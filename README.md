@@ -27,6 +27,11 @@ senza installare nulla, senza account e senza raccogliere dati degli studenti.
   mostra a tutto schermo il QR code della pagina con l'indirizzo scritto in grande, così alla LIM gli studenti
   la aprono dal telefono. Si chiude con un clic o con Esc. Se la pagina è aperta dal disco, il QR porta comunque
   all'indirizzo pubblico su teaching.federicodiluca.com.
+- **Link diretto a un gioco**: `.../attivita/#<id-della-scheda>` apre subito quella scheda (e la sottoscheda),
+  per esempio `informatica-1/reti/indirizzi-dns-e-url/#qz2`. Cambiando scheda l'indirizzo si aggiorna da solo
+  (senza aggiungere passi alla cronologia), quindi il QR e i link copiati portano sempre alla scheda aperta.
+  Vale per le attività `tg-act`, per le due schede del BEP (`#p2`) e per Processi e thread, che lo faceva già
+  (`#quiz`, `#smistamento`, `#stati`, `#precedenze`, `#holt`).
 
 ```
 index.html                 home con l'elenco di tutte le attività
@@ -46,7 +51,11 @@ assets/
 1. Crea la cartella `<corso>/<unità>/<nome-attivita>/` e mettici l'attività come `index.html`
    (un unico file con stile e script inclusi).
 2. Se l'attività usa la struttura comune (header, nav con le schede, `main`, `.card`, `.btn`), scrivi `<body class="tg-act">`:
-   prende la veste grafica del sito senza cambiare nulla del suo codice. Le attività con un layout proprio
+   prende la veste grafica del sito senza cambiare nulla del suo codice. Ogni scheda è una
+   `<section id="..." data-t="etichetta">` dentro `main` (con `data-g` per raggrupparle in sottoschede) e la pagina
+   cambia scheda con una funzione globale `go(id)` che mette la classe `on`: così funzionano da soli i link
+   diretti `#id`. Gli `id` finiscono negli indirizzi dati alle classi: una volta pubblicati non vanno rinominati.
+   Le attività con un layout proprio
    (pensate per la LIM) usano invece `class="tg-lim tg-<nome>"`, con poche regole dedicate in `teaching.css`.
    Nessuna risorsa esterna (font, librerie da CDN): tutto deve funzionare anche offline.
 3. Prima di `</head>` aggiungi le quattro righe comuni (ogni `../` sale di una cartella, quindi sono tre):

@@ -207,6 +207,60 @@
     aggiorna();
   }
 
+  /* ---------- link diretto a una scheda ----------
+     .../attivita/#<id-sezione> apre quella scheda; cambiando scheda l'indirizzo si aggiorna
+     con replaceState (senza aggiungere passi alla cronologia), così QR e link copiati portano lì.
+     Non si duplica la navigazione delle pagine: si usa la loro funzione go(id) e si osserva
+     quale sezione ha la classe "on". */
+  function hash(id) {
+    var url = location.href.replace(/#.*$/, "") + (id ? "#" + id : "");
+    if (url === location.href) return;
+    try { history.replaceState(history.state, "", url); }
+    catch (e) { if (id) location.replace("#" + id); }
+  }
+
+  function schede() {
+    var body = document.body;
+    if (body.classList.contains("tg-act") && typeof window.go === "function") {
+      var secs = [].slice.call(document.querySelectorAll("main section[id][data-t]"));
+      if (!secs.length) return;
+      var sez = function (id) { return secs.filter(function (s) { return s.id === id; })[0]; };
+      var apri = function () {
+        var id = decodeURIComponent(location.hash.slice(1)), s = id && sez(id);
+        if (s && !s.classList.contains("on")) window.go(id);
+      };
+      var segui = function () {
+        var s = secs.filter(function (x) { return x.classList.contains("on"); })[0];
+        if (s) hash(s === secs[0] ? "" : s.id);
+      };
+      apri();
+      var mo = new MutationObserver(segui);
+      secs.forEach(function (s) { mo.observe(s, { attributes: true, attributeFilter: ["class"] }); });
+      window.addEventListener("hashchange", apri);
+      return;
+    }
+    /* Il BEP vivo: due schede, pulsanti #tab1 e #tab2 per i pannelli #p1 e #p2 */
+    if (body.classList.contains("tg-bep")) {
+      var coppie = [["p1", "tab1"], ["p2", "tab2"]].filter(function (c) {
+        return document.getElementById(c[0]) && document.getElementById(c[1]);
+      });
+      if (coppie.length < 2) return;
+      var vai = function () {
+        var id = decodeURIComponent(location.hash.slice(1));
+        coppie.forEach(function (c) {
+          var b = document.getElementById(c[1]);
+          if (c[0] === id && !b.classList.contains("on")) b.click();
+        });
+      };
+      coppie.forEach(function (c, i) {
+        document.getElementById(c[1]).addEventListener("click", function () { hash(i ? c[0] : ""); });
+      });
+      vai();
+      window.addEventListener("hashchange", vai);
+    }
+    /* Processi e thread ha già il suo routing (#quiz, #holt...); Che struttura è non ha schede. */
+  }
+
   /* ---------- schermata finale ----------
      Le attività con la struttura comune scrivono il riepilogo in #restab (righe "x su y").
      Qui lo si osserva e lo si ridisegna come pannello con barre, totale e "Copia il risultato". */
@@ -271,7 +325,7 @@
   }
 
   function avvia() {
-    if (document.body.dataset.tg === "elenco") { tema(); elenco(); } else { barra(); risultato(); }
+    if (document.body.dataset.tg === "elenco") { tema(); elenco(); } else { barra(); risultato(); schede(); }
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", avvia); else avvia();
 })();
