@@ -3,7 +3,7 @@
 //      npm test -- qr       (solo quelli il cui nome contiene "qr")
 const { spawnSync } = require("child_process");
 const path = require("path");
-const CONTROLLI = ["link-rotti", "qr", "link-diretti", "progressi", "modalita", "migrazione", "fotografia", "schermate"];
+const CONTROLLI = ["link-rotti", "qr", "link-diretti", "progressi", "modalita", "migrazione", "fotografia", "schermate", "nuova"];
 const filtro = process.argv[2];
 const esiti = [];
 for (const c of CONTROLLI.filter(c => !filtro || c.includes(filtro))) {

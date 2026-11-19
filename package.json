@@ -1,0 +1,10 @@
+{
+  "name": "teaching",
+  "private": true,
+  "description": "Attività interattive per la scuola. Il sito non ha build: questi comandi servono solo a chi ci lavora.",
+  "license": "CC-BY-NC-SA-4.0",
+  "scripts": {
+    "nuova": "node strumenti/nuova.js",
+    "test": "npm --prefix tests test"
+  }
+}

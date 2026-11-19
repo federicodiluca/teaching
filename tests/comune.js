@@ -3,7 +3,8 @@ const fs = require("fs"), path = require("path"), vm = require("vm"), http = req
 const { chromium } = require("playwright");
 const jsQR = require("jsqr"), { PNG } = require("pngjs");
 
-const REPO = path.resolve(__dirname, "..");
+// TG_RADICE: i controlli girano su un'altra copia del sito (la usa tests/nuova.js)
+const REPO = path.resolve(process.env.TG_RADICE || path.join(__dirname, ".."));
 const OUT = path.join(__dirname, "risultati");
 fs.mkdirSync(OUT, { recursive: true });
 

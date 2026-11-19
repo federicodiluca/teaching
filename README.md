@@ -67,6 +67,7 @@ assets/
 <corso>/<unità>/<attività>/index.html   l'attività
 informatica-1/computer-e-codici/temi/   codice di argomento (numeri, aritmetica, logica, immagini, informazione)
                                         condiviso tra le pagine dell'unità e Palestra dei numeri
+strumenti/nuova.js         npm run nuova: prepara una nuova attività (non fa parte del sito)
 tests/                     controlli automatici (Playwright), non fanno parte del sito
 .github/workflows/         i controlli girano su GitHub a ogni push
 ```
@@ -86,6 +87,7 @@ nella scheda **Actions** del repository, con una spunta verde o una croce rossa 
 | `migrazione` | i salvataggi nel formato vecchio si leggono ancora; i nomi con caratteri HTML non rompono la pagina |
 | `fotografia` | con il caso fissato, i giochi generano gli stessi esercizi e gli stessi testi di `tests/fotografia.json` |
 | `schermate` | tutte le pagine in tema scuro e chiaro, a 1280 e 390 px, senza errori in console |
+| `nuova` | su una copia del sito `npm run nuova` crea corsi, unità e attività: catalogo in ordine, sitemap, README, link e pagine funzionanti |
 
 Tutti controllano anche che la console del browser resti senza errori. Le schermate si scaricano dall'esecuzione
 (artefatto **schermate**). Per lanciarli sul proprio computer serve Node.js:
@@ -103,9 +105,37 @@ differenze elencate siano quelle volute e si aggiorna il riferimento con `npm ru
 
 ## Aggiungere un'attività
 
-1. Crea la cartella `<corso>/<unità>/<nome-attivita>/` e mettici l'attività come `index.html`.
-2. **Attività a schede con i giochi comuni** (come quelle di Informatica 1): copia una pagina esistente e
-   tieni lo schema, scrivendo solo testi, dati e chiamate ai giochi:
+Il comando che prepara tutto (serve solo Node.js, senza installare niente), dalla cartella del repository:
+
+```bash
+npm run nuova
+```
+
+Fa le domande una alla volta (corso, unità, titolo, tipo, modalità, icona, descrizione) e poi:
+
+- crea `<corso>/<unità>/<nome-attivita>/index.html`, che funziona già con dati di esempio: basta cercare
+  `DA SCRIVERE` e mettere testi e dati della lezione. Due tipi: **a schede con i giochi comuni** (smistamento,
+  riordino, quiz, sfida finale, risultato) oppure **da LIM** (schermate da scorrere con i pulsanti o le frecce);
+- aggiunge la voce in `assets/catalogo.js`, l'indirizzo in `sitemap.xml` e il titolo nella tabella di questo README;
+- se il corso o l'unità sono nuovi, crea anche le loro pagine di elenco e le voci in `CORSI` e `UNITA`
+  (un corso nuovo si mette in ordine di anno).
+
+Le risposte si possono anche passare tutte insieme, per esempio:
+
+```bash
+npm run nuova -- --corso tpsit-3 --corso-nome TPSIT --anno "3° anno" --colore "#b45309" --corso-icona cpu \
+  --unita reti-e-protocolli --unita-nome "Reti e protocolli" --titolo "Il modello ISO/OSI" \
+  --tipo giochi --modalita "da soli" --icona network --descrizione "I sette livelli, un gioco alla volta."
+```
+
+Il comando non fa commit. Quando la pagina è pronta: `npm test` (dentro `tests/`), per una pagina a schede
+`npm run fotografia:aggiorna` così entra nella fotografia dei giochi, poi commit e push.
+
+Com'è fatta una pagina, per scriverla o sistemarla a mano:
+
+1. La pagina è `<corso>/<unità>/<nome-attivita>/index.html`.
+2. **Attività a schede con i giochi comuni** (come quelle di Informatica 1): tieni lo schema, scrivendo solo
+   testi, dati e chiamate ai giochi:
    ```html
    <body class="tg-act">                      <!-- data-solo="1" se si gioca da soli -->
    <header><h1>Titolo</h1></header><nav id="nav"></nav><main>
@@ -136,7 +166,6 @@ differenze elencate siano quelle volute e si aggiorna il riferimento con `npm ru
    `--ink`...) vengono ridefinite sui token del sito, quindi conviene usare variabili anche nel loro CSS e negli SVG
    generati, invece di colori scritti a mano.
 4. In entrambi i casi, prima di `</head>` vanno le quattro righe comuni (ogni `../` sale di una cartella, quindi sono tre):
-3. Prima di `</head>` aggiungi le quattro righe comuni (ogni `../` sale di una cartella, quindi sono tre):
    ```html
    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
    <link rel="stylesheet" href="../../../assets/teaching.css">
