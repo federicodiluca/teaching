@@ -207,7 +207,7 @@ table.recap td.n { font-family: var(--f-mono); }
       <div class="stack">
         <div class="row" style="justify-content:space-between"><span class="kicker">Da smistare</span><span class="score" id="sscore"></span></div>
         <div class="pool" id="spool"></div>
-        <div class="msg" id="smsg" aria-live="polite">Tocca una carta, poi tocca la casella giusta. Con il mouse puoi anche trascinarla.</div>
+        <div class="msg" id="smsg" aria-live="polite">Toccate una carta, poi toccate la casella giusta. Con il mouse potete anche trascinarla.</div>
       </div>
       <div class="buckets" id="sbuckets"></div>
     </div>
@@ -314,7 +314,7 @@ tOut.addEventListener("click", () => { clearInterval(tId); tLeft = 0; tOut.class
 
 /* ---------- QUIZ ---------- */
 const QDATA = [
-  ["Seleziona la risposta ERRATA fra le seguenti.", "Un processo terminato può essere riutilizzato quando serve",
+  ["Selezionate la risposta ERRATA fra le seguenti.", "Un processo terminato può essere riutilizzato quando serve",
    ["Un processo in esecuzione può essere interrotto per poi essere rieseguito", "Un processo torna subito a stato di pronto appena c'è il completamento dell'I/O o dell'evento", "Un processo pronto attende che lo scheduler gli assegni la CPU"],
    "Un processo terminato ha concluso il ciclo di vita: il sistema rilascia le sue risorse e non lo riusa. Gli stati Nuovo e Terminato si attraversano una volta sola."],
   ["Cos'è un'operazione di Interrupt Software?", "Operazione di sospensione di un processo",
@@ -552,7 +552,7 @@ function sRender() {
   const m = $("#smsg");
   if (sd.pool.length === 0) { m.className = "msg good"; m.textContent = "Fatto: " + first + " carte su " + d.c.length + " al primo colpo. Passa a un altro gruppo di carte."; }
   else if (sd.msg) { m.className = "msg " + sd.msg[1]; m.textContent = sd.msg[0]; if (sd.msg[1] === "bad") { m.classList.remove("shake"); void m.offsetWidth; m.classList.add("shake"); } }
-  else { m.className = "msg"; m.textContent = "Tocca una carta, poi tocca la casella giusta. Con il mouse puoi anche trascinarla."; }
+  else { m.className = "msg"; m.textContent = "Toccate una carta, poi toccate la casella giusta. Con il mouse potete anche trascinarla."; }
 }
 $("#decks").addEventListener("click", e => { const b = e.target.closest("[data-d]"); if (b) sInit(+b.dataset.d); });
 $("#spool").addEventListener("click", e => { const b = e.target.closest("[data-c]"); if (b) { sd.sel = sd.sel === +b.dataset.c ? null : +b.dataset.c; sd.msg = null; sRender(); } });
@@ -598,7 +598,7 @@ let sp = null, stSel = null, chal = null, stLast = null;
 const cpuBusy = () => Object.keys(sp).find(p => sp[p] === "running");
 const evOk = (e, p) => !!p && sp[p] === e.from && !(e.id === "disp" && cpuBusy());
 function stReset() { sp = { A: "running", B: "ready", C: "wait", D: "new" }; stSel = "B"; chal = null; stLast = null;
-  stMsg("Tocca un processo, poi tocca l'evento che gli succede. Le frecce blu sul diagramma mostrano cosa può fare.", ""); stRender(); }
+  stMsg("Toccate un processo, poi toccate l'evento che gli succede. Le frecce blu sul diagramma mostrano cosa può fare.", ""); stRender(); }
 function stMsg(t, c) { const m = $("#stmsg"); m.className = "msg " + c; m.textContent = t; m.style.flex = "1 1 320px"; if (c === "bad") { m.classList.remove("shake"); void m.offsetWidth; m.classList.add("shake"); } }
 function stApply(ev) {
   if (!stSel) return stMsg("Prima tocca il processo a cui succede l'evento.", "bad");
@@ -639,12 +639,12 @@ function stRender() {
     const cards = Object.keys(sp).map(p => '<button class="pcard' + (p === stSel ? " sel" : "") + '" data-pc="' + p + '"><span class="pl">' + p + '</span><span><b>' + ST[sp[p]].n + "</b><small>" + ST[sp[p]].s + "</small></span></button>").join("");
     const evs = EV.map(e => { const ok = evOk(e, stSel);
       return '<button class="btn ev ' + (ok ? "ok" : "no") + '" data-e="' + e.id + '"><span>' + esc(e.t) + "</span>" + (ok ? '<span class="dest">→ ' + ST[e.to].n + "</span>" : "") + "</button>"; }).join("");
-    ctl.innerHTML = '<div class="stgrid"><div class="stack"><span class="kicker">1 · Scegli il processo</span><div class="pcards">' + cards + "</div></div>" +
-      '<div class="stack"><span class="kicker">2 · Che cosa gli succede?' + (stSel ? " (processo " + stSel + ")" : "") + '</span><div class="evgrid">' + evs + '</div><span class="hint-s">Gli eventi pieni sono possibili adesso; quelli tratteggiati no, ma puoi provarli per vedere perché.</span></div></div>';
+    ctl.innerHTML = '<div class="stgrid"><div class="stack"><span class="kicker">1 · Scegliete il processo</span><div class="pcards">' + cards + "</div></div>" +
+      '<div class="stack"><span class="kicker">2 · Che cosa gli succede?' + (stSel ? " (processo " + stSel + ")" : "") + '</span><div class="evgrid">' + evs + '</div><span class="hint-s">Gli eventi pieni sono possibili adesso; quelli tratteggiati no, ma potete provarli per vedere perché.</span></div></div>';
   }
-  else if (chal.end) ctl.innerHTML = '<div class="card"><h2>Sfida finita: ' + chal.score + " su " + chal.list.length + '</h2><p>Premi «Torna alla simulazione» oppure rifai la sfida per cambiare l\'ordine delle domande.</p></div>';
+  else if (chal.end) ctl.innerHTML = '<div class="card"><h2>Sfida finita: ' + chal.score + " su " + chal.list.length + '</h2><p>Premete «Torna alla simulazione» oppure rifate la sfida per cambiare l\'ordine delle domande.</p></div>';
   else ctl.innerHTML = '<div class="card stack"><span class="kicker">Domanda ' + (chal.i + 1) + " di " + chal.list.length + '</span><div class="qtext">Il processo ' + chal.q.p + " è in «" + ST[chal.q.from].n + "». Succede: " + esc(chal.q.ev.t) + '. Che cosa gli capita?</div>' +
-    '<div class="row"><span>Tocca lo stato di arrivo oppure</span><button class="btn" data-imp="1"' + (chal.fb ? " disabled" : "") + '>Non è possibile</button>' + (chal.fb ? '<button class="btn primary" data-nx="1" style="margin-left:auto">' + (chal.i + 1 < chal.list.length ? "Avanti" : "Vedi il risultato") + "</button>" : "") + "</div></div>";
+    '<div class="row"><span>Toccate lo stato di arrivo oppure</span><button class="btn" data-imp="1"' + (chal.fb ? " disabled" : "") + '>Non è possibile</button>' + (chal.fb ? '<button class="btn primary" data-nx="1" style="margin-left:auto">' + (chal.i + 1 < chal.list.length ? "Avanti" : "Vedi il risultato") + "</button>" : "") + "</div></div>";
 }
 function sel0(k) { return !!stSel && sp[stSel] === k; }
 function chStart() {
@@ -665,7 +665,7 @@ function chAnswer(ans) {
   const wrong = q.to ? "No. La transizione giusta è " + ST[q.from].n + " → " + ST[q.to].n + ". " + q.ev.d : "No: questa transizione non esiste. " + why(q.from, q.ev);
   stMsg(ok ? right : wrong, ok ? "good" : "bad"); stRender();
 }
-$("#stmode").addEventListener("click", () => { if (chal) { chal = null; stMsg("Tocca un processo, poi tocca l'evento che gli succede.", ""); stRender(); } else chStart(); });
+$("#stmode").addEventListener("click", () => { if (chal) { chal = null; stMsg("Toccate un processo, poi toccate l'evento che gli succede.", ""); stRender(); } else chStart(); });
 $("#streset").addEventListener("click", stReset);
 $("#stsvg").addEventListener("click", e => {
   const t = e.target.closest(".tok"), s = e.target.closest("[data-s]");
@@ -696,7 +696,7 @@ let hi = 0, hs = null;
 const hRes = r => SC[hi].R.find(x => x[0] === r);
 function hInit(i) {
   hi = i; const sc = SC[i];
-  hs = { step: 0, H: {}, W: {}, pres: sc.P.slice(), hist: [], fresh: new Set(), msg: "Applica le richieste una alla volta e disegna il grafo sul quaderno. Poi riducilo." };
+  hs = { step: 0, H: {}, W: {}, pres: sc.P.slice(), hist: [], fresh: new Set(), msg: "Applicate le richieste una alla volta e disegnate il grafo sul quaderno. Poi riducetelo." };
   sc.R.forEach(([r]) => { hs.H[r] = []; hs.W[r] = []; });
   hRender();
 }
@@ -778,7 +778,7 @@ $("#hhint").addEventListener("click", () => {
   if (hs.step < SC[hi].seq.length) { hs.msg = "Prima applica tutta la sequenza di richieste."; return hRender(); }
   const red = hs.pres.filter(p => !hPend(p).length);
   if (!red.length) { hs.msg = hs.pres.length ? "Nessun processo ha solo archi entranti." : "Hai già ridotto tutto."; return hRender(); }
-  hs.msg = "Guarda il processo che pulsa: non ha archi uscenti."; hRender(); hs.hint = red[0];
+  hs.msg = "Guardate il processo che pulsa: non ha archi uscenti."; hRender(); hs.hint = red[0];
   const n = $('#hsvg .pn[data-p="' + red[0] + '"]'); if (n) n.classList.add("hint");
 });
 $("#hsvg").addEventListener("click", e => { const n = e.target.closest(".pn"); if (n) hReduce(n.dataset.p); });
@@ -804,7 +804,7 @@ function pBuild(i) {
   const L = Math.max(...Object.values(lvl)) + 1, pos = {};
   for (let l = 0; l < L; l++) { const row = names.filter(n => lvl[n] === l); row.forEach((n, k) => { pos[n] = { x: 800 * (l + 1) / (L + 1), y: 420 * (k + 1) / (row.length + 1) }; }); }
   const pre = {}; names.forEach(n => pre[n] = code.find(c => c[0] === n)[2]);
-  pg = { names, all, red, imp, lvl, L, pos, pre, mine: new Set(), sel: null, show: false, hist: [], msg: "Per ogni istruzione chiediti: quali valori le servono? Tocca chi li produce e poi chi li usa: nasce una freccia." };
+  pg = { names, all, red, imp, lvl, L, pos, pre, mine: new Set(), sel: null, show: false, hist: [], msg: "Per ogni istruzione chiedetevi: quali valori le servono? Toccate chi li produce e poi chi li usa: nasce una freccia." };
   pRender();
 }
 function pClick(n) {
@@ -867,7 +867,7 @@ function pRun(c) {
 $("#pscen").addEventListener("click", e => { const b = e.target.closest("[data-s]"); if (b) { pBuild(+b.dataset.s); $("#prun").innerHTML = ""; } });
 $("#psvg").addEventListener("click", e => { const n = e.target.closest(".pn"); if (n) pClick(n.dataset.n); });
 $("#psvg").addEventListener("keydown", e => { const n = e.target.closest(".pn"); if (n && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); pClick(n.dataset.n); } });
-$("#pshow").addEventListener("click", () => { pg.show = !pg.show; pg.sel = null; pg.msg = pg.show ? "Ecco il grafo con il massimo parallelismo." : "Prova a ricostruirlo."; pRender(); });
+$("#pshow").addEventListener("click", () => { pg.show = !pg.show; pg.sel = null; pg.msg = pg.show ? "Ecco il grafo con il massimo parallelismo." : "Provate a ricostruirlo."; pRender(); });
 $("#pundo").addEventListener("click", () => { const e = pg.hist.pop(); if (e) { pg.mine.delete(e); pg.msg = "Ultima freccia tolta."; pRender(); } });
 $("#preset").addEventListener("click", () => { pBuild(pi); $("#prun").innerHTML = ""; });
 $("#pcpu").addEventListener("click", e => { const b = e.target.closest("[data-c]"); if (b) pRun(b.dataset.c === "inf" ? Infinity : +b.dataset.c); });

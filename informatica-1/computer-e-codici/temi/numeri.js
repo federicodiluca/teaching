@@ -8,22 +8,22 @@ function solFracToBin(k,m){let x=k/Math.pow(2,m),bits='',L=[];for(let i=0;i<m;i+
 function groups(bits,k){const p=(k-bits.length%k)%k;return ('0'.repeat(p)+bits).match(new RegExp('.{'+k+'}','g'))}
 function solGroup(bits,k,base){const g=groups(bits,k);return `Gruppi da ${k} bit (da destra): ${g.join(' ')}  →  ${g.map(x=>B(parseInt(x,2),base)).join('')}\n`}
 function gBin2Dec(l){const bits=lv(l,rnd(4,5),rnd(6,8),rnd(9,12));const n=rnd(1<<(bits-1),(1<<bits)-1),b=B(n,2);
- return{q:`Converti in decimale il numero binario <b>${b}</b>`,fields:[{label:'Decimale',exp:String(n),kind:'str'}],sol:P(solPoly(b))}}
-function gDec2Bin(l){const n=lv(l,rnd(5,31),rnd(32,255),rnd(256,4095));return{q:`Converti in binario il numero decimale <b>${n}</b>`,fields:[{label:'Binario',exp:B(n,2),kind:'str'}],sol:P(solDec2Bin(n))}}
+ return{q:`Convertite in decimale il numero binario <b>${b}</b>`,fields:[{label:'Decimale',exp:String(n),kind:'str'}],sol:P(solPoly(b))}}
+function gDec2Bin(l){const n=lv(l,rnd(5,31),rnd(32,255),rnd(256,4095));return{q:`Convertite in binario il numero decimale <b>${n}</b>`,fields:[{label:'Binario',exp:B(n,2),kind:'str'}],sol:P(solDec2Bin(n))}}
 function gBinFrac2Dec(l){const ib=lv(l,3,4,rnd(4,6)),m=lv(l,2,3,rnd(3,4));const n=rnd(1<<(ib-1),(1<<ib)-1),k=rnd(0,(1<<m)-1)|1;const bi=B(n,2),bf=B(k,2).padStart(m,'0');const val=n+k/(1<<m);
  const fp=[...bf].map((c,i)=>`${c}×2^-${i+1}`).join(' + '),fv=[...bf].map((c,i)=>c==='1'?fmt(1/Math.pow(2,i+1)):null).filter(x=>x);
- return{q:`Converti in decimale il numero binario <b>${bi},${bf}</b>`,fields:[{label:'Decimale',exp:fmt(val),kind:'str'}],sol:P(`Parte intera ${bi}:\n${solPoly(bi)}Parte frazionaria ,${bf}:\n${fp}\n= ${fv.join(' + ')} = ${fmt(k/(1<<m))}\nTotale: ${n} + ${fmt(k/(1<<m))} = ${fmt(val)}`)}}
+ return{q:`Convertite in decimale il numero binario <b>${bi},${bf}</b>`,fields:[{label:'Decimale',exp:fmt(val),kind:'str'}],sol:P(`Parte intera ${bi}:\n${solPoly(bi)}Parte frazionaria ,${bf}:\n${fp}\n= ${fv.join(' + ')} = ${fmt(k/(1<<m))}\nTotale: ${n} + ${fmt(k/(1<<m))} = ${fmt(val)}`)}}
 function gDecFrac2Bin(l){const m=lv(l,2,4,5),n=rnd(1,lv(l,15,63,255)),k=rnd(0,(1<<m)-1)|1;const val=n+k/(1<<m),bf=B(k,2).padStart(m,'0');
- return{q:`Converti in binario il numero decimale <b>${fmt(val)}</b>`,fields:[{label:'Binario',exp:B(n,2)+','+bf,kind:'str'}],sol:P(`Parte intera ${n}:\n${solDec2Bin(n)}Parte frazionaria ${fmt(k/(1<<m))}:\n${solFracToBin(k,m)}Risultato: ${B(n,2)},${bf}`)}}
+ return{q:`Convertite in binario il numero decimale <b>${fmt(val)}</b>`,fields:[{label:'Binario',exp:B(n,2)+','+bf,kind:'str'}],sol:P(`Parte intera ${n}:\n${solDec2Bin(n)}Parte frazionaria ${fmt(k/(1<<m))}:\n${solFracToBin(k,m)}Risultato: ${B(n,2)},${bf}`)}}
 function gBin2OctHex(l){const len=lv(l,rnd(6,8),rnd(9,12),rnd(13,16));const n=(1<<(len-1))+rnd(0,(1<<(len-1))-1),b=B(n,2);
- return{q:`Converti il numero binario <b>${b}</b> in ottale e in esadecimale`,fields:[{label:'Ottale',exp:B(n,8),kind:'str'},{label:'Esadecimale',exp:B(n,16),kind:'str'}],sol:P(`Ottale:\n${solGroup(b,3,8)}Esadecimale:\n${solGroup(b,4,16)}`)}}
+ return{q:`Convertite il numero binario <b>${b}</b> in ottale e in esadecimale`,fields:[{label:'Ottale',exp:B(n,8),kind:'str'},{label:'Esadecimale',exp:B(n,16),kind:'str'}],sol:P(`Ottale:\n${solGroup(b,3,8)}Esadecimale:\n${solGroup(b,4,16)}`)}}
 function gDec2All(l){const n=lv(l,rnd(16,255),rnd(256,4095),rnd(4096,65535)),b=B(n,2);
- return{q:`Converti il numero decimale <b>${n}</b> in binario, ottale ed esadecimale`,fields:[{label:'Binario',exp:b,kind:'str'},{label:'Ottale',exp:B(n,8),kind:'str'},{label:'Esadecimale',exp:B(n,16),kind:'str'}],sol:P(`Binario:\n${solDec2Bin(n)}Ottale:\n${solGroup(b,3,8)}Esadecimale:\n${solGroup(b,4,16)}`)}}
+ return{q:`Convertite il numero decimale <b>${n}</b> in binario, ottale ed esadecimale`,fields:[{label:'Binario',exp:b,kind:'str'},{label:'Ottale',exp:B(n,8),kind:'str'},{label:'Esadecimale',exp:B(n,16),kind:'str'}],sol:P(`Binario:\n${solDec2Bin(n)}Ottale:\n${solGroup(b,3,8)}Esadecimale:\n${solGroup(b,4,16)}`)}}
 function gHex2OctDec(l){const d=lv(l,2,3,4);const n=(1<<(4*(d-1)))*rnd(1,15)+rnd(0,(1<<(4*(d-1)))-1),h=B(n,16),b=B(n,2),digs=[...h];
- return{q:`Converti il numero esadecimale <b>${h}</b> in ottale e in decimale`,fields:[{label:'Ottale',exp:B(n,8),kind:'str'},{label:'Decimale',exp:String(n),kind:'str'}],
+ return{q:`Convertite il numero esadecimale <b>${h}</b> in ottale e in decimale`,fields:[{label:'Ottale',exp:B(n,8),kind:'str'},{label:'Decimale',exp:String(n),kind:'str'}],
  sol:P(`Esadecimale → binario (ogni cifra = 4 bit): ${digs.map(c=>B(parseInt(c,16),2).padStart(4,'0')).join(' ')} = ${b}\nBinario → ottale:\n${solGroup(b,3,8)}Decimale:\n${digs.map((c,i)=>`${c}(=${parseInt(c,16)})×16^${d-1-i}`).join(' + ')} = ${n}\n`)}}
 function gOct2BinHex(l){const d=lv(l,2,3,4);const n=(1<<(3*(d-1)))*rnd(1,7)+rnd(0,(1<<(3*(d-1)))-1),o=B(n,8),b=B(n,2);
- return{q:`Converti il numero ottale <b>${o}</b> in binario e in esadecimale`,fields:[{label:'Binario',exp:b,kind:'str'},{label:'Esadecimale',exp:B(n,16),kind:'str'}],
+ return{q:`Convertite il numero ottale <b>${o}</b> in binario e in esadecimale`,fields:[{label:'Binario',exp:b,kind:'str'},{label:'Esadecimale',exp:B(n,16),kind:'str'}],
  sol:P(`Ottale → binario (ogni cifra = 3 bit): ${[...o].map(c=>B(parseInt(c,8),2).padStart(3,'0')).join(' ')} = ${b}\nBinario → esadecimale:\n${solGroup(b,4,16)}`)}}
 const NUM_ITEMS=[["Binario → decimale",gBin2Dec],["Decimale → binario",gDec2Bin],["Binario con virgola → decimale",gBinFrac2Dec],["Decimale con virgola → binario",gDecFrac2Bin],["Binario → ottale e esadecimale",gBin2OctHex],["Decimale → binario, ottale, esadecimale",gDec2All],["Esadecimale → ottale e decimale",gHex2OctDec],["Ottale → binario e esadecimale",gOct2BinHex]];
 
