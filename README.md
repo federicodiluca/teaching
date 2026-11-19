@@ -15,7 +15,7 @@ senza installare nulla, senza account e senza raccogliere dati degli studenti.
 | | Reti di calcolatori | La rete e i suoi pezzi · Indirizzi IP, DNS e URL · Il Web, la ricerca e i rischi |
 | TPSIT, 4° anno | Processi sequenziali e paralleli | Processi e thread |
 | GPOI, 5° anno | Aziende e mercati | Il BEP vivo |
-| | Organizzazione d'impresa | Che struttura è? |
+| | Organizzazione d'impresa | Che struttura è? · Organizzazione e processi · Sistema informativo ed ERP |
 
 ## Come è fatto
 
@@ -49,6 +49,12 @@ senza installare nulla, senza account e senza raccogliere dati degli studenti.
   per i compiti a casa, o `.../palestra-dei-numeri/?coppie` in classe. Cambiano i campi dei nomi, le frasi sui
   turni, i turni nei giochi e l'intestazione del risultato. Nel QR ci sono i pulsanti **Da soli** e **A coppie**:
   il codice cambia subito e porta con sé la modalità scelta (e la scheda aperta).
+- **Scheda da stampare** (attività `tg-act`, pulsante **Scheda** nella barra): un foglio di esercizi per la classe
+  o per casa, preparato dagli stessi giochi della pagina. A sinistra si scelgono i giochi, quanti esercizi e il
+  livello; a destra c'è l'anteprima del foglio, con nome, classe e data in alto. Smistamenti e riordini diventano
+  tabelle da completare. Le soluzioni (con il procedimento) vanno in fondo, su una pagina a parte, e si possono
+  togliere. **Altra versione** rifà gli esercizi con numeri nuovi, così ogni banco può avere la sua.
+  I giochi si annotano da soli in `SCHEDA` (giochi.js) mentre si montano: le attività nuove ce l'hanno già.
 
 ```
 index.html                 home con l'elenco di tutte le attività
@@ -56,7 +62,8 @@ sitemap.xml, robots.txt   per i motori di ricerca
 assets/
   catalogo.js              elenco di corsi, unità e attività (l'unico file da aggiornare)
   teaching.css             stile condiviso
-  teaching.js              elenco, filtri, tema scuro; nelle attività barra in alto con il QR, link alle schede,
+  teaching.js              elenco, filtri, tema scuro; nelle attività barra in alto con il QR, scheda da stampare,
+                           link alle schede,
                            avviso dei progressi ripresi e schermata finale
   giochi.js, giochi.css    motore comune delle attività di Informatica 1: schede, giocatori, esercizi,
                            allenatore, missione a tempo, smistamento, riordino, memory, caccia all'errore,
@@ -87,6 +94,7 @@ nella scheda **Actions** del repository, con una spunta verde o una croce rossa 
 | `migrazione` | i salvataggi nel formato vecchio si leggono ancora; i nomi con caratteri HTML non rompono la pagina |
 | `fotografia` | con il caso fissato, i giochi generano gli stessi esercizi e gli stessi testi di `tests/fotografia.json` |
 | `schermate` | tutte le pagine in tema scuro e chiaro, a 1280 e 390 px, senza errori in console |
+| `schede` | in ogni attività a schede ogni gioco finisce sul foglio con la sua soluzione; altra versione, stampa, solo il foglio in stampa |
 | `nuova` | su una copia del sito `npm run nuova` crea corsi, unità e attività: catalogo in ordine, sitemap, README, link e pagine funzionanti |
 
 Tutti controllano anche che la console del browser resti senza errori. Le schermate si scaricano dall'esecuzione

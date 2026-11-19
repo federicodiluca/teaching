@@ -238,6 +238,83 @@ body.tg-home {
 .tg-qr-modo .tg-ico { width: 1.2em; height: 1.2em; }
 @media print { .tg-qr { display: none; } }
 
+/* ---------- scheda da stampare: scelte a sinistra, foglio a destra; in stampa solo il foglio ---------- */
+body.tg-sch-aperta { overflow: hidden; }
+.tg-sch {
+  position: fixed; inset: 0; z-index: 900; display: grid; grid-template-columns: 300px 1fr;
+  background: var(--tg-bg); color: var(--tg-ink); font-family: var(--tg-sans);
+}
+.tg-sch-opz { overflow-y: auto; padding: 18px 16px; border-right: 1px solid var(--tg-line); background: var(--tg-paper); display: flex; flex-direction: column; gap: 10px; }
+.tg-sch .tg-sch-opz h2 { margin: 0; letter-spacing: 0; font-size: 18px; display: flex; align-items: center; gap: 8px; }
+.tg-sch .tg-sch-opz h2 .tg-ico { width: 22px; height: 22px; }
+.tg-sch-opz > p { margin: 0; color: var(--tg-mute); font-size: 14px; line-height: 1.4; }
+.tg-sch-voci { display: flex; flex-direction: column; gap: 2px; border-top: 1px solid var(--tg-line); border-bottom: 1px solid var(--tg-line); padding: 6px 0; }
+.tg-sch-voce { display: flex; align-items: center; gap: 8px; padding: 5px 4px; border-radius: 8px; font-size: 14px; cursor: pointer; }
+.tg-sch-voce:hover { background: var(--tg-paper-2); }
+.tg-sch-voce input { accent-color: var(--tg-acc); width: 16px; height: 16px; flex: none; }
+.tg-sch-voce .t { flex: 1; min-width: 0; line-height: 1.25; }
+.tg-sch-voce small { display: block; color: var(--tg-mute); font-size: 12px; }
+body .tg-sch .tg-sch-voce select { font: 13px var(--tg-sans); min-width: 0; width: auto; color: var(--tg-ink); background-color: var(--tg-bg); border: 1px solid var(--tg-line-2); border-radius: 6px; padding: 3px 4px; }
+.tg-sch-cmd { display: flex; flex-wrap: wrap; gap: 6px; }
+.tg-sch-cmd button {
+  display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font: 600 14px var(--tg-sans);
+  padding: 8px 12px; border-radius: 10px; border: 1px solid var(--tg-line-2); background: var(--tg-paper-2); color: var(--tg-ink);
+}
+.tg-sch-cmd button.pri { background: var(--tg-acc); border-color: var(--tg-acc); color: var(--tg-on-acc); }
+.tg-sch-cmd .tg-ico { width: 17px; height: 17px; }
+.tg-sch-carta { overflow-y: auto; padding: 24px; }
+/* il foglio è sempre bianco, come sulla carta */
+.tg-sch-foglio {
+  max-width: 760px; margin: 0 auto; background: #fff; color: #1d2433; padding: 40px 48px; border-radius: 6px;
+  box-shadow: var(--tg-shadow); font: 15px/1.5 var(--tg-sans); color-scheme: light;
+}
+.tg-sch-testa { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; border-bottom: 2px solid #1d2433; padding-bottom: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+.tg-sch .tg-sch-testa h1 { margin: 0; font-size: 24px; line-height: 1.15; }
+.tg-sch-sopra { margin: 0 0 2px; color: #5d6474; font-size: 13px; }
+.tg-sch-nome { margin: 0; font-size: 13px; color: #3a4152; white-space: nowrap; }
+.tg-sch-nome span { display: inline-block; width: 150px; border-bottom: 1px solid #1d2433; margin: 0 8px 0 4px; }
+.tg-sch-nome span.c { width: 60px; }
+.tg-sch .tg-sch-gioco h2 { letter-spacing: 0; font-size: 16px; margin: 18px 0 6px; padding-bottom: 3px; border-bottom: 1px solid #d5d8de; }
+.tg-sch-lista { margin: 0; padding-left: 26px; }
+.tg-sch-es { margin: 0 0 14px; break-inside: avoid; page-break-inside: avoid; }
+.tg-sch-es .q { margin-bottom: 4px; }
+.tg-sch-es .q p { margin: 0 0 4px; }
+.tg-sch-es pre, .tg-sch-sol pre { font: 13px/1.35 var(--tg-mono); background: #f4f5f7; border: 0; padding: 6px 8px; border-radius: 4px; margin: 4px 0; white-space: pre-wrap; color: inherit; }
+.tg-sch-es .f { margin: 4px 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+.tg-sch-es .f b { font-weight: 600; font-size: 14px; }
+.tg-sch-es .riga { flex: 1; min-width: 160px; max-width: 320px; border-bottom: 1px solid #1d2433; height: 1.3em; }
+.tg-sch-es .ck::before { content: ""; display: inline-block; width: 11px; height: 11px; border: 1.3px solid #1d2433; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+.tg-sch-tab { border-collapse: collapse; width: 100%; margin-top: 4px; }
+.tg-sch-tab td { border: 1px solid #c9cdd6; padding: 5px 8px; vertical-align: top; font-size: 14px; }
+.tg-sch-tab td.vuota { width: 34%; }
+.tg-sch-tab td.num { width: 42px; }
+.tg-sch-tab small { color: #5d6474; }
+.tg-sch-sol { break-before: page; page-break-before: always; margin-top: 30px; border-top: 2px dashed #c9cdd6; padding-top: 10px; font-size: 13.5px; }
+.tg-sch .tg-sch-sol h2 { letter-spacing: 0; font-size: 18px; margin: 0 0 8px; }
+.tg-sch-sol ol { padding-left: 26px; margin: 0; }
+.tg-sch-sol li { margin-bottom: 8px; break-inside: avoid; }
+.tg-sch-sol .sp { color: #3a4152; }
+.tg-sch-sol .sp p { margin: 2px 0; }
+.tg-sch-sol table { border-collapse: collapse; margin: 4px 0; font-size: 12.5px; }
+.tg-sch-sol td, .tg-sch-sol th { border: 1px solid #d5d8de; padding: 2px 6px; }
+.tg-sch-vuoto { color: #5d6474; text-align: center; padding: 40px 0; }
+.tg-sch-piede { margin: 24px 0 0; color: #8a90a0; font: 11px var(--tg-mono); text-align: right; }
+@media (max-width: 760px) {
+  .tg-sch { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+  .tg-sch-opz { max-height: 42vh; border-right: 0; border-bottom: 1px solid var(--tg-line); }
+  .tg-sch-carta { padding: 12px; }
+  .tg-sch-foglio { padding: 22px 18px; }
+  .tg-sch-nome { white-space: normal; }
+}
+@media print {
+  body.tg-sch-aperta > :not(.tg-sch) { display: none !important; }
+  body.tg-sch-aperta { overflow: visible; background: #fff; }
+  .tg-sch { position: static; display: block; background: #fff; }
+  .tg-sch-opz { display: none; }
+  .tg-sch-carta { overflow: visible; padding: 0; }
+  .tg-sch-foglio { max-width: none; padding: 0; box-shadow: none; border-radius: 0; }
+}
+
 /* ---------- intestazione comune delle attività: riquadro con l'icona accanto al titolo ---------- */
 .tg-titolo { display: inline-flex; align-items: center; gap: 12px; }
 .tg-titolo h1 { margin: 0; }

@@ -104,8 +104,14 @@ const GIOCHI=(function(){
 /* ---------- esercizio con campi da compilare ----------
    genFn() restituisce {q, fields:[{label, kind:'str'|'num'|'choice', exp, opts, tol}], sol, sl}.
    sl = titolo della soluzione ("Spiegazione"); senza sl è "Procedimento". */
+/* ---------- schede da stampare ----------
+   Ogni gioco, mentre si monta, si annota qui con quello che serve per rifarlo su carta:
+   tipo 'es' (esercizi da un generatore, con livelli se è un allenatore), 'smista' (carte e categorie), 'ordina'.
+   La scheda la costruisce teaching.js (pulsante "Scheda" nella barra). */
+const SCHEDA=[];
+function perScheda(el,voce){if(SCHEDA.some(v=>v.titolo===voce.titolo))return;const s=el&&el.closest&&el.closest('section');voce.sez=s?s.id:'';SCHEDA.push(voce)}
 function fieldsHTML(ex){return ex.fields.map(f=>`<div class="f"><label>${f.label}</label>`+(f.kind==='choice'?`<select>${f.opts.map(o=>`<option>${o}</option>`).join('')}</select>`:`<input type="text" autocomplete="off" autocapitalize="off" spellcheck="false">`)+`</div>`).join('')}
-function mount(el,genFn,label){const st=stat(label);el.innerHTML='';const box=document.createElement('div');el.appendChild(box);let ex,first;
+function mount(el,genFn,label){const st=stat(label);if(!el.classList.contains('inner'))perScheda(el,{tipo:'es',titolo:label,gen:genFn});el.innerHTML='';const box=document.createElement('div');el.appendChild(box);let ex,first;
  function draw(){ex=genFn();first=true;
   box.innerHTML=`<div class="card">${turn()}<p class="q">${ex.q}</p>${fieldsHTML(ex)}<div class="row"><button class="btn" data-a="c">Controlla</button><button class="btn sec" data-a="s">Mostra ${ex.sl?'la spiegazione':'il procedimento'}</button><button class="btn sec" data-a="n">Altro esercizio</button><span class="msg"></span></div><div class="sol" style="display:none"></div><div class="stat"></div></div>`;
   box.querySelector('[data-a=c]').onclick=check;box.querySelector('[data-a=n]').onclick=draw;
@@ -119,7 +125,7 @@ function mount(el,genFn,label){const st=stat(label);el.innerHTML='';const box=do
 
 /* ---------- allenatore: menu a tendina (e livelli) + esercizio ----------
    items = [["Nome", gen(livello)], ...] */
-function mountMenu(el,items,label,levels){el.innerHTML=`<div class="row"><select class="mt">${items.map((a,i)=>`<option value="${i}">${a[0]}</option>`).join('')}</select>`+(levels?`<select class="ml"><option value="1">Livello 1: facile</option><option value="2">Livello 2: medio</option><option value="3">Livello 3: difficile</option></select>`:'')+`</div><div class="inner"></div>`;
+function mountMenu(el,items,label,levels){items.forEach(a=>perScheda(el,{tipo:'es',titolo:label+': '+a[0],gen:a[1],livelli:!!levels,menu:true}));el.innerHTML=`<div class="row"><select class="mt">${items.map((a,i)=>`<option value="${i}">${a[0]}</option>`).join('')}</select>`+(levels?`<select class="ml"><option value="1">Livello 1: facile</option><option value="2">Livello 2: medio</option><option value="3">Livello 3: difficile</option></select>`:'')+`</div><div class="inner"></div>`;
  const m=()=>{const i=+el.querySelector('.mt').value,l=levels?+el.querySelector('.ml').value:1;mount(el.querySelector('.inner'),()=>items[i][1](l),label+': '+items[i][0]+(levels?' (liv. '+l+')':''))};
  el.querySelector('.mt').onchange=m;if(levels)el.querySelector('.ml').onchange=m;m()}
 
@@ -138,7 +144,7 @@ function mission(el,poolFns,label,count=10){let T;MISSIONI.push(label);const nom
 
 /* ---------- smistamento: clic sulla carta, poi sulla categoria ----------
    cards = [["testo", "idCategoria"], ...]; buckets = [{id, t, s}, ...] */
-function sortGame(el,cards,buckets,label){const st=stat(label);let L,sel;
+function sortGame(el,cards,buckets,label){const st=stat(label);perScheda(el,{tipo:'smista',titolo:label,cards,buckets});let L,sel;
  function draw(){L={left:cards.length,err:0};sel=null;st.done=false;
   el.innerHTML=`<div class="pool"></div><div class="buckets"></div><div class="row"><span class="msg"></span><button class="btn sec" data-a="r">Ricomincia</button></div>`;
   const pool=el.querySelector('.pool'),bk=el.querySelector('.buckets');
@@ -156,7 +162,7 @@ const SG=(id,cards,bk,label)=>sortGame($(id),cards,bk,label);
 
 /* ---------- riordino con trascinamento e frecce ----------
    items = [["titolo", "descrizione", "anno"], ...] nell'ordine giusto; years = mostra l'anno dopo la verifica */
-function orderGame(el,items,label,years){const st=stat(label);let order,first,shown;
+function orderGame(el,items,label,years){const st=stat(label);perScheda(el,{tipo:'ordina',titolo:label,items,years});let order,first,shown;
  function round(){let o;do{o=shuffle([...items.keys()])}while(o.every((v,i)=>v===i));order=o;first=true;shown=false;draw();el.querySelector('.msg').textContent='';el.querySelector('#ov').disabled=false}
  el.innerHTML=`<ol class="ord"></ol><div class="row"><button class="btn" id="ov">Verifica</button><button class="btn sec" id="or">Rimescola</button><span class="msg"></span></div><div class="stat"></div>`;
  function draw(){const ul=el.querySelector('.ord');ul.innerHTML='';

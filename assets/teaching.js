@@ -212,11 +212,13 @@
       '<span class="tg-path">' + (p[0] ? '<a href="' + link(p[0]) + '">' + esc(c.nome) + "</a>" : "") +
       (u ? '<span>/</span><a href="' + link(p[0] + "/" + p[1]) + '">' + esc(u) + "</a>" : "") + "</span>" +
       '<span class="tg-btns"><button type="button" data-a="qr" title="Mostra il QR code di questa pagina">' + ico("qr") + "<span>QR</span></button>" +
+      (giochiDaStampare().length ? '<button type="button" data-a="scheda" title="Prepara una scheda di esercizi da stampare">' + ico("print") + "<span>Scheda</span></button>" : "") +
       (document.fullscreenEnabled ? '<button type="button" data-a="fs"></button>' : "") +
       '<button type="button" data-a="tema"></button></span>';
     document.body.insertBefore(bar, document.body.firstChild);
     coloreCorso(p[0]);
     bar.querySelector('[data-a="qr"]').addEventListener("click", qr);
+    if (bar.querySelector('[data-a="scheda"]')) bar.querySelector('[data-a="scheda"]').addEventListener("click", scheda);
     pulsanteTema(bar.querySelector('[data-a="tema"]'));
     var b = bar.querySelector('[data-a="fs"]');
     if (b) {
@@ -232,6 +234,140 @@
       document.addEventListener("fullscreenchange", fs);
     }
     intestazione();
+  }
+
+  /* ---------- scheda da stampare (attività tg-act) ----------
+     I giochi si annotano in SCHEDA (giochi.js) mentre si montano. Qui si sceglie che cosa mettere nel foglio,
+     si vede l'anteprima e si stampa: esercizi sempre nuovi dagli stessi generatori dei giochi, smistamenti e
+     riordini come tabelle, e in fondo (a richiesta) le soluzioni con il procedimento. */
+  function giochiDaStampare() {
+    return document.body.classList.contains("tg-act") && typeof SCHEDA === "object" && SCHEDA ? SCHEDA : [];
+  }
+  function mescola(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+  // un esercizio su carta: domanda, campi da riempire (le scelte diventano caselle), soluzione a parte
+  function esercizio(voce, livello, visti) {
+    var ex = null;
+    for (var k = 0; k < 12; k++) {
+      var e;
+      try { e = voce.gen(livello); } catch (err) { return null; }
+      if (!e || !e.q || !e.fields) return null;
+      var chiave = e.q + "|" + e.fields.map(function (f) { return f.exp; }).join("|");
+      ex = e;
+      if (!visti[chiave]) { visti[chiave] = 1; break; }
+    }
+    return ex;
+  }
+  function valore(x) { return typeof x === "number" ? String(x).replace(".", ",") : String(x); }
+  function foglio(scelte, soluzioni) {
+    var titolo = (document.querySelector("h1") || {}).textContent || document.title;
+    var p = percorso().split("/"), c = corso(p[0]), u = UNITA[p[0] + "/" + p[1]];
+    var html = '<div class="tg-sch-testa"><div><p class="tg-sch-sopra">' + esc(c.nome + (c.anno ? ", " + c.anno : "") + (u ? " · " + u : "")) +
+      "</p><h1>" + esc(titolo) + '</h1></div><p class="tg-sch-nome">Nome <span></span> Classe <span class="c"></span> Data <span class="c"></span></p></div>';
+    var sol = [], n = 0;
+    scelte.forEach(function (s) {
+      var v = s.voce, blocco = "";
+      if (v.tipo === "es") {
+        var visti = {};
+        for (var i = 0; i < s.quanti; i++) {
+          var ex = esercizio(v, s.livello, visti);
+          if (!ex) break;
+          n++;
+          blocco += '<li class="tg-sch-es"><div class="q">' + ex.q + "</div>" + ex.fields.map(function (f) {
+            if (f.kind === "choice") {
+              return '<p class="f"><b>' + f.label + "</b> " + f.opts.filter(Boolean).map(function (o) { return '<span class="ck">' + o + "</span>"; }).join(" ") + "</p>";
+            }
+            return '<p class="f"><b>' + f.label + '</b> <span class="riga"></span></p>';
+          }).join("") + "</li>";
+          sol.push('<li value="' + n + '"><b>' + ex.fields.map(function (f) { return (ex.fields.length > 1 ? f.label + ": " : "") + valore(f.exp); }).join(" · ") +
+            "</b>" + (ex.sol ? '<div class="sp">' + ex.sol + "</div>" : "") + "</li>");
+        }
+        if (blocco) blocco = '<ol class="tg-sch-lista" start="' + (n - (blocco.match(/tg-sch-es/g) || []).length + 1) + '">' + blocco + "</ol>";
+      } else if (v.tipo === "smista") {
+        n++;
+        var carte = mescola(v.cards).slice(0, 14);
+        var cat = {};
+        v.buckets.forEach(function (b) { cat[b.id] = b.t; });
+        blocco = '<ol class="tg-sch-lista" start="' + n + '"><li class="tg-sch-es"><div class="q">Scrivete accanto a ogni voce la categoria giusta: ' +
+          v.buckets.map(function (b) { return "<b>" + b.t + "</b>" + (b.s ? " (" + b.s + ")" : ""); }).join(", ") + '.</div><table class="tg-sch-tab">' +
+          carte.map(function (x) { return "<tr><td>" + x[0] + '</td><td class="vuota"></td></tr>'; }).join("") + "</table></li></ol>";
+        sol.push('<li value="' + n + '">' + carte.map(function (x) { return x[0] + ": <b>" + cat[x[1]] + "</b>"; }).join("; ") + ".</li>");
+      } else if (v.tipo === "ordina") {
+        n++;
+        var ord = v.items.map(function (x, i) { return [x, i]; }), mix;
+        do { mix = mescola(ord); } while (mix.length > 1 && mix.every(function (x, i) { return x[1] === i; }));
+        blocco = '<ol class="tg-sch-lista" start="' + n + '"><li class="tg-sch-es"><div class="q">Mettete in ordine: scrivete nella casella il numero ' +
+          "della posizione (1 = primo).</div><table class=\"tg-sch-tab\">" +
+          mix.map(function (x) { return '<tr><td class="num"></td><td><b>' + x[0][0] + "</b>" + (x[0][1] ? "<br><small>" + x[0][1] + "</small>" : "") + "</td></tr>"; }).join("") + "</table></li></ol>";
+        sol.push('<li value="' + n + '">' + v.items.map(function (x) { return x[0] + (v.years && x[2] ? " (" + x[2] + ")" : ""); }).join(" → ") + ".</li>");
+      }
+      if (blocco) html += '<div class="tg-sch-gioco"><h2>' + esc(v.titolo.replace(/^Allenatore: /, "")) + (s.livello && v.livelli ? " · livello " + s.livello : "") + "</h2>" + blocco + "</div>";
+    });
+    if (!n) html += '<p class="tg-sch-vuoto">Scegliete almeno un gioco a sinistra.</p>';
+    if (soluzioni && sol.length) html += '<div class="tg-sch-sol"><h2>Soluzioni</h2><ol>' + sol.join("") + "</ol></div>";
+    html += '<p class="tg-sch-piede">' + esc(indirizzo().replace(/^https?:\/\//, "").replace(/[?#].*$/, "")) + "</p>";
+    return html;
+  }
+  function scheda() {
+    if (document.querySelector(".tg-sch")) return;
+    var voci = giochiDaStampare(), prima = document.activeElement;
+    var nomeSez = function (id) { var s = document.getElementById(id); return s ? (s.getAttribute("data-g") || "") : ""; };
+    var box = document.createElement("div");
+    box.className = "tg-sch";
+    box.setAttribute("role", "dialog");
+    box.setAttribute("aria-modal", "true");
+    box.setAttribute("aria-label", "Scheda da stampare");
+    // di partenza: gli esercizi semplici; se non ce ne sono, la prima voce dell'allenatore o la prima in assoluto
+    var acceso = voci.map(function (v) { return v.tipo === "es" && !v.menu; });
+    if (acceso.indexOf(true) < 0 && voci.length) {
+      var k = voci.map(function (v) { return v.tipo; }).indexOf("es");
+      acceso[k < 0 ? 0 : k] = true;
+    }
+    var righe = voci.map(function (v, i) {
+      var es = v.tipo === "es";
+      return '<label class="tg-sch-voce"><input type="checkbox" data-i="' + i + '"' + (acceso[i] ? " checked" : "") + ">" +
+        '<span class="t">' + esc(v.titolo.replace(/^Allenatore: /, "")) + (nomeSez(v.sez) && nomeSez(v.sez) !== v.titolo ? "<small>" + esc(nomeSez(v.sez)) + "</small>" : "") + "</span>" +
+        (es ? '<select data-q="' + i + '" aria-label="Quanti esercizi">' + [1, 2, 3, 4, 5, 6, 8, 10].map(function (q) { return "<option" + (q === 3 ? " selected" : "") + ">" + q + "</option>"; }).join("") + "</select>" : "") +
+        (v.livelli ? '<select data-l="' + i + '" aria-label="Livello"><option value="1">liv. 1</option><option value="2">liv. 2</option><option value="3">liv. 3</option></select>' : "") +
+        "</label>";
+    }).join("");
+    box.innerHTML = '<aside class="tg-sch-opz"><h2>' + ico("print") + "Scheda da stampare</h2>" +
+      "<p>Esercizi sempre nuovi, dagli stessi giochi della pagina. Per la classe o per casa.</p>" +
+      '<div class="tg-sch-voci">' + righe + "</div>" +
+      '<label class="tg-sch-voce"><input type="checkbox" data-a="sol" checked><span class="t">Soluzioni in fondo</span></label>' +
+      '<div class="tg-sch-cmd"><button type="button" class="pri" data-a="stampa">' + ico("print") + "Stampa</button>" +
+      '<button type="button" data-a="nuova">' + ico("restart") + "Altra versione</button>" +
+      '<button type="button" data-a="chiudi">' + ico("close") + "Chiudi</button></div></aside>" +
+      '<div class="tg-sch-carta"><article class="tg-sch-foglio"></article></div>';
+    document.body.appendChild(box);
+    document.body.classList.add("tg-sch-aperta");
+
+    function disegna() {
+      var scelte = [];
+      [].forEach.call(box.querySelectorAll(".tg-sch-voci input[data-i]"), function (cb) {
+        if (!cb.checked) return;
+        var i = +cb.getAttribute("data-i"), q = box.querySelector('[data-q="' + i + '"]'), l = box.querySelector('[data-l="' + i + '"]');
+        scelte.push({ voce: voci[i], quanti: q ? +q.value : 1, livello: l ? +l.value : 1 });
+      });
+      box.querySelector(".tg-sch-foglio").innerHTML = foglio(scelte, box.querySelector('[data-a="sol"]').checked);
+    }
+    function chiudi() {
+      box.remove();
+      document.body.classList.remove("tg-sch-aperta");
+      document.removeEventListener("keydown", tasto, true);
+      if (prima && prima.focus) prima.focus();
+    }
+    function tasto(e) { if (e.key === "Escape") { e.preventDefault(); chiudi(); } }
+    box.querySelector(".tg-sch-opz").addEventListener("change", disegna);
+    box.querySelector('[data-a="nuova"]').addEventListener("click", disegna);
+    box.querySelector('[data-a="chiudi"]').addEventListener("click", chiudi);
+    box.querySelector('[data-a="stampa"]').addEventListener("click", function () { window.print(); });
+    document.addEventListener("keydown", tasto, true);
+    disegna();
+    box.querySelector(".tg-sch-opz button").focus();
   }
 
   /* icona dell'attività accanto al titolo (tutte le attività, anche quelle da LIM) */
