@@ -214,6 +214,20 @@ body.tg-act .tg-hidden { display: none; }
 .tg-res-list li.todo { opacity: .55; }
 .tg-res-list .v { color: var(--mute); font: 500 14px var(--tg-mono); white-space: nowrap; }
 .tg-res-act { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+/* avviso "Ripresi i progressi salvati" in cima alle attività */
+.tg-ripresi {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 0 0 16px;
+  background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--acc);
+  border-radius: 12px; padding: 10px 12px 10px 14px; font-size: 15px;
+}
+.tg-ripresi span { flex: 1 1 220px; }
+body.tg-act .tg-ripresi .btn { padding: 6px 12px; font-size: 14px; margin: 0; }
+.tg-ripresi .tg-x {
+  border: 0; background: transparent; color: var(--mute); font-size: 22px; line-height: 1;
+  width: 32px; height: 32px; border-radius: 8px; cursor: pointer;
+}
+.tg-ripresi .tg-x:hover { color: var(--ink); background: var(--line); }
+@media print { .tg-ripresi { display: none; } }
 body.tg-act p#rmsg { background: var(--card); border-left: 4px solid var(--acc); border-radius: 0 10px 10px 0; padding: 10px 14px; }
 body.tg-act p#rmsg:empty { display: none; }
 @media (max-width: 560px) {

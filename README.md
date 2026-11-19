@@ -32,6 +32,11 @@ senza installare nulla, senza account e senza raccogliere dati degli studenti.
   (senza aggiungere passi alla cronologia), quindi il QR e i link copiati portano sempre alla scheda aperta.
   Vale per le attività `tg-act`, per le due schede del BEP (`#p2`) e per Processi e thread, che lo faceva già
   (`#quiz`, `#smistamento`, `#stati`, `#precedenze`, `#holt`).
+- **Progressi salvati nel browser** (attività `tg-act`): punteggi e nomi restano in `localStorage`, una chiave
+  per pagina (`tg-progressi:<percorso>`), e tornano ricaricando o riaprendo la pagina, con un avviso in alto.
+  Non esce nulla dal browser. Nella scheda Risultato, **Ricomincia da capo** cancella il salvataggio e riparte
+  pulito: da usare a fine ora sui PC di laboratorio condivisi. In navigazione privata o con i dati bloccati
+  la pagina funziona lo stesso, senza salvare.
 
 ```
 index.html                 home con l'elenco di tutte le attività
@@ -39,7 +44,8 @@ sitemap.xml, robots.txt   per i motori di ricerca
 assets/
   catalogo.js              elenco di corsi, unità e attività (l'unico file da aggiornare)
   teaching.css             stile condiviso
-  teaching.js              elenco, filtri, tema scuro e barra in alto nelle attività (con il QR)
+  teaching.js              elenco, filtri, tema scuro; nelle attività barra in alto con il QR, link alle schede,
+                           salvataggio dei progressi e schermata finale
   qr.js                    generatore di QR code (Kazuhiko Arase, licenza MIT), caricato solo al clic su "QR"
 <corso>/index.html         elenco delle attività del corso
 <corso>/<unità>/index.html elenco delle attività dell'unità
@@ -55,6 +61,9 @@ assets/
    `<section id="..." data-t="etichetta">` dentro `main` (con `data-g` per raggrupparle in sottoschede) e la pagina
    cambia scheda con una funzione globale `go(id)` che mette la classe `on`: così funzionano da soli i link
    diretti `#id`. Gli `id` finiscono negli indirizzi dati alle classi: una volta pubblicati non vanno rinominati.
+   Per il salvataggio e la schermata finale i punteggi stanno nell'oggetto globale `const ST` (`ST.g` per i giochi,
+   `{ok, tot}`; `ST.ms` o `ST.m` per le missioni), i nomi in `#n1`/`#n2` e il riepilogo in `#restab`.
+   I giochi devono tenere i contatori dentro `ST.g` (non in copie), perché il ripristino li aggiorna sul posto.
    Le attività con un layout proprio
    (pensate per la LIM) usano invece `class="tg-lim tg-<nome>"`, con poche regole dedicate in `teaching.css`.
    Nessuna risorsa esterna (font, librerie da CDN): tutto deve funzionare anche offline.
