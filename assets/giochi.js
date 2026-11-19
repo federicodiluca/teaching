@@ -106,7 +106,7 @@ function mountMenu(el,items,label,levels){el.innerHTML=`<div class="row"><select
 
 /* ---------- missione a tempo ----------
    poolFns = generatori come per mount; se ne pescano count a caso. Vale il primo controllo. */
-function mission(el,poolFns,label,count=10){let T;MISSIONI.push(label);el.innerHTML=`<div class="row"><button class="btn" id="ms-s">Inizia la missione</button><span class="timer" id="ms-t"></span></div><div id="ms-x"></div>`;
+function mission(el,poolFns,label,count=10){let T;MISSIONI.push(label);const nome='la '+label.charAt(0).toLowerCase()+label.slice(1);el.innerHTML=`<div class="row"><button class="btn" id="ms-s">Inizia ${nome}</button><span class="timer" id="ms-t"></span></div><div id="ms-x"></div>`;
  const tt=()=>{const s=Math.floor((Date.now()-T.t0)/1000);return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
  el.querySelector('#ms-s').onclick=()=>{T={t0:Date.now(),n:0,pts:0,qs:shuffle(poolFns).slice(0,count)};delete ST.m[label];el.querySelector('#ms-s').disabled=true;clearInterval(T.iv);T.iv=setInterval(()=>el.querySelector('#ms-t').textContent=tt(),500);Q()};
  function Q(){const ex=T.qs[T.n]();DBG.cur=ex;const x=el.querySelector('#ms-x');
@@ -115,7 +115,7 @@ function mission(el,poolFns,label,count=10){let T;MISSIONI.push(label);el.innerH
    if(all)T.pts++;const m=x.querySelector('#m');m.textContent=all?'Esatto! +1':`Sbagliato. ${ex.sl||'Procedimento'} sotto.`;m.style.color=all?'var(--ok)':'var(--ko)';
    if(!all){const s=x.querySelector('#sl');s.innerHTML='<b>'+(ex.sl||'Procedimento')+'</b>'+ex.sol;s.style.display='block'}
    x.querySelector('#c').disabled=true;const n=x.querySelector('#n');n.style.display='inline-block';n.textContent=T.n===count-1?'Vedi il risultato':'Avanti'};
-  x.querySelector('#n').onclick=()=>{T.n++;if(T.n>=count){clearInterval(T.iv);ST.m[label]={pts:T.pts,t:tt(),count};x.innerHTML=`<div class="card"><p class="q">Finita: <b>${T.pts} su ${count}</b> in ${ST.m[label].t}.</p></div>`;el.querySelector('#ms-s').disabled=false;el.querySelector('#ms-s').textContent='Riprova la missione'}else Q()}}}
+  x.querySelector('#n').onclick=()=>{T.n++;if(T.n>=count){clearInterval(T.iv);ST.m[label]={pts:T.pts,t:tt(),count};x.innerHTML=`<div class="card"><p class="q">Finita: <b>${T.pts} su ${count}</b> in ${ST.m[label].t}.</p></div>`;el.querySelector('#ms-s').disabled=false;el.querySelector('#ms-s').textContent='Riprova '+nome}else Q()}}}
 
 /* ---------- smistamento: clic sulla carta, poi sulla categoria ----------
    cards = [["testo", "idCategoria"], ...]; buckets = [{id, t, s}, ...] */
