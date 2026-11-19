@@ -108,13 +108,34 @@ body.tg-home {
 .tg-bar .tg-logo { color: #fff; font-size: 15px; }
 .tg-bar .tg-path { display: flex; gap: 6px; align-items: center; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .tg-bar .tg-path span { opacity: .5; }
+.tg-bar .tg-btns { margin-left: auto; display: flex; gap: 6px; }
 .tg-bar button {
-  margin-left: auto; background: transparent; color: inherit; border: 1px solid rgba(255, 255, 255, .25);
+  background: transparent; color: inherit; border: 1px solid rgba(255, 255, 255, .25);
   border-radius: 999px; padding: 5px 11px; font: 12px var(--tg-sans); cursor: pointer; white-space: nowrap;
 }
 .tg-bar button:hover { color: #fff; border-color: rgba(255, 255, 255, .55); }
+.tg-bar button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 @media (max-width: 560px) { .tg-bar .tg-path { display: none; } }
 @media print { .tg-bar { display: none; } }
+
+/* QR code a tutto schermo: sempre nero su bianco, anche nel tema scuro, perché i telefoni lo leggano */
+.tg-qr {
+  position: fixed; inset: 0; z-index: 1000; background: #fff; color: #1d2433; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2vh;
+  padding: 16px; font-family: var(--tg-sans); text-align: center; outline: none;
+}
+.tg-qr-code { width: min(68vh, 88vw); aspect-ratio: 1; display: grid; place-items: center; }
+.tg-qr .tg-qr-code svg {
+  width: 100%; height: 100%; max-width: none; display: block; margin: 0;
+  border: 0; border-radius: 0; box-shadow: none; background: #fff;
+}
+.tg-qr-url {
+  margin: 0; max-width: 94vw; font: 700 clamp(17px, 3.4vw, 40px)/1.2 var(--tg-mono);
+  overflow-wrap: anywhere; letter-spacing: -.01em;
+}
+.tg-qr-hint { margin: 0; color: #5d6474; font-size: clamp(13px, 1.6vw, 18px); }
+.tg-qr-err { color: #5d6474; font-size: 18px; }
+@media print { .tg-qr { display: none; } }
 
 @media (max-width: 560px) { .tg-search { flex: 1 1 100%; margin-left: 0; min-width: 0; } }
 

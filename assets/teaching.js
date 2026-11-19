@@ -1,6 +1,7 @@
 /* teaching: script condiviso.
    - Nelle pagine indice (body data-tg="elenco") disegna l'elenco delle attività dal catalogo.
-   - Nelle pagine delle attività aggiunge in alto una barra con il ritorno all'indice e lo schermo intero.
+   - Nelle pagine delle attività aggiunge in alto una barra con il ritorno all'indice, il QR code
+     della pagina e lo schermo intero.
    Funziona sia online sia aprendo i file con un doppio clic (percorsi relativi). */
 (function () {
   "use strict";
@@ -100,20 +101,35 @@
     disegna();
   }
 
+  /* percorso della pagina rispetto alla radice, es. "informatica-1/reti/indirizzi-dns-e-url" */
+  function percorso() {
+    var qui = location.href.replace(/[?#].*$/, "").replace(/index\.html?$/, "");
+    return qui.indexOf(ROOT) === 0 ? qui.slice(ROOT.length).replace(/\/$/, "") : "";
+  }
+
+  /* indirizzo da condividere: quello della pagina, scheda compresa.
+     Se la pagina è aperta dal disco (file://) si usa l'indirizzo pubblico corrispondente. */
+  var SITO = "https://teaching.federicodiluca.com/";
+  function indirizzo() {
+    if (/^https?:$/.test(location.protocol)) return location.href;
+    var rel = percorso();
+    return SITO + (rel ? rel + "/" : "") + location.hash;
+  }
+
   /* ---------- barra nelle attività ---------- */
   function barra() {
-    var qui = location.href.replace(/index\.html?$/, "").replace(/[?#].*$/, "");
-    var rel = qui.indexOf(ROOT) === 0 ? qui.slice(ROOT.length).replace(/\/$/, "") : "";
-    var p = rel.split("/");
+    var p = percorso().split("/");
     var c = corso(p[0]), u = UNITA[p[0] + "/" + p[1]];
     var bar = document.createElement("div");
     bar.className = "tg-bar";
     bar.innerHTML = '<a class="tg-logo" href="' + ROOT + '" title="Tutte le attività">teaching</a>' +
       '<span class="tg-path">' + (p[0] ? '<a href="' + link(p[0]) + '">' + esc(c.nome) + "</a>" : "") +
       (u ? '<span>/</span><a href="' + link(p[0] + "/" + p[1]) + '">' + esc(u) + "</a>" : "") + "</span>" +
-      (document.fullscreenEnabled ? '<button type="button">Schermo intero</button>' : "");
+      '<span class="tg-btns"><button type="button" data-a="qr" title="Mostra il QR code di questa pagina">QR</button>' +
+      (document.fullscreenEnabled ? '<button type="button" data-a="fs">Schermo intero</button>' : "") + "</span>";
     document.body.insertBefore(bar, document.body.firstChild);
-    var b = bar.querySelector("button");
+    bar.querySelector('[data-a="qr"]').addEventListener("click", qr);
+    var b = bar.querySelector('[data-a="fs"]');
     if (b) {
       b.addEventListener("click", function () {
         if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen();
@@ -122,6 +138,73 @@
         b.textContent = document.fullscreenElement ? "Esci da schermo intero" : "Schermo intero";
       });
     }
+  }
+
+  /* ---------- QR code della pagina, a tutto schermo ----------
+     Il generatore (assets/qr.js, licenza MIT) si carica solo al primo clic. */
+  var qrLib = null;
+  function caricaQr(fatto) {
+    if (window.qrcode) { fatto(); return; }
+    if (!qrLib) {
+      qrLib = [];
+      var s = document.createElement("script");
+      s.src = ROOT + "assets/qr.js";
+      s.onload = s.onerror = function () { var f = qrLib; qrLib = null; f.forEach(function (g) { g(); }); };
+      document.head.appendChild(s);
+    }
+    qrLib.push(fatto);
+  }
+
+  function disegnoQr(testo) {
+    if (!window.qrcode) return "";
+    try {
+      qrcode.stringToBytes = qrcode.stringToBytesFuncs["UTF-8"];
+      var q = qrcode(0, "M");
+      q.addData(testo, "Byte");
+      q.make();
+      var n = q.getModuleCount(), m = 4, d = "";
+      for (var r = 0; r < n; r++) for (var c = 0; c < n; c++) if (q.isDark(r, c)) d += "M" + (c + m) + " " + (r + m) + "h1v1h-1z";
+      return '<svg viewBox="0 0 ' + (n + 2 * m) + " " + (n + 2 * m) + '" shape-rendering="crispEdges" role="img" aria-label="QR code">' +
+        '<rect width="100%" height="100%" fill="#fff"/><path fill="#000" d="' + d + '"/></svg>';
+    } catch (e) { return ""; }
+  }
+
+  function qr() {
+    if (document.querySelector(".tg-qr")) return;
+    var prima = document.activeElement;
+    var box = document.createElement("div");
+    box.className = "tg-qr";
+    box.setAttribute("role", "dialog");
+    box.setAttribute("aria-modal", "true");
+    box.setAttribute("aria-label", "QR code di questa pagina");
+    box.tabIndex = -1;
+    box.innerHTML = '<div class="tg-qr-code"></div><p class="tg-qr-url"></p>' +
+      '<p class="tg-qr-hint">Inquadrate il codice con la fotocamera del telefono. Clic o Esc per chiudere.</p>';
+    document.body.appendChild(box);
+    box.focus();
+
+    function aggiorna() {
+      var url = indirizzo();
+      box.querySelector(".tg-qr-url").textContent = url.replace(/^https?:\/\//, "");
+      caricaQr(function () {
+        box.querySelector(".tg-qr-code").innerHTML = disegnoQr(url) ||
+          '<p class="tg-qr-err">QR non disponibile: usate l\'indirizzo qui sotto.</p>';
+      });
+    }
+    function chiudi() {
+      box.remove();
+      document.removeEventListener("keydown", tasto, true);
+      window.removeEventListener("hashchange", aggiorna);
+      if (prima && prima.focus) prima.focus();
+    }
+    function tasto(e) {
+      if (e.key === "Escape") { e.preventDefault(); chiudi(); }
+      else if (e.key === "Tab") { e.preventDefault(); box.focus(); }
+    }
+    box.addEventListener("click", chiudi);
+    document.addEventListener("keydown", tasto, true);
+    window.addEventListener("hashchange", aggiorna);
+    aggiorna();
   }
 
   /* ---------- schermata finale ----------

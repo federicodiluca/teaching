@@ -23,6 +23,10 @@ senza installare nulla, senza account e senza raccogliere dati degli studenti.
 - Pubblicato con **GitHub Pages** sul dominio personalizzato (file `CNAME`).
 - Gli indirizzi seguono `corso/unità/attività/` e non cambiano nel tempo, così i link dati alle classi restano validi.
 - Funziona anche offline: basta aprire `index.html` con un doppio clic.
+- Ogni attività ha in alto una barra comune con il ritorno all'elenco, lo schermo intero e il pulsante **QR**:
+  mostra a tutto schermo il QR code della pagina con l'indirizzo scritto in grande, così alla LIM gli studenti
+  la aprono dal telefono. Si chiude con un clic o con Esc. Se la pagina è aperta dal disco, il QR porta comunque
+  all'indirizzo pubblico su teaching.federicodiluca.com.
 
 ```
 index.html                 home con l'elenco di tutte le attività
@@ -30,7 +34,8 @@ sitemap.xml, robots.txt   per i motori di ricerca
 assets/
   catalogo.js              elenco di corsi, unità e attività (l'unico file da aggiornare)
   teaching.css             stile condiviso
-  teaching.js              elenco, filtri, tema scuro e barra in alto nelle attività
+  teaching.js              elenco, filtri, tema scuro e barra in alto nelle attività (con il QR)
+  qr.js                    generatore di QR code (Kazuhiko Arase, licenza MIT), caricato solo al clic su "QR"
 <corso>/index.html         elenco delle attività del corso
 <corso>/<unità>/index.html elenco delle attività dell'unità
 <corso>/<unità>/<attività>/index.html   l'attività
