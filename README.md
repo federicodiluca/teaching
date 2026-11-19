@@ -26,6 +26,7 @@ senza installare nulla, senza account e senza raccogliere dati degli studenti.
 
 ```
 index.html                 home con l'elenco di tutte le attività
+sitemap.xml, robots.txt   per i motori di ricerca
 assets/
   catalogo.js              elenco di corsi, unità e attività (l'unico file da aggiornare)
   teaching.css             stile condiviso
@@ -46,7 +47,7 @@ assets/
    <script src="../../../assets/catalogo.js" defer></script>
    <script src="../../../assets/teaching.js" defer></script>
    ```
-3. Aggiungi una voce in `assets/catalogo.js`. Se il corso o l'unità sono nuovi, aggiungili in `CORSI`
+3. Aggiungi una voce in `assets/catalogo.js` e il nuovo indirizzo in `sitemap.xml`. Se il corso o l'unità sono nuovi, aggiungili in `CORSI`
    e `UNITA` e copia una pagina `index.html` di corso o di unità esistente, cambiando `data-corso` e `data-unita`.
 4. Commit e push: in un minuto è online.
 
