@@ -25,8 +25,16 @@ body.tg-act nav {
   border-bottom: 1px solid var(--tg-line);
   padding: 6px max(12px, calc((100% - 940px) / 2 + 16px));
 }
-.nv { display: flex; gap: 6px; overflow-x: auto; padding: 3px 0; scrollbar-width: thin; }
+/* le schede vanno a capo invece di scorrere: si vedono tutte, senza barra di scorrimento */
+.nv { display: flex; flex-wrap: wrap; gap: 6px; padding: 3px 0; }
 .nv:empty { display: none; }
+@media (max-width: 600px) {
+  body.tg-act nav { padding-top: 4px; padding-bottom: 4px; }
+  .nv { gap: 5px; padding: 2px 0; }
+  body.tg-act nav button { padding: 5px 10px; gap: 5px; font-size: 13px; }
+  body.tg-act nav button .tg-ico { font-size: 14px; }
+  body.tg-act nav button.sub { padding: 4px 9px; font-size: 12px; }
+}
 body.tg-act nav button {
   flex: 0 0 auto; display: inline-flex; align-items: center; gap: 7px;
   border: 1px solid var(--tg-line); background: var(--tg-paper); color: var(--tg-ink);

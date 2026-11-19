@@ -76,7 +76,9 @@ const path = require("path");
     ok(page.url() === u, `indietro (bfcache ${bf}): url ${page.url()}`);
     ok((await page.$$eval("section.on", a => a.map(x => x.id)))[0] === "qz2", `indietro (bfcache ${bf}): scheda aperta sbagliata`);
     await page.click('.tg-bar [data-a="qr"]'); await page.waitForSelector(".tg-qr svg");
-    ok(decodePng(await page.screenshot({ path: path.join(OUT, "l_qr_qz2.png") })) === u, "QR dopo Indietro non contiene la scheda");
+    let letto = null;  // sulle macchine lente il disegno può arrivare dopo l'SVG: si riprova
+    for (let t = 0; t < 10 && letto !== u; t++) { await page.waitForTimeout(100); letto = decodePng(await page.screenshot({ path: path.join(OUT, "l_qr_qz2.png") })); }
+    ok(letto === u, "QR dopo Indietro non contiene la scheda: " + letto);
     await page.keyboard.press("Escape");
     await page.goBack(); await page.waitForTimeout(300);
     ok(page.url() === base, "secondo Indietro non torna alla home: " + page.url());
