@@ -234,6 +234,11 @@
         if (s) hash(s === secs[0] ? "" : s.id);
       };
       apri();
+      /* il browser, a fine caricamento, scorre da solo fino alla sezione #id (ormai visibile)
+         e la nav fissa ne coprirebbe il titolo: si riparte dall'alto, come cambiando scheda */
+      if (location.hash && document.readyState !== "complete") {
+        window.addEventListener("load", function () { setTimeout(function () { window.scrollTo(0, 0); }, 0); }, { once: true });
+      }
       var mo = new MutationObserver(segui);
       secs.forEach(function (s) { mo.observe(s, { attributes: true, attributeFilter: ["class"] }); });
       window.addEventListener("hashchange", apri);
@@ -256,86 +261,24 @@
         document.getElementById(c[1]).addEventListener("click", function () { hash(i ? c[0] : ""); });
       });
       vai();
+      if (location.hash && document.readyState !== "complete") {
+        window.addEventListener("load", function () { setTimeout(function () { window.scrollTo(0, 0); }, 0); }, { once: true });
+      }
       window.addEventListener("hashchange", vai);
     }
     /* Processi e thread ha già il suo routing (#quiz, #holt...); Che struttura è non ha schede. */
   }
 
   /* ---------- progressi salvati nel browser (solo tg-act) ----------
-     Le pagine tengono i punteggi nell'oggetto globale ST:
-       ST.g  = { "nome gioco": { ok, tot, done } }      (tutte)
-       ST.ms = { pts, t, label } oppure null            (missione finale, pagine a coppie)
-       ST.m  = { "nome sfida": { pts, t, count } }      (sfide finali, pagine da soli)
-     Si salvano ST e i nomi (#n1, #n2) in localStorage, una chiave per pagina, e si ripristinano al caricamento.
-     "done" non si salva: è lo stato della partita in corso, non un risultato.
-     I giochi tengono un riferimento agli oggetti di ST.g, quindi il ripristino li aggiorna sul posto.
-     Nessun dato esce dal browser; ogni accesso a localStorage è in try/catch (navigazione privata, dati bloccati). */
+     Il salvataggio e il ripristino stanno nel motore dei giochi (assets/giochi.js, oggetto GIOCHI),
+     che ripristina i punteggi prima di montare i giochi. Qui ci sono solo l'avviso in alto
+     e il pulsante "Ricomincia da capo" nella schermata finale. */
   var prog = null;
 
   function progressi() {
-    var st = null;
-    try { st = typeof ST === "object" && ST && typeof ST.g === "object" ? ST : null; } catch (e) {}
-    if (!st || !document.body.classList.contains("tg-act")) return;
-    var chiave = "tg-progressi:" + (percorso() || location.pathname);
-    var campi = ["n1", "n2"].map(function (id) { return document.getElementById(id); }).filter(Boolean);
-
-    function istantanea() {
-      try {
-        return JSON.stringify({ st: st, nomi: campi.map(function (c) { return c.value; }) },
-          function (k, v) { return k === "done" ? undefined : v; });
-      } catch (e) { return null; }
-    }
-    var iniziale = istantanea(), ultimo = iniziale, azzerato = false, ripresi = false;
-
-    /* ripristino */
-    var dati = null;
-    try { dati = JSON.parse(localStorage.getItem(chiave) || "null"); } catch (e) {}
-    if (dati && dati.v === 1 && dati.d && typeof dati.d === "object") {
-      try {
-        var d = dati.d, salvato = d.st || {};
-        Object.keys(salvato).forEach(function (k) {
-          if (!(k in st)) return;
-          var v = salvato[k], cur = st[k];
-          if (!v || typeof v !== "object" || Array.isArray(v)) return;
-          if (cur && typeof cur === "object") {
-            Object.keys(v).forEach(function (j) {
-              var x = v[j];
-              if (!x || typeof x !== "object") return;
-              if (cur[j] && typeof cur[j] === "object") Object.assign(cur[j], x); else cur[j] = x;
-            });
-          } else if (cur === null) st[k] = v;
-        });
-        (d.nomi || []).forEach(function (n, i) { if (campi[i] && typeof n === "string" && n) campi[i].value = n; });
-        ultimo = istantanea();
-        ripresi = ultimo !== iniziale;
-      } catch (e) {}
-    }
-
-    /* salvataggio: dopo ogni azione, ogni pochi secondi e quando si lascia la pagina */
-    function salvaOra() {
-      if (azzerato) return;
-      var s = istantanea();
-      if (s === null || s === ultimo) return;
-      ultimo = s;
-      try {
-        if (s === iniziale) localStorage.removeItem(chiave);
-        else localStorage.setItem(chiave, '{"v":1,"t":' + Date.now() + ',"d":' + s + "}");
-      } catch (e) {}
-    }
-    function presto() { setTimeout(salvaOra, 0); }
-    ["click", "change", "input", "keyup"].forEach(function (ev) { document.addEventListener(ev, presto, true); });
-    window.addEventListener("pagehide", salvaOra);
-    document.addEventListener("visibilitychange", function () { if (document.hidden) salvaOra(); });
-    setInterval(salvaOra, 4000);
-
-    function ricomincia() {
-      if (!window.confirm("Cancellare i risultati salvati su questo computer e ricominciare da capo?")) return;
-      azzerato = true;
-      try { localStorage.removeItem(chiave); } catch (e) {}
-      campi.forEach(function (c) { c.value = ""; });
-      location.replace(location.href.replace(/#.*$/, ""));
-    }
-    prog = { ricomincia: ricomincia };
+    try { prog = typeof GIOCHI === "object" && GIOCHI && typeof GIOCHI.ricomincia === "function" ? GIOCHI : null; } catch (e) {}
+    if (!prog || !document.body.classList.contains("tg-act")) { prog = null; return; }
+    var ripresi = prog.ripresi, ricomincia = prog.ricomincia;
 
     /* avviso in alto: chi si siede a un PC condiviso vede subito che ci sono risultati di prima */
     if (ripresi) {

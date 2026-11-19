@@ -1,127 +1,9 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Logica e tavole di verità: giochi di classe</title><style>:root{--bg:#f6f7fb;--card:#fff;--ink:#1d2433;--mute:#5b6577;--line:#d7dce7;--acc:#2f5bea;--ok:#1e8e4e;--okbg:#e4f6ec;--ko:#c0392b;--kobg:#fdeaea;--sel:#fff3c4}
-*{box-sizing:border-box}body{margin:0;font-family:var(--tg-sans,Arial,Helvetica,sans-serif);background:var(--bg);color:var(--ink);line-height:1.4}
-header{background:var(--acc);color:#fff;padding:14px 20px}header h1{margin:0;font-size:20px}
-nav{display:flex;gap:6px;padding:10px 12px;background:#fff;border-bottom:1px solid var(--line);overflow-x:auto;position:sticky;top:0;z-index:5}
-nav button{flex:0 0 auto;border:1px solid var(--line);background:#fff;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:14px;color:var(--ink)}
-nav button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
-main{max-width:940px;margin:0 auto;padding:16px 16px 50px}
-section{display:none}section.on{display:block}
-h2{font-size:18px;margin:8px 0}p.lead{color:var(--mute);margin:4px 0 14px}
-.btn{background:var(--acc);color:#fff;border:0;border-radius:8px;padding:10px 16px;font-size:15px;cursor:pointer}
-.btn.sec{background:#fff;color:var(--acc);border:1px solid var(--acc)}.btn:disabled{opacity:.45}
-.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:12px 0}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin:10px 0}
-.q{font-size:17px;margin:0 0 10px}.turn{background:#eef1fb;border-radius:8px;padding:6px 10px;font-size:14px;margin-bottom:10px;display:inline-block}
-.f{display:flex;align-items:center;gap:8px;margin:8px 0;flex-wrap:wrap}.f label{min-width:150px;font-weight:bold;font-size:14px}
-input[type=text],select{padding:9px;border:1px solid var(--line);border-radius:8px;font-size:16px;font-family:var(--tg-mono,Consolas,monospace);min-width:200px}
-input.ok,select.ok{background:var(--okbg);border-color:var(--ok)}input.ko,select.ko{background:var(--kobg);border-color:var(--ko)}
-.sol{background:#fff8dc;border:1px solid #e6d58a;border-radius:8px;padding:10px;margin-top:10px;font-size:14px}
-.sol pre{margin:6px 0;font-family:var(--tg-mono,Consolas,monospace);white-space:pre-wrap}
-.stat{color:var(--mute);font-size:14px;margin-top:8px}.msg{font-weight:bold}
-.sw{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
-.bit{width:62px;border:2px solid var(--line);background:#fff;border-radius:10px;text-align:center;padding:6px 0;cursor:pointer;user-select:none}
-.bit b{display:block;font-size:26px;font-family:var(--tg-mono,Consolas,monospace)}.bit small{color:var(--mute)}
-.bit.on{background:var(--acc);color:#fff;border-color:var(--acc)}.bit.on small{color:#cfdcff}
-.val{font-family:var(--tg-mono,Consolas,monospace);font-size:18px}
-table.tv{border-collapse:collapse;margin:10px 0}table.tv th,table.tv td{border:1px solid var(--line);padding:8px 14px;text-align:center;background:#fff;font-family:var(--tg-mono,Consolas,monospace);font-size:16px}
-table.tv td.out{cursor:pointer;min-width:70px;background:#f0f3fb}table.tv td.ok{background:var(--okbg)}table.tv td.ko{background:var(--kobg)}
-table.res{border-collapse:collapse;margin:10px 0}table.res td,table.res th{border:1px solid var(--line);padding:8px 14px;background:#fff;text-align:left}
-.timer{font-family:var(--tg-mono,Consolas,monospace);font-size:18px}
-.pool{display:flex;gap:8px;flex-wrap:wrap;min-height:50px;padding:10px;background:#eef1f8;border:1px dashed var(--line);border-radius:10px;margin-bottom:12px}
-.chip{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 10px;cursor:pointer;max-width:330px;font-size:14px;user-select:none}
-.chip.sel{background:var(--sel);border-color:#d9a900}.chip.wrong{animation:sh .35s}
-@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-.buckets{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
-.bk{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:10px;min-height:100px;cursor:pointer}
-.bk h3{margin:0 0 2px;font-size:15px}.bk small{color:var(--mute);display:block;margin-bottom:6px}.bk.hl{border-color:var(--acc);background:#f0f4ff}
-.bk .chip{background:var(--okbg);border-color:var(--ok);cursor:default;margin:4px 0;max-width:none}
-.line{display:block;width:100%;text-align:left;font-family:var(--tg-mono,Consolas,monospace);font-size:15px;border:1px solid var(--line);background:#fff;border-radius:8px;padding:8px 10px;margin:4px 0;cursor:pointer}
-.line.ok{background:var(--okbg);border-color:var(--ok)}.line.ko{background:var(--kobg);border-color:var(--ko)}
-.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:640px}
-.tile{height:70px;border:2px solid var(--line);border-radius:10px;background:var(--acc);color:#fff;font-size:17px;font-family:var(--tg-mono,Consolas,monospace);display:flex;align-items:center;justify-content:center;cursor:pointer;text-align:center;padding:4px}
-.tile.up{background:#fff;color:var(--ink)}.tile.done{background:var(--okbg);color:var(--ink);border-color:var(--ok);cursor:default}
-.grid{display:grid;gap:2px;width:fit-content}.px{width:34px;height:34px;border:1px solid #bbb;cursor:pointer}
-.add input{width:34px;min-width:0;text-align:center;padding:6px 2px}.add td,.add th{padding:2px 3px;font-family:var(--tg-mono,Consolas,monospace)}
-.cb{display:inline-block;margin:6px 14px 6px 0}
-</style><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head><body class="tg-act"><header><h1>Logica e tavole di verità: giochi di classe</h1></header><nav id="nav"></nav><main>
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Logica e tavole di verità: giochi di classe</title><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head><body class="tg-act"><header><h1>Logica e tavole di verità: giochi di classe</h1></header><nav id="nav"></nav><main>
 <section id="inizio" data-t="Inizio"><h2>Operatori logici AND, OR e NOT</h2><p class="lead">Giochi per costruire e leggere tavole di verità.</p><ol><li><b>Tavole di verità:</b> compilate l'uscita di espressioni a due e a tre ingressi.</li><li><b>Riconosci l'espressione:</b> data la tavola, scegliete l'espressione.</li><li><b>Uguali o diverse?</b> confrontate due espressioni.</li><li><b>Quando vale 1?</b> trovate le combinazioni che accendono l'uscita.</li><li><b>Allenatore</b> e <b>Missione finale</b>.</li></ol>
 <p>Si gioca in coppia: ad ogni esercizio tocca a uno dei due scrivere, mentre l'altro controlla e discute. Nelle risposte potete usare la virgola o il punto; gli zeri iniziali e le maiuscole non contano.</p>
 <div class="row"><label>Primo nome: <input type="text" id="n1" placeholder="Nome"></label><label>Secondo nome: <input type="text" id="n2" placeholder="Nome"></label></div></section>
 <section id="s1" data-t="1 Tavole"><h2>1. Tavole di verità</h2><p class="lead">Fate clic sulle celle «Uscita» per scegliere 0 o 1, poi premete «Verifica».</p><div id="tav"></div></section><section id="s2" data-t="2 Riconosci"><h2>2. Riconosci l'espressione</h2><div id="ric"></div></section><section id="s3" data-t="3 Uguali o diverse"><h2>3. Uguali o diverse?</h2><div id="equ"></div></section><section id="s4" data-t="4 Quando vale 1"><h2>4. Quando vale 1?</h2><div id="ing"></div></section><section id="s5" data-t="5 Allenatore"><h2>5. Allenatore</h2><div id="all"></div></section>
-<section id="ms-sec" data-t="Missione finale"><h2>Missione finale</h2><p class="lead">Dieci domande miste, a turno. Il tempo parte con il primo clic. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="ms"></div></section><section id="res" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section></main><script>
-const DBG={};const $=s=>document.querySelector(s);
-const rnd=(a,b)=>Math.floor(Math.random()*(b-a+1))+a,pick=a=>a[rnd(0,a.length-1)];
-function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=rnd(0,i);[a[i],a[j]]=[a[j],a[i]]}return a}
-const B=(n,b)=>n.toString(b).toUpperCase(),fmt=x=>String(x).replace('.',','),sep=n=>n.toLocaleString('it-IT');
-const lv=(l,a,b,c)=>[a,b,c][l-1];
-function norm(s){s=String(s).trim().toUpperCase().replace(/\s+/g,'');if(s.includes('.')&&!s.includes(','))s=s.replace('.',',');
- let [i,f]=s.split(',');i=(i||'').replace(/^0+/,'')||'0';if(f!==undefined){f=f.replace(/0+$/,'');return f?i+','+f:i}return i}
-function parseNum(s){s=String(s).trim().replace(/\s+/g,'');if(/^\d{1,3}(\.\d{3})+(,\d+)?$/.test(s))s=s.replace(/\./g,'');s=s.replace(',','.');const v=Number(s);return isNaN(v)||s===''?NaN:v}
-function checkField(f,val){if(f.kind==='str')return norm(val)===norm(f.exp);if(f.kind==='choice')return val===f.exp;
- const v=parseNum(val),e=Number(f.exp);if(isNaN(v))return false;if(f.tol===0)return v===e;return Math.abs(v-e)<=Math.abs(e)*(f.tol||0.005)+1e-9}
-const P=h=>`<pre>${h}</pre>`;
-/* sezioni e navigazione */
-const SECS=[...document.querySelectorAll('section')];SECS[0].classList.add('on');
-$('#nav').innerHTML=SECS.map((s,i)=>`<button data-s="${s.id}" class="${i===0?'on':''}">${s.dataset.t}</button>`).join('');
-function go(id){SECS.forEach(x=>x.classList.toggle('on',x.id===id));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.s===id));if(id==='res')showRes();window.scrollTo(0,0)}
-document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>go(b.dataset.s));
-/* coppia e statistiche */
-const PAIR={n:['Giocatore 1','Giocatore 2'],t:1},ST={g:{},ms:null};
-function names(){PAIR.n=[$('#n1').value.trim()||'Giocatore 1',$('#n2').value.trim()||'Giocatore 2']}
-function turn(){names();PAIR.t^=1;return `<div class="turn">Tocca a <b>${PAIR.n[PAIR.t]}</b> (scrive) · <b>${PAIR.n[PAIR.t^1]}</b> controlla</div>`}
-const stat=l=>ST.g[l]=ST.g[l]||{ok:0,tot:0};
-/* motore esercizi */
-function fieldsHTML(ex){return ex.fields.map(f=>`<div class="f"><label>${f.label}</label>`+(f.kind==='choice'?`<select>${f.opts.map(o=>`<option>${o}</option>`).join('')}</select>`:`<input type="text" autocomplete="off" autocapitalize="off" spellcheck="false">`)+`</div>`).join('')}
-function mount(el,genFn,label){const st=stat(label);el.innerHTML='';const box=document.createElement('div');el.appendChild(box);let ex,first;
- function draw(){ex=genFn();first=true;
-  box.innerHTML=`<div class="card">${turn()}<p class="q">${ex.q}</p>${fieldsHTML(ex)}<div class="row"><button class="btn" data-a="c">Controlla</button><button class="btn sec" data-a="s">Mostra il procedimento</button><button class="btn sec" data-a="n">Altro esercizio</button><span class="msg"></span></div><div class="sol" style="display:none"></div><div class="stat"></div></div>`;
-  box.querySelector('[data-a=c]').onclick=check;box.querySelector('[data-a=n]').onclick=draw;
-  box.querySelector('[data-a=s]').onclick=()=>{const s=box.querySelector('.sol');s.innerHTML='<b>Procedimento</b>'+ex.sol;s.style.display='block'};
-  box.querySelectorAll('input').forEach(i=>i.onkeydown=e=>{if(e.key==='Enter')check()});up()}
- const up=()=>box.querySelector('.stat').textContent=`Esatti: ${st.ok} su ${st.tot}`;
- function check(){const ins=[...box.querySelectorAll('.f input,.f select')];let all=true;
-  ex.fields.forEach((f,i)=>{const ok=checkField(f,ins[i].value);ins[i].classList.remove('ok','ko');ins[i].classList.add(ok?'ok':'ko');if(!ok)all=false});
-  if(first){st.tot++;if(all)st.ok++;first=false}const m=box.querySelector('.msg');m.textContent=all?'Esatto!':'Non ancora: controllate i campi rossi o aprite il procedimento.';m.style.color=all?'var(--ok)':'var(--ko)';up()}
- draw()}
-/* menu a tendina + motore */
-function mountMenu(el,items,label,levels){el.innerHTML=`<div class="row"><select class="mt">${items.map((a,i)=>`<option value="${i}">${a[0]}</option>`).join('')}</select>`+(levels?`<select class="ml"><option value="1">Livello 1: facile</option><option value="2">Livello 2: medio</option><option value="3">Livello 3: difficile</option></select>`:'')+`</div><div class="inner"></div>`;
- const m=()=>{const i=+el.querySelector('.mt').value,l=levels?+el.querySelector('.ml').value:1;mount(el.querySelector('.inner'),()=>items[i][1](l),label+': '+items[i][0]+(levels?' (liv. '+l+')':''))};
- el.querySelector('.mt').onchange=m;if(levels)el.querySelector('.ml').onchange=m;m()}
-/* missione finale */
-function mission(el,poolFns,label){let T;el.innerHTML=`<div class="row"><button class="btn" id="ms-s">Inizia la missione</button><span class="timer" id="ms-t"></span></div><div id="ms-x"></div>`;
- const tt=()=>{const s=Math.floor((Date.now()-T.t0)/1000);return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
- el.querySelector('#ms-s').onclick=()=>{T={t0:Date.now(),n:0,pts:0,qs:shuffle(poolFns).slice(0,10)};ST.ms=null;el.querySelector('#ms-s').disabled=true;clearInterval(T.iv);T.iv=setInterval(()=>el.querySelector('#ms-t').textContent=tt(),500);Q()};
- function Q(){const ex=T.qs[T.n]();const x=el.querySelector('#ms-x');
-  x.innerHTML=`<div class="card">${turn()}<div class="stat">Domanda ${T.n+1} di 10 · punti: ${T.pts}</div><p class="q">${ex.q}</p>${fieldsHTML(ex)}<div class="row"><button class="btn" id="c">Controlla</button><button class="btn sec" id="n" style="display:none">Avanti</button><span class="msg" id="m"></span></div><div class="sol" id="sl" style="display:none"></div></div>`;
-  x.querySelector('#c').onclick=()=>{const ins=[...x.querySelectorAll('.f input,.f select')];let all=true;ex.fields.forEach((f,i)=>{const ok=checkField(f,ins[i].value);ins[i].classList.add(ok?'ok':'ko');if(!ok)all=false;ins[i].disabled=true});
-   if(all)T.pts++;const m=x.querySelector('#m');m.textContent=all?'Esatto! +1':'Sbagliato. Procedimento sotto.';m.style.color=all?'var(--ok)':'var(--ko)';
-   if(!all){const s=x.querySelector('#sl');s.innerHTML='<b>Procedimento</b>'+ex.sol;s.style.display='block'}
-   x.querySelector('#c').disabled=true;const n=x.querySelector('#n');n.style.display='inline-block';n.textContent=T.n===9?'Vedi il risultato':'Avanti'};
-  x.querySelector('#n').onclick=()=>{T.n++;if(T.n>=10){clearInterval(T.iv);ST.ms={pts:T.pts,t:tt(),label};x.innerHTML=`<div class="card"><p class="q">Missione finita: <b>${T.pts} su 10</b> in ${ST.ms.t}.</p></div>`;el.querySelector('#ms-s').disabled=false;el.querySelector('#ms-s').textContent='Riprova la missione'}else Q()}}}
-/* gioco di smistamento (clic) */
-function sortGame(el,cards,buckets,label){const st=stat(label);let L,sel;
- function draw(){L={left:cards.length,err:0};sel=null;st.done=false;
-  el.innerHTML=`<div class="pool"></div><div class="buckets"></div><div class="row"><span class="msg"></span><button class="btn sec" data-a="r">Ricomincia</button></div>`;
-  const pool=el.querySelector('.pool'),bk=el.querySelector('.buckets');
-  shuffle([...cards.keys()]).forEach(i=>{const c=document.createElement('div');c.className='chip';c.textContent=cards[i][0];c.dataset.i=i;
-   c.onclick=()=>{el.querySelectorAll('.chip.sel').forEach(x=>x.classList.remove('sel'));if(sel===c){sel=null;hl(false);return}sel=c;c.classList.add('sel');hl(true)};pool.appendChild(c)});
-  buckets.forEach(k=>{const d=document.createElement('div');d.className='bk';d.dataset.id=k.id;d.innerHTML=`<h3>${k.t}</h3><small>${k.s||''}</small>`;d.onclick=()=>put(d);bk.appendChild(d)});
-  el.querySelector('[data-a=r]').onclick=draw;msg()}
- const hl=on=>el.querySelectorAll('.bk').forEach(x=>x.classList.toggle('hl',on));
- const msg=()=>{el.querySelector('.msg').textContent=L.left?`Carte da smistare: ${L.left}. Errori: ${L.err}.`:`Finito! Errori: ${L.err}.`};
- function put(d){if(!sel)return;hl(false);const c=sel;sel=null;
-  if(cards[c.dataset.i][1]===d.dataset.id){c.classList.remove('sel');c.onclick=null;d.appendChild(c);L.left--;if(!L.left&&!st.done){st.done=true;st.tot++;if(L.err===0)st.ok++}}
-  else{L.err++;c.classList.remove('sel');c.classList.add('wrong');setTimeout(()=>c.classList.remove('wrong'),400)}msg()}
- draw()}
-/* tavola di verità interattiva */
-function truthTable(vars,rowsAns,cls){}
-function showRes(){names();$('#who').textContent=`Coppia: ${PAIR.n[0]} e ${PAIR.n[1]}`;const r=[];
- Object.keys(ST.g).forEach(k=>{const v=ST.g[k];if(v.tot)r.push([k,`${v.ok} su ${v.tot} esatti`])});
- r.push(['Missione finale',ST.ms?`${ST.ms.pts} su 10 in ${ST.ms.t}`:'non ancora fatta']);
- $('#restab').innerHTML=r.map(x=>`<tr><th>${x[0]}</th><td>${x[1]}</td></tr>`).join('');
- $('#rmsg').textContent=ST.ms&&ST.ms.pts>=8?'Ottimo lavoro!':'Rifate i giochi in cui avete sbagliato di più e poi riprovate la missione.'}
-
-
+<section id="ms-sec" data-t="Missione finale"><h2>Missione finale</h2><p class="lead">Dieci domande miste, a turno. Il tempo parte con il primo clic. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="ms"></div></section><section id="res" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section></main><script src="../../../assets/giochi.js"></script><script>
 const E2=[["A AND B",(a,b)=>a&b],["A OR B",(a,b)=>a|b],["A AND (NOT B)",(a,b)=>a&(1-b)],["(NOT A) AND B",(a,b)=>(1-a)&b],["NOT (A OR B)",(a,b)=>1-(a|b)],["NOT (A AND B)",(a,b)=>1-(a&b)],["(NOT A) OR B",(a,b)=>(1-a)|b],["A OR (NOT B)",(a,b)=>a|(1-b)],["(NOT A) AND (NOT B)",(a,b)=>(1-a)&(1-b)],["(NOT A) OR (NOT B)",(a,b)=>(1-a)|(1-b)],
 ["(A OR B) AND (NOT (A AND B))",(a,b)=>(a|b)&(1-(a&b))],["(A AND (NOT B)) OR ((NOT A) AND B)",(a,b)=>(a&(1-b))|((1-a)&b)],["A AND (A OR B)",(a,b)=>a&(a|b)],["A OR (A AND B)",(a,b)=>a|(a&b)],["NOT (NOT A)",(a)=>a]];
 const E3=[["(A AND B) OR C",(a,b,c)=>(a&b)|c],["A AND (B OR C)",(a,b,c)=>a&(b|c)],["(NOT A) AND (B OR C)",(a,b,c)=>(1-a)&(b|c)],["(A OR B) AND (NOT C)",(a,b,c)=>(a|b)&(1-c)],["A OR (B AND C)",(a,b,c)=>a|(b&c)],["(A AND B) AND C",(a,b,c)=>a&b&c],["NOT (A OR B OR C)",(a,b,c)=>1-(a|b|c)],["(A OR B) AND (B OR C)",(a,b,c)=>(a|b)&(b|c)],["(A AND (NOT B)) OR C",(a,b,c)=>(a&(1-b))|c],["NOT (A AND B) OR C",(a,b,c)=>(1-(a&b))|c],["A AND B AND (NOT C)",(a,b,c)=>a&b&(1-c)],["(A XOR B) AND C: (A OR B) AND (NOT (A AND B)) AND C",(a,b,c)=>((a|b)&(1-(a&b)))&c]];
@@ -177,6 +59,5 @@ function gCount(l){const e=pick(exprList(l)),n=NV(e),c=outs(e,n).reduce((a,b)=>a
  return{q:`Nella tavola di verità di <b>${e[0]}</b>, in quante righe (su ${1<<n}) l'uscita vale 1?`,fields:[{label:'Righe con uscita 1',exp:String(c),kind:'str'}],sol:P(`Uscite in ordine: ${outs(e,n).join(' ')}\nUscite uguali a 1: ${c}`)}}
 function gSerie(l){const e=pick(exprList(l)),n=NV(e);return{q:`Scrivete la colonna delle uscite di <b>${e[0]}</b>, dalla prima all'ultima riga (ingressi in ordine ${'0'.repeat(n)}, ..., ${'1'.repeat(n)}), come sequenza di ${1<<n} cifre.`,fields:[{label:'Uscite',exp:outStr(e,n),kind:'str'}],sol:P(`Righe: ${rowsOf(n).map(v=>v.join('')).join(' ')}\nUscite: ${outs(e,n).join(' ')}`)}}
 mountMenu($('#all'),[["Quanto vale l'uscita?",gOut],["Contare gli 1",gCount],["Scrivere la colonna delle uscite",gSerie]],'Allenatore',true);
-mission($('#ms'),[()=>gOut(1),()=>gOut(2),()=>gOut(3),()=>gCount(1),()=>gCount(2),()=>gCount(3),()=>gSerie(1),()=>gSerie(2),()=>gSerie(3),()=>gOut(2)],'Missione');
-
+mission($('#ms'),[()=>gOut(1),()=>gOut(2),()=>gOut(3),()=>gCount(1),()=>gCount(2),()=>gCount(3),()=>gSerie(1),()=>gSerie(2),()=>gSerie(3),()=>gOut(2)],'Missione finale');
 </script></body></html>
