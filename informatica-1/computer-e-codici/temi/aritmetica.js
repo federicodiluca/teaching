@@ -1,0 +1,45 @@
+/* Aritmetica binaria: somme, overflow, scorrimenti, sommatore in colonna.
+   Codice di argomento condiviso tra la pagina dell'attività e Palestra dei numeri.
+   Usa il motore comune (assets/giochi.js), che va caricato prima. Solo definizioni:
+   le pagine decidono quali giochi montare e in che ordine. */
+function addTxt(a,b,n){const A=B(a,2).padStart(n,'0'),Bb=B(b,2).padStart(n,'0');let c=0,cs=[],res='';for(let i=n-1;i>=0;i--){const s=+A[i]+ +Bb[i]+c;res=(s%2)+res;c=s>>1;cs.unshift(c)}
+ return {A,Bb,res,c,txt:`  ${A}\n+ ${Bb}\n${'-'.repeat(n+2)}\n${c}${res}   (riporto finale ${c})`}}
+function gSomma(l){const n=lv(l,4,8,8),mx=(1<<n)-1;const over=Math.random()<(l===3?0.6:0.5);let a,b;
+ if(over){a=rnd(Math.ceil((mx+1)/2),mx);b=rnd(mx+1-a,mx)}else{a=rnd(1,mx-1);b=rnd(0,mx-a)}
+ const s=a+b,m=s&mx,t=addTxt(a,b,n);
+ return{q:`Somma in binario su <b>${n} bit</b> i numeri decimali <b>${a}</b> e <b>${b}</b>.`,
+ fields:[{label:`${a} in binario (${n} bit)`,exp:B(a,2),kind:'str'},{label:`${b} in binario (${n} bit)`,exp:B(b,2),kind:'str'},{label:'Somma in decimale',exp:String(s),kind:'str'},{label:"C'è overflow?",exp:s>mx?'Sì':'No',kind:'choice',opts:['','Sì','No']},{label:`Valore memorizzato su ${n} bit (binario)`,exp:B(m,2),kind:'str'}],
+ sol:P(`${a} = ${t.A}\n${b} = ${t.Bb}\n${t.txt}\n`+(s>mx?`Con ${n} bit il valore massimo è ${mx}: la somma (${s}) non entra. Overflow! Il bit di riporto va perso e resta ${t.res} = ${m}.`:`${s} ≤ ${mx}: nessun overflow.`))}}
+function gOverflow(l){const n=pick(lv(l,[4],[6,8],[5,7,9,10])),mx=(1<<n)-1;const a=rnd(Math.floor(mx/3),mx),b=rnd(Math.floor(mx/3),mx),s=a+b;
+ return{q:`Con numeri senza segno su <b>${n} bit</b>, sommando <b>${a}</b> e <b>${b}</b> si ha overflow?`,fields:[{label:'Valore massimo con '+n+' bit',exp:String(mx),kind:'str'},{label:'Somma',exp:String(s),kind:'str'},{label:'Overflow?',exp:s>mx?'Sì':'No',kind:'choice',opts:['','Sì','No']}],
+ sol:P(`Valore massimo con ${n} bit: 2^${n} − 1 = ${mx}\nSomma: ${a} + ${b} = ${s}\n${s} ${s>mx?'>':'≤'} ${mx} → ${s>mx?'overflow':'nessun overflow'}`)}}
+function gInterv(l){const n=lv(l,rnd(3,6),rnd(7,10),rnd(11,16));return{q:`Con <b>${n} bit</b> (numeri senza segno) quanti valori diversi si possono rappresentare e qual è il più grande?`,fields:[{label:'Quanti valori',exp:String(Math.pow(2,n)),kind:'str'},{label:'Valore massimo',exp:String(Math.pow(2,n)-1),kind:'str'}],sol:P(`Valori: 2^${n} = ${sep(Math.pow(2,n))}\nIl più grande è 2^${n} − 1 = ${sep(Math.pow(2,n)-1)} (si parte da 0)`)}}
+function gBitsNeeded(l){const N=lv(l,rnd(5,60),rnd(61,600),rnd(601,70000));const k=Math.ceil(Math.log2(N+1));
+ return{q:`Quanti <b>bit</b> servono, al minimo, per rappresentare tutti i numeri interi da 0 a <b>${N}</b>?`,fields:[{label:'Bit',exp:String(k),kind:'str'}],sol:P(`Con ${k-1} bit il massimo è ${sep(Math.pow(2,k-1)-1)} (troppo poco)\nCon ${k} bit il massimo è ${sep(Math.pow(2,k)-1)} ≥ ${N}\nServono ${k} bit.`)}}
+function gShift(l){const len=lv(l,rnd(3,4),rnd(4,6),rnd(5,7)),n=(1<<(len-1))+rnd(0,(1<<(len-1))-1),b=B(n,2),left=Math.random()<0.5,k=lv(l,1,rnd(1,2),rnd(2,3));
+ if(left){const r=n*Math.pow(2,k);return{q:`Spostate a sinistra di <b>${k}</b> posizioni (aggiungendo ${k} zero a destra) il numero binario <b>${b}</b>. Che numero ottenete?`,fields:[{label:'Binario',exp:B(r,2),kind:'str'},{label:'Decimale',exp:String(r),kind:'str'}],sol:P(`${b} → ${B(r,2)}\nOgni spostamento a sinistra moltiplica per 2: ${n} × 2^${k} = ${r}`)}}
+ const r=Math.floor(n/Math.pow(2,k));return{q:`Spostate a destra di <b>${k}</b> posizioni (eliminando le ultime ${k} cifre) il numero binario <b>${b}</b>. Che numero ottenete?`,fields:[{label:'Binario',exp:B(r,2),kind:'str'},{label:'Decimale',exp:String(r),kind:'str'}],sol:P(`${b} → ${B(r,2)}\nOgni spostamento a destra divide per 2 (parte intera): ${n} : 2^${k} = ${r}`)}}
+function gSommaDec(l){const n=lv(l,rnd(4,5),rnd(5,6),rnd(6,8)),a=rnd(1<<(n-1),(1<<n)-1),b=rnd(1<<(n-2),(1<<n)-1),s=a+b;
+ return{q:`Calcolate in binario <b>${B(a,2)} + ${B(b,2)}</b> e scrivete il risultato in binario e in decimale.`,fields:[{label:'Risultato in binario',exp:B(s,2),kind:'str'},{label:'Risultato in decimale',exp:String(s),kind:'str'}],sol:P(`${B(a,2)} = ${a}, ${B(b,2)} = ${b}\n${addTxt(a,b,Math.max(B(a,2).length,B(b,2).length)).txt}\n(${a} + ${b} = ${s})`)}}
+const ARIT_ITEMS=[["Somma e overflow",gSomma],["Overflow: c'è o non c'è?",gOverflow],["Somma tra numeri binari",gSommaDec],["Quanti valori con n bit",gInterv],["Quanti bit servono",gBitsNeeded],["Spostamenti a sinistra e a destra",gShift]];
+
+function adder(el){const st=stat('Somma in colonna');let n,a,b,exp;
+ function draw(){n=+el.querySelector('select')?.value||4}
+ el.innerHTML=`<div class="row"><select id="an"><option value="4">4 bit</option><option value="6">6 bit</option><option value="8">8 bit</option></select><button class="btn sec" id="anew">Altra somma</button></div><div id="aa"></div>`;
+ function gen(){n=+el.querySelector('#an').value;const mx=(1<<n)-1;const over=Math.random()<0.5;if(over){a=rnd(Math.ceil((mx+1)/2),mx);b=rnd(mx+1-a,mx)}else{a=rnd(1,mx-1);b=rnd(1,mx-a)}
+  const A=B(a,2).padStart(n,'0'),Bb=B(b,2).padStart(n,'0');let c=0,cin=Array(n).fill(0),res=Array(n).fill(0);for(let i=n-1;i>=0;i--){cin[i]=c;const s=+A[i]+ +Bb[i]+c;res[i]=s%2;c=s>>1}
+  exp={cin,res,fin:c,A,Bb,ov:c===1};DBG.exp=exp;DBG.n=n;
+  let h=`<div class="card">${turn()}<p class="q">Eseguite la somma <b>${a} + ${b}</b> in binario su ${n} bit. Scrivete i riporti (la cifra che passa alla colonna successiva) e il risultato, colonna per colonna.</p><table class="add"><tr><th>riporto</th><th></th>`;
+  for(let i=0;i<n;i++)h+=`<td>${i===n-1?'<input type="text" value="0" disabled>':`<input type="text" maxlength="1" data-k="c${i}">`}</td>`;
+  h+=`</tr><tr><th>${a}</th><th></th>${[...A].map(x=>`<td style="text-align:center">${x}</td>`).join('')}</tr><tr><th>+ ${b}</th><th></th>${[...Bb].map(x=>`<td style="text-align:center">${x}</td>`).join('')}</tr><tr><th>risultato</th><td><input type="text" maxlength="1" data-k="f"></td>${[...Array(n)].map((_,i)=>`<td><input type="text" maxlength="1" data-k="r${i}"></td>`).join('')}</tr></table>
+  <p class="stat">Sopra ogni colonna scrivete il riporto che arriva dalla colonna alla sua destra (nella colonna più a destra è sempre 0). La prima casella del risultato è il riporto finale.</p>
+  <div class="f"><label>C'è overflow su ${n} bit?</label><select id="aov"><option></option><option>Sì</option><option>No</option></select></div>
+  <div class="row"><button class="btn" id="ack">Controlla</button><span class="msg" id="am"></span></div><div class="stat" id="ast"></div></div>`;
+  el.querySelector('#aa').innerHTML=h;let first=true;
+  el.querySelector('#ack').onclick=()=>{let all=true;const bad=[];el.querySelectorAll('#aa input[data-k]').forEach(i=>{const k=i.dataset.k;let e;
+    if(k==='f')e=String(exp.fin);else if(k[0]==='r')e=String(exp.res[+k.slice(1)]);else e=String(exp.cin[+k.slice(1)+1]!==undefined?exp.cin[+k.slice(1)]:0);
+    const ok=i.value.trim()===e;i.classList.remove('ok','ko');i.classList.add(ok?'ok':'ko');if(!ok)all=false});
+   const o=el.querySelector('#aov');const okO=o.value===(exp.ov?'Sì':'No');o.classList.remove('ok','ko');o.classList.add(okO?'ok':'ko');if(!okO)all=false;
+   if(first){st.tot++;if(all)st.ok++;first=false}const m=el.querySelector('#am');m.textContent=all?'Perfetto!':'Controllate le caselle rosse: partite dalla colonna di destra.';m.style.color=all?'var(--ok)':'var(--ko)';el.querySelector('#ast').textContent=`Esatte: ${st.ok} su ${st.tot}`};
+  el.querySelector('#ast').textContent=`Esatte: ${st.ok} su ${st.tot}`}
+ el.querySelector('#anew').onclick=gen;el.querySelector('#an').onchange=gen;gen()}

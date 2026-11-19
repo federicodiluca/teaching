@@ -53,6 +53,8 @@ assets/
 <corso>/index.html         elenco delle attività del corso
 <corso>/<unità>/index.html elenco delle attività dell'unità
 <corso>/<unità>/<attività>/index.html   l'attività
+informatica-1/computer-e-codici/temi/   codice di argomento (numeri, aritmetica, logica, immagini, informazione)
+                                        condiviso tra le pagine dell'unità e Palestra dei numeri
 ```
 
 ## Aggiungere un'attività
@@ -80,7 +82,9 @@ assets/
    Con `data-g="Gruppo"` sulle sezioni le schede si raggruppano in sottoschede. Gli `id` delle sezioni finiscono
    negli indirizzi dati alle classi (`#s1`): una volta pubblicati non vanno rinominati, e neanche le etichette dei
    giochi, che sono le chiavi dei progressi salvati. Accanto al CSS comune basta la riga
-   `<link rel="stylesheet" href="../../../assets/giochi.css">` prima di quelle del punto 3.
+   `<link rel="stylesheet" href="../../../assets/giochi.css">` prima di quelle del punto 4.
+   Se più pagine usano gli stessi generatori di esercizi, mettili in un file `temi/<argomento>.js` dell'unità
+   (solo definizioni) e caricalo dopo `giochi.js`, come fanno le pagine di Computer e codici.
 3. **Attività con un layout proprio** (pensate per la LIM): `<body class="tg-lim tg-<nome>">`, con stile e script
    nella pagina e poche regole dedicate in `teaching.css`. Nessuna risorsa esterna (font, librerie da CDN):
    tutto deve funzionare anche offline.
