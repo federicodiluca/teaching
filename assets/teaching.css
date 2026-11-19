@@ -203,3 +203,30 @@ body.tg-act p#rmsg:empty { display: none; }
   .tg-res-act { display: none; }
   .tg-ring, .tg-res-list .bar i { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
+
+/* ---------- attività da LIM con veste propria (body.tg-lim) ----------
+   BEP, Che struttura è, Processi e thread: tengono layout e colori loro,
+   prendono dal sito sfondo carta, font e intestazione chiara. */
+
+/* Il BEP vivo: niente seconda fascia scura sotto la barra del sito */
+body.tg-lim.tg-bep header { background: transparent; color: var(--ink); padding: 1.1rem 1.2rem .5rem; }
+body.tg-lim.tg-bep header h1 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); letter-spacing: -.015em; }
+body.tg-lim.tg-bep header .sub { color: var(--muted); }
+body.tg-lim.tg-bep header .tbtn { background: var(--card); color: var(--ink); border: 1px solid var(--line); }
+
+/* Che struttura è: sfondo e bordi del sito */
+body.tg-lim.tg-che { --bg: #f6f4ef; --line: #e3dfd5; }
+body.tg-lim.tg-che header {
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+body.tg-lim.tg-che header h1 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); letter-spacing: -.015em; }
+
+/* Processi e thread: font del sito al posto di quelli esterni, sfondo carta nel tema chiaro */
+body.tg-lim.tg-tp { --f-head: var(--tg-sans); --f-body: var(--tg-sans); --f-mono: var(--tg-mono); }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) body.tg-lim.tg-tp { --bg: #f6f4ef; --surface2: #ece8df; --line: #ddd8cc; }
+}
+:root[data-theme="light"] body.tg-lim.tg-tp { --bg: #f6f4ef; --surface2: #ece8df; --line: #ddd8cc; }
+body.tg-lim.tg-tp h1, body.tg-lim.tg-tp h2 { font-weight: 700; letter-spacing: -.015em; }
+body.tg-lim.tg-bep header .tbtn:hover { border-color: var(--muted); }

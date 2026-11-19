@@ -41,7 +41,9 @@ assets/
 1. Crea la cartella `<corso>/<unità>/<nome-attivita>/` e mettici l'attività come `index.html`
    (un unico file con stile e script inclusi).
 2. Se l'attività usa la struttura comune (header, nav con le schede, `main`, `.card`, `.btn`), scrivi `<body class="tg-act">`:
-   prende la veste grafica del sito senza cambiare nulla del suo codice.
+   prende la veste grafica del sito senza cambiare nulla del suo codice. Le attività con un layout proprio
+   (pensate per la LIM) usano invece `class="tg-lim tg-<nome>"`, con poche regole dedicate in `teaching.css`.
+   Nessuna risorsa esterna (font, librerie da CDN): tutto deve funzionare anche offline.
 3. Prima di `</head>` aggiungi le quattro righe comuni (ogni `../` sale di una cartella, quindi sono tre):
    ```html
    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
