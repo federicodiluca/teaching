@@ -124,8 +124,71 @@
     }
   }
 
+  /* ---------- schermata finale ----------
+     Le attività con la struttura comune scrivono il riepilogo in #restab (righe "x su y").
+     Qui lo si osserva e lo si ridisegna come pannello con barre, totale e "Copia il risultato". */
+  function risultato() {
+    var tab = document.getElementById("restab");
+    if (!tab || !document.body.classList.contains("tg-act")) return;
+    var box = document.createElement("div");
+    box.id = "tg-res";
+    tab.parentNode.insertBefore(box, tab);
+    tab.classList.add("tg-hidden");
+
+    function disegna() {
+      var righe = [].map.call(tab.querySelectorAll("tr"), function (tr) {
+        var nome = (tr.querySelector("th") || {}).textContent || "";
+        var val = (tr.querySelector("td") || {}).textContent || "";
+        var m = val.match(/(\d+)\s+su\s+(\d+)/);
+        return { nome: nome, val: val, ok: m ? +m[1] : null, tot: m ? +m[2] : null };
+      });
+      if (!righe.length) { box.innerHTML = ""; return; }
+      var fatte = righe.filter(function (r) { return r.tot; });
+      var ok = fatte.reduce(function (s, r) { return s + r.ok; }, 0);
+      var tot = fatte.reduce(function (s, r) { return s + r.tot; }, 0);
+      var pc = tot ? Math.round(ok * 100 / tot) : 0;
+      var html = '<div class="tg-res-top"><div class="tg-ring" style="--p:' + pc + '"><b>' + (tot ? pc + "%" : "-") + "</b></div>" +
+        "<div><strong>" + (tot ? ok + " risposte giuste su " + tot : "Nessun gioco ancora completato") + "</strong>" +
+        "<span>" + fatte.length + " di " + righe.length + " attività svolte</span></div></div><ul class=\"tg-res-list\">";
+      righe.forEach(function (r) {
+        var p = r.tot ? Math.round(r.ok * 100 / r.tot) : 0;
+        html += '<li class="' + (r.tot ? (p >= 80 ? "ok" : p >= 50 ? "mid" : "ko") : "todo") + '"><span class="n">' + esc(r.nome) +
+          '</span><span class="bar"><i style="width:' + p + '%"></i></span><span class="v">' + esc(r.val) + "</span></li>";
+      });
+      html += '</ul><div class="tg-res-act"><button type="button" class="btn" data-a="copia">Copia il risultato</button>' +
+        '<button type="button" class="btn sec" data-a="stampa">Stampa</button></div>';
+      box.innerHTML = html;
+    }
+
+    function testo() {
+      var who = (document.getElementById("who") || {}).textContent || "";
+      var r = [].map.call(tab.querySelectorAll("tr"), function (tr) {
+        return "- " + tr.querySelector("th").textContent + ": " + tr.querySelector("td").textContent;
+      });
+      return [document.title, who].concat(r, [new Date().toLocaleString("it-IT"), location.href.split("#")[0]])
+        .filter(Boolean).join("\n");
+    }
+
+    box.addEventListener("click", function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      if (b.dataset.a === "stampa") { window.print(); return; }
+      var t = testo(), fatto = function () { b.textContent = "Copiato!"; setTimeout(function () { b.textContent = "Copia il risultato"; }, 1800); };
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(t).then(fatto, function () { manuale(t); });
+      else manuale(t);
+      function manuale(s) {
+        var ta = document.createElement("textarea"); ta.value = s; ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand("copy"); fatto(); } catch (err) { window.prompt("Copia il testo:", s); }
+        ta.remove();
+      }
+    });
+
+    new MutationObserver(disegna).observe(tab, { childList: true, subtree: true, characterData: true });
+    disegna();
+  }
+
   function avvia() {
-    if (document.body.dataset.tg === "elenco") { tema(); elenco(); } else { barra(); }
+    if (document.body.dataset.tg === "elenco") { tema(); elenco(); } else { barra(); risultato(); }
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", avvia); else avvia();
 })();

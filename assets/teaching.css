@@ -164,3 +164,42 @@ body.tg-act input[type=text], body.tg-act select { border-radius: 10px; backgrou
 body.tg-act .sol { border-radius: 10px; }
 body.tg-act :focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
 @media print { body.tg-act nav { display: none; } }
+
+/* ---------- schermata finale (#tg-res) ---------- */
+body.tg-act .tg-hidden { display: none; }
+#tg-res { margin: 8px 0 14px; }
+.tg-res-top {
+  display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--line);
+  border-radius: 14px; padding: 16px 18px; box-shadow: 0 1px 2px rgba(29, 36, 51, .05), 0 4px 14px rgba(29, 36, 51, .05);
+}
+.tg-res-top strong { display: block; font-size: 19px; letter-spacing: -.01em; }
+.tg-res-top span { color: var(--mute); font-size: 14px; }
+.tg-ring {
+  --p: 0; flex: 0 0 auto; width: 84px; height: 84px; border-radius: 50%; display: grid; place-items: center;
+  background: conic-gradient(var(--acc) calc(var(--p) * 1%), var(--line) 0);
+}
+.tg-ring b { width: 66px; height: 66px; border-radius: 50%; background: var(--card); display: grid; place-items: center; font: 700 20px var(--tg-sans); }
+.tg-res-list { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; }
+.tg-res-list li {
+  display: grid; grid-template-columns: minmax(120px, 1.2fr) 2fr auto; gap: 12px; align-items: center;
+  background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; font-size: 15px;
+}
+.tg-res-list .n { font-weight: 600; }
+.tg-res-list .bar { height: 8px; border-radius: 999px; background: var(--line); overflow: hidden; }
+.tg-res-list .bar i { display: block; height: 100%; border-radius: inherit; background: var(--acc); transition: width .4s ease; }
+.tg-res-list li.ok .bar i { background: var(--ok); }
+.tg-res-list li.mid .bar i { background: #d39a00; }
+.tg-res-list li.ko .bar i { background: var(--ko); }
+.tg-res-list li.todo { opacity: .55; }
+.tg-res-list .v { color: var(--mute); font: 500 14px var(--tg-mono); white-space: nowrap; }
+.tg-res-act { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+body.tg-act p#rmsg { background: var(--card); border-left: 4px solid var(--acc); border-radius: 0 10px 10px 0; padding: 10px 14px; }
+body.tg-act p#rmsg:empty { display: none; }
+@media (max-width: 560px) {
+  .tg-res-list li { grid-template-columns: 1fr auto; }
+  .tg-res-list .bar { grid-column: 1 / -1; order: 3; }
+}
+@media print {
+  .tg-res-act { display: none; }
+  .tg-ring, .tg-res-list .bar i { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
