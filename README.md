@@ -11,7 +11,7 @@ senza installare nulla, senza account e senza raccogliere dati degli studenti.
 | Corso | Unità | Attività |
 |---|---|---|
 | Informatica, 1° anno | Computer e codici | Numeri e basi · Aritmetica binaria · Logica e tavole di verità · Immagini e video · Informazione e codifiche · Palestra dei numeri |
-| | Sistemi operativi | Storia dei sistemi operativi e licenze |
+| | Sistemi operativi | Storia dei sistemi operativi e licenze · Percorsi assoluti e relativi · Prompt dei comandi di Windows |
 | | Reti di calcolatori | La rete e i suoi pezzi · Indirizzi IP, DNS e URL · Il Web, la ricerca e i rischi |
 | TPSIT, 4° anno | Processi sequenziali e paralleli | Processi e thread |
 | GPOI, 5° anno | Aziende e mercati | Il BEP vivo |

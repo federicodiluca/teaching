@@ -1,0 +1,70 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Percorsi assoluti e relativi: esercizi</title><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script>
+<style>
+.fsb{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media(max-width:720px){.fsb{grid-template-columns:1fr}}
+.fst{background:var(--tg-paper);border:1px solid var(--tg-line);border-radius:12px;padding:10px 12px;font-family:var(--tg-mono);font-size:14px;overflow:auto;max-height:420px}
+.fst ul{list-style:none;margin:0;padding-left:18px;border-left:1px dashed var(--tg-line-2)}
+.fst>ul{padding-left:0;border-left:0}
+.fst li{margin:2px 0}
+.fst button{font:inherit;color:var(--tg-ink);background:transparent;border:1px solid transparent;border-radius:6px;padding:1px 6px;cursor:pointer;text-align:left}
+.fst button:hover{border-color:var(--tg-line-2)}
+.fst button.on{background:var(--tg-hl-soft);border-color:var(--tg-hl)}
+.fst button.pr{outline:2px solid var(--tg-acc)}
+.fsi{background:var(--tg-paper);border:1px solid var(--tg-line);border-radius:12px;padding:12px 14px}
+.fsi p{margin:6px 0}
+.fsi code{word-break:break-all}
+.fsi .row{margin:8px 0}
+</style></head><body class="tg-act" data-solo="1"><header><h1>Percorsi assoluti e relativi: esercizi</h1></header><nav id="nav"></nav><main>
+<section id="inizio" data-t="Inizio"><h2>Dove si trova un file?</h2><p class="lead">Ogni file ha un indirizzo: il percorso. Qui imparate a scriverlo in due modi e a scegliere il più comodo.</p><ol><li><b>Il tuo albero:</b> costruite cartelle e file e guardate come cambia il percorso.</li><li><b>Assoluto o relativo?:</b> smistate dei percorsi.</li><li><b>Allenatore:</b> scrivete percorsi, seguite i comandi <code>cd</code>, convertite.</li><li><b>Sul tuo albero:</b> domande generate dall'albero che avete costruito voi.</li><li><b>Caccia all'errore:</b> trovate il percorso che non funziona.</li><li><b>Missione finale:</b> dieci domande miste a tempo.</li></ol>
+<p><b>Da ricordare.</b> Un percorso <b>assoluto</b> parte dalla radice (<code>C:\</code>) e vale da qualsiasi punto. Un percorso <b>relativo</b> parte dalla cartella in cui vi trovate: <code>..</code> sale di una cartella, <code>.</code> è la cartella stessa. In Windows il separatore è la barra rovesciata <code>\</code> (tastiera italiana: AltGr + ?) e le maiuscole non contano.</p>
+<div class="row"><label>Nome: <input type="text" id="n1" placeholder="Nome"></label></div></section>
+<section id="s1" data-t="1 Il tuo albero"><h2>1. Il tuo albero</h2><p class="lead">Costruite il vostro file system. Toccate una cartella o un file per vederne il percorso assoluto. Con "Metti qui il prompt" scegliete da dove partire e leggete il percorso relativo.</p>
+<div class="fsb"><div class="fst" id="fst"></div><div class="fsi"><p><b>Selezionato:</b><br><code id="fsa">-</code></p><p><b>Prompt in:</b> <code id="fsp">C:\</code></p><p><b>Relativo dal prompt:</b><br><code id="fsr">-</code></p>
+<div class="row"><input type="text" id="fsn" placeholder="Nome (es. Musica o brani.mp3)" autocomplete="off" spellcheck="false"></div>
+<div class="row"><button class="btn" id="b-d">+ Cartella</button><button class="btn" id="b-f">+ File</button><button class="btn sec" id="b-r">Rinomina</button><button class="btn sec" id="b-x">Elimina</button></div>
+<div class="row"><button class="btn sec" id="b-p">Metti qui il prompt</button><button class="btn sec" id="b-e">Albero di esempio</button><button class="btn sec" id="b-v">Svuota</button></div><p class="msg" id="fsm"></p></div></div></section>
+<section id="s2" data-t="2 Assoluto o relativo?"><h2>2. Assoluto o relativo?</h2><p class="lead">Toccate un percorso e poi la categoria giusta.</p><div id="sg"></div></section>
+<section id="s3" data-t="3 Allenatore"><h2>3. Allenatore</h2><p class="lead">Scegliete il tipo e il livello. Scrivete i percorsi con la barra rovesciata <code>\</code>.</p><div id="all"></div></section>
+<section id="s4" data-t="4 Sul tuo albero"><h2>4. Sul tuo albero</h2><p class="lead">Domande generate dall'albero che avete costruito nella scheda 1. Servono almeno due cartelle dentro altre cartelle e due file.</p><div class="row"><button class="btn" id="mio-s">Interrogami sul mio albero</button><span class="msg" id="mio-m"></span></div><div id="mio"></div></section>
+<section id="s5" data-t="5 Caccia all'errore"><h2>5. Caccia all'errore</h2><p class="lead">Tre percorsi per raggiungere lo stesso file: uno solo non funziona. Quale?</p><div id="hu"></div></section>
+<section id="ms-sec" data-t="Missione finale"><h2>Missione finale</h2><p class="lead">Dieci domande miste. Il tempo parte con il primo clic. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="ms"></div></section><section id="res" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main>
+<script src="../../../assets/giochi.js"></script>
+<script src="../temi/filesystem.js"></script>
+<script>
+/* costruttore dell'albero */
+let TT = fsBuild(FS_SPEC), SEL = TT, PR = TT, ALL = [];
+const nomeOk = (n, dir) => { n = n.trim(); if (!n) return 'Scrivete un nome.'; if (!FS_NOMI_OK.test(n)) return 'Il nome non può contenere \\ / : * ? " < > |'; if (dir.c.some(x => x.n.toLowerCase() === n.toLowerCase())) return 'Esiste già un elemento con questo nome.'; return ''; };
+function msgFs(t, ok) { const m = $('#fsm'); m.textContent = t; m.style.color = ok ? 'var(--ok)' : 'var(--ko)'; }
+function nodoHTML(n) { const i = ALL.length; ALL.push(n); return '<li><button data-i="' + i + '" class="' + (n === SEL ? 'on ' : '') + (n === PR ? 'pr' : '') + '">' + (n.d ? '📁 ' : '📄 ') + escH(n.p ? n.n : 'C:\\') + '</button>' + (n.c.length ? '<ul>' + n.c.map(nodoHTML).join('') + '</ul>' : '') + '</li>'; }
+function drawFs() {
+  ALL = []; $('#fst').innerHTML = '<ul>' + nodoHTML(TT) + '</ul>';
+  $('#fst').querySelectorAll('button').forEach(b => b.onclick = () => { SEL = ALL[b.dataset.i]; drawFs(); });
+  $('#fsa').textContent = fsAbs(SEL); $('#fsp').textContent = fsPrompt(PR); $('#fsr').textContent = fsRel(PR, SEL);
+}
+function aggiungi(dir) { const dest = SEL.d ? SEL : SEL.p; const n = $('#fsn').value.trim(), e = nomeOk(n, dest); if (e) return msgFs(e); const f = { n, d: dir, c: [], p: dest }; dest.c.push(f); SEL = f; $('#fsn').value = ''; msgFs('Creato: ' + fsAbs(f), true); drawFs(); }
+$('#b-d').onclick = () => aggiungi(true); $('#b-f').onclick = () => aggiungi(false);
+$('#fsn').onkeydown = e => { if (e.key === 'Enter') aggiungi(true); };
+$('#b-r').onclick = () => { if (!SEL.p) return msgFs('La radice non si rinomina.'); const n = $('#fsn').value.trim(), e = nomeOk(n, SEL.p); if (e) return msgFs(e); SEL.n = n; $('#fsn').value = ''; msgFs('Rinominato: ' + fsAbs(SEL), true); drawFs(); };
+$('#b-x').onclick = () => { if (!SEL.p) return msgFs('La radice non si elimina.'); const p = SEL.p; p.c.splice(p.c.indexOf(SEL), 1); if (fsAll(SEL).includes(PR)) PR = p; SEL = p; msgFs('Eliminato.', true); drawFs(); };
+$('#b-p').onclick = () => { if (!SEL.d) return msgFs('Il prompt sta in una cartella, non in un file.'); PR = SEL; msgFs(''); drawFs(); };
+$('#b-e').onclick = () => { TT = fsBuild(FS_SPEC); SEL = PR = TT; msgFs(''); drawFs(); };
+$('#b-v').onclick = () => { TT = fsBuild({}); SEL = PR = TT; msgFs(''); drawFs(); };
+drawFs();
+
+sortGame($('#sg'), FS_SORT_CARDS, FS_SORT_BUCKETS, 'Assoluto o relativo?');
+mountMenu($('#all'), FS_ITEMS, 'Allenatore', true);
+
+/* domande sull'albero personale */
+function mioPronto() { const t = fsAll(TT), f = t.filter(x => !x.d), d = t.filter(x => x.d && x.p); return f.length >= 2 && d.length >= 2 && f.some(x => fsDepth(x) >= 2) && d.some(x => fsDepth(x) >= 2); }
+$('#mio-s').onclick = () => {
+  const m = $('#mio-m');
+  if (!mioPronto()) { m.textContent = 'Il vostro albero è troppo piccolo: tornate alla scheda 1 e aggiungete cartelle dentro altre cartelle e almeno due file.'; m.style.color = 'var(--ko)'; return; }
+  m.textContent = '';
+  const T = TT;
+  mount($('#mio'), () => pick([() => gFsAssoluto(1, T), () => gFsRelativo(1, T), () => gFsConverti(1, T), () => gFsCd(1, T)])(), 'Sul tuo albero');
+};
+
+hunt($('#hu'), () => gFsCaccia(), 'Caccia all\'errore');
+mission($('#ms'), [() => gFsAssoluto(1), () => gFsAssoluto(2), () => gFsRelativo(1), () => gFsRelativo(2), () => gFsRelativo(3), () => gFsConverti(2), () => gFsCd(1), () => gFsCd(2), () => gFsDove(2), () => gFsDove(3), () => gFsTipo(1)], 'Missione finale');
+</script></body></html>

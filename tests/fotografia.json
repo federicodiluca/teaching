@@ -615,6 +615,134 @@
   },
   "st": "{\"g\":{\"Linea del tempo\":{\"ok\":0,\"tot\":1},\"Chi sono io?\":{\"ok\":0,\"tot\":1},\"Livelli di linguaggio\":{\"ok\":0,\"tot\":1},\"Categorie di software\":{\"ok\":0,\"tot\":1},\"Sequenza di avvio\":{\"ok\":0,\"tot\":1},\"Modello a cipolla\":{\"ok\":0,\"tot\":1},\"Strati e ruoli\":{\"ok\":0,\"tot\":1},\"Quale strato interviene?\":{\"ok\":0,\"tot\":1},\"Chi fa cosa nel sistema operativo\":{\"ok\":0,\"tot\":1},\"Nomi dei file\":{\"ok\":0,\"tot\":1},\"Smistamento delle licenze\":{\"ok\":0,\"tot\":1},\"Libero o proprietario?\":{\"ok\":0,\"tot\":1},\"Le release X.Y.Z\":{\"ok\":0,\"tot\":1},\"Vero o falso\":{\"ok\":0,\"tot\":1},\"Risposta multipla\":{\"ok\":0,\"tot\":1}},\"m\":{\"Sfida finale\":{\"pts\":0,\"t\":\"00:00\",\"count\":15}}}"
  },
+ "informatica-1/sistemi-operativi/percorsi-assoluti-e-relativi": {
+  "nav": [],
+  "sez": {
+   "inizio": {
+    "nav": "Inizio\n1 Il tuo albero\n2 Assoluto o relativo?\n3 Allenatore\n4 Sul tuo albero\n5 Caccia all'errore\nMissione finale\nRisultato",
+    "testo": "Dove si trova un file?\n\nOgni file ha un indirizzo: il percorso. Qui imparate a scriverlo in due modi e a scegliere il più comodo.\n\nIl tuo albero: costruite cartelle e file e guardate come cambia il percorso.\nAssoluto o relativo?: smistate dei percorsi.\nAllenatore: scrivete percorsi, seguite i comandi cd, convertite.\nSul tuo albero: domande generate dall'albero che avete costruito voi.\nCaccia all'errore: trovate il percorso che non funziona.\nMissione finale: dieci domande miste a tempo.\n\nDa ricordare. Un percorso assoluto parte dalla radice (C:\\) e vale da qualsiasi punto. Un percorso relativo parte dalla cartella in cui vi trovate: .. sale di una cartella, . è la cartella stessa. In Windows il separatore è la barra rovesciata \\ (tastiera italiana: AltGr + ?) e le maiuscole non contano.\n\nNome: "
+   },
+   "s1": {
+    "nav": "Inizio\n1 Il tuo albero\n2 Assoluto o relativo?\n3 Allenatore\n4 Sul tuo albero\n5 Caccia all'errore\nMissione finale\nRisultato",
+    "testo": "1. Il tuo albero\n\nCostruite il vostro file system. Toccate una cartella o un file per vederne il percorso assoluto. Con \"Metti qui il prompt\" scegliete da dove partire e leggete il percorso relativo.\n\n📁 C:\\\n📁 Users\n📁 studente\n📁 Documenti\n📁 Scuola\n📁 Informatica\n📄 esercizi.docx\n📄 appunti.txt\n📁 Italiano\n📄 tema.docx\n📄 Lettera.docx\n📁 Immagini\n📁 Vacanze\n📄 mare.jpg\n📄 montagna.jpg\n📄 profilo.png\n📁 Download\n📄 setup.exe\n📁 Programmi\n📁 Firefox\n📄 firefox.exe\n📁 Windows\n📁 System32\n📄 cmd.exe\n\nSelezionato:\nC:\\\n\nPrompt in: C:\\\n\nRelativo dal prompt:\n.\n\n+ Cartella\n+ File\nRinomina\nElimina\nMetti qui il prompt\nAlbero di esempio\nSvuota"
+   },
+   "s2": {
+    "nav": "Inizio\n1 Il tuo albero\n2 Assoluto o relativo?\n3 Allenatore\n4 Sul tuo albero\n5 Caccia all'errore\nMissione finale\nRisultato",
+    "testo": "2. Assoluto o relativo?\n\nToccate un percorso e poi la categoria giusta.\n\n..\\..\n..\\Immagini\n..\nC:\\Users\\studente\\Documenti\nC:\\Windows\\System32\\cmd.exe\n.\\appunti.txt\nScuola\\Italiano\\tema.docx\nC:\\\nC:\\Programmi\\Firefox\nVacanze\\mare.jpg\nAssoluto\nparte dalla radice\nRelativo\nparte dalla cartella corrente\nCarte da smistare: 10. Errori: 0.\nRicomincia"
+   },
+   "s3": {
+    "nav": "Inizio\n1 Il tuo albero\n2 Assoluto o relativo?\n3 Allenatore\n4 Sul tuo albero\n5 Caccia all'errore\nMissione finale\nRisultato",
+    "testo": "3. Allenatore\n\nScegliete il tipo e il livello. Scrivete i percorsi con la barra rovesciata \\.\n\nPercorso assoluto di un file\nPercorso relativo\nDa assoluto a relativo\nDove mi porta cd?\nQuale file apre ..\\?\nAssoluto o relativo?\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\n\nQuesto è il file system:\n\nC:\\\n├── Users\n│   └── studente\n│       ├── Documenti\n│       │   ├── Scuola\n│       │   │   ├── Informatica\n│       │   │   │   ├── esercizi.docx\n│       │   │   │   └── appunti.txt\n│       │   │   └── Italiano\n│       │   │       └── tema.docx\n│       │   └── Lettera.docx\n│       ├── Immagini\n│       │   ├── Vacanze\n│       │   │   ├── mare.jpg\n│       │   │   └── montagna.jpg\n│       │   └── profilo.png\n│       └── Download\n│           └── setup.exe\n├── Programmi\n│   └── Firefox\n│       └── firefox.exe\n└── Windows\n    └── System32\n        └── cmd.exe\nScrivete il percorso assoluto del file firefox.exe. Il separatore è la barra rovesciata \\ (sulla tastiera italiana: AltGr + ?). Maiuscole e minuscole non contano.\n\nPercorso assoluto\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "s4": {
+    "nav": "Inizio\n1 Il tuo albero\n2 Assoluto o relativo?\n3 Allenatore\n4 Sul tuo albero\n5 Caccia all'errore\nMissione finale\nRisultato",
+    "testo": "4. Sul tuo albero\n\nDomande generate dall'albero che avete costruito nella scheda 1. Servono almeno due cartelle dentro altre cartelle e due file.\n\nInterrogami sul mio albero"
+   },
+   "s5": {
+    "nav": "Inizio\n1 Il tuo albero\n2 Assoluto o relativo?\n3 Allenatore\n4 Sul tuo albero\n5 Caccia all'errore\nMissione finale\nRisultato",
+    "testo": "5. Caccia all'errore\n\nTre percorsi per raggiungere lo stesso file: uno solo non funziona. Quale?\n\nIl prompt è in C:\\Users\\studente\\Documenti\\Scuola\\Italiano e volete raggiungere C:\\Windows\\System32\\cmd.exe.\n\nC:\\\n├── Users\n│   └── studente\n│       ├── Documenti\n│       │   ├── Scuola\n│       │   │   ├── Informatica\n│       │   │   │   ├── esercizi.docx\n│       │   │   │   └── appunti.txt\n│       │   │   └── Italiano\n│       │   │       └── tema.docx\n│       │   └── Lettera.docx\n│       ├── Immagini\n│       │   ├── Vacanze\n│       │   │   ├── mare.jpg\n│       │   │   └── montagna.jpg\n│       │   └── profilo.png\n│       └── Download\n│           └── setup.exe\n├── Programmi\n│   └── Firefox\n│       └── firefox.exe\n└── Windows\n    └── System32\n        └── cmd.exe\nQuale di questi percorsi non funziona?\n\n..\\..\\..\\..\\Windows\\System32\\cmd.exe\n..\\..\\..\\..\\..\\Windows\\System32\\cmd.exe\nC:\\Windows\\System32\\cmd.exe\nAltro esercizio\nTrovati: 0 su 0"
+   },
+   "ms-sec": {
+    "nav": "Inizio\n1 Il tuo albero\n2 Assoluto o relativo?\n3 Allenatore\n4 Sul tuo albero\n5 Caccia all'errore\nMissione finale\nRisultato",
+    "testo": "Missione finale\n\nDieci domande miste. Il tempo parte con il primo clic. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nInizia la missione finale"
+   },
+   "res": {
+    "nav": "Inizio\n1 Il tuo albero\n2 Assoluto o relativo?\n3 Allenatore\n4 Sul tuo albero\n5 Caccia all'errore\nMissione finale\nRisultato",
+    "testo": "Risultato\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la missione finale."
+   }
+  },
+  "dopo": {
+   "inizio": "Dove si trova un file?\n\nOgni file ha un indirizzo: il percorso. Qui imparate a scriverlo in due modi e a scegliere il più comodo.\n\nIl tuo albero: costruite cartelle e file e guardate come cambia il percorso.\nAssoluto o relativo?: smistate dei percorsi.\nAllenatore: scrivete percorsi, seguite i comandi cd, convertite.\nSul tuo albero: domande generate dall'albero che avete costruito voi.\nCaccia all'errore: trovate il percorso che non funziona.\nMissione finale: dieci domande miste a tempo.\n\nDa ricordare. Un percorso assoluto parte dalla radice (C:\\) e vale da qualsiasi punto. Un percorso relativo parte dalla cartella in cui vi trovate: .. sale di una cartella, . è la cartella stessa. In Windows il separatore è la barra rovesciata \\ (tastiera italiana: AltGr + ?) e le maiuscole non contano.\n\nNome: ",
+   "s1": "1. Il tuo albero\n\nCostruite il vostro file system. Toccate una cartella o un file per vederne il percorso assoluto. Con \"Metti qui il prompt\" scegliete da dove partire e leggete il percorso relativo.\n\n📁 C:\\\n📁 Users\n📁 studente\n📁 Documenti\n📁 Scuola\n📁 Informatica\n📄 esercizi.docx\n📄 appunti.txt\n📁 Italiano\n📄 tema.docx\n📄 Lettera.docx\n📁 Immagini\n📁 Vacanze\n📄 mare.jpg\n📄 montagna.jpg\n📄 profilo.png\n📁 Download\n📄 setup.exe\n📁 Programmi\n📁 Firefox\n📄 firefox.exe\n📁 Windows\n📁 System32\n📄 cmd.exe\n\nSelezionato:\nC:\\\n\nPrompt in: C:\\\n\nRelativo dal prompt:\n.\n\n+ Cartella\n+ File\nRinomina\nElimina\nMetti qui il prompt\nAlbero di esempio\nSvuota",
+   "s2": "2. Assoluto o relativo?\n\nToccate un percorso e poi la categoria giusta.\n\nAssoluto\nparte dalla radice\nC:\\Users\\studente\\Documenti\nC:\\Windows\\System32\\cmd.exe\nC:\\\nC:\\Programmi\\Firefox\nRelativo\nparte dalla cartella corrente\n..\\..\n..\\Immagini\n..\n.\\appunti.txt\nScuola\\Italiano\\tema.docx\nVacanze\\mare.jpg\nFinito! Errori: 6.\nRicomincia",
+   "s3": "3. Allenatore\n\nScegliete il tipo e il livello. Scrivete i percorsi con la barra rovesciata \\.\n\nPercorso assoluto di un file\nPercorso relativo\nDa assoluto a relativo\nDove mi porta cd?\nQuale file apre ..\\?\nAssoluto o relativo?\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\n\nQuesto è il file system:\n\nC:\\\n├── Users\n│   └── studente\n│       ├── Documenti\n│       │   ├── Scuola\n│       │   │   ├── Informatica\n│       │   │   │   ├── esercizi.docx\n│       │   │   │   └── appunti.txt\n│       │   │   └── Italiano\n│       │   │       └── tema.docx\n│       │   └── Lettera.docx\n│       ├── Immagini\n│       │   ├── Vacanze\n│       │   │   ├── mare.jpg\n│       │   │   └── montagna.jpg\n│       │   └── profilo.png\n│       └── Download\n│           └── setup.exe\n├── Programmi\n│   └── Firefox\n│       └── firefox.exe\n└── Windows\n    └── System32\n        └── cmd.exe\nScrivete il percorso assoluto del file firefox.exe. Il separatore è la barra rovesciata \\ (sulla tastiera italiana: AltGr + ?). Maiuscole e minuscole non contano.\n\nPercorso assoluto\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "s4": "4. Sul tuo albero\n\nDomande generate dall'albero che avete costruito nella scheda 1. Servono almeno due cartelle dentro altre cartelle e due file.\n\nInterrogami sul mio albero",
+   "s5": "5. Caccia all'errore\n\nTre percorsi per raggiungere lo stesso file: uno solo non funziona. Quale?\n\nIl prompt è in C:\\Users\\studente\\Documenti\\Scuola\\Italiano e volete raggiungere C:\\Windows\\System32\\cmd.exe.\n\nC:\\\n├── Users\n│   └── studente\n│       ├── Documenti\n│       │   ├── Scuola\n│       │   │   ├── Informatica\n│       │   │   │   ├── esercizi.docx\n│       │   │   │   └── appunti.txt\n│       │   │   └── Italiano\n│       │   │       └── tema.docx\n│       │   └── Lettera.docx\n│       ├── Immagini\n│       │   ├── Vacanze\n│       │   │   ├── mare.jpg\n│       │   │   └── montagna.jpg\n│       │   └── profilo.png\n│       └── Download\n│           └── setup.exe\n├── Programmi\n│   └── Firefox\n│       └── firefox.exe\n└── Windows\n    └── System32\n        └── cmd.exe\nQuale di questi percorsi non funziona?\n\n..\\..\\..\\..\\Windows\\System32\\cmd.exe\n..\\..\\..\\..\\..\\Windows\\System32\\cmd.exe\nC:\\Windows\\System32\\cmd.exe\nTrovato! Da <code>C:\\Users\\studente\\Documenti\\Scuola\\Italiano</code>, <code>..\\..\\..\\..\\Windows\\System32\\cmd.exe</code> non esiste: non è il file cercato.\nAltro esercizio\nTrovati: 1 su 1",
+   "ms-sec": "Missione finale\n\nDieci domande miste. Il tempo parte con il primo clic. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nRiprova la missione finale\n\nFinita: 0 su 10 in 00:00.",
+   "res": "Risultato\n\nNome: Ada\n\nNessun gioco ancora completato\n0 di 1 attività svolte\nMissione finale\nnon ancora fatta\nCopia il risultato\nStampa\nRicomincia da capo\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la missione finale."
+  },
+  "giocati": {
+   "s1": [],
+   "s2": [
+    "smistamento"
+   ],
+   "s3": [
+    "controlla"
+   ],
+   "s4": [],
+   "s5": [
+    "caccia"
+   ],
+   "ms-sec": [
+    "missione"
+   ]
+  },
+  "st": "{\"g\":{\"Assoluto o relativo?\":{\"ok\":0,\"tot\":1},\"Allenatore: Percorso assoluto di un file (liv. 1)\":{\"ok\":0,\"tot\":1},\"Caccia all'errore\":{\"ok\":1,\"tot\":1}},\"m\":{\"Missione finale\":{\"pts\":0,\"t\":\"00:00\",\"count\":10}}}"
+ },
+ "informatica-1/sistemi-operativi/prompt-dei-comandi": {
+  "nav": [],
+  "sez": {
+   "inizio": {
+    "nav": "Inizio\n1 Prompt libero\n2 Missioni\n3 Che comando è?\n4 Allenatore\n5 Caccia all'errore\nMissione finale\nRisultato",
+    "testo": "Il computer a righe di comando\n\nPrima delle finestre c'era il prompt: scrivi un comando, il computer risponde. Qui ne usate uno simulato, che non tocca i file del vostro computer.\n\nPrompt libero: provate i comandi come in un vero cmd.\nMissioni: nove compiti da risolvere scrivendo i comandi giusti.\nChe comando è?: smistate i comandi per funzione.\nAllenatore: domande su comandi e percorsi.\nCaccia all'errore: trovate il comando che non funziona.\nMissione finale: dieci domande miste a tempo.\n\nPrerequisito: i percorsi assoluti e relativi (esercizi qui). Il prompt mostra sempre la cartella corrente prima del segno >.\n\nNome: "
+   },
+   "s1": {
+    "nav": "Inizio\n1 Prompt libero\n2 Missioni\n3 Che comando è?\n4 Allenatore\n5 Caccia all'errore\nMissione finale\nRisultato",
+    "testo": "1. Prompt libero\n\nFate pratica: provate dir, cd, tree /f, mkdir... La freccia su richiama il comando precedente.\n\nMicrosoft Windows [Versione simulata]\n(simulazione: i file sono finti e non toccano il vostro computer)\nScrivete help per l'elenco dei comandi.\n\nC:\\Users\\studente>\nRicomincia con l'albero originale\ndir\tmostra il contenuto della cartella corrente\ncd cartella\tentra in una cartella (cd .. sale, cd \\ va alla radice)\ntree /f\talbero delle cartelle, con i file\nmkdir nome\tcrea una cartella (anche md)\nrd nome\telimina una cartella vuota (rd /s anche piena)\ncopy file destinazione\tcopia un file\nmove file destinazione\tsposta un file o una cartella\nren file nuovo\trinomina\ndel file\telimina un file\ntype file\tmostra il testo di un file\ncls, help\tpulisce lo schermo, elenca i comandi"
+   },
+   "s2": {
+    "nav": "Inizio\n1 Prompt libero\n2 Missioni\n3 Che comando è?\n4 Allenatore\n5 Caccia all'errore\nMissione finale\nRisultato",
+    "testo": "2. Missioni\n\nOgni missione ricomincia da un albero nuovo. Appena il compito è svolto, compare il segno di spunta.\n\nMissione 1\nMissione 2\nMissione 3\nMissione 4\nMissione 5\nMissione 6\nMissione 7\nMissione 8\nMissione 9\n\nIl prompt è in C:\\Users\\studente. Entrate in Documenti\\Scuola\\Informatica con un solo comando cd e un percorso relativo.\n\nMicrosoft Windows [Versione simulata]\n(simulazione: i file sono finti e non toccano il vostro computer)\nScrivete help per l'elenco dei comandi.\n\nC:\\Users\\studente>\nRicomincia questa missione"
+   },
+   "s3": {
+    "nav": "Inizio\n1 Prompt libero\n2 Missioni\n3 Che comando è?\n4 Allenatore\n5 Caccia all'errore\nMissione finale\nRisultato",
+    "testo": "3. Che comando è?\n\nToccate un comando e poi il gruppo a cui appartiene.\n\ncd ..\ncopy a.txt ..\nmove a.txt ..\ndel a.txt\nmd Foto\ndir\ntree /f\nmkdir Foto\nren a.txt b.txt\ncd \\\ntype appunti.txt\nrd Foto\nSpostarsi e guardare\nnon cambiano nulla\nCambiare i file\ncopiare, spostare, togliere\nCartelle\ncreare e togliere\nCarte da smistare: 12. Errori: 0.\nRicomincia"
+   },
+   "s4": {
+    "nav": "Inizio\n1 Prompt libero\n2 Missioni\n3 Che comando è?\n4 Allenatore\n5 Caccia all'errore\nMissione finale\nRisultato",
+    "testo": "4. Allenatore\n\nScegliete il tipo e il livello.\n\nChe comando fa questo?\nCreare una cartella con un percorso\nCopiare con percorsi relativi\nDove mi porta cd?\nQuale file apre ..\\?\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\n\nQuale comando del prompt di Windows fa questo? Elimina una cartella vuota.\n\nComando\nScegli...\nmkdir\nrd\ndir\ncls\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "s5": {
+    "nav": "Inizio\n1 Prompt libero\n2 Missioni\n3 Che comando è?\n4 Allenatore\n5 Caccia all'errore\nMissione finale\nRisultato",
+    "testo": "5. Caccia all'errore\n\nTre comandi per fare la stessa cosa: uno solo non funziona. Quale?\n\nVolete creare la cartella Foto nella cartella corrente. Quale comando è sbagliato in cmd?\n\nmd Foto\nmkdir -p Foto\nmkdir Foto\nAltro esercizio\nTrovati: 0 su 0"
+   },
+   "ms-sec": {
+    "nav": "Inizio\n1 Prompt libero\n2 Missioni\n3 Che comando è?\n4 Allenatore\n5 Caccia all'errore\nMissione finale\nRisultato",
+    "testo": "Missione finale\n\nDieci domande miste. Il tempo parte con il primo clic. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nInizia la missione finale"
+   },
+   "res": {
+    "nav": "Inizio\n1 Prompt libero\n2 Missioni\n3 Che comando è?\n4 Allenatore\n5 Caccia all'errore\nMissione finale\nRisultato",
+    "testo": "Risultato\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la missione finale."
+   }
+  },
+  "dopo": {
+   "inizio": "Il computer a righe di comando\n\nPrima delle finestre c'era il prompt: scrivi un comando, il computer risponde. Qui ne usate uno simulato, che non tocca i file del vostro computer.\n\nPrompt libero: provate i comandi come in un vero cmd.\nMissioni: nove compiti da risolvere scrivendo i comandi giusti.\nChe comando è?: smistate i comandi per funzione.\nAllenatore: domande su comandi e percorsi.\nCaccia all'errore: trovate il comando che non funziona.\nMissione finale: dieci domande miste a tempo.\n\nPrerequisito: i percorsi assoluti e relativi (esercizi qui). Il prompt mostra sempre la cartella corrente prima del segno >.\n\nNome: ",
+   "s1": "1. Prompt libero\n\nFate pratica: provate dir, cd, tree /f, mkdir... La freccia su richiama il comando precedente.\n\nMicrosoft Windows [Versione simulata]\n(simulazione: i file sono finti e non toccano il vostro computer)\nScrivete help per l'elenco dei comandi.\n\nC:\\Users\\studente>\nRicomincia con l'albero originale\ndir\tmostra il contenuto della cartella corrente\ncd cartella\tentra in una cartella (cd .. sale, cd \\ va alla radice)\ntree /f\talbero delle cartelle, con i file\nmkdir nome\tcrea una cartella (anche md)\nrd nome\telimina una cartella vuota (rd /s anche piena)\ncopy file destinazione\tcopia un file\nmove file destinazione\tsposta un file o una cartella\nren file nuovo\trinomina\ndel file\telimina un file\ntype file\tmostra il testo di un file\ncls, help\tpulisce lo schermo, elenca i comandi",
+   "s2": "2. Missioni\n\nOgni missione ricomincia da un albero nuovo. Appena il compito è svolto, compare il segno di spunta.\n\nMissione 1\nMissione 2\nMissione 3\nMissione 4\nMissione 5\nMissione 6\nMissione 7\nMissione 8\nMissione 9\n\nIl prompt è in C:\\Users\\studente. Entrate in Documenti\\Scuola\\Informatica con un solo comando cd e un percorso relativo.\n\nMicrosoft Windows [Versione simulata]\n(simulazione: i file sono finti e non toccano il vostro computer)\nScrivete help per l'elenco dei comandi.\n\nC:\\Users\\studente>\nRicomincia questa missione",
+   "s3": "3. Che comando è?\n\nToccate un comando e poi il gruppo a cui appartiene.\n\nSpostarsi e guardare\nnon cambiano nulla\ncd ..\ndir\ntree /f\ncd \\\ntype appunti.txt\nCambiare i file\ncopiare, spostare, togliere\ncopy a.txt ..\nmove a.txt ..\ndel a.txt\nren a.txt b.txt\nCartelle\ncreare e togliere\nmd Foto\nmkdir Foto\nrd Foto\nFinito! Errori: 10.\nRicomincia",
+   "s4": "4. Allenatore\n\nScegliete il tipo e il livello.\n\nChe comando fa questo?\nCreare una cartella con un percorso\nCopiare con percorsi relativi\nDove mi porta cd?\nQuale file apre ..\\?\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\n\nQuale comando del prompt di Windows fa questo? Elimina una cartella vuota.\n\nComando\nScegli...\nmkdir\nrd\ndir\ncls\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "s5": "5. Caccia all'errore\n\nTre comandi per fare la stessa cosa: uno solo non funziona. Quale?\n\nVolete creare la cartella Foto nella cartella corrente. Quale comando è sbagliato in cmd?\n\nmd Foto\nmkdir -p Foto\nmkdir Foto\nNo: la riga sbagliata era un'altra. <code>-p</code> è un'opzione di Linux: cmd non la conosce e crea anche una cartella chiamata \"-p\".\nAltro esercizio\nTrovati: 0 su 1",
+   "ms-sec": "Missione finale\n\nDieci domande miste. Il tempo parte con il primo clic. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nRiprova la missione finale\n\nFinita: 0 su 10 in 00:00.",
+   "res": "Risultato\n\nNome: Ada\n\nNessun gioco ancora completato\n0 di 1 attività svolte\nMissione finale\nnon ancora fatta\nCopia il risultato\nStampa\nRicomincia da capo\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la missione finale."
+  },
+  "giocati": {
+   "s1": [],
+   "s2": [],
+   "s3": [
+    "smistamento"
+   ],
+   "s4": [
+    "controlla"
+   ],
+   "s5": [
+    "caccia"
+   ],
+   "ms-sec": [
+    "missione"
+   ]
+  },
+  "st": "{\"g\":{\"Missioni nel prompt\":{\"ok\":0,\"tot\":0},\"Che comando è?\":{\"ok\":0,\"tot\":1},\"Allenatore: Che comando fa questo? (liv. 1)\":{\"ok\":0,\"tot\":1},\"Caccia all'errore\":{\"ok\":0,\"tot\":1}},\"m\":{\"Missione finale\":{\"pts\":0,\"t\":\"00:00\",\"count\":10}}}"
+ },
  "informatica-1/reti/la-rete-e-i-suoi-pezzi": {
   "nav": [],
   "sez": {

@@ -1,0 +1,65 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Prompt dei comandi di Windows: esercitazione</title><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script>
+<style>
+.trm{background:#0c0c0c;color:#cccccc;border:1px solid var(--tg-line-2);border-radius:10px;padding:10px 12px;font-family:var(--tg-mono);font-size:14px;cursor:text}
+.trm-o{margin:0;white-space:pre-wrap;word-break:break-word;max-height:340px;overflow:auto;font:inherit;color:inherit;background:transparent;padding:0;border:0}
+.trm-i{display:flex;align-items:center;gap:0}
+.trm-p{white-space:nowrap;font-weight:400;min-width:0}
+body.tg-act .trm .trm-i input{flex:1;min-width:0;background:transparent;border:0;outline:0;box-shadow:none;border-radius:0;color:#fff;font:inherit;padding:0;margin:0;width:auto}
+body.tg-act .trm .trm-p{min-width:0;font-weight:400;margin:0}
+.trm:focus-within{border-color:var(--tg-acc)}
+.mp{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.mp button{border:1px solid var(--tg-line);background:var(--tg-paper);color:var(--tg-ink);border-radius:999px;padding:5px 12px;cursor:pointer;font:500 13px var(--tg-sans)}
+.mp button.on{background:var(--tg-ink);color:var(--tg-bg);border-color:var(--tg-ink)}
+.mp button.fatta{border-color:var(--tg-ok)}
+.mp button.fatta::after{content:" ✓";color:var(--tg-ok)}
+.mp button.on.fatta::after{color:inherit}
+.cmdt{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}
+.cmdt th,.cmdt td{border-bottom:1px solid var(--tg-line);padding:5px 8px;text-align:left;vertical-align:top}
+.cmdt td:first-child{font-family:var(--tg-mono);white-space:nowrap}
+</style></head><body class="tg-act" data-solo="1"><header><h1>Prompt dei comandi di Windows: esercitazione</h1></header><nav id="nav"></nav><main>
+<section id="inizio" data-t="Inizio"><h2>Il computer a righe di comando</h2><p class="lead">Prima delle finestre c'era il prompt: scrivi un comando, il computer risponde. Qui ne usate uno simulato, che non tocca i file del vostro computer.</p><ol><li><b>Prompt libero:</b> provate i comandi come in un vero cmd.</li><li><b>Missioni:</b> nove compiti da risolvere scrivendo i comandi giusti.</li><li><b>Che comando è?:</b> smistate i comandi per funzione.</li><li><b>Allenatore:</b> domande su comandi e percorsi.</li><li><b>Caccia all'errore:</b> trovate il comando che non funziona.</li><li><b>Missione finale:</b> dieci domande miste a tempo.</li></ol>
+<p>Prerequisito: i percorsi assoluti e relativi (<a href="../percorsi-assoluti-e-relativi/">esercizi qui</a>). Il prompt mostra sempre la cartella corrente prima del segno <code>&gt;</code>.</p>
+<div class="row"><label>Nome: <input type="text" id="n1" placeholder="Nome"></label></div></section>
+<section id="s1" data-t="1 Prompt libero"><h2>1. Prompt libero</h2><p class="lead">Fate pratica: provate <code>dir</code>, <code>cd</code>, <code>tree /f</code>, <code>mkdir</code>... La freccia su richiama il comando precedente.</p>
+<div id="lib"></div><div class="row"><button class="btn sec" id="lib-r">Ricomincia con l'albero originale</button></div>
+<table class="cmdt"><tr><td>dir</td><td>mostra il contenuto della cartella corrente</td></tr><tr><td>cd cartella</td><td>entra in una cartella (<code>cd ..</code> sale, <code>cd \</code> va alla radice)</td></tr><tr><td>tree /f</td><td>albero delle cartelle, con i file</td></tr><tr><td>mkdir nome</td><td>crea una cartella (anche <code>md</code>)</td></tr><tr><td>rd nome</td><td>elimina una cartella vuota (<code>rd /s</code> anche piena)</td></tr><tr><td>copy file destinazione</td><td>copia un file</td></tr><tr><td>move file destinazione</td><td>sposta un file o una cartella</td></tr><tr><td>ren file nuovo</td><td>rinomina</td></tr><tr><td>del file</td><td>elimina un file</td></tr><tr><td>type file</td><td>mostra il testo di un file</td></tr><tr><td>cls, help</td><td>pulisce lo schermo, elenca i comandi</td></tr></table></section>
+<section id="s2" data-t="2 Missioni"><h2>2. Missioni</h2><p class="lead">Ogni missione ricomincia da un albero nuovo. Appena il compito è svolto, compare il segno di spunta.</p><div class="mp" id="mp"></div><p class="q" id="mt"></p><div id="mis"></div><div class="row"><button class="btn sec" id="mis-r">Ricomincia questa missione</button><span class="msg" id="mis-m"></span></div></section>
+<section id="s3" data-t="3 Che comando è?"><h2>3. Che comando è?</h2><p class="lead">Toccate un comando e poi il gruppo a cui appartiene.</p><div id="sg"></div></section>
+<section id="s4" data-t="4 Allenatore"><h2>4. Allenatore</h2><p class="lead">Scegliete il tipo e il livello.</p><div id="all"></div></section>
+<section id="s5" data-t="5 Caccia all'errore"><h2>5. Caccia all'errore</h2><p class="lead">Tre comandi per fare la stessa cosa: uno solo non funziona. Quale?</p><div id="hu"></div></section>
+<section id="ms-sec" data-t="Missione finale"><h2>Missione finale</h2><p class="lead">Dieci domande miste. Il tempo parte con il primo clic. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="ms"></div></section><section id="res" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main>
+<script src="../../../assets/giochi.js"></script>
+<script src="../temi/filesystem.js"></script>
+<script src="../temi/prompt.js"></script>
+<script>
+const lib = pMonta($('#lib'), PROMPT_ABS);
+$('#lib-r').onclick = () => lib.reset();
+
+/* missioni */
+/* il totale compare dalla prima missione svolta: una pagina mai toccata non ha progressi da salvare */
+const stM = stat('Missioni nel prompt'); if (stM.ok) stM.tot = PROMPT_MISSIONI.length;
+const fatte = PROMPT_MISSIONI.map(() => false); let cur = 0, T2;
+function disegna() {
+  $('#mp').innerHTML = PROMPT_MISSIONI.map((m, i) => `<button data-i="${i}" class="${i === cur ? 'on ' : ''}${fatte[i] ? 'fatta' : ''}">Missione ${i + 1}</button>`).join('');
+  $('#mp').querySelectorAll('button').forEach(b => b.onclick = () => { cur = +b.dataset.i; vai(); });
+}
+function vai() { $('#mt').innerHTML = PROMPT_MISSIONI[cur].t; $('#mis-m').textContent = fatte[cur] ? 'Missione già svolta.' : ''; $('#mis-m').style.color = 'var(--ok)'; T2.reset(PROMPT_MISSIONI[cur].start); disegna(); }
+T2 = pMonta($('#mis'), PROMPT_MISSIONI[0].start, (s) => {
+  const m = PROMPT_MISSIONI[cur];
+  if (!fatte[cur] && m.ok(s)) { fatte[cur] = true; stM.tot = PROMPT_MISSIONI.length; stM.ok = Math.min(stM.ok + 1, stM.tot); $('#mis-m').textContent = 'Missione svolta!'; $('#mis-m').style.color = 'var(--ok)'; disegna(); }
+});
+$('#mis-r').onclick = vai;
+vai();
+
+sortGame($('#sg'), PROMPT_SORT_CARDS, PROMPT_SORT_BUCKETS, 'Che comando è?');
+mountMenu($('#all'), [
+  ['Che comando fa questo?', l => gCmdFunzione()],
+  ['Creare una cartella con un percorso', l => gCmdMkdir(l)],
+  ['Copiare con percorsi relativi', l => gCmdCopy(l)],
+  ['Dove mi porta cd?', l => gFsCd(l)],
+  ['Quale file apre ..\\?', l => gFsDove(l)]
+], 'Allenatore', true);
+hunt($('#hu'), () => gCmdCaccia(), 'Caccia all\'errore');
+mission($('#ms'), [() => gCmdFunzione(), () => gCmdFunzione(), () => gCmdMkdir(1), () => gCmdMkdir(2), () => gCmdCopy(1), () => gCmdCopy(2), () => gFsCd(1), () => gFsCd(2), () => gFsDove(2), () => gFsRelativo(2), () => gFsConverti(2), () => gFsAssoluto(2)], 'Missione finale');
+</script></body></html>
