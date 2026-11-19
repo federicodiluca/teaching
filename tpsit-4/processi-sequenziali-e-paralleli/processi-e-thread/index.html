@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ripasso Processi e Thread</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+body{margin:0}
+/* Layout: una barra in alto con le quattro attivita' e il timer, sotto un'unica area di lavoro a tutta larghezza pensata per la LIM. */
+:root {
+  --bg:#EEF1F6; --surface:#FFFFFF; --surface2:#E3E9F2; --ink:#13202F; --muted:#51607A; --line:#C7D1E0;
+  --proc:#2457D6; --proc-soft:#DCE6FF; --res:#A85200; --res-soft:#FBE7CE;
+  --good:#12703F; --good-soft:#D5F0E1; --bad:#B72A2A; --bad-soft:#F9DADA;
+  --f-head:'Space Grotesk',system-ui,sans-serif; --f-body:'Inter',system-ui,sans-serif; --f-mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg:#0E1520; --surface:#16202E; --surface2:#202C3F; --ink:#E8EEF7; --muted:#9DABC0; --line:#2D3B52;
+  --proc:#86A9FF; --proc-soft:#1C2E58; --res:#F2A650; --res-soft:#3A2810;
+  --good:#4CC98A; --good-soft:#12362A; --bad:#FF8080; --bad-soft:#401B1B; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg:#0E1520; --surface:#16202E; --surface2:#202C3F; --ink:#E8EEF7; --muted:#9DABC0; --line:#2D3B52;
+  --proc:#86A9FF; --proc-soft:#1C2E58; --res:#F2A650; --res-soft:#3A2810;
+  --good:#4CC98A; --good-soft:#12362A; --bad:#FF8080; --bad-soft:#401B1B; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 18px; line-height: 1.45; }
+h1,h2,h3 { font-family: var(--f-head); text-wrap: balance; margin: 0; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--proc); outline-offset: 2px; }
+.app { max-width: 1280px; margin: 0 auto; padding-block: 12px 28px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.top { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; padding-bottom: 12px; border-bottom: 2px solid var(--line); margin-bottom: 16px; }
+.top h1 { font-size: 1.35rem; letter-spacing: -0.01em; margin-right: auto; }
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.tab { min-height: 48px; padding: 6px 16px; border: 2px solid var(--line); border-radius: 10px; background: var(--surface); font-weight: 600; }
+.tab[aria-selected="true"] { background: var(--proc); border-color: var(--proc); color: #fff; }
+:root[data-theme="dark"] .tab[aria-selected="true"] { color: #08111f; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tab[aria-selected="true"] { color: #08111f; } }
+.timer { display: flex; align-items: center; gap: 6px; }
+.timer button { min-height: 48px; min-width: 48px; border: 2px solid var(--line); border-radius: 10px; background: var(--surface); font-weight: 600; }
+.timer output { font-family: var(--f-mono); font-size: 1.5rem; min-width: 4.4ch; text-align: center; padding: 4px 8px; border-radius: 8px; }
+.timer output.end { background: var(--bad); color: #fff; animation: blink .6s steps(2) infinite; }
+@keyframes blink { 50% { opacity: .35; } }
+.btn { min-height: 52px; padding: 8px 20px; border-radius: 10px; border: 2px solid var(--line); background: var(--surface); font-weight: 600; }
+.btn.primary { background: var(--proc); border-color: var(--proc); color: #fff; }
+:root[data-theme="dark"] .btn.primary { color: #08111f; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn.primary { color: #08111f; } }
+.btn:disabled { opacity: .45; cursor: default; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.card { background: var(--surface); border: 2px solid var(--line); border-radius: 14px; padding: 16px; min-width: 0; }
+.kicker { font-family: var(--f-mono); font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.panel[hidden] { display: none !important; }
+.msg { min-height: 3.2em; padding: 12px 16px; border-radius: 12px; background: var(--surface2); font-weight: 500; }
+.msg.good { background: var(--good-soft); color: var(--good); }
+.msg.bad { background: var(--bad-soft); color: var(--bad); }
+.shake { animation: shake .35s; }
+@keyframes shake { 20%,60% { transform: translateX(-7px); } 40%,80% { transform: translateX(7px); } }
+
+/* Quiz */
+.qwrap { display: grid; gap: 14px; }
+.qtext { font-family: var(--f-head); font-size: 1.55rem; line-height: 1.3; font-weight: 500; }
+.qdots { display: flex; flex-wrap: wrap; gap: 6px; }
+.qdot { width: 44px; height: 44px; border-radius: 10px; border: 2px solid var(--line); background: var(--surface); font-family: var(--f-mono); font-weight: 600; }
+.qdot.cur { border-color: var(--proc); box-shadow: 0 0 0 3px var(--proc-soft); }
+.qdot.ok { background: var(--good-soft); border-color: var(--good); }
+.qdot.ko { background: var(--bad-soft); border-color: var(--bad); }
+.opt { display: grid; grid-template-columns: 52px minmax(0,1fr) auto; gap: 12px; align-items: center; padding: 12px; border: 2px solid var(--line); border-radius: 12px; background: var(--surface); }
+.opt.right { border-color: var(--good); background: var(--good-soft); }
+.opt .letter { width: 48px; height: 48px; border-radius: 10px; background: var(--surface2); display: grid; place-items: center; font-family: var(--f-mono); font-weight: 600; font-size: 1.3rem; }
+.opt.right .letter { background: var(--good); color: #fff; }
+.opt .otext { font-size: 1.2rem; }
+.bars { display: grid; gap: 4px; margin-top: 6px; }
+.bar { height: 12px; border-radius: 6px; background: var(--surface2); overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--muted); }
+.bar.b2 i { background: var(--proc); }
+.barlbl { font-size: .8rem; color: var(--muted); font-family: var(--f-mono); }
+.ctr { display: flex; align-items: center; gap: 8px; }
+.ctr button { width: 52px; height: 52px; border-radius: 10px; border: 2px solid var(--line); background: var(--surface); font-size: 1.6rem; font-weight: 600; }
+.ctr b { font-family: var(--f-mono); font-size: 1.6rem; min-width: 1.6ch; text-align: center; }
+.expl { padding: 14px 16px; border-left: 6px solid var(--good); background: var(--good-soft); border-radius: 8px; }
+table.recap { width: 100%; border-collapse: collapse; font-size: 1rem; }
+table.recap th, table.recap td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+table.recap td.n { font-family: var(--f-mono); }
+.scroll { overflow-x: auto; }
+
+/* Smistamento */
+.decks { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.deck { min-height: 48px; padding: 6px 14px; border-radius: 999px; border: 2px solid var(--line); background: var(--surface); font-weight: 600; }
+.deck[aria-pressed="true"] { border-color: var(--proc); background: var(--proc-soft); }
+.sortgrid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.3fr); gap: 16px; align-items: start; }
+@media (max-width: 860px) { .sortgrid { grid-template-columns: minmax(0,1fr); } }
+.pool { display: flex; flex-wrap: wrap; gap: 10px; align-content: flex-start; min-height: 120px; }
+.chip { padding: 10px 14px; border-radius: 10px; border: 2px solid var(--line); background: var(--surface); text-align: left; font-size: 1.05rem; }
+.chip.sel { border-color: var(--proc); background: var(--proc-soft); box-shadow: 0 0 0 3px var(--proc-soft); }
+.buckets { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.bucket { border: 3px dashed var(--line); border-radius: 14px; padding: 12px; min-height: 160px; background: var(--surface); text-align: left; display: flex; flex-direction: column; gap: 8px; }
+.bucket:hover, .bucket.over { border-color: var(--proc); background: var(--proc-soft); }
+.bucket h3 { font-size: 1.15rem; }
+.bucket .chip { font-size: .95rem; padding: 6px 10px; background: var(--good-soft); border-color: var(--good); cursor: default; }
+.score { font-family: var(--f-mono); }
+
+/* Stati */
+.diagram { width: 100%; height: auto; display: block; }
+.diagram text, .holt text { font-family: var(--f-body); }
+.sbox { fill: var(--surface); stroke: var(--line); stroke-width: 3; }
+.sbox.can { stroke: var(--proc); cursor: pointer; }
+.sname { font-family: var(--f-head); font-weight: 700; font-size: 18px; fill: var(--ink); }
+.ssub { font-size: 14px; fill: var(--muted); }
+.tr { stroke: var(--muted); stroke-width: 3; fill: none; }
+.trl { font-size: 15px; fill: var(--muted); }
+.mk { fill: var(--muted); }
+.tok circle { fill: var(--proc-soft); stroke: var(--proc); stroke-width: 3; }
+.tok text { font-family: var(--f-mono); font-weight: 600; font-size: 20px; fill: var(--ink); text-anchor: middle; dominant-baseline: central; }
+.tok.sel circle { fill: var(--proc); }
+.tok.sel text { fill: var(--bg); }
+.tok { cursor: pointer; }
+.evgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; }
+.evgrid .btn { text-align: left; }
+
+/* Holt */
+.holtgrid { display: grid; grid-template-columns: minmax(0,1.7fr) minmax(280px,1fr); gap: 16px; align-items: start; }
+@media (max-width: 900px) { .holtgrid { grid-template-columns: minmax(0,1fr); } }
+.holt { width: 100%; height: auto; display: block; }
+.pn { cursor: pointer; }
+.pn circle { fill: var(--proc-soft); stroke: var(--proc); stroke-width: 4; }
+.pn text { font-family: var(--f-mono); font-weight: 600; font-size: 26px; fill: var(--ink); text-anchor: middle; dominant-baseline: central; }
+.pn.hint circle { fill: var(--proc); animation: pulse 0.8s ease-in-out 3; }
+.pn.hint text { fill: var(--bg); }
+@keyframes pulse { 50% { stroke-width: 10; } }
+.rn rect { fill: var(--res-soft); stroke: var(--res); stroke-width: 4; }
+.rn text { font-family: var(--f-mono); font-weight: 600; font-size: 24px; fill: var(--ink); text-anchor: middle; dominant-baseline: central; }
+.rn circle { stroke: var(--res); stroke-width: 3; }
+.rn circle.full { fill: var(--res); }
+.rn circle.free { fill: none; }
+.eg { stroke: var(--ink); stroke-width: 4; fill: none; }
+.ep { stroke: var(--bad); stroke-width: 4; fill: none; stroke-dasharray: 10 7; }
+.eg.new, .ep.new { animation: draw 1s; }
+@keyframes draw { 0% { opacity: .25; } 100% { opacity: 1; } }
+.mk-g { fill: var(--ink); } .mk-p { fill: var(--bad); }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: .95rem; color: var(--muted); }
+.seq { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-family: var(--f-mono); font-size: 1.05rem; }
+.seq li { padding: 4px 10px; border-radius: 8px; border: 2px solid transparent; display: flex; gap: 10px; }
+.seq li.done { color: var(--muted); }
+.seq li.cur { border-color: var(--proc); background: var(--proc-soft); }
+.seq li span { min-width: 2ch; }
+.scen { display: flex; flex-wrap: wrap; gap: 8px; }
+.scen button { min-height: 48px; padding: 6px 14px; border-radius: 10px; border: 2px solid var(--line); background: var(--surface); font-weight: 600; }
+.scen button[aria-pressed="true"] { border-color: var(--proc); background: var(--proc-soft); }
+.stack { display: grid; gap: 14px; min-width: 0; }
+.tr.act { stroke: var(--proc); stroke-width: 5; } .trl.act { fill: var(--proc); font-weight: 700; } .mk-a { fill: var(--proc); }
+.tr.last { animation: draw 1s; } .sbox.here { stroke: var(--proc); fill: var(--proc-soft); }
+.stgrid { display: grid; grid-template-columns: minmax(0,1fr); gap: 12px; }
+.pcards { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 8px; }
+.pcard { display: flex; gap: 12px; align-items: center; text-align: left; padding: 10px 12px; border-radius: 12px; border: 2px solid var(--line); background: var(--surface); min-height: 60px; }
+.pcard.sel { border-color: var(--proc); background: var(--proc-soft); box-shadow: 0 0 0 3px var(--proc-soft); }
+.pcard .pl { width: 44px; height: 44px; border-radius: 50%; background: var(--proc-soft); border: 3px solid var(--proc); display: grid; place-items: center; font-family: var(--f-mono); font-weight: 600; font-size: 1.3rem; flex: none; }
+.pcard small { display: block; color: var(--muted); }
+.btn.ev { display: flex; justify-content: space-between; gap: 10px; align-items: center; text-align: left; }
+.btn.ev.ok { border-color: var(--proc); background: var(--proc-soft); }
+.btn.ev.no { border-style: dashed; opacity: .6; }
+.dest { font-family: var(--f-mono); white-space: nowrap; font-weight: 600; color: var(--proc); }
+.hint-s { font-size: .9rem; color: var(--muted); }
+.ei { stroke: var(--muted); stroke-width: 3; stroke-dasharray: 6 6; fill: none; }
+.pn.selp circle { fill: var(--proc); } .pn.selp text { fill: var(--bg); }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body>
+
+
+<div class="app">
+  <header class="top">
+    <h1>Ripasso: processi e thread</h1>
+    <nav class="tabs" role="tablist" aria-label="Attivit&agrave;">
+      <button class="tab" role="tab" data-tab="quiz">Quiz a votazione</button>
+      <button class="tab" role="tab" data-tab="smistamento">Smistamento</button>
+      <button class="tab" role="tab" data-tab="stati">Stati dei processi</button>
+      <button class="tab" role="tab" data-tab="precedenze">Grafo delle precedenze</button>
+      <button class="tab" role="tab" data-tab="holt">Grafo di Holt</button>
+    </nav>
+    <div class="timer" aria-label="Timer">
+      <button data-min="1">1&prime;</button><button data-min="3">3&prime;</button><button data-min="5">5&prime;</button><button data-min="10">10&prime;</button>
+      <output id="tout" aria-live="off">0:00</output>
+    </div>
+  </header>
+
+  <section class="panel" id="p-quiz" hidden>
+    <div class="qwrap">
+      <div class="row" style="justify-content:space-between">
+        <span class="kicker" id="qk"></span>
+        <div class="qdots" id="qdots"></div>
+      </div>
+      <div class="card"><div class="qtext" id="qtext"></div></div>
+      <div id="qopts" class="qwrap" style="gap:10px"></div>
+      <div class="row">
+        <button class="btn" id="qprev">&larr; Precedente</button>
+        <button class="btn primary" id="qgo"></button>
+        <button class="btn" id="qnext">Successiva &rarr;</button>
+        <button class="btn" id="qrecap" style="margin-left:auto">Riepilogo voti</button>
+      </div>
+      <div id="qinfo"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-smistamento" hidden>
+    <div class="decks" id="decks"></div>
+    <div class="sortgrid">
+      <div class="stack">
+        <div class="row" style="justify-content:space-between"><span class="kicker">Da smistare</span><span class="score" id="sscore"></span></div>
+        <div class="pool" id="spool"></div>
+        <div class="msg" id="smsg" aria-live="polite">Tocca una carta, poi tocca la casella giusta. Con il mouse puoi anche trascinarla.</div>
+      </div>
+      <div class="buckets" id="sbuckets"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-stati" hidden>
+    <div class="stack">
+      <div class="row">
+        <button class="btn" id="stmode"></button>
+        <button class="btn" id="streset">Ricomincia</button>
+        <span class="msg" id="stmsg" style="flex:1 1 320px" aria-live="polite"></span>
+      </div>
+      <div class="card" style="padding:8px"><svg class="diagram" id="stsvg" viewBox="0 40 1000 385" role="img" aria-label="Diagramma dei cinque stati di un processo"></svg></div>
+      <div id="stctl"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-prec" hidden>
+    <div class="holtgrid">
+      <div class="stack">
+        <div class="scen" id="pscen" role="group" aria-label="Esercizio"></div>
+        <div class="card" style="padding:8px"><svg class="holt" id="psvg" viewBox="0 0 800 420" role="img" aria-label="Grafo delle precedenze"></svg></div>
+        <div class="legend"><span><svg width="46" height="12" aria-hidden="true"><line x1="0" y1="6" x2="46" y2="6" class="eg"/></svg> precedenza: la seconda parte solo quando la prima ha finito</span>
+          <span><svg width="46" height="12" aria-hidden="true"><line x1="0" y1="6" x2="46" y2="6" class="ei"/></svg> precedenza implicita</span></div>
+      </div>
+      <div class="stack">
+        <div class="card stack"><span class="kicker">Istruzioni</span><ol class="seq" id="pcode"></ol></div>
+        <div class="card stack"><span class="kicker">Costruisci il grafo: tocca due istruzioni</span>
+          <div class="msg" id="pmsg" aria-live="polite"></div>
+          <div class="row"><button class="btn" id="pshow">Mostra la soluzione</button><button class="btn" id="pundo">Annulla</button><button class="btn" id="preset">Ricomincia</button></div></div>
+        <div class="card stack"><span class="kicker">Eseguilo: quanto tempo serve?</span>
+          <div class="row" id="pcpu"><button class="btn" data-c="1">1 processore</button><button class="btn" data-c="2">2</button><button class="btn" data-c="3">3</button><button class="btn" data-c="inf">Quanti servono</button></div>
+          <div id="prun"></div><p id="pinfo" style="margin:0;color:var(--muted)"></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-holt" hidden>
+    <div class="holtgrid">
+      <div class="stack">
+        <div class="scen" id="hscen" role="group" aria-label="Scenario"></div>
+        <div class="card" style="padding:8px"><svg class="holt" id="hsvg" viewBox="0 0 800 400" role="img" aria-label="Grafo di Holt"></svg></div>
+        <div class="legend">
+          <span><svg width="46" height="12" aria-hidden="true"><line x1="0" y1="6" x2="46" y2="6" class="eg"/></svg> risorsa assegnata al processo</span>
+          <span><svg width="46" height="12" aria-hidden="true"><line x1="0" y1="6" x2="46" y2="6" class="ep"/></svg> richiesta pendente (processo in attesa)</span>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="card stack">
+          <span class="kicker">Sequenza di richieste</span>
+          <ol class="seq" id="hseq"></ol>
+          <div class="row">
+            <button class="btn primary" id="hnext">Applica la prossima</button>
+            <button class="btn" id="hall">Tutte</button>
+          </div>
+        </div>
+        <div class="card stack">
+          <span class="kicker">Riduzione: tocca un processo da eliminare</span>
+          <div class="msg" id="hmsg" aria-live="polite"></div>
+          <div class="row">
+            <button class="btn" id="hhint">Suggerisci</button>
+            <button class="btn" id="hundo">Annulla</button>
+            <button class="btn" id="hreset">Ricomincia</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+"use strict";
+const $ = (s, el) => (el || document).querySelector(s);
+const $$ = (s, el) => Array.from((el || document).querySelectorAll(s));
+const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const NS = "http://www.w3.org/2000/svg";
+
+/* ---------- Schede e routing ---------- */
+const TABS = ["quiz", "smistamento", "stati", "precedenze", "holt"];
+function showTab(t) {
+  if (!TABS.includes(t)) t = "quiz";
+  $$(".tab").forEach(b => b.setAttribute("aria-selected", b.dataset.tab === t));
+  TABS.forEach(x => { $("#p-" + (x === "precedenze" ? "prec" : x)).hidden = x !== t; });
+  if (location.hash !== "#" + t) { try { history.replaceState(null, "", "#" + t); } catch (e) { location.hash = t; } }
+}
+$$(".tab").forEach(b => b.addEventListener("click", () => showTab(b.dataset.tab)));
+window.addEventListener("hashchange", () => showTab(location.hash.slice(1)));
+
+/* ---------- Timer ---------- */
+let tId = null, tLeft = 0;
+const tOut = $("#tout");
+function tDraw() { tOut.textContent = Math.floor(tLeft / 60) + ":" + String(tLeft % 60).padStart(2, "0"); }
+function beep() {
+  try { const c = new (window.AudioContext || window.webkitAudioContext)(); const o = c.createOscillator(); const g = c.createGain();
+    o.connect(g); g.connect(c.destination); o.frequency.value = 880; g.gain.value = 0.15; o.start(); o.stop(c.currentTime + 0.5); } catch (e) {}
+}
+function tStart(min) {
+  clearInterval(tId); tLeft = min * 60; tOut.classList.remove("end"); tDraw();
+  tId = setInterval(() => { tLeft--; tDraw(); if (tLeft <= 0) { clearInterval(tId); tOut.classList.add("end"); beep(); } }, 1000);
+}
+$$(".timer button").forEach(b => b.addEventListener("click", () => tStart(+b.dataset.min)));
+tOut.addEventListener("click", () => { clearInterval(tId); tLeft = 0; tOut.classList.remove("end"); tDraw(); });
+
+/* ---------- QUIZ ---------- */
+const QDATA = [
+  ["Seleziona la risposta ERRATA fra le seguenti.", "Un processo terminato può essere riutilizzato quando serve",
+   ["Un processo in esecuzione può essere interrotto per poi essere rieseguito", "Un processo torna subito a stato di pronto appena c'è il completamento dell'I/O o dell'evento", "Un processo pronto attende che lo scheduler gli assegni la CPU"],
+   "Un processo terminato ha concluso il ciclo di vita: il sistema rilascia le sue risorse e non lo riusa. Gli stati Nuovo e Terminato si attraversano una volta sola."],
+  ["Cos'è un'operazione di Interrupt Software?", "Operazione di sospensione di un processo",
+   ["Operazione che riprende l'esecuzione del processo interrotto", "Operazione di terminazione definitiva di un processo", "Operazione di creazione di un nuovo processo"],
+   "L'interrupt software è generato dallo scheduler quando il processo esaurisce il quanto di tempo: il processo viene sospeso e il suo contesto salvato."],
+  ["Un interrupt hardware è generato da:", "Un dispositivo di I/O che segnala un evento",
+   ["Lo scheduler, quando il processo esaurisce il time slice", "Il programmatore, con una chiamata a fork()", "Un processo che termina normalmente"],
+   "L'interrupt hardware arriva da dispositivi esterni (disco, rete, tastiera) e ha priorità maggiore dell'interrupt software."],
+  ["Che cosa si intende per throughput di un sistema?", "Il numero di processi che il sistema riesce a servire nell'unità di tempo",
+   ["Il tempo che un singolo processo impiega per terminare", "La quantità di memoria RAM occupata dai processi", "La velocità di clock della CPU"],
+   "Il throughput è la capacità di servire il maggior numero di processi nell'unità di tempo. La multiprogrammazione serve a massimizzarlo."],
+  ["In quale area della memoria di un processo vengono memorizzate le variabili locali di una funzione?", "Stack",
+   ["Heap", "Area codice", "Area dati globali"],
+   "Lo stack contiene parametri, variabili locali e indirizzo di ritorno di ogni chiamata. L'heap serve alla memoria dinamica, l'area dati alle variabili globali."],
+  ["Quale tra le seguenti risorse è seriale?", "La stampante",
+   ["Un file aperto in sola lettura da molti processi", "Una tabella di sistema in sola lettura", "Il codice di un programma condiviso in sola lettura"],
+   "Una risorsa seriale non può essere assegnata a più processi insieme: accesso mutuamente esclusivo, gli altri aspettano in coda. Ciò che è in sola lettura è non seriale."],
+  ["Quale delle seguenti risorse è prerilasciabile (preemptive)?", "La CPU",
+   ["La stampante, durante la stampa di un documento", "Il masterizzatore, durante la scrittura di un disco", "Una stampante 3D, durante la realizzazione di un pezzo"],
+   "La CPU si può togliere a un processo (context switching) e restituire senza danni. Interrompere una stampa o una masterizzazione rovina il lavoro."],
+  ["Che cosa accade se un processo effettua una richiesta bloccante di una risorsa non disponibile?", "Il processo si sospende, passa in stato di attesa e la richiesta viene accodata",
+   ["Il processo continua a evolvere e riceve una notifica di indisponibilità", "Il processo viene terminato dal sistema operativo", "La risorsa viene tolta al processo che la sta usando e assegnata al richiedente"],
+   "Nella richiesta bloccante il processo si ferma in attesa (WL). Se continuasse a lavorare con una notifica di indisponibilità, la richiesta sarebbe non bloccante."],
+  ["Quale dei seguenti è un esempio di assegnazione statica di una risorsa?", "L'area di RAM assegnata al processo alla sua creazione e mantenuta fino alla terminazione",
+   ["La stampante assegnata a un processo solo per il tempo della stampa", "Un file aperto durante l'esecuzione e chiuso dopo l'uso", "Un'interfaccia di rete richiesta e rilasciata più volte durante la vita del processo"],
+   "Statica: assegnata alla creazione e tenuta fino alla terminazione (PCB, area di RAM). Le altre sono richieste e rilasciate durante la vita del processo: dinamica."],
+  ["Quando un grafo di Holt è riducibile rispetto a un processo?", "Quando un processo ha solo archi entranti.",
+   ["Quando un processo ha solo archi uscenti.", "Quando un processo ha sia archi entranti che uscenti.", "Quando un processo non ha alcun arco."],
+   "Solo archi entranti significa nessuna richiesta pendente: il processo ha tutto ciò che gli serve, termina e libera le sue risorse, quindi il nodo si elimina."],
+  ["Che cosa fa un Thread?", "È un flusso di controllo che esegue in parallelo ad altri nello stesso processo",
+   ["Gestisce le risorse hardware al posto del sistema operativo", "Esegue un blocco di codice separato dal processo che lo contiene", "Svolge gli stessi compiti di un processo, con memoria propria"],
+   "Un thread è un flusso di controllo che gira in parallelo agli altri thread dello stesso processo, condividendo il suo spazio di indirizzamento."],
+  ["Il Thread Control Block", "è diverso per ogni thread, anche se appartenenti allo stesso processo.",
+   ["non contiene le informazioni per gestire e controllare un thread.", "è un particolare tipo di thread.", "è identico al PCB"],
+   "Ogni thread ha il proprio TCB: ID, program counter, registri, stato, stack privato e puntatore al PCB del processo contenitore."],
+  ["Quale fra i seguenti NON è un elemento dei thread?", "PCB",
+   ["program counter", "registri", "stack"],
+   "Il PCB descrive il processo. Il thread ha program counter, registri e stack, raccolti nel suo TCB."],
+  ["Nei thread di tipo user-level:", "il sistema operativo non è consapevole dell'esistenza dei singoli thread",
+   ["ogni thread è gestito direttamente dallo scheduler del kernel", "ogni thread ha un proprio PCB nel kernel", "il kernel assegna ogni thread a un processore diverso"],
+   "I thread user-level sono gestiti da una libreria: il kernel vede solo il processo. Se un thread blocca per I/O si ferma tutto il processo."],
+  ["Quale vantaggio hanno i thread kernel-level rispetto a quelli user-level?", "Se un thread si blocca per I/O gli altri thread dello stesso processo possono continuare a evolvere",
+   ["Il cambio di contesto è più veloce, perché non richiede system call", "Sono portabili su qualsiasi sistema operativo senza modifiche", "Il kernel non ha bisogno di conoscerne l'esistenza"],
+   "Il kernel conosce e schedula ogni thread, quindi sfrutta anche più core. In cambio il cambio di contesto è più lento (system call) e il codice meno portabile."],
+  ["Quale delle seguenti funzioni NON è thread safe?", "Una funzione che scrive il proprio risultato in una variabile globale condivisa, senza alcuna protezione",
+   ["Una funzione che usa solo variabili locali", "Una funzione che protegge l'accesso ai dati condivisi con un mutex", "Una funzione che non modifica nessun dato condiviso"],
+   "Se due thread scrivono la stessa variabile globale senza coordinarsi c'è una race condition: il secondo sovrascrive il risultato del primo."],
+  ["Quando vogliamo realizzare un programma con esecuzione PARALLELA, cosa è necessario?", "Un elaboratore non sequenziale",
+   ["Un insieme specifico di memorie non sequenziale", "Un linguaggio di programmazione con precedenza", "Numero di file aperti"],
+   "Per far avanzare più azioni insieme serve un elaboratore non sequenziale: multiprocessore (parallelismo reale) o monoprocessore multiprogrammato (virtuale)."],
+  ["Qual è la relazione tra parallelismo e concorrenza?", "Concorrenza: sovrapposizione nel tempo; parallelismo: esecuzione simultanea su più CPU",
+   ["Sono sinonimi e indicano la stessa cosa", "La concorrenza richiede sempre più processori", "Il parallelismo è possibile solo su un monoprocessore"],
+   "Due processi sono concorrenti se si sovrappongono nel tempo, anche su una sola CPU. Il parallelismo vero richiede più CPU che lavorano nello stesso istante."],
+  ["Con quale tipo di sistema otteniamo un parallelismo virtuale?", "Monoprocessore multiprogrammato",
+   ["Monoprocessore monoprogrammato (un solo programma alla volta)", "Multiprocessore", "Sistema distribuito su più calcolatori"],
+   "Una sola CPU alterna rapidamente i processi grazie allo scheduling: sembra parallelo, ma in ogni istante ne esegue uno solo."],
+  ["La sincronizzazione tramite lo scambio di messaggi diretti è possibile in quali tipi di processi?", "Processi direttamente a conoscenza l'uno dell'altro",
+   ["Processi ignari", "Processi indirettamente a conoscenza l'uno dell'altro", "Qualsiasi processo"],
+   "Con send e receive il mittente indica il destinatario (PID): i processi devono conoscersi. Gli ignari competono solo per le risorse, gli indiretti usano la memoria condivisa."],
+  ["Quale caratteristica distingue la comunicazione a memoria condivisa da quella a scambio di messaggi?", "I dati sono accessibili direttamente, senza copia, ma gli accessi vanno sincronizzati",
+   ["Funziona solo tra processi su macchine diverse", "Richiede sempre le primitive send e receive", "Non richiede alcuna sincronizzazione tra i processi"],
+   "Memoria condivisa: dati lì, nessuna copia, ma bisogna sincronizzare gli accessi. Messaggi: la sincronizzazione è integrata (receive può bloccare) ma i dati si copiano."]
+];
+const QS = QDATA.map(([t, c, w, e]) => { const opts = shuffle([c, ...w]); return { t, e, opts, ok: opts.indexOf(c), ph: 0, v1: [0, 0, 0, 0], v2: [0, 0, 0, 0] }; });
+let qi = 0, recap = false;
+const L4 = ["A", "B", "C", "D"];
+const sum = a => a.reduce((x, y) => x + y, 0);
+const pct = (v, k) => sum(v) ? Math.round(100 * v[k] / sum(v)) : null;
+
+function qRender() {
+  const q = QS[qi];
+  $("#qk").textContent = "Domanda " + (qi + 1) + " di " + QS.length + " · " + ["primo voto", "dopo il confronto: secondo voto", "risposta"][q.ph];
+  $("#qdots").innerHTML = QS.map((x, i) => {
+    let c = "qdot" + (i === qi ? " cur" : "");
+    if (x.ph === 2 && sum(x.v2)) c += (pct(x.v2, x.ok) >= 60 ? " ok" : " ko");
+    return '<button class="' + c + '" data-i="' + i + '" aria-label="Domanda ' + (i + 1) + '">' + (i + 1) + "</button>";
+  }).join("");
+  $("#qtext").textContent = q.t;
+  const tot1 = sum(q.v1), tot2 = sum(q.v2);
+  $("#qopts").innerHTML = q.opts.map((o, k) => {
+    let bars = "";
+    if (q.ph >= 1 && tot1) bars += '<div class="barlbl">primo voto: ' + q.v1[k] + '</div><div class="bar"><i style="width:' + (100 * q.v1[k] / tot1) + '%"></i></div>';
+    if (q.ph === 2 && tot2) bars += '<div class="barlbl">dopo il confronto: ' + q.v2[k] + '</div><div class="bar b2"><i style="width:' + (100 * q.v2[k] / tot2) + '%"></i></div>';
+    let ctl = "";
+    if (q.ph < 2) { const v = q.ph === 0 ? q.v1 : q.v2;
+      ctl = '<div class="ctr"><button data-k="' + k + '" data-d="-1" aria-label="Togli un voto a ' + L4[k] + '">&minus;</button><b>' + v[k] + '</b><button data-k="' + k + '" data-d="1" aria-label="Aggiungi un voto a ' + L4[k] + '">+</button></div>'; }
+    return '<div class="opt' + (q.ph === 2 && k === q.ok ? " right" : "") + '"><div class="letter">' + L4[k] + '</div><div><div class="otext">' + esc(o) + '</div>' + (bars ? '<div class="bars">' + bars + "</div>" : "") + "</div><div>" + ctl + "</div></div>";
+  }).join("");
+  $("#qgo").textContent = ["Chiudi il voto e mostra i risultati", "Rivela la risposta", "Prossima domanda"][q.ph];
+  $("#qprev").disabled = qi === 0; $("#qnext").disabled = qi === QS.length - 1;
+  let info = "";
+  if (q.ph === 1) info = '<div class="msg">Confrontatevi a coppie: chi vuole cambiare idea? Poi rivotate qui sotto.</div>';
+  if (q.ph === 2) info = '<div class="expl"><b>Risposta ' + L4[q.ok] + ".</b> " + esc(q.e) + "</div>";
+  $("#qinfo").innerHTML = info;
+  $(".qwrap").style.display = recap ? "none" : "";
+  qRecapRender();
+}
+function qRecapRender() {
+  let el = $("#qrecapbox");
+  if (!el) { el = document.createElement("div"); el.id = "qrecapbox"; $("#p-quiz").appendChild(el); }
+  if (!recap) { el.innerHTML = ""; return; }
+  const rows = QS.map((q, i) => ({ q, i })).filter(r => sum(r.q.v1) || sum(r.q.v2));
+  const f = v => v === null ? "–" : v + "%";
+  el.innerHTML = '<div class="card stack"><div class="row" style="justify-content:space-between"><h2>Riepilogo voti</h2><button class="btn primary" id="qback">Torna alle domande</button></div>' +
+    (rows.length ? '<div class="scroll"><table class="recap"><thead><tr><th>N.</th><th>Domanda</th><th>Corretti al primo voto</th><th>Dopo il confronto</th></tr></thead><tbody>' +
+      rows.map(r => { const a = pct(r.q.v1, r.q.ok), b = pct(r.q.v2, r.q.ok);
+        return '<tr><td class="n">' + (r.i + 1) + "</td><td>" + esc(r.q.t) + "</td><td>" + f(a) + "</td><td>" + f(b) + "</td></tr>"; }).join("") + "</tbody></table></div>" : "<p>Nessun voto registrato finora.</p>") + "</div>";
+  $("#qback").onclick = () => { recap = false; qRender(); };
+}
+$("#qdots").addEventListener("click", e => { const b = e.target.closest("[data-i]"); if (b) { qi = +b.dataset.i; qRender(); } });
+$("#qopts").addEventListener("click", e => {
+  const b = e.target.closest("[data-k]"); if (!b) return; const q = QS[qi]; const v = q.ph === 0 ? q.v1 : q.v2;
+  v[+b.dataset.k] = Math.max(0, v[+b.dataset.k] + +b.dataset.d); qRender();
+});
+$("#qgo").addEventListener("click", () => {
+  const q = QS[qi];
+  if (q.ph === 0) { q.ph = 1; }
+  else if (q.ph === 1) { if (!sum(q.v2)) q.v2 = q.v1.slice(); q.ph = 2; }
+  else if (qi < QS.length - 1) qi++;
+  qRender();
+});
+$("#qprev").addEventListener("click", () => { if (qi > 0) { qi--; qRender(); } });
+$("#qnext").addEventListener("click", () => { if (qi < QS.length - 1) { qi++; qRender(); } });
+$("#qrecap").addEventListener("click", () => { recap = true; qRender(); });
+
+/* ---------- SMISTAMENTO ---------- */
+const DECKS = [
+  { n: "Processo o thread?", b: ["Processo", "Thread", "Entrambi"], c: [
+    ["Ha uno spazio di indirizzamento privato", 0, "Il processo pesante non condivide memoria con gli altri."],
+    ["Condivide codice, dati globali e heap con gli altri", 1, "I thread dello stesso processo vedono le stesse variabili globali."],
+    ["Ha un proprio stack privato", 2, "Anche ogni thread ha il suo stack e le sue variabili locali."],
+    ["Il cambio di contesto salva solo TCB e stack", 1, "Per questo il context switch tra thread è leggero."],
+    ["Crearlo richiede di copiare grandi aree di memoria", 0, "Il thread invece ha bisogno solo di un nuovo stack."],
+    ["Un suo errore può danneggiare tutta l'applicazione", 1, "I thread si influenzano a vicenda: meno sicurezza, più velocità."],
+    ["Ha program counter e registri propri", 2, "Servono a entrambi per riprendere dal punto in cui erano stati sospesi."],
+    ["Comunica con gli altri tramite pipe o socket", 0, "La condivisione tra processi va costruita esplicitamente."],
+    ["È descritto dal PCB", 0, "Il PCB è il descrittore del processo."],
+    ["È descritto dal TCB", 1, "Ogni thread ha il suo Thread Control Block."],
+    ["Può essere in stato Pronto, In esecuzione o In attesa", 2, "Entrambi attraversano questi stati durante la vita."]
+  ] },
+  { n: "Seriale o non seriale?", b: ["Seriale", "Non seriale"], c: [
+    ["La stampante", 0, "Un solo processo alla volta: gli altri si mettono in coda."],
+    ["Il masterizzatore", 0, "Accesso mutuamente esclusivo."],
+    ["Il lettore CD-ROM", 0, "Una sola lettura alla volta, in serie."],
+    ["Un file aperto in sola lettura", 1, "Molti processi leggono insieme senza problemi."],
+    ["Una tabella di sistema in sola lettura", 1, "Nessuna coda: la condivisione avviene in parallelo."],
+    ["Il codice di un programma condiviso", 1, "Si legge soltanto: nessun rischio di inconsistenza."]
+  ] },
+  { n: "Prerilasciabile?", b: ["Preemptive", "Non preemptive"], c: [
+    ["La CPU", 0, "Si toglie al processo con il context switching e la si restituisce dopo."],
+    ["Un'area di memoria (swapping)", 0, "Il suo contenuto si può salvare e ripristinare."],
+    ["La stampante durante la stampa", 1, "Interrompere rovina il documento."],
+    ["Il masterizzatore durante la scrittura", 1, "Interrompere compromette il disco."],
+    ["Una stampante 3D durante la realizzazione di un pezzo", 1, "L'operazione va completata o ricominciata da capo."]
+  ] },
+  { n: "Statica o dinamica?", b: ["Assegnazione statica", "Assegnazione dinamica"], c: [
+    ["Il descrittore di processo (PCB)", 0, "Assegnato alla creazione e tenuto fino alla terminazione."],
+    ["L'area di RAM data al processo alla nascita", 0, "Resta riservata anche quando non la usa."],
+    ["La stampante usata per un documento", 1, "Richiesta, ottenuta e rilasciata durante la vita del processo."],
+    ["Un file aperto durante l'esecuzione", 1, "Si apre quando serve e si chiude dopo."],
+    ["Un'interfaccia di rete richiesta più volte", 1, "Torna disponibile appena il processo non ne ha più bisogno."],
+    ["Il masterizzatore richiesto solo per una scrittura", 1, "Assegnazione dinamica: dura quanto l'operazione."]
+  ] },
+  { n: "Chi conosce chi?", b: ["Ignari", "Indirettamente a conoscenza", "Direttamente a conoscenza"], c: [
+    ["Due processi che vogliono stampare e si accodano", 0, "Competizione involontaria: l'arbitro è il sistema operativo."],
+    ["Si contendono CPU e file senza comunicare", 0, "Non si scambiano nulla di proposito ma si ostacolano."],
+    ["Un produttore scrive in un buffer, un consumatore legge", 1, "Cooperano tramite memoria condivisa senza conoscere i nomi."],
+    ["Si scambiano dati in un'area di memoria comune", 1, "Sanno che esistono altri processi, non il loro PID."],
+    ["Si inviano risultati con send e receive", 2, "Il mittente indica il destinatario: devono conoscersi."],
+    ["Ciascuno conosce il PID dell'altro", 2, "Comunicazione diretta con messaggi espliciti (IPC)."]
+  ] },
+  { n: "Dove sta in memoria?", b: ["Area codice", "Dati globali", "Stack", "Heap"], c: [
+    ["Le istruzioni del programma compilato", 0, "Non modificabili a runtime."],
+    ["Una variabile globale", 1, "Parte statica, allocata alla creazione."],
+    ["Una variabile statica", 1, "Rientra nell'area dati globali e statici."],
+    ["Le variabili locali di una funzione", 2, "Crescono a ogni chiamata, si riducono a ogni ritorno."],
+    ["L'indirizzo di ritorno di una chiamata", 2, "Stack: parametri, locali e indirizzo di ritorno."],
+    ["Il blocco ottenuto con malloc() o new", 3, "Memoria allocata dinamicamente a runtime dal programmatore."]
+  ] },
+  { n: "Cooperanti o in competizione?", b: ["Cooperanti", "In competizione"], c: [
+    ["Due giocatori di un videogame multiplayer che aggiornano lo stato del gioco", 0, "Si influenzano di proposito per un obiettivo comune."],
+    ["Più processi che vogliono stampare insieme", 1, "Non comunicano, ma si ostacolano: devono aspettare in coda."],
+    ["Il correttore ortografico che lavora mentre scrivi", 0, "Modularità: parti di un'applicazione che collaborano."],
+    ["Tutti i processi che vogliono la CPU", 1, "Lo scheduling è competizione: il sistema operativo fa da arbitro."],
+    ["Produttore e consumatore su dati condivisi", 0, "Cooperano e devono sincronizzarsi. Se mal progettati: deadlock."],
+    ["Un processo che non ottiene mai la risorsa che chiede", 1, "È la starvation, rischio tipico di chi compete."]
+  ] },
+  { n: "PCB o TCB?", b: ["Solo PCB", "Solo TCB", "Entrambi"], c: [
+    ["L'elenco dei file aperti", 0, "Il PCB tiene le risorse del processo: file, dispositivi, connessioni."],
+    ["Le statistiche di CPU consumata", 0, "Informazioni di accounting del processo."],
+    ["I puntatori alle aree di codice, dati e heap", 0, "Informazioni di memoria: appartengono al processo."],
+    ["Il PID", 0, "Identificatore unico del processo."],
+    ["Il puntatore al PCB del processo contenitore", 1, "Il TCB collega il thread al suo processo."],
+    ["L'ID del thread", 1, "Ogni thread ha il proprio identificatore."],
+    ["Il program counter", 2, "Serve a entrambi per sapere da dove riprendere."],
+    ["Il contenuto dei registri della CPU", 2, "Si salva a ogni cambio di contesto."],
+    ["Lo stato (pronto, in esecuzione, in attesa)", 2, "Anche il thread attraversa questi stati."]
+  ] },
+  { n: "Richiesta singola o multipla?", b: ["Richiesta singola", "Richiesta multipla"], c: [
+    ["Chiede una sola risorsa di una classe", 0, "È il caso più comune e semplice."],
+    ["Chiede stampante e file insieme", 1, "Più risorse, anche di classi diverse, nella stessa richiesta."],
+    ["Se manca anche una sola risorsa, il processo aspetta", 1, "Va soddisfatta integralmente: o tutte, o attesa."],
+    ["Chiede un blocco di RAM da 4 KB", 0, "Una generica istanza di una classe."]
+  ] },
+  { n: "Bloccante o no?", b: ["Bloccante", "Non bloccante"], c: [
+    ["Il processo si sospende e passa in stato di attesa", 0, "La richiesta viene accodata e riesaminata a ogni rilascio."],
+    ["Il processo continua a lavorare e riceve una notifica", 1, "Decide lui come procedere: più flessibile ma più complesso."],
+    ["Chi deve stampare si ferma ad aspettare la stampante", 0, "Comportamento più semplice e comune."],
+    ["Tenta una connessione di rete e intanto fa altro", 1, "Non si ferma ad aspettare."]
+  ] }
+];
+let di = 0, sd = null;
+function sInit(i) {
+  di = i; const d = DECKS[i];
+  sd = { pool: shuffle(d.c.map((c, k) => k)), placed: d.b.map(() => []), sel: null, wrong: new Set(), done: 0, msg: null };
+  sRender();
+}
+function sPlace(k) {
+  if (sd.sel === null) { sd.msg = ["Prima scegli una carta da smistare.", ""]; return sRender(); }
+  const d = DECKS[di], card = d.c[sd.sel];
+  if (card[1] === k) {
+    sd.placed[k].push(sd.sel); sd.pool = sd.pool.filter(x => x !== sd.sel); sd.done++;
+    sd.msg = ["Giusto. " + card[2], "good"]; sd.sel = null;
+  } else { sd.wrong.add(sd.sel); sd.msg = ["Non qui. " + card[2] + " Riprova.", "bad"]; }
+  sRender();
+}
+function sRender() {
+  const d = DECKS[di];
+  $("#decks").innerHTML = DECKS.map((x, i) => '<button class="deck" data-d="' + i + '" aria-pressed="' + (i === di) + '">' + esc(x.n) + "</button>").join("");
+  $("#spool").innerHTML = sd.pool.map(k => '<button class="chip' + (sd.sel === k ? " sel" : "") + '" draggable="true" data-c="' + k + '">' + esc(d.c[k][0]) + "</button>").join("") || '<b style="color:var(--good)">Tutto smistato.</b>';
+  $("#sbuckets").innerHTML = d.b.map((b, k) => '<div class="bucket" role="button" tabindex="0" data-b="' + k + '"><h3>' + esc(b) + "</h3>" +
+    sd.placed[k].map(c => '<span class="chip">' + esc(d.c[c][0]) + "</span>").join("") + "</div>").join("");
+  const first = sd.done - [...sd.wrong].filter(c => sd.placed.some(p => p.includes(c))).length;
+  $("#sscore").textContent = sd.done + "/" + d.c.length + (sd.done ? " · al primo colpo: " + first : "");
+  const m = $("#smsg");
+  if (sd.pool.length === 0) { m.className = "msg good"; m.textContent = "Fatto: " + first + " carte su " + d.c.length + " al primo colpo. Passa a un altro gruppo di carte."; }
+  else if (sd.msg) { m.className = "msg " + sd.msg[1]; m.textContent = sd.msg[0]; if (sd.msg[1] === "bad") { m.classList.remove("shake"); void m.offsetWidth; m.classList.add("shake"); } }
+  else { m.className = "msg"; m.textContent = "Tocca una carta, poi tocca la casella giusta. Con il mouse puoi anche trascinarla."; }
+}
+$("#decks").addEventListener("click", e => { const b = e.target.closest("[data-d]"); if (b) sInit(+b.dataset.d); });
+$("#spool").addEventListener("click", e => { const b = e.target.closest("[data-c]"); if (b) { sd.sel = sd.sel === +b.dataset.c ? null : +b.dataset.c; sd.msg = null; sRender(); } });
+$("#spool").addEventListener("dragstart", e => { const b = e.target.closest("[data-c]"); if (b) { sd.sel = +b.dataset.c; e.dataTransfer.setData("text/plain", b.dataset.c); } });
+$("#sbuckets").addEventListener("click", e => { const b = e.target.closest("[data-b]"); if (b) sPlace(+b.dataset.b); });
+$("#sbuckets").addEventListener("keydown", e => { const b = e.target.closest("[data-b]"); if (b && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); sPlace(+b.dataset.b); } });
+$("#sbuckets").addEventListener("dragover", e => { const b = e.target.closest("[data-b]"); if (b) { e.preventDefault(); b.classList.add("over"); } });
+$("#sbuckets").addEventListener("dragleave", e => { const b = e.target.closest("[data-b]"); if (b) b.classList.remove("over"); });
+$("#sbuckets").addEventListener("drop", e => { const b = e.target.closest("[data-b]"); if (b) { e.preventDefault(); sPlace(+b.dataset.b); } });
+
+/* ---------- STATI ---------- */
+const ST = {
+  new:     { n: "Nuovo",         s: "PID assegnato",      x: 10,  y: 60 },
+  ready:   { n: "Pronto",        s: "Ready List",         x: 230, y: 60 },
+  running: { n: "In esecuzione", s: "CPU",                x: 540, y: 60 },
+  term:    { n: "Terminato",     s: "risorse rilasciate", x: 850, y: 60 },
+  wait:    { n: "In attesa",     s: "Waiting List",       x: 385, y: 300 }
+};
+const SW = 140, SH = 110;
+const EV = [
+  { id: "admit", t: "Il processo viene creato e ammesso", from: "new", to: "ready", d: "Il processo riceve il PID ed entra nella Ready List." },
+  { id: "disp",  t: "Lo scheduler gli assegna la CPU", from: "ready", to: "running", d: "Lo scheduler sceglie il processo dalla Ready List." },
+  { id: "slice", t: "Il quanto di tempo finisce (interrupt software)", from: "running", to: "ready", d: "Il contesto viene salvato e il processo torna in coda tra i pronti." },
+  { id: "io",    t: "Chiede I/O o una risorsa occupata", from: "running", to: "wait", d: "Non può proseguire: finisce nella Waiting List e la CPU si libera." },
+  { id: "wake",  t: "Arriva l'evento atteso (interrupt hardware)", from: "wait", to: "ready", d: "Non va in esecuzione: torna Pronto e aspetta il suo turno." },
+  { id: "done",  t: "Esegue l'ultima istruzione", from: "running", to: "term", d: "Il ciclo di vita finisce e il sistema rilascia le risorse." }
+];
+const STORY = {
+  "wait|disp": "Un processo in attesa non va mai direttamente in esecuzione: quando l'evento arriva torna Pronto e aspetta il suo turno.",
+  "ready|io": "Per chiedere I/O il processo deve essere in esecuzione: solo chi ha la CPU esegue istruzioni.",
+  "ready|slice": "Il quanto di tempo scade solo a chi sta usando la CPU.",
+  "ready|done": "Per terminare deve prima eseguire le sue istruzioni, quindi avere la CPU.",
+  "wait|slice": "Un processo in attesa non usa la CPU: non può esaurire nessun quanto.",
+  "wait|io": "È già in attesa.", "wait|done": "Un processo sospeso non esegue istruzioni: non può finire.",
+  "running|wake": "L'evento atteso riguarda un processo sospeso: questo sta già usando la CPU.",
+  "ready|wake": "Non sta aspettando nessun evento: è già Pronto.",
+  "new|disp": "Prima deve essere ammesso nella Ready List: da Nuovo si va solo in Pronto.",
+  "running|disp": "È già in esecuzione.", "running|admit": "Esiste già: l'ammissione avviene una volta sola.",
+  "ready|admit": "Esiste già: l'ammissione avviene una volta sola.", "wait|admit": "Esiste già: l'ammissione avviene una volta sola."
+};
+const why = (state, ev) => state === "term" ? "Terminato: il ciclo di vita è finito e il processo non torna più indietro." : (STORY[state + "|" + ev.id] || ("Da «" + ST[state].n + "» questo evento non è previsto."));
+let sp = null, stSel = null, chal = null, stLast = null;
+const cpuBusy = () => Object.keys(sp).find(p => sp[p] === "running");
+const evOk = (e, p) => !!p && sp[p] === e.from && !(e.id === "disp" && cpuBusy());
+function stReset() { sp = { A: "running", B: "ready", C: "wait", D: "new" }; stSel = "B"; chal = null; stLast = null;
+  stMsg("Tocca un processo, poi tocca l'evento che gli succede. Le frecce blu sul diagramma mostrano cosa può fare.", ""); stRender(); }
+function stMsg(t, c) { const m = $("#stmsg"); m.className = "msg " + c; m.textContent = t; m.style.flex = "1 1 320px"; if (c === "bad") { m.classList.remove("shake"); void m.offsetWidth; m.classList.add("shake"); } }
+function stApply(ev) {
+  if (!stSel) return stMsg("Prima tocca il processo a cui succede l'evento.", "bad");
+  const cur = sp[stSel];
+  if (cur !== ev.from) return stMsg(stSel + " è «" + ST[cur].n + "»: " + why(cur, ev), "bad");
+  if (ev.id === "disp") { const busy = cpuBusy(); if (busy) return stMsg("La CPU è occupata da " + busy + ": in un monoprocessore un solo processo alla volta è in esecuzione. Fai prima uscire " + busy + " dalla CPU.", "bad"); }
+  sp[stSel] = ev.to; stLast = ev.id; stMsg(stSel + ": " + ST[ev.from].n + " → " + ST[ev.to].n + ". " + ev.d, "good"); stRender();
+}
+function stRender() {
+  const svg = $("#stsvg");
+  const defs = '<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L10,5 L0,10z" class="mk"/></marker>' +
+    '<marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="16" markerHeight="16" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L10,5 L0,10z" class="mk-a"/></marker></defs>';
+  const act = id => !chal && evOk(EV.find(e => e.id === id), stSel);
+  const line = (id, x1, y1, x2, y2) => '<path class="tr' + (act(id) ? " act" : "") + (!chal && stLast === id ? " last" : "") + '" d="M' + x1 + "," + y1 + " L" + x2 + "," + y2 + '" marker-end="url(#' + (act(id) ? "ar2" : "ar") + ')"/>';
+  const lbl = (id, x, y, t, a) => '<text class="trl' + (act(id) ? " act" : "") + '" x="' + x + '" y="' + y + '" text-anchor="' + (a || "middle") + '">' + t + "</text>";
+  let g = defs +
+    line("admit", 150, 115, 228, 115) + lbl("admit", 190, 98, "ammesso") +
+    line("disp", 370, 95, 538, 95) + lbl("disp", 454, 80, "CPU assegnata") +
+    line("slice", 540, 135, 372, 135) + lbl("slice", 456, 158, "quanto esaurito") +
+    line("done", 680, 115, 848, 115) + lbl("done", 764, 98, "fine") +
+    line("io", 615, 172, 525, 298) + lbl("io", 600, 252, "I/O o risorsa occupata", "start") +
+    line("wake", 415, 298, 325, 172) + lbl("wake", 300, 252, "evento / I/O completato", "end");
+  const ans = !!chal && !chal.fb;
+  Object.keys(ST).forEach(k => {
+    const s = ST[k];
+    g += '<g data-s="' + k + '"><rect class="sbox' + (ans ? " can" : "") + (!chal && sel0(k) ? " here" : "") + '" x="' + s.x + '" y="' + s.y + '" width="' + SW + '" height="' + SH + '" rx="16"/>' +
+      '<text class="sname" x="' + (s.x + SW / 2) + '" y="' + (s.y + 28) + '" text-anchor="middle">' + s.n + "</text>" +
+      '<text class="ssub" x="' + (s.x + SW / 2) + '" y="' + (s.y + 48) + '" text-anchor="middle">' + s.s + "</text>";
+    const ps = chal ? (chal.q && k === chal.q.from ? [chal.q.p] : []) : Object.keys(sp).filter(p => sp[p] === k);
+    ps.forEach((p, i) => { const cx = s.x + SW / 2 + (i - (ps.length - 1) / 2) * 50, cy = s.y + 78;
+      g += '<g class="tok' + (!chal && stSel === p ? " sel" : "") + '" data-p="' + p + '" tabindex="0" role="button" aria-label="Processo ' + p + '"><circle cx="' + cx + '" cy="' + cy + '" r="22"/><text x="' + cx + '" y="' + cy + '">' + p + "</text></g>"; });
+    g += "</g>";
+  });
+  svg.innerHTML = g;
+  $("#stmode").textContent = chal ? "Torna alla simulazione" : "Sfida: dove va il processo?";
+  const ctl = $("#stctl");
+  if (!chal) {
+    const cards = Object.keys(sp).map(p => '<button class="pcard' + (p === stSel ? " sel" : "") + '" data-pc="' + p + '"><span class="pl">' + p + '</span><span><b>' + ST[sp[p]].n + "</b><small>" + ST[sp[p]].s + "</small></span></button>").join("");
+    const evs = EV.map(e => { const ok = evOk(e, stSel);
+      return '<button class="btn ev ' + (ok ? "ok" : "no") + '" data-e="' + e.id + '"><span>' + esc(e.t) + "</span>" + (ok ? '<span class="dest">→ ' + ST[e.to].n + "</span>" : "") + "</button>"; }).join("");
+    ctl.innerHTML = '<div class="stgrid"><div class="stack"><span class="kicker">1 · Scegli il processo</span><div class="pcards">' + cards + "</div></div>" +
+      '<div class="stack"><span class="kicker">2 · Che cosa gli succede?' + (stSel ? " (processo " + stSel + ")" : "") + '</span><div class="evgrid">' + evs + '</div><span class="hint-s">Gli eventi pieni sono possibili adesso; quelli tratteggiati no, ma puoi provarli per vedere perché.</span></div></div>';
+  }
+  else if (chal.end) ctl.innerHTML = '<div class="card"><h2>Sfida finita: ' + chal.score + " su " + chal.list.length + '</h2><p>Premi «Torna alla simulazione» oppure rifai la sfida per cambiare l\'ordine delle domande.</p></div>';
+  else ctl.innerHTML = '<div class="card stack"><span class="kicker">Domanda ' + (chal.i + 1) + " di " + chal.list.length + '</span><div class="qtext">Il processo ' + chal.q.p + " è in «" + ST[chal.q.from].n + "». Succede: " + esc(chal.q.ev.t) + '. Che cosa gli capita?</div>' +
+    '<div class="row"><span>Tocca lo stato di arrivo oppure</span><button class="btn" data-imp="1"' + (chal.fb ? " disabled" : "") + '>Non è possibile</button>' + (chal.fb ? '<button class="btn primary" data-nx="1" style="margin-left:auto">' + (chal.i + 1 < chal.list.length ? "Avanti" : "Vedi il risultato") + "</button>" : "") + "</div></div>";
+}
+function sel0(k) { return !!stSel && sp[stSel] === k; }
+function chStart() {
+  const states = Object.keys(ST), imp = [];
+  states.forEach(s => EV.forEach(e => { if (e.from !== s) imp.push({ s, ev: e }); }));
+  const valid = EV.map(e => ({ s: e.from, ev: e, to: e.to }));
+  const bad = shuffle(imp.filter(x => x.s !== "term")).slice(0, 3).concat(shuffle(imp.filter(x => x.s === "term")).slice(0, 1)).map(x => ({ s: x.s, ev: x.ev, to: null }));
+  const list = shuffle(valid.concat(bad)).map(x => ({ p: "ABC"[Math.floor(Math.random() * 3)], from: x.s, ev: x.ev, to: x.to }));
+  chal = { list, i: 0, score: 0, q: list[0], fb: false, end: false };
+  stMsg("Rispondete insieme: toccate lo stato giusto sul diagramma.", ""); stRender();
+}
+function chAnswer(ans) {
+  if (!chal || chal.fb) return;
+  const q = chal.q, ok = ans === (q.to || "imp");
+  if (ok) chal.score++;
+  chal.fb = true;
+  const right = q.to ? "Esatto: " + ST[q.from].n + " → " + ST[q.to].n + ". " + q.ev.d : "Esatto: non è possibile. " + why(q.from, q.ev);
+  const wrong = q.to ? "No. La transizione giusta è " + ST[q.from].n + " → " + ST[q.to].n + ". " + q.ev.d : "No: questa transizione non esiste. " + why(q.from, q.ev);
+  stMsg(ok ? right : wrong, ok ? "good" : "bad"); stRender();
+}
+$("#stmode").addEventListener("click", () => { if (chal) { chal = null; stMsg("Tocca un processo, poi tocca l'evento che gli succede.", ""); stRender(); } else chStart(); });
+$("#streset").addEventListener("click", stReset);
+$("#stsvg").addEventListener("click", e => {
+  const t = e.target.closest(".tok"), s = e.target.closest("[data-s]");
+  if (chal) { if (s) chAnswer(s.dataset.s); return; }
+  if (t) { stSel = t.dataset.p; stRender(); }
+});
+$("#stsvg").addEventListener("keydown", e => { const t = e.target.closest(".tok"); if (t && !chal && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); stSel = t.dataset.p; stRender(); } });
+$("#stctl").addEventListener("click", e => {
+  const pc = e.target.closest("[data-pc]"); if (pc) { stSel = pc.dataset.pc; stRender(); return; }
+  const b = e.target.closest("button"); if (!b) return;
+  if (b.dataset.e) stApply(EV.find(x => x.id === b.dataset.e));
+  else if (b.dataset.imp) chAnswer("imp");
+  else if (b.dataset.nx) { if (chal.i + 1 < chal.list.length) { chal.i++; chal.q = chal.list[chal.i]; chal.fb = false; stMsg("", ""); } else { chal.end = true; chal.q = null; stMsg("", ""); } stRender(); }
+});
+
+/* ---------- HOLT ---------- */
+const SC = [
+  { n: "Due processi", d: "Il caso più semplice di stallo", P: ["A", "B"], R: [["X", 1], ["Y", 1]],
+    seq: [["A", "req", "X"], ["B", "req", "Y"], ["A", "req", "Y"], ["B", "req", "X"]] },
+  { n: "Tre processi", d: "Tre processi e tre risorse seriali", P: ["A", "C", "B"], R: [["Q", 1], ["S", 1], ["R", 1]],
+    seq: [["A", "req", "Q"], ["C", "req", "S"], ["C", "req", "Q"], ["B", "req", "R"], ["B", "req", "S"], ["A", "rel", "Q"], ["A", "req", "S"], ["C", "req", "R"]] },
+  { n: "Cinque processi", d: "Cinque processi e cinque risorse seriali", P: ["B", "A", "E", "C", "D"], R: [["R", 1], ["S", 1], ["T", 1], ["U", 1], ["V", 1]],
+    seq: [["B", "req", "R"], ["A", "req", "R"], ["A", "req", "S"], ["C", "req", "T"], ["A", "req", "T"], ["E", "req", "U"], ["D", "req", "V"], ["C", "req", "U"], ["E", "req", "R"], ["D", "req", "T"]] },
+  { n: "Risorsa con più istanze", d: "La risorsa M ha due istanze", P: ["B", "A", "C"], R: [["M", 2], ["N", 1]],
+    seq: [["A", "req", "M"], ["B", "req", "M"], ["C", "req", "M"], ["C", "req", "N"], ["A", "req", "N"]] }
+];
+let hi = 0, hs = null;
+const hRes = r => SC[hi].R.find(x => x[0] === r);
+function hInit(i) {
+  hi = i; const sc = SC[i];
+  hs = { step: 0, H: {}, W: {}, pres: sc.P.slice(), hist: [], fresh: new Set(), msg: "Applica le richieste una alla volta e disegna il grafo sul quaderno. Poi riducilo." };
+  sc.R.forEach(([r]) => { hs.H[r] = []; hs.W[r] = []; });
+  hRender();
+}
+function hGrant(r) { const out = []; while (hs.H[r].length < hRes(r)[1] && hs.W[r].length) { const p = hs.W[r].shift(); hs.H[r].push(p); out.push(p); hs.fresh.add(p + r); } return out; }
+function hReq(p, r) {
+  if (hs.H[r].length < hRes(r)[1]) { hs.H[r].push(p); hs.fresh.add(p + r); return p + " richiede " + r + ": è libera, quindi la ottiene."; }
+  hs.W[r].push(p); hs.fresh.add(p + r + "?");
+  return p + " richiede " + r + ": " + (hRes(r)[1] > 1 ? "tutte le istanze sono assegnate" : "è occupata da " + hs.H[r].join(", ")) + ". " + p + " resta in attesa: freccia tratteggiata verso " + r + ".";
+}
+function hRel(p, r) { hs.H[r] = hs.H[r].filter(x => x !== p); const g = hGrant(r); return p + " rilascia " + r + (g.length ? ". " + g.join(", ") + " la stava aspettando e la ottiene." : "."); }
+const hSnap = () => hs.hist.push(JSON.stringify({ step: hs.step, H: hs.H, W: hs.W, pres: hs.pres, msg: hs.msg }));
+function hStep() {
+  const sc = SC[hi]; if (hs.step >= sc.seq.length) return;
+  hSnap(); hs.fresh = new Set(); const [p, a, r] = sc.seq[hs.step++];
+  hs.msg = a === "req" ? hReq(p, r) : hRel(p, r);
+  hRender();
+}
+const hPend = p => Object.keys(hs.W).filter(r => hs.W[r].includes(p));
+function hReduce(p) {
+  const pend = hPend(p);
+  if (hs.step < SC[hi].seq.length) { hs.msg = "Prima applica tutta la sequenza di richieste."; return hRender("bad"); }
+  if (pend.length) {
+    hs.msg = p + " non è riducibile: aspetta " + pend.map(r => r + " (assegnata a " + hs.H[r].join(", ") + ")").join(" e ") + ". Ha ancora archi uscenti.";
+    return hRender("bad", p);
+  }
+  hSnap(); hs.fresh = new Set();
+  const freed = [], got = [];
+  Object.keys(hs.H).forEach(r => { if (hs.H[r].includes(p)) { hs.H[r] = hs.H[r].filter(x => x !== p); freed.push(r); hGrant(r).forEach(q => got.push(q + " ottiene " + r)); } });
+  hs.pres = hs.pres.filter(x => x !== p);
+  hs.msg = p + " ha solo archi entranti: può terminare. Si elimina" + (freed.length ? " e libera " + freed.join(", ") : "") + (got.length ? ": " + got.join(", ") + "." : ".");
+  hRender("good");
+}
+function hRender(tone, shakeP) {
+  const sc = SC[hi], W = 800, YR = 100, YP = 305;
+  const pos = {};
+  sc.P.forEach((p, i) => pos[p] = { x: W * (i + 1) / (sc.P.length + 1), y: YP, r: 32, hw: 32, hh: 32, c: true });
+  sc.R.forEach(([r, m], i) => { const hw = m > 1 ? 24 + m * 24 : 32; pos[r] = { x: W * (i + 1) / (sc.R.length + 1), y: YR, hw, hh: m > 1 ? 36 : 32, c: false }; });
+  const clip = (a, b) => { const dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy);
+    let t; if (a.c) t = (a.r + 4) / len; else t = Math.min(a.hw / Math.abs(dx || 1e-9), a.hh / Math.abs(dy || 1e-9)) + 4 / len; return { x: a.x + dx * t, y: a.y + dy * t }; };
+  let g = '<defs><marker id="mg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="16" markerHeight="16" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L10,5 L0,10z" class="mk-g"/></marker>' +
+    '<marker id="mp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="16" markerHeight="16" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L10,5 L0,10z" class="mk-p"/></marker></defs>';
+  const edge = (from, to, cls, mk, key) => { const a = pos[from], b = pos[to]; const s = clip(a, b), e = clip(b, a);
+    return '<path class="' + cls + (hs.fresh.has(key) ? " new" : "") + '" d="M' + s.x.toFixed(1) + "," + s.y.toFixed(1) + " L" + e.x.toFixed(1) + "," + e.y.toFixed(1) + '" marker-end="url(#' + mk + ')"/>'; };
+  Object.keys(hs.H).forEach(r => { hs.H[r].forEach(p => { if (pos[p]) g += edge(r, p, "eg", "mg", p + r); }); });
+  Object.keys(hs.W).forEach(r => { hs.W[r].forEach(p => { if (pos[p]) g += edge(p, r, "ep", "mp", p + r + "?"); }); });
+  sc.R.forEach(([r, m]) => { const q = pos[r];
+    g += '<g class="rn"><rect x="' + (q.x - q.hw) + '" y="' + (q.y - q.hh) + '" width="' + 2 * q.hw + '" height="' + 2 * q.hh + '" rx="6"/>';
+    if (m > 1) { g += '<text x="' + q.x + '" y="' + (q.y - 12) + '">' + r + "</text>";
+      for (let k = 0; k < m; k++) g += '<circle class="' + (k < hs.H[r].length ? "full" : "free") + '" cx="' + (q.x + (k - (m - 1) / 2) * 30) + '" cy="' + (q.y + 16) + '" r="9"/>'; }
+    else g += '<text x="' + q.x + '" y="' + q.y + '">' + r + "</text>";
+    g += "</g>"; });
+  const red = hs.pres.filter(p => !hPend(p).length);
+  sc.P.forEach(p => { if (!hs.pres.includes(p)) return; const q = pos[p];
+    g += '<g class="pn' + (hs.hint === p ? " hint" : "") + '" data-p="' + p + '" tabindex="0" role="button" aria-label="Processo ' + p + '"><circle cx="' + q.x + '" cy="' + q.y + '" r="32"/><text x="' + q.x + '" y="' + q.y + '">' + p + "</text></g>"; });
+  $("#hsvg").innerHTML = g;
+  $("#hscen").innerHTML = SC.map((s, i) => '<button data-s="' + i + '" aria-pressed="' + (i === hi) + '" title="' + esc(s.d) + '">' + esc(s.n) + "</button>").join("");
+  $("#hseq").innerHTML = sc.seq.map((s, i) => '<li class="' + (i < hs.step ? "done" : i === hs.step ? "cur" : "") + '"><span>' + (i < hs.step ? "✓" : "") + "</span>" + s[0] + (s[1] === "req" ? " richiede " : " rilascia ") + s[2] + "</li>").join("");
+  $("#hnext").disabled = hs.step >= sc.seq.length; $("#hall").disabled = hs.step >= sc.seq.length;
+  $("#hundo").disabled = !hs.hist.length;
+  let m = hs.msg, cls = tone || "";
+  if (hs.step >= sc.seq.length && !tone) {
+    if (!hs.pres.length) { cls = "good"; }
+    else if (!red.length) { cls = "bad"; m += " Nessun processo si può ridurre."; }
+    else m += " Processi riducibili ora: " + red.join(", ") + ".";
+  }
+  if (!hs.pres.length) { cls = "good"; m += " Grafo completamente riducibile: non c'è stallo."; }
+  else if (hs.step >= sc.seq.length && !red.length) { cls = "bad"; if (!/Nessun processo si può/.test(m)) m += " Nessun processo si può ridurre."; m += " Stallo: restano bloccati " + hs.pres.join(", ") + "."; }
+  const box = $("#hmsg"); box.className = "msg " + cls; box.textContent = m;
+  if (tone === "bad") { box.classList.remove("shake"); void box.offsetWidth; box.classList.add("shake"); }
+  if (shakeP) { const n = $('#hsvg .pn[data-p="' + shakeP + '"]'); if (n) { n.classList.remove("shake"); void n.getBoundingClientRect(); n.classList.add("shake"); } }
+  hs.hint = null;
+}
+$("#hscen").addEventListener("click", e => { const b = e.target.closest("[data-s]"); if (b) hInit(+b.dataset.s); });
+$("#hnext").addEventListener("click", hStep);
+$("#hall").addEventListener("click", () => { while (hs.step < SC[hi].seq.length) hStep(); });
+$("#hreset").addEventListener("click", () => hInit(hi));
+$("#hundo").addEventListener("click", () => { const s = hs.hist.pop(); if (!s) return; const o = JSON.parse(s); hs.step = o.step; hs.H = o.H; hs.W = o.W; hs.pres = o.pres; hs.msg = o.msg; hs.fresh = new Set(); hRender(); });
+$("#hhint").addEventListener("click", () => {
+  if (hs.step < SC[hi].seq.length) { hs.msg = "Prima applica tutta la sequenza di richieste."; return hRender(); }
+  const red = hs.pres.filter(p => !hPend(p).length);
+  if (!red.length) { hs.msg = hs.pres.length ? "Nessun processo ha solo archi entranti." : "Hai già ridotto tutto."; return hRender(); }
+  hs.msg = "Guarda il processo che pulsa: non ha archi uscenti."; hRender(); hs.hint = red[0];
+  const n = $('#hsvg .pn[data-p="' + red[0] + '"]'); if (n) n.classList.add("hint");
+});
+$("#hsvg").addEventListener("click", e => { const n = e.target.closest(".pn"); if (n) hReduce(n.dataset.p); });
+$("#hsvg").addEventListener("keydown", e => { const n = e.target.closest(".pn"); if (n && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); hReduce(n.dataset.p); } });
+
+/* ---------- PRECEDENZE ---------- */
+const SCP = [
+  { n: "Esempio base", code: [["a", "10", []], ["b", "a + 1", ["a"]], ["c", "a + 2", ["a"]], ["d", "a + 3", ["a"]], ["e", "b + c + d", ["b", "c", "d"]]] },
+  { n: "Esercizio 1", code: [["A", "10", []], ["B", "A + 1", ["A"]], ["D", "A + 3", ["A"]], ["G", "20 + D", ["D"]], ["N", "A + 3", ["A"]],
+      ["E", "B + D", ["B", "D"]], ["F", "G + E + N", ["G", "E", "N"]], ["H", "2 + N", ["N"]], ["L", "G + F + H", ["G", "F", "H"]], ["M", "100 + L", ["L"]]] },
+  { n: "Esercizio 2", code: [["A", "10", []], ["B", "20", []], ["G", "2 + B", ["B"]], ["D", "A + 3", ["A"]], ["N", "A + 3", ["A"]],
+      ["E", "A + B", ["A", "B"]], ["F", "D + N", ["D", "N"]], ["H", "2 + N", ["N"]], ["L", "G + F + H", ["G", "F", "H"]], ["M", "100 + L", ["L"]]] }
+];
+let pi = 0, pg = null;
+function pBuild(i) {
+  pi = i; const code = SCP[i].code, names = code.map(c => c[0]);
+  const all = new Set(); code.forEach(([n, , rd]) => rd.forEach(r => all.add(r + ">" + n)));
+  const succ = {}; names.forEach(n => succ[n] = []); all.forEach(e => { const [u, v] = e.split(">"); succ[u].push(v); });
+  const reach = (u, v, skip) => { const st = [u], seen = new Set(); while (st.length) { const x = st.pop(); for (const y of succ[x]) { if (x === u && y === v && skip) continue; if (y === v) return true; if (!seen.has(y)) { seen.add(y); st.push(y); } } } return false; };
+  const red = new Set(), imp = new Set();
+  all.forEach(e => { const [u, v] = e.split(">"); (reach(u, v, true) ? imp : red).add(e); });
+  const lvl = {}; code.forEach(([n, , rd]) => { lvl[n] = rd.length ? 1 + Math.max(...rd.map(r => lvl[r])) : 0; });
+  const L = Math.max(...Object.values(lvl)) + 1, pos = {};
+  for (let l = 0; l < L; l++) { const row = names.filter(n => lvl[n] === l); row.forEach((n, k) => { pos[n] = { x: 800 * (l + 1) / (L + 1), y: 420 * (k + 1) / (row.length + 1) }; }); }
+  const pre = {}; names.forEach(n => pre[n] = code.find(c => c[0] === n)[2]);
+  pg = { names, all, red, imp, lvl, L, pos, pre, mine: new Set(), sel: null, show: false, hist: [], msg: "Per ogni istruzione chiediti: quali valori le servono? Tocca chi li produce e poi chi li usa: nasce una freccia." };
+  pRender();
+}
+function pClick(n) {
+  if (pg.show) return;
+  if (!pg.sel) { pg.sel = n; pg.msg = "Hai scelto " + n + ". Ora tocca l'istruzione che usa il valore di " + n + "."; return pRender(); }
+  const u = pg.sel, v = n; pg.sel = null;
+  if (u === v) { pg.msg = "Scelta annullata."; return pRender(); }
+  const e = u + ">" + v;
+  if (pg.mine.has(e)) { pg.msg = "Questa freccia c'è già."; return pRender("bad"); }
+  if (pg.red.has(e)) { pg.hist.push(e); pg.mine.add(e); pg.msg = "Giusto: " + v + " usa il valore calcolato da " + u + ", quindi deve aspettare che " + u + " finisca."; return pRender("good"); }
+  if (pg.imp.has(e)) { pg.msg = v + " dipende da " + u + ", ma è una precedenza implicita: " + u + " finisce comunque prima per altre strade. Nel grafo con il massimo parallelismo quella freccia non si disegna."; return pRender("bad"); }
+  if (pg.all.has(v + ">" + u) || pg.red.has(v + ">" + u)) { pg.msg = "Verso sbagliato: la freccia parte da chi produce il valore (" + v + ") e arriva a chi lo usa (" + u + ")."; return pRender("bad"); }
+  pg.msg = v + " non usa nessun valore calcolato da " + u + ": le due istruzioni sono indipendenti e possono andare in parallelo."; pRender("bad");
+}
+function pSchedule(cpus) {
+  const done = new Set(), steps = [];
+  while (done.size < pg.names.length) {
+    const ready = pg.names.filter(n => !done.has(n) && pg.pre[n].every(r => done.has(r)));
+    const run = cpus === Infinity ? ready : ready.slice(0, cpus);
+    steps.push(run); run.forEach(r => done.add(r));
+  }
+  return steps;
+}
+function pOrders() {
+  const n = pg.names.length, idx = {}; pg.names.forEach((x, i) => idx[x] = i);
+  const need = pg.names.map(x => pg.pre[x].reduce((m, r) => m | (1 << idx[r]), 0));
+  const dp = new Array(1 << n).fill(0); dp[0] = 1;
+  for (let m = 0; m < (1 << n); m++) { if (!dp[m]) continue; for (let i = 0; i < n; i++) if (!(m & (1 << i)) && (need[i] & m) === need[i]) dp[m | (1 << i)] += dp[m]; }
+  return dp[(1 << n) - 1];
+}
+function pRender(tone) {
+  const W = 800, g0 = pg;
+  const clip = (a, b, r) => { const dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy); const t = (r + 4) / len; return { x: a.x + dx * t, y: a.y + dy * t }; };
+  let g = '<defs><marker id="pm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="16" markerHeight="16" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L10,5 L0,10z" class="mk-g"/></marker>' +
+    '<marker id="pm2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="16" markerHeight="16" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L10,5 L0,10z" class="mk"/></marker></defs>';
+  const edge = (e, cls, mk) => { const [u, v] = e.split(">"), a = g0.pos[u], b = g0.pos[v], s = clip(a, b, 26), t = clip(b, a, 26);
+    return '<path class="' + cls + '" d="M' + s.x.toFixed(1) + "," + s.y.toFixed(1) + " L" + t.x.toFixed(1) + "," + t.y.toFixed(1) + '" marker-end="url(#' + mk + ')"/>'; };
+  const shown = g0.show ? g0.red : g0.mine;
+  shown.forEach(e => g += edge(e, "eg", "pm"));
+  if (g0.show) g0.imp.forEach(e => g += edge(e, "ei", "pm2"));
+  g0.names.forEach(n => { const q = g0.pos[n];
+    g += '<g class="pn' + (g0.sel === n ? " selp" : "") + '" data-n="' + n + '" tabindex="0" role="button" aria-label="Istruzione ' + n + '"><circle cx="' + q.x.toFixed(1) + '" cy="' + q.y.toFixed(1) + '" r="26"/><text x="' + q.x.toFixed(1) + '" y="' + q.y.toFixed(1) + '">' + n + "</text></g>"; });
+  $("#psvg").innerHTML = g;
+  $("#pscen").innerHTML = SCP.map((s, i) => '<button data-s="' + i + '" aria-pressed="' + (i === pi) + '">' + esc(s.n) + "</button>").join("");
+  $("#pcode").innerHTML = SCP[pi].code.map(([n, ex]) => '<li class="' + (g0.sel === n ? "cur" : "") + '">' + n + " ← " + esc(ex) + "</li>").join("");
+  const total = g0.red.size, found = g0.mine.size;
+  const done = !g0.show && found === total;
+  const box = $("#pmsg"); box.className = "msg " + (done ? "good" : tone || "");
+  box.textContent = (done ? "Grafo completo: tutte le " + total + " frecce necessarie. " : "") + g0.msg + (g0.show ? " Le frecce grigie tratteggiate sono precedenze implicite: non si disegnano." : "") + (!done && !g0.show ? " Frecce trovate: " + found + " su " + total + "." : "");
+  $("#pundo").disabled = !g0.hist.length || g0.show;
+  $("#pshow").textContent = g0.show ? "Nascondi la soluzione" : "Mostra la soluzione";
+  const ord = pOrders();
+  $("#pinfo").innerHTML = "Eseguendo le istruzioni una alla volta, gli ordini validi sono <b>" + ord.toLocaleString("it-IT") + "</b>: il grafo impone un ordine solo parziale. Con un unico percorso (ordine totale) ce ne sarebbe uno solo.";
+}
+function pRun(c) {
+  const st = pSchedule(c), el = $("#prun");
+  el.innerHTML = '<div class="msg good">' + (c === Infinity ? "Con tutti i processori che servono" : c === 1 ? "Con 1 processore" : "Con " + c + " processori") + ": " + st.length + " unità di tempo.</div>" +
+    '<ol class="seq">' + st.map((s, i) => "<li><span>t" + (i + 1) + "</span>" + s.join(" + ") + "</li>").join("") + "</ol>";
+}
+$("#pscen").addEventListener("click", e => { const b = e.target.closest("[data-s]"); if (b) { pBuild(+b.dataset.s); $("#prun").innerHTML = ""; } });
+$("#psvg").addEventListener("click", e => { const n = e.target.closest(".pn"); if (n) pClick(n.dataset.n); });
+$("#psvg").addEventListener("keydown", e => { const n = e.target.closest(".pn"); if (n && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); pClick(n.dataset.n); } });
+$("#pshow").addEventListener("click", () => { pg.show = !pg.show; pg.sel = null; pg.msg = pg.show ? "Ecco il grafo con il massimo parallelismo." : "Prova a ricostruirlo."; pRender(); });
+$("#pundo").addEventListener("click", () => { const e = pg.hist.pop(); if (e) { pg.mine.delete(e); pg.msg = "Ultima freccia tolta."; pRender(); } });
+$("#preset").addEventListener("click", () => { pBuild(pi); $("#prun").innerHTML = ""; });
+$("#pcpu").addEventListener("click", e => { const b = e.target.closest("[data-c]"); if (b) pRun(b.dataset.c === "inf" ? Infinity : +b.dataset.c); });
+
+/* ---------- Avvio ---------- */
+qRender(); sInit(0); stReset(); hInit(0); pBuild(0);
+showTab(location.hash.slice(1));
+</script>
+
+</body>
+</html>

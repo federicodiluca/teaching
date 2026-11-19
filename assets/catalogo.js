@@ -3,6 +3,7 @@
 
 window.CORSI = [
   { id: "informatica-1", nome: "Informatica", anno: "1° anno", colore: "#2f5bea" },
+  { id: "tpsit-4", nome: "TPSIT", anno: "4° anno", colore: "#7c3aed" },
   { id: "gpoi", nome: "GPOI", anno: "5° anno", colore: "#0f766e" }
 ];
 
@@ -10,6 +11,7 @@ window.UNITA = {
   "informatica-1/computer-e-codici": "Computer e codici",
   "informatica-1/sistemi-operativi": "Sistemi operativi",
   "informatica-1/reti": "Reti di calcolatori",
+  "tpsit-4/processi-sequenziali-e-paralleli": "Processi sequenziali e paralleli",
   "gpoi/aziende-e-mercati": "Aziende e mercati",
   "gpoi/organizzazione-d-impresa": "Organizzazione d'impresa"
 };
@@ -46,6 +48,9 @@ window.CATALOGO = [
   { percorso: "informatica-1/reti/web-ricerca-e-sicurezza", titolo: "Il Web, la ricerca e i rischi",
     descrizione: "Protocolli, tag HTML, motori di ricerca, minacce della rete e come difendersi.",
     modalita: "da soli" },
+  { percorso: "tpsit-4/processi-sequenziali-e-paralleli/processi-e-thread", titolo: "Processi e thread",
+    descrizione: "Quiz a votazione, smistamento, stati dei processi, grafo delle precedenze e grafo di Holt: pensato per la LIM.",
+    modalita: "alla lavagna" },
   { percorso: "gpoi/aziende-e-mercati/bep", titolo: "Il BEP vivo",
     descrizione: "Ripasso del Break Even Point su un caso reale: si muovono costi e prezzi e si vede il punto di pareggio spostarsi.",
     modalita: "alla lavagna" },
