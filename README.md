@@ -15,7 +15,7 @@ senza installare nulla, senza account e senza raccogliere dati degli studenti.
 | | Reti di calcolatori | La rete e i suoi pezzi · Indirizzi IP, DNS e URL · Il Web, la ricerca e i rischi |
 | TPSIT, 4° anno | Processi sequenziali e paralleli | Processi e thread |
 | GPOI, 5° anno | Aziende e mercati | Il BEP vivo |
-| | Organizzazione d'impresa | Che struttura è? · Organizzazione e processi · Sistema informativo ed ERP |
+| | Organizzazione d'impresa | Che struttura è? |
 
 ## Come è fatto
 
