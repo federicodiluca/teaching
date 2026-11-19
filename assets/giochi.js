@@ -7,7 +7,8 @@
    Contratto con la pagina:
    - schede: <section id="..." data-t="etichetta"> dentro <main>; data-g="gruppo" per le sottoschede.
      La nav (#nav) si costruisce da sola; go(id) cambia scheda; la scheda "res" mostra il risultato.
-   - nomi in #n1 e #n2 (#n2 assente se si gioca da soli); data-solo="1" sul body = da soli.
+   - nomi in #n1 e #n2 (#n2 assente se si gioca da soli); data-solo="1" sul body = da soli,
+     ma ?solo o ?coppie nell'indirizzo hanno la precedenza.
    - risultato in #who, #restab, #rmsg.
    - punteggi in ST: ST.g["gioco"] = {ok, tot}, ST.m["missione"] = {pts, t, count}.
    I progressi si salvano nel browser (localStorage) e si ripristinano qui, prima che la pagina monti i giochi. */
@@ -28,7 +29,25 @@ const P=h=>`<pre>${h}</pre>`;
 /* ---------- schede e navigazione ----------
    Prima riga: i gruppi (data-g, oppure la scheda stessa); seconda riga: le sottoschede del gruppo aperto. */
 const SECS=[...document.querySelectorAll('main section')];SECS[0].classList.add('on');
-const SOLO=!!document.querySelector('[data-solo]');
+/* ---------- da soli o a coppie ----------
+   La pagina sceglie con data-solo sul body; un link con ?solo o ?coppie (es. .../numeri-e-basi/?solo
+   per i compiti a casa) cambia modalità: si adattano i campi dei nomi e le frasi sui turni.
+   Gira prima del salvataggio, che così trova già i campi giusti. */
+const MODO_PAGINA=document.body.hasAttribute('data-solo')?'solo':'coppie';
+const SOLO=(function(){
+ const q=new URLSearchParams(location.search),solo=q.has('solo')?true:q.has('coppie')?false:MODO_PAGINA==='solo';
+ if(solo===(MODO_PAGINA==='solo'))return solo;
+ if(solo)document.body.setAttribute('data-solo','1');else document.body.removeAttribute('data-solo');
+ const n1=$('#n1'),l1=n1&&n1.closest('label');
+ const etichetta=t=>{const n=l1&&[...l1.childNodes].find(x=>x.nodeType===3);if(n)n.nodeValue=t};
+ if(solo){const n2=$('#n2');if(n2)(n2.closest('label')||n2).remove();etichetta('Il vostro nome: ');if(n1)n1.placeholder='Scrivete qui il nome'}
+ else if(l1){etichetta('Primo nome: ');n1.placeholder='Nome';l1.insertAdjacentHTML('afterend','<label>Secondo nome: <input type="text" id="n2" placeholder="Nome"></label>')}
+ const COPPIA='Si gioca in coppia: ad ogni esercizio tocca a uno dei due scrivere, mentre l\'altro controlla e discute.',
+  SOLI='Si gioca da soli, quando e quanto volete.';
+ const frasi=solo?[[COPPIA,SOLI],[' Dopo ogni esercizio il turno passa all\'altro giocatore.',''],['Dieci domande miste, a turno.','Dieci domande miste.'],[' Giocate a turno.','']]:[[SOLI,COPPIA]];
+ const w=document.createTreeWalker(document.querySelector('main'),NodeFilter.SHOW_TEXT);
+ for(let n;(n=w.nextNode());)frasi.forEach(([a,b])=>{if(n.nodeValue.includes(a))n.nodeValue=n.nodeValue.split(a).join(b)});
+ return solo})();
 const GK=s=>s.dataset.g||s.id,GROUPS=[...new Set(SECS.map(GK))];
 $('#nav').innerHTML=`<div class="nv" id="nv1"></div><div class="nv" id="nv2"></div>`;
 function go(id){const cur=SECS.find(x=>x.id===id),g=GK(cur);SECS.forEach(x=>x.classList.toggle('on',x.id===id));

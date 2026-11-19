@@ -44,6 +44,11 @@ senza installare nulla, senza account e senza raccogliere dati degli studenti.
   Non esce nulla dal browser. Nella scheda Risultato, **Ricomincia da capo** cancella il salvataggio e riparte
   pulito: da usare a fine ora sui PC di laboratorio condivisi. In navigazione privata o con i dati bloccati
   la pagina funziona lo stesso, senza salvare.
+- **Da soli o a coppie, dal link** (attività `tg-act`): ogni pagina ha la sua modalità (`data-solo`), ma
+  `?solo` o `?coppie` nell'indirizzo la cambiano. Per esempio `informatica-1/computer-e-codici/numeri-e-basi/?solo`
+  per i compiti a casa, o `.../palestra-dei-numeri/?coppie` in classe. Cambiano i campi dei nomi, le frasi sui
+  turni, i turni nei giochi e l'intestazione del risultato. Nel QR ci sono i pulsanti **Da soli** e **A coppie**:
+  il codice cambia subito e porta con sé la modalità scelta (e la scheda aperta).
 
 ```
 index.html                 home con l'elenco di tutte le attività
@@ -77,6 +82,7 @@ nella scheda **Actions** del repository, con una spunta verde o una croce rossa 
 | `qr` | il QR di ogni attività si legge e porta all'indirizzo giusto, anche aprendo i file dal disco |
 | `link-diretti` | ogni scheda si apre con `#id`, l'indirizzo segue la scheda, il tasto Indietro funziona |
 | `progressi` | si gioca davvero, si ricarica, i punteggi tornano; "Ricomincia da capo"; navigazione privata |
+| `modalita` | `?solo` e `?coppie` cambiano nomi, frasi, turni e risultato; i pulsanti del QR cambiano il codice |
 | `migrazione` | i salvataggi nel formato vecchio si leggono ancora; i nomi con caratteri HTML non rompono la pagina |
 | `fotografia` | con il caso fissato, i giochi generano gli stessi esercizi e gli stessi testi di `tests/fotografia.json` |
 | `schermate` | tutte le pagine in tema scuro e chiaro, a 1280 e 390 px, senza errori in console |

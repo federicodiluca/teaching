@@ -68,7 +68,9 @@
     restart: '<circle class="f" cx="12" cy="12" r="8"/><path d="M4 12a8 8 0 1 0 2.3-5.7M4 4v4h4"/><path class="a" d="M12 8v4l2.5 2.5"/>',
     check: '<circle class="f" cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="9"/><path class="a" d="M8 12.5l2.5 2.5L16 9.5"/>',
     arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
-    close: '<path d="M6 6l12 12M18 6 6 18"/>'
+    close: '<path d="M6 6l12 12M18 6 6 18"/>',
+    user: '<circle class="f" cx="12" cy="8" r="3.5"/><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/>',
+    users: '<circle class="f" cx="9" cy="8" r="3.2"/><circle cx="9" cy="8" r="3.2"/><path d="M3 20a6 6 0 0 1 12 0"/><path class="a" d="M15.5 4.9a3.2 3.2 0 0 1 0 6.2M17 14.2a6 6 0 0 1 4 5.8"/>'
   };
   function ico(nome, cls) {
     return ICONE[nome] ? '<svg class="tg-ico' + (cls ? " " + cls : "") + '" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' + ICONE[nome] + "</svg>" : "";
@@ -189,7 +191,15 @@
   function indirizzo() {
     if (/^https?:$/.test(location.protocol)) return location.href;
     var rel = percorso();
-    return SITO + (rel ? rel + "/" : "") + location.hash;
+    return SITO + (rel ? rel + "/" : "") + location.search + location.hash;
+  }
+
+  /* lo stesso indirizzo con la modalità scelta: ?solo o ?coppie solo se diversa da quella della pagina */
+  function conModo(url, modo, pagina) {
+    var m = url.match(/^([^?#]*)(\?[^#]*)?(#.*)?$/);
+    var q = (m[2] || "").slice(1).split("&").filter(function (x) { return x && !/^(solo|coppie)(=|$)/.test(x); });
+    if (modo !== pagina) q.push(modo);
+    return m[1] + (q.length ? "?" + q.join("&") : "") + (m[3] || "");
   }
 
   /* ---------- barra nelle attività ---------- */
@@ -306,13 +316,31 @@
     box.setAttribute("aria-modal", "true");
     box.setAttribute("aria-label", "QR code di questa pagina");
     box.tabIndex = -1;
+    /* nelle attività tg-act si sceglie anche la modalità che il codice porta con sé (vedi giochi.js) */
+    var pagina = typeof MODO_PAGINA === "string" ? MODO_PAGINA : "";
+    var modo = pagina && (typeof SOLO === "boolean" ? (SOLO ? "solo" : "coppie") : pagina);
     box.innerHTML = '<div class="tg-qr-code"></div><p class="tg-qr-url"></p>' +
+      (pagina ? '<div class="tg-qr-modo" role="group" aria-label="Modalità">' +
+        '<button type="button" data-m="solo">' + ico("user") + "Da soli</button>" +
+        '<button type="button" data-m="coppie">' + ico("users") + "A coppie</button></div>" : "") +
       '<p class="tg-qr-hint">Inquadrate il codice con la fotocamera del telefono. Clic o Esc per chiudere.</p>';
     document.body.appendChild(box);
     box.focus();
+    [].forEach.call(box.querySelectorAll("[data-m]"), function (b) {
+      b.addEventListener("click", function (e) {
+        e.stopPropagation();
+        modo = b.getAttribute("data-m");
+        aggiorna();
+      });
+    });
 
     function aggiorna() {
-      var url = indirizzo();
+      var url = pagina ? conModo(indirizzo(), modo, pagina) : indirizzo();
+      [].forEach.call(box.querySelectorAll("[data-m]"), function (b) {
+        var on = b.getAttribute("data-m") === modo;
+        b.classList.toggle("on", on);
+        b.setAttribute("aria-pressed", on ? "true" : "false");
+      });
       box.querySelector(".tg-qr-url").textContent = url.replace(/^https?:\/\//, "");
       caricaQr(function () {
         box.querySelector(".tg-qr-code").innerHTML = disegnoQr(url) ||
@@ -327,7 +355,14 @@
     }
     function tasto(e) {
       if (e.key === "Escape") { e.preventDefault(); chiudi(); }
-      else if (e.key === "Tab") { e.preventDefault(); box.focus(); }
+      else if (e.key === "Tab") {
+        /* il fuoco resta nel riquadro: gira tra i pulsanti della modalità, se ci sono */
+        e.preventDefault();
+        var bb = [].slice.call(box.querySelectorAll("button"));
+        if (!bb.length) { box.focus(); return; }
+        var i = bb.indexOf(document.activeElement) + (e.shiftKey ? -1 : 1);
+        bb[(i + bb.length) % bb.length].focus();
+      }
     }
     box.addEventListener("click", chiudi);
     document.addEventListener("keydown", tasto, true);

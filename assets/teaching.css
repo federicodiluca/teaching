@@ -227,6 +227,15 @@ body.tg-home {
 }
 .tg-qr-hint { margin: 0; color: #5d6474; font-size: clamp(13px, 1.6vw, 18px); }
 .tg-qr-err { color: #5d6474; font-size: 18px; }
+.tg-qr-modo { display: flex; gap: 8px; }
+.tg-qr-modo button {
+  display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+  font: 600 clamp(14px, 1.7vw, 19px) var(--tg-sans); color: #3a4152;
+  background: #fff; border: 1.5px solid #c9cdd6; border-radius: 999px; padding: 6px 14px;
+}
+.tg-qr-modo button.on { background: #1d2433; border-color: #1d2433; color: #fff; }
+.tg-qr-modo button:focus-visible { outline: 3px solid #2f5bea; outline-offset: 2px; }
+.tg-qr-modo .tg-ico { width: 1.2em; height: 1.2em; }
 @media print { .tg-qr { display: none; } }
 
 /* ---------- intestazione comune delle attività: riquadro con l'icona accanto al titolo ---------- */
