@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Il BEP vivo - Ripasso</title>
+<style>
+:root{
+  --scale:1;
+  --bg:#f5f3ee; --card:#ffffff; --ink:#1f2937; --muted:#667085; --line:#e4e1d8;
+  --rev:#0f766e; --cost:#c2410c; --fix:#6b7280; --acc:#4338ca; --accsoft:#eef0ff;
+  --ok:#15803d; --oksoft:#e8f5ec; --bad:#b91c1c; --badsoft:#fdecec; --warn:#b45309; --warnsoft:#fff4e0;
+}
+*{box-sizing:border-box}
+html{font-size:calc(16px*var(--scale))}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.45}
+header{background:#1f2937;color:#fff;padding:.9rem 1.2rem;display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;align-items:center}
+header h1{font-size:1.35rem;margin:0}
+header .sub{color:#cbd5e1;font-size:.95rem}
+header .tools{margin-left:auto;display:flex;gap:.4rem}
+button{font:inherit;cursor:pointer}
+.tbtn{background:#374151;color:#fff;border:0;border-radius:.4rem;padding:.3rem .65rem}
+.tbtn:hover{background:#4b5563}
+nav{display:flex;gap:.3rem;padding:.7rem 1.2rem 0;max-width:1300px;margin:0 auto}
+nav button{background:#e9e6dd;border:0;border-radius:.5rem .5rem 0 0;padding:.6rem 1.1rem;font-weight:600;color:#4b5563}
+nav button.on{background:var(--card);color:var(--ink);box-shadow:0 -2px 0 var(--acc) inset}
+main{max-width:1300px;margin:0 auto;padding:0 1.2rem 2rem}
+.panel{background:var(--card);border-radius:0 .6rem .6rem .6rem;padding:1.1rem 1.2rem;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.hidden{display:none!important}
+h2{font-size:1.2rem;margin:0 0 .5rem}
+h3{font-size:1.02rem;margin:0 0 .4rem}
+.grid{display:grid;grid-template-columns:minmax(300px,380px) 1fr;gap:1.1rem}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.box{border:1px solid var(--line);border-radius:.6rem;padding:.8rem .9rem;margin-bottom:.9rem;background:#fff}
+.slider{margin:.55rem 0 .8rem}
+.slider label{display:flex;justify-content:space-between;font-weight:600;font-size:.95rem}
+.slider input[type=range]{width:100%;accent-color:var(--acc)}
+.slider .v{color:var(--acc);font-variant-numeric:tabular-nums}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.55rem;margin-top:.6rem}
+.kpi{background:#faf9f5;border:1px solid var(--line);border-radius:.5rem;padding:.45rem .6rem}
+.kpi .k{font-size:.78rem;color:var(--muted)}
+.kpi .n{font-size:1.2rem;font-weight:700;font-variant-numeric:tabular-nums}
+.kpi.big{background:var(--accsoft);border-color:#c7cbff}
+.kpi.big .n{color:var(--acc);font-size:1.45rem}
+.kpi.pos .n{color:var(--ok)} .kpi.neg .n{color:var(--bad)}
+canvas{width:100%;height:400px;display:block;background:#fff;border:1px solid var(--line);border-radius:.5rem}
+.msg{margin-top:.6rem;padding:.5rem .7rem;border-radius:.5rem;font-size:.95rem}
+.msg.warn{background:var(--warnsoft);color:var(--warn)}
+.msg.bad{background:var(--badsoft);color:var(--bad)}
+.msg.ok{background:var(--oksoft);color:var(--ok)}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+td,th{padding:.25rem .45rem;border-bottom:1px solid var(--line);text-align:left}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
+tr.tot td{font-weight:700;border-top:2px solid var(--ink)}
+details summary{cursor:pointer;font-weight:600}
+.btn{background:var(--acc);color:#fff;border:0;border-radius:.45rem;padding:.45rem .8rem;font-weight:600}
+.btn:hover{filter:brightness(1.1)}
+.btn.sec{background:#e9e6dd;color:var(--ink)}
+.btn.sm{padding:.25rem .55rem;font-size:.88rem}
+.choices{display:flex;gap:.5rem;flex-wrap:wrap;margin:.5rem 0}
+.choices button{background:#fff;border:2px solid var(--line);border-radius:.5rem;padding:.4rem .8rem;font-weight:600}
+.choices button:hover{border-color:var(--acc)}
+.choices button.btn{background:var(--acc);color:#fff;border-color:var(--acc)}
+.choices button.btn.sec{background:#e9e6dd;color:var(--ink);border-color:#e9e6dd}
+.choices button.right{border-color:var(--ok);background:var(--oksoft)}
+.choices button.wrong{border-color:var(--bad);background:var(--badsoft)}
+.exp{border-left:4px solid var(--acc);padding-left:.7rem;margin-bottom:.9rem}
+.exp .res{margin-top:.4rem;font-size:.95rem}
+.mission{display:flex;gap:.6rem;align-items:flex-start;padding:.45rem 0;border-bottom:1px solid var(--line)}
+.mission:last-child{border-bottom:0}
+.mission .chk{flex:0 0 1.5rem;height:1.5rem;border:2px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff}
+.mission.done .chk{background:var(--ok);border-color:var(--ok)}
+.mission.done{background:var(--oksoft)}
+.small{font-size:.88rem;color:var(--muted)}
+.event{border:2px solid var(--acc);border-radius:.7rem;padding:1rem 1.1rem;background:var(--accsoft);margin-bottom:1rem}
+.event .tag{display:inline-block;background:var(--acc);color:#fff;border-radius:1rem;padding:.1rem .7rem;font-size:.82rem;font-weight:700;margin-bottom:.35rem}
+.event h3{font-size:1.3rem}
+.event .ask{font-weight:600;margin-top:.5rem}
+.sol{border:2px solid var(--ok);background:var(--oksoft);border-radius:.7rem;padding:.9rem 1rem;margin-bottom:1rem}
+.sol ul{margin:.3rem 0 0 1.1rem;padding:0}
+.teams{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.7rem}
+.team{border:1px solid var(--line);border-radius:.6rem;padding:.6rem .7rem;background:#fff}
+.team input[type=text]{font:inherit;font-weight:700;width:100%;border:0;border-bottom:2px dashed var(--line);padding:.1rem 0;margin-bottom:.4rem;background:transparent}
+.team .pts{font-size:1.6rem;font-weight:800;color:var(--acc)}
+.team .row{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center}
+.pt{background:#fff;border:2px solid var(--line);border-radius:.4rem;padding:.2rem .5rem;font-size:.85rem;font-weight:600}
+.pt.on{background:var(--ok);border-color:var(--ok);color:#fff}
+.legend{display:flex;gap:1rem;flex-wrap:wrap;font-size:.88rem;margin:.4rem 0 .2rem}
+.legend i{display:inline-block;width:1.3rem;height:.25rem;margin-right:.3rem;vertical-align:middle}
+</style>
+<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body>
+<header>
+  <h1>Il BEP vivo</h1>
+  <span class="sub">Ripasso sul Break Even Point &middot; Candele di Cera, laboratorio artigianale</span>
+  <div class="tools">
+    <button class="tbtn" id="zm" title="Rimpicciolisci">A&minus;</button>
+    <button class="tbtn" id="zp" title="Ingrandisci">A+</button>
+  </div>
+</header>
+<nav>
+  <button id="tab1" class="on">1 &middot; Simulatore</button>
+  <button id="tab2">2 &middot; Consiglio di amministrazione</button>
+</nav>
+<main>
+
+<!-- ============ FASE 1 ============ -->
+<section id="p1" class="panel">
+  <div class="grid">
+    <div>
+      <div class="box">
+        <h3>L'azienda</h3>
+        <p class="small" style="margin:.1rem 0 .5rem">Produce candele profumate fatte a mano. Capacit&agrave; produttiva: <b>2.500 candele</b> all'anno.</p>
+        <details>
+          <summary>Dati di partenza</summary>
+          <table style="margin-top:.4rem">
+            <tr><th>Costi fissi annui</th><th class="r">&euro;</th></tr>
+            <tr><td>Affitto del laboratorio</td><td class="r">4.800</td></tr>
+            <tr><td>Ammortamento forno</td><td class="r">1.800</td></tr>
+            <tr><td>Assicurazione</td><td class="r">600</td></tr>
+            <tr><td>Sito e social</td><td class="r">900</td></tr>
+            <tr><td>Stand ai mercatini</td><td class="r">900</td></tr>
+            <tr class="tot"><td>Totale</td><td class="r">9.000</td></tr>
+          </table>
+          <table style="margin-top:.6rem">
+            <tr><th>Costi variabili per candela</th><th class="r">&euro;</th></tr>
+            <tr><td>Cera</td><td class="r">3,20</td></tr>
+            <tr><td>Stoppino e vasetto</td><td class="r">1,60</td></tr>
+            <tr><td>Profumo</td><td class="r">0,70</td></tr>
+            <tr><td>Packaging</td><td class="r">0,50</td></tr>
+            <tr class="tot"><td>Totale</td><td class="r">6,00</td></tr>
+          </table>
+          <p class="small">Prezzo di vendita: 15 &euro; a candela.</p>
+        </details>
+      </div>
+
+      <div class="box">
+        <h3>Pannello di controllo</h3>
+        <div class="slider"><label>Prezzo di vendita <span class="v" id="vp"></span></label><input type="range" id="sp" min="5" max="30" step="0.5"></div>
+        <div class="slider"><label>Costi fissi annui <span class="v" id="vcf"></span></label><input type="range" id="scf" min="3000" max="20000" step="100"></div>
+        <div class="slider"><label>Costo variabile per candela <span class="v" id="vcv"></span></label><input type="range" id="scv" min="1" max="14" step="0.1"></div>
+        <div class="slider"><label>Candele vendute nell'anno <span class="v" id="vq"></span></label><input type="range" id="sq" min="0" max="2500" step="50"></div>
+        <button class="btn sec sm" id="reset">Torna ai dati iniziali</button>
+      </div>
+
+      <div class="box">
+        <h3>Missioni libere</h3>
+        <div id="missions"></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="box">
+        <div class="legend">
+          <span><i style="background:var(--rev)"></i>Ricavi</span>
+          <span><i style="background:var(--cost)"></i>Costi totali</span>
+          <span><i style="background:var(--fix);height:0;border-top:3px dashed var(--fix)"></i>Costi fissi</span>
+          <span class="small" id="cmpnote"></span>
+        </div>
+        <canvas id="cv"></canvas>
+        <div id="warn"></div>
+        <div class="kpis" id="kpis"></div>
+      </div>
+
+      <div class="box">
+        <h3>Esperimenti: prima prevedi, poi guarda</h3>
+        <p class="small" style="margin-top:0">Ogni squadra scrive sul quaderno il pronostico, poi si sceglie la risposta di classe e si guarda cosa succede al grafico.</p>
+        <div id="exps"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FASE 2 ============ -->
+<section id="p2" class="panel hidden">
+  <div class="box" id="setup">
+    <h3>Le squadre</h3>
+    <label>Numero di squadre:
+      <select id="nteams"><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option></select>
+    </label>
+    <span class="small"> &nbsp;Ogni squadra &egrave; un'azienda con gli stessi dati di partenza. Calcoli sul quaderno, il risultato si rivela alla fine di ogni round.</span>
+  </div>
+
+  <div id="evwrap">
+    <div class="event" id="evcard"></div>
+    <div class="choices">
+      <button class="btn" id="evreveal">Rivela la soluzione</button>
+      <button class="btn sec" id="evnext">Evento successivo &rarr;</button>
+      <button class="btn sec" id="evprev">&larr; Precedente</button>
+    </div>
+    <div class="sol hidden" id="evsol"></div>
+  </div>
+
+  <h3 style="margin-top:1rem">Punteggi</h3>
+  <p class="small" style="margin-top:0">Calcolo corretto +2, ragionamento corretto +1. Si assegna dopo aver rivelato la soluzione.</p>
+  <div class="teams" id="teams"></div>
+</section>
+
+</main>
+
+<script>
+/* ===================== MODELLO ===================== */
+const BASE = {p:15, cf:9000, cv:6, cap:2500, utile:4500};
+
+const fmt = (n,d=0)=> n.toLocaleString('it-IT',{minimumFractionDigits:d,maximumFractionDigits:d});
+const eur = (n,d=0)=> fmt(n,d)+' €';
+const eur2 = n => eur(n, Number.isInteger(+n.toFixed(2)) ? 0 : 2);
+
+function calc(s){
+  const mc = +(s.p - s.cv).toFixed(4);
+  const bep = mc > 0 ? Math.ceil(+(s.cf/mc).toFixed(6)) : null;
+  return {mc, bep,
+    rbep: bep!=null ? bep*s.p : null,
+    pct: bep!=null ? bep/s.cap : null,
+    cross: mc>0 ? s.cf/mc : null};
+}
+function qFor(s,utile){
+  const mc = s.p - s.cv;
+  return mc>0 ? Math.ceil(+((s.cf+utile)/mc).toFixed(6)) : null;
+}
+function risultato(s,q){ return +((s.p-s.cv)*q - s.cf).toFixed(2); }
+
+/* ===================== GRAFICO ===================== */
+function niceStep(x){
+  const e=Math.pow(10,Math.floor(Math.log10(x))), f=x/e;
+  return (f<=1?1:f<=2?2:f<=5?5:10)*e;
+}
+function drawChart(cv, s, opts){
+  opts = opts||{};
+  const base = opts.base;
+  const dpr = window.devicePixelRatio||1;
+  const w = cv.clientWidth, h = cv.clientHeight;
+  if(!w||!h) return;
+  cv.width = w*dpr; cv.height = h*dpr;
+  const c = cv.getContext('2d');
+  c.setTransform(dpr,0,0,dpr,0,0);
+  c.clearRect(0,0,w,h);
+  const m = {l:82, r:20, t:16, b:48};
+  const pw = w-m.l-m.r, ph = h-m.t-m.b;
+  const cap = s.cap;
+  let raw = Math.max(s.p*cap, s.cf+s.cv*cap);
+  if(base) raw = Math.max(raw, base.p*cap, base.cf+base.cv*cap);
+  raw *= 1.04;
+  const step = niceStep(raw/5);
+  const ymax = Math.ceil(raw/step)*step;
+  const X = q => m.l + q/cap*pw;
+  const Y = v => m.t + ph - v/ymax*ph;
+
+  c.font = '12px system-ui,Arial'; c.fillStyle = '#667085'; c.strokeStyle = '#e5e7eb'; c.lineWidth = 1;
+  c.textAlign='right'; c.textBaseline='middle';
+  for(let v=0; v<=ymax+1e-9; v+=step){
+    c.beginPath(); c.moveTo(m.l,Y(v)); c.lineTo(m.l+pw,Y(v)); c.stroke();
+    c.fillText(fmt(v), m.l-8, Y(v));
+  }
+  c.textAlign='center'; c.textBaseline='top';
+  for(let i=0;i<=5;i++){
+    const q = cap*i/5;
+    c.fillText(fmt(q), X(q), m.t+ph+6);
+  }
+  c.fillStyle='#4b5563'; c.font='12px system-ui,Arial';
+  c.fillText('Quantità (candele)', m.l+pw/2, h-18);
+  c.save(); c.translate(12, m.t+ph/2); c.rotate(-Math.PI/2); c.textBaseline='top'; c.fillText('Euro', 0, 0); c.restore();
+
+  // zone perdita / profitto
+  const mc = s.p - s.cv;
+  const cross = mc>0 ? s.cf/mc : Infinity;
+  const xl = Math.min(cross, cap);
+  c.fillStyle = 'rgba(185,28,28,0.09)';
+  c.beginPath();
+  c.moveTo(X(0),Y(s.cf)); c.lineTo(X(xl),Y(s.cf+s.cv*xl)); c.lineTo(X(xl),Y(s.p*xl)); c.lineTo(X(0),Y(0)); c.closePath(); c.fill();
+  if(cross < cap){
+    c.fillStyle = 'rgba(21,128,61,0.10)';
+    c.beginPath();
+    c.moveTo(X(cross),Y(s.p*cross)); c.lineTo(X(cap),Y(s.p*cap)); c.lineTo(X(cap),Y(s.cf+s.cv*cap)); c.closePath(); c.fill();
+  }
+
+  function lines(st, alpha, dash){
+    c.globalAlpha = alpha;
+    c.lineWidth = 2.5;
+    c.setLineDash(dash?[6,5]:[]);
+    c.strokeStyle='#0f766e'; c.beginPath(); c.moveTo(X(0),Y(0)); c.lineTo(X(cap),Y(st.p*cap)); c.stroke();
+    c.strokeStyle='#c2410c'; c.beginPath(); c.moveTo(X(0),Y(st.cf)); c.lineTo(X(cap),Y(st.cf+st.cv*cap)); c.stroke();
+    c.strokeStyle='#6b7280'; c.lineWidth=2; c.setLineDash([2,5]);
+    c.beginPath(); c.moveTo(X(0),Y(st.cf)); c.lineTo(X(cap),Y(st.cf)); c.stroke();
+    c.setLineDash([]); c.globalAlpha = 1;
+  }
+  if(base && (base.p!==s.p||base.cf!==s.cf||base.cv!==s.cv)) lines(base, .35, true);
+  lines(s, 1, false);
+
+  // linea quantità scelta
+  if(opts.q!=null){
+    const q = opts.q;
+    c.strokeStyle='#4338ca'; c.lineWidth=1.5; c.setLineDash([4,4]);
+    c.beginPath(); c.moveTo(X(q),Y(0)); c.lineTo(X(q),m.t); c.stroke(); c.setLineDash([]);
+    [[s.p*q,'#0f766e'],[s.cf+s.cv*q,'#c2410c']].forEach(([v,col])=>{
+      c.fillStyle=col; c.beginPath(); c.arc(X(q),Y(v),4.5,0,7); c.fill();
+    });
+  }
+  // punto BEP
+  if(mc>0 && cross<=cap){
+    const bx=X(cross), by=Y(s.p*cross);
+    c.fillStyle='#fff'; c.strokeStyle='#4338ca'; c.lineWidth=3;
+    c.beginPath(); c.arc(bx,by,7,0,7); c.fill(); c.stroke();
+    const bep = Math.ceil(+(s.cf/mc).toFixed(6));
+    c.font='bold 13px system-ui,Arial';
+    const label='BEP: '+fmt(bep)+' candele', tw=c.measureText(label).width+14;
+    let lx = bx>m.l+pw*0.7 ? bx-tw-10 : bx+10;
+    let ly = Math.max(m.t+2, by-62);
+    c.fillStyle='rgba(255,255,255,0.92)'; c.strokeStyle='#4338ca'; c.lineWidth=1.5;
+    c.beginPath(); c.rect(lx,ly,tw,24); c.fill(); c.stroke();
+    c.beginPath(); c.setLineDash([3,3]); c.moveTo(bx,by-7); c.lineTo(bx,ly+24); c.stroke(); c.setLineDash([]);
+    c.fillStyle='#4338ca'; c.textAlign='left'; c.textBaseline='middle'; c.fillText(label, lx+7, ly+12);
+  }
+}
+
+/* ===================== FASE 1 ===================== */
+const S = {p:BASE.p, cf:BASE.cf, cv:BASE.cv, q:1500};
+const $ = id => document.getElementById(id);
+
+const missions = [
+  {t:'Porta il BEP sotto le 800 candele senza toccare il prezzo (15 €).', ok:(s,r)=> s.p===15 && r.bep!==null && r.bep<=800},
+  {t:'Il mercato non accetta più di 13 € a candela: riporta il BEP a 1.000 candele o meno agendo sui costi.', ok:(s,r)=> s.p<=13 && r.bep!==null && r.bep<=1000},
+  {t:'Con 1.200 candele vendute ottieni almeno 3.000 € di utile, senza superare i 16 € di prezzo.', ok:(s,r)=> s.q===1200 && s.p<=16 && risultato({...s,cap:BASE.cap},s.q)>=3000},
+  {t:'Fai in modo che il pareggio sia irraggiungibile (BEP oltre la capacità o margine zero/negativo). Poi spiega perché.', ok:(s,r)=> r.bep===null || r.bep>BASE.cap},
+];
+
+function stateFull(){ return {p:S.p, cf:S.cf, cv:S.cv, cap:BASE.cap}; }
+
+function renderP1(){
+  const s = stateFull(), r = calc(s);
+  $('vp').textContent = eur2(S.p);
+  $('vcf').textContent = eur(S.cf);
+  $('vcv').textContent = eur2(S.cv);
+  $('vq').textContent = fmt(S.q);
+  $('sp').value=S.p; $('scf').value=S.cf; $('scv').value=S.cv; $('sq').value=S.q;
+
+  const res = risultato(s,S.q);
+  const cls = res>0?'pos':res<0?'neg':'';
+  $('kpis').innerHTML = [
+    ['Margine di contribuzione unitario', r.mc>0?eur2(r.mc):'≤ 0 €', ''],
+    ['BEP (candele)', r.bep!=null?fmt(r.bep):'non esiste', 'big'],
+    ['Ricavo di BEP', r.rbep!=null?eur(r.rbep):'—', ''],
+    ['% della capacità', r.pct!=null?fmt(r.pct*100,1)+' %':'—', ''],
+    ['Risultato a '+fmt(S.q)+' candele', (res>0?'+':'')+eur(res), cls],
+  ].map(k=>`<div class="kpi ${k[2]}"><div class="k">${k[0]}</div><div class="n">${k[1]}</div></div>`).join('');
+
+  let w='';
+  if(r.bep===null) w='<div class="msg bad">Il margine unitario è zero o negativo: ogni candela venduta peggiora il bilancio, il pareggio non esiste.</div>';
+  else if(r.bep>BASE.cap) w='<div class="msg warn">Il BEP supera la capacità produttiva ('+fmt(BASE.cap)+' candele): con questi dati non si arriva mai al pareggio.</div>';
+  $('warn').innerHTML = w;
+
+  const ch = (S.p!==BASE.p||S.cf!==BASE.cf||S.cv!==BASE.cv);
+  $('cmpnote').textContent = ch ? 'Linee tratteggiate = situazione iniziale' : '';
+  drawChart($('cv'), s, {base:{...BASE}, q:S.q});
+
+  $('missions').innerHTML = missions.map(m=>{
+    const done = m.ok({...S}, r);
+    return `<div class="mission ${done?'done':''}"><div class="chk">${done?'✓':''}</div><div>${m.t}</div></div>`;
+  }).join('');
+}
+
+/* esperimenti con pronostico */
+const exps = [
+  {t:'Il prezzo sale a 18 €', mod:s=>({...s,p:18}), dir:'down',
+   why:(a,b)=>`Ogni candela lascia ${eur2(b.mc)} invece di ${eur2(a.mc)} per coprire i costi fissi: ne servono meno.`},
+  {t:'La cera costa di più: +0,80 € a candela', mod:s=>({...s,cv:+(s.cv+0.8).toFixed(2)}), dir:'up',
+   why:(a,b)=>`Il margine unitario scende da ${eur2(a.mc)} a ${eur2(b.mc)}: ogni candela contribuisce meno ai costi fissi.`},
+  {t:'Si prende un secondo laboratorio: costi fissi +1.800 €', mod:s=>({...s,cf:s.cf+1800}), dir:'up',
+   why:(a,b)=>`Il margine unitario non cambia (${eur2(a.mc)}), ma i costi fissi da coprire sono di più.`},
+  {t:'Si apre la vendita online: costi fissi +1.800 € e commissioni +1 € a candela', mod:s=>({...s,cf:s.cf+1800,cv:+(s.cv+1).toFixed(2)}), dir:'up',
+   why:(a,b)=>`Due effetti nello stesso verso: più costi fissi da coprire e margine unitario più basso (da ${eur2(a.mc)} a ${eur2(b.mc)}).`},
+];
+function renderExps(){
+  $('exps').innerHTML = exps.map((e,i)=>`
+    <div class="exp" id="exp${i}">
+      <h3>${i+1}. ${e.t}</h3>
+      <div>Il BEP&hellip;</div>
+      <div class="choices">
+        <button data-i="${i}" data-c="up">sale</button>
+        <button data-i="${i}" data-c="down">scende</button>
+        <button data-i="${i}" data-c="same">resta uguale</button>
+      </div>
+      <div class="res" id="res${i}"></div>
+    </div>`).join('');
+  $('exps').querySelectorAll('button').forEach(b=>b.onclick=()=>answerExp(+b.dataset.i,b.dataset.c));
+}
+function answerExp(i,c){
+  const e = exps[i];
+  const a = calc({...BASE});
+  const ns = e.mod({p:BASE.p,cf:BASE.cf,cv:BASE.cv,cap:BASE.cap});
+  const b = calc(ns);
+  const real = b.bep>a.bep?'up':b.bep<a.bep?'down':'same';
+  const btns = document.querySelectorAll(`#exp${i} .choices button`);
+  btns.forEach(x=>{
+    x.classList.remove('right','wrong');
+    if(x.dataset.c===real) x.classList.add('right');
+    else if(x.dataset.c===c) x.classList.add('wrong');
+  });
+  $('res'+i).innerHTML = `<b>${c===real?'Pronostico giusto.':'Non proprio.'}</b> BEP: ${fmt(a.bep)} &rarr; <b>${fmt(b.bep)}</b> candele (${real==='up'?'sale':real==='down'?'scende':'uguale'}). ${e.why(a,b)}`;
+  S.p=ns.p; S.cf=ns.cf; S.cv=ns.cv;
+  renderP1();
+}
+
+/* ===================== FASE 2 ===================== */
+const events = [
+  {t:'La cera aumenta', mod:s=>({...s,cv:+(s.cv+0.8).toFixed(2)}),
+   text:'Il fornitore alza il prezzo della cera: da 3,20 € a 4,00 € a candela.',
+   ask:'Qual è il nuovo BEP? Di quanto dovete alzare il prezzo per riportare il BEP al valore di prima?',
+   sol:(a,b,n)=>{
+     const pNew = +(n.cv + BASE.cf/a.bep).toFixed(2);
+     return [`Nuovo costo variabile: <b>${eur2(n.cv)}</b>, margine unitario <b>${eur2(b.mc)}</b>.`,
+             `Nuovo BEP: ${eur(n.cf)} / ${eur2(b.mc)} = <b>${fmt(b.bep)} candele</b> (prima ${fmt(a.bep)}).`,
+             `Per tornare a ${fmt(a.bep)} candele il margine deve restare ${eur2(BASE.cf/a.bep)}: prezzo = ${eur2(n.cv)} + ${eur2(BASE.cf/a.bep)} = <b>${eur2(pNew)}</b>.`];
+   }, chart:true},
+  {t:'Il forno nuovo', mod:s=>({...s,cf:s.cf+1500,cv:+(s.cv-1).toFixed(2)}),
+   text:'Un forno più efficiente costa 1.500 € all\'anno in più di ammortamento, ma fa risparmiare 1 € di energia e scarti a ogni candela.',
+   ask:'Qual è il nuovo BEP? Da quante candele vendute in su conviene il forno nuovo?',
+   sol:(a,b,n)=>{
+     const qx = (n.cf-BASE.cf)/(b.mc-a.mc);
+     return [`Nuovo margine unitario: <b>${eur2(b.mc)}</b>, costi fissi <b>${eur(n.cf)}</b>.`,
+             `Nuovo BEP: ${eur(n.cf)} / ${eur2(b.mc)} = <b>${fmt(b.bep)} candele</b> (prima ${fmt(a.bep)}): il pareggio arriva un po\' più tardi.`,
+             `Il forno nuovo conviene quando i costi in più sono recuperati dal risparmio: ${eur(n.cf-BASE.cf)} / ${eur2(b.mc-a.mc)} = <b>${fmt(qx)} candele</b>. Sopra quella quantità l\'utile è maggiore, sotto è minore.`];
+   }, chart:true},
+  {t:'L\'ordine del negozio', mod:s=>s,
+   text:'Un negozio chiede 600 candele a 10 € l\'una, sotto il prezzo di listino. Quest\'anno ne vendete già 1.500 al prezzo normale.',
+   ask:'Conviene accettare? Di quanto cambia l\'utile? La capacità basta?',
+   sol:(a,b,n)=>{
+     const mcs = 10-n.cv, extra = mcs*600;
+     return [`Margine di contribuzione dell\'ordine: 10 € − ${eur2(n.cv)} = <b>${eur2(mcs)}</b> a candela.`,
+             `I costi fissi sono già coperti dalle altre vendite, quindi l\'utile aumenta di ${fmt(600)} × ${eur2(mcs)} = <b>${eur(extra)}</b>.`,
+             `Utile prima: ${eur(risultato(n,1500))}; dopo: <b>${eur(risultato(n,1500)+extra)}</b>. Capacità: 1.500 + 600 = ${fmt(2100)} ≤ ${fmt(BASE.cap)}, basta.`,
+             `Conviene finché il prezzo dell\'ordine resta sopra il costo variabile (6 €). Resta da valutare l\'effetto sui clienti che pagano 15 €.`];
+   }, chart:false},
+  {t:'Il traguardo', mod:s=>s,
+   text:'Le socie vogliono un utile di 6.000 € in un anno.',
+   ask:'Quante candele servono e con quali ricavi? La capacità produttiva basta? E se l\'obiettivo fosse 18.000 €?',
+   sol:(a,b,n)=>{
+     const q1 = qFor(n,6000), q2 = qFor(n,18000);
+     return [`Per 6.000 €: (${eur(n.cf)} + 6.000 €) / ${eur2(a.mc)} = ${fmt((n.cf+6000)/a.mc,2)} &rarr; <b>${fmt(q1)} candele</b>, ricavi <b>${eur(q1*n.p)}</b>, ${fmt(q1/BASE.cap*100,1)} % della capacità: basta.`,
+             `Per 18.000 €: (${eur(n.cf)} + 18.000 €) / ${eur2(a.mc)} = <b>${fmt(q2)} candele</b>, più della capacità (${fmt(BASE.cap)}): con questi dati non si può raggiungere.`];
+   }, chart:false},
+  {t:'La concorrenza', mod:s=>({...s,p:12}),
+   text:'Un grande negozio online vende candele simili a 12 €: per non perdere clienti dovete abbassare il prezzo.',
+   ask:'Qual è il nuovo BEP e che percentuale della capacità richiede? Quante candele servirebbero per mantenere l\'utile di 4.500 €?',
+   sol:(a,b,n)=>{
+     const q = qFor(n,4500);
+     return [`Margine unitario: 12 € − ${eur2(n.cv)} = <b>${eur2(b.mc)}</b> (prima ${eur2(a.mc)}).`,
+             `Nuovo BEP: ${eur(n.cf)} / ${eur2(b.mc)} = <b>${fmt(b.bep)} candele</b>, pari al <b>${fmt(b.pct*100,1)} %</b> della capacità (prima ${fmt(a.pct*100,1)} %).`,
+             `Per 4.500 € di utile: (${eur(n.cf)} + 4.500 €) / ${eur2(b.mc)} = <b>${fmt(q)} candele</b> (${fmt(q/BASE.cap*100,1)} % della capacità). Un calo di prezzo del 20 % costringe a vendere molto di più.`];
+   }, chart:true},
+  {t:'Tutto insieme', mod:s=>({...s,cf:+(s.cf*1.2).toFixed(2),p:+(s.p*0.9).toFixed(2),cv:+(s.cv*1.05).toFixed(2)}),
+   text:'Un anno difficile: i costi fissi salgono del 20 %, il prezzo scende del 10 %, i costi variabili salgono del 5 %.',
+   ask:'Calcolate il nuovo BEP. Quanto è cambiato rispetto a prima? Basta sommare le variazioni?',
+   sol:(a,b,n)=>{
+     return [`Nuovi dati: costi fissi <b>${eur(n.cf)}</b>, prezzo <b>${eur2(n.p)}</b>, costo variabile <b>${eur2(n.cv)}</b>, margine unitario <b>${eur2(b.mc)}</b> (prima ${eur2(a.mc)}).`,
+             `Nuovo BEP: ${eur(n.cf)} / ${eur2(b.mc)} = <b>${fmt(b.bep)} candele</b> (prima ${fmt(a.bep)}), ricavo di BEP ${eur(b.rbep)}.`,
+             `Non basta sommare le percentuali: i costi fissi crescono del 20 % e il margine unitario cala del 20 % (da ${eur2(a.mc)} a ${eur2(b.mc)}), e i due effetti si moltiplicano: il BEP sale del <b>${fmt((b.bep/a.bep-1)*100,0)} %</b>.`];
+   }, chart:true},
+];
+
+let evIdx = 0;
+let teams = [];
+let pts = {}; // pts[evIdx][teamIdx] = {c:bool,r:bool}
+
+function ensureTeams(n){
+  while(teams.length<n) teams.push('Squadra '+(teams.length+1));
+  teams.length = n;
+}
+function renderEvent(){
+  const e = events[evIdx];
+  const base = calc({...BASE});
+  const ns = e.mod({p:BASE.p,cf:BASE.cf,cv:BASE.cv,cap:BASE.cap});
+  $('evcard').innerHTML = `
+    <span class="tag">Evento ${evIdx+1} di ${events.length}</span>
+    <h3>${e.t}</h3>
+    <div>${e.text}</div>
+    <div class="ask">${e.ask}</div>
+    <div class="small" style="margin-top:.5rem">Dati di partenza: prezzo 15 €, costi fissi 9.000 €, costo variabile 6 €, capacità 2.500 candele.</div>`;
+  $('evsol').classList.add('hidden');
+  $('evreveal').classList.remove('hidden');
+  $('evprev').disabled = evIdx===0; $('evnext').disabled = evIdx===events.length-1;
+  $('evprev').style.opacity = evIdx===0?.4:1; $('evnext').style.opacity = evIdx===events.length-1?.4:1;
+  renderTeams();
+}
+function revealSolution(){
+  const e = events[evIdx];
+  const a = calc({...BASE});
+  const n = e.mod({p:BASE.p,cf:BASE.cf,cv:BASE.cv,cap:BASE.cap});
+  const b = calc(n);
+  const lines = e.sol(a,b,n);
+  $('evsol').innerHTML = `<h3>Soluzione</h3><ul>${lines.map(l=>`<li>${l}</li>`).join('')}</ul>` +
+    (e.chart?`<div class="legend" style="margin-top:.7rem"><span><i style="background:var(--rev)"></i>Ricavi</span><span><i style="background:var(--cost)"></i>Costi totali</span><span class="small">Tratteggiate = situazione iniziale</span></div><canvas id="evcv" style="height:300px"></canvas>`:'');
+  $('evsol').classList.remove('hidden');
+  if(e.chart) drawChart($('evcv'), {...n,cap:BASE.cap}, {base:{...BASE}});
+}
+function renderTeams(){
+  const wrap = $('teams');
+  wrap.innerHTML = teams.map((name,i)=>{
+    const total = Object.keys(pts).reduce((acc,k)=>{
+      const p=(pts[k]||{})[i]||{}; return acc + (p.c?2:0) + (p.r?1:0);
+    },0);
+    const cur = ((pts[evIdx]||{})[i])||{};
+    return `<div class="team">
+      <input type="text" value="${name.replace(/"/g,'&quot;')}" data-i="${i}" aria-label="Nome squadra">
+      <div class="row"><span class="pts">${total}</span><span class="small">punti</span></div>
+      <div class="row" style="margin-top:.4rem">
+        <button class="pt ${cur.c?'on':''}" data-i="${i}" data-k="c">Calcolo +2</button>
+        <button class="pt ${cur.r?'on':''}" data-i="${i}" data-k="r">Ragionamento +1</button>
+      </div></div>`;
+  }).join('');
+  wrap.querySelectorAll('input').forEach(inp=>inp.oninput=()=>{teams[+inp.dataset.i]=inp.value;});
+  wrap.querySelectorAll('.pt').forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.i,k=b.dataset.k;
+    pts[evIdx] = pts[evIdx]||{}; pts[evIdx][i] = pts[evIdx][i]||{};
+    pts[evIdx][i][k] = !pts[evIdx][i][k];
+    const keep = document.activeElement; renderTeams();
+  });
+}
+
+/* ===================== EVENTI UI ===================== */
+function bind(id,key){
+  $(id).addEventListener('input',()=>{ S[key]=parseFloat($(id).value); renderP1(); });
+}
+bind('sp','p'); bind('scf','cf'); bind('scv','cv'); bind('sq','q');
+$('reset').onclick=()=>{ S.p=BASE.p; S.cf=BASE.cf; S.cv=BASE.cv; S.q=1500;
+  document.querySelectorAll('.exp .choices button').forEach(b=>b.classList.remove('right','wrong'));
+  document.querySelectorAll('.exp .res').forEach(r=>r.innerHTML='');
+  renderP1(); };
+
+$('tab1').onclick=()=>{ $('tab1').classList.add('on'); $('tab2').classList.remove('on'); $('p1').classList.remove('hidden'); $('p2').classList.add('hidden'); renderP1(); };
+$('tab2').onclick=()=>{ $('tab2').classList.add('on'); $('tab1').classList.remove('on'); $('p2').classList.remove('hidden'); $('p1').classList.add('hidden'); renderEvent(); };
+
+$('nteams').onchange=()=>{ ensureTeams(+$('nteams').value); renderTeams(); };
+$('evreveal').onclick=revealSolution;
+$('evnext').onclick=()=>{ if(evIdx<events.length-1){evIdx++; renderEvent();} };
+$('evprev').onclick=()=>{ if(evIdx>0){evIdx--; renderEvent();} };
+
+let zoom = 1;
+$('zp').onclick=()=>{ zoom=Math.min(1.6,zoom+0.1); document.documentElement.style.setProperty('--scale',zoom); renderP1(); };
+$('zm').onclick=()=>{ zoom=Math.max(0.8,zoom-0.1); document.documentElement.style.setProperty('--scale',zoom); renderP1(); };
+window.addEventListener('resize',()=>{ if(!$('p1').classList.contains('hidden')) renderP1(); });
+
+ensureTeams(4);
+renderExps();
+renderP1();
+</script>
+</body>
+</html>

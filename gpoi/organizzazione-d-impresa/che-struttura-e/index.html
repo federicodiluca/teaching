@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Che struttura è?</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--ink:#1d2433;--mut:#5b6478;--line:#d8dce8;--acc:#2f5bd8;--accl:#e6edff;--ok:#1a8a4a;--okl:#e2f5ea;--ko:#c0392b;--kol:#fbe7e4;--warn:#b9770e;--fs:20px}
+*{box-sizing:border-box}
+html{font-size:var(--fs)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.45}
+header{display:flex;align-items:center;gap:1rem;padding:.6rem 1.2rem;background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5;flex-wrap:wrap}
+header h1{font-size:1.2rem;margin:0;flex:1}
+.zoom button,.nav button,.btn{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:.5rem;padding:.35rem .8rem;cursor:pointer}
+.btn.pri{background:var(--acc);color:#fff;border-color:var(--acc)}
+.btn:disabled,.nav button:disabled{opacity:.4;cursor:default}
+main{max-width:1150px;margin:0 auto;padding:1rem 1.2rem 3rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:.8rem;padding:1rem 1.3rem;margin-bottom:1rem}
+.tag{display:inline-block;background:var(--accl);color:var(--acc);border-radius:2rem;padding:.1rem .7rem;font-size:.75rem;font-weight:600}
+h2{margin:.4rem 0 .5rem;font-size:1.5rem}
+.case{font-size:1.15rem}
+.small{font-size:.8rem;color:var(--mut)}
+.clue{margin-top:.7rem;padding:.6rem .9rem;background:#fff7e6;border-left:4px solid var(--warn);border-radius:.4rem}
+.teams{display:grid;gap:.6rem}
+.trow{display:grid;grid-template-columns:minmax(8rem,12rem) 1fr auto;gap:.6rem;align-items:center;padding:.4rem 0;border-top:1px solid var(--line)}
+.trow:first-child{border-top:0}
+.trow input{font:inherit;width:100%;border:1px solid transparent;background:transparent;font-weight:600;padding:.2rem .3rem;border-radius:.3rem}
+.trow input:hover,.trow input:focus{border-color:var(--line);background:#fff}
+.ch{display:flex;gap:.4rem;flex-wrap:wrap}
+.ch button{font:inherit;font-size:.85rem;border:2px solid var(--line);background:#fff;border-radius:.5rem;padding:.3rem .7rem;cursor:pointer}
+.ch button.sel{border-color:var(--acc);background:var(--accl);font-weight:600}
+.ch button.right{border-color:var(--ok);background:var(--okl);font-weight:600}
+.ch button.wrong{border-color:var(--ko);background:var(--kol)}
+.ch button:disabled{cursor:default}
+.pts{font-weight:700;min-width:5rem;text-align:right}
+.bonus{font:inherit;font-size:.75rem;border:1px dashed var(--mut);background:#fff;border-radius:.4rem;padding:.15rem .5rem;cursor:pointer;margin-right:.4rem}
+.bonus.on{background:var(--okl);border-color:var(--ok);color:var(--ok);font-weight:600}
+.reveal{border:2px solid var(--ok);background:var(--okl)}
+.reveal h3{margin:.1rem 0 .4rem;font-size:1.2rem}
+.reveal ul{margin:.3rem 0 .6rem 1.1rem;padding:0}
+.disc{margin-top:.7rem;padding:.7rem 1rem;background:#fff;border-radius:.5rem;border:1px dashed var(--ok)}
+svg{max-width:100%;height:auto;display:block;margin:.6rem auto 0;background:#fff;border-radius:.5rem;border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:.85rem}
+th,td{border:1px solid var(--line);padding:.4rem .6rem;text-align:left;vertical-align:top}
+th{background:var(--accl)}
+.rank{display:flex;align-items:center;gap:1rem;padding:.5rem .8rem;border-radius:.5rem;background:#fff;border:1px solid var(--line);margin:.4rem 0;font-size:1.1rem}
+.rank b:first-child{font-size:1.5rem;width:2rem}
+.rank .s{margin-left:auto;font-weight:700}
+.setup label{display:inline-block;margin-right:.6rem}
+.hidden{display:none}
+@media (max-width:760px){.trow{grid-template-columns:1fr}.pts{text-align:left}}
+</style>
+<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body>
+<header>
+  <h1>Che struttura è?</h1>
+  <div class="nav"><button id="prev">&larr; Indietro</button> <span id="pos" class="small"></span> <button id="next">Avanti &rarr;</button></div>
+  <div class="zoom"><button id="zm">A&minus;</button> <button id="zp">A+</button></div>
+</header>
+<main>
+  <div class="card setup" id="setup">
+    <span class="tag">Squadre</span>
+    <p style="margin:.5rem 0 0">Quante squadre? <span id="nbtns"></span></p>
+  </div>
+  <div id="view"></div>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const KIND={L:'Lineare',F:'Funzionale',D:'Divisionale',M:'Matriciale'};
+
+/* ---------- casi ---------- */
+const CASES=[
+ {t:'La falegnameria',ans:'L',
+  text:'Nella bottega di Marco lavorano quattro artigiani. Marco decide tutto: sceglie i lavori da accettare, compra il legno, parla con i clienti e dice a ciascuno cosa fare. Ognuno risponde solo a lui.',
+  clue:'Quanti capi ha ciascun artigiano? Ci sono reparti o livelli intermedi?',
+  why:['Un solo capo per ogni persona, catena di comando semplice e diretta.','Nessun reparto specializzato: il titolare coordina tutto di persona.'],
+  q:'Cosa succede se la bottega passa da 4 a 30 persone? Marco ce la fa ancora a decidere tutto da solo?',
+  org:{type:'tree',root:{n:'Titolare',c:[{n:'Artigiano 1'},{n:'Artigiano 2'},{n:'Artigiano 3'},{n:'Artigiano 4'}]}}},
+ {t:'L\'officina meccanica',ans:'F',
+  text:'In un\'officina con 40 dipendenti c\'è un direttore generale. Sotto di lui ci sono tre responsabili: uno per la produzione, uno per le vendite e uno per amministrazione e acquisti. Ogni dipendente risponde al responsabile del proprio reparto. L\'azienda fa un solo tipo di prodotto.',
+  clue:'Come sono raggruppate le persone: per prodotto, per zona o per attività svolta?',
+  why:['Le persone sono raggruppate per funzione: produzione, vendite, amministrazione.','Ogni reparto fa una sola attività e ha un solo responsabile.'],
+  q:'Vantaggio di avere esperti dello stesso mestiere nello stesso reparto? E quale problema nasce se serve far collaborare produzione e vendite su un ordine urgente?',
+  org:{type:'tree',root:{n:'Direttore generale',c:[{n:'Produzione',c:[{n:'Operai'}]},{n:'Vendite',c:[{n:'Venditori'}]},{n:'Amministrazione e acquisti',c:[{n:'Impiegati'}]}]}}},
+ {t:'Il gruppo alimentare',ans:'D',
+  text:'Il gruppo "Casa Dolce" ha tre attività separate: pasta, prodotti da forno e bevande. Ognuna ha il proprio direttore e i propri reparti di produzione, marketing e amministrazione. La direzione del gruppo si occupa solo della strategia generale.',
+  clue:'I reparti produzione, marketing e amministrazione sono uno solo per tutta l\'azienda o si ripetono?',
+  why:['L\'azienda è divisa per prodotto: ogni divisione è quasi un\'azienda a sé.','Le funzioni (produzione, marketing, amministrazione) si ripetono dentro ogni divisione.'],
+  q:'Perché conviene a un gruppo con prodotti molto diversi? Quale costo si paga rispetto a un\'unica amministrazione per tutti?',
+  org:{type:'tree',root:{n:'Direzione gruppo',c:[
+    {n:'Divisione Pasta',c:[{n:'Produzione'},{n:'Marketing'},{n:'Amm.'}]},
+    {n:'Divisione Forno',c:[{n:'Produzione'},{n:'Marketing'},{n:'Amm.'}]},
+    {n:'Divisione Bevande',c:[{n:'Produzione'},{n:'Marketing'},{n:'Amm.'}]}]}}},
+ {t:'La software house',ans:'M',
+  text:'In una software house ci sono i reparti Sviluppo, Design e Test, ciascuno con un responsabile. Ogni persona lavora però su due progetti alla volta, e per ogni progetto c\'è un project manager. Quindi ognuno risponde sia al capo del proprio reparto sia al project manager del progetto.',
+  clue:'Quanti capi ha ogni persona?',
+  why:['Doppia dipendenza: responsabile di funzione e responsabile di progetto.','La struttura per funzioni e quella per progetti si incrociano, come righe e colonne di una tabella.'],
+  q:'Cosa può andare storto se i due capi chiedono cose opposte nello stesso giorno? Chi dovrebbe avere l\'ultima parola?',
+  org:{type:'matrix',cols:['Progetto App Spesa','Progetto Gestionale'],colLeads:['PM Anna','PM Luca'],rows:['Sviluppo','Design','Test'],rowLeads:['Resp. sviluppo','Resp. design','Resp. test']}},
+ {t:'La pizzeria',ans:'L',
+  text:'La pizzeria ha un titolare, un pizzaiolo capo con due aiutanti e un responsabile di sala con tre camerieri. Gli aiutanti rispondono al pizzaiolo capo, i camerieri al responsabile di sala, e i due responsabili rispondono al titolare.',
+  clue:'Questa volta ci sono livelli intermedi. Ma ogni persona ha più di un capo?',
+  why:['Anche con più livelli la struttura resta lineare: ognuno ha un solo capo, e i capi rispondono al titolare.','Non ci sono divisioni autonome né doppie dipendenze.'],
+  q:'Qual è la differenza con l\'officina di prima? Pensate: quante funzioni diverse ci sono in una pizzeria?',
+  org:{type:'tree',root:{n:'Titolare',c:[{n:'Pizzaiolo capo',c:[{n:'Aiuto 1'},{n:'Aiuto 2'}]},{n:'Resp. sala',c:[{n:'Cameriere 1'},{n:'Cameriere 2'},{n:'Cameriere 3'}]}]}}},
+ {t:'La catena di negozi',ans:'D',
+  text:'"Moda Mare" ha negozi in tutta Italia, organizzati in tre sedi regionali: Nord, Centro e Sud. Ogni sede ha un direttore e gestisce acquisti, negozi e personale della propria zona. La direzione centrale coordina le tre sedi.',
+  clue:'Qui il criterio è il prodotto, la zona o l\'attività?',
+  why:['Le divisioni possono essere per zona geografica, oltre che per prodotto.','Ogni sede gestisce in autonomia le proprie funzioni.'],
+  q:'Perché una sede regionale conosce meglio i propri clienti? Quale rischio c\'è che le tre sedi facciano scelte troppo diverse?',
+  org:{type:'tree',root:{n:'Direzione centrale',c:[
+    {n:'Sede Nord',c:[{n:'Acquisti'},{n:'Negozi'},{n:'Personale'}]},
+    {n:'Sede Centro',c:[{n:'Acquisti'},{n:'Negozi'},{n:'Personale'}]},
+    {n:'Sede Sud',c:[{n:'Acquisti'},{n:'Negozi'},{n:'Personale'}]}]}}},
+ {t:'L\'azienda di abbigliamento',ans:'F',
+  text:'Un\'azienda di abbigliamento con 120 dipendenti ha cinque reparti: Stile, Produzione, Vendite, Logistica e Amministrazione. Vende un solo genere di prodotti in un solo mercato. Ogni reparto ha un responsabile che risponde al direttore.',
+  clue:'I reparti sono raggruppati per attività o ripetuti per prodotto o zona?',
+  why:['Reparti per attività svolta, ognuno con un solo responsabile.','Un solo prodotto e un solo mercato: non serve dividere in divisioni.'],
+  q:'Se l\'azienda iniziasse a vendere anche scarpe e borse all\'estero, la struttura attuale reggerebbe? Quale struttura le servirebbe?',
+  org:{type:'tree',root:{n:'Direttore',c:[{n:'Stile'},{n:'Produzione'},{n:'Vendite'},{n:'Logistica'},{n:'Amministrazione'}]}}},
+ {t:'Lo studio di ingegneria',ans:'M',
+  text:'Uno studio di ingegneria ha uffici di Strutture, Impianti e Topografia, ognuno con il proprio responsabile. Per ogni grande cantiere viene nominato un direttore di progetto che coordina persone provenienti dai vari uffici. Quelle persone continuano comunque a rispondere anche al responsabile del loro ufficio.',
+  clue:'Chi risponde a più di un capo?',
+  why:['I tecnici rispondono sia al responsabile d\'ufficio sia al direttore di progetto: doppia dipendenza.','Gli uffici (funzioni) si incrociano con i cantieri (progetti).'],
+  q:'Quando un tecnico lavora su due cantieri insieme, come si decide a quale dare la precedenza? Che regole servono per evitare conflitti?',
+  org:{type:'matrix',cols:['Cantiere Ponte','Cantiere Scuola'],colLeads:['Dir. progetto A','Dir. progetto B'],rows:['Strutture','Impianti','Topografia'],rowLeads:['Resp. strutture','Resp. impianti','Resp. topografia']}}
+];
+
+const RECAP=[
+ ['Lineare','Ogni persona ha un solo capo, catena di comando semplice','Rapida e chiara, costa poco','Il vertice si sovraccarica, adatta solo alle realtà piccole'],
+ ['Funzionale','Reparti per attività (produzione, vendite, amministrazione)','Competenze specializzate, niente doppioni','Reparti poco collegati, decisioni lente tra reparti'],
+ ['Divisionale','Divisioni per prodotto, mercato o zona, ognuna con le proprie funzioni','Autonomia e vicinanza al mercato','Funzioni ripetute, costi più alti, rischio di scelte diverse'],
+ ['Matriciale','Doppia dipendenza: capo di funzione e capo di progetto','Flessibile, usa bene le competenze sui progetti','Conflitti tra i due capi, serve molta comunicazione']
+];
+
+/* ---------- stato ---------- */
+let clueOpen={};let N=4, teams=[], votes=[], bonus=[], revealed=[], step=-1; // step -1 = intro? usiamo 0..n-1 casi, n = finale
+function initState(){
+  while(teams.length<N) teams.push('Squadra '+(teams.length+1));
+  teams.length=N;
+  votes=CASES.map(()=>Array(N).fill(null));
+  bonus=CASES.map(()=>Array(N).fill(false));
+  revealed=CASES.map(()=>false);
+}
+function score(ti){
+  let s=0;
+  CASES.forEach((c,i)=>{ if(revealed[i]){ if(votes[i][ti]===c.ans) s++; if(bonus[i][ti]) s++; } });
+  return s;
+}
+
+/* ---------- disegno ---------- */
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function leaves(n){return n.c?n.c.reduce((a,x)=>a+leaves(x),0):1}
+function lbl(t,x,y,H,W,col,fw){
+  const max=Math.floor(W/8.2); let lines=[t];
+  if(t.length>max){const w=t.split(' ');let a='',b='';w.forEach(k=>{if((a+' '+k).trim().length<=max&&!b)a=(a+' '+k).trim();else b=(b+' '+k).trim()});lines=[a,b]}
+  const sy=lines.length===1?y+H/2+5:y+H/2-3;
+  return lines.map((l,i)=>`<text x="${x}" y="${sy+i*16}" text-anchor="middle" font-size="14" font-weight="${fw}" fill="${col}">${esc(l)}</text>`).join('');
+}
+function treeSVG(root){
+  const W=150,H=50,GX=14,GY=44;
+  const pos=[];let maxD=0;
+  function lay(n,d,x0){
+    maxD=Math.max(maxD,d);
+    const w=leaves(n)*(W+GX);
+    n._x=x0+w/2; n._d=d;
+    if(n.c){let x=x0;n.c.forEach(k=>{lay(k,d+1,x);x+=leaves(k)*(W+GX)})}
+    pos.push(n);
+    return w;
+  }
+  const tw=lay(root,0,0);
+  const th=(maxD+1)*H+maxD*GY;
+  let s=`<svg viewBox="-6 -6 ${tw+12} ${th+12}" role="img" aria-label="Organigramma" style="max-height:340px">`;
+  (function ln(n){ if(n.c) n.c.forEach(k=>{
+      const y1=n._d*(H+GY)+H, y2=k._d*(H+GY), ym=(y1+y2)/2;
+      s+=`<path d="M${n._x} ${y1} V${ym} H${k._x} V${y2}" fill="none" stroke="#7b86a3" stroke-width="2"/>`; ln(k)}) })(root);
+  pos.forEach(n=>{
+    const y=n._d*(H+GY), top=n._d===0, leaf=!n.c;
+    s+=`<rect x="${n._x-W/2}" y="${y}" width="${W}" height="${H}" rx="8" fill="${top?'#2f5bd8':leaf?'#f1f3f9':'#e6edff'}" stroke="${top?'#2f5bd8':'#9aa7cc'}" stroke-width="1.5"/>`+
+       lbl(n.n,n._x,y,H,W,top?'#fff':'#1d2433',leaf?400:600);
+  });
+  return s+'</svg>';
+}
+function matrixSVG(o){
+  const cw=190,rh=64,lw=150,hh=46,pad=8;
+  const W=lw+o.cols.length*cw+pad*2, H=hh*2+o.rows.length*rh+pad*2+22;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Struttura matriciale" style="max-height:340px">`;
+  // intestazioni colonne: capi di progetto + nome progetto
+  o.cols.forEach((c,j)=>{
+    const x=pad+lw+j*cw;
+    s+=`<rect x="${x+6}" y="${pad}" width="${cw-12}" height="${hh-8}" rx="8" fill="#2f5bd8"/><text x="${x+cw/2}" y="${pad+(hh-8)/2+5}" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">${esc(o.colLeads[j])}</text>`;
+    s+=`<text x="${x+cw/2}" y="${pad+hh+hh/2}" text-anchor="middle" font-size="13" fill="#5b6478">${esc(c)}</text>`;
+  });
+  o.rows.forEach((r,i)=>{
+    const y=pad+hh*2+i*rh;
+    s+=`<rect x="${pad}" y="${y+8}" width="${lw-12}" height="${rh-16}" rx="8" fill="#e6edff" stroke="#9aa7cc"/><text x="${pad+(lw-12)/2}" y="${y+rh/2-2}" text-anchor="middle" font-size="13" font-weight="600">${esc(o.rowLeads[i])}</text><text x="${pad+(lw-12)/2}" y="${y+rh/2+14}" text-anchor="middle" font-size="12" fill="#5b6478">${esc(r)}</text>`;
+    o.cols.forEach((c,j)=>{
+      const x=pad+lw+j*cw;
+      s+=`<rect x="${x+6}" y="${y+6}" width="${cw-12}" height="${rh-12}" rx="8" fill="#fff7e6" stroke="#e0b25c"/><text x="${x+cw/2}" y="${y+rh/2+5}" text-anchor="middle" font-size="13" fill="#1d2433">${esc(r)} su progetto ${j+1}</text>`;
+    });
+  });
+  s+=`<text x="${W/2}" y="${H-8}" text-anchor="middle" font-size="12" fill="#b9770e">Ogni persona risponde al capo della riga e al capo della colonna</text>`;
+  return s+'</svg>';
+}
+
+/* ---------- render ---------- */
+function renderNav(){
+  const last=CASES.length;
+  $('prev').disabled = step<=0;
+  $('next').disabled = step>=last || step<0 && false;
+  $('pos').textContent = step<0?'Avvio':(step<last?`Caso ${step+1} di ${last}`:'Classifica finale');
+  $('next').textContent = step<0?'Inizia →':'Avanti →';
+  $('setup').classList.toggle('hidden',step>=0);
+}
+function render(){
+  renderNav();
+  const v=$('view');
+  if(step<0){ v.innerHTML=''; return; }
+  if(step>=CASES.length){ renderFinal(v); return; }
+  const c=CASES[step], rv=revealed[step];
+  let h=`<div class="card"><span class="tag">Caso ${step+1} di ${CASES.length}</span><h2>${esc(c.t)}</h2><div class="case">${esc(c.text)}</div>
+    <div style="margin-top:.7rem"><button class="btn" id="clueb">Indizio</button></div>
+    <div class="clue ${clueOpen[step]?'':'hidden'}" id="clue">${esc(c.clue)}</div></div>`;
+  h+=`<div class="card"><b>Che struttura è? Ogni squadra sceglie.</b><div class="teams" style="margin-top:.5rem">`;
+  for(let t=0;t<N;t++){
+    const vt=votes[step][t];
+    h+=`<div class="trow"><input value="${esc(teams[t])}" data-t="${t}" class="tn" aria-label="Nome squadra ${t+1}">
+      <div class="ch">${Object.keys(KIND).map(k=>{
+        let cl=''; if(rv){ if(k===c.ans) cl='right'; else if(k===vt) cl='wrong'; } else if(k===vt) cl='sel';
+        return `<button data-t="${t}" data-k="${k}" class="${cl}" ${rv?'disabled':''}>${KIND[k]}</button>`}).join('')}</div>
+      <div class="pts">${rv?`<button class="bonus ${bonus[step][t]?'on':''}" data-b="${t}">+1 motivazione</button>`:''}${score(t)} pt</div></div>`;
+  }
+  h+=`</div><div style="margin-top:.7rem"><button class="btn pri" id="revb" ${rv?'class="hidden"':''}>${rv?'Rivelato':'Rivela la risposta'}</button></div></div>`;
+  if(rv){
+    h+=`<div class="card reveal"><h3>Risposta: struttura ${KIND[c.ans].toLowerCase()}</h3><ul>${c.why.map(w=>`<li>${esc(w)}</li>`).join('')}</ul>${c.org.type==='tree'?treeSVG(JSON.parse(JSON.stringify(c.org.root))):matrixSVG(c.org)}
+      <div class="disc"><b>Per la discussione:</b> ${esc(c.q)}</div></div>`;
+  }
+  v.innerHTML=h;
+  $('clueb').onclick=()=>{clueOpen[step]=!clueOpen[step];$('clue').classList.toggle('hidden');};
+  if($('revb')) { if(rv) $('revb').disabled=true; else $('revb').onclick=()=>{revealed[step]=true;render();}; }
+  v.querySelectorAll('.ch button').forEach(b=>b.onclick=()=>{ if(revealed[step])return; const t=+b.dataset.t; votes[step][t]=votes[step][t]===b.dataset.k?null:b.dataset.k; render(); });
+  v.querySelectorAll('.bonus').forEach(b=>b.onclick=()=>{const t=+b.dataset.b;bonus[step][t]=!bonus[step][t];render();});
+  v.querySelectorAll('.tn').forEach(i=>i.onchange=()=>{teams[+i.dataset.t]=i.value||('Squadra '+(+i.dataset.t+1));render();});
+}
+function renderFinal(v){
+  const order=teams.map((n,i)=>({n,i,s:score(i)})).sort((a,b)=>b.s-a.s);
+  let h=`<div class="card"><span class="tag">Fine</span><h2>Classifica</h2>`;
+  order.forEach((o,k)=>{h+=`<div class="rank"><b>${k+1}</b><span>${esc(o.n)}</span><span class="s">${o.s} pt</span></div>`});
+  h+=`</div><div class="card"><h2>Ripasso: come riconoscerle</h2><table><tr><th>Struttura</th><th>Come si riconosce</th><th>Punti di forza</th><th>Rischi</th></tr>${RECAP.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('')}</table></div>`;
+  v.innerHTML=h;
+}
+
+/* ---------- controlli ---------- */
+function buildN(){
+  $('nbtns').innerHTML=[2,3,4,5,6].map(n=>`<button class="btn ${n===N?'pri':''}" data-n="${n}">${n}</button>`).join(' ');
+  $('nbtns').querySelectorAll('button').forEach(b=>b.onclick=()=>{N=+b.dataset.n;initState();buildN();render();});
+}
+$('prev').onclick=()=>{ if(step>0){step--;render();window.scrollTo(0,0);} };
+$('next').onclick=()=>{ if(step<CASES.length){step++;render();window.scrollTo(0,0);} };
+let fs=20;
+function setFs(){document.documentElement.style.setProperty('--fs',fs+'px')}
+$('zp').onclick=()=>{fs=Math.min(30,fs+2);setFs()};
+$('zm').onclick=()=>{fs=Math.max(14,fs-2);setFs()};
+document.addEventListener('keydown',e=>{ if(e.target.tagName==='INPUT')return; if(e.key==='ArrowRight')$('next').click(); if(e.key==='ArrowLeft')$('prev').click(); });
+initState();buildN();render();
+</script>
+</body>
+</html>

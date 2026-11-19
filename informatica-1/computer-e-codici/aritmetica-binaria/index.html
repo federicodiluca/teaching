@@ -1,0 +1,193 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Aritmetica binaria: giochi di classe</title><style>:root{--bg:#f6f7fb;--card:#fff;--ink:#1d2433;--mute:#5b6577;--line:#d7dce7;--acc:#2f5bea;--ok:#1e8e4e;--okbg:#e4f6ec;--ko:#c0392b;--kobg:#fdeaea;--sel:#fff3c4}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.4}
+header{background:var(--acc);color:#fff;padding:14px 20px}header h1{margin:0;font-size:20px}
+nav{display:flex;gap:6px;padding:10px 12px;background:#fff;border-bottom:1px solid var(--line);overflow-x:auto;position:sticky;top:0;z-index:5}
+nav button{flex:0 0 auto;border:1px solid var(--line);background:#fff;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:14px;color:var(--ink)}
+nav button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+main{max-width:940px;margin:0 auto;padding:16px 16px 50px}
+section{display:none}section.on{display:block}
+h2{font-size:18px;margin:8px 0}p.lead{color:var(--mute);margin:4px 0 14px}
+.btn{background:var(--acc);color:#fff;border:0;border-radius:8px;padding:10px 16px;font-size:15px;cursor:pointer}
+.btn.sec{background:#fff;color:var(--acc);border:1px solid var(--acc)}.btn:disabled{opacity:.45}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:12px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin:10px 0}
+.q{font-size:17px;margin:0 0 10px}.turn{background:#eef1fb;border-radius:8px;padding:6px 10px;font-size:14px;margin-bottom:10px;display:inline-block}
+.f{display:flex;align-items:center;gap:8px;margin:8px 0;flex-wrap:wrap}.f label{min-width:150px;font-weight:bold;font-size:14px}
+input[type=text],select{padding:9px;border:1px solid var(--line);border-radius:8px;font-size:16px;font-family:Consolas,monospace;min-width:200px}
+input.ok,select.ok{background:var(--okbg);border-color:var(--ok)}input.ko,select.ko{background:var(--kobg);border-color:var(--ko)}
+.sol{background:#fff8dc;border:1px solid #e6d58a;border-radius:8px;padding:10px;margin-top:10px;font-size:14px}
+.sol pre{margin:6px 0;font-family:Consolas,monospace;white-space:pre-wrap}
+.stat{color:var(--mute);font-size:14px;margin-top:8px}.msg{font-weight:bold}
+.sw{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.bit{width:62px;border:2px solid var(--line);background:#fff;border-radius:10px;text-align:center;padding:6px 0;cursor:pointer;user-select:none}
+.bit b{display:block;font-size:26px;font-family:Consolas,monospace}.bit small{color:var(--mute)}
+.bit.on{background:var(--acc);color:#fff;border-color:var(--acc)}.bit.on small{color:#cfdcff}
+.val{font-family:Consolas,monospace;font-size:18px}
+table.tv{border-collapse:collapse;margin:10px 0}table.tv th,table.tv td{border:1px solid var(--line);padding:8px 14px;text-align:center;background:#fff;font-family:Consolas,monospace;font-size:16px}
+table.tv td.out{cursor:pointer;min-width:70px;background:#f0f3fb}table.tv td.ok{background:var(--okbg)}table.tv td.ko{background:var(--kobg)}
+table.res{border-collapse:collapse;margin:10px 0}table.res td,table.res th{border:1px solid var(--line);padding:8px 14px;background:#fff;text-align:left}
+.timer{font-family:Consolas,monospace;font-size:18px}
+.pool{display:flex;gap:8px;flex-wrap:wrap;min-height:50px;padding:10px;background:#eef1f8;border:1px dashed var(--line);border-radius:10px;margin-bottom:12px}
+.chip{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 10px;cursor:pointer;max-width:330px;font-size:14px;user-select:none}
+.chip.sel{background:var(--sel);border-color:#d9a900}.chip.wrong{animation:sh .35s}
+@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.buckets{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
+.bk{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:10px;min-height:100px;cursor:pointer}
+.bk h3{margin:0 0 2px;font-size:15px}.bk small{color:var(--mute);display:block;margin-bottom:6px}.bk.hl{border-color:var(--acc);background:#f0f4ff}
+.bk .chip{background:var(--okbg);border-color:var(--ok);cursor:default;margin:4px 0;max-width:none}
+.line{display:block;width:100%;text-align:left;font-family:Consolas,monospace;font-size:15px;border:1px solid var(--line);background:#fff;border-radius:8px;padding:8px 10px;margin:4px 0;cursor:pointer}
+.line.ok{background:var(--okbg);border-color:var(--ok)}.line.ko{background:var(--kobg);border-color:var(--ko)}
+.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:640px}
+.tile{height:70px;border:2px solid var(--line);border-radius:10px;background:var(--acc);color:#fff;font-size:17px;font-family:Consolas,monospace;display:flex;align-items:center;justify-content:center;cursor:pointer;text-align:center;padding:4px}
+.tile.up{background:#fff;color:var(--ink)}.tile.done{background:var(--okbg);color:var(--ink);border-color:var(--ok);cursor:default}
+.grid{display:grid;gap:2px;width:fit-content}.px{width:34px;height:34px;border:1px solid #bbb;cursor:pointer}
+.add input{width:34px;min-width:0;text-align:center;padding:6px 2px}.add td,.add th{padding:2px 3px;font-family:Consolas,monospace}
+.cb{display:inline-block;margin:6px 14px 6px 0}
+</style><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head><body><header><h1>Aritmetica binaria: giochi di classe</h1></header><nav id="nav"></nav><main>
+<section id="inizio" data-t="Inizio"><h2>Somma, overflow e valori rappresentabili</h2><p class="lead">Giochi per fare somme in binario e capire cosa succede quando i bit non bastano.</p><ol><li><b>Somma in colonna:</b> riporti e risultato, colonna per colonna.</li><li><b>Allenatore:</b> somme, overflow, quanti valori con n bit, spostamenti.</li><li><b>Missione finale:</b> dieci domande miste a tempo.</li></ol>
+<p>Si gioca in coppia: ad ogni esercizio tocca a uno dei due scrivere, mentre l'altro controlla e discute. Nelle risposte potete usare la virgola o il punto; gli zeri iniziali e le maiuscole non contano.</p>
+<div class="row"><label>Primo nome: <input type="text" id="n1" placeholder="Nome"></label><label>Secondo nome: <input type="text" id="n2" placeholder="Nome"></label></div></section>
+<section id="s1" data-t="1 Somma in colonna"><h2>1. Somma in colonna</h2><p class="lead">Compilate i riporti e il risultato, partendo dalla colonna di destra.</p><div id="add"></div></section><section id="s2" data-t="2 Allenatore"><h2>2. Allenatore</h2><p class="lead">Scegliete il tipo e il livello. Dopo ogni esercizio il turno passa all'altro giocatore.</p><div id="all"></div></section>
+<section id="ms-sec" data-t="Missione finale"><h2>Missione finale</h2><p class="lead">Dieci domande miste, a turno. Il tempo parte con il primo clic. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="ms"></div></section><section id="res" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section></main><script>
+const DBG={};const $=s=>document.querySelector(s);
+const rnd=(a,b)=>Math.floor(Math.random()*(b-a+1))+a,pick=a=>a[rnd(0,a.length-1)];
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=rnd(0,i);[a[i],a[j]]=[a[j],a[i]]}return a}
+const B=(n,b)=>n.toString(b).toUpperCase(),fmt=x=>String(x).replace('.',','),sep=n=>n.toLocaleString('it-IT');
+const lv=(l,a,b,c)=>[a,b,c][l-1];
+function norm(s){s=String(s).trim().toUpperCase().replace(/\s+/g,'');if(s.includes('.')&&!s.includes(','))s=s.replace('.',',');
+ let [i,f]=s.split(',');i=(i||'').replace(/^0+/,'')||'0';if(f!==undefined){f=f.replace(/0+$/,'');return f?i+','+f:i}return i}
+function parseNum(s){s=String(s).trim().replace(/\s+/g,'');if(/^\d{1,3}(\.\d{3})+(,\d+)?$/.test(s))s=s.replace(/\./g,'');s=s.replace(',','.');const v=Number(s);return isNaN(v)||s===''?NaN:v}
+function checkField(f,val){if(f.kind==='str')return norm(val)===norm(f.exp);if(f.kind==='choice')return val===f.exp;
+ const v=parseNum(val),e=Number(f.exp);if(isNaN(v))return false;if(f.tol===0)return v===e;return Math.abs(v-e)<=Math.abs(e)*(f.tol||0.005)+1e-9}
+const P=h=>`<pre>${h}</pre>`;
+/* sezioni e navigazione */
+const SECS=[...document.querySelectorAll('section')];SECS[0].classList.add('on');
+$('#nav').innerHTML=SECS.map((s,i)=>`<button data-s="${s.id}" class="${i===0?'on':''}">${s.dataset.t}</button>`).join('');
+function go(id){SECS.forEach(x=>x.classList.toggle('on',x.id===id));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.s===id));if(id==='res')showRes();window.scrollTo(0,0)}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>go(b.dataset.s));
+/* coppia e statistiche */
+const PAIR={n:['Giocatore 1','Giocatore 2'],t:1},ST={g:{},ms:null};
+function names(){PAIR.n=[$('#n1').value.trim()||'Giocatore 1',$('#n2').value.trim()||'Giocatore 2']}
+function turn(){names();PAIR.t^=1;return `<div class="turn">Tocca a <b>${PAIR.n[PAIR.t]}</b> (scrive) · <b>${PAIR.n[PAIR.t^1]}</b> controlla</div>`}
+const stat=l=>ST.g[l]=ST.g[l]||{ok:0,tot:0};
+/* motore esercizi */
+function fieldsHTML(ex){return ex.fields.map(f=>`<div class="f"><label>${f.label}</label>`+(f.kind==='choice'?`<select>${f.opts.map(o=>`<option>${o}</option>`).join('')}</select>`:`<input type="text" autocomplete="off" autocapitalize="off" spellcheck="false">`)+`</div>`).join('')}
+function mount(el,genFn,label){const st=stat(label);el.innerHTML='';const box=document.createElement('div');el.appendChild(box);let ex,first;
+ function draw(){ex=genFn();first=true;
+  box.innerHTML=`<div class="card">${turn()}<p class="q">${ex.q}</p>${fieldsHTML(ex)}<div class="row"><button class="btn" data-a="c">Controlla</button><button class="btn sec" data-a="s">Mostra il procedimento</button><button class="btn sec" data-a="n">Altro esercizio</button><span class="msg"></span></div><div class="sol" style="display:none"></div><div class="stat"></div></div>`;
+  box.querySelector('[data-a=c]').onclick=check;box.querySelector('[data-a=n]').onclick=draw;
+  box.querySelector('[data-a=s]').onclick=()=>{const s=box.querySelector('.sol');s.innerHTML='<b>Procedimento</b>'+ex.sol;s.style.display='block'};
+  box.querySelectorAll('input').forEach(i=>i.onkeydown=e=>{if(e.key==='Enter')check()});up()}
+ const up=()=>box.querySelector('.stat').textContent=`Esatti: ${st.ok} su ${st.tot}`;
+ function check(){const ins=[...box.querySelectorAll('.f input,.f select')];let all=true;
+  ex.fields.forEach((f,i)=>{const ok=checkField(f,ins[i].value);ins[i].classList.remove('ok','ko');ins[i].classList.add(ok?'ok':'ko');if(!ok)all=false});
+  if(first){st.tot++;if(all)st.ok++;first=false}const m=box.querySelector('.msg');m.textContent=all?'Esatto!':'Non ancora: controllate i campi rossi o aprite il procedimento.';m.style.color=all?'var(--ok)':'var(--ko)';up()}
+ draw()}
+/* menu a tendina + motore */
+function mountMenu(el,items,label,levels){el.innerHTML=`<div class="row"><select class="mt">${items.map((a,i)=>`<option value="${i}">${a[0]}</option>`).join('')}</select>`+(levels?`<select class="ml"><option value="1">Livello 1: facile</option><option value="2">Livello 2: medio</option><option value="3">Livello 3: difficile</option></select>`:'')+`</div><div class="inner"></div>`;
+ const m=()=>{const i=+el.querySelector('.mt').value,l=levels?+el.querySelector('.ml').value:1;mount(el.querySelector('.inner'),()=>items[i][1](l),label+': '+items[i][0]+(levels?' (liv. '+l+')':''))};
+ el.querySelector('.mt').onchange=m;if(levels)el.querySelector('.ml').onchange=m;m()}
+/* missione finale */
+function mission(el,poolFns,label){let T;el.innerHTML=`<div class="row"><button class="btn" id="ms-s">Inizia la missione</button><span class="timer" id="ms-t"></span></div><div id="ms-x"></div>`;
+ const tt=()=>{const s=Math.floor((Date.now()-T.t0)/1000);return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
+ el.querySelector('#ms-s').onclick=()=>{T={t0:Date.now(),n:0,pts:0,qs:shuffle(poolFns).slice(0,10)};ST.ms=null;el.querySelector('#ms-s').disabled=true;clearInterval(T.iv);T.iv=setInterval(()=>el.querySelector('#ms-t').textContent=tt(),500);Q()};
+ function Q(){const ex=T.qs[T.n]();const x=el.querySelector('#ms-x');
+  x.innerHTML=`<div class="card">${turn()}<div class="stat">Domanda ${T.n+1} di 10 · punti: ${T.pts}</div><p class="q">${ex.q}</p>${fieldsHTML(ex)}<div class="row"><button class="btn" id="c">Controlla</button><button class="btn sec" id="n" style="display:none">Avanti</button><span class="msg" id="m"></span></div><div class="sol" id="sl" style="display:none"></div></div>`;
+  x.querySelector('#c').onclick=()=>{const ins=[...x.querySelectorAll('.f input,.f select')];let all=true;ex.fields.forEach((f,i)=>{const ok=checkField(f,ins[i].value);ins[i].classList.add(ok?'ok':'ko');if(!ok)all=false;ins[i].disabled=true});
+   if(all)T.pts++;const m=x.querySelector('#m');m.textContent=all?'Esatto! +1':'Sbagliato. Procedimento sotto.';m.style.color=all?'var(--ok)':'var(--ko)';
+   if(!all){const s=x.querySelector('#sl');s.innerHTML='<b>Procedimento</b>'+ex.sol;s.style.display='block'}
+   x.querySelector('#c').disabled=true;const n=x.querySelector('#n');n.style.display='inline-block';n.textContent=T.n===9?'Vedi il risultato':'Avanti'};
+  x.querySelector('#n').onclick=()=>{T.n++;if(T.n>=10){clearInterval(T.iv);ST.ms={pts:T.pts,t:tt(),label};x.innerHTML=`<div class="card"><p class="q">Missione finita: <b>${T.pts} su 10</b> in ${ST.ms.t}.</p></div>`;el.querySelector('#ms-s').disabled=false;el.querySelector('#ms-s').textContent='Riprova la missione'}else Q()}}}
+/* gioco di smistamento (clic) */
+function sortGame(el,cards,buckets,label){const st=stat(label);let L,sel;
+ function draw(){L={left:cards.length,err:0};sel=null;st.done=false;
+  el.innerHTML=`<div class="pool"></div><div class="buckets"></div><div class="row"><span class="msg"></span><button class="btn sec" data-a="r">Ricomincia</button></div>`;
+  const pool=el.querySelector('.pool'),bk=el.querySelector('.buckets');
+  shuffle([...cards.keys()]).forEach(i=>{const c=document.createElement('div');c.className='chip';c.textContent=cards[i][0];c.dataset.i=i;
+   c.onclick=()=>{el.querySelectorAll('.chip.sel').forEach(x=>x.classList.remove('sel'));if(sel===c){sel=null;hl(false);return}sel=c;c.classList.add('sel');hl(true)};pool.appendChild(c)});
+  buckets.forEach(k=>{const d=document.createElement('div');d.className='bk';d.dataset.id=k.id;d.innerHTML=`<h3>${k.t}</h3><small>${k.s||''}</small>`;d.onclick=()=>put(d);bk.appendChild(d)});
+  el.querySelector('[data-a=r]').onclick=draw;msg()}
+ const hl=on=>el.querySelectorAll('.bk').forEach(x=>x.classList.toggle('hl',on));
+ const msg=()=>{el.querySelector('.msg').textContent=L.left?`Carte da smistare: ${L.left}. Errori: ${L.err}.`:`Finito! Errori: ${L.err}.`};
+ function put(d){if(!sel)return;hl(false);const c=sel;sel=null;
+  if(cards[c.dataset.i][1]===d.dataset.id){c.classList.remove('sel');c.onclick=null;d.appendChild(c);L.left--;if(!L.left&&!st.done){st.done=true;st.tot++;if(L.err===0)st.ok++}}
+  else{L.err++;c.classList.remove('sel');c.classList.add('wrong');setTimeout(()=>c.classList.remove('wrong'),400)}msg()}
+ draw()}
+/* tavola di verità interattiva */
+function truthTable(vars,rowsAns,cls){}
+function showRes(){names();$('#who').textContent=`Coppia: ${PAIR.n[0]} e ${PAIR.n[1]}`;const r=[];
+ Object.keys(ST.g).forEach(k=>{const v=ST.g[k];if(v.tot)r.push([k,`${v.ok} su ${v.tot} esatti`])});
+ r.push(['Missione finale',ST.ms?`${ST.ms.pts} su 10 in ${ST.ms.t}`:'non ancora fatta']);
+ $('#restab').innerHTML=r.map(x=>`<tr><th>${x[0]}</th><td>${x[1]}</td></tr>`).join('');
+ $('#rmsg').textContent=ST.ms&&ST.ms.pts>=8?'Ottimo lavoro!':'Rifate i giochi in cui avete sbagliato di più e poi riprovate la missione.'}
+
+function solDec2Bin(n,base=2){let L=[],x=n;if(x===0)return `0 : ${base} = 0 resto 0\n`;while(x>0){const q=Math.floor(x/base),r=x%base;L.push(`${x} : ${base} = ${q}  resto ${B(r,base)}`);x=q}return L.join('\n')+`\nSi leggono i resti dal basso verso l'alto: ${B(n,base)}\n`}
+function solPoly(bits){const n=bits.length;let t=[],v=[];[...bits].forEach((c,i)=>{const p=n-1-i;t.push(`${c}×2^${p}`);if(c==='1')v.push(Math.pow(2,p))});return t.join(' + ')+`\n= ${v.join(' + ')} = ${v.reduce((a,b)=>a+b,0)}\n`}
+function solFracToBin(k,m){let x=k/Math.pow(2,m),bits='',L=[];for(let i=0;i<m;i++){const y=x*2,b=Math.floor(y);L.push(`${fmt(x)} × 2 = ${fmt(y)}  → ${b}`);bits+=b;x=y-b}return L.join('\n')+`\nSi leggono le cifre intere dall'alto verso il basso: ,${bits}\n`}
+function groups(bits,k){const p=(k-bits.length%k)%k;return ('0'.repeat(p)+bits).match(new RegExp('.{'+k+'}','g'))}
+function solGroup(bits,k,base){const g=groups(bits,k);return `Gruppi da ${k} bit (da destra): ${g.join(' ')}  →  ${g.map(x=>B(parseInt(x,2),base)).join('')}\n`}
+function gBin2Dec(l){const bits=lv(l,rnd(4,5),rnd(6,8),rnd(9,12));const n=rnd(1<<(bits-1),(1<<bits)-1),b=B(n,2);
+ return{q:`Converti in decimale il numero binario <b>${b}</b>`,fields:[{label:'Decimale',exp:String(n),kind:'str'}],sol:P(solPoly(b))}}
+function gDec2Bin(l){const n=lv(l,rnd(5,31),rnd(32,255),rnd(256,4095));return{q:`Converti in binario il numero decimale <b>${n}</b>`,fields:[{label:'Binario',exp:B(n,2),kind:'str'}],sol:P(solDec2Bin(n))}}
+function gBinFrac2Dec(l){const ib=lv(l,3,4,rnd(4,6)),m=lv(l,2,3,rnd(3,4));const n=rnd(1<<(ib-1),(1<<ib)-1),k=rnd(0,(1<<m)-1)|1;const bi=B(n,2),bf=B(k,2).padStart(m,'0');const val=n+k/(1<<m);
+ const fp=[...bf].map((c,i)=>`${c}×2^-${i+1}`).join(' + '),fv=[...bf].map((c,i)=>c==='1'?fmt(1/Math.pow(2,i+1)):null).filter(x=>x);
+ return{q:`Converti in decimale il numero binario <b>${bi},${bf}</b>`,fields:[{label:'Decimale',exp:fmt(val),kind:'str'}],sol:P(`Parte intera ${bi}:\n${solPoly(bi)}Parte frazionaria ,${bf}:\n${fp}\n= ${fv.join(' + ')} = ${fmt(k/(1<<m))}\nTotale: ${n} + ${fmt(k/(1<<m))} = ${fmt(val)}`)}}
+function gDecFrac2Bin(l){const m=lv(l,2,4,5),n=rnd(1,lv(l,15,63,255)),k=rnd(0,(1<<m)-1)|1;const val=n+k/(1<<m),bf=B(k,2).padStart(m,'0');
+ return{q:`Converti in binario il numero decimale <b>${fmt(val)}</b>`,fields:[{label:'Binario',exp:B(n,2)+','+bf,kind:'str'}],sol:P(`Parte intera ${n}:\n${solDec2Bin(n)}Parte frazionaria ${fmt(k/(1<<m))}:\n${solFracToBin(k,m)}Risultato: ${B(n,2)},${bf}`)}}
+function gBin2OctHex(l){const len=lv(l,rnd(6,8),rnd(9,12),rnd(13,16));const n=(1<<(len-1))+rnd(0,(1<<(len-1))-1),b=B(n,2);
+ return{q:`Converti il numero binario <b>${b}</b> in ottale e in esadecimale`,fields:[{label:'Ottale',exp:B(n,8),kind:'str'},{label:'Esadecimale',exp:B(n,16),kind:'str'}],sol:P(`Ottale:\n${solGroup(b,3,8)}Esadecimale:\n${solGroup(b,4,16)}`)}}
+function gDec2All(l){const n=lv(l,rnd(16,255),rnd(256,4095),rnd(4096,65535)),b=B(n,2);
+ return{q:`Converti il numero decimale <b>${n}</b> in binario, ottale ed esadecimale`,fields:[{label:'Binario',exp:b,kind:'str'},{label:'Ottale',exp:B(n,8),kind:'str'},{label:'Esadecimale',exp:B(n,16),kind:'str'}],sol:P(`Binario:\n${solDec2Bin(n)}Ottale:\n${solGroup(b,3,8)}Esadecimale:\n${solGroup(b,4,16)}`)}}
+function gHex2OctDec(l){const d=lv(l,2,3,4);const n=(1<<(4*(d-1)))*rnd(1,15)+rnd(0,(1<<(4*(d-1)))-1),h=B(n,16),b=B(n,2),digs=[...h];
+ return{q:`Converti il numero esadecimale <b>${h}</b> in ottale e in decimale`,fields:[{label:'Ottale',exp:B(n,8),kind:'str'},{label:'Decimale',exp:String(n),kind:'str'}],
+ sol:P(`Esadecimale → binario (ogni cifra = 4 bit): ${digs.map(c=>B(parseInt(c,16),2).padStart(4,'0')).join(' ')} = ${b}\nBinario → ottale:\n${solGroup(b,3,8)}Decimale:\n${digs.map((c,i)=>`${c}(=${parseInt(c,16)})×16^${d-1-i}`).join(' + ')} = ${n}\n`)}}
+function gOct2BinHex(l){const d=lv(l,2,3,4);const n=(1<<(3*(d-1)))*rnd(1,7)+rnd(0,(1<<(3*(d-1)))-1),o=B(n,8),b=B(n,2);
+ return{q:`Converti il numero ottale <b>${o}</b> in binario e in esadecimale`,fields:[{label:'Binario',exp:b,kind:'str'},{label:'Esadecimale',exp:B(n,16),kind:'str'}],
+ sol:P(`Ottale → binario (ogni cifra = 3 bit): ${[...o].map(c=>B(parseInt(c,8),2).padStart(3,'0')).join(' ')} = ${b}\nBinario → esadecimale:\n${solGroup(b,4,16)}`)}}
+const NUM_ITEMS=[["Binario → decimale",gBin2Dec],["Decimale → binario",gDec2Bin],["Binario con virgola → decimale",gBinFrac2Dec],["Decimale con virgola → binario",gDecFrac2Bin],["Binario → ottale e esadecimale",gBin2OctHex],["Decimale → binario, ottale, esadecimale",gDec2All],["Esadecimale → ottale e decimale",gHex2OctDec],["Ottale → binario e esadecimale",gOct2BinHex]];
+function addTxt(a,b,n){const A=B(a,2).padStart(n,'0'),Bb=B(b,2).padStart(n,'0');let c=0,cs=[],res='';for(let i=n-1;i>=0;i--){const s=+A[i]+ +Bb[i]+c;res=(s%2)+res;c=s>>1;cs.unshift(c)}
+ return {A,Bb,res,c,txt:`  ${A}\n+ ${Bb}\n${'-'.repeat(n+2)}\n${c}${res}   (riporto finale ${c})`}}
+function gSomma(l){const n=lv(l,4,8,8),mx=(1<<n)-1;const over=Math.random()<(l===3?0.6:0.5);let a,b;
+ if(over){a=rnd(Math.ceil((mx+1)/2),mx);b=rnd(mx+1-a,mx)}else{a=rnd(1,mx-1);b=rnd(0,mx-a)}
+ const s=a+b,m=s&mx,t=addTxt(a,b,n);
+ return{q:`Somma in binario su <b>${n} bit</b> i numeri decimali <b>${a}</b> e <b>${b}</b>.`,
+ fields:[{label:`${a} in binario (${n} bit)`,exp:B(a,2),kind:'str'},{label:`${b} in binario (${n} bit)`,exp:B(b,2),kind:'str'},{label:'Somma in decimale',exp:String(s),kind:'str'},{label:"C'è overflow?",exp:s>mx?'Sì':'No',kind:'choice',opts:['','Sì','No']},{label:`Valore memorizzato su ${n} bit (binario)`,exp:B(m,2),kind:'str'}],
+ sol:P(`${a} = ${t.A}\n${b} = ${t.Bb}\n${t.txt}\n`+(s>mx?`Con ${n} bit il valore massimo è ${mx}: la somma (${s}) non entra. Overflow! Il bit di riporto va perso e resta ${t.res} = ${m}.`:`${s} ≤ ${mx}: nessun overflow.`))}}
+function gOverflow(l){const n=pick(lv(l,[4],[6,8],[5,7,9,10])),mx=(1<<n)-1;const a=rnd(Math.floor(mx/3),mx),b=rnd(Math.floor(mx/3),mx),s=a+b;
+ return{q:`Con numeri senza segno su <b>${n} bit</b>, sommando <b>${a}</b> e <b>${b}</b> si ha overflow?`,fields:[{label:'Valore massimo con '+n+' bit',exp:String(mx),kind:'str'},{label:'Somma',exp:String(s),kind:'str'},{label:'Overflow?',exp:s>mx?'Sì':'No',kind:'choice',opts:['','Sì','No']}],
+ sol:P(`Valore massimo con ${n} bit: 2^${n} − 1 = ${mx}\nSomma: ${a} + ${b} = ${s}\n${s} ${s>mx?'>':'≤'} ${mx} → ${s>mx?'overflow':'nessun overflow'}`)}}
+function gInterv(l){const n=lv(l,rnd(3,6),rnd(7,10),rnd(11,16));return{q:`Con <b>${n} bit</b> (numeri senza segno) quanti valori diversi si possono rappresentare e qual è il più grande?`,fields:[{label:'Quanti valori',exp:String(Math.pow(2,n)),kind:'str'},{label:'Valore massimo',exp:String(Math.pow(2,n)-1),kind:'str'}],sol:P(`Valori: 2^${n} = ${sep(Math.pow(2,n))}\nIl più grande è 2^${n} − 1 = ${sep(Math.pow(2,n)-1)} (si parte da 0)`)}}
+function gBitsNeeded(l){const N=lv(l,rnd(5,60),rnd(61,600),rnd(601,70000));const k=Math.ceil(Math.log2(N+1));
+ return{q:`Quanti <b>bit</b> servono, al minimo, per rappresentare tutti i numeri interi da 0 a <b>${N}</b>?`,fields:[{label:'Bit',exp:String(k),kind:'str'}],sol:P(`Con ${k-1} bit il massimo è ${sep(Math.pow(2,k-1)-1)} (troppo poco)\nCon ${k} bit il massimo è ${sep(Math.pow(2,k)-1)} ≥ ${N}\nServono ${k} bit.`)}}
+function gShift(l){const len=lv(l,rnd(3,4),rnd(4,6),rnd(5,7)),n=(1<<(len-1))+rnd(0,(1<<(len-1))-1),b=B(n,2),left=Math.random()<0.5,k=lv(l,1,rnd(1,2),rnd(2,3));
+ if(left){const r=n*Math.pow(2,k);return{q:`Spostate a sinistra di <b>${k}</b> posizioni (aggiungendo ${k} zero a destra) il numero binario <b>${b}</b>. Che numero ottenete?`,fields:[{label:'Binario',exp:B(r,2),kind:'str'},{label:'Decimale',exp:String(r),kind:'str'}],sol:P(`${b} → ${B(r,2)}\nOgni spostamento a sinistra moltiplica per 2: ${n} × 2^${k} = ${r}`)}}
+ const r=Math.floor(n/Math.pow(2,k));return{q:`Spostate a destra di <b>${k}</b> posizioni (eliminando le ultime ${k} cifre) il numero binario <b>${b}</b>. Che numero ottenete?`,fields:[{label:'Binario',exp:B(r,2),kind:'str'},{label:'Decimale',exp:String(r),kind:'str'}],sol:P(`${b} → ${B(r,2)}\nOgni spostamento a destra divide per 2 (parte intera): ${n} : 2^${k} = ${r}`)}}
+function gSommaDec(l){const n=lv(l,rnd(4,5),rnd(5,6),rnd(6,8)),a=rnd(1<<(n-1),(1<<n)-1),b=rnd(1<<(n-2),(1<<n)-1),s=a+b;
+ return{q:`Calcolate in binario <b>${B(a,2)} + ${B(b,2)}</b> e scrivete il risultato in binario e in decimale.`,fields:[{label:'Risultato in binario',exp:B(s,2),kind:'str'},{label:'Risultato in decimale',exp:String(s),kind:'str'}],sol:P(`${B(a,2)} = ${a}, ${B(b,2)} = ${b}\n${addTxt(a,b,Math.max(B(a,2).length,B(b,2).length)).txt}\n(${a} + ${b} = ${s})`)}}
+const ARIT_ITEMS=[["Somma e overflow",gSomma],["Overflow: c'è o non c'è?",gOverflow],["Somma tra numeri binari",gSommaDec],["Quanti valori con n bit",gInterv],["Quanti bit servono",gBitsNeeded],["Spostamenti a sinistra e a destra",gShift]];
+
+function adder(el){const st=stat('Somma in colonna');let n,a,b,exp;
+ function draw(){n=+el.querySelector('select')?.value||4}
+ el.innerHTML=`<div class="row"><select id="an"><option value="4">4 bit</option><option value="6">6 bit</option><option value="8">8 bit</option></select><button class="btn sec" id="anew">Altra somma</button></div><div id="aa"></div>`;
+ function gen(){n=+el.querySelector('#an').value;const mx=(1<<n)-1;const over=Math.random()<0.5;if(over){a=rnd(Math.ceil((mx+1)/2),mx);b=rnd(mx+1-a,mx)}else{a=rnd(1,mx-1);b=rnd(1,mx-a)}
+  const A=B(a,2).padStart(n,'0'),Bb=B(b,2).padStart(n,'0');let c=0,cin=Array(n).fill(0),res=Array(n).fill(0);for(let i=n-1;i>=0;i--){cin[i]=c;const s=+A[i]+ +Bb[i]+c;res[i]=s%2;c=s>>1}
+  exp={cin,res,fin:c,A,Bb,ov:c===1};DBG.exp=exp;DBG.n=n;
+  let h=`<div class="card">${turn()}<p class="q">Eseguite la somma <b>${a} + ${b}</b> in binario su ${n} bit. Scrivete i riporti (la cifra che passa alla colonna successiva) e il risultato, colonna per colonna.</p><table class="add"><tr><th>riporto</th><th></th>`;
+  for(let i=0;i<n;i++)h+=`<td>${i===n-1?'<input type="text" value="0" disabled>':`<input type="text" maxlength="1" data-k="c${i}">`}</td>`;
+  h+=`</tr><tr><th>${a}</th><th></th>${[...A].map(x=>`<td style="text-align:center">${x}</td>`).join('')}</tr><tr><th>+ ${b}</th><th></th>${[...Bb].map(x=>`<td style="text-align:center">${x}</td>`).join('')}</tr><tr><th>risultato</th><td><input type="text" maxlength="1" data-k="f"></td>${[...Array(n)].map((_,i)=>`<td><input type="text" maxlength="1" data-k="r${i}"></td>`).join('')}</tr></table>
+  <p class="stat">Sopra ogni colonna scrivete il riporto che arriva dalla colonna alla sua destra (nella colonna più a destra è sempre 0). La prima casella del risultato è il riporto finale.</p>
+  <div class="f"><label>C'è overflow su ${n} bit?</label><select id="aov"><option></option><option>Sì</option><option>No</option></select></div>
+  <div class="row"><button class="btn" id="ack">Controlla</button><span class="msg" id="am"></span></div><div class="stat" id="ast"></div></div>`;
+  el.querySelector('#aa').innerHTML=h;let first=true;
+  el.querySelector('#ack').onclick=()=>{let all=true;const bad=[];el.querySelectorAll('#aa input[data-k]').forEach(i=>{const k=i.dataset.k;let e;
+    if(k==='f')e=String(exp.fin);else if(k[0]==='r')e=String(exp.res[+k.slice(1)]);else e=String(exp.cin[+k.slice(1)+1]!==undefined?exp.cin[+k.slice(1)]:0);
+    const ok=i.value.trim()===e;i.classList.remove('ok','ko');i.classList.add(ok?'ok':'ko');if(!ok)all=false});
+   const o=el.querySelector('#aov');const okO=o.value===(exp.ov?'Sì':'No');o.classList.remove('ok','ko');o.classList.add(okO?'ok':'ko');if(!okO)all=false;
+   if(first){st.tot++;if(all)st.ok++;first=false}const m=el.querySelector('#am');m.textContent=all?'Perfetto!':'Controllate le caselle rosse: partite dalla colonna di destra.';m.style.color=all?'var(--ok)':'var(--ko)';el.querySelector('#ast').textContent=`Esatte: ${st.ok} su ${st.tot}`};
+  el.querySelector('#ast').textContent=`Esatte: ${st.ok} su ${st.tot}`}
+ el.querySelector('#anew').onclick=gen;el.querySelector('#an').onchange=gen;gen()}
+adder($('#add'));
+mountMenu($('#all'),ARIT_ITEMS,'Allenatore',true);
+mission($('#ms'),[()=>gSomma(1),()=>gSomma(2),()=>gSomma(3),()=>gOverflow(2),()=>gOverflow(3),()=>gInterv(2),()=>gInterv(3),()=>gBitsNeeded(2),()=>gBitsNeeded(3),()=>gShift(2),()=>gShift(3),()=>gSommaDec(2)],'Missione');
+
+</script></body></html>
