@@ -1,5 +1,5 @@
 <!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Numeri e basi: giochi di classe</title><style>:root{--bg:#f6f7fb;--card:#fff;--ink:#1d2433;--mute:#5b6577;--line:#d7dce7;--acc:#2f5bea;--ok:#1e8e4e;--okbg:#e4f6ec;--ko:#c0392b;--kobg:#fdeaea;--sel:#fff3c4}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.4}
+*{box-sizing:border-box}body{margin:0;font-family:var(--tg-sans,Arial,Helvetica,sans-serif);background:var(--bg);color:var(--ink);line-height:1.4}
 header{background:var(--acc);color:#fff;padding:14px 20px}header h1{margin:0;font-size:20px}
 nav{display:flex;gap:6px;padding:10px 12px;background:#fff;border-bottom:1px solid var(--line);overflow-x:auto;position:sticky;top:0;z-index:5}
 nav button{flex:0 0 auto;border:1px solid var(--line);background:#fff;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:14px;color:var(--ink)}
@@ -13,20 +13,20 @@ h2{font-size:18px;margin:8px 0}p.lead{color:var(--mute);margin:4px 0 14px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin:10px 0}
 .q{font-size:17px;margin:0 0 10px}.turn{background:#eef1fb;border-radius:8px;padding:6px 10px;font-size:14px;margin-bottom:10px;display:inline-block}
 .f{display:flex;align-items:center;gap:8px;margin:8px 0;flex-wrap:wrap}.f label{min-width:150px;font-weight:bold;font-size:14px}
-input[type=text],select{padding:9px;border:1px solid var(--line);border-radius:8px;font-size:16px;font-family:Consolas,monospace;min-width:200px}
+input[type=text],select{padding:9px;border:1px solid var(--line);border-radius:8px;font-size:16px;font-family:var(--tg-mono,Consolas,monospace);min-width:200px}
 input.ok,select.ok{background:var(--okbg);border-color:var(--ok)}input.ko,select.ko{background:var(--kobg);border-color:var(--ko)}
 .sol{background:#fff8dc;border:1px solid #e6d58a;border-radius:8px;padding:10px;margin-top:10px;font-size:14px}
-.sol pre{margin:6px 0;font-family:Consolas,monospace;white-space:pre-wrap}
+.sol pre{margin:6px 0;font-family:var(--tg-mono,Consolas,monospace);white-space:pre-wrap}
 .stat{color:var(--mute);font-size:14px;margin-top:8px}.msg{font-weight:bold}
 .sw{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
 .bit{width:62px;border:2px solid var(--line);background:#fff;border-radius:10px;text-align:center;padding:6px 0;cursor:pointer;user-select:none}
-.bit b{display:block;font-size:26px;font-family:Consolas,monospace}.bit small{color:var(--mute)}
+.bit b{display:block;font-size:26px;font-family:var(--tg-mono,Consolas,monospace)}.bit small{color:var(--mute)}
 .bit.on{background:var(--acc);color:#fff;border-color:var(--acc)}.bit.on small{color:#cfdcff}
-.val{font-family:Consolas,monospace;font-size:18px}
-table.tv{border-collapse:collapse;margin:10px 0}table.tv th,table.tv td{border:1px solid var(--line);padding:8px 14px;text-align:center;background:#fff;font-family:Consolas,monospace;font-size:16px}
+.val{font-family:var(--tg-mono,Consolas,monospace);font-size:18px}
+table.tv{border-collapse:collapse;margin:10px 0}table.tv th,table.tv td{border:1px solid var(--line);padding:8px 14px;text-align:center;background:#fff;font-family:var(--tg-mono,Consolas,monospace);font-size:16px}
 table.tv td.out{cursor:pointer;min-width:70px;background:#f0f3fb}table.tv td.ok{background:var(--okbg)}table.tv td.ko{background:var(--kobg)}
 table.res{border-collapse:collapse;margin:10px 0}table.res td,table.res th{border:1px solid var(--line);padding:8px 14px;background:#fff;text-align:left}
-.timer{font-family:Consolas,monospace;font-size:18px}
+.timer{font-family:var(--tg-mono,Consolas,monospace);font-size:18px}
 .pool{display:flex;gap:8px;flex-wrap:wrap;min-height:50px;padding:10px;background:#eef1f8;border:1px dashed var(--line);border-radius:10px;margin-bottom:12px}
 .chip{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 10px;cursor:pointer;max-width:330px;font-size:14px;user-select:none}
 .chip.sel{background:var(--sel);border-color:#d9a900}.chip.wrong{animation:sh .35s}
@@ -35,15 +35,15 @@ table.res{border-collapse:collapse;margin:10px 0}table.res td,table.res th{borde
 .bk{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:10px;min-height:100px;cursor:pointer}
 .bk h3{margin:0 0 2px;font-size:15px}.bk small{color:var(--mute);display:block;margin-bottom:6px}.bk.hl{border-color:var(--acc);background:#f0f4ff}
 .bk .chip{background:var(--okbg);border-color:var(--ok);cursor:default;margin:4px 0;max-width:none}
-.line{display:block;width:100%;text-align:left;font-family:Consolas,monospace;font-size:15px;border:1px solid var(--line);background:#fff;border-radius:8px;padding:8px 10px;margin:4px 0;cursor:pointer}
+.line{display:block;width:100%;text-align:left;font-family:var(--tg-mono,Consolas,monospace);font-size:15px;border:1px solid var(--line);background:#fff;border-radius:8px;padding:8px 10px;margin:4px 0;cursor:pointer}
 .line.ok{background:var(--okbg);border-color:var(--ok)}.line.ko{background:var(--kobg);border-color:var(--ko)}
 .mem{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:640px}
-.tile{height:70px;border:2px solid var(--line);border-radius:10px;background:var(--acc);color:#fff;font-size:17px;font-family:Consolas,monospace;display:flex;align-items:center;justify-content:center;cursor:pointer;text-align:center;padding:4px}
+.tile{height:70px;border:2px solid var(--line);border-radius:10px;background:var(--acc);color:#fff;font-size:17px;font-family:var(--tg-mono,Consolas,monospace);display:flex;align-items:center;justify-content:center;cursor:pointer;text-align:center;padding:4px}
 .tile.up{background:#fff;color:var(--ink)}.tile.done{background:var(--okbg);color:var(--ink);border-color:var(--ok);cursor:default}
 .grid{display:grid;gap:2px;width:fit-content}.px{width:34px;height:34px;border:1px solid #bbb;cursor:pointer}
-.add input{width:34px;min-width:0;text-align:center;padding:6px 2px}.add td,.add th{padding:2px 3px;font-family:Consolas,monospace}
+.add input{width:34px;min-width:0;text-align:center;padding:6px 2px}.add td,.add th{padding:2px 3px;font-family:var(--tg-mono,Consolas,monospace)}
 .cb{display:inline-block;margin:6px 14px 6px 0}
-</style><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head><body><header><h1>Numeri e basi: giochi di classe</h1></header><nav id="nav"></nav><main>
+</style><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head><body class="tg-act"><header><h1>Numeri e basi: giochi di classe</h1></header><nav id="nav"></nav><main>
 <section id="inizio" data-t="Inizio"><h2>Sistemi di numerazione: decimale, binario, ottale ed esadecimale</h2><p class="lead">Cinque giochi per allenare le conversioni, dal più semplice al più difficile.</p><ol><li><b>Interruttori:</b> accendete i bit e guardate i valori.</li><li><b>Allenatore:</b> otto tipi di conversione a tre livelli.</li><li><b>Caccia all'errore:</b> trovate il passaggio sbagliato in una conversione.</li><li><b>Memory delle equivalenze:</b> abbinate lo stesso numero scritto in basi diverse.</li><li><b>Missione finale:</b> dieci domande miste a tempo.</li></ol>
 <p>Si gioca in coppia: ad ogni esercizio tocca a uno dei due scrivere, mentre l'altro controlla e discute. Nelle risposte potete usare la virgola o il punto; gli zeri iniziali e le maiuscole non contano.</p>
 <div class="row"><label>Primo nome: <input type="text" id="n1" placeholder="Nome"></label><label>Secondo nome: <input type="text" id="n2" placeholder="Nome"></label></div></section>

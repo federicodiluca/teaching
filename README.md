@@ -40,16 +40,18 @@ assets/
 
 1. Crea la cartella `<corso>/<unità>/<nome-attivita>/` e mettici l'attività come `index.html`
    (un unico file con stile e script inclusi).
-2. Prima di `</head>` aggiungi le quattro righe comuni (ogni `../` sale di una cartella, quindi sono tre):
+2. Se l'attività usa la struttura comune (header, nav con le schede, `main`, `.card`, `.btn`), scrivi `<body class="tg-act">`:
+   prende la veste grafica del sito senza cambiare nulla del suo codice.
+3. Prima di `</head>` aggiungi le quattro righe comuni (ogni `../` sale di una cartella, quindi sono tre):
    ```html
    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
    <link rel="stylesheet" href="../../../assets/teaching.css">
    <script src="../../../assets/catalogo.js" defer></script>
    <script src="../../../assets/teaching.js" defer></script>
    ```
-3. Aggiungi una voce in `assets/catalogo.js` e il nuovo indirizzo in `sitemap.xml`. Se il corso o l'unità sono nuovi, aggiungili in `CORSI`
+4. Aggiungi una voce in `assets/catalogo.js` e il nuovo indirizzo in `sitemap.xml`. Se il corso o l'unità sono nuovi, aggiungili in `CORSI`
    e `UNITA` e copia una pagina `index.html` di corso o di unità esistente, cambiando `data-corso` e `data-unita`.
-4. Commit e push: in un minuto è online.
+5. Commit e push: in un minuto è online.
 
 ## Licenza
 
