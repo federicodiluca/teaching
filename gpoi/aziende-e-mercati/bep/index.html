@@ -226,6 +226,8 @@ function niceStep(x){
   return (f<=1?1:f<=2?2:f<=5?5:10)*e;
 }
 function drawChart(cv, s, opts){
+  // colori dal tema del sito (variabili CSS), con i valori originali come riserva
+  const K = (n, d) => (getComputedStyle(cv).getPropertyValue(n) || '').trim() || d;
   opts = opts||{};
   const base = opts.base;
   const dpr = window.devicePixelRatio||1;
@@ -246,7 +248,7 @@ function drawChart(cv, s, opts){
   const X = q => m.l + q/cap*pw;
   const Y = v => m.t + ph - v/ymax*ph;
 
-  c.font = '12px system-ui,Arial'; c.fillStyle = '#667085'; c.strokeStyle = '#e5e7eb'; c.lineWidth = 1;
+  c.font = '12px system-ui,Arial'; c.fillStyle = K('--muted','#667085'); c.strokeStyle = K('--line','#e5e7eb'); c.lineWidth = 1;
   c.textAlign='right'; c.textBaseline='middle';
   for(let v=0; v<=ymax+1e-9; v+=step){
     c.beginPath(); c.moveTo(m.l,Y(v)); c.lineTo(m.l+pw,Y(v)); c.stroke();
@@ -257,7 +259,7 @@ function drawChart(cv, s, opts){
     const q = cap*i/5;
     c.fillText(fmt(q), X(q), m.t+ph+6);
   }
-  c.fillStyle='#4b5563'; c.font='12px system-ui,Arial';
+  c.fillStyle=K('--muted','#4b5563'); c.font='12px system-ui,Arial';
   c.fillText('Quantità (candele)', m.l+pw/2, h-18);
   c.save(); c.translate(12, m.t+ph/2); c.rotate(-Math.PI/2); c.textBaseline='top'; c.fillText('Euro', 0, 0); c.restore();
 
@@ -278,9 +280,9 @@ function drawChart(cv, s, opts){
     c.globalAlpha = alpha;
     c.lineWidth = 2.5;
     c.setLineDash(dash?[6,5]:[]);
-    c.strokeStyle='#0f766e'; c.beginPath(); c.moveTo(X(0),Y(0)); c.lineTo(X(cap),Y(st.p*cap)); c.stroke();
-    c.strokeStyle='#c2410c'; c.beginPath(); c.moveTo(X(0),Y(st.cf)); c.lineTo(X(cap),Y(st.cf+st.cv*cap)); c.stroke();
-    c.strokeStyle='#6b7280'; c.lineWidth=2; c.setLineDash([2,5]);
+    c.strokeStyle=K('--rev','#0f766e'); c.beginPath(); c.moveTo(X(0),Y(0)); c.lineTo(X(cap),Y(st.p*cap)); c.stroke();
+    c.strokeStyle=K('--cost','#c2410c'); c.beginPath(); c.moveTo(X(0),Y(st.cf)); c.lineTo(X(cap),Y(st.cf+st.cv*cap)); c.stroke();
+    c.strokeStyle=K('--fix','#6b7280'); c.lineWidth=2; c.setLineDash([2,5]);
     c.beginPath(); c.moveTo(X(0),Y(st.cf)); c.lineTo(X(cap),Y(st.cf)); c.stroke();
     c.setLineDash([]); c.globalAlpha = 1;
   }
@@ -290,26 +292,26 @@ function drawChart(cv, s, opts){
   // linea quantità scelta
   if(opts.q!=null){
     const q = opts.q;
-    c.strokeStyle='#4338ca'; c.lineWidth=1.5; c.setLineDash([4,4]);
+    c.strokeStyle=K('--acc','#4338ca'); c.lineWidth=1.5; c.setLineDash([4,4]);
     c.beginPath(); c.moveTo(X(q),Y(0)); c.lineTo(X(q),m.t); c.stroke(); c.setLineDash([]);
-    [[s.p*q,'#0f766e'],[s.cf+s.cv*q,'#c2410c']].forEach(([v,col])=>{
+    [[s.p*q,K('--rev','#0f766e')],[s.cf+s.cv*q,K('--cost','#c2410c')]].forEach(([v,col])=>{
       c.fillStyle=col; c.beginPath(); c.arc(X(q),Y(v),4.5,0,7); c.fill();
     });
   }
   // punto BEP
   if(mc>0 && cross<=cap){
     const bx=X(cross), by=Y(s.p*cross);
-    c.fillStyle='#fff'; c.strokeStyle='#4338ca'; c.lineWidth=3;
+    c.fillStyle=K('--card','#fff'); c.strokeStyle=K('--acc','#4338ca'); c.lineWidth=3;
     c.beginPath(); c.arc(bx,by,7,0,7); c.fill(); c.stroke();
     const bep = Math.ceil(+(s.cf/mc).toFixed(6));
     c.font='bold 13px system-ui,Arial';
     const label='BEP: '+fmt(bep)+' candele', tw=c.measureText(label).width+14;
     let lx = bx>m.l+pw*0.7 ? bx-tw-10 : bx+10;
     let ly = Math.max(m.t+2, by-62);
-    c.fillStyle='rgba(255,255,255,0.92)'; c.strokeStyle='#4338ca'; c.lineWidth=1.5;
+    c.fillStyle=K('--card','#fff'); c.strokeStyle=K('--acc','#4338ca'); c.lineWidth=1.5;
     c.beginPath(); c.rect(lx,ly,tw,24); c.fill(); c.stroke();
     c.beginPath(); c.setLineDash([3,3]); c.moveTo(bx,by-7); c.lineTo(bx,ly+24); c.stroke(); c.setLineDash([]);
-    c.fillStyle='#4338ca'; c.textAlign='left'; c.textBaseline='middle'; c.fillText(label, lx+7, ly+12);
+    c.fillStyle=K('--acc','#4338ca'); c.textAlign='left'; c.textBaseline='middle'; c.fillText(label, lx+7, ly+12);
   }
 }
 

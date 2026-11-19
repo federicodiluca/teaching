@@ -1,30 +1,95 @@
-/* teaching: stile condiviso.
-   Le classi tg-* servono all'indice e alla barra iniettata nelle attività:
-   non toccano lo stile interno delle singole pagine. */
+/* teaching: stile condiviso di tutto il sito.
+   - Token di colore unici per indici e attività: il tema scuro è quello di partenza,
+     il chiaro si attiva con <html data-theme="light"> (pulsante in alto, scelta ricordata).
+   - --tg-c è il colore del corso (impostato da teaching.js dal catalogo).
+   - Le attività tg-act prendono il resto da giochi.css; quelle da LIM (tg-lim) tengono il loro layout
+     e qui ricevono i token del sito al posto dei loro colori. */
 
+/* ---------- token ---------- */
 :root {
-  --tg-bg: #f6f4ef;
-  --tg-paper: #ffffff;
-  --tg-ink: #1d2433;
-  --tg-mute: #5d6474;
-  --tg-line: #e3dfd5;
-  --tg-acc: #2f5bea;
+  color-scheme: dark;
+  --tg-bg: #12151b;
+  --tg-paper: #1b1f27;
+  --tg-paper-2: #242a35;
+  --tg-ink: #e8eaf0;
+  --tg-mute: #a2a8b6;
+  --tg-line: #2e3440;
+  --tg-line-2: #414958;
+  --tg-acc: #7c9cff;
+  --tg-acc-soft: rgba(124, 156, 255, .16);
+  --tg-on-acc: #0b1020;
   --tg-hl: #f2b632;
-  --tg-shadow: 0 1px 2px rgba(29, 36, 51, .06), 0 6px 18px rgba(29, 36, 51, .06);
+  --tg-hl-soft: rgba(242, 182, 50, .16);
+  --tg-ok: #4cc98a;
+  --tg-ok-soft: rgba(76, 201, 138, .15);
+  --tg-ko: #ff8080;
+  --tg-ko-soft: rgba(255, 128, 128, .15);
+  --tg-warn: #f2a650;
+  --tg-warn-soft: rgba(242, 166, 80, .15);
+  --tg-bar: #0b0d12;
+  --tg-shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 22px rgba(0, 0, 0, .25);
+  --tg-shadow-sm: 0 1px 2px rgba(0, 0, 0, .25);
+  --tg-c: #2f5bea;
+  --tg-cc: color-mix(in srgb, var(--tg-c) 55%, #fff);   /* colore del corso leggibile come testo */
   --tg-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --tg-mono: ui-monospace, "Cascadia Code", Consolas, "SFMono-Regular", Menlo, monospace;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .tg-home, :root:not([data-theme="light"]) body.tg-home {
-    --tg-bg: #14171d; --tg-paper: #1c2028; --tg-ink: #e8eaf0; --tg-mute: #a2a8b6;
-    --tg-line: #2c313c; --tg-shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 22px rgba(0, 0, 0, .25);
+:root[data-theme="light"] {
+  color-scheme: light;
+  --tg-bg: #f6f4ef;
+  --tg-paper: #ffffff;
+  --tg-paper-2: #f0ede5;
+  --tg-ink: #1d2433;
+  --tg-mute: #5d6474;
+  --tg-line: #e3dfd5;
+  --tg-line-2: #cfc9bb;
+  --tg-acc: #2f5bea;
+  --tg-acc-soft: #e8eeff;
+  --tg-on-acc: #ffffff;
+  --tg-hl-soft: #fff3c4;
+  --tg-ok: #1e8e4e;
+  --tg-ok-soft: #e4f6ec;
+  --tg-ko: #c0392b;
+  --tg-ko-soft: #fdeaea;
+  --tg-warn: #b45309;
+  --tg-warn-soft: #fff4e0;
+  --tg-bar: #1d2433;
+  --tg-shadow: 0 1px 2px rgba(29, 36, 51, .06), 0 6px 18px rgba(29, 36, 51, .06);
+  --tg-shadow-sm: 0 1px 2px rgba(29, 36, 51, .06);
+  --tg-cc: var(--tg-c);
+}
+/* in stampa sempre chiaro, per non sprecare inchiostro */
+@media print {
+  :root, :root[data-theme] {
+    color-scheme: light;
+    --tg-bg: #fff; --tg-paper: #fff; --tg-paper-2: #f3f3f3; --tg-ink: #111; --tg-mute: #555;
+    --tg-line: #ccc; --tg-line-2: #aaa; --tg-acc: #2f5bea; --tg-acc-soft: #eef2ff; --tg-on-acc: #fff;
+    --tg-hl-soft: #fff3c4; --tg-ok: #1e8e4e; --tg-ok-soft: #e4f6ec; --tg-ko: #c0392b; --tg-ko-soft: #fdeaea;
+    --tg-warn: #b45309; --tg-warn-soft: #fff4e0; --tg-shadow: none; --tg-shadow-sm: none; --tg-cc: var(--tg-c);
   }
 }
-:root[data-theme="dark"] body.tg-home {
-  --tg-bg: #14171d; --tg-paper: #1c2028; --tg-ink: #e8eaf0; --tg-mute: #a2a8b6;
-  --tg-line: #2c313c; --tg-shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 22px rgba(0, 0, 0, .25);
+html { background: var(--tg-bg); }
+
+/* ---------- icone (stile del portfolio: tratto, riempimento "f" nel colore del corso, accento giallo) ---------- */
+.tg-ico {
+  width: 1.15em; height: 1.15em; flex: none; vertical-align: -.2em; overflow: visible;
+  fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
 }
+.tg-ico .f { fill: var(--c, var(--tg-c)); fill-opacity: .4; stroke: none; }
+.tg-ico .d { fill: currentColor; stroke: none; }
+.tg-ico .a { stroke: var(--tg-hl); }
+.tg-ico .y { fill: var(--tg-hl); stroke: none; }
+.tg-badge {
+  --c: var(--tg-c);
+  width: 44px; height: 44px; border-radius: 13px; flex: none; display: inline-grid; place-items: center;
+  font-size: 25px; color: color-mix(in srgb, var(--c) 55%, var(--tg-ink));
+  background: linear-gradient(135deg, color-mix(in srgb, var(--c) 26%, transparent), color-mix(in srgb, var(--tg-hl) 14%, transparent));
+  border: 1px solid color-mix(in srgb, var(--c) 38%, transparent);
+  transition: transform .25s ease;
+}
+.tg-badge .tg-ico { width: 1em; height: 1em; }
+.tg-badge.sm { width: 30px; height: 30px; border-radius: 9px; font-size: 17px; }
+@media (prefers-reduced-motion: reduce) { .tg-badge { transition: none; } }
 
 /* ---------- pagine indice ---------- */
 
@@ -33,15 +98,19 @@ body.tg-home {
   font-family: var(--tg-sans); line-height: 1.5; -webkit-font-smoothing: antialiased;
 }
 .tg-home *, .tg-home *::before, .tg-home *::after { box-sizing: border-box; }
+.tg-home a { color: var(--tg-acc); }
+.tg-home a.tg-card { color: var(--tg-ink); }
 .tg-wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
 
 .tg-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 0; }
 .tg-logo { font-family: var(--tg-mono); font-weight: 700; font-size: 18px; color: var(--tg-ink); text-decoration: none; letter-spacing: -.01em; }
+.tg-home .tg-logo { color: var(--tg-ink); }
 .tg-logo span { display: inline-block; width: .6em; height: .14em; margin-left: .08em; background: var(--tg-hl); vertical-align: baseline; animation: tg-blink 1.1s steps(1) infinite; }
 @keyframes tg-blink { 50% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .tg-logo span { animation: none; } }
 
 .tg-iconbtn {
+  display: inline-flex; align-items: center; gap: 7px;
   border: 1px solid var(--tg-line); background: var(--tg-paper); color: var(--tg-ink);
   border-radius: 999px; padding: 7px 12px; font: 500 14px var(--tg-sans); cursor: pointer;
 }
@@ -49,10 +118,13 @@ body.tg-home {
 
 .tg-hero { padding: 36px 0 26px; }
 .tg-hero h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.08; letter-spacing: -.02em; margin: 0 0 12px; max-width: 18ch; }
-.tg-hero h1 em { font-style: normal; background: linear-gradient(transparent 62%, color-mix(in srgb, var(--tg-hl) 55%, transparent) 62%); }
+/* nel tema scuro una sottolineatura gialla come il cursore, nel chiaro l'evidenziatore */
+.tg-hero h1 em { font-style: normal; background: linear-gradient(transparent 86%, var(--tg-hl) 86%, var(--tg-hl) 96%, transparent 96%); }
+:root[data-theme="light"] .tg-hero h1 em { background: linear-gradient(transparent 62%, color-mix(in srgb, var(--tg-hl) 55%, transparent) 62%); }
 .tg-hero p { margin: 0; color: var(--tg-mute); font-size: 17px; max-width: 60ch; }
 .tg-crumb { font-family: var(--tg-mono); font-size: 13px; color: var(--tg-mute); margin-bottom: 10px; }
 .tg-crumb a { color: inherit; }
+.tg-hero .tg-badge { margin-bottom: 14px; }
 
 .tg-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 6px 0 22px; }
 .tg-chip {
@@ -62,46 +134,59 @@ body.tg-home {
 }
 .tg-chip i { width: 9px; height: 9px; border-radius: 50%; background: var(--c, var(--tg-mute)); }
 .tg-chip[aria-pressed="true"] { background: var(--tg-ink); color: var(--tg-bg); border-color: var(--tg-ink); }
+.tg-searchbox { margin-left: auto; flex: 0 1 280px; min-width: 220px; position: relative; display: flex; align-items: center; }
+.tg-searchbox .tg-ico { position: absolute; left: 12px; color: var(--tg-mute); pointer-events: none; }
 .tg-search {
   margin-left: auto; min-width: 220px; flex: 0 1 280px; padding: 8px 14px; border-radius: 999px;
   border: 1px solid var(--tg-line); background: var(--tg-paper); color: var(--tg-ink); font: 15px var(--tg-sans);
 }
+.tg-searchbox .tg-search { width: 100%; min-width: 0; flex: 1; margin: 0; padding-left: 38px; }
+.tg-search::placeholder { color: var(--tg-mute); }
 .tg-search:focus, .tg-chip:focus-visible, .tg-card:focus-visible, .tg-iconbtn:focus-visible {
   outline: 2px solid var(--tg-acc); outline-offset: 2px;
 }
 
-.tg-course { margin: 8px 0 34px; }
-.tg-course > h2 { display: flex; align-items: baseline; gap: 10px; font-size: 22px; margin: 0 0 4px; letter-spacing: -.01em; }
+.tg-course { margin: 8px 0 34px; --cc: color-mix(in srgb, var(--c) 55%, var(--tg-ink)); }
+:root[data-theme="light"] .tg-course { --cc: var(--c); }
+.tg-course > h2 { display: flex; align-items: center; gap: 12px; font-size: 22px; margin: 0 0 4px; letter-spacing: -.01em; }
 .tg-course > h2 a { color: inherit; text-decoration: none; }
 .tg-course > h2 small { font: 500 13px var(--tg-mono); color: var(--tg-mute); }
-.tg-course > h2::before { content: ""; width: 12px; height: 12px; border-radius: 3px; background: var(--c); align-self: center; }
 .tg-unit { font: 600 12px var(--tg-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--tg-mute); margin: 18px 0 10px; }
 .tg-unit a { color: inherit; text-decoration: none; }
 .tg-unit a:hover { color: var(--tg-ink); }
 
 .tg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; }
 .tg-card {
-  position: relative; display: flex; flex-direction: column; gap: 6px; min-height: 150px;
-  background: var(--tg-paper); border: 1px solid var(--tg-line); border-radius: 14px;
-  padding: 16px 16px 14px 20px; color: inherit; text-decoration: none; box-shadow: var(--tg-shadow);
+  position: relative; display: flex; flex-direction: column; gap: 8px; min-height: 160px;
+  background: var(--tg-paper); border: 1px solid var(--tg-line); border-radius: 16px;
+  padding: 16px 16px 14px; color: inherit; text-decoration: none; box-shadow: var(--tg-shadow);
   transition: transform .15s ease, border-color .15s ease;
 }
-.tg-card::before { content: ""; position: absolute; left: 0; top: 14px; bottom: 14px; width: 4px; border-radius: 0 4px 4px 0; background: var(--c); }
-.tg-card:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--c) 45%, var(--tg-line)); }
+.tg-card:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--c) 50%, var(--tg-line)); }
+.tg-card:hover .tg-badge { transform: translateY(-2px) rotate(-6deg); }
+.tg-card .tg-head { display: flex; align-items: center; gap: 12px; }
+.tg-card .tg-badge { --c: inherit; }
 .tg-card h3 { margin: 0; font-size: 17px; line-height: 1.25; }
 .tg-card p { margin: 0; color: var(--tg-mute); font-size: 14px; flex: 1; }
 .tg-meta { display: flex; justify-content: space-between; align-items: center; font: 500 12px var(--tg-mono); color: var(--tg-mute); padding-top: 6px; }
-.tg-meta b { font-weight: 500; color: var(--c); }
-.tg-empty { color: var(--tg-mute); padding: 30px 0; }
+.tg-meta b { font-weight: 500; color: var(--cc); }
+.tg-meta > span { display: inline-flex; align-items: center; gap: 4px; }
+.tg-empty { color: var(--tg-mute); padding: 30px 0; display: flex; align-items: center; gap: 10px; }
+.tg-empty .tg-ico { font-size: 22px; }
 
 .tg-foot { border-top: 1px solid var(--tg-line); margin-top: 30px; padding: 22px 0 40px; color: var(--tg-mute); font-size: 14px; display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: space-between; }
 .tg-foot a { color: inherit; }
 
+@media (max-width: 560px) {
+  .tg-search, .tg-searchbox { flex: 1 1 100%; margin-left: 0; min-width: 0; }
+}
+
 /* ---------- barra nelle pagine delle attività ---------- */
 
 .tg-bar {
-  display: flex; align-items: center; gap: 12px; padding: 0 14px; height: 40px;
-  background: #1d2433; color: #cfd5e2; font: 13px/1 var(--tg-sans); position: relative; z-index: 50;
+  display: flex; align-items: center; gap: 12px; padding: 0 14px; height: 42px;
+  background: var(--tg-bar); color: #cfd5e2; font: 13px/1 var(--tg-sans); position: relative; z-index: 50;
+  box-shadow: inset 0 -2px 0 var(--tg-c);
 }
 .tg-bar a { color: inherit; text-decoration: none; }
 .tg-bar a:hover { color: #fff; }
@@ -110,19 +195,26 @@ body.tg-home {
 .tg-bar .tg-path span { opacity: .5; }
 .tg-bar .tg-btns { margin-left: auto; display: flex; gap: 6px; }
 .tg-bar button {
-  background: transparent; color: inherit; border: 1px solid rgba(255, 255, 255, .25);
+  display: inline-flex; align-items: center; gap: 6px;
+  background: transparent; color: inherit; border: 1px solid rgba(255, 255, 255, .22);
   border-radius: 999px; padding: 5px 11px; font: 12px var(--tg-sans); cursor: pointer; white-space: nowrap;
 }
+.tg-bar button .tg-ico { font-size: 15px; }
 .tg-bar button:hover { color: #fff; border-color: rgba(255, 255, 255, .55); }
 .tg-bar button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
-@media (max-width: 560px) { .tg-bar .tg-path { display: none; } }
+.tg-bar .tg-ico .f { fill: var(--tg-cc); }
+@media (max-width: 560px) {
+  .tg-bar .tg-path { display: none; }
+  .tg-bar button span { display: none; }
+  .tg-bar button { padding: 5px 8px; }
+}
 @media print { .tg-bar { display: none; } }
 
 /* QR code a tutto schermo: sempre nero su bianco, anche nel tema scuro, perché i telefoni lo leggano */
 .tg-qr {
   position: fixed; inset: 0; z-index: 1000; background: #fff; color: #1d2433; cursor: pointer;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2vh;
-  padding: 16px; font-family: var(--tg-sans); text-align: center; outline: none;
+  padding: 16px; font-family: var(--tg-sans); text-align: center; outline: none; color-scheme: light;
 }
 .tg-qr-code { width: min(68vh, 88vw); aspect-ratio: 1; display: grid; place-items: center; }
 .tg-qr .tg-qr-code svg {
@@ -137,101 +229,46 @@ body.tg-home {
 .tg-qr-err { color: #5d6474; font-size: 18px; }
 @media print { .tg-qr { display: none; } }
 
-@media (max-width: 560px) { .tg-search { flex: 1 1 100%; margin-left: 0; min-width: 0; } }
+/* ---------- intestazione comune delle attività: riquadro con l'icona accanto al titolo ---------- */
+.tg-titolo { display: inline-flex; align-items: center; gap: 12px; }
+.tg-titolo h1 { margin: 0; }
 
-/* ---------- veste comune delle attività (body.tg-act) ----------
-   Le attività tengono il loro CSS: queste regole, più specifiche, ne cambiano solo l'aspetto.
-   Le variabili --bg, --line, --acc... sono quelle definite dalle pagine stesse. */
-
-body.tg-act {
-  --bg: #f6f4ef; --line: #e3dfd5; --mute: #5d6474; --ink: #1d2433;
-  font-family: var(--tg-sans); line-height: 1.5; -webkit-font-smoothing: antialiased;
-}
-body.tg-act header {
-  background: transparent; color: var(--ink); max-width: 940px; margin: 0 auto;
-  padding: 26px 16px 10px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px;
-}
-body.tg-act header h1 { font-size: clamp(22px, 3.2vw, 30px); line-height: 1.15; letter-spacing: -.015em; font-weight: 700; }
-body.tg-act nav {
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--line);
-  padding: 8px max(12px, calc((100% - 940px) / 2 + 16px));
-}
-body.tg-act nav button {
-  border-radius: 999px; background: var(--card); border-color: var(--line);
-  padding: 7px 14px; font: 500 14px var(--tg-sans); color: var(--ink);
-  transition: border-color .15s ease, background-color .15s ease;
-}
-body.tg-act nav button:hover { border-color: var(--mute); }
-body.tg-act nav button.on { background: var(--ink); border-color: var(--ink); color: #fff; }
-body.tg-act nav button.sub { background: transparent; font-size: 13px; padding: 5px 12px; }
-body.tg-act nav button.sub.on { background: var(--acc); border-color: var(--acc); color: #fff; }
-body.tg-act main { padding-top: 22px; }
-body.tg-act h2 { font-size: 21px; letter-spacing: -.01em; margin: 4px 0 6px; }
-body.tg-act p.lead { font-size: 16px; }
-body.tg-act .card {
-  border-radius: 14px; border-color: var(--line);
-  box-shadow: 0 1px 2px rgba(29, 36, 51, .05), 0 4px 14px rgba(29, 36, 51, .05);
-}
-body.tg-act .btn {
-  border-radius: 10px; font: 600 15px var(--tg-sans); padding: 10px 18px;
-  transition: filter .15s ease, transform .1s ease;
-}
-body.tg-act .btn:hover:not(:disabled) { filter: brightness(1.08); }
-body.tg-act .btn:active:not(:disabled) { transform: translateY(1px); }
-body.tg-act .btn.sec { background: var(--card); }
-body.tg-act input[type=text], body.tg-act select { border-radius: 10px; background-color: var(--card); color: var(--ink); }
-body.tg-act .sol { border-radius: 10px; }
-body.tg-act :focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
-@media print { body.tg-act nav { display: none; } }
-
-/* ---------- schermata finale (#tg-res) ---------- */
-body.tg-act .tg-hidden { display: none; }
+/* ---------- schermata finale (#tg-res, attività tg-act) ---------- */
+.tg-hidden { display: none !important; }
 #tg-res { margin: 8px 0 14px; }
 .tg-res-top {
-  display: flex; align-items: center; gap: 18px; background: var(--card); border: 1px solid var(--line);
-  border-radius: 14px; padding: 16px 18px; box-shadow: 0 1px 2px rgba(29, 36, 51, .05), 0 4px 14px rgba(29, 36, 51, .05);
+  display: flex; align-items: center; gap: 18px; background: var(--tg-paper); border: 1px solid var(--tg-line);
+  border-radius: 14px; padding: 16px 18px; box-shadow: var(--tg-shadow-sm);
 }
 .tg-res-top strong { display: block; font-size: 19px; letter-spacing: -.01em; }
-.tg-res-top span { color: var(--mute); font-size: 14px; }
+.tg-res-top span { color: var(--tg-mute); font-size: 14px; }
 .tg-ring {
   --p: 0; flex: 0 0 auto; width: 84px; height: 84px; border-radius: 50%; display: grid; place-items: center;
-  background: conic-gradient(var(--acc) calc(var(--p) * 1%), var(--line) 0);
+  background: conic-gradient(var(--tg-acc) calc(var(--p) * 1%), var(--tg-line) 0);
 }
-.tg-ring b { width: 66px; height: 66px; border-radius: 50%; background: var(--card); display: grid; place-items: center; font: 700 20px var(--tg-sans); }
+.tg-ring b { width: 66px; height: 66px; border-radius: 50%; background: var(--tg-paper); display: grid; place-items: center; font: 700 20px var(--tg-sans); }
+.tg-ring b .tg-ico { font-size: 28px; color: var(--tg-mute); }
 .tg-res-list { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; }
 .tg-res-list li {
-  display: grid; grid-template-columns: minmax(120px, 1.2fr) 2fr auto; gap: 12px; align-items: center;
-  background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; font-size: 15px;
+  display: grid; grid-template-columns: auto minmax(120px, 1.2fr) 2fr auto; gap: 12px; align-items: center;
+  background: var(--tg-paper); border: 1px solid var(--tg-line); border-radius: 12px; padding: 10px 14px; font-size: 15px;
 }
+.tg-res-list li > .tg-ico { font-size: 18px; color: var(--tg-mute); }
+.tg-res-list li.ok > .tg-ico { color: var(--tg-ok); }
 .tg-res-list .n { font-weight: 600; }
-.tg-res-list .bar { height: 8px; border-radius: 999px; background: var(--line); overflow: hidden; }
-.tg-res-list .bar i { display: block; height: 100%; border-radius: inherit; background: var(--acc); transition: width .4s ease; }
-.tg-res-list li.ok .bar i { background: var(--ok); }
-.tg-res-list li.mid .bar i { background: #d39a00; }
-.tg-res-list li.ko .bar i { background: var(--ko); }
+.tg-res-list .bar { height: 8px; border-radius: 999px; background: var(--tg-line); overflow: hidden; }
+.tg-res-list .bar i { display: block; height: 100%; border-radius: inherit; background: var(--tg-acc); transition: width .4s ease; }
+.tg-res-list li.ok .bar i { background: var(--tg-ok); }
+.tg-res-list li.mid .bar i { background: var(--tg-hl); }
+.tg-res-list li.ko .bar i { background: var(--tg-ko); }
 .tg-res-list li.todo { opacity: .55; }
-.tg-res-list .v { color: var(--mute); font: 500 14px var(--tg-mono); white-space: nowrap; }
+.tg-res-list .v { color: var(--tg-mute); font: 500 14px var(--tg-mono); white-space: nowrap; }
 .tg-res-act { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
-/* avviso "Ripresi i progressi salvati" in cima alle attività */
-.tg-ripresi {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 0 0 16px;
-  background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--acc);
-  border-radius: 12px; padding: 10px 12px 10px 14px; font-size: 15px;
-}
-.tg-ripresi span { flex: 1 1 220px; }
-body.tg-act .tg-ripresi .btn { padding: 6px 12px; font-size: 14px; margin: 0; }
-.tg-ripresi .tg-x {
-  border: 0; background: transparent; color: var(--mute); font-size: 22px; line-height: 1;
-  width: 32px; height: 32px; border-radius: 8px; cursor: pointer;
-}
-.tg-ripresi .tg-x:hover { color: var(--ink); background: var(--line); }
-@media print { .tg-ripresi { display: none; } }
-body.tg-act p#rmsg { background: var(--card); border-left: 4px solid var(--acc); border-radius: 0 10px 10px 0; padding: 10px 14px; }
+.tg-res-act .btn, .tg-ripresi .btn { display: inline-flex; align-items: center; gap: 8px; }
+body.tg-act p#rmsg { background: var(--tg-paper); border-left: 4px solid var(--tg-acc); border-radius: 0 10px 10px 0; padding: 10px 14px; }
 body.tg-act p#rmsg:empty { display: none; }
 @media (max-width: 560px) {
-  .tg-res-list li { grid-template-columns: 1fr auto; }
+  .tg-res-list li { grid-template-columns: auto 1fr auto; }
   .tg-res-list .bar { grid-column: 1 / -1; order: 3; }
 }
 @media print {
@@ -239,29 +276,100 @@ body.tg-act p#rmsg:empty { display: none; }
   .tg-ring, .tg-res-list .bar i { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
 
-/* ---------- attività da LIM con veste propria (body.tg-lim) ----------
-   BEP, Che struttura è, Processi e thread: tengono layout e colori loro,
-   prendono dal sito sfondo carta, font e intestazione chiara. */
+/* avviso "Ripresi i progressi salvati" in cima alle attività */
+.tg-ripresi {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 0 0 16px;
+  background: var(--tg-paper); border: 1px solid var(--tg-line); border-left: 4px solid var(--tg-acc);
+  border-radius: 12px; padding: 10px 12px 10px 14px; font-size: 15px;
+}
+.tg-ripresi > span { flex: 1 1 220px; display: inline-flex; align-items: center; gap: 8px; }
+.tg-ripresi > span .tg-ico { font-size: 19px; color: var(--tg-acc); }
+body.tg-act .tg-ripresi .btn { padding: 6px 12px; font-size: 14px; margin: 0; }
+.tg-ripresi .tg-x {
+  border: 0; background: transparent; color: var(--tg-mute); font-size: 18px; line-height: 1;
+  width: 32px; height: 32px; border-radius: 8px; cursor: pointer; display: grid; place-items: center;
+}
+.tg-ripresi .tg-x:hover { color: var(--tg-ink); background: var(--tg-paper-2); }
+@media print { .tg-ripresi { display: none; } }
 
-/* Il BEP vivo: niente seconda fascia scura sotto la barra del sito */
-body.tg-lim.tg-bep header { background: transparent; color: var(--ink); padding: 1.1rem 1.2rem .5rem; }
-body.tg-lim.tg-bep header h1 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); letter-spacing: -.015em; }
-body.tg-lim.tg-bep header .sub { color: var(--muted); }
-body.tg-lim.tg-bep header .tbtn { background: var(--card); color: var(--ink); border: 1px solid var(--line); }
+/* ---------- attività da LIM con layout proprio (body.tg-lim) ----------
+   Le loro variabili diventano i token del sito; i pochi colori scritti a mano nelle pagine
+   (anche negli SVG generati, tramite gli attributi fill/stroke) si coprono qui. */
+body.tg-lim { background: var(--tg-bg); color: var(--tg-ink); font-family: var(--tg-sans); -webkit-font-smoothing: antialiased; }
+body.tg-lim h1 { font-weight: 700; letter-spacing: -.015em; }
+body.tg-lim .btn { border-radius: 10px; }
 
-/* Che struttura è: sfondo e bordi del sito */
-body.tg-lim.tg-che { --bg: #f6f4ef; --line: #e3dfd5; }
+/* Il BEP vivo */
+body.tg-lim.tg-bep {
+  --bg: var(--tg-bg); --card: var(--tg-paper); --ink: var(--tg-ink); --muted: var(--tg-mute); --line: var(--tg-line);
+  --acc: var(--tg-acc); --accsoft: var(--tg-acc-soft); --fix: var(--tg-mute);
+  --rev: #3fc7b4; --cost: #f2a650;
+  --ok: var(--tg-ok); --oksoft: var(--tg-ok-soft); --bad: var(--tg-ko); --badsoft: var(--tg-ko-soft);
+  --warn: var(--tg-warn); --warnsoft: var(--tg-warn-soft);
+}
+:root[data-theme="light"] body.tg-lim.tg-bep { --rev: #0f766e; --cost: #c2410c; }
+body.tg-lim.tg-bep header { background: transparent; color: var(--tg-ink); padding: 1.1rem 1.2rem .5rem; }
+body.tg-lim.tg-bep header h1 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); }
+body.tg-lim.tg-bep header .sub { color: var(--tg-mute); }
+body.tg-lim.tg-bep header .tbtn { background: var(--tg-paper); color: var(--tg-ink); border: 1px solid var(--tg-line); }
+body.tg-lim.tg-bep header .tbtn:hover { border-color: var(--tg-mute); }
+body.tg-lim.tg-bep nav button { background: var(--tg-paper-2); color: var(--tg-mute); }
+body.tg-lim.tg-bep nav button.on { background: var(--tg-paper); color: var(--tg-ink); }
+body.tg-lim.tg-bep .panel { box-shadow: var(--tg-shadow-sm); border: 1px solid var(--tg-line); }
+body.tg-lim.tg-bep .box, body.tg-lim.tg-bep .team, body.tg-lim.tg-bep .pt,
+body.tg-lim.tg-bep .choices button, body.tg-lim.tg-bep canvas { background: var(--tg-paper); color: var(--tg-ink); }
+body.tg-lim.tg-bep .kpi { background: var(--tg-paper-2); }
+body.tg-lim.tg-bep .kpi.big { background: var(--tg-acc-soft); border-color: color-mix(in srgb, var(--tg-acc) 45%, transparent); }
+body.tg-lim.tg-bep .btn, body.tg-lim.tg-bep .choices button.btn, body.tg-lim.tg-bep .event .tag { color: var(--tg-on-acc); }
+body.tg-lim.tg-bep .btn.sec, body.tg-lim.tg-bep .choices button.btn.sec { background: var(--tg-paper-2); color: var(--tg-ink); border-color: var(--tg-paper-2); }
+body.tg-lim.tg-bep .mission .chk, body.tg-lim.tg-bep .pt.on { color: var(--tg-on-acc); }
+body.tg-lim.tg-bep .team input[type=text] { color: var(--tg-ink); }
+
+/* Che struttura è? */
+body.tg-lim.tg-che {
+  --bg: var(--tg-bg); --card: var(--tg-paper); --ink: var(--tg-ink); --mut: var(--tg-mute); --line: var(--tg-line);
+  --acc: var(--tg-acc); --accl: var(--tg-acc-soft); --ok: var(--tg-ok); --okl: var(--tg-ok-soft);
+  --ko: var(--tg-ko); --kol: var(--tg-ko-soft); --warn: var(--tg-warn);
+}
 body.tg-lim.tg-che header {
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  background: color-mix(in srgb, var(--tg-bg) 88%, transparent);
   -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
 }
-body.tg-lim.tg-che header h1 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); letter-spacing: -.015em; }
+body.tg-lim.tg-che header h1 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); }
+body.tg-lim.tg-che .btn.pri { color: var(--tg-on-acc); }
+body.tg-lim.tg-che .clue { background: var(--tg-warn-soft); }
+body.tg-lim.tg-che .trow input { color: var(--tg-ink); }
+body.tg-lim.tg-che .trow input:hover, body.tg-lim.tg-che .trow input:focus { background: var(--tg-paper-2); }
+body.tg-lim.tg-che .ch button, body.tg-lim.tg-che .bonus, body.tg-lim.tg-che .disc,
+body.tg-lim.tg-che .rank, body.tg-lim.tg-che svg { background: var(--tg-paper); color: var(--tg-ink); }
+body.tg-lim.tg-che svg [stroke="#7b86a3"] { stroke: var(--tg-mute); }
+body.tg-lim.tg-che svg [fill="#2f5bd8"] { fill: var(--tg-acc); }
+body.tg-lim.tg-che svg [stroke="#2f5bd8"] { stroke: var(--tg-acc); }
+body.tg-lim.tg-che svg [fill="#f1f3f9"] { fill: var(--tg-paper-2); }
+body.tg-lim.tg-che svg [fill="#e6edff"] { fill: var(--tg-acc-soft); }
+body.tg-lim.tg-che svg [stroke="#9aa7cc"] { stroke: var(--tg-line-2); }
+body.tg-lim.tg-che svg [fill="#fff7e6"] { fill: var(--tg-warn-soft); }
+body.tg-lim.tg-che svg [stroke="#e0b25c"] { stroke: var(--tg-warn); }
+body.tg-lim.tg-che svg text[fill="#fff"] { fill: var(--tg-on-acc); }
+body.tg-lim.tg-che svg text[fill="#1d2433"] { fill: var(--tg-ink); }
+body.tg-lim.tg-che svg text[fill="#5b6478"] { fill: var(--tg-mute); }
+body.tg-lim.tg-che svg text[fill="#b9770e"] { fill: var(--tg-warn); }
 
-/* Processi e thread: font del sito al posto di quelli esterni, sfondo carta nel tema chiaro */
-body.tg-lim.tg-tp { --f-head: var(--tg-sans); --f-body: var(--tg-sans); --f-mono: var(--tg-mono); }
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) body.tg-lim.tg-tp { --bg: #f6f4ef; --surface2: #ece8df; --line: #ddd8cc; }
+/* Processi e thread: aveva già un tema scuro; ora usa i token del sito in entrambi i temi */
+body.tg-lim.tg-tp {
+  --bg: var(--tg-bg); --surface: var(--tg-paper); --surface2: var(--tg-paper-2); --ink: var(--tg-ink);
+  --muted: var(--tg-mute); --line: var(--tg-line-2); --proc: var(--tg-acc); --proc-soft: var(--tg-acc-soft);
+  --res: var(--tg-warn); --res-soft: var(--tg-warn-soft); --good: var(--tg-ok); --good-soft: var(--tg-ok-soft);
+  --bad: var(--tg-ko); --bad-soft: var(--tg-ko-soft);
+  --f-head: var(--tg-sans); --f-body: var(--tg-sans); --f-mono: var(--tg-mono);
 }
-:root[data-theme="light"] body.tg-lim.tg-tp { --bg: #f6f4ef; --surface2: #ece8df; --line: #ddd8cc; }
 body.tg-lim.tg-tp h1, body.tg-lim.tg-tp h2 { font-weight: 700; letter-spacing: -.015em; }
-body.tg-lim.tg-bep header .tbtn:hover { border-color: var(--muted); }
+body.tg-lim.tg-tp .tab[aria-selected="true"], body.tg-lim.tg-tp .btn.primary,
+body.tg-lim.tg-tp .timer output.end, body.tg-lim.tg-tp .opt.right .letter { color: var(--tg-on-acc); }
+
+/* titolo con l'icona nelle intestazioni delle attività */
+.tg-titolo { min-width: 0; }
+.tg-titolo h1 { min-width: 0; }
+body.tg-lim.tg-tp .tg-titolo { margin-right: auto; }
+body.tg-lim.tg-che .tg-titolo { flex: 1 0 auto; }
+body.tg-lim.tg-che header .tg-badge, body.tg-lim.tg-tp .tg-badge { width: 40px; height: 40px; font-size: 23px; }

@@ -23,6 +23,13 @@ senza installare nulla, senza account e senza raccogliere dati degli studenti.
 - Pubblicato con **GitHub Pages** sul dominio personalizzato (file `CNAME`).
 - Gli indirizzi seguono `corso/unità/attività/` e non cambiano nel tempo, così i link dati alle classi restano validi.
 - Funziona anche offline: basta aprire `index.html` con un doppio clic.
+- **Una sola veste per tutto il sito**: i colori sono token in `assets/teaching.css` (`--tg-bg`, `--tg-paper`,
+  `--tg-ink`, `--tg-acc`, `--tg-ok`...). Il **tema scuro** è quello di partenza; il pulsante in alto passa al chiaro
+  e la scelta resta nel browser. In stampa la pagina è sempre chiara. Ogni corso ha il suo colore (`colore` in
+  `catalogo.js`), usato per la riga sotto la barra e per le icone.
+- **Icone SVG** disegnate per il sito nello stile del portfolio (griglia 24×24, tratto, riempimento trasparente nel
+  colore del corso, accento giallo come il cursore del logo): sono in `ICONE` dentro `assets/teaching.js` e compaiono
+  sulle card, accanto ai titoli delle attività, nelle schede dei giochi, nella barra e nel risultato.
 - Ogni attività ha in alto una barra comune con il ritorno all'elenco, lo schermo intero e il pulsante **QR**:
   mostra a tutto schermo il QR code della pagina con l'indirizzo scritto in grande, così alla LIM gli studenti
   la aprono dal telefono. Si chiude con un clic o con Esc. Se la pagina è aperta dal disco, il QR porta comunque
@@ -88,6 +95,9 @@ informatica-1/computer-e-codici/temi/   codice di argomento (numeri, aritmetica,
 3. **Attività con un layout proprio** (pensate per la LIM): `<body class="tg-lim tg-<nome>">`, con stile e script
    nella pagina e poche regole dedicate in `teaching.css`. Nessuna risorsa esterna (font, librerie da CDN):
    tutto deve funzionare anche offline.
+   Le attività da LIM ricevono il tema scuro da `teaching.css`: le loro variabili di colore (`--bg`, `--card`,
+   `--ink`...) vengono ridefinite sui token del sito, quindi conviene usare variabili anche nel loro CSS e negli SVG
+   generati, invece di colori scritti a mano.
 4. In entrambi i casi, prima di `</head>` vanno le quattro righe comuni (ogni `../` sale di una cartella, quindi sono tre):
 3. Prima di `</head>` aggiungi le quattro righe comuni (ogni `../` sale di una cartella, quindi sono tre):
    ```html
@@ -96,7 +106,7 @@ informatica-1/computer-e-codici/temi/   codice di argomento (numeri, aritmetica,
    <script src="../../../assets/catalogo.js" defer></script>
    <script src="../../../assets/teaching.js" defer></script>
    ```
-5. Aggiungi una voce in `assets/catalogo.js` e il nuovo indirizzo in `sitemap.xml`. Se il corso o l'unità sono nuovi, aggiungili in `CORSI`
+5. Aggiungi una voce in `assets/catalogo.js` (con `icona`: il nome di un'icona di `ICONE`, o disegnane una nuova) e il nuovo indirizzo in `sitemap.xml`. Se il corso o l'unità sono nuovi, aggiungili in `CORSI`
    e `UNITA` e copia una pagina `index.html` di corso o di unità esistente, cambiando `data-corso` e `data-unita`.
 6. Commit e push: in un minuto è online.
 

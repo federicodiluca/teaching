@@ -1,55 +1,177 @@
-/* giochi: stile comune delle attività tg-act (Informatica 1), usato insieme a giochi.js.
-   Va caricato prima di teaching.css, che ci mette sopra la veste grafica del sito. */
-:root{--bg:#f6f7fb;--card:#fff;--ink:#1d2433;--mute:#5b6577;--line:#d7dce7;--acc:#2f5bea;--ok:#1e8e4e;--okbg:#e4f6ec;--ko:#c0392b;--kobg:#fdeaea;--sel:#fff3c4}
-*{box-sizing:border-box}body{margin:0;font-family:var(--tg-sans,Arial,Helvetica,sans-serif);background:var(--bg);color:var(--ink);line-height:1.4}
-header{background:var(--acc);color:#fff;padding:14px 20px}header h1{margin:0;font-size:20px}
-nav{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5;padding:6px 12px}.nv{display:flex;gap:6px;overflow-x:auto;padding:3px 0}.nv:empty{display:none}nav button.sub{background:#f0f3fb;font-size:13px;padding:6px 10px}nav button.sub.on{background:var(--acc)}
-nav button{flex:0 0 auto;border:1px solid var(--line);background:#fff;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:14px;color:var(--ink)}
-nav button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
-main{max-width:940px;margin:0 auto;padding:16px 16px 50px}
-section{display:none}section.on{display:block}
-h2{font-size:18px;margin:8px 0}p.lead{color:var(--mute);margin:4px 0 14px}
-.btn{background:var(--acc);color:#fff;border:0;border-radius:8px;padding:10px 16px;font-size:15px;cursor:pointer}
-.btn.sec{background:#fff;color:var(--acc);border:1px solid var(--acc)}.btn:disabled{opacity:.45}
-.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:12px 0}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin:10px 0}
-.q{font-size:17px;margin:0 0 10px}.turn{background:#eef1fb;border-radius:8px;padding:6px 10px;font-size:14px;margin-bottom:10px;display:inline-block}
-.f{display:flex;align-items:center;gap:8px;margin:8px 0;flex-wrap:wrap}.f label{min-width:150px;font-weight:bold;font-size:14px}
-input[type=text],select{padding:9px;border:1px solid var(--line);border-radius:8px;font-size:16px;font-family:var(--tg-mono,Consolas,monospace);min-width:200px}
-input.ok,select.ok{background:var(--okbg);border-color:var(--ok)}input.ko,select.ko{background:var(--kobg);border-color:var(--ko)}
-.sol{background:#fff8dc;border:1px solid #e6d58a;border-radius:8px;padding:10px;margin-top:10px;font-size:14px}
-.sol pre{margin:6px 0;font-family:var(--tg-mono,Consolas,monospace);white-space:pre-wrap}
-.stat{color:var(--mute);font-size:14px;margin-top:8px}.msg{font-weight:bold}
-.sw{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
-.bit{width:62px;border:2px solid var(--line);background:#fff;border-radius:10px;text-align:center;padding:6px 0;cursor:pointer;user-select:none}
-.bit b{display:block;font-size:26px;font-family:var(--tg-mono,Consolas,monospace)}.bit small{color:var(--mute)}
-.bit.on{background:var(--acc);color:#fff;border-color:var(--acc)}.bit.on small{color:#cfdcff}
-.val{font-family:var(--tg-mono,Consolas,monospace);font-size:18px}
-table.tv{border-collapse:collapse;margin:10px 0}table.tv th,table.tv td{border:1px solid var(--line);padding:8px 14px;text-align:center;background:#fff;font-family:var(--tg-mono,Consolas,monospace);font-size:16px}
-table.tv td.out{cursor:pointer;min-width:70px;background:#f0f3fb}table.tv td.ok{background:var(--okbg)}table.tv td.ko{background:var(--kobg)}
-table.res{border-collapse:collapse;margin:10px 0}table.res td,table.res th{border:1px solid var(--line);padding:8px 14px;background:#fff;text-align:left}
-.timer{font-family:var(--tg-mono,Consolas,monospace);font-size:18px}
-.pool{display:flex;gap:8px;flex-wrap:wrap;min-height:50px;padding:10px;background:#eef1f8;border:1px dashed var(--line);border-radius:10px;margin-bottom:12px}
-.chip{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 10px;cursor:pointer;max-width:330px;font-size:14px;user-select:none}
-.chip.sel{background:var(--sel);border-color:#d9a900}.chip.wrong{animation:sh .35s}
-@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-.buckets{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
-.bk{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:10px;min-height:100px;cursor:pointer}
-.bk h3{margin:0 0 2px;font-size:15px}.bk small{color:var(--mute);display:block;margin-bottom:6px}.bk.hl{border-color:var(--acc);background:#f0f4ff}
-.bk .chip{background:var(--okbg);border-color:var(--ok);cursor:default;margin:4px 0;max-width:none}
-.line{display:block;width:100%;text-align:left;font-family:var(--tg-mono,Consolas,monospace);font-size:15px;border:1px solid var(--line);background:#fff;border-radius:8px;padding:8px 10px;margin:4px 0;cursor:pointer}
-.line.ok{background:var(--okbg);border-color:var(--ok)}.line.ko{background:var(--kobg);border-color:var(--ko)}
-.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:640px}
-.tile{height:70px;border:2px solid var(--line);border-radius:10px;background:var(--acc);color:#fff;font-size:17px;font-family:var(--tg-mono,Consolas,monospace);display:flex;align-items:center;justify-content:center;cursor:pointer;text-align:center;padding:4px}
-.tile.up{background:#fff;color:var(--ink)}.tile.done{background:var(--okbg);color:var(--ink);border-color:var(--ok);cursor:default}
-.grid{display:grid;gap:2px;width:fit-content}.px{width:34px;height:34px;border:1px solid #bbb;cursor:pointer}
-.add input{width:34px;min-width:0;text-align:center;padding:6px 2px}.add td,.add th{padding:2px 3px;font-family:var(--tg-mono,Consolas,monospace)}
-.cb{display:inline-block;margin:6px 14px 6px 0}
-.ord{list-style:none;margin:0;padding:0;counter-reset:n}
-.ord li{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px;margin:6px 0;cursor:grab}
-.ord li.drag{opacity:.4}.ord li.over{border-color:var(--acc);box-shadow:0 0 0 2px #c9d6ff}
-.ord li::before{counter-increment:n;content:counter(n);background:var(--acc);color:#fff;border-radius:50%;min-width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:bold}
-.ord li .t{flex:1}.ord li .t b{display:block}.ord li .t span{color:var(--mute);font-size:14px}.ord li .yr{font-weight:bold;min-width:110px;text-align:right}
-.ord li .mv button{border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;width:30px;height:30px}
-.ord li.ok{background:var(--okbg);border-color:var(--ok)}.ord li.ko{background:var(--kobg);border-color:var(--ko)}
-code{background:#eef1f7;padding:1px 6px;border-radius:5px;font-family:var(--tg-mono,Consolas,monospace)}
+/* giochi: stile delle attività tg-act (Informatica 1), usato insieme a giochi.js.
+   Usa i token di colore di teaching.css (tema scuro di partenza, chiaro con data-theme="light").
+   Le variabili brevi (--ok, --ko, --acc...) restano come alias perché gli script dei giochi
+   le usano negli stili in linea, per esempio m.style.color = 'var(--ok)'. */
+body.tg-act {
+  --bg: var(--tg-bg); --card: var(--tg-paper); --ink: var(--tg-ink); --mute: var(--tg-mute); --line: var(--tg-line);
+  --acc: var(--tg-acc); --ok: var(--tg-ok); --okbg: var(--tg-ok-soft); --ko: var(--tg-ko); --kobg: var(--tg-ko-soft);
+  --sel: var(--tg-hl-soft);
+  margin: 0; background: var(--tg-bg); color: var(--tg-ink);
+  font: 16px/1.5 var(--tg-sans); -webkit-font-smoothing: antialiased;
+}
+body.tg-act *, body.tg-act *::before, body.tg-act *::after { box-sizing: border-box; }
+body.tg-act :focus-visible { outline: 2px solid var(--tg-acc); outline-offset: 2px; }
+
+/* ---------- intestazione e schede ---------- */
+body.tg-act header {
+  max-width: 940px; margin: 0 auto; padding: 26px 16px 12px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px;
+}
+body.tg-act header h1 { margin: 0; font-size: clamp(22px, 3.2vw, 30px); line-height: 1.15; letter-spacing: -.015em; font-weight: 700; }
+body.tg-act nav {
+  position: sticky; top: 0; z-index: 5;
+  background: color-mix(in srgb, var(--tg-bg) 88%, transparent);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--tg-line);
+  padding: 6px max(12px, calc((100% - 940px) / 2 + 16px));
+}
+.nv { display: flex; gap: 6px; overflow-x: auto; padding: 3px 0; scrollbar-width: thin; }
+.nv:empty { display: none; }
+body.tg-act nav button {
+  flex: 0 0 auto; display: inline-flex; align-items: center; gap: 7px;
+  border: 1px solid var(--tg-line); background: var(--tg-paper); color: var(--tg-ink);
+  padding: 7px 14px; border-radius: 999px; cursor: pointer; font: 500 14px var(--tg-sans);
+  transition: border-color .15s ease, background-color .15s ease;
+}
+body.tg-act nav button .tg-ico { font-size: 16px; color: var(--tg-mute); }
+body.tg-act nav button:hover { border-color: var(--tg-mute); }
+body.tg-act nav button.on { background: var(--tg-ink); border-color: var(--tg-ink); color: var(--tg-bg); }
+body.tg-act nav button.on .tg-ico { color: inherit; }
+body.tg-act nav button.sub { background: transparent; font-size: 13px; padding: 5px 12px; }
+body.tg-act nav button.sub.on { background: var(--tg-acc); border-color: var(--tg-acc); color: var(--tg-on-acc); }
+body.tg-act main { max-width: 940px; margin: 0 auto; padding: 22px 16px 50px; }
+body.tg-act section { display: none; }
+body.tg-act section.on { display: block; }
+body.tg-act h2 { font-size: 21px; letter-spacing: -.01em; margin: 4px 0 6px; }
+body.tg-act p.lead { color: var(--tg-mute); margin: 4px 0 14px; font-size: 16px; }
+body.tg-act main a { color: var(--tg-acc); }
+
+/* ---------- pulsanti, card, campi ---------- */
+.btn {
+  background: var(--tg-acc); color: var(--tg-on-acc); border: 1px solid var(--tg-acc); border-radius: 10px;
+  padding: 10px 18px; font: 600 15px var(--tg-sans); cursor: pointer;
+  transition: filter .15s ease, transform .1s ease;
+}
+.btn:hover:not(:disabled) { filter: brightness(1.08); }
+.btn:active:not(:disabled) { transform: translateY(1px); }
+.btn.sec { background: var(--tg-paper); color: var(--tg-acc); border-color: color-mix(in srgb, var(--tg-acc) 70%, var(--tg-line)); }
+.btn:disabled { opacity: .45; cursor: default; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin: 12px 0; }
+.card {
+  background: var(--tg-paper); border: 1px solid var(--tg-line); border-radius: 14px; padding: 14px; margin: 10px 0;
+  box-shadow: var(--tg-shadow-sm);
+}
+.q { font-size: 17px; margin: 0 0 10px; }
+.turn { background: var(--tg-acc-soft); border-radius: 8px; padding: 6px 10px; font-size: 14px; margin-bottom: 10px; display: inline-block; }
+.f { display: flex; align-items: center; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
+.f label { min-width: 150px; font-weight: 700; font-size: 14px; }
+body.tg-act input[type=text], body.tg-act select {
+  padding: 9px; border: 1px solid var(--tg-line-2); border-radius: 10px; font-size: 16px;
+  font-family: var(--tg-mono); min-width: 200px; background-color: var(--tg-paper); color: var(--tg-ink);
+}
+body.tg-act input[type=text]::placeholder { color: var(--tg-mute); }
+body.tg-act input.ok, body.tg-act select.ok { background-color: var(--tg-ok-soft); border-color: var(--tg-ok); }
+body.tg-act input.ko, body.tg-act select.ko { background-color: var(--tg-ko-soft); border-color: var(--tg-ko); }
+.sol {
+  background: var(--tg-hl-soft); border: 1px solid color-mix(in srgb, var(--tg-hl) 50%, transparent);
+  border-radius: 10px; padding: 10px; margin-top: 10px; font-size: 14px;
+}
+.sol pre { margin: 6px 0; font-family: var(--tg-mono); white-space: pre-wrap; }
+.stat { color: var(--tg-mute); font-size: 14px; margin-top: 8px; }
+.msg { font-weight: 700; }
+.timer { font-family: var(--tg-mono); font-size: 18px; }
+.val { font-family: var(--tg-mono); font-size: 18px; }
+code { background: var(--tg-paper-2); padding: 1px 6px; border-radius: 5px; font-family: var(--tg-mono); }
+
+/* ---------- interruttori ---------- */
+.sw { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0; }
+.bit {
+  width: 62px; border: 2px solid var(--tg-line); background: var(--tg-paper); border-radius: 10px;
+  text-align: center; padding: 6px 0; cursor: pointer; user-select: none;
+}
+.bit b { display: block; font-size: 26px; font-family: var(--tg-mono); }
+.bit small { color: var(--tg-mute); }
+.bit.on { background: var(--tg-acc); color: var(--tg-on-acc); border-color: var(--tg-acc); }
+.bit.on small { color: inherit; opacity: .75; }
+
+/* ---------- tabelle ---------- */
+table.tv { border-collapse: collapse; margin: 10px 0; }
+table.tv th, table.tv td {
+  border: 1px solid var(--tg-line); padding: 8px 14px; text-align: center;
+  background: var(--tg-paper); font-family: var(--tg-mono); font-size: 16px;
+}
+table.tv td.out { cursor: pointer; min-width: 70px; background: var(--tg-paper-2); }
+table.tv td.ok { background: var(--tg-ok-soft); }
+table.tv td.ko { background: var(--tg-ko-soft); }
+table.res { border-collapse: collapse; margin: 10px 0; }
+table.res td, table.res th { border: 1px solid var(--tg-line); padding: 8px 14px; background: var(--tg-paper); text-align: left; }
+
+/* ---------- smistamento ---------- */
+.pool {
+  display: flex; gap: 8px; flex-wrap: wrap; min-height: 50px; padding: 10px; margin-bottom: 12px;
+  background: var(--tg-paper-2); border: 1px dashed var(--tg-line-2); border-radius: 12px;
+}
+.chip {
+  background: var(--tg-paper); color: var(--tg-ink); border: 1px solid var(--tg-line); border-radius: 10px;
+  padding: 8px 10px; cursor: pointer; max-width: 330px; font-size: 14px; user-select: none;
+}
+.chip.sel { background: var(--tg-hl-soft); border-color: var(--tg-hl); }
+.chip.wrong { animation: sh .35s; }
+@keyframes sh { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+.buckets { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 10px; }
+.bk { background: var(--tg-paper); border: 2px solid var(--tg-line); border-radius: 12px; padding: 10px; min-height: 100px; cursor: pointer; }
+.bk h3 { margin: 0 0 2px; font-size: 15px; }
+.bk small { color: var(--tg-mute); display: block; margin-bottom: 6px; }
+.bk.hl { border-color: var(--tg-acc); background: var(--tg-acc-soft); }
+.bk .chip { background: var(--tg-ok-soft); border-color: var(--tg-ok); cursor: default; margin: 4px 0; max-width: none; }
+
+/* ---------- caccia all'errore ---------- */
+.line {
+  display: block; width: 100%; text-align: left; font-family: var(--tg-mono); font-size: 15px; color: var(--tg-ink);
+  border: 1px solid var(--tg-line); background: var(--tg-paper); border-radius: 8px; padding: 8px 10px; margin: 4px 0; cursor: pointer;
+}
+.line:hover { border-color: var(--tg-mute); }
+.line.ok { background: var(--tg-ok-soft); border-color: var(--tg-ok); }
+.line.ko { background: var(--tg-ko-soft); border-color: var(--tg-ko); }
+
+/* ---------- memory ---------- */
+.mem { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; max-width: 640px; }
+.tile {
+  height: 70px; border: 2px solid transparent; border-radius: 10px; background: var(--tg-acc); color: var(--tg-on-acc);
+  font-size: 17px; font-family: var(--tg-mono); display: flex; align-items: center; justify-content: center;
+  cursor: pointer; text-align: center; padding: 4px;
+}
+.tile.up { background: var(--tg-paper); color: var(--tg-ink); border-color: var(--tg-line-2); }
+.tile.done { background: var(--tg-ok-soft); color: var(--tg-ink); border-color: var(--tg-ok); cursor: default; }
+
+/* ---------- editor di pixel e sommatore ---------- */
+.grid { display: grid; gap: 2px; width: fit-content; }
+.px { width: 34px; height: 34px; border: 1px solid var(--tg-line-2); cursor: pointer; }
+.add input { width: 34px; min-width: 0 !important; text-align: center; padding: 6px 2px !important; }
+.add td, .add th { padding: 2px 3px; font-family: var(--tg-mono); }
+.cb { display: inline-block; margin: 6px 14px 6px 0; }
+
+/* ---------- riordino ---------- */
+.ord { list-style: none; margin: 0; padding: 0; counter-reset: n; }
+.ord li {
+  display: flex; align-items: center; gap: 10px; background: var(--tg-paper); border: 1px solid var(--tg-line);
+  border-radius: 10px; padding: 10px; margin: 6px 0; cursor: grab;
+}
+.ord li.drag { opacity: .4; }
+.ord li.over { border-color: var(--tg-acc); box-shadow: 0 0 0 2px var(--tg-acc-soft); }
+.ord li::before {
+  counter-increment: n; content: counter(n); background: var(--tg-acc); color: var(--tg-on-acc); border-radius: 50%;
+  min-width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;
+}
+.ord li .t { flex: 1; }
+.ord li .t b { display: block; }
+.ord li .t span { color: var(--tg-mute); font-size: 14px; }
+.ord li .yr { font-weight: 700; min-width: 110px; text-align: right; }
+.ord li .mv button {
+  border: 1px solid var(--tg-line); background: var(--tg-paper); color: var(--tg-ink);
+  border-radius: 6px; cursor: pointer; width: 30px; height: 30px;
+}
+.ord li.ok { background: var(--tg-ok-soft); border-color: var(--tg-ok); }
+.ord li.ko { background: var(--tg-ko-soft); border-color: var(--tg-ko); }
+
+@media print { body.tg-act nav { display: none; } }
