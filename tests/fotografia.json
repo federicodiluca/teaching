@@ -1,0 +1,980 @@
+{
+ "informatica-1/computer-e-codici/numeri-e-basi": {
+  "nav": [],
+  "sez": {
+   "inizio": {
+    "nav": "Inizio\n1 Interruttori\n2 Allenatore\n3 Caccia all'errore\n4 Memory\nMissione finale\nRisultato",
+    "testo": "Sistemi di numerazione: decimale, binario, ottale ed esadecimale\n\nCinque giochi per allenare le conversioni, dal più semplice al più difficile.\n\nInterruttori: accendete i bit e guardate i valori.\nAllenatore: otto tipi di conversione a tre livelli.\nCaccia all'errore: trovate il passaggio sbagliato in una conversione.\nMemory delle equivalenze: abbinate lo stesso numero scritto in basi diverse.\nMissione finale: dieci domande miste a tempo.\n\nSi gioca in coppia: ad ogni esercizio tocca a uno dei due scrivere, mentre l'altro controlla e discute. Nelle risposte potete usare la virgola o il punto; gli zeri iniziali e le maiuscole non contano.\n\nPrimo nome: \nSecondo nome: "
+   },
+   "s1": {
+    "nav": "Inizio\n1 Interruttori\n2 Allenatore\n3 Caccia all'errore\n4 Memory\nMissione finale\nRisultato",
+    "testo": "1. Interruttori\n\nFate clic sui bit: sotto vedete lo stesso numero in decimale, ottale ed esadecimale. Poi la sfida.\n\n0\n128\n0\n64\n0\n32\n0\n16\n0\n8\n0\n4\n0\n2\n0\n1\nBinario 00000000 · Decimale 0 · Ottale 0 · Esadecimale 0\n\nFate comparire il numero decimale 250\n\nCambia numero"
+   },
+   "s2": {
+    "nav": "Inizio\n1 Interruttori\n2 Allenatore\n3 Caccia all'errore\n4 Memory\nMissione finale\nRisultato",
+    "testo": "2. Allenatore di conversioni\n\nScegliete il tipo e il livello. Dopo ogni esercizio il turno passa all'altro giocatore.\n\nBinario → decimale\nDecimale → binario\nBinario con virgola → decimale\nDecimale con virgola → binario\nBinario → ottale e esadecimale\nDecimale → binario, ottale, esadecimale\nEsadecimale → ottale e decimale\nOttale → binario e esadecimale\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\nTocca a Giocatore 1 (scrive) · Giocatore 2 controlla\n\nConvertite in decimale il numero binario 1100\n\nDecimale\nControlla\nMostra il procedimento\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "s3": {
+    "nav": "Inizio\n1 Interruttori\n2 Allenatore\n3 Caccia all'errore\n4 Memory\nMissione finale\nRisultato",
+    "testo": "3. Caccia all'errore\n\nUn passaggio della conversione è sbagliato: fate clic sulla riga errata.\n\nTocca a Giocatore 2 (scrive) · Giocatore 1 controlla\n\nConversione di 11100010 in esadecimale a gruppi di 4 bit: una riga è sbagliata. Quale?\n\n1110 → E\n0010 → D\nAltro esercizio\nTrovati: 0 su 0"
+   },
+   "s4": {
+    "nav": "Inizio\n1 Interruttori\n2 Allenatore\n3 Caccia all'errore\n4 Memory\nMissione finale\nRisultato",
+    "testo": "4. Memory delle equivalenze\n\nScoprite due tessere alla volta: si tolgono dal tavolo se rappresentano lo stesso numero. Giocate a turno.\n\nTocca a Giocatore 1 · coppie trovate: Giocatore 1 0 · Giocatore 2 0 · tentativi: 0. Un numero senza indicazione è decimale.\n?\n?\n?\n?\n?\n?\n?\n?\n?\n?\n?\n?\nNuova partita"
+   },
+   "ms-sec": {
+    "nav": "Inizio\n1 Interruttori\n2 Allenatore\n3 Caccia all'errore\n4 Memory\nMissione finale\nRisultato",
+    "testo": "Missione finale\n\nDieci domande miste, a turno. Il tempo parte con il primo clic. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nInizia la missione finale"
+   },
+   "res": {
+    "nav": "Inizio\n1 Interruttori\n2 Allenatore\n3 Caccia all'errore\n4 Memory\nMissione finale\nRisultato",
+    "testo": "Risultato\n\nCoppia: Giocatore 1 e Giocatore 2\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la missione finale."
+   }
+  },
+  "dopo": {
+   "inizio": "Sistemi di numerazione: decimale, binario, ottale ed esadecimale\n\nCinque giochi per allenare le conversioni, dal più semplice al più difficile.\n\nInterruttori: accendete i bit e guardate i valori.\nAllenatore: otto tipi di conversione a tre livelli.\nCaccia all'errore: trovate il passaggio sbagliato in una conversione.\nMemory delle equivalenze: abbinate lo stesso numero scritto in basi diverse.\nMissione finale: dieci domande miste a tempo.\n\nSi gioca in coppia: ad ogni esercizio tocca a uno dei due scrivere, mentre l'altro controlla e discute. Nelle risposte potete usare la virgola o il punto; gli zeri iniziali e le maiuscole non contano.\n\nPrimo nome: \nSecondo nome: ",
+   "s1": "1. Interruttori\n\nFate clic sui bit: sotto vedete lo stesso numero in decimale, ottale ed esadecimale. Poi la sfida.\n\n0\n128\n0\n64\n0\n32\n0\n16\n0\n8\n0\n4\n0\n2\n0\n1\nBinario 00000000 · Decimale 0 · Ottale 0 · Esadecimale 0\n\nFate comparire il numero decimale 250\n\nCambia numero",
+   "s2": "2. Allenatore di conversioni\n\nScegliete il tipo e il livello. Dopo ogni esercizio il turno passa all'altro giocatore.\n\nBinario → decimale\nDecimale → binario\nBinario con virgola → decimale\nDecimale con virgola → binario\nBinario → ottale e esadecimale\nDecimale → binario, ottale, esadecimale\nEsadecimale → ottale e decimale\nOttale → binario e esadecimale\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\nTocca a Giocatore 1 (scrive) · Giocatore 2 controlla\n\nConvertite in decimale il numero binario 1100\n\nDecimale\nControlla\nMostra il procedimento\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "s3": "3. Caccia all'errore\n\nUn passaggio della conversione è sbagliato: fate clic sulla riga errata.\n\nTocca a Giocatore 2 (scrive) · Giocatore 1 controlla\n\nConversione di 11100010 in esadecimale a gruppi di 4 bit: una riga è sbagliata. Quale?\n\n1110 → E\n0010 → D\nNo: la riga sbagliata era un'altra. 0010 vale 2, non D.\nAltro esercizio\nTrovati: 0 su 1",
+   "s4": "4. Memory delle equivalenze\n\nScoprite due tessere alla volta: si tolgono dal tavolo se rappresentano lo stesso numero. Giocate a turno.\n\nTocca a Bruno · coppie trovate: Ada 0 · Bruno 0 · tentativi: 1. Un numero senza indicazione è decimale.\nF8 (16)\nF2 (16)\n?\n?\n?\n?\n?\n?\n?\n?\n?\n?\nNuova partita",
+   "ms-sec": "Missione finale\n\nDieci domande miste, a turno. Il tempo parte con il primo clic. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nRiprova la missione finale\n\nFinita: 0 su 10 in 00:00.",
+   "res": "Risultato\n\nCoppia: Ada e Bruno\n\nNessun gioco ancora completato\n0 di 1 attività svolte\nMissione finale\nnon ancora fatta\nCopia il risultato\nStampa\nRicomincia da capo\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la missione finale."
+  },
+  "giocati": {
+   "s1": [],
+   "s2": [
+    "controlla"
+   ],
+   "s3": [
+    "caccia"
+   ],
+   "s4": [
+    "memory"
+   ],
+   "ms-sec": [
+    "missione"
+   ]
+  },
+  "st": "{\"g\":{\"Allenatore: Binario → decimale (liv. 1)\":{\"ok\":0,\"tot\":1},\"Caccia all'errore\":{\"ok\":0,\"tot\":1},\"Memory delle equivalenze\":{\"ok\":0,\"tot\":0}},\"m\":{\"Missione finale\":{\"pts\":0,\"t\":\"00:00\",\"count\":10}}}"
+ },
+ "informatica-1/computer-e-codici/aritmetica-binaria": {
+  "nav": [],
+  "sez": {
+   "inizio": {
+    "nav": "Inizio\n1 Somma in colonna\n2 Allenatore\nMissione finale\nRisultato",
+    "testo": "Somma, overflow e valori rappresentabili\n\nGiochi per fare somme in binario e capire cosa succede quando i bit non bastano.\n\nSomma in colonna: riporti e risultato, colonna per colonna.\nAllenatore: somme, overflow, quanti valori con n bit, spostamenti.\nMissione finale: dieci domande miste a tempo.\n\nSi gioca in coppia: ad ogni esercizio tocca a uno dei due scrivere, mentre l'altro controlla e discute. Nelle risposte potete usare la virgola o il punto; gli zeri iniziali e le maiuscole non contano.\n\nPrimo nome: \nSecondo nome: "
+   },
+   "s1": {
+    "nav": "Inizio\n1 Somma in colonna\n2 Allenatore\nMissione finale\nRisultato",
+    "testo": "1. Somma in colonna\n\nCompilate i riporti e il risultato, partendo dalla colonna di destra.\n\n4 bit\n6 bit\n8 bit\nAltra somma\nTocca a Giocatore 1 (scrive) · Giocatore 2 controlla\n\nEseguite la somma 5 + 5 in binario su 4 bit. Scrivete i riporti (la cifra che passa alla colonna successiva) e il risultato, colonna per colonna.\n\nriporto\t\t\t\t\t\n5\t\t0\t1\t0\t1\n+ 5\t\t0\t1\t0\t1\nrisultato\t\t\t\t\t\n\nSopra ogni colonna scrivete il riporto che arriva dalla colonna alla sua destra (nella colonna più a destra è sempre 0). La prima casella del risultato è il riporto finale.\n\nC'è overflow su 4 bit?\nSì\nNo\nControlla\nEsatte: 0 su 0"
+   },
+   "s2": {
+    "nav": "Inizio\n1 Somma in colonna\n2 Allenatore\nMissione finale\nRisultato",
+    "testo": "2. Allenatore\n\nScegliete il tipo e il livello. Dopo ogni esercizio il turno passa all'altro giocatore.\n\nSomma e overflow\nOverflow: c'è o non c'è?\nSomma tra numeri binari\nQuanti valori con n bit\nQuanti bit servono\nSpostamenti a sinistra e a destra\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\nTocca a Giocatore 2 (scrive) · Giocatore 1 controlla\n\nSomma in binario su 4 bit i numeri decimali 8 e 2.\n\n8 in binario (4 bit)\n2 in binario (4 bit)\nSomma in decimale\nC'è overflow?\nSì\nNo\nValore memorizzato su 4 bit (binario)\nControlla\nMostra il procedimento\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "ms-sec": {
+    "nav": "Inizio\n1 Somma in colonna\n2 Allenatore\nMissione finale\nRisultato",
+    "testo": "Missione finale\n\nDieci domande miste, a turno. Il tempo parte con il primo clic. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nInizia la missione finale"
+   },
+   "res": {
+    "nav": "Inizio\n1 Somma in colonna\n2 Allenatore\nMissione finale\nRisultato",
+    "testo": "Risultato\n\nCoppia: Giocatore 1 e Giocatore 2\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la missione finale."
+   }
+  },
+  "dopo": {
+   "inizio": "Somma, overflow e valori rappresentabili\n\nGiochi per fare somme in binario e capire cosa succede quando i bit non bastano.\n\nSomma in colonna: riporti e risultato, colonna per colonna.\nAllenatore: somme, overflow, quanti valori con n bit, spostamenti.\nMissione finale: dieci domande miste a tempo.\n\nSi gioca in coppia: ad ogni esercizio tocca a uno dei due scrivere, mentre l'altro controlla e discute. Nelle risposte potete usare la virgola o il punto; gli zeri iniziali e le maiuscole non contano.\n\nPrimo nome: \nSecondo nome: ",
+   "s1": "1. Somma in colonna\n\nCompilate i riporti e il risultato, partendo dalla colonna di destra.\n\n4 bit\n6 bit\n8 bit\nAltra somma\nTocca a Giocatore 1 (scrive) · Giocatore 2 controlla\n\nEseguite la somma 5 + 5 in binario su 4 bit. Scrivete i riporti (la cifra che passa alla colonna successiva) e il risultato, colonna per colonna.\n\nriporto\t\t\t\t\t\n5\t\t0\t1\t0\t1\n+ 5\t\t0\t1\t0\t1\nrisultato\t\t\t\t\t\n\nSopra ogni colonna scrivete il riporto che arriva dalla colonna alla sua destra (nella colonna più a destra è sempre 0). La prima casella del risultato è il riporto finale.\n\nC'è overflow su 4 bit?\nSì\nNo\nControlla\nEsatte: 0 su 0",
+   "s2": "2. Allenatore\n\nScegliete il tipo e il livello. Dopo ogni esercizio il turno passa all'altro giocatore.\n\nSomma e overflow\nOverflow: c'è o non c'è?\nSomma tra numeri binari\nQuanti valori con n bit\nQuanti bit servono\nSpostamenti a sinistra e a destra\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\nTocca a Giocatore 2 (scrive) · Giocatore 1 controlla\n\nSomma in binario su 4 bit i numeri decimali 8 e 2.\n\n8 in binario (4 bit)\n2 in binario (4 bit)\nSomma in decimale\nC'è overflow?\nSì\nNo\nValore memorizzato su 4 bit (binario)\nControlla\nMostra il procedimento\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "ms-sec": "Missione finale\n\nDieci domande miste, a turno. Il tempo parte con il primo clic. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nRiprova la missione finale\n\nFinita: 0 su 10 in 00:00.",
+   "res": "Risultato\n\nCoppia: Ada e Bruno\n\nNessun gioco ancora completato\n0 di 1 attività svolte\nMissione finale\nnon ancora fatta\nCopia il risultato\nStampa\nRicomincia da capo\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la missione finale."
+  },
+  "giocati": {
+   "s1": [],
+   "s2": [
+    "controlla"
+   ],
+   "ms-sec": [
+    "missione"
+   ]
+  },
+  "st": "{\"g\":{\"Somma in colonna\":{\"ok\":0,\"tot\":0},\"Allenatore: Somma e overflow (liv. 1)\":{\"ok\":0,\"tot\":1}},\"m\":{\"Missione finale\":{\"pts\":0,\"t\":\"00:00\",\"count\":10}}}"
+ },
+ "informatica-1/computer-e-codici/logica-e-tavole-di-verita": {
+  "nav": [],
+  "sez": {
+   "inizio": {
+    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\nMissione finale\nRisultato",
+    "testo": "Operatori logici AND, OR e NOT\n\nGiochi per costruire e leggere tavole di verità.\n\nTavole di verità: compilate l'uscita di espressioni a due e a tre ingressi.\nRiconosci l'espressione: data la tavola, scegliete l'espressione.\nUguali o diverse? confrontate due espressioni.\nQuando vale 1? trovate le combinazioni che accendono l'uscita.\nAllenatore e Missione finale.\n\nSi gioca in coppia: ad ogni esercizio tocca a uno dei due scrivere, mentre l'altro controlla e discute. Nelle risposte potete usare la virgola o il punto; gli zeri iniziali e le maiuscole non contano.\n\nPrimo nome: \nSecondo nome: "
+   },
+   "s1": {
+    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\nMissione finale\nRisultato",
+    "testo": "1. Tavole di verità\n\nFate clic sulle celle «Uscita» per scegliere 0 o 1, poi premete «Verifica».\n\nLivello 1: espressioni semplici a 2 ingressi\nLivello 2: espressioni composte a 2 ingressi\nLivello 3: 3 ingressi\nTocca a Giocatore 1 (scrive) · Giocatore 2 controlla\n\nCompilate la tavola di verità di NOT (A AND B)\n\nA\tB\tUscita\n0\t0\t?\n0\t1\t?\n1\t0\t?\n1\t1\t?\nVerifica\nAltra espressione\nPerfette: 0 su 0"
+   },
+   "s2": {
+    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\nMissione finale\nRisultato",
+    "testo": "2. Riconosci l'espressione\n2 ingressi\n3 ingressi\nTocca a Giocatore 2 (scrive) · Giocatore 1 controlla\n\nQuale espressione produce questa tavola di verità?\n\nA\tB\tUscita\n0\t0\t1\n0\t1\t0\n1\t0\t0\n1\t1\t0\nA AND (A OR B)\nNOT (A OR B)\n(NOT A) OR (NOT B)\nA AND (NOT B)\nAltra tavola\nEsatte: 0 su 0"
+   },
+   "s3": {
+    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\nMissione finale\nRisultato",
+    "testo": "3. Uguali o diverse?\nTocca a Giocatore 1 (scrive) · Giocatore 2 controlla\n\nLe due espressioni hanno sempre la stessa uscita (cioè sono equivalenti)?\n\n① (NOT A) AND (NOT B)\n② NOT (A OR B)\n\nSì, sono equivalenti\nNo, sono diverse\nAltra coppia\nEsatte: 0 su 0"
+   },
+   "s4": {
+    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\nMissione finale\nRisultato",
+    "testo": "4. Quando vale 1?\n2 ingressi\n3 ingressi\nTocca a Giocatore 2 (scrive) · Giocatore 1 controlla\n\nPer quali combinazioni di ingressi l'uscita di A AND B vale 1? Selezionatele tutte.\n\n A=0 B=0 A=0 B=1 A=1 B=0 A=1 B=1\nControlla\nAltra espressione\nEsatte: 0 su 0"
+   },
+   "s5": {
+    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\nMissione finale\nRisultato",
+    "testo": "5. Allenatore\nQuanto vale l'uscita?\nContare gli 1\nScrivere la colonna delle uscite\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\nTocca a Giocatore 1 (scrive) · Giocatore 2 controlla\n\nQuanto vale l'uscita di (NOT A) AND B quando A=1, B=1?\n\nUscita (0 o 1)\nControlla\nMostra il procedimento\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "ms-sec": {
+    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\nMissione finale\nRisultato",
+    "testo": "Missione finale\n\nDieci domande miste, a turno. Il tempo parte con il primo clic. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nInizia la missione finale"
+   },
+   "res": {
+    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\nMissione finale\nRisultato",
+    "testo": "Risultato\n\nCoppia: Giocatore 1 e Giocatore 2\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la missione finale."
+   }
+  },
+  "dopo": {
+   "inizio": "Operatori logici AND, OR e NOT\n\nGiochi per costruire e leggere tavole di verità.\n\nTavole di verità: compilate l'uscita di espressioni a due e a tre ingressi.\nRiconosci l'espressione: data la tavola, scegliete l'espressione.\nUguali o diverse? confrontate due espressioni.\nQuando vale 1? trovate le combinazioni che accendono l'uscita.\nAllenatore e Missione finale.\n\nSi gioca in coppia: ad ogni esercizio tocca a uno dei due scrivere, mentre l'altro controlla e discute. Nelle risposte potete usare la virgola o il punto; gli zeri iniziali e le maiuscole non contano.\n\nPrimo nome: \nSecondo nome: ",
+   "s1": "1. Tavole di verità\n\nFate clic sulle celle «Uscita» per scegliere 0 o 1, poi premete «Verifica».\n\nLivello 1: espressioni semplici a 2 ingressi\nLivello 2: espressioni composte a 2 ingressi\nLivello 3: 3 ingressi\nTocca a Giocatore 1 (scrive) · Giocatore 2 controlla\n\nCompilate la tavola di verità di NOT (A AND B)\n\nA\tB\tUscita\n0\t0\t?\n0\t1\t?\n1\t0\t?\n1\t1\t?\nVerifica\nAltra espressione\nPerfette: 0 su 0",
+   "s2": "2. Riconosci l'espressione\n2 ingressi\n3 ingressi\nTocca a Giocatore 2 (scrive) · Giocatore 1 controlla\n\nQuale espressione produce questa tavola di verità?\n\nA\tB\tUscita\n0\t0\t1\n0\t1\t0\n1\t0\t0\n1\t1\t0\nA AND (A OR B)\nNOT (A OR B)\n(NOT A) OR (NOT B)\nA AND (NOT B)\nNo: provate a calcolare la tavola di ogni espressione.\nAltra tavola\nEsatte: 0 su 1",
+   "s3": "3. Uguali o diverse?\nTocca a Giocatore 1 (scrive) · Giocatore 2 controlla\n\nLe due espressioni hanno sempre la stessa uscita (cioè sono equivalenti)?\n\n① (NOT A) AND (NOT B)\n② NOT (A OR B)\n\nSì, sono equivalenti\nNo, sono diverse\nAltra coppia\nEsatte: 0 su 0",
+   "s4": "4. Quando vale 1?\n2 ingressi\n3 ingressi\nTocca a Giocatore 2 (scrive) · Giocatore 1 controlla\n\nPer quali combinazioni di ingressi l'uscita di A AND B vale 1? Selezionatele tutte.\n\n A=0 B=0 A=0 B=1 A=1 B=0 A=1 B=1\nControlla\nAltra espressione\nEsatte: 0 su 0",
+   "s5": "5. Allenatore\nQuanto vale l'uscita?\nContare gli 1\nScrivere la colonna delle uscite\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\nTocca a Giocatore 1 (scrive) · Giocatore 2 controlla\n\nQuanto vale l'uscita di (NOT A) AND B quando A=1, B=1?\n\nUscita (0 o 1)\nControlla\nMostra il procedimento\nAltro esercizio\nEsatto!\nEsatti: 1 su 1",
+   "ms-sec": "Missione finale\n\nDieci domande miste, a turno. Il tempo parte con il primo clic. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nRiprova la missione finale\n\nFinita: 2 su 10 in 00:00.",
+   "res": "Risultato\n\nCoppia: Ada e Bruno\n\nNessun gioco ancora completato\n0 di 1 attività svolte\nMissione finale\nnon ancora fatta\nCopia il risultato\nStampa\nRicomincia da capo\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la missione finale."
+  },
+  "giocati": {
+   "s1": [],
+   "s2": [
+    "caccia"
+   ],
+   "s3": [],
+   "s4": [],
+   "s5": [
+    "controlla"
+   ],
+   "ms-sec": [
+    "missione"
+   ]
+  },
+  "st": "{\"g\":{\"Tavole di verità\":{\"ok\":0,\"tot\":0},\"Riconosci l'espressione\":{\"ok\":0,\"tot\":1},\"Uguali o diverse?\":{\"ok\":0,\"tot\":0},\"Quando vale 1?\":{\"ok\":0,\"tot\":0},\"Allenatore: Quanto vale l'uscita? (liv. 1)\":{\"ok\":1,\"tot\":1}},\"m\":{\"Missione finale\":{\"pts\":2,\"t\":\"00:00\",\"count\":10}}}"
+ },
+ "informatica-1/computer-e-codici/immagini-e-video": {
+  "nav": [],
+  "sez": {
+   "inizio": {
+    "nav": "Inizio\n1 Editor\n2 Disegna dal codice\n3 Allenatore\n4 Compressione\nMissione finale\nRisultato",
+    "testo": "Codifica di immagini e video, dimensioni e compressione\n\nGiochi per capire come si rappresentano i pixel e per fare i calcoli sulle dimensioni.\n\nEditor di pixel: disegnate e guardate il codice.\nDisegna dal codice: ricostruite un'immagine dai suoi bit.\nAllenatore: dieci tipi di calcolo a tre livelli.\nSmistamento: compressione con perdita e senza perdita.\nMissione finale: dieci domande miste a tempo.\n\nSi gioca in coppia: ad ogni esercizio tocca a uno dei due scrivere, mentre l'altro controlla e discute. Nelle risposte potete usare la virgola o il punto; gli zeri iniziali e le maiuscole non contano.\n\nPrimo nome: \nSecondo nome: "
+   },
+   "s1": {
+    "nav": "Inizio\n1 Editor\n2 Disegna dal codice\n3 Allenatore\n4 Compressione\nMissione finale\nRisultato",
+    "testo": "1. Editor di pixel\n\nFate clic sui quadretti per cambiare colore e osservate come cambia il codice.\n\n1 bit per pixel (2 colori)\n2 bit per pixel (4 colori)\nCancella\nCodice riga per riga:\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n\nBit totali: 64 × 1 = 64 · Byte: 8"
+   },
+   "s2": {
+    "nav": "Inizio\n1 Editor\n2 Disegna dal codice\n3 Allenatore\n4 Compressione\nMissione finale\nRisultato",
+    "testo": "2. Disegna dal codice\nTocca a Giocatore 1 (scrive) · Giocatore 2 controlla\n\nOgni riga è un codice a 1 bit per pixel (1 = nero, 0 = bianco). Fate clic sulla griglia per disegnare l'immagine.\n\n11111110\n11000000\n11000000\n11111100\n11000000\n11000000\n11111110\n00000000\n\n\nControlla\nAltra immagine\nPerfette: 0 su 0"
+   },
+   "s3": {
+    "nav": "Inizio\n1 Editor\n2 Disegna dal codice\n3 Allenatore\n4 Compressione\nMissione finale\nRisultato",
+    "testo": "3. Allenatore di calcoli\n\nRicordate: byte = bit ÷ 8; 1 MB = 1.000.000 byte; 1 MiB = 1.048.576 byte; 1 Mbit/s = 1.000.000 bit al secondo.\n\nImmagine: byte\nImmagine: MiB\nVideo: MB\nVideo: Mbit/s\nTempo di scaricamento\nCompressione\nQuanti colori con n bit\nQuanti bit per k colori\nVideo compresso: MB\nQuanto video entra nel disco\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\nTocca a Giocatore 2 (scrive) · Giocatore 1 controlla\n\nUn'immagine di 640×480 pixel usa 8 bit per pixel, senza compressione. Quanti byte occupa?\n\nByte\nControlla\nMostra il procedimento\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "s4": {
+    "nav": "Inizio\n1 Editor\n2 Disegna dal codice\n3 Allenatore\n4 Compressione\nMissione finale\nRisultato",
+    "testo": "4. Compressione con e senza perdita\n\nFate clic su una carta e poi sulla categoria giusta.\n\nWAV\nGIF\nDopo la compressione si può ricostruire il file identico all'originale\nDopo la compressione alcune informazioni sono perse per sempre\nZIP\nJPEG\nBMP\nMP4 (video)\nPNG\nFLAC\nMP3\nUn video registrato con tutti i fotogrammi completi, senza compressione\nCompressione senza perdita\nIl file originale si ricostruisce esattamente\nCompressione con perdita\nSi scarta qualcosa per risparmiare spazio\nNon compresso\nDi solito il formato non comprime i dati\nCarte da smistare: 12. Errori: 0.\nRicomincia"
+   },
+   "ms-sec": {
+    "nav": "Inizio\n1 Editor\n2 Disegna dal codice\n3 Allenatore\n4 Compressione\nMissione finale\nRisultato",
+    "testo": "Missione finale\n\nDieci domande miste, a turno. Il tempo parte con il primo clic. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nInizia la missione finale"
+   },
+   "res": {
+    "nav": "Inizio\n1 Editor\n2 Disegna dal codice\n3 Allenatore\n4 Compressione\nMissione finale\nRisultato",
+    "testo": "Risultato\n\nCoppia: Giocatore 1 e Giocatore 2\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la missione finale."
+   }
+  },
+  "dopo": {
+   "inizio": "Codifica di immagini e video, dimensioni e compressione\n\nGiochi per capire come si rappresentano i pixel e per fare i calcoli sulle dimensioni.\n\nEditor di pixel: disegnate e guardate il codice.\nDisegna dal codice: ricostruite un'immagine dai suoi bit.\nAllenatore: dieci tipi di calcolo a tre livelli.\nSmistamento: compressione con perdita e senza perdita.\nMissione finale: dieci domande miste a tempo.\n\nSi gioca in coppia: ad ogni esercizio tocca a uno dei due scrivere, mentre l'altro controlla e discute. Nelle risposte potete usare la virgola o il punto; gli zeri iniziali e le maiuscole non contano.\n\nPrimo nome: \nSecondo nome: ",
+   "s1": "1. Editor di pixel\n\nFate clic sui quadretti per cambiare colore e osservate come cambia il codice.\n\n1 bit per pixel (2 colori)\n2 bit per pixel (4 colori)\nCancella\nCodice riga per riga:\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n\nBit totali: 64 × 1 = 64 · Byte: 8",
+   "s2": "2. Disegna dal codice\nTocca a Giocatore 1 (scrive) · Giocatore 2 controlla\n\nOgni riga è un codice a 1 bit per pixel (1 = nero, 0 = bianco). Fate clic sulla griglia per disegnare l'immagine.\n\n11111110\n11000000\n11000000\n11111100\n11000000\n11000000\n11111110\n00000000\n\n\nControlla\nAltra immagine\nPerfette: 0 su 0",
+   "s3": "3. Allenatore di calcoli\n\nRicordate: byte = bit ÷ 8; 1 MB = 1.000.000 byte; 1 MiB = 1.048.576 byte; 1 Mbit/s = 1.000.000 bit al secondo.\n\nImmagine: byte\nImmagine: MiB\nVideo: MB\nVideo: Mbit/s\nTempo di scaricamento\nCompressione\nQuanti colori con n bit\nQuanti bit per k colori\nVideo compresso: MB\nQuanto video entra nel disco\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\nTocca a Giocatore 2 (scrive) · Giocatore 1 controlla\n\nUn'immagine di 640×480 pixel usa 8 bit per pixel, senza compressione. Quanti byte occupa?\n\nByte\nControlla\nMostra il procedimento\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "s4": "4. Compressione con e senza perdita\n\nFate clic su una carta e poi sulla categoria giusta.\n\nCompressione senza perdita\nIl file originale si ricostruisce esattamente\nGIF\nDopo la compressione si può ricostruire il file identico all'originale\nZIP\nPNG\nFLAC\nCompressione con perdita\nSi scarta qualcosa per risparmiare spazio\nDopo la compressione alcune informazioni sono perse per sempre\nJPEG\nMP4 (video)\nMP3\nNon compresso\nDi solito il formato non comprime i dati\nWAV\nBMP\nUn video registrato con tutti i fotogrammi completi, senza compressione\nFinito! Errori: 10.\nRicomincia",
+   "ms-sec": "Missione finale\n\nDieci domande miste, a turno. Il tempo parte con il primo clic. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nRiprova la missione finale\n\nFinita: 0 su 10 in 00:00.",
+   "res": "Risultato\n\nCoppia: Ada e Bruno\n\nNessun gioco ancora completato\n0 di 1 attività svolte\nMissione finale\nnon ancora fatta\nCopia il risultato\nStampa\nRicomincia da capo\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la missione finale."
+  },
+  "giocati": {
+   "s1": [],
+   "s2": [],
+   "s3": [
+    "controlla"
+   ],
+   "s4": [
+    "smistamento"
+   ],
+   "ms-sec": [
+    "missione"
+   ]
+  },
+  "st": "{\"g\":{\"Disegna dal codice\":{\"ok\":0,\"tot\":0},\"Allenatore: Immagine: byte (liv. 1)\":{\"ok\":0,\"tot\":1},\"Compressione: smistamento\":{\"ok\":0,\"tot\":1}},\"m\":{\"Missione finale\":{\"pts\":0,\"t\":\"00:00\",\"count\":10}}}"
+ },
+ "informatica-1/computer-e-codici/informazione-e-codifiche": {
+  "nav": [],
+  "sez": {
+   "inizio": {
+    "nav": "Inizio\n1 Allenatore\n2 Bit o byte\n3 Prefissi\nMissione finale\nRisultato",
+    "testo": "Bit, byte, unità di misura e codifica dei caratteri\n\nGiochi per muoversi tra le unità di misura e per leggere il codice ASCII.\n\nAllenatore: otto tipi di esercizio a tre livelli.\nBit o byte? smistate le grandezze.\nPrefissi decimali o binari? kB contro KiB.\nMissione finale: dieci domande miste a tempo.\n\nSi gioca in coppia: ad ogni esercizio tocca a uno dei due scrivere, mentre l'altro controlla e discute. Nelle risposte potete usare la virgola o il punto; gli zeri iniziali e le maiuscole non contano.\n\nPrimo nome: \nSecondo nome: "
+   },
+   "s1": {
+    "nav": "Inizio\n1 Allenatore\n2 Bit o byte\n3 Prefissi\nMissione finale\nRisultato",
+    "testo": "1. Allenatore\n\nCodici ASCII utili: spazio = 32, cifre 0-9 = 48-57, maiuscole A-Z = 65-90, minuscole a-z = 97-122.\n\nUnità binarie (KiB, MiB)\nGB e GiB\nQuanti file entrano\nBit e byte\nQuanti bit per n informazioni\nCodice ASCII di un carattere\nDecifrare un messaggio ASCII\nDimensione di un testo\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\nTocca a Giocatore 1 (scrive) · Giocatore 2 controlla\n\nQuanti byte sono 8 KiB? (1 KiB = 1024 byte)\n\nByte\nControlla\nMostra il procedimento\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "s2": {
+    "nav": "Inizio\n1 Allenatore\n2 Bit o byte\n3 Prefissi\nMissione finale\nRisultato",
+    "testo": "2. Bit o byte?\n\nFate clic su una carta e poi sulla categoria giusta.\n\nDimensione di un file (MB)\nPeso di una foto (MiB)\nVelocità di una fibra ottica (Gbit/s)\nDimensione della RAM (GB)\nBitrate di un video (Mbit/s)\nVelocità di una connessione (Mbit/s)\nCapienza di un disco (GB)\nVelocità dichiarata dall'operatore di telefonia (Mbit/s)\nContenuto di una chiavetta USB (GB)\nProfondità del colore di un'immagine (per esempio 24)\nSi misura in bit\nVelocità di trasmissione e profondità del colore\nSi misura in byte\nDimensione di file e capacità di memorie\nCarte da smistare: 10. Errori: 0.\nRicomincia"
+   },
+   "s3": {
+    "nav": "Inizio\n1 Allenatore\n2 Bit o byte\n3 Prefissi\nMissione finale\nRisultato",
+    "testo": "3. Prefissi decimali o binari?\n\nFate clic su una carta e poi sulla categoria giusta.\n\nkB\nGB\n1 KiB = 1024 byte\nMiB\n1 MB = 1.000.000 byte\n1 MiB = 1.048.576 byte\nKiB\nMB\nGiB\n1 GB = 1.000.000.000 byte\n1 kB = 1000 byte\n1 GiB = 1.073.741.824 byte\nPrefissi decimali\nPotenze di 10: i produttori di dischi li usano\nPrefissi binari\nPotenze di 2: 1024 e suoi multipli\nCarte da smistare: 12. Errori: 0.\nRicomincia"
+   },
+   "ms-sec": {
+    "nav": "Inizio\n1 Allenatore\n2 Bit o byte\n3 Prefissi\nMissione finale\nRisultato",
+    "testo": "Missione finale\n\nDieci domande miste, a turno. Il tempo parte con il primo clic. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nInizia la missione finale"
+   },
+   "res": {
+    "nav": "Inizio\n1 Allenatore\n2 Bit o byte\n3 Prefissi\nMissione finale\nRisultato",
+    "testo": "Risultato\n\nCoppia: Giocatore 1 e Giocatore 2\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la missione finale."
+   }
+  },
+  "dopo": {
+   "inizio": "Bit, byte, unità di misura e codifica dei caratteri\n\nGiochi per muoversi tra le unità di misura e per leggere il codice ASCII.\n\nAllenatore: otto tipi di esercizio a tre livelli.\nBit o byte? smistate le grandezze.\nPrefissi decimali o binari? kB contro KiB.\nMissione finale: dieci domande miste a tempo.\n\nSi gioca in coppia: ad ogni esercizio tocca a uno dei due scrivere, mentre l'altro controlla e discute. Nelle risposte potete usare la virgola o il punto; gli zeri iniziali e le maiuscole non contano.\n\nPrimo nome: \nSecondo nome: ",
+   "s1": "1. Allenatore\n\nCodici ASCII utili: spazio = 32, cifre 0-9 = 48-57, maiuscole A-Z = 65-90, minuscole a-z = 97-122.\n\nUnità binarie (KiB, MiB)\nGB e GiB\nQuanti file entrano\nBit e byte\nQuanti bit per n informazioni\nCodice ASCII di un carattere\nDecifrare un messaggio ASCII\nDimensione di un testo\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\nTocca a Giocatore 1 (scrive) · Giocatore 2 controlla\n\nQuanti byte sono 8 KiB? (1 KiB = 1024 byte)\n\nByte\nControlla\nMostra il procedimento\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "s2": "2. Bit o byte?\n\nFate clic su una carta e poi sulla categoria giusta.\n\nSi misura in bit\nVelocità di trasmissione e profondità del colore\nVelocità di una fibra ottica (Gbit/s)\nBitrate di un video (Mbit/s)\nVelocità di una connessione (Mbit/s)\nVelocità dichiarata dall'operatore di telefonia (Mbit/s)\nProfondità del colore di un'immagine (per esempio 24)\nSi misura in byte\nDimensione di file e capacità di memorie\nDimensione di un file (MB)\nPeso di una foto (MiB)\nDimensione della RAM (GB)\nCapienza di un disco (GB)\nContenuto di una chiavetta USB (GB)\nFinito! Errori: 5.\nRicomincia",
+   "s3": "3. Prefissi decimali o binari?\n\nFate clic su una carta e poi sulla categoria giusta.\n\nPrefissi decimali\nPotenze di 10: i produttori di dischi li usano\nkB\nGB\n1 MB = 1.000.000 byte\nMB\n1 GB = 1.000.000.000 byte\n1 kB = 1000 byte\nPrefissi binari\nPotenze di 2: 1024 e suoi multipli\n1 KiB = 1024 byte\nMiB\n1 MiB = 1.048.576 byte\nKiB\nGiB\n1 GiB = 1.073.741.824 byte\nFinito! Errori: 6.\nRicomincia",
+   "ms-sec": "Missione finale\n\nDieci domande miste, a turno. Il tempo parte con il primo clic. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nRiprova la missione finale\n\nFinita: 0 su 10 in 00:00.",
+   "res": "Risultato\n\nCoppia: Ada e Bruno\n\nNessun gioco ancora completato\n0 di 1 attività svolte\nMissione finale\nnon ancora fatta\nCopia il risultato\nStampa\nRicomincia da capo\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la missione finale."
+  },
+  "giocati": {
+   "s1": [
+    "controlla"
+   ],
+   "s2": [
+    "smistamento"
+   ],
+   "s3": [
+    "smistamento"
+   ],
+   "ms-sec": [
+    "missione"
+   ]
+  },
+  "st": "{\"g\":{\"Allenatore: Unità binarie (KiB, MiB) (liv. 1)\":{\"ok\":0,\"tot\":1},\"Bit o byte?\":{\"ok\":0,\"tot\":1},\"Prefissi decimali o binari?\":{\"ok\":0,\"tot\":1}},\"m\":{\"Missione finale\":{\"pts\":0,\"t\":\"00:00\",\"count\":10}}}"
+ },
+ "informatica-1/computer-e-codici/palestra-dei-numeri": {
+  "nav": [],
+  "sez": {
+   "inizio": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato",
+    "testo": "Ripasso interattivo: sistemi di numerazione, codici, immagini e video\n\nSi gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato e vi mostra il procedimento. Gli esercizi sono sempre nuovi.\n\nNumeri e basi: interruttori, conversioni a tre livelli, caccia all'errore, memory.\nAritmetica binaria: somma in colonna, overflow, valori rappresentabili, spostamenti.\nLogica: tavole di verità, riconoscere le espressioni, equivalenze.\nImmagini e video: editor di pixel, calcoli su byte, MiB, bit/s, compressione.\nInformazione e codifiche: unità di misura, bit e byte, ASCII.\nSfida totale: quindici domande miste a tempo.\n\nOgni argomento ha anche una sfida di dieci domande. Nelle risposte potete usare la virgola o il punto; gli zeri iniziali e le maiuscole non contano.\n\nIl vostro nome: "
+   },
+   "num_s1": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato\n1 Interruttori\n2 Allenatore\n3 Caccia all'errore\n4 Memory\nSfida",
+    "testo": "Interruttori\n\nFate clic sui bit: sotto vedete lo stesso numero in decimale, ottale ed esadecimale. Poi la sfida.\n\n0\n128\n0\n64\n0\n32\n0\n16\n0\n8\n0\n4\n0\n2\n0\n1\nBinario 00000000 · Decimale 0 · Ottale 0 · Esadecimale 0\n\nFate comparire il numero decimale 250\n\nCambia numero"
+   },
+   "num_s2": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato\n1 Interruttori\n2 Allenatore\n3 Caccia all'errore\n4 Memory\nSfida",
+    "testo": "Allenatore di conversioni\n\nOtto tipi di conversione a tre livelli. Se sbagliate potete riprovare o aprire il procedimento.\n\nBinario → decimale\nDecimale → binario\nBinario con virgola → decimale\nDecimale con virgola → binario\nBinario → ottale e esadecimale\nDecimale → binario, ottale, esadecimale\nEsadecimale → ottale e decimale\nOttale → binario e esadecimale\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\n\nConvertite in decimale il numero binario 1100\n\nDecimale\nControlla\nMostra il procedimento\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "num_s3": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato\n1 Interruttori\n2 Allenatore\n3 Caccia all'errore\n4 Memory\nSfida",
+    "testo": "Caccia all'errore\n\nUn passaggio della conversione è sbagliato: fate clic sulla riga errata.\n\nConversione di 11100010 in esadecimale a gruppi di 4 bit: una riga è sbagliata. Quale?\n\n1110 → E\n0010 → D\nAltro esercizio\nTrovati: 0 su 0"
+   },
+   "num_s4": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato\n1 Interruttori\n2 Allenatore\n3 Caccia all'errore\n4 Memory\nSfida",
+    "testo": "Memory delle equivalenze\n\nScoprite due tessere alla volta: si tolgono dal tavolo se rappresentano lo stesso numero.\n\nCoppie trovate: 0 su 6 · tentativi: 0. Un numero senza indicazione è decimale.\n?\n?\n?\n?\n?\n?\n?\n?\n?\n?\n?\n?\nNuova partita"
+   },
+   "num_ms": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato\n1 Interruttori\n2 Allenatore\n3 Caccia all'errore\n4 Memory\nSfida",
+    "testo": "Sfida: Numeri e basi\n\nDieci domande miste sull'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nInizia la missione: numeri e basi"
+   },
+   "ar_s1": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato\n1 Somma in colonna\n2 Allenatore\nSfida",
+    "testo": "Somma in colonna\n\nCompilate i riporti e il risultato, partendo dalla colonna di destra.\n\n4 bit\n6 bit\n8 bit\nAltra somma\n\nEseguite la somma 14 + 3 in binario su 4 bit. Scrivete i riporti (la cifra che passa alla colonna successiva) e il risultato, colonna per colonna.\n\nriporto\t\t\t\t\t\n14\t\t1\t1\t1\t0\n+ 3\t\t0\t0\t1\t1\nrisultato\t\t\t\t\t\n\nSopra ogni colonna scrivete il riporto che arriva dalla colonna alla sua destra (nella colonna più a destra è sempre 0). La prima casella del risultato è il riporto finale.\n\nC'è overflow su 4 bit?\nSì\nNo\nControlla\nEsatte: 0 su 0"
+   },
+   "ar_s2": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato\n1 Somma in colonna\n2 Allenatore\nSfida",
+    "testo": "Allenatore\n\nSomme, overflow, quanti valori con n bit, quanti bit servono, spostamenti.\n\nSomma e overflow\nOverflow: c'è o non c'è?\nSomma tra numeri binari\nQuanti valori con n bit\nQuanti bit servono\nSpostamenti a sinistra e a destra\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\n\nSomma in binario su 4 bit i numeri decimali 8 e 13.\n\n8 in binario (4 bit)\n13 in binario (4 bit)\nSomma in decimale\nC'è overflow?\nSì\nNo\nValore memorizzato su 4 bit (binario)\nControlla\nMostra il procedimento\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "ar_ms": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato\n1 Somma in colonna\n2 Allenatore\nSfida",
+    "testo": "Sfida: Aritmetica binaria\n\nDieci domande miste sull'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nInizia la missione: aritmetica binaria"
+   },
+   "lo_s1": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\nSfida",
+    "testo": "Tavole di verità\n\nFate clic sulle celle «Uscita» per scegliere 0 o 1, poi premete «Verifica».\n\nLivello 1: espressioni semplici a 2 ingressi\nLivello 2: espressioni composte a 2 ingressi\nLivello 3: 3 ingressi\n\nCompilate la tavola di verità di NOT (A AND B)\n\nA\tB\tUscita\n0\t0\t?\n0\t1\t?\n1\t0\t?\n1\t1\t?\nVerifica\nAltra espressione\nPerfette: 0 su 0"
+   },
+   "lo_s2": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\nSfida",
+    "testo": "Riconosci l'espressione\n2 ingressi\n3 ingressi\n\nQuale espressione produce questa tavola di verità?\n\nA\tB\tUscita\n0\t0\t1\n0\t1\t0\n1\t0\t0\n1\t1\t0\n(NOT A) AND B\nNOT (A OR B)\nA OR B\nA OR (A AND B)\nAltra tavola\nEsatte: 0 su 0"
+   },
+   "lo_s3": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\nSfida",
+    "testo": "Uguali o diverse?\n\nLe due espressioni hanno sempre la stessa uscita (cioè sono equivalenti)?\n\n① (A AND (NOT B)) OR ((NOT A) AND B)\n② (A OR B) AND (NOT (A AND B))\n\nSì, sono equivalenti\nNo, sono diverse\nAltra coppia\nEsatte: 0 su 0"
+   },
+   "lo_s4": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\nSfida",
+    "testo": "Quando vale 1?\n2 ingressi\n3 ingressi\n\nPer quali combinazioni di ingressi l'uscita di (NOT A) OR B vale 1? Selezionatele tutte.\n\n A=0 B=0 A=0 B=1 A=1 B=0 A=1 B=1\nControlla\nAltra espressione\nEsatte: 0 su 0"
+   },
+   "lo_s5": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\nSfida",
+    "testo": "Allenatore\nQuanto vale l'uscita?\nContare gli 1\nScrivere la colonna delle uscite\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\n\nQuanto vale l'uscita di A AND B quando A=0, B=1?\n\nUscita (0 o 1)\nControlla\nMostra il procedimento\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "lo_ms": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\nSfida",
+    "testo": "Sfida: Logica\n\nDieci domande miste sull'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nInizia la missione: logica"
+   },
+   "im_s1": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato\n1 Editor\n2 Disegna dal codice\n3 Allenatore\n4 Compressione\nSfida",
+    "testo": "Editor di pixel\n\nFate clic sui quadretti per cambiare colore e osservate come cambia il codice.\n\n1 bit per pixel (2 colori)\n2 bit per pixel (4 colori)\nCancella\nCodice riga per riga:\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n\nBit totali: 64 × 1 = 64 · Byte: 8"
+   },
+   "im_s2": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato\n1 Editor\n2 Disegna dal codice\n3 Allenatore\n4 Compressione\nSfida",
+    "testo": "Disegna dal codice\n\nOgni riga è un codice a 1 bit per pixel (1 = nero, 0 = bianco). Fate clic sulla griglia per disegnare l'immagine.\n\n11111110\n11000000\n11000000\n11111100\n11000000\n11000000\n11111110\n00000000\n\n\nControlla\nAltra immagine\nPerfette: 0 su 0"
+   },
+   "im_s3": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato\n1 Editor\n2 Disegna dal codice\n3 Allenatore\n4 Compressione\nSfida",
+    "testo": "Allenatore di calcoli\n\nRicordate: byte = bit ÷ 8; 1 MB = 1.000.000 byte; 1 MiB = 1.048.576 byte; 1 Mbit/s = 1.000.000 bit al secondo.\n\nImmagine: byte\nImmagine: MiB\nVideo: MB\nVideo: Mbit/s\nTempo di scaricamento\nCompressione\nQuanti colori con n bit\nQuanti bit per k colori\nVideo compresso: MB\nQuanto video entra nel disco\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\n\nUn'immagine di 1024×768 pixel usa 24 bit per pixel, senza compressione. Quanti byte occupa?\n\nByte\nControlla\nMostra il procedimento\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "im_s4": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato\n1 Editor\n2 Disegna dal codice\n3 Allenatore\n4 Compressione\nSfida",
+    "testo": "Compressione con e senza perdita\n\nFate clic su una carta e poi sulla categoria giusta.\n\nMP4 (video)\nDopo la compressione alcune informazioni sono perse per sempre\nZIP\nDopo la compressione si può ricostruire il file identico all'originale\nUn video registrato con tutti i fotogrammi completi, senza compressione\nBMP\nWAV\nJPEG\nGIF\nMP3\nPNG\nFLAC\nCompressione senza perdita\nIl file originale si ricostruisce esattamente\nCompressione con perdita\nSi scarta qualcosa per risparmiare spazio\nNon compresso\nDi solito il formato non comprime i dati\nCarte da smistare: 12. Errori: 0.\nRicomincia"
+   },
+   "im_ms": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato\n1 Editor\n2 Disegna dal codice\n3 Allenatore\n4 Compressione\nSfida",
+    "testo": "Sfida: Immagini e video\n\nDieci domande miste sull'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nInizia la missione: immagini e video"
+   },
+   "in_s1": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato\n1 Allenatore\n2 Bit o byte\n3 Prefissi\nSfida",
+    "testo": "Allenatore\n\nCodici ASCII utili: spazio = 32, cifre 0-9 = 48-57, maiuscole A-Z = 65-90, minuscole a-z = 97-122.\n\nUnità binarie (KiB, MiB)\nGB e GiB\nQuanti file entrano\nBit e byte\nQuanti bit per n informazioni\nCodice ASCII di un carattere\nDecifrare un messaggio ASCII\nDimensione di un testo\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\n\nQuanti KiB sono 8 MiB? (1 MiB = 1024 KiB)\n\nKiB\nControlla\nMostra il procedimento\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "in_s2": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato\n1 Allenatore\n2 Bit o byte\n3 Prefissi\nSfida",
+    "testo": "Bit o byte?\n\nFate clic su una carta e poi sulla categoria giusta.\n\nPeso di una foto (MiB)\nVelocità di una fibra ottica (Gbit/s)\nVelocità dichiarata dall'operatore di telefonia (Mbit/s)\nProfondità del colore di un'immagine (per esempio 24)\nCapienza di un disco (GB)\nVelocità di una connessione (Mbit/s)\nBitrate di un video (Mbit/s)\nDimensione della RAM (GB)\nContenuto di una chiavetta USB (GB)\nDimensione di un file (MB)\nSi misura in bit\nVelocità di trasmissione e profondità del colore\nSi misura in byte\nDimensione di file e capacità di memorie\nCarte da smistare: 10. Errori: 0.\nRicomincia"
+   },
+   "in_s3": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato\n1 Allenatore\n2 Bit o byte\n3 Prefissi\nSfida",
+    "testo": "Prefissi decimali o binari?\n\nFate clic su una carta e poi sulla categoria giusta.\n\n1 MB = 1.000.000 byte\nkB\nMiB\n1 GB = 1.000.000.000 byte\nGiB\nMB\nGB\nKiB\n1 MiB = 1.048.576 byte\n1 kB = 1000 byte\n1 KiB = 1024 byte\n1 GiB = 1.073.741.824 byte\nPrefissi decimali\nPotenze di 10: i produttori di dischi li usano\nPrefissi binari\nPotenze di 2: 1024 e suoi multipli\nCarte da smistare: 12. Errori: 0.\nRicomincia"
+   },
+   "in_ms": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato\n1 Allenatore\n2 Bit o byte\n3 Prefissi\nSfida",
+    "testo": "Sfida: Informazione e codifiche\n\nDieci domande miste sull'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nInizia la missione: informazione e codifiche"
+   },
+   "tot": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato",
+    "testo": "Sfida totale\n\nQuindici domande miste su tutti gli argomenti, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nInizia la sfida totale"
+   },
+   "res": {
+    "nav": "Inizio\nNumeri e basi\nAritmetica binaria\nLogica\nImmagini e video\nInformazione e codifiche\nSfida totale\nRisultato",
+    "testo": "Risultato\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate le sfide."
+   }
+  },
+  "dopo": {
+   "inizio": "Ripasso interattivo: sistemi di numerazione, codici, immagini e video\n\nSi gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato e vi mostra il procedimento. Gli esercizi sono sempre nuovi.\n\nNumeri e basi: interruttori, conversioni a tre livelli, caccia all'errore, memory.\nAritmetica binaria: somma in colonna, overflow, valori rappresentabili, spostamenti.\nLogica: tavole di verità, riconoscere le espressioni, equivalenze.\nImmagini e video: editor di pixel, calcoli su byte, MiB, bit/s, compressione.\nInformazione e codifiche: unità di misura, bit e byte, ASCII.\nSfida totale: quindici domande miste a tempo.\n\nOgni argomento ha anche una sfida di dieci domande. Nelle risposte potete usare la virgola o il punto; gli zeri iniziali e le maiuscole non contano.\n\nIl vostro nome: ",
+   "num_s1": "Interruttori\n\nFate clic sui bit: sotto vedete lo stesso numero in decimale, ottale ed esadecimale. Poi la sfida.\n\n0\n128\n0\n64\n0\n32\n0\n16\n0\n8\n0\n4\n0\n2\n0\n1\nBinario 00000000 · Decimale 0 · Ottale 0 · Esadecimale 0\n\nFate comparire il numero decimale 250\n\nCambia numero",
+   "num_s2": "Allenatore di conversioni\n\nOtto tipi di conversione a tre livelli. Se sbagliate potete riprovare o aprire il procedimento.\n\nBinario → decimale\nDecimale → binario\nBinario con virgola → decimale\nDecimale con virgola → binario\nBinario → ottale e esadecimale\nDecimale → binario, ottale, esadecimale\nEsadecimale → ottale e decimale\nOttale → binario e esadecimale\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\n\nConvertite in decimale il numero binario 1100\n\nDecimale\nControlla\nMostra il procedimento\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "num_s3": "Caccia all'errore\n\nUn passaggio della conversione è sbagliato: fate clic sulla riga errata.\n\nConversione di 11100010 in esadecimale a gruppi di 4 bit: una riga è sbagliata. Quale?\n\n1110 → E\n0010 → D\nNo: la riga sbagliata era un'altra. 0010 vale 2, non D.\nAltro esercizio\nTrovati: 0 su 1",
+   "num_s4": "Memory delle equivalenze\n\nScoprite due tessere alla volta: si tolgono dal tavolo se rappresentano lo stesso numero.\n\nCoppie trovate: 0 su 6 · tentativi: 1. Un numero senza indicazione è decimale.\nF8 (16)\nF2 (16)\n?\n?\n?\n?\n?\n?\n?\n?\n?\n?\nNuova partita",
+   "num_ms": "Sfida: Numeri e basi\n\nDieci domande miste sull'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nRiprova la missione: numeri e basi\n\nFinita: 0 su 10 in 00:00.",
+   "ar_s1": "Somma in colonna\n\nCompilate i riporti e il risultato, partendo dalla colonna di destra.\n\n4 bit\n6 bit\n8 bit\nAltra somma\n\nEseguite la somma 14 + 3 in binario su 4 bit. Scrivete i riporti (la cifra che passa alla colonna successiva) e il risultato, colonna per colonna.\n\nriporto\t\t\t\t\t\n14\t\t1\t1\t1\t0\n+ 3\t\t0\t0\t1\t1\nrisultato\t\t\t\t\t\n\nSopra ogni colonna scrivete il riporto che arriva dalla colonna alla sua destra (nella colonna più a destra è sempre 0). La prima casella del risultato è il riporto finale.\n\nC'è overflow su 4 bit?\nSì\nNo\nControlla\nEsatte: 0 su 0",
+   "ar_s2": "Allenatore\n\nSomme, overflow, quanti valori con n bit, quanti bit servono, spostamenti.\n\nSomma e overflow\nOverflow: c'è o non c'è?\nSomma tra numeri binari\nQuanti valori con n bit\nQuanti bit servono\nSpostamenti a sinistra e a destra\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\n\nSomma in binario su 4 bit i numeri decimali 8 e 13.\n\n8 in binario (4 bit)\n13 in binario (4 bit)\nSomma in decimale\nC'è overflow?\nSì\nNo\nValore memorizzato su 4 bit (binario)\nControlla\nMostra il procedimento\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "ar_ms": "Sfida: Aritmetica binaria\n\nDieci domande miste sull'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nRiprova la missione: aritmetica binaria\n\nFinita: 0 su 10 in 00:00.",
+   "lo_s1": "Tavole di verità\n\nFate clic sulle celle «Uscita» per scegliere 0 o 1, poi premete «Verifica».\n\nLivello 1: espressioni semplici a 2 ingressi\nLivello 2: espressioni composte a 2 ingressi\nLivello 3: 3 ingressi\n\nCompilate la tavola di verità di NOT (A AND B)\n\nA\tB\tUscita\n0\t0\t?\n0\t1\t?\n1\t0\t?\n1\t1\t?\nVerifica\nAltra espressione\nPerfette: 0 su 0",
+   "lo_s2": "Riconosci l'espressione\n2 ingressi\n3 ingressi\n\nQuale espressione produce questa tavola di verità?\n\nA\tB\tUscita\n0\t0\t1\n0\t1\t0\n1\t0\t0\n1\t1\t0\n(NOT A) AND B\nNOT (A OR B)\nA OR B\nA OR (A AND B)\nNo: provate a calcolare la tavola di ogni espressione.\nAltra tavola\nEsatte: 0 su 1",
+   "lo_s3": "Uguali o diverse?\n\nLe due espressioni hanno sempre la stessa uscita (cioè sono equivalenti)?\n\n① (A AND (NOT B)) OR ((NOT A) AND B)\n② (A OR B) AND (NOT (A AND B))\n\nSì, sono equivalenti\nNo, sono diverse\nAltra coppia\nEsatte: 0 su 0",
+   "lo_s4": "Quando vale 1?\n2 ingressi\n3 ingressi\n\nPer quali combinazioni di ingressi l'uscita di (NOT A) OR B vale 1? Selezionatele tutte.\n\n A=0 B=0 A=0 B=1 A=1 B=0 A=1 B=1\nControlla\nAltra espressione\nEsatte: 0 su 0",
+   "lo_s5": "Allenatore\nQuanto vale l'uscita?\nContare gli 1\nScrivere la colonna delle uscite\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\n\nQuanto vale l'uscita di A AND B quando A=0, B=1?\n\nUscita (0 o 1)\nControlla\nMostra il procedimento\nAltro esercizio\nEsatto!\nEsatti: 1 su 1",
+   "lo_ms": "Sfida: Logica\n\nDieci domande miste sull'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nRiprova la missione: logica\n\nFinita: 2 su 10 in 00:00.",
+   "im_s1": "Editor di pixel\n\nFate clic sui quadretti per cambiare colore e osservate come cambia il codice.\n\n1 bit per pixel (2 colori)\n2 bit per pixel (4 colori)\nCancella\nCodice riga per riga:\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0\n\nBit totali: 64 × 1 = 64 · Byte: 8",
+   "im_s2": "Disegna dal codice\n\nOgni riga è un codice a 1 bit per pixel (1 = nero, 0 = bianco). Fate clic sulla griglia per disegnare l'immagine.\n\n11111110\n11000000\n11000000\n11111100\n11000000\n11000000\n11111110\n00000000\n\n\nControlla\nAltra immagine\nPerfette: 0 su 0",
+   "im_s3": "Allenatore di calcoli\n\nRicordate: byte = bit ÷ 8; 1 MB = 1.000.000 byte; 1 MiB = 1.048.576 byte; 1 Mbit/s = 1.000.000 bit al secondo.\n\nImmagine: byte\nImmagine: MiB\nVideo: MB\nVideo: Mbit/s\nTempo di scaricamento\nCompressione\nQuanti colori con n bit\nQuanti bit per k colori\nVideo compresso: MB\nQuanto video entra nel disco\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\n\nUn'immagine di 1024×768 pixel usa 24 bit per pixel, senza compressione. Quanti byte occupa?\n\nByte\nControlla\nMostra il procedimento\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "im_s4": "Compressione con e senza perdita\n\nFate clic su una carta e poi sulla categoria giusta.\n\nCompressione senza perdita\nIl file originale si ricostruisce esattamente\nZIP\nDopo la compressione si può ricostruire il file identico all'originale\nGIF\nPNG\nFLAC\nCompressione con perdita\nSi scarta qualcosa per risparmiare spazio\nMP4 (video)\nDopo la compressione alcune informazioni sono perse per sempre\nJPEG\nMP3\nNon compresso\nDi solito il formato non comprime i dati\nUn video registrato con tutti i fotogrammi completi, senza compressione\nBMP\nWAV\nFinito! Errori: 10.\nRicomincia",
+   "im_ms": "Sfida: Immagini e video\n\nDieci domande miste sull'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nRiprova la missione: immagini e video\n\nFinita: 0 su 10 in 00:00.",
+   "in_s1": "Allenatore\n\nCodici ASCII utili: spazio = 32, cifre 0-9 = 48-57, maiuscole A-Z = 65-90, minuscole a-z = 97-122.\n\nUnità binarie (KiB, MiB)\nGB e GiB\nQuanti file entrano\nBit e byte\nQuanti bit per n informazioni\nCodice ASCII di un carattere\nDecifrare un messaggio ASCII\nDimensione di un testo\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\n\nQuanti KiB sono 8 MiB? (1 MiB = 1024 KiB)\n\nKiB\nControlla\nMostra il procedimento\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "in_s2": "Bit o byte?\n\nFate clic su una carta e poi sulla categoria giusta.\n\nSi misura in bit\nVelocità di trasmissione e profondità del colore\nVelocità di una fibra ottica (Gbit/s)\nVelocità dichiarata dall'operatore di telefonia (Mbit/s)\nProfondità del colore di un'immagine (per esempio 24)\nVelocità di una connessione (Mbit/s)\nBitrate di un video (Mbit/s)\nSi misura in byte\nDimensione di file e capacità di memorie\nPeso di una foto (MiB)\nCapienza di un disco (GB)\nDimensione della RAM (GB)\nContenuto di una chiavetta USB (GB)\nDimensione di un file (MB)\nFinito! Errori: 5.\nRicomincia",
+   "in_s3": "Prefissi decimali o binari?\n\nFate clic su una carta e poi sulla categoria giusta.\n\nPrefissi decimali\nPotenze di 10: i produttori di dischi li usano\n1 MB = 1.000.000 byte\nkB\n1 GB = 1.000.000.000 byte\nMB\nGB\n1 kB = 1000 byte\nPrefissi binari\nPotenze di 2: 1024 e suoi multipli\nMiB\nGiB\nKiB\n1 MiB = 1.048.576 byte\n1 KiB = 1024 byte\n1 GiB = 1.073.741.824 byte\nFinito! Errori: 6.\nRicomincia",
+   "in_ms": "Sfida: Informazione e codifiche\n\nDieci domande miste sull'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nRiprova la missione: informazione e codifiche\n\nFinita: 0 su 10 in 00:00.",
+   "tot": "Sfida totale\n\nQuindici domande miste su tutti gli argomenti, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nRiprova la sfida totale\n\nFinita: 0 su 15 in 00:00.",
+   "res": "Risultato\n\nNome: Ada\n\nNessun gioco ancora completato\n0 di 6 attività svolte\nMissione: numeri e basi\nnon ancora fatta\nMissione: aritmetica binaria\nnon ancora fatta\nMissione: logica\nnon ancora fatta\nMissione: immagini e video\nnon ancora fatta\nMissione: informazione e codifiche\nnon ancora fatta\nSfida totale\nnon ancora fatta\nCopia il risultato\nStampa\nRicomincia da capo\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate le sfide."
+  },
+  "giocati": {
+   "num_s1": [],
+   "num_s2": [
+    "controlla"
+   ],
+   "num_s3": [
+    "caccia"
+   ],
+   "num_s4": [
+    "memory"
+   ],
+   "num_ms": [
+    "missione"
+   ],
+   "ar_s1": [],
+   "ar_s2": [
+    "controlla"
+   ],
+   "ar_ms": [
+    "missione"
+   ],
+   "lo_s1": [],
+   "lo_s2": [
+    "caccia"
+   ],
+   "lo_s3": [],
+   "lo_s4": [],
+   "lo_s5": [
+    "controlla"
+   ],
+   "lo_ms": [
+    "missione"
+   ],
+   "im_s1": [],
+   "im_s2": [],
+   "im_s3": [
+    "controlla"
+   ],
+   "im_s4": [
+    "smistamento"
+   ],
+   "im_ms": [
+    "missione"
+   ],
+   "in_s1": [
+    "controlla"
+   ],
+   "in_s2": [
+    "smistamento"
+   ],
+   "in_s3": [
+    "smistamento"
+   ],
+   "in_ms": [
+    "missione"
+   ],
+   "tot": [
+    "missione"
+   ]
+  },
+  "st": "{\"g\":{\"Allenatore: Binario → decimale (liv. 1)\":{\"ok\":0,\"tot\":1},\"Caccia all'errore\":{\"ok\":0,\"tot\":1},\"Memory delle equivalenze\":{\"ok\":0,\"tot\":0},\"Somma in colonna\":{\"ok\":0,\"tot\":0},\"Allenatore: Somma e overflow (liv. 1)\":{\"ok\":0,\"tot\":1},\"Tavole di verità\":{\"ok\":0,\"tot\":0},\"Riconosci l'espressione\":{\"ok\":0,\"tot\":1},\"Uguali o diverse?\":{\"ok\":0,\"tot\":0},\"Quando vale 1?\":{\"ok\":0,\"tot\":0},\"Allenatore: Quanto vale l'uscita? (liv. 1)\":{\"ok\":1,\"tot\":1},\"Disegna dal codice\":{\"ok\":0,\"tot\":0},\"Allenatore: Immagine: byte (liv. 1)\":{\"ok\":0,\"tot\":1},\"Compressione: smistamento\":{\"ok\":0,\"tot\":1},\"Allenatore: Unità binarie (KiB, MiB) (liv. 1)\":{\"ok\":0,\"tot\":1},\"Bit o byte?\":{\"ok\":0,\"tot\":1},\"Prefissi decimali o binari?\":{\"ok\":0,\"tot\":1}},\"m\":{\"Missione: numeri e basi\":{\"pts\":0,\"t\":\"00:00\",\"count\":10},\"Missione: aritmetica binaria\":{\"pts\":0,\"t\":\"00:00\",\"count\":10},\"Missione: logica\":{\"pts\":2,\"t\":\"00:00\",\"count\":10},\"Missione: immagini e video\":{\"pts\":0,\"t\":\"00:00\",\"count\":10},\"Missione: informazione e codifiche\":{\"pts\":0,\"t\":\"00:00\",\"count\":10},\"Sfida totale\":{\"pts\":0,\"t\":\"00:00\",\"count\":15}}}"
+ },
+ "informatica-1/sistemi-operativi/storia-e-licenze": {
+  "nav": [],
+  "sez": {
+   "inizio": {
+    "nav": "Inizio\nStoria\nIl software\nIl sistema operativo\nLicenze\nQuiz\nSfida finale\nRisultato",
+    "testo": "Sistemi operativi, software e licenze\n\nUna raccolta di giochi con correzione immediata: potete fare le attività nell'ordine che preferite e tenere aperte le slide per consultarle.\n\nStoria: linea del tempo dei sistemi operativi e «Chi sono io?».\nIl software: livelli di linguaggio e categorie.\nIl sistema operativo: sequenza di avvio, modello a cipolla, strati e ruoli, chi fa cosa, nomi dei file.\nLicenze: smistamento, libero o proprietario, release X.Y.Z.\nQuiz: vero o falso e risposta multipla, con spiegazione.\nSfida finale: quindici domande miste a tempo.\nIl vostro nome: "
+   },
+   "st1": {
+    "nav": "Inizio\nStoria\nIl software\nIl sistema operativo\nLicenze\nQuiz\nSfida finale\nRisultato\n1 Linea del tempo\n2 Chi sono io?",
+    "testo": "Linea del tempo\n\nTrascinate le righe (oppure usate le frecce) per metterle in ordine dal più antico al più recente. Gli anni compaiono dopo «Verifica».\n\niOS (iPhone OS)\nIl sistema operativo mobile di Apple viene presentato insieme all'iPhone.\n▲▼\nAndroid\nIl sistema mobile di Google basato sul kernel Linux nasce a fine 2007.\n▲▼\nUNIX\nSviluppato ai Bell Laboratories, finanziato dal Dipartimento della Difesa degli USA.\n▲▼\nMacintosh\nPrimo personal computer Apple con interfaccia grafica, annunciato con lo spot «1984».\n▲▼\nWindows Mobile abbandonato\nMicrosoft rinuncia al mercato mobile dopo anni di tentativi mai pienamente riusciti.\n▲▼\nWindows 95\nIl sistema a finestre di Microsoft si afferma definitivamente, dieci anni dopo la prima versione.\n▲▼\nLinux\nUno studente di Helsinki, Linus Torvalds, rende pubblico il codice del suo nuovo kernel.\n▲▼\nWindows\nMicrosoft introduce la prima interfaccia a finestre.\n▲▼\nWindows 11\nUltima versione di Windows citata nelle slide.\n▲▼\nVerifica\nRimescola\nGiusti al primo tentativo: 0 su 0"
+   },
+   "st2": {
+    "nav": "Inizio\nStoria\nIl software\nIl sistema operativo\nLicenze\nQuiz\nSfida finale\nRisultato\n1 Linea del tempo\n2 Chi sono io?",
+    "testo": "Chi sono io?\n\nLeggete l'indizio e scegliete il sistema operativo. «Altro esercizio» propone un nuovo indizio.\n\nChi sono io? Nella versione Android Open Source Project, senza GApps, sono open-source.\n\nSistema operativo\nUNIX\nWindows\nmacOS\nLinux\nAndroid\niOS\nWindows Mobile\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "sw1": {
+    "nav": "Inizio\nStoria\nIl software\nIl sistema operativo\nLicenze\nQuiz\nSfida finale\nRisultato\n1 Livelli\n2 Categorie",
+    "testo": "Software di basso e di alto livello\n\nFate clic su una carta e poi sulla categoria giusta.\n\nAssembly\nBasic\nKotlin\nFortran\nC#\nCobol\nCodice macchina\nUn singolo comando può generare più operazioni macchina\nOgni istruzione corrisponde a un'azione precisa del processore\nPython\nRichiede un traduttore o un interprete\nJava\nNon è portabile: processori diversi, codifiche diverse\nSoftware di basso livello\nVicino all'hardware\nSoftware di alto livello\nVicino all'utente\nCarte da smistare: 13. Errori: 0.\nRicomincia"
+   },
+   "sw2": {
+    "nav": "Inizio\nStoria\nIl software\nIl sistema operativo\nLicenze\nQuiz\nSfida finale\nRisultato\n1 Livelli\n2 Categorie",
+    "testo": "Firmware, sistema operativo, software di base e applicativo\n\nFate clic su una carta e poi sulla categoria giusta.\n\nWindows\nUn videogioco\nAudacity\nLinker\nLoader\nUn e-reader\nmacOS\nAndroid\nBIOS\nLibreOffice\nMatlab\nDebugger\nIl software nella ROM che si avvia con il bootstrap\nLinux\nUEFI\nCompilatore\nEditor di testo (Notepad++, VIM)\nUn software ERP o CRM\nGIMP\nFirmware\nIl primo software che si avvia\nSistema operativo\nSoftware di base\nStrumenti per creare software\nSoftware applicativo\nAttività specifiche\nCarte da smistare: 19. Errori: 0.\nRicomincia"
+   },
+   "so1": {
+    "nav": "Inizio\nStoria\nIl software\nIl sistema operativo\nLicenze\nQuiz\nSfida finale\nRisultato\n1 Avvio\n2 Cipolla\n3 Strati e ruoli\n4 Quale strato?\n5 Chi fa cosa\n6 Nomi dei file",
+    "testo": "La sequenza di avvio\n\nMettete in ordine i passaggi, dall'accensione del computer fino al sistema operativo in esecuzione.\n\nPOST\nPower On Self Test: verifica il funzionamento di tutti i componenti hardware.\n▲▼\nSistema operativo in esecuzione\nL'utente può avviare i programmi applicativi.\n▲▼\nBootloader\nIndividua il sistema operativo e ne carica il kernel.\n▲▼\nKernel in memoria centrale\nIl kernel resta sempre caricato in memoria.\n▲▼\nBIOS / UEFI\nInizializza l'hardware e carica il bootloader da disco, USB o altro dispositivo.\n▲▼\nAccensione\nIl processore carica il firmware dalla ROM ed esegue la prima istruzione.\n▲▼\nVerifica\nRimescola\nGiusti al primo tentativo: 0 su 0"
+   },
+   "so2": {
+    "nav": "Inizio\nStoria\nIl software\nIl sistema operativo\nLicenze\nQuiz\nSfida finale\nRisultato\n1 Avvio\n2 Cipolla\n3 Strati e ruoli\n4 Quale strato?\n5 Chi fa cosa\n6 Nomi dei file",
+    "testo": "Il modello a cipolla\n\nOrdinate gli strati dal più interno (il kernel) al più esterno (i programmi applicativi).\n\nGestore della memoria centrale\nAssegna la RAM ai processi.\n▲▼\nKernel\nComunica direttamente con l'hardware: CPU, memoria, periferiche.\n▲▼\nProgrammi applicativi\nIl livello più vicino all'utente.\n▲▼\nGestore delle periferiche\nUsa i driver per parlare con stampanti, tastiere, dischi.\n▲▼\nInterprete dei comandi (shell)\nCLI o GUI: l'interfaccia con cui l'utente dà i comandi.\n▲▼\nGestore del file system\nOrganizza file e cartelle sulle memorie di massa.\n▲▼\nVerifica\nRimescola\nGiusti al primo tentativo: 0 su 0"
+   },
+   "so2b": {
+    "nav": "Inizio\nStoria\nIl software\nIl sistema operativo\nLicenze\nQuiz\nSfida finale\nRisultato\n1 Avvio\n2 Cipolla\n3 Strati e ruoli\n4 Quale strato?\n5 Chi fa cosa\n6 Nomi dei file",
+    "testo": "Strati e ruoli\n\nOgni carta descrive il ruolo di uno strato: fate clic sulla carta e poi sullo strato a cui appartiene.\n\nDecide quanta RAM dare a ogni processo\nCon il Plug and Play riconosce la nuova chiavetta USB\nContiene i driver\nProtegge lo spazio di un processo dagli altri\nÈ il nucleo: tutti gli altri strati si appoggiano a lui\nDivide il disco in cluster\nGestisce l'albero di cartelle a partire dalla radice\nComunica direttamente con CPU, memoria e periferiche\nRiceve i comandi digitati dall'utente e li passa al sistema\nWord, GIMP, un videogioco, un browser\nPuò essere a riga di comando (CLI) o grafico (GUI)\nIl prompt dei comandi di Windows ne è un esempio\nResta sempre caricato nella memoria centrale\nÈ lo strato più vicino all'utente\nRegistra nome, dimensione, tipo e permessi dei file\nGestisce la coda di stampa\nChiede servizi al sistema operativo invece di toccare l'hardware\nUsa il file di swap quando la RAM non basta\nKernel\nInterno: parla con l'hardware\nGestore della memoria\nAssegna la RAM\nGestore delle periferiche\nDriver e dispositivi\nGestore del file system\nFile e cartelle\nInterprete dei comandi\nShell: CLI o GUI\nProgrammi applicativi\nStrato più esterno\nCarte da smistare: 18. Errori: 0.\nRicomincia"
+   },
+   "so2c": {
+    "nav": "Inizio\nStoria\nIl software\nIl sistema operativo\nLicenze\nQuiz\nSfida finale\nRisultato\n1 Avvio\n2 Cipolla\n3 Strati e ruoli\n4 Quale strato?\n5 Chi fa cosa\n6 Nomi dei file",
+    "testo": "Quale strato interviene?\n\nLeggete la situazione e scegliete lo strato del sistema operativo coinvolto.\n\nQuale strato del sistema operativo interviene? Digitate il comando dir nel prompt\n\nStrato\nKernel\nGestore della memoria\nGestore delle periferiche\nGestore del file system\nInterprete dei comandi\nProgrammi applicativi\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "so3": {
+    "nav": "Inizio\nStoria\nIl software\nIl sistema operativo\nLicenze\nQuiz\nSfida finale\nRisultato\n1 Avvio\n2 Cipolla\n3 Strati e ruoli\n4 Quale strato?\n5 Chi fa cosa\n6 Nomi dei file",
+    "testo": "Chi fa cosa\n\nOgni carta descrive un compito: assegnatela al gestore giusto.\n\nAlterna i processi con brevi time slice\nRichiede l'installazione di un driver\nMostra ai processi un dispositivo logico fittizio\nOrganizza i file in un albero con una radice (root)\nDivide i programmi in pagine e segmenti\nGestisce nome, dimensioni, tipo, permessi e date dei file\nImpedisce a un processo di accedere a dati non autorizzati\nCon il Plug and Play rileva i nuovi dispositivi\nAssegna a ogni processo il proprio spazio riservato\nGestisce multitasking e scheduling\nUsa il file di swap quando la RAM non basta\nDecide quale processo usa la CPU e per quanto tempo\nRimette in coda i processi interrotti\nGestisce le code di accesso alla stampante\nDivide il disco in cluster\nPermette copia, cancellazione e cambio nome dei file\nIl gestore dei processi\nIl gestore della memoria\nIl gestore delle periferiche\nIl gestore del file system\nCarte da smistare: 16. Errori: 0.\nRicomincia"
+   },
+   "so4": {
+    "nav": "Inizio\nStoria\nIl software\nIl sistema operativo\nLicenze\nQuiz\nSfida finale\nRisultato\n1 Avvio\n2 Cipolla\n3 Strati e ruoli\n4 Quale strato?\n5 Chi fa cosa\n6 Nomi dei file",
+    "testo": "Nomi dei file\n\nSmistate i nomi tra snake case, camel case e nomi da evitare.\n\nCartella1\ndati<2025>.txt\nnuovo\nverifica_informatica_1.docx\nMappaConcettuale.pdf\nEsercizioNumero1.xlsx\nFoto_Montagna_2025\nRelazioneFinale.docx\nappunti&schemi.txt\ntesina/finale.docx\nSoluzione_Prova2025.pdf\na.docx\nSnake case\nParole separate da trattino basso\nCamel case\nParole unite con iniziali maiuscole\nNome da evitare\nPoco significativo o con caratteri proibiti (< > & / \\)\nCarte da smistare: 12. Errori: 0.\nRicomincia"
+   },
+   "li1": {
+    "nav": "Inizio\nStoria\nIl software\nIl sistema operativo\nLicenze\nQuiz\nSfida finale\nRisultato\n1 Smistamento\n2 Libero o proprietario\n3 Release",
+    "testo": "Smistamento delle licenze\n\nFate clic su una carta e poi sulla categoria giusta.\n\nmacOS\nVersione di prova a tempo, poi si acquista\nMicrosoft Office\nUn programma proprietario che non costa nulla\nIl codice è pubblico, ma chi lo modifica può rendere proprietaria la sua versione\nWindows\nSe modifichi il programma, anche la tua versione deve essere distribuita con la stessa licenza\nLicenza GNU GPL\nIl kernel Linux\nLicenza GNU LGPL\nIl codice sorgente non è pubblico e l'uso è regolato da un contratto con l'utente\nProgramma gratis per sempre, ma con il codice segreto\nUn software libero i cui derivati devono restare liberi\nLicenza MIT (molto permissiva)\nLibera, ma senza obbligo di copyleft\nGioco gratis con acquisti per sbloccare livelli e oggetti\nApp gratuita; per togliere la pubblicità e avere più funzioni si paga\nProgramma gratuito per 30 giorni, poi devi pagare per continuare a usarlo\nLibero con copyleft\nLe versioni derivate devono restare libere con la stessa licenza\nLibero senza copyleft\nLe modifiche possono avere licenze diverse, anche proprietarie\nProprietario con EULA\nCodice non pubblico, uso regolato da un contratto\nFreeware\nGratuito ma proprietario\nShareware\nGratuito per un periodo di prova, poi a pagamento\nFreemium\nGratuito con funzioni extra a pagamento\nCarte da smistare: 18. Errori: 0.\nRicomincia"
+   },
+   "li2": {
+    "nav": "Inizio\nStoria\nIl software\nIl sistema operativo\nLicenze\nQuiz\nSfida finale\nRisultato\n1 Smistamento\n2 Libero o proprietario\n3 Release",
+    "testo": "Libero o proprietario?\n\nFate clic su una carta e poi sulla categoria giusta.\n\nAndroid Open Source Project\nLibreOffice\niOS\nLinux\nMicrosoft Office\nAudacity\nL'uso è regolato da un contratto EULA\nWindows\nmacOS\nSi può studiare e modificare il codice\nGIMP\nIl codice sorgente non è pubblico\nSi possono distribuire copie e versioni modificate\nSoftware libero\nCodice accessibile, modificabile e distribuibile\nSoftware proprietario\nCodice non pubblico, uso regolato da contratto\nCarte da smistare: 13. Errori: 0.\nRicomincia"
+   },
+   "li3": {
+    "nav": "Inizio\nStoria\nIl software\nIl sistema operativo\nLicenze\nQuiz\nSfida finale\nRisultato\n1 Smistamento\n2 Libero o proprietario\n3 Release",
+    "testo": "Le release X.Y.Z\n\nEsercizi sul numero di versione dei programmi.\n\nUn'applicazione ha la release 6.3.0 (formato X.Y.Z). Indicate i tre numeri.\n\nVersione principale (X)\nVersione minore (Y)\nPatch, correzioni di errori (Z)\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "qz1": {
+    "nav": "Inizio\nStoria\nIl software\nIl sistema operativo\nLicenze\nQuiz\nSfida finale\nRisultato\n1 Vero o falso\n2 Risposta multipla",
+    "testo": "Vero o falso?\n\nScegliete e poi premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.\n\nVero o falso? Windows Mobile oggi è il sistema operativo mobile più diffuso.\n\nRisposta\nVero\nFalso\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "qz2": {
+    "nav": "Inizio\nStoria\nIl software\nIl sistema operativo\nLicenze\nQuiz\nSfida finale\nRisultato\n1 Vero o falso\n2 Risposta multipla",
+    "testo": "Risposta multipla\n\nScegliete una risposta e premete «Controlla».\n\nQuale di questi sistemi non è nell'ambiente UNIX secondo le slide?\n\nRisposta\nLinux\nmacOS\nAndroid\nWindows\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "fin": {
+    "nav": "Inizio\nStoria\nIl software\nIl sistema operativo\nLicenze\nQuiz\nSfida finale\nRisultato",
+    "testo": "Sfida finale\n\nQuindici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nInizia la sfida finale"
+   },
+   "res": {
+    "nav": "Inizio\nStoria\nIl software\nIl sistema operativo\nLicenze\nQuiz\nSfida finale\nRisultato",
+    "testo": "Risultato\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la sfida finale."
+   }
+  },
+  "dopo": {
+   "inizio": "Sistemi operativi, software e licenze\n\nUna raccolta di giochi con correzione immediata: potete fare le attività nell'ordine che preferite e tenere aperte le slide per consultarle.\n\nStoria: linea del tempo dei sistemi operativi e «Chi sono io?».\nIl software: livelli di linguaggio e categorie.\nIl sistema operativo: sequenza di avvio, modello a cipolla, strati e ruoli, chi fa cosa, nomi dei file.\nLicenze: smistamento, libero o proprietario, release X.Y.Z.\nQuiz: vero o falso e risposta multipla, con spiegazione.\nSfida finale: quindici domande miste a tempo.\nIl vostro nome: ",
+   "st1": "Linea del tempo\n\nTrascinate le righe (oppure usate le frecce) per metterle in ordine dal più antico al più recente. Gli anni compaiono dopo «Verifica».\n\niOS (iPhone OS)\nIl sistema operativo mobile di Apple viene presentato insieme all'iPhone.\n2007\nAndroid\nIl sistema mobile di Google basato sul kernel Linux nasce a fine 2007.\nfine 2007\nUNIX\nSviluppato ai Bell Laboratories, finanziato dal Dipartimento della Difesa degli USA.\n1969\nMacintosh\nPrimo personal computer Apple con interfaccia grafica, annunciato con lo spot «1984».\ngennaio 1984\nWindows Mobile abbandonato\nMicrosoft rinuncia al mercato mobile dopo anni di tentativi mai pienamente riusciti.\n2017\nWindows 95\nIl sistema a finestre di Microsoft si afferma definitivamente, dieci anni dopo la prima versione.\n1995\nLinux\nUno studente di Helsinki, Linus Torvalds, rende pubblico il codice del suo nuovo kernel.\n1991\nWindows\nMicrosoft introduce la prima interfaccia a finestre.\nnovembre 1985\nWindows 11\nUltima versione di Windows citata nelle slide.\n2021\nVerifica\nRimescola\nPosizioni corrette: 1 su 9. Le righe rosse sono fuori posto: premete «Rimescola» per riprovare.\nGiusti al primo tentativo: 0 su 1",
+   "st2": "Chi sono io?\n\nLeggete l'indizio e scegliete il sistema operativo. «Altro esercizio» propone un nuovo indizio.\n\nChi sono io? Nella versione Android Open Source Project, senza GApps, sono open-source.\n\nSistema operativo\nUNIX\nWindows\nmacOS\nLinux\nAndroid\niOS\nWindows Mobile\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "sw1": "Software di basso e di alto livello\n\nFate clic su una carta e poi sulla categoria giusta.\n\nSoftware di basso livello\nVicino all'hardware\nAssembly\nCodice macchina\nOgni istruzione corrisponde a un'azione precisa del processore\nNon è portabile: processori diversi, codifiche diverse\nSoftware di alto livello\nVicino all'utente\nBasic\nKotlin\nFortran\nC#\nCobol\nUn singolo comando può generare più operazioni macchina\nPython\nRichiede un traduttore o un interprete\nJava\nFinito! Errori: 9.\nRicomincia",
+   "sw2": "Firmware, sistema operativo, software di base e applicativo\n\nFate clic su una carta e poi sulla categoria giusta.\n\nFirmware\nIl primo software che si avvia\nBIOS\nIl software nella ROM che si avvia con il bootstrap\nUEFI\nSistema operativo\nWindows\nmacOS\nAndroid\nLinux\nSoftware di base\nStrumenti per creare software\nLinker\nLoader\nDebugger\nCompilatore\nEditor di testo (Notepad++, VIM)\nSoftware applicativo\nAttività specifiche\nUn videogioco\nAudacity\nUn e-reader\nLibreOffice\nMatlab\nUn software ERP o CRM\nGIMP\nFinito! Errori: 35.\nRicomincia",
+   "so1": "La sequenza di avvio\n\nMettete in ordine i passaggi, dall'accensione del computer fino al sistema operativo in esecuzione.\n\nPOST\nPower On Self Test: verifica il funzionamento di tutti i componenti hardware.\nSistema operativo in esecuzione\nL'utente può avviare i programmi applicativi.\nBootloader\nIndividua il sistema operativo e ne carica il kernel.\nKernel in memoria centrale\nIl kernel resta sempre caricato in memoria.\nBIOS / UEFI\nInizializza l'hardware e carica il bootloader da disco, USB o altro dispositivo.\nAccensione\nIl processore carica il firmware dalla ROM ed esegue la prima istruzione.\nVerifica\nRimescola\nPosizioni corrette: 0 su 6. Le righe rosse sono fuori posto: premete «Rimescola» per riprovare.\nGiusti al primo tentativo: 0 su 1",
+   "so2": "Il modello a cipolla\n\nOrdinate gli strati dal più interno (il kernel) al più esterno (i programmi applicativi).\n\nGestore della memoria centrale\nAssegna la RAM ai processi.\nKernel\nComunica direttamente con l'hardware: CPU, memoria, periferiche.\nProgrammi applicativi\nIl livello più vicino all'utente.\nGestore delle periferiche\nUsa i driver per parlare con stampanti, tastiere, dischi.\nInterprete dei comandi (shell)\nCLI o GUI: l'interfaccia con cui l'utente dà i comandi.\nGestore del file system\nOrganizza file e cartelle sulle memorie di massa.\nVerifica\nRimescola\nPosizioni corrette: 1 su 6. Le righe rosse sono fuori posto: premete «Rimescola» per riprovare.\nGiusti al primo tentativo: 0 su 1",
+   "so2b": "Strati e ruoli\n\nOgni carta descrive il ruolo di uno strato: fate clic sulla carta e poi sullo strato a cui appartiene.\n\nKernel\nInterno: parla con l'hardware\nÈ il nucleo: tutti gli altri strati si appoggiano a lui\nComunica direttamente con CPU, memoria e periferiche\nResta sempre caricato nella memoria centrale\nGestore della memoria\nAssegna la RAM\nDecide quanta RAM dare a ogni processo\nProtegge lo spazio di un processo dagli altri\nUsa il file di swap quando la RAM non basta\nGestore delle periferiche\nDriver e dispositivi\nCon il Plug and Play riconosce la nuova chiavetta USB\nContiene i driver\nGestisce la coda di stampa\nGestore del file system\nFile e cartelle\nDivide il disco in cluster\nGestisce l'albero di cartelle a partire dalla radice\nRegistra nome, dimensione, tipo e permessi dei file\nInterprete dei comandi\nShell: CLI o GUI\nRiceve i comandi digitati dall'utente e li passa al sistema\nPuò essere a riga di comando (CLI) o grafico (GUI)\nIl prompt dei comandi di Windows ne è un esempio\nProgrammi applicativi\nStrato più esterno\nWord, GIMP, un videogioco, un browser\nÈ lo strato più vicino all'utente\nChiede servizi al sistema operativo invece di toccare l'hardware\nFinito! Errori: 45.\nRicomincia",
+   "so2c": "Quale strato interviene?\n\nLeggete la situazione e scegliete lo strato del sistema operativo coinvolto.\n\nQuale strato del sistema operativo interviene? Digitate il comando dir nel prompt\n\nStrato\nKernel\nGestore della memoria\nGestore delle periferiche\nGestore del file system\nInterprete dei comandi\nProgrammi applicativi\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "so3": "Chi fa cosa\n\nOgni carta descrive un compito: assegnatela al gestore giusto.\n\nIl gestore dei processi\nAlterna i processi con brevi time slice\nGestisce multitasking e scheduling\nDecide quale processo usa la CPU e per quanto tempo\nRimette in coda i processi interrotti\nIl gestore della memoria\nDivide i programmi in pagine e segmenti\nImpedisce a un processo di accedere a dati non autorizzati\nAssegna a ogni processo il proprio spazio riservato\nUsa il file di swap quando la RAM non basta\nIl gestore delle periferiche\nRichiede l'installazione di un driver\nMostra ai processi un dispositivo logico fittizio\nCon il Plug and Play rileva i nuovi dispositivi\nGestisce le code di accesso alla stampante\nIl gestore del file system\nOrganizza i file in un albero con una radice (root)\nGestisce nome, dimensioni, tipo, permessi e date dei file\nDivide il disco in cluster\nPermette copia, cancellazione e cambio nome dei file\nFinito! Errori: 24.\nRicomincia",
+   "so4": "Nomi dei file\n\nSmistate i nomi tra snake case, camel case e nomi da evitare.\n\nSnake case\nParole separate da trattino basso\nverifica_informatica_1.docx\nFoto_Montagna_2025\nSoluzione_Prova2025.pdf\nCamel case\nParole unite con iniziali maiuscole\nMappaConcettuale.pdf\nEsercizioNumero1.xlsx\nRelazioneFinale.docx\nNome da evitare\nPoco significativo o con caratteri proibiti (< > & / \\)\nCartella1\ndati<2025>.txt\nnuovo\nappunti&schemi.txt\ntesina/finale.docx\na.docx\nFinito! Errori: 15.\nRicomincia",
+   "li1": "Smistamento delle licenze\n\nFate clic su una carta e poi sulla categoria giusta.\n\nLibero con copyleft\nLe versioni derivate devono restare libere con la stessa licenza\nSe modifichi il programma, anche la tua versione deve essere distribuita con la stessa licenza\nLicenza GNU GPL\nIl kernel Linux\nUn software libero i cui derivati devono restare liberi\nLibero senza copyleft\nLe modifiche possono avere licenze diverse, anche proprietarie\nIl codice è pubblico, ma chi lo modifica può rendere proprietaria la sua versione\nLicenza GNU LGPL\nLicenza MIT (molto permissiva)\nLibera, ma senza obbligo di copyleft\nProprietario con EULA\nCodice non pubblico, uso regolato da un contratto\nmacOS\nMicrosoft Office\nWindows\nIl codice sorgente non è pubblico e l'uso è regolato da un contratto con l'utente\nFreeware\nGratuito ma proprietario\nUn programma proprietario che non costa nulla\nProgramma gratis per sempre, ma con il codice segreto\nShareware\nGratuito per un periodo di prova, poi a pagamento\nVersione di prova a tempo, poi si acquista\nProgramma gratuito per 30 giorni, poi devi pagare per continuare a usarlo\nFreemium\nGratuito con funzioni extra a pagamento\nGioco gratis con acquisti per sbloccare livelli e oggetti\nApp gratuita; per togliere la pubblicità e avere più funzioni si paga\nFinito! Errori: 36.\nRicomincia",
+   "li2": "Libero o proprietario?\n\nFate clic su una carta e poi sulla categoria giusta.\n\nSoftware libero\nCodice accessibile, modificabile e distribuibile\nAndroid Open Source Project\nLibreOffice\nLinux\nAudacity\nSi può studiare e modificare il codice\nGIMP\nSi possono distribuire copie e versioni modificate\nSoftware proprietario\nCodice non pubblico, uso regolato da contratto\niOS\nMicrosoft Office\nL'uso è regolato da un contratto EULA\nWindows\nmacOS\nIl codice sorgente non è pubblico\nFinito! Errori: 6.\nRicomincia",
+   "li3": "Le release X.Y.Z\n\nEsercizi sul numero di versione dei programmi.\n\nUn'applicazione ha la release 6.3.0 (formato X.Y.Z). Indicate i tre numeri.\n\nVersione principale (X)\nVersione minore (Y)\nPatch, correzioni di errori (Z)\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "qz1": "Vero o falso?\n\nScegliete e poi premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.\n\nVero o falso? Windows Mobile oggi è il sistema operativo mobile più diffuso.\n\nRisposta\nVero\nFalso\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "qz2": "Risposta multipla\n\nScegliete una risposta e premete «Controlla».\n\nQuale di questi sistemi non è nell'ambiente UNIX secondo le slide?\n\nRisposta\nLinux\nmacOS\nAndroid\nWindows\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "fin": "Sfida finale\n\nQuindici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nRiprova la sfida finale\n\nFinita: 0 su 15 in 00:00.",
+   "res": "Risultato\n\nNome: Ada\n\nNessun gioco ancora completato\n0 di 1 attività svolte\nSfida finale\nnon ancora fatta\nCopia il risultato\nStampa\nRicomincia da capo\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la sfida finale."
+  },
+  "giocati": {
+   "st1": [
+    "ordine"
+   ],
+   "st2": [
+    "controlla"
+   ],
+   "sw1": [
+    "smistamento"
+   ],
+   "sw2": [
+    "smistamento"
+   ],
+   "so1": [
+    "ordine"
+   ],
+   "so2": [
+    "ordine"
+   ],
+   "so2b": [
+    "smistamento"
+   ],
+   "so2c": [
+    "controlla"
+   ],
+   "so3": [
+    "smistamento"
+   ],
+   "so4": [
+    "smistamento"
+   ],
+   "li1": [
+    "smistamento"
+   ],
+   "li2": [
+    "smistamento"
+   ],
+   "li3": [
+    "controlla"
+   ],
+   "qz1": [
+    "controlla"
+   ],
+   "qz2": [
+    "controlla"
+   ],
+   "fin": [
+    "missione"
+   ]
+  },
+  "st": "{\"g\":{\"Linea del tempo\":{\"ok\":0,\"tot\":1},\"Chi sono io?\":{\"ok\":0,\"tot\":1},\"Livelli di linguaggio\":{\"ok\":0,\"tot\":1},\"Categorie di software\":{\"ok\":0,\"tot\":1},\"Sequenza di avvio\":{\"ok\":0,\"tot\":1},\"Modello a cipolla\":{\"ok\":0,\"tot\":1},\"Strati e ruoli\":{\"ok\":0,\"tot\":1},\"Quale strato interviene?\":{\"ok\":0,\"tot\":1},\"Chi fa cosa nel sistema operativo\":{\"ok\":0,\"tot\":1},\"Nomi dei file\":{\"ok\":0,\"tot\":1},\"Smistamento delle licenze\":{\"ok\":0,\"tot\":1},\"Libero o proprietario?\":{\"ok\":0,\"tot\":1},\"Le release X.Y.Z\":{\"ok\":0,\"tot\":1},\"Vero o falso\":{\"ok\":0,\"tot\":1},\"Risposta multipla\":{\"ok\":0,\"tot\":1}},\"m\":{\"Sfida finale\":{\"pts\":0,\"t\":\"00:00\",\"count\":15}}}"
+ },
+ "informatica-1/reti/la-rete-e-i-suoi-pezzi": {
+  "nav": [],
+  "sez": {
+   "inizio": {
+    "nav": "Inizio\nComunicazione\nLe reti\nI mezzi\nI dispositivi\nQuiz\nSfida finale\nRisultato",
+    "testo": "Le reti: comunicazione, mezzi e dispositivi\n\nGiochi con correzione immediata. Potete svolgere le attività nell'ordine che preferite, tenendo aperte le slide per consultarle.\n\nComunicazione: lo schema di Shannon, chi è chi, la storia delle reti.\nLe reti: PAN, LAN, WAN, GAN, client e server, TCP/IP.\nI mezzi: guidati e non guidati, caratteristiche di ogni mezzo.\nI dispositivi: scheda di rete, switch, router, access point.\nQuiz e Sfida finale.\nIl vostro nome: "
+   },
+   "c1": {
+    "nav": "Inizio\nComunicazione\nLe reti\nI mezzi\nI dispositivi\nQuiz\nSfida finale\nRisultato\n1 Shannon\n2 Chi è chi\n3 Storia",
+    "testo": "Lo schema di Shannon\n\nOrdinate i cinque componenti della comunicazione digitale, dalla sorgente alla destinazione. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».\n\nMittente\nLa fonte dell'informazione: la trasforma in messaggio.\n▲▼\nCanale di comunicazione\nIl mezzo fisico attraverso cui viaggia il segnale.\n▲▼\nRicevitore\nDecodifica il segnale ricevuto e lo ritrasforma in messaggio.\n▲▼\nTrasmettitore\nCodifica il messaggio in segnale e lo invia.\n▲▼\nDestinatario\nLa persona o la macchina a cui il messaggio è diretto.\n▲▼\nVerifica\nRimescola\nGiusti al primo tentativo: 0 su 0"
+   },
+   "c2": {
+    "nav": "Inizio\nComunicazione\nLe reti\nI mezzi\nI dispositivi\nQuiz\nSfida finale\nRisultato\n1 Shannon\n2 Chi è chi\n3 Storia",
+    "testo": "Chi è chi nella comunicazione\n\nFate clic su una carta e poi sulla categoria giusta.\n\nLa scheda di rete che decodifica il segnale\nUn computer che invia una email\nIl server che riceve la richiesta\nLa persona che ascolta il messaggio vocale\nIl telefono che trasforma la voce in segnale\nIl cavo in fibra ottica\nIl telefono che ritrasforma il segnale in voce\nIl doppino\nChi scrive un messaggio e lo invia\nLa scheda di rete che invia il segnale\nL'aria attraverso cui viaggiano le onde del Wi-Fi\nMittente\nTrasmettitore\nCanale\nRicevitore\nDestinatario\nCarte da smistare: 11. Errori: 0.\nRicomincia"
+   },
+   "c3": {
+    "nav": "Inizio\nComunicazione\nLe reti\nI mezzi\nI dispositivi\nQuiz\nSfida finale\nRisultato\n1 Shannon\n2 Chi è chi\n3 Storia",
+    "testo": "Storia delle reti\n\nMettete in ordine gli eventi dal più antico al più recente. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».\n\nPosta elettronica\nRay Tomlinson inventa l'email e introduce il simbolo @.\n▲▼\nDominio Google\nViene registrato il dominio Google.\n▲▼\nShannon\nClaude Shannon pubblica «A Mathematical Theory of Communication», base della teoria dell'informazione.\n▲▼\nWorld Wide Web\nTim Berners-Lee e Robert Cailliau al CERN di Ginevra creano il WWW.\n▲▼\nARPAnet\nCollega quattro università americane tra California e Utah.\n▲▼\nInternet\nDal progetto ARPAnet nasce la rete Internet.\n▲▼\nVerifica\nRimescola\nGiusti al primo tentativo: 0 su 0"
+   },
+   "r1": {
+    "nav": "Inizio\nComunicazione\nLe reti\nI mezzi\nI dispositivi\nQuiz\nSfida finale\nRisultato\n1 Tipi di rete\n2 Client e server\n3 IP e TCP",
+    "testo": "PAN, LAN, WAN e GAN\n\nFate clic su una carta e poi sulla categoria giusta.\n\nRete personale entro pochi metri\nAlta velocità e affidabilità\nHa velocità inferiore alla LAN\nUno smartwatch collegato allo smartphone con il Bluetooth\nI computer e la stampante di una scuola collegati tra loro\nRete limitata alle dimensioni di un edificio (circa 1 km)\nRete che copre l'intero pianeta collegando più WAN\nSfrutta parte dell'infrastruttura telefonica\nCollega più LAN tra loro, fino a un intero continente\nInternet\nPAN\nPersonal Area Network\nLAN\nLocal Area Network\nWAN\nWide Area Network\nGAN\nGlobal Area Network\nCarte da smistare: 10. Errori: 0.\nRicomincia"
+   },
+   "r2": {
+    "nav": "Inizio\nComunicazione\nLe reti\nI mezzi\nI dispositivi\nQuiz\nSfida finale\nRisultato\n1 Tipi di rete\n2 Client e server\n3 IP e TCP",
+    "testo": "Client e server\n\nFate clic su una carta e poi sulla categoria giusta.\n\nIl computer che chiede una pagina web\nUn web server che risponde con una pagina HTML\nIl computer che invia la pagina richiesta\nIl software che richiede e visualizza informazioni\nIl browser\nIl software che fornisce informazioni a chi le richiede\nClient\nRichiede e visualizza\nServer\nFornisce le informazioni\nCarte da smistare: 6. Errori: 0.\nRicomincia"
+   },
+   "r3": {
+    "nav": "Inizio\nComunicazione\nLe reti\nI mezzi\nI dispositivi\nQuiz\nSfida finale\nRisultato\n1 Tipi di rete\n2 Client e server\n3 IP e TCP",
+    "testo": "IP e TCP\n\nFate clic su una carta e poi sulla categoria giusta.\n\nInternet Protocol\nSi occupa degli indirizzi\nTransmission Control Protocol\nIdentifica i dispositivi e gestisce gli indirizzi\nGestisce il percorso dei messaggi e garantisce la consegna\nControlla che i messaggi arrivino a destinazione\nIP\nInternet Protocol\nTCP\nTransmission Control Protocol\nCarte da smistare: 6. Errori: 0.\nRicomincia"
+   },
+   "m1": {
+    "nav": "Inizio\nComunicazione\nLe reti\nI mezzi\nI dispositivi\nQuiz\nSfida finale\nRisultato\n1 Guidati o no\n2 Caratteristiche",
+    "testo": "Mezzi guidati e non guidati\n\nFate clic su una carta e poi sulla categoria giusta.\n\nFibra ottica\nCavo coassiale\nSatellite (Starlink)\nBluetooth\nWi-Fi\nCavo con connettore RJ45\nDoppino\nRete mobile 5G\nMezzi guidati\nIl segnale segue un cavo\nMezzi non guidati\nIl segnale viaggia nell'aria\nCarte da smistare: 8. Errori: 0.\nRicomincia"
+   },
+   "m2": {
+    "nav": "Inizio\nComunicazione\nLe reti\nI mezzi\nI dispositivi\nQuiz\nSfida finale\nRisultato\n1 Guidati o no\n2 Caratteristiche",
+    "testo": "Caratteristiche dei mezzi\n\nFate clic su una carta e poi sulla categoria giusta.\n\nTermina con il connettore RJ45\nUsato per le grandi distanze\nAccesso a Internet ad alta velocità in aree rurali o remote\nHa una copertura ampia\nNon si può intercettare senza interromperla\nRaggio di circa 10 metri\nCoppie di fili di rame attorcigliati\nBasso consumo energetico\nÈ immune alle interferenze elettromagnetiche\nFunziona a 2,4 GHz oppure a 5 GHz\nAlla base della tecnologia ADSL\nFilo di rame centrale, dielettrico e schermo metallico\nTrasmette segnali luminosi\nStandard 802.11\nÈ più costosa e meno tollerante ai guasti\n3G, 4G e 5G\nDoppino\nCavo coassiale\nFibra ottica\nBluetooth\nWi-Fi\nReti mobili e satellite\nCarte da smistare: 16. Errori: 0.\nRicomincia"
+   },
+   "d1": {
+    "nav": "Inizio\nComunicazione\nLe reti\nI mezzi\nI dispositivi\nQuiz\nSfida finale\nRisultato\n1 Chi è chi\n2 Percorso\n3 Sicurezza Wi-Fi\n4 Che cosa serve?",
+    "testo": "I dispositivi di rete\n\nFate clic su una carta e poi sulla categoria giusta.\n\nCollega la LAN a Internet\nI dispositivi wireless si collegano a lui, e lui a uno switch o al router\nÈ la scheda di rete wireless di portatili e dispositivi mobili\nPer usarla si sceglie la rete rilevata e si inserisce la password\nOgni dispositivo deve averne una per collegarsi alla rete\nCollega più dispositivi nella stessa rete locale\nInstrada il segnale nella direzione corretta\nA ogni sua porta si collega il cavo di un dispositivo\nPermette di creare una rete locale senza fili (WLAN)\nSi collega al cavo con connettore RJ45\nScheda di rete (NIC)\nSwitch\nRouter\nAccess point\nScheda Wi-Fi\nCarte da smistare: 10. Errori: 0.\nRicomincia"
+   },
+   "d2": {
+    "nav": "Inizio\nComunicazione\nLe reti\nI mezzi\nI dispositivi\nQuiz\nSfida finale\nRisultato\n1 Chi è chi\n2 Percorso\n3 Sicurezza Wi-Fi\n4 Che cosa serve?",
+    "testo": "Il percorso di una connessione\n\nOrdinate i passaggi di una connessione tipica. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».\n\nSwitch\nCollega i dispositivi della LAN.\n▲▼\nInternet\nLa rete delle reti.\n▲▼\nDispositivo\nIl computer, con la sua scheda di rete.\n▲▼\nCavo o Wi-Fi\nIl collegamento verso la rete locale.\n▲▼\nRouter\nCollega la LAN a Internet.\n▲▼\nVerifica\nRimescola\nGiusti al primo tentativo: 0 su 0"
+   },
+   "d3": {
+    "nav": "Inizio\nComunicazione\nLe reti\nI mezzi\nI dispositivi\nQuiz\nSfida finale\nRisultato\n1 Chi è chi\n2 Percorso\n3 Sicurezza Wi-Fi\n4 Che cosa serve?",
+    "testo": "Gli standard di sicurezza Wi-Fi\n\nDal più vecchio al più recente e sicuro. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».\n\nWPA3\nIl più recente e sicuro.\n▲▼\nWPA2\nIl secondo standard.\n▲▼\nWPA\nIl primo standard di sicurezza Wi-Fi.\n▲▼\nVerifica\nRimescola\nGiusti al primo tentativo: 0 su 0"
+   },
+   "d4": {
+    "nav": "Inizio\nComunicazione\nLe reti\nI mezzi\nI dispositivi\nQuiz\nSfida finale\nRisultato\n1 Chi è chi\n2 Percorso\n3 Sicurezza Wi-Fi\n4 Che cosa serve?",
+    "testo": "Che cosa serve?\n\nLeggete la situazione e scegliete il dispositivo o il mezzo giusto.\n\nChe cosa serve? Dovete collegare la rete locale a Internet\n\nScelta\nSwitch\nRouter\nAccess point\nScheda di rete (NIC)\nBluetooth\nFibra ottica\nSatellite (Starlink)\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "qz1": {
+    "nav": "Inizio\nComunicazione\nLe reti\nI mezzi\nI dispositivi\nQuiz\nSfida finale\nRisultato\n1 Vero o falso\n2 Risposta multipla",
+    "testo": "Vero o falso?\n\nScegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.\n\nVero o falso? Un access point permette di creare una rete locale senza fili.\n\nRisposta\nVero\nFalso\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "qz2": {
+    "nav": "Inizio\nComunicazione\nLe reti\nI mezzi\nI dispositivi\nQuiz\nSfida finale\nRisultato\n1 Vero o falso\n2 Risposta multipla",
+    "testo": "Risposta multipla\n\nScegliete una risposta e premete «Controlla».\n\nQual è il percorso tipico di una connessione?\n\nRisposta\nDispositivo, switch, router, Internet\nSwitch, dispositivo, Internet, router\nInternet, dispositivo, router, switch\nRouter, switch, dispositivo, Internet\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "fin": {
+    "nav": "Inizio\nComunicazione\nLe reti\nI mezzi\nI dispositivi\nQuiz\nSfida finale\nRisultato",
+    "testo": "Sfida finale\n\nQuindici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nInizia la sfida finale"
+   },
+   "res": {
+    "nav": "Inizio\nComunicazione\nLe reti\nI mezzi\nI dispositivi\nQuiz\nSfida finale\nRisultato",
+    "testo": "Risultato\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la sfida finale."
+   }
+  },
+  "dopo": {
+   "inizio": "Le reti: comunicazione, mezzi e dispositivi\n\nGiochi con correzione immediata. Potete svolgere le attività nell'ordine che preferite, tenendo aperte le slide per consultarle.\n\nComunicazione: lo schema di Shannon, chi è chi, la storia delle reti.\nLe reti: PAN, LAN, WAN, GAN, client e server, TCP/IP.\nI mezzi: guidati e non guidati, caratteristiche di ogni mezzo.\nI dispositivi: scheda di rete, switch, router, access point.\nQuiz e Sfida finale.\nIl vostro nome: ",
+   "c1": "Lo schema di Shannon\n\nOrdinate i cinque componenti della comunicazione digitale, dalla sorgente alla destinazione. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».\n\nMittente\nLa fonte dell'informazione: la trasforma in messaggio.\nCanale di comunicazione\nIl mezzo fisico attraverso cui viaggia il segnale.\nRicevitore\nDecodifica il segnale ricevuto e lo ritrasforma in messaggio.\nTrasmettitore\nCodifica il messaggio in segnale e lo invia.\nDestinatario\nLa persona o la macchina a cui il messaggio è diretto.\nVerifica\nRimescola\nPosizioni corrette: 2 su 5. Le righe rosse sono fuori posto: premete «Rimescola» per riprovare.\nGiusti al primo tentativo: 0 su 1",
+   "c2": "Chi è chi nella comunicazione\n\nFate clic su una carta e poi sulla categoria giusta.\n\nMittente\nUn computer che invia una email\nChi scrive un messaggio e lo invia\nTrasmettitore\nIl telefono che trasforma la voce in segnale\nLa scheda di rete che invia il segnale\nCanale\nIl cavo in fibra ottica\nIl doppino\nL'aria attraverso cui viaggiano le onde del Wi-Fi\nRicevitore\nLa scheda di rete che decodifica il segnale\nIl telefono che ritrasforma il segnale in voce\nDestinatario\nIl server che riceve la richiesta\nLa persona che ascolta il messaggio vocale\nFinito! Errori: 22.\nRicomincia",
+   "c3": "Storia delle reti\n\nMettete in ordine gli eventi dal più antico al più recente. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».\n\nPosta elettronica\nRay Tomlinson inventa l'email e introduce il simbolo @.\n1971\nDominio Google\nViene registrato il dominio Google.\n1997\nShannon\nClaude Shannon pubblica «A Mathematical Theory of Communication», base della teoria dell'informazione.\n1948\nWorld Wide Web\nTim Berners-Lee e Robert Cailliau al CERN di Ginevra creano il WWW.\n1991\nARPAnet\nCollega quattro università americane tra California e Utah.\n1969\nInternet\nDal progetto ARPAnet nasce la rete Internet.\n1982\nVerifica\nRimescola\nPosizioni corrette: 0 su 6. Le righe rosse sono fuori posto: premete «Rimescola» per riprovare.\nGiusti al primo tentativo: 0 su 1",
+   "r1": "PAN, LAN, WAN e GAN\n\nFate clic su una carta e poi sulla categoria giusta.\n\nPAN\nPersonal Area Network\nRete personale entro pochi metri\nUno smartwatch collegato allo smartphone con il Bluetooth\nLAN\nLocal Area Network\nAlta velocità e affidabilità\nI computer e la stampante di una scuola collegati tra loro\nRete limitata alle dimensioni di un edificio (circa 1 km)\nWAN\nWide Area Network\nHa velocità inferiore alla LAN\nSfrutta parte dell'infrastruttura telefonica\nCollega più LAN tra loro, fino a un intero continente\nGAN\nGlobal Area Network\nRete che copre l'intero pianeta collegando più WAN\nInternet\nFinito! Errori: 15.\nRicomincia",
+   "r2": "Client e server\n\nFate clic su una carta e poi sulla categoria giusta.\n\nClient\nRichiede e visualizza\nIl computer che chiede una pagina web\nIl software che richiede e visualizza informazioni\nIl browser\nServer\nFornisce le informazioni\nUn web server che risponde con una pagina HTML\nIl computer che invia la pagina richiesta\nIl software che fornisce informazioni a chi le richiede\nFinito! Errori: 3.\nRicomincia",
+   "r3": "IP e TCP\n\nFate clic su una carta e poi sulla categoria giusta.\n\nIP\nInternet Protocol\nInternet Protocol\nSi occupa degli indirizzi\nIdentifica i dispositivi e gestisce gli indirizzi\nTCP\nTransmission Control Protocol\nTransmission Control Protocol\nGestisce il percorso dei messaggi e garantisce la consegna\nControlla che i messaggi arrivino a destinazione\nFinito! Errori: 3.\nRicomincia",
+   "m1": "Mezzi guidati e non guidati\n\nFate clic su una carta e poi sulla categoria giusta.\n\nMezzi guidati\nIl segnale segue un cavo\nFibra ottica\nCavo coassiale\nCavo con connettore RJ45\nDoppino\nMezzi non guidati\nIl segnale viaggia nell'aria\nSatellite (Starlink)\nBluetooth\nWi-Fi\nRete mobile 5G\nFinito! Errori: 4.\nRicomincia",
+   "m2": "Caratteristiche dei mezzi\n\nFate clic su una carta e poi sulla categoria giusta.\n\nDoppino\nTermina con il connettore RJ45\nCoppie di fili di rame attorcigliati\nAlla base della tecnologia ADSL\nCavo coassiale\nUsato per le grandi distanze\nFilo di rame centrale, dielettrico e schermo metallico\nFibra ottica\nNon si può intercettare senza interromperla\nÈ immune alle interferenze elettromagnetiche\nTrasmette segnali luminosi\nÈ più costosa e meno tollerante ai guasti\nBluetooth\nRaggio di circa 10 metri\nBasso consumo energetico\nWi-Fi\nHa una copertura ampia\nFunziona a 2,4 GHz oppure a 5 GHz\nStandard 802.11\nReti mobili e satellite\nAccesso a Internet ad alta velocità in aree rurali o remote\n3G, 4G e 5G\nFinito! Errori: 38.\nRicomincia",
+   "d1": "I dispositivi di rete\n\nFate clic su una carta e poi sulla categoria giusta.\n\nScheda di rete (NIC)\nOgni dispositivo deve averne una per collegarsi alla rete\nSi collega al cavo con connettore RJ45\nSwitch\nCollega più dispositivi nella stessa rete locale\nA ogni sua porta si collega il cavo di un dispositivo\nRouter\nCollega la LAN a Internet\nInstrada il segnale nella direzione corretta\nAccess point\nI dispositivi wireless si collegano a lui, e lui a uno switch o al router\nPermette di creare una rete locale senza fili (WLAN)\nScheda Wi-Fi\nÈ la scheda di rete wireless di portatili e dispositivi mobili\nPer usarla si sceglie la rete rilevata e si inserisce la password\nFinito! Errori: 20.\nRicomincia",
+   "d2": "Il percorso di una connessione\n\nOrdinate i passaggi di una connessione tipica. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».\n\nSwitch\nCollega i dispositivi della LAN.\nInternet\nLa rete delle reti.\nDispositivo\nIl computer, con la sua scheda di rete.\nCavo o Wi-Fi\nIl collegamento verso la rete locale.\nRouter\nCollega la LAN a Internet.\nVerifica\nRimescola\nPosizioni corrette: 0 su 5. Le righe rosse sono fuori posto: premete «Rimescola» per riprovare.\nGiusti al primo tentativo: 0 su 1",
+   "d3": "Gli standard di sicurezza Wi-Fi\n\nDal più vecchio al più recente e sicuro. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».\n\nWPA3\nIl più recente e sicuro.\nWPA2\nIl secondo standard.\nWPA\nIl primo standard di sicurezza Wi-Fi.\nVerifica\nRimescola\nPosizioni corrette: 1 su 3. Le righe rosse sono fuori posto: premete «Rimescola» per riprovare.\nGiusti al primo tentativo: 0 su 1",
+   "d4": "Che cosa serve?\n\nLeggete la situazione e scegliete il dispositivo o il mezzo giusto.\n\nChe cosa serve? Dovete collegare la rete locale a Internet\n\nScelta\nSwitch\nRouter\nAccess point\nScheda di rete (NIC)\nBluetooth\nFibra ottica\nSatellite (Starlink)\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "qz1": "Vero o falso?\n\nScegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.\n\nVero o falso? Un access point permette di creare una rete locale senza fili.\n\nRisposta\nVero\nFalso\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "qz2": "Risposta multipla\n\nScegliete una risposta e premete «Controlla».\n\nQual è il percorso tipico di una connessione?\n\nRisposta\nDispositivo, switch, router, Internet\nSwitch, dispositivo, Internet, router\nInternet, dispositivo, router, switch\nRouter, switch, dispositivo, Internet\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "fin": "Sfida finale\n\nQuindici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nRiprova la sfida finale\n\nFinita: 0 su 15 in 00:00.",
+   "res": "Risultato\n\nNome: Ada\n\nNessun gioco ancora completato\n0 di 1 attività svolte\nSfida finale\nnon ancora fatta\nCopia il risultato\nStampa\nRicomincia da capo\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la sfida finale."
+  },
+  "giocati": {
+   "c1": [
+    "ordine"
+   ],
+   "c2": [
+    "smistamento"
+   ],
+   "c3": [
+    "ordine"
+   ],
+   "r1": [
+    "smistamento"
+   ],
+   "r2": [
+    "smistamento"
+   ],
+   "r3": [
+    "smistamento"
+   ],
+   "m1": [
+    "smistamento"
+   ],
+   "m2": [
+    "smistamento"
+   ],
+   "d1": [
+    "smistamento"
+   ],
+   "d2": [
+    "ordine"
+   ],
+   "d3": [
+    "ordine"
+   ],
+   "d4": [
+    "controlla"
+   ],
+   "qz1": [
+    "controlla"
+   ],
+   "qz2": [
+    "controlla"
+   ],
+   "fin": [
+    "missione"
+   ]
+  },
+  "st": "{\"g\":{\"Schema di Shannon\":{\"ok\":0,\"tot\":1},\"Chi è chi nella comunicazione\":{\"ok\":0,\"tot\":1},\"Storia delle reti\":{\"ok\":0,\"tot\":1},\"PAN, LAN, WAN, GAN\":{\"ok\":0,\"tot\":1},\"Client e server\":{\"ok\":0,\"tot\":1},\"IP e TCP\":{\"ok\":0,\"tot\":1},\"Mezzi guidati e non guidati\":{\"ok\":0,\"tot\":1},\"Caratteristiche dei mezzi\":{\"ok\":0,\"tot\":1},\"Dispositivi di rete\":{\"ok\":0,\"tot\":1},\"Percorso di connessione\":{\"ok\":0,\"tot\":1},\"Standard Wi-Fi\":{\"ok\":0,\"tot\":1},\"Che cosa serve?\":{\"ok\":0,\"tot\":1},\"Vero o falso\":{\"ok\":0,\"tot\":1},\"Risposta multipla\":{\"ok\":0,\"tot\":1}},\"m\":{\"Sfida finale\":{\"pts\":0,\"t\":\"00:00\",\"count\":15}}}"
+ },
+ "informatica-1/reti/indirizzi-dns-e-url": {
+  "nav": [],
+  "sez": {
+   "inizio": {
+    "nav": "Inizio\nLaboratorio\nIndirizzi IP\nDNS e URL\nQuiz\nSfida finale\nRisultato",
+    "testo": "Indirizzi IP, instradamento, DNS e URL\n\nQuesta lezione si svolge al computer del laboratorio: prima esplorate la rete della scuola con il prompt dei comandi, poi esercitatevi con i giochi.\n\nLaboratorio: sei passi con ipconfig, ping, nslookup e tracert, e un gioco sui comandi.\nIndirizzi IP: validi o no, numeri in binario, IPv4 e IPv6.\nDNS e URL: leggere un nome di dominio e scomporre un indirizzo.\nQuiz e Sfida finale.\nIl vostro nome: "
+   },
+   "l1": {
+    "nav": "Inizio\nLaboratorio\nIndirizzi IP\nDNS e URL\nQuiz\nSfida finale\nRisultato\n1 Esplorate la rete\n2 I comandi",
+    "testo": "Esplorate la rete della scuola\n\nTenete aperte due finestre: il prompt dei comandi e questa pagina. Eseguite i comandi e scrivete qui ciò che leggete. Se la rete blocca un comando, scrivete BLOCCATO.\n\n1. Il vostro indirizzo IP\n\nAprite il prompt dei comandi, scrivete ipconfig e premete Invio. Cercate «Indirizzo IPv4».\n\nIndirizzo IPv4 del vostro PC\nControlla\n\n2. Il primo numero in binario\n\nConvertite in binario (8 bit) il primo numero del vostro indirizzo IP.\n\nPrimo numero in binario\nControlla\n\n3. Il gateway\n\nNello stesso risultato di ipconfig cercate «Gateway predefinito»: è l'indirizzo del router della rete.\n\nGateway predefinito\nControlla\n\n4. Provate il collegamento\n\nScrivete ping 127.0.0.1: è il computer che parla con se stesso. Poi scrivete ping seguito dal gateway. Quanti pacchetti sono stati ricevuti sui 4 inviati?\n\nPacchetti ricevuti dal gateway (0-4) oppure BLOCCATO\nControlla\n\n5. Il DNS al lavoro\n\nScrivete nslookup www.miur.gov.it. Il server DNS traduce il nome in un indirizzo IP. Copiate l'indirizzo del sito.\n\nIndirizzo IP di www.miur.gov.it oppure BLOCCATO\nControlla\n\n6. Il percorso fino al sito\n\nScrivete tracert www.miur.gov.it (attendete). Contate i salti, cioè i router attraversati prima dell'arrivo.\n\nNumero di salti (router) oppure BLOCCATO\nControlla"
+   },
+   "l2": {
+    "nav": "Inizio\nLaboratorio\nIndirizzi IP\nDNS e URL\nQuiz\nSfida finale\nRisultato\n1 Esplorate la rete\n2 I comandi",
+    "testo": "Quale comando?\n\nFate clic su una carta e poi sulla categoria giusta.\n\nInvia piccoli messaggi di prova a un indirizzo\nMostra l'indirizzo IP del computer e il gateway\nMostra la configurazione di rete della scheda\nMostra il percorso (salti) verso un sito\nMostra i router attraversati per arrivare a un indirizzo\nChiede al server DNS l'indirizzo IP di un nome di dominio\nVerifica se un altro computer risponde e in quanto tempo\nTraduce un nome come www.miur.gov.it in un IP\nipconfig\nping\ntracert\nnslookup\nCarte da smistare: 8. Errori: 0.\nRicomincia"
+   },
+   "i1": {
+    "nav": "Inizio\nLaboratorio\nIndirizzi IP\nDNS e URL\nQuiz\nSfida finale\nRisultato\n1 Valido o no\n2 In binario\n3 IPv4 e IPv6",
+    "testo": "Indirizzo IP valido o no?\n\nLeggete l'indirizzo e scegliete.\n\nQuesto indirizzo IPv4 è valido? 254.211.117.241.227\n\nRisposta\nValido\nNon valido\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "i2": {
+    "nav": "Inizio\nLaboratorio\nIndirizzi IP\nDNS e URL\nQuiz\nSfida finale\nRisultato\n1 Valido o no\n2 In binario\n3 IPv4 e IPv6",
+    "testo": "Gli indirizzi IP in binario\n\nConvertite i numeri tra decimale e binario. Premete «Mostra il procedimento» se vi serve aiuto.\n\nScrivete in binario i quattro numeri dell'indirizzo 64.121.78.197.\n\nNumero 1 (64)\nNumero 2 (121)\nNumero 3 (78)\nNumero 4 (197)\nControlla\nMostra il procedimento\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "i3": {
+    "nav": "Inizio\nLaboratorio\nIndirizzi IP\nDNS e URL\nQuiz\nSfida finale\nRisultato\n1 Valido o no\n2 In binario\n3 IPv4 e IPv6",
+    "testo": "IPv4 e IPv6\n\nFate clic su una carta e poi sulla categoria giusta.\n\nOtto gruppi esadecimali separati da due punti\nCirca 4 miliardi di indirizzi possibili\nIndirizzi a 32 bit\nQuattro numeri decimali separati da punti\nGli indirizzi disponibili sono esauriti\nEsempio: 170.162.4.1\nÈ stato introdotto nel 1998\nIndirizzi a 128 bit\nCirca 3,4 × 10³⁸ indirizzi possibili\nIPv4\nIndirizzi a 32 bit\nIPv6\nIndirizzi a 128 bit\nCarte da smistare: 9. Errori: 0.\nRicomincia"
+   },
+   "o1": {
+    "nav": "Inizio\nLaboratorio\nIndirizzi IP\nDNS e URL\nQuiz\nSfida finale\nRisultato\n1 Nomi di dominio\n2 Le parti di un URL",
+    "testo": "Leggere un nome di dominio\n\nIl nome si legge da destra a sinistra.\n\nNel nome di dominio www.mef.gov.it, quale parte è il sottodominio (servizio web)?\n\nParte del nome\ngov\nmef\nwww\nit\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "o2": {
+    "nav": "Inizio\nLaboratorio\nIndirizzi IP\nDNS e URL\nQuiz\nSfida finale\nRisultato\n1 Nomi di dominio\n2 Le parti di un URL",
+    "testo": "Le parti di un URL\n\nScomponete l'indirizzo: protocollo://dominio/percorso/nomeFile.\n\nNell'URL https://www.giustizia.gov.it/notizie/archivio/comunicato.html, quale parte è il protocollo?\n\nParte dell'URL\ncomunicato.html\nwww.giustizia.gov.it\n/notizie/archivio/\nhttps\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "qz1": {
+    "nav": "Inizio\nLaboratorio\nIndirizzi IP\nDNS e URL\nQuiz\nSfida finale\nRisultato\n1 Vero o falso\n2 Risposta multipla",
+    "testo": "Vero o falso?\n\nScegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.\n\nVero o falso? Un indirizzo IPv4 è composto da 4 byte, cioè 32 bit.\n\nRisposta\nVero\nFalso\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "qz2": {
+    "nav": "Inizio\nLaboratorio\nIndirizzi IP\nDNS e URL\nQuiz\nSfida finale\nRisultato\n1 Vero o falso\n2 Risposta multipla",
+    "testo": "Risposta multipla\n\nScegliete una risposta e premete «Controlla».\n\nIn un URL, che cosa viene prima di «://»?\n\nRisposta\nIl percorso\nIl dominio\nIl nome del file\nIl protocollo\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "fin": {
+    "nav": "Inizio\nLaboratorio\nIndirizzi IP\nDNS e URL\nQuiz\nSfida finale\nRisultato",
+    "testo": "Sfida finale\n\nQuindici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nInizia la sfida finale"
+   },
+   "res": {
+    "nav": "Inizio\nLaboratorio\nIndirizzi IP\nDNS e URL\nQuiz\nSfida finale\nRisultato",
+    "testo": "Risultato\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la sfida finale."
+   }
+  },
+  "dopo": {
+   "inizio": "Indirizzi IP, instradamento, DNS e URL\n\nQuesta lezione si svolge al computer del laboratorio: prima esplorate la rete della scuola con il prompt dei comandi, poi esercitatevi con i giochi.\n\nLaboratorio: sei passi con ipconfig, ping, nslookup e tracert, e un gioco sui comandi.\nIndirizzi IP: validi o no, numeri in binario, IPv4 e IPv6.\nDNS e URL: leggere un nome di dominio e scomporre un indirizzo.\nQuiz e Sfida finale.\nIl vostro nome: ",
+   "l1": "Esplorate la rete della scuola\n\nTenete aperte due finestre: il prompt dei comandi e questa pagina. Eseguite i comandi e scrivete qui ciò che leggete. Se la rete blocca un comando, scrivete BLOCCATO.\n\n1. Il vostro indirizzo IP\n\nAprite il prompt dei comandi, scrivete ipconfig e premete Invio. Cercate «Indirizzo IPv4».\n\nIndirizzo IPv4 del vostro PC\nControlla\n\n2. Il primo numero in binario\n\nConvertite in binario (8 bit) il primo numero del vostro indirizzo IP.\n\nPrimo numero in binario\nControlla\n\n3. Il gateway\n\nNello stesso risultato di ipconfig cercate «Gateway predefinito»: è l'indirizzo del router della rete.\n\nGateway predefinito\nControlla\n\n4. Provate il collegamento\n\nScrivete ping 127.0.0.1: è il computer che parla con se stesso. Poi scrivete ping seguito dal gateway. Quanti pacchetti sono stati ricevuti sui 4 inviati?\n\nPacchetti ricevuti dal gateway (0-4) oppure BLOCCATO\nControlla\n\n5. Il DNS al lavoro\n\nScrivete nslookup www.miur.gov.it. Il server DNS traduce il nome in un indirizzo IP. Copiate l'indirizzo del sito.\n\nIndirizzo IP di www.miur.gov.it oppure BLOCCATO\nControlla\n\n6. Il percorso fino al sito\n\nScrivete tracert www.miur.gov.it (attendete). Contate i salti, cioè i router attraversati prima dell'arrivo.\n\nNumero di salti (router) oppure BLOCCATO\nControlla",
+   "l2": "Quale comando?\n\nFate clic su una carta e poi sulla categoria giusta.\n\nipconfig\nMostra l'indirizzo IP del computer e il gateway\nMostra la configurazione di rete della scheda\nping\nInvia piccoli messaggi di prova a un indirizzo\nVerifica se un altro computer risponde e in quanto tempo\ntracert\nMostra il percorso (salti) verso un sito\nMostra i router attraversati per arrivare a un indirizzo\nnslookup\nChiede al server DNS l'indirizzo IP di un nome di dominio\nTraduce un nome come www.miur.gov.it in un IP\nFinito! Errori: 12.\nRicomincia",
+   "i1": "Indirizzo IP valido o no?\n\nLeggete l'indirizzo e scegliete.\n\nQuesto indirizzo IPv4 è valido? 254.211.117.241.227\n\nRisposta\nValido\nNon valido\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "i2": "Gli indirizzi IP in binario\n\nConvertite i numeri tra decimale e binario. Premete «Mostra il procedimento» se vi serve aiuto.\n\nScrivete in binario i quattro numeri dell'indirizzo 64.121.78.197.\n\nNumero 1 (64)\nNumero 2 (121)\nNumero 3 (78)\nNumero 4 (197)\nControlla\nMostra il procedimento\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "i3": "IPv4 e IPv6\n\nFate clic su una carta e poi sulla categoria giusta.\n\nIPv4\nIndirizzi a 32 bit\nCirca 4 miliardi di indirizzi possibili\nIndirizzi a 32 bit\nQuattro numeri decimali separati da punti\nGli indirizzi disponibili sono esauriti\nEsempio: 170.162.4.1\nIPv6\nIndirizzi a 128 bit\nOtto gruppi esadecimali separati da due punti\nÈ stato introdotto nel 1998\nIndirizzi a 128 bit\nCirca 3,4 × 10³⁸ indirizzi possibili\nFinito! Errori: 4.\nRicomincia",
+   "o1": "Leggere un nome di dominio\n\nIl nome si legge da destra a sinistra.\n\nNel nome di dominio www.mef.gov.it, quale parte è il sottodominio (servizio web)?\n\nParte del nome\ngov\nmef\nwww\nit\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "o2": "Le parti di un URL\n\nScomponete l'indirizzo: protocollo://dominio/percorso/nomeFile.\n\nNell'URL https://www.giustizia.gov.it/notizie/archivio/comunicato.html, quale parte è il protocollo?\n\nParte dell'URL\ncomunicato.html\nwww.giustizia.gov.it\n/notizie/archivio/\nhttps\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "qz1": "Vero o falso?\n\nScegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.\n\nVero o falso? Un indirizzo IPv4 è composto da 4 byte, cioè 32 bit.\n\nRisposta\nVero\nFalso\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "qz2": "Risposta multipla\n\nScegliete una risposta e premete «Controlla».\n\nIn un URL, che cosa viene prima di «://»?\n\nRisposta\nIl percorso\nIl dominio\nIl nome del file\nIl protocollo\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "fin": "Sfida finale\n\nQuindici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nRiprova la sfida finale\n\nFinita: 0 su 15 in 00:00.",
+   "res": "Risultato\n\nNome: Ada\n\nNessun gioco ancora completato\n0 di 1 attività svolte\nSfida finale\nnon ancora fatta\nCopia il risultato\nStampa\nRicomincia da capo\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la sfida finale."
+  },
+  "giocati": {
+   "l1": [],
+   "l2": [
+    "smistamento"
+   ],
+   "i1": [
+    "controlla"
+   ],
+   "i2": [
+    "controlla"
+   ],
+   "i3": [
+    "smistamento"
+   ],
+   "o1": [
+    "controlla"
+   ],
+   "o2": [
+    "controlla"
+   ],
+   "qz1": [
+    "controlla"
+   ],
+   "qz2": [
+    "controlla"
+   ],
+   "fin": [
+    "missione"
+   ]
+  },
+  "st": "{\"g\":{\"Laboratorio di rete\":{\"ok\":0,\"tot\":0},\"Comandi di rete\":{\"ok\":0,\"tot\":1},\"IP valido o no\":{\"ok\":0,\"tot\":1},\"IP e numeri binari\":{\"ok\":0,\"tot\":1},\"IPv4 e IPv6\":{\"ok\":0,\"tot\":1},\"Nomi di dominio\":{\"ok\":0,\"tot\":1},\"Le parti di un URL\":{\"ok\":0,\"tot\":1},\"Vero o falso\":{\"ok\":0,\"tot\":1},\"Risposta multipla\":{\"ok\":0,\"tot\":1}},\"m\":{\"Sfida finale\":{\"pts\":0,\"t\":\"00:00\",\"count\":15}}}"
+ },
+ "informatica-1/reti/web-ricerca-e-sicurezza": {
+  "nav": [],
+  "sez": {
+   "inizio": {
+    "nav": "Inizio\nIl web\nLa ricerca\nI rischi\nApprofondimenti\nQuiz\nSfida finale\nRisultato",
+    "testo": "Il Web, i motori di ricerca e i rischi della rete\n\nGiochi con correzione immediata, da svolgere nell'ordine che preferite con le slide aperte.\n\nIl web: HTTP, HTTPS, HTML, CSS, W3C e che cosa succede quando digitate un indirizzo.\nLa ricerca: crawler, indice e ranking.\nI rischi: virus, worm, trojan, spyware, phishing, fake news, difese, navigazione in incognito.\nApprofondimenti (facoltativi): posta elettronica e cloud.\nQuiz e Sfida finale.\nIl vostro nome: "
+   },
+   "w1": {
+    "nav": "Inizio\nIl web\nLa ricerca\nI rischi\nApprofondimenti\nQuiz\nSfida finale\nRisultato\n1 Protocolli e linguaggi\n2 I tag HTML\n3 Digito un indirizzo",
+    "testo": "Protocolli e linguaggi del web\n\nFate clic su una carta e poi sulla categoria giusta.\n\nDefinisce colori, font, margini e dimensioni dei contenuti\nStrutturare le pagine web con i tag\nStabilisce gli standard del WWW\nProtocollo principale per la trasmissione di ipertesti\nTrasmette pagine con testo, immagini, link e multimedia\nSi può inserire nell'attributo style dei tag HTML\nUsa tag come head, body, h1 e p\nDa preferire sempre per la sicurezza dei dati trasmessi\nVersione con crittografia, riconoscibile dal lucchetto nel browser\nIl World Wide Web Consortium\nHTTP\nProtocollo di trasmissione\nHTTPS\nVersione sicura\nHTML\nLinguaggio di markup\nCSS\nPresentazione\nW3C\nOrganizzazione\nCarte da smistare: 10. Errori: 0.\nRicomincia"
+   },
+   "w2": {
+    "nav": "Inizio\nIl web\nLa ricerca\nI rischi\nApprofondimenti\nQuiz\nSfida finale\nRisultato\n1 Protocolli e linguaggi\n2 I tag HTML\n3 Digito un indirizzo",
+    "testo": "I tag HTML\n\nScegliete il tag giusto.\n\nIn HTML, quale tag usate per: una tabella?\n\nTag\nbody\nhead\ntable\np\nh1\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "w3": {
+    "nav": "Inizio\nIl web\nLa ricerca\nI rischi\nApprofondimenti\nQuiz\nSfida finale\nRisultato\n1 Protocolli e linguaggi\n2 I tag HTML\n3 Digito un indirizzo",
+    "testo": "Che cosa succede quando digito un indirizzo\n\nOrdinate i passaggi dalla digitazione alla pagina sullo schermo. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».\n\nRichiesta al web server\nIl browser (client) invia una richiesta HTTP al server.\n▲▼\nIl browser mostra la pagina\nDecodifica HTML e CSS e li visualizza a schermo.\n▲▼\nIl DNS traduce il nome\nIl browser interroga il server DNS per ottenere l'indirizzo IP.\n▲▼\nDigitate l'indirizzo\nScrivete nel browser il nome di dominio, per esempio www.miur.gov.it.\n▲▼\nRisposta del server\nIl web server risponde inviando la pagina HTML.\n▲▼\nVerifica\nRimescola\nGiusti al primo tentativo: 0 su 0"
+   },
+   "s1": {
+    "nav": "Inizio\nIl web\nLa ricerca\nI rischi\nApprofondimenti\nQuiz\nSfida finale\nRisultato",
+    "testo": "Come funziona un motore di ricerca\n\nOrdinate le fasi del lavoro di un motore di ricerca. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».\n\nL'algoritmo decide il ranking\nPertinenza, affidabilità, velocità ed esperienza utente fissano l'ordine dei risultati.\n▲▼\nLe pagine entrano nell'indice\nIl grande database è il cuore del motore di ricerca.\n▲▼\nIl crawler esplora il web\nUn bot parte da URL già noti e segue i link trovando nuove pagine.\n▲▼\nSi raccolgono i dati\nIl crawler memorizza parole chiave, metadati, titolo, URL e link.\n▲▼\nVerifica\nRimescola\nGiusti al primo tentativo: 0 su 0"
+   },
+   "k1": {
+    "nav": "Inizio\nIl web\nLa ricerca\nI rischi\nApprofondimenti\nQuiz\nSfida finale\nRisultato\n1 Le minacce\n2 Quale minaccia?\n3 Difendersi\n4 Incognito",
+    "testo": "Le minacce informatiche\n\nFate clic su una carta e poi sulla categoria giusta.\n\nInformazioni false pubblicate per ottenere vantaggi economici o politici\nResta nascosto e registra i dati inseriti, come password e numeri di carta\nRende il sistema inutilizzabile per sovraccarico\nRegistra ciò che scrivete senza che ve ne accorgiate\nServe a rubare password e numeri di carta di credito\nRivela il suo contenuto malevolo solo dopo l'installazione\nSi maschera da software legittimo\nSi inserisce in un sistema operativo, si replica e si diffonde\nSi contrasta verificando autore, fonte e data\nProvoca perdita di dati e malfunzionamenti\nEmail che rimandano a copie grafiche di siti bancari o postali\nSi replica rapidissimamente fino a sovraccaricare il sistema\nVirus\nWorm\nTrojan\nSpyware\nPhishing\nFake news\nCarte da smistare: 12. Errori: 0.\nRicomincia"
+   },
+   "k2": {
+    "nav": "Inizio\nIl web\nLa ricerca\nI rischi\nApprofondimenti\nQuiz\nSfida finale\nRisultato\n1 Le minacce\n2 Quale minaccia?\n3 Difendersi\n4 Incognito",
+    "testo": "Quale minaccia?\n\nLeggete la situazione e riconoscete la minaccia.\n\nQuale minaccia? Un articolo inventato circola per fare vantaggio a un partito politico\n\nMinaccia\nVirus\nWorm\nTrojan\nSpyware\nPhishing\nFake news\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "k3": {
+    "nav": "Inizio\nIl web\nLa ricerca\nI rischi\nApprofondimenti\nQuiz\nSfida finale\nRisultato\n1 Le minacce\n2 Quale minaccia?\n3 Difendersi\n4 Incognito",
+    "testo": "Difendersi\n\nFate clic su una carta e poi sulla categoria giusta.\n\nNon condividere mai username e password\nCondividere le proprie credenziali con un amico\nAggiornare il sistema operativo\nCredere a una notizia solo perché è tra i primi risultati\nControllare autore, fonte e data di una notizia\nNon installare software sconosciuti\nPreferire i siti con HTTPS e lucchetto\nInstallare programmi presi da siti sconosciuti\nInserire la password su un sito raggiunto da un link sospetto\nScaricare file compressi da fonti non verificate\nCliccare sui link di una email sospetta\nInstallare e aggiornare un antivirus\nBuona pratica\nErrore pericoloso\nCarte da smistare: 12. Errori: 0.\nRicomincia"
+   },
+   "k4": {
+    "nav": "Inizio\nIl web\nLa ricerca\nI rischi\nApprofondimenti\nQuiz\nSfida finale\nRisultato\n1 Le minacce\n2 Quale minaccia?\n3 Difendersi\n4 Incognito",
+    "testo": "La navigazione in incognito\n\nFate clic su una carta e poi sulla categoria giusta.\n\nIl vostro indirizzo IP, visibile al provider (ISP)\nI siti visitati, visibili all'amministratore di rete\nLe azioni online, tracciabili in caso di atti illeciti\nLa cronologia di navigazione\nI cookie\nIl vostro indirizzo IP, visibile al web server\nIl contenuto della cache del browser\nI dati dei moduli e le password inserite\nNon viene salvato sul dispositivo\nRimane visibile\nCarte da smistare: 8. Errori: 0.\nRicomincia"
+   },
+   "a1": {
+    "nav": "Inizio\nIl web\nLa ricerca\nI rischi\nApprofondimenti\nQuiz\nSfida finale\nRisultato\n1 Posta\n2 Cloud",
+    "testo": "POP, IMAP e SMTP\n\nFate clic su una carta e poi sulla categoria giusta.\n\nSi possono organizzare in cartelle sul server\nAdatto a chi usa un solo dispositivo\nProtocollo per la posta in uscita\nLe email restano sul server anche dopo la lettura\nAdatto a PC, smartphone e tablet insieme\nScarica le email sul dispositivo e le cancella dal server\nLe email sono accessibili solo sul dispositivo che le ha scaricate\nDal server SMTP del mittente a quello del destinatario\nPOP\nIMAP\nSMTP\nCarte da smistare: 8. Errori: 0.\nRicomincia"
+   },
+   "a2": {
+    "nav": "Inizio\nIl web\nLa ricerca\nI rischi\nApprofondimenti\nQuiz\nSfida finale\nRisultato\n1 Posta\n2 Cloud",
+    "testo": "Il cloud computing\n\nFate clic su una carta e poi sulla categoria giusta.\n\nDropbox\nAWS (Amazon Web Services)\nGoogle Compute Engine\nFornisce hardware e rete, anche macchine virtuali: l'utente gestisce SO e applicazioni\nGoogle App Engine\nGli sviluppatori creano le proprie applicazioni senza gestire hardware e sistema operativo\nL'utente usa applicazioni su server remoti senza gestire l'infrastruttura\nGoogle Drive\nMicrosoft Azure\nSaaS\nSoftware as a Service\nPaaS\nPlatform as a Service\nIaaS\nInfrastructure as a Service\nCarte da smistare: 9. Errori: 0.\nRicomincia"
+   },
+   "qz1": {
+    "nav": "Inizio\nIl web\nLa ricerca\nI rischi\nApprofondimenti\nQuiz\nSfida finale\nRisultato\n1 Vero o falso\n2 Risposta multipla",
+    "testo": "Vero o falso?\n\nScegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.\n\nVero o falso? Un file robots.txt può impedire al crawler di raggiungere una pagina.\n\nRisposta\nVero\nFalso\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "qz2": {
+    "nav": "Inizio\nIl web\nLa ricerca\nI rischi\nApprofondimenti\nQuiz\nSfida finale\nRisultato\n1 Vero o falso\n2 Risposta multipla",
+    "testo": "Risposta multipla\n\nScegliete una risposta e premete «Controlla».\n\nQuale tag HTML contiene il contenuto visibile della pagina?\n\nRisposta\nIl tag table\nIl tag body\nIl tag head\nIl tag html\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "fin": {
+    "nav": "Inizio\nIl web\nLa ricerca\nI rischi\nApprofondimenti\nQuiz\nSfida finale\nRisultato",
+    "testo": "Sfida finale\n\nQuindici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nInizia la sfida finale"
+   },
+   "res": {
+    "nav": "Inizio\nIl web\nLa ricerca\nI rischi\nApprofondimenti\nQuiz\nSfida finale\nRisultato",
+    "testo": "Risultato\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la sfida finale."
+   }
+  },
+  "dopo": {
+   "inizio": "Il Web, i motori di ricerca e i rischi della rete\n\nGiochi con correzione immediata, da svolgere nell'ordine che preferite con le slide aperte.\n\nIl web: HTTP, HTTPS, HTML, CSS, W3C e che cosa succede quando digitate un indirizzo.\nLa ricerca: crawler, indice e ranking.\nI rischi: virus, worm, trojan, spyware, phishing, fake news, difese, navigazione in incognito.\nApprofondimenti (facoltativi): posta elettronica e cloud.\nQuiz e Sfida finale.\nIl vostro nome: ",
+   "w1": "Protocolli e linguaggi del web\n\nFate clic su una carta e poi sulla categoria giusta.\n\nHTTP\nProtocollo di trasmissione\nProtocollo principale per la trasmissione di ipertesti\nTrasmette pagine con testo, immagini, link e multimedia\nHTTPS\nVersione sicura\nDa preferire sempre per la sicurezza dei dati trasmessi\nVersione con crittografia, riconoscibile dal lucchetto nel browser\nHTML\nLinguaggio di markup\nStrutturare le pagine web con i tag\nUsa tag come head, body, h1 e p\nCSS\nPresentazione\nDefinisce colori, font, margini e dimensioni dei contenuti\nSi può inserire nell'attributo style dei tag HTML\nW3C\nOrganizzazione\nStabilisce gli standard del WWW\nIl World Wide Web Consortium\nFinito! Errori: 20.\nRicomincia",
+   "w2": "I tag HTML\n\nScegliete il tag giusto.\n\nIn HTML, quale tag usate per: una tabella?\n\nTag\nbody\nhead\ntable\np\nh1\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "w3": "Che cosa succede quando digito un indirizzo\n\nOrdinate i passaggi dalla digitazione alla pagina sullo schermo. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».\n\nRichiesta al web server\nIl browser (client) invia una richiesta HTTP al server.\nIl browser mostra la pagina\nDecodifica HTML e CSS e li visualizza a schermo.\nIl DNS traduce il nome\nIl browser interroga il server DNS per ottenere l'indirizzo IP.\nDigitate l'indirizzo\nScrivete nel browser il nome di dominio, per esempio www.miur.gov.it.\nRisposta del server\nIl web server risponde inviando la pagina HTML.\nVerifica\nRimescola\nPosizioni corrette: 0 su 5. Le righe rosse sono fuori posto: premete «Rimescola» per riprovare.\nGiusti al primo tentativo: 0 su 1",
+   "s1": "Come funziona un motore di ricerca\n\nOrdinate le fasi del lavoro di un motore di ricerca. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».\n\nL'algoritmo decide il ranking\nPertinenza, affidabilità, velocità ed esperienza utente fissano l'ordine dei risultati.\nLe pagine entrano nell'indice\nIl grande database è il cuore del motore di ricerca.\nIl crawler esplora il web\nUn bot parte da URL già noti e segue i link trovando nuove pagine.\nSi raccolgono i dati\nIl crawler memorizza parole chiave, metadati, titolo, URL e link.\nVerifica\nRimescola\nPosizioni corrette: 0 su 4. Le righe rosse sono fuori posto: premete «Rimescola» per riprovare.\nGiusti al primo tentativo: 0 su 1",
+   "k1": "Le minacce informatiche\n\nFate clic su una carta e poi sulla categoria giusta.\n\nVirus\nSi inserisce in un sistema operativo, si replica e si diffonde\nProvoca perdita di dati e malfunzionamenti\nWorm\nRende il sistema inutilizzabile per sovraccarico\nSi replica rapidissimamente fino a sovraccaricare il sistema\nTrojan\nRivela il suo contenuto malevolo solo dopo l'installazione\nSi maschera da software legittimo\nSpyware\nResta nascosto e registra i dati inseriti, come password e numeri di carta\nRegistra ciò che scrivete senza che ve ne accorgiate\nPhishing\nServe a rubare password e numeri di carta di credito\nEmail che rimandano a copie grafiche di siti bancari o postali\nFake news\nInformazioni false pubblicate per ottenere vantaggi economici o politici\nSi contrasta verificando autore, fonte e data\nFinito! Errori: 30.\nRicomincia",
+   "k2": "Quale minaccia?\n\nLeggete la situazione e riconoscete la minaccia.\n\nQuale minaccia? Un articolo inventato circola per fare vantaggio a un partito politico\n\nMinaccia\nVirus\nWorm\nTrojan\nSpyware\nPhishing\nFake news\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "k3": "Difendersi\n\nFate clic su una carta e poi sulla categoria giusta.\n\nBuona pratica\nNon condividere mai username e password\nAggiornare il sistema operativo\nControllare autore, fonte e data di una notizia\nNon installare software sconosciuti\nPreferire i siti con HTTPS e lucchetto\nInstallare e aggiornare un antivirus\nErrore pericoloso\nCondividere le proprie credenziali con un amico\nCredere a una notizia solo perché è tra i primi risultati\nInstallare programmi presi da siti sconosciuti\nInserire la password su un sito raggiunto da un link sospetto\nScaricare file compressi da fonti non verificate\nCliccare sui link di una email sospetta\nFinito! Errori: 6.\nRicomincia",
+   "k4": "La navigazione in incognito\n\nFate clic su una carta e poi sulla categoria giusta.\n\nNon viene salvato sul dispositivo\nLa cronologia di navigazione\nI cookie\nIl contenuto della cache del browser\nI dati dei moduli e le password inserite\nRimane visibile\nIl vostro indirizzo IP, visibile al provider (ISP)\nI siti visitati, visibili all'amministratore di rete\nLe azioni online, tracciabili in caso di atti illeciti\nIl vostro indirizzo IP, visibile al web server\nFinito! Errori: 4.\nRicomincia",
+   "a1": "POP, IMAP e SMTP\n\nFate clic su una carta e poi sulla categoria giusta.\n\nPOP\nAdatto a chi usa un solo dispositivo\nScarica le email sul dispositivo e le cancella dal server\nLe email sono accessibili solo sul dispositivo che le ha scaricate\nIMAP\nSi possono organizzare in cartelle sul server\nLe email restano sul server anche dopo la lettura\nAdatto a PC, smartphone e tablet insieme\nSMTP\nProtocollo per la posta in uscita\nDal server SMTP del mittente a quello del destinatario\nFinito! Errori: 7.\nRicomincia",
+   "a2": "Il cloud computing\n\nFate clic su una carta e poi sulla categoria giusta.\n\nSaaS\nSoftware as a Service\nDropbox\nL'utente usa applicazioni su server remoti senza gestire l'infrastruttura\nGoogle Drive\nPaaS\nPlatform as a Service\nGoogle App Engine\nGli sviluppatori creano le proprie applicazioni senza gestire hardware e sistema operativo\nMicrosoft Azure\nIaaS\nInfrastructure as a Service\nAWS (Amazon Web Services)\nGoogle Compute Engine\nFornisce hardware e rete, anche macchine virtuali: l'utente gestisce SO e applicazioni\nFinito! Errori: 9.\nRicomincia",
+   "qz1": "Vero o falso?\n\nScegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.\n\nVero o falso? Un file robots.txt può impedire al crawler di raggiungere una pagina.\n\nRisposta\nVero\nFalso\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "qz2": "Risposta multipla\n\nScegliete una risposta e premete «Controlla».\n\nQuale tag HTML contiene il contenuto visibile della pagina?\n\nRisposta\nIl tag table\nIl tag body\nIl tag head\nIl tag html\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "fin": "Sfida finale\n\nQuindici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nRiprova la sfida finale\n\nFinita: 0 su 15 in 00:00.",
+   "res": "Risultato\n\nNome: Ada\n\nNessun gioco ancora completato\n0 di 1 attività svolte\nSfida finale\nnon ancora fatta\nCopia il risultato\nStampa\nRicomincia da capo\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la sfida finale."
+  },
+  "giocati": {
+   "w1": [
+    "smistamento"
+   ],
+   "w2": [
+    "controlla"
+   ],
+   "w3": [
+    "ordine"
+   ],
+   "s1": [
+    "ordine"
+   ],
+   "k1": [
+    "smistamento"
+   ],
+   "k2": [
+    "controlla"
+   ],
+   "k3": [
+    "smistamento"
+   ],
+   "k4": [
+    "smistamento"
+   ],
+   "a1": [
+    "smistamento"
+   ],
+   "a2": [
+    "smistamento"
+   ],
+   "qz1": [
+    "controlla"
+   ],
+   "qz2": [
+    "controlla"
+   ],
+   "fin": [
+    "missione"
+   ]
+  },
+  "st": "{\"g\":{\"Protocolli e linguaggi del web\":{\"ok\":0,\"tot\":1},\"I tag HTML\":{\"ok\":0,\"tot\":1},\"Che cosa succede quando digito un indirizzo\":{\"ok\":0,\"tot\":1},\"Come funziona un motore di ricerca\":{\"ok\":0,\"tot\":1},\"Le minacce informatiche\":{\"ok\":0,\"tot\":1},\"Quale minaccia?\":{\"ok\":0,\"tot\":1},\"Difendersi\":{\"ok\":0,\"tot\":1},\"La navigazione in incognito\":{\"ok\":0,\"tot\":1},\"POP, IMAP e SMTP\":{\"ok\":0,\"tot\":1},\"Cloud: SaaS, PaaS, IaaS\":{\"ok\":0,\"tot\":1},\"Vero o falso\":{\"ok\":0,\"tot\":1},\"Risposta multipla\":{\"ok\":0,\"tot\":1}},\"m\":{\"Sfida finale\":{\"pts\":0,\"t\":\"00:00\",\"count\":15}}}"
+ }
+}

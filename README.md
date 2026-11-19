@@ -62,7 +62,38 @@ assets/
 <corso>/<unità>/<attività>/index.html   l'attività
 informatica-1/computer-e-codici/temi/   codice di argomento (numeri, aritmetica, logica, immagini, informazione)
                                         condiviso tra le pagine dell'unità e Palestra dei numeri
+tests/                     controlli automatici (Playwright), non fanno parte del sito
+.github/workflows/         i controlli girano su GitHub a ogni push
 ```
+
+## Controlli automatici
+
+A ogni push su `main` (e a ogni pull request) GitHub Actions esegue i controlli in `tests/`; l'esito si vede
+nella scheda **Actions** del repository, con una spunta verde o una croce rossa accanto al commit.
+
+| Controllo | Cosa verifica |
+|---|---|
+| `link-rotti` | ogni link interno porta a un file esistente; catalogo, pagine di corso e unità, sitemap e icone sono allineati |
+| `qr` | il QR di ogni attività si legge e porta all'indirizzo giusto, anche aprendo i file dal disco |
+| `link-diretti` | ogni scheda si apre con `#id`, l'indirizzo segue la scheda, il tasto Indietro funziona |
+| `progressi` | si gioca davvero, si ricarica, i punteggi tornano; "Ricomincia da capo"; navigazione privata |
+| `migrazione` | i salvataggi nel formato vecchio si leggono ancora; i nomi con caratteri HTML non rompono la pagina |
+| `fotografia` | con il caso fissato, i giochi generano gli stessi esercizi e gli stessi testi di `tests/fotografia.json` |
+| `schermate` | tutte le pagine in tema scuro e chiaro, a 1280 e 390 px, senza errori in console |
+
+Tutti controllano anche che la console del browser resti senza errori. Le schermate si scaricano dall'esecuzione
+(artefatto **schermate**). Per lanciarli sul proprio computer serve Node.js:
+
+```bash
+cd tests
+npm ci
+npx playwright install chromium
+npm test              # tutti
+npm test -- qr        # solo uno
+```
+
+Se si cambiano apposta i testi o i giochi di Informatica 1, la `fotografia` lo segnala: si controlla che le
+differenze elencate siano quelle volute e si aggiorna il riferimento con `npm run fotografia:aggiorna`.
 
 ## Aggiungere un'attività
 
@@ -108,7 +139,8 @@ informatica-1/computer-e-codici/temi/   codice di argomento (numeri, aritmetica,
    ```
 5. Aggiungi una voce in `assets/catalogo.js` (con `icona`: il nome di un'icona di `ICONE`, o disegnane una nuova) e il nuovo indirizzo in `sitemap.xml`. Se il corso o l'unità sono nuovi, aggiungili in `CORSI`
    e `UNITA` e copia una pagina `index.html` di corso o di unità esistente, cambiando `data-corso` e `data-unita`.
-6. Commit e push: in un minuto è online.
+6. Commit e push: in un minuto è online. Nella scheda Actions si vede se i controlli sono passati; per una nuova
+   attività `tg-act` conviene aggiornare la fotografia (`npm run fotografia:aggiorna`), così entra nei controlli.
 
 ## Licenza
 

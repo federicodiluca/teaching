@@ -1,0 +1,15 @@
+{
+  "name": "teaching-controlli",
+  "private": true,
+  "description": "Controlli automatici del sito teaching (Playwright). Servono solo ai test: il sito non ha build.",
+  "license": "CC-BY-NC-SA-4.0",
+  "scripts": {
+    "test": "node esegui.js",
+    "fotografia:aggiorna": "node fotografia.js --aggiorna"
+  },
+  "devDependencies": {
+    "jsqr": "1.4.0",
+    "playwright": "1.49.1",
+    "pngjs": "7.0.0"
+  }
+}
