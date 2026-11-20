@@ -121,9 +121,13 @@
     var cerca = document.getElementById("tg-cerca");
     if (chips && !fC) {
       var usati = CORSI.filter(function (c) { return voci.some(function (a) { return a.percorso.indexOf(c.id + "/") === 0; }); });
+      /* più corsi con lo stesso nome (TPSIT 3, 4, 5): nel filtro si aggiunge l'anno */
+      var nomeChip = function (c) {
+        return usati.filter(function (x) { return x.nome === c.nome; }).length > 1 ? c.nome + " " + parseInt(c.anno, 10) : c.nome;
+      };
       chips.innerHTML = '<button class="tg-chip" aria-pressed="true" data-c="">Tutte</button>' +
         usati.map(function (c) {
-          return '<button class="tg-chip" aria-pressed="false" data-c="' + esc(c.id) + '" style="--c:' + esc(c.colore) + '"><i></i>' + esc(c.nome) + "</button>";
+          return '<button class="tg-chip" aria-pressed="false" data-c="' + esc(c.id) + '" style="--c:' + esc(c.colore) + '"><i></i>' + esc(nomeChip(c)) + "</button>";
         }).join("");
       chips.addEventListener("click", function (e) {
         var b = e.target.closest("button"); if (!b) return;

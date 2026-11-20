@@ -155,8 +155,9 @@ function paginaGiochi(a) {
 
 <!-- DA SCRIVERE: testi e sezioni. Gli id delle sezioni finiscono negli indirizzi (#g1): una volta pubblicati non si rinominano. -->
 <section id="inizio" data-g="Inizio" data-t="Inizio"><h2>${t}</h2>
-<p class="lead">${solo ? SOLI : COPPIA} Ogni gioco vi dice subito se avete sbagliato.</p>
+<p class="lead">${esc(a.descrizione)}</p>
 <ol><li><b>Smistamento</b> e <b>In ordine</b>: i giochi sull'argomento.</li><li><b>Quiz</b> e <b>Sfida finale</b>.</li></ol>
+<p>${solo ? SOLI : COPPIA} Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.</p>
 <div class="row">${nomi}</div></section>
 
 <section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>

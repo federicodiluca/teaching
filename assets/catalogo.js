@@ -5,7 +5,7 @@ window.CORSI = [
   { id: "informatica-1", nome: "Informatica", anno: "1° anno", colore: "#2f5bea", icona: "terminal" },
   { id: "tpsit-3", nome: "TPSIT", anno: "3° anno", colore: "#b45309", icona: "cpu" },
   { id: "tpsit-4", nome: "TPSIT", anno: "4° anno", colore: "#7c3aed", icona: "cpu" },
-  { id: "tpsit-5", nome: "TPSIT", anno: "5° anno", colore: "#c2410c", icona: "cpu" },
+  { id: "tpsit-5", nome: "TPSIT", anno: "5° anno", colore: "#be185d", icona: "cpu" },
   { id: "gpoi", nome: "GPOI", anno: "5° anno", colore: "#0f766e", icona: "building" }
 ];
 
