@@ -40,7 +40,11 @@ function decodePng(buf) {
 // raccoglie errori e avvisi della console e gli errori JavaScript della pagina
 function watch(page, errs, label) {
   page.on("console", m => { if (m.type() === "error" || m.type() === "warning") errs.push(label + " console." + m.type() + ": " + m.text()); });
-  page.on("pageerror", e => errs.push(label + " pageerror: " + e.message));
+  // con il punto del codice in cui è successo (prima riga utile dello stack, senza l'indirizzo del server)
+  page.on("pageerror", e => {
+    const dove = ((e.stack || "").split("\n")[1] || "").trim().replace(/https?:\/\/localhost:\d+\//, "");
+    errs.push(label + " pageerror: " + e.message + (dove ? " (" + dove + ")" : ""));
+  });
 }
 
 // stampa il riepilogo e fa fallire il processo se qualcosa non va
