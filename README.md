@@ -111,7 +111,7 @@ nella scheda **Actions** del repository, con una spunta verde o una croce rossa 
 | `link-rotti` | ogni link interno porta a un file esistente; catalogo, pagine di corso e unità, sitemap e icone sono allineati |
 | `qr` | il QR di ogni attività si legge e porta all'indirizzo giusto, anche aprendo i file dal disco |
 | `link-diretti` | ogni scheda si apre con `#id`, l'indirizzo segue la scheda, il tasto Indietro funziona |
-| `progressi` | si gioca davvero, si ricarica, i punteggi tornano; "Ricomincia da capo"; navigazione privata |
+| `progressi` | su tutte le attività con `giochi.js`: si gioca davvero, si ricarica, i punteggi tornano; "Ricomincia da capo"; navigazione privata |
 | `modalita` | `?solo` e `?coppie` cambiano nomi, frasi, turni e risultato; i pulsanti del QR cambiano il codice |
 | `migrazione` | i salvataggi nel formato vecchio si leggono ancora; i nomi con caratteri HTML non rompono la pagina |
 | `fotografia` | con il caso fissato, i giochi generano gli stessi esercizi e gli stessi testi di `tests/fotografia.json` |
@@ -183,6 +183,7 @@ Com'è fatta una pagina, per scriverla o sistemarla a mano:
    ```
    I giochi disponibili sono descritti in testa a `assets/giochi.js`: `mount` (esercizio con campi), `mountMenu`
    (allenatore con menu e livelli), `mission` (a tempo), `SG`/`sortGame`, `orderGame`, `memory`, `hunt`, `quiz`.
+   Nella `mission` vanno bene anche i generatori di `hunt`: diventano la scelta della riga sbagliata.
    Con `data-g="Gruppo"` sulle sezioni le schede si raggruppano in sottoschede. Gli `id` delle sezioni finiscono
    negli indirizzi dati alle classi (`#s1`): una volta pubblicati non vanno rinominati, e neanche le etichette dei
    giochi, che sono le chiavi dei progressi salvati. Accanto al CSS comune basta la riga

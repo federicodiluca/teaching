@@ -1,6 +1,6 @@
 // Progressi salvati nel browser: ripristino, contatori, "Ricomincia da capo", localStorage bloccato, 390 px.
-const { OUT, catalogo, server, watch, chromium, fine } = require("./comune");
-const path = require("path");
+const { REPO, OUT, catalogo, server, watch, chromium, fine } = require("./comune");
+const fs = require("fs"), path = require("path");
 
 // gioca nella sezione id: due "Controlla", uno smistamento completo, una missione intera
 async function gioca(page, id) {
@@ -39,7 +39,8 @@ const tabella = page => page.evaluate(() => { go("res"); return document.getElem
   const browser = await chromium.launch();
   const errs = [], fails = [];
   const ok = (c, m) => { if (!c) fails.push(m); };
-  const act = catalogo().filter(p => p.startsWith("informatica-1"));
+  // tutte le attività costruite con il motore comune dei giochi
+  const act = catalogo().filter(p => fs.readFileSync(path.join(REPO, p, "index.html"), "utf8").includes("assets/giochi.js"));
 
   for (const p of act) {
     const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });

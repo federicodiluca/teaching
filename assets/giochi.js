@@ -131,10 +131,13 @@ function mountMenu(el,items,label,levels){items.forEach(a=>perScheda(el,{tipo:'e
 
 /* ---------- missione a tempo ----------
    poolFns = generatori come per mount; se ne pescano count a caso. Vale il primo controllo. */
+/* nella sfida una domanda della caccia all'errore ({t, lines, bad, why}) diventa una scelta della riga */
+function comeEsercizio(h){if(!h.lines)return h;const r=h.lines.map((l,i)=>'Riga '+(i+1));
+ return {q:h.t+P(h.lines.map((l,i)=>(i+1)+'  '+escH(l)).join('\n')),fields:[{label:'Riga sbagliata',kind:'choice',opts:['',...r],exp:r[h.bad]}],sl:'Spiegazione',sol:'<p>'+r[h.bad]+': '+escH(h.why)+'</p>'}}
 function mission(el,poolFns,label,count=10){let T;MISSIONI.push(label);const nome='la '+label.charAt(0).toLowerCase()+label.slice(1);el.innerHTML=`<div class="row"><button class="btn" id="ms-s">Inizia ${nome}</button><span class="timer" id="ms-t"></span></div><div id="ms-x"></div>`;
  const tt=()=>{const s=Math.floor((Date.now()-T.t0)/1000);return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
  el.querySelector('#ms-s').onclick=()=>{T={t0:Date.now(),n:0,pts:0,qs:shuffle(poolFns).slice(0,count)};delete ST.m[label];el.querySelector('#ms-s').disabled=true;clearInterval(T.iv);T.iv=setInterval(()=>el.querySelector('#ms-t').textContent=tt(),500);Q()};
- function Q(){const ex=T.qs[T.n]();DBG.cur=ex;const x=el.querySelector('#ms-x');
+ function Q(){const ex=comeEsercizio(T.qs[T.n]());DBG.cur=ex;const x=el.querySelector('#ms-x');
   x.innerHTML=`<div class="card">${turn()}<div class="stat">Domanda ${T.n+1} di ${count} · punti: ${T.pts}</div><p class="q">${ex.q}</p>${fieldsHTML(ex)}<div class="row"><button class="btn" id="c">Controlla</button><button class="btn sec" id="n" style="display:none">Avanti</button><span class="msg" id="m"></span></div><div class="sol" id="sl" style="display:none"></div></div>`;
   x.querySelector('#c').onclick=()=>{const ins=[...x.querySelectorAll('.f input,.f select')];let all=true;ex.fields.forEach((f,i)=>{const ok=checkField(f,ins[i].value);ins[i].classList.add(ok?'ok':'ko');if(!ok)all=false;ins[i].disabled=true});
    if(all)T.pts++;const m=x.querySelector('#m');m.textContent=all?'Esatto! +1':`Sbagliato. ${ex.sl||'Procedimento'} sotto.`;m.style.color=all?'var(--ok)':'var(--ko)';
