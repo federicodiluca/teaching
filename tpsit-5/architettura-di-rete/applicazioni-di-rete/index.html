@@ -1,0 +1,263 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Applicazioni di rete</title><meta name="description" content="Client-server e peer-to-peer, requisiti delle applicazioni, app mobile native, web e ibride, monolite e microservizi."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>Applicazioni di rete</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Applicazioni di rete</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso delle applicazioni di rete: come sono organizzate, di che cosa hanno bisogno e quali tipi di app esistono.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">Client-server o peer-to-peer? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine i passi di uno scambio in un P2P centralizzato. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "Il server ha un IP statico ed è sempre acceso",
+   "cs"
+  ],
+  [
+   "Server farm dietro un load balancer",
+   "cs"
+  ],
+  [
+   "Navigazione web",
+   "cs"
+  ],
+  [
+   "Posta elettronica",
+   "cs"
+  ],
+  [
+   "Ogni nodo dà e riceve risorse",
+   "p2p"
+  ],
+  [
+   "Supernodi che indicizzano i peer foglia",
+   "p2p"
+  ],
+  [
+   "BitTorrent",
+   "p2p"
+  ],
+  [
+   "Più utenti, più capacità del sistema",
+   "p2p"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "cs",
+   "t": "Client-server",
+   "s": ""
+  },
+  {
+   "id": "p2p",
+   "t": "Peer-to-peer",
+   "s": ""
+  }
+ ],
+ "VF": [
+  [
+   "Il server di un'architettura client-server deve avere un indirizzo IP statico.",
+   true,
+   "Deve essere sempre raggiungibile dai client."
+  ],
+  [
+   "Nel peer-to-peer ogni nodo fornisce risorse e ne ottiene altre in cambio.",
+   true,
+   "Il principio è dare e ricevere."
+  ],
+  [
+   "Nel P2P centralizzato i file passano attraverso il directory server.",
+   false,
+   "Il server tiene solo l'indice; i file passano direttamente fra i peer."
+  ],
+  [
+   "Le applicazioni mobile sono una sottocategoria delle applicazioni web.",
+   true,
+   "Usano la rete e spesso gli stessi servizi lato server."
+  ],
+  [
+   "Le app native Android si sviluppano tipicamente in Java o Kotlin.",
+   true,
+   "Per iOS si usa Swift."
+  ],
+  [
+   "Con i microservizi si può scalare solo il servizio sotto carico.",
+   true,
+   "È la scalabilità granulare."
+  ],
+  [
+   "TCP garantisce una banda minima e tempi di risposta fissi.",
+   false,
+   "Garantisce consegna corretta e ordinata, non banda né tempi."
+  ],
+  [
+   "Ogni applicazione di rete è composta da user agent e implementazione dei protocolli.",
+   true,
+   "Per esempio il browser (user agent) e HTTP."
+  ]
+ ],
+ "MC": [
+  [
+   "Che cos'è una server farm?",
+   [
+    "Più server con un unico nome dietro un load balancer",
+    "Un server molto vecchio",
+    "Un PC domestico",
+    "Una rete P2P"
+   ],
+   "Più server con un unico nome dietro un load balancer",
+   "Il carico viene distribuito fra le macchine."
+  ],
+  [
+   "Che cosa fa il directory server nel P2P centralizzato?",
+   [
+    "Mantiene l'indice delle risorse e dei peer che le possiedono",
+    "Trasferisce i file",
+    "Cifra i dati",
+    "Assegna gli indirizzi IP"
+   ],
+   "Mantiene l'indice delle risorse e dei peer che le possiedono",
+   "È il punto debole: se cade, il sistema si ferma."
+  ],
+  [
+   "Che cosa sono i supernodi nel P2P ibrido?",
+   [
+    "Peer eletti che indicizzano i peer foglia vicini",
+    "Server centrali fissi",
+    "Router della rete",
+    "Peer senza file"
+   ],
+   "Peer eletti che indicizzano i peer foglia vicini",
+   "Riducono il carico senza un unico server centrale."
+  ],
+  [
+   "Che cosa caratterizza un'app web mobile?",
+   [
+    "È un sito ottimizzato per schermi piccoli, senza installazione",
+    "Si scarica solo dallo store",
+    "Funziona solo offline",
+    "È scritta in Kotlin"
+   ],
+   "È un sito ottimizzato per schermi piccoli, senza installazione",
+   "Si apre nel browser."
+  ],
+  [
+   "Perché la posta elettronica usa TCP?",
+   [
+    "Perché i dati devono arrivare tutti e corretti",
+    "Perché è più veloce",
+    "Perché usa il multicast",
+    "Perché non ha server"
+   ],
+   "Perché i dati devono arrivare tutti e corretti",
+   "Una mail a metà non serve."
+  ],
+  [
+   "Quale vantaggio offrono i microservizi?",
+   [
+    "Si scala e si aggiorna ogni servizio separatamente",
+    "Hanno un unico database",
+    "Non usano la rete",
+    "Sono un solo programma"
+   ],
+   "Si scala e si aggiorna ogni servizio separatamente",
+   "Squadre diverse possono lavorare in parallelo."
+  ],
+  [
+   "Quale livello del modello ISO/OSI fa da interfaccia con i programmi utente?",
+   [
+    "Il livello 7, Applicazione",
+    "Il livello 4, Trasporto",
+    "Il livello 3, Rete",
+    "Il livello 1, Fisico"
+   ],
+   "Il livello 7, Applicazione",
+   "È quello di HTTP, SMTP, DNS."
+  ],
+  [
+   "Che cosa fa il server con l'operazione di bind?",
+   [
+    "Si registra su una porta e resta in ascolto",
+    "Chiude la connessione",
+    "Invia i dati",
+    "Cerca un indirizzo IP"
+   ],
+   "Si registra su una porta e resta in ascolto",
+   "Dopo bind il servizio è raggiungibile su quella porta."
+  ]
+ ],
+ "ORD": [
+  [
+   "Il peer si collega al directory server",
+   "Comunica quali file condivide."
+  ],
+  [
+   "Il peer chiede chi possiede un file",
+   "Al directory server."
+  ],
+  [
+   "Il directory server risponde con l'elenco dei peer",
+   "Usa il suo indice."
+  ],
+  [
+   "Il peer contatta direttamente un altro peer",
+   "Il server non partecipa più."
+  ],
+  [
+   "Il file viene trasferito fra i due peer",
+   "Da pari a pari."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "App mobile: una riga è sbagliata.",
+   "lines": [
+    "Nativa: scritta per una piattaforma, per esempio in Kotlin",
+    "Web app: sito ottimizzato, senza installazione",
+    "Ibrida: tecnologie web dentro un contenitore nativo",
+    "Web app: va installata dallo store e funziona solo su Android"
+   ],
+   "bad": 3,
+   "why": "Una web app si apre nel browser su qualsiasi sistema, senza installazione."
+  },
+  {
+   "t": "Requisiti delle applicazioni: una riga è sbagliata.",
+   "lines": [
+    "Trasferimento file: nessuna perdita di dati",
+    "Posta elettronica: TCP",
+    "Videochiamata: bassi ritardi, tollera piccole perdite",
+    "Posta elettronica: richiede tempi di consegna rigidissimi"
+   ],
+   "bad": 3,
+   "why": "La posta può arrivare con qualche secondo di ritardo; conta che arrivi completa e corretta."
+  },
+  {
+   "t": "Monolite e microservizi: una riga è sbagliata.",
+   "lines": [
+    "Monolite: un'unica entità con un unico database",
+    "Microservizi: si scala solo il servizio sotto carico",
+    "Microservizi: ogni servizio si può aggiornare da solo",
+    "Monolite: un guasto in una parte non tocca mai le altre"
+   ],
+   "bad": 3,
+   "why": "Nel monolite tutto gira insieme: un guasto può fermare l'intera applicazione."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>

@@ -1,0 +1,724 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Il progetto: fasi e obiettivi</title><meta name="description" content="Che cos&#x27;è un progetto, storia del project management, fasi del ciclo di vita, anticipazione dei vincoli, obiettivi SMART, benefici delle tecnologie informatiche."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head><body class="tg-act" data-solo="1"><header><h1>Il progetto: fasi e obiettivi</h1></header><nav id="nav"></nav><main>
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Il progetto: fasi e obiettivi</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.</p>
+<ol><li><b>Il progetto:</b> che cos'è, perché ci si organizza per progetti, la storia del project management.</li><li><b>Fasi:</b> le quattro fasi generali e le cinque del PMBOK.</li><li><b>Anticipazione dei vincoli:</b> che cosa succede se i vincoli arrivano tardi e come anticiparli.</li><li><b>Obiettivi:</b> di continuità e specifici, obiettivi SMART.</li><li><b>Benefici:</b> tangibili e intangibili delle tecnologie informatiche.</li><li><b>Quiz</b> e <b>Sfida finale</b>.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+<section id="p1" data-g="Il progetto" data-t="1 È un progetto?"><h2>Progetto o attività di routine?</h2><p class="lead">Un progetto è temporaneo e porta a un output unico. Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_p1"></div></section>
+<section id="p2" data-g="Il progetto" data-t="2 Perché per progetti?"><h2>Perché ci si organizza per progetti</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_p2"></div></section>
+<section id="p3" data-g="Il progetto" data-t="3 Storia"><h2>Breve storia del project management</h2><p class="lead">Mettete in ordine le tappe, dalla più antica alla più recente. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».</p><div id="x_p3"></div></section>
+<section id="f1" data-g="Fasi" data-t="1 Le quattro fasi"><h2>Le quattro fasi del progetto</h2><p class="lead">Mettete in ordine le fasi del ciclo di vita del progetto. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».</p><div id="x_f1"></div></section>
+<section id="f2" data-g="Fasi" data-t="2 In quale fase?"><h2>In quale fase siamo?</h2><p class="lead">Le fasi sono le cinque del PMBOK. Fate clic su un&#x27;attività e poi sulla fase giusta.</p><div id="x_f2"></div></section>
+<section id="a1" data-g="Anticipazione dei vincoli" data-t="1 Vincoli inattesi"><h2>Che cosa succede se un vincolo arriva tardi</h2><p class="lead">Fate clic su una situazione e poi sull&#x27;inconveniente giusto.</p><div id="x_a1"></div></section>
+<section id="a2" data-g="Anticipazione dei vincoli" data-t="2 Come anticipare"><h2>I tre criteri per anticipare i vincoli</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_a2"></div></section>
+<section id="o1" data-g="Obiettivi" data-t="1 Continuità o specifici"><h2>Obiettivi di continuità e obiettivi specifici</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_o1"></div></section>
+<section id="o2" data-g="Obiettivi" data-t="2 SMART"><h2>Obiettivi SMART</h2><p class="lead">Abbinate ogni lettera al suo significato. Girate due tessere alla volta.</p><div id="x_o2"></div></section>
+<section id="o3" data-g="Obiettivi" data-t="3 Che cosa manca?"><h2>Che cosa manca a questo obiettivo?</h2><p class="lead">Leggete l&#x27;obiettivo e scegliete quale caratteristica SMART gli manca di più.</p><div id="x_o3"></div></section>
+<section id="b1" data-g="Benefici" data-t="1 Tangibili o intangibili"><h2>Benefici tangibili e intangibili</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_b1"></div></section>
+<section id="b2" data-g="Benefici" data-t="2 Che beneficio è?"><h2>Che beneficio intangibile è?</h2><p class="lead">Leggete l&#x27;esempio e scegliete il tipo di beneficio intangibile.</p><div id="x_b2"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Quindici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+const D = {
+ "p1": [
+  [
+   "Costruire un ponte",
+   "p"
+  ],
+  [
+   "Introdurre un nuovo sistema informativo",
+   "p"
+  ],
+  [
+   "Una campagna pubblicitaria",
+   "p"
+  ],
+  [
+   "Organizzare un trasloco",
+   "p"
+  ],
+  [
+   "Preparare un matrimonio",
+   "p"
+  ],
+  [
+   "Studiare per un esame",
+   "p"
+  ],
+  [
+   "Pagare gli stipendi ogni mese",
+   "r"
+  ],
+  [
+   "Il turno quotidiano alla cassa del supermercato",
+   "r"
+  ],
+  [
+   "La produzione in serie della stessa auto",
+   "r"
+  ],
+  [
+   "Rispondere ogni giorno alle email dei clienti",
+   "r"
+  ]
+ ],
+ "p1_BK": [
+  {
+   "id": "p",
+   "t": "Progetto",
+   "s": "Ha un inizio e una fine"
+  },
+  {
+   "id": "r",
+   "t": "Attività di routine",
+   "s": "Si ripete sempre uguale"
+  }
+ ],
+ "p2": [
+  [
+   "Un'azienda di arredamento realizza cucine su misura per ogni cliente",
+   "c"
+  ],
+  [
+   "Le soluzioni su misura avvicinano la produzione alla logica del progetto",
+   "c"
+  ],
+  [
+   "Un'indagine di mercato",
+   "u"
+  ],
+  [
+   "Partecipare a una fiera",
+   "u"
+  ],
+  [
+   "Aprire una filiale all'estero",
+   "u"
+  ],
+  [
+   "Introdurre la movimentazione automatica in magazzino",
+   "i"
+  ],
+  [
+   "Ristrutturare il sistema informativo",
+   "i"
+  ],
+  [
+   "Un salto rispetto al modo abituale di lavorare",
+   "i"
+  ]
+ ],
+ "p2_BK": [
+  {
+   "id": "c",
+   "t": "Attività su commessa",
+   "s": ""
+  },
+  {
+   "id": "u",
+   "t": "Problemi «una tantum»",
+   "s": ""
+  },
+  {
+   "id": "i",
+   "t": "Strumento di innovazione",
+   "s": ""
+  }
+ ],
+ "p3": [
+  [
+   "Diagramma di Gantt",
+   "Henry Gantt lo usa per la costruzione navale.",
+   "primi del Novecento"
+  ],
+  [
+   "CPM e PERT",
+   "Du Pont per la manutenzione degli impianti, Rand Corporation per i missili.",
+   "anni '50-'60"
+  ],
+  [
+   "IPMA",
+   "Nasce l'International Project Management Association.",
+   "1967"
+  ],
+  [
+   "PMI",
+   "Viene fondato il Project Management Institute.",
+   "1969"
+  ],
+  [
+   "Costo, tempo e qualità",
+   "Si studia come bilanciare le tre prestazioni.",
+   "anni '80"
+  ],
+  [
+   "Qualità totale",
+   "Il Total Quality Management entra nella gestione dei progetti.",
+   "anni '90"
+  ]
+ ],
+ "f1": [
+  [
+   "Concezione",
+   "Nasce l'idea: si valuta fattibilità e convenienza e si decide se partire."
+  ],
+  [
+   "Definizione",
+   "Si pianifica: attività, organizzazione, tempi e costi."
+  ],
+  [
+   "Realizzazione",
+   "Si produce l'output: la fase più lunga e che usa più risorse."
+  ],
+  [
+   "Chiusura",
+   "Si rilascia l'output e si passano le consegne a chi lo gestirà."
+  ]
+ ],
+ "f2": [
+  [
+   "Si valuta se l'intervento conviene davvero",
+   "con"
+  ],
+  [
+   "Arriva una richiesta del cliente o si vede un'opportunità",
+   "con"
+  ],
+  [
+   "Si sceglie a chi affidare ogni attività",
+   "def"
+  ],
+  [
+   "Si scrive il programma di lavoro con tempi e costi",
+   "def"
+  ],
+  [
+   "Si consuma la parte più grande del budget",
+   "rea"
+  ],
+  [
+   "Si costruisce concretamente l'output",
+   "rea"
+  ],
+  [
+   "Si misura l'avanzamento e si cercano gli scostamenti dal piano",
+   "mon"
+  ],
+  [
+   "Si passano le consegne a chi gestirà l'output a regime",
+   "chi"
+  ],
+  [
+   "Si verifica quanto gli obiettivi sono stati raggiunti",
+   "chi"
+  ]
+ ],
+ "f2_BK": [
+  {
+   "id": "con",
+   "t": "Concezione",
+   "s": ""
+  },
+  {
+   "id": "def",
+   "t": "Definizione",
+   "s": ""
+  },
+  {
+   "id": "rea",
+   "t": "Realizzazione",
+   "s": ""
+  },
+  {
+   "id": "mon",
+   "t": "Monitoraggio e controllo",
+   "s": ""
+  },
+  {
+   "id": "chi",
+   "t": "Chiusura",
+   "s": ""
+  }
+ ],
+ "a1": [
+  [
+   "Il sito è quasi finito, ma si scopre che non rispetta la legge sulla privacy: si torna alla progettazione",
+   "ric"
+  ],
+  [
+   "Si rifà da capo il disegno del prodotto",
+   "ric"
+  ],
+  [
+   "Si va avanti lo stesso e i problemi si risolveranno in collaudo",
+   "fin"
+  ],
+  [
+   "Il progetto si allunga e i costi crescono alla fine",
+   "fin"
+  ],
+  [
+   "Correggere costa troppo: si consegna un'app con meno funzioni del previsto",
+   "qua"
+  ],
+  [
+   "L'output esce già vecchio",
+   "qua"
+  ]
+ ],
+ "a1_BK": [
+  {
+   "id": "ric",
+   "t": "Ricicli",
+   "s": ""
+  },
+  {
+   "id": "fin",
+   "t": "Problemi scaricati sulle fasi finali",
+   "s": ""
+  },
+  {
+   "id": "qua",
+   "t": "Degrado della qualità",
+   "s": ""
+  }
+ ],
+ "a2": [
+  [
+   "Coinvolgere fin dall'inizio gli stakeholder che conoscono i vincoli",
+   "team"
+  ],
+  [
+   "Il gruppo è una collettività di soluzioni, non una somma di decisori",
+   "team"
+  ],
+  [
+   "I «creativi» diventano più concreti, gli «operativi» più creativi",
+   "team"
+  ],
+  [
+   "Chiamare chi ha già seguito progetti simili",
+   "esp"
+  ],
+  [
+   "Persone sia specialiste sia sistemiste",
+   "esp"
+  ],
+  [
+   "Usare criteri precisi per definire gli obiettivi",
+   "met"
+  ],
+  [
+   "Usare tecniche e strumenti per il piano di progetto",
+   "met"
+  ]
+ ],
+ "a2_BK": [
+  {
+   "id": "team",
+   "t": "Lavorare in team",
+   "s": ""
+  },
+  {
+   "id": "esp",
+   "t": "Coinvolgere persone di esperienza",
+   "s": ""
+  },
+  {
+   "id": "met",
+   "t": "Agire con metodo",
+   "s": ""
+  }
+ ],
+ "o1": [
+  [
+   "Aumentare il fatturato aprendo un ufficio all'estero",
+   "c"
+  ],
+  [
+   "Le motivazioni per cui l'azienda attiva il progetto",
+   "c"
+  ],
+  [
+   "L'«eredità» del progetto nel medio-lungo periodo",
+   "c"
+  ],
+  [
+   "Li presidia l'imprenditore",
+   "c"
+  ],
+  [
+   "Consegnare entro il 30 giugno",
+   "s"
+  ],
+  [
+   "Non superare un budget di 80.000 €",
+   "s"
+  ],
+  [
+   "Le specifiche di qualità dell'output",
+   "s"
+  ],
+  [
+   "Li gestisce il responsabile di progetto",
+   "s"
+  ],
+  [
+   "Vivono solo per la durata del progetto",
+   "s"
+  ]
+ ],
+ "o1_BK": [
+  {
+   "id": "c",
+   "t": "Di continuità",
+   "s": "Strategici"
+  },
+  {
+   "id": "s",
+   "t": "Specifici",
+   "s": "Qualità, tempo, costo"
+  }
+ ],
+ "o2": [
+  [
+   "S - Specifici",
+   "Definiti e chiaramente espressi"
+  ],
+  [
+   "M - Misurabili",
+   "C'è un indicatore per capire se sono raggiunti"
+  ],
+  [
+   "A - Accordati",
+   "Concordati con le parti in causa"
+  ],
+  [
+   "R - Realistici",
+   "Raggiungibili dentro i vincoli"
+  ],
+  [
+   "T - Temporalmente definiti",
+   "Hanno una scadenza"
+  ]
+ ],
+ "o3": [
+  [
+   "«Migliorare un po' il sito della scuola.»",
+   "Specifico",
+   "non dice che cosa migliorare: è vago"
+  ],
+  [
+   "«Rendere i clienti più contenti.»",
+   "Misurabile",
+   "non c'è un indicatore per capire se ci si è riusciti"
+  ],
+  [
+   "«Il PM decide da solo che il gestionale avrà la chat interna, senza sentire il cliente.»",
+   "Accordato",
+   "non è stato concordato con le parti in causa"
+  ],
+  [
+   "«Sviluppare un social network come Instagram in due settimane con due studenti.»",
+   "Realistico",
+   "non è raggiungibile con il tempo e le risorse a disposizione"
+  ],
+  [
+   "«Mettere online il sito dell'evento.» (senza indicare quando)",
+   "Temporalmente definito",
+   "manca la scadenza, e il sito deve uscire prima dell'evento"
+  ],
+  [
+   "«Ridurre del 20% i tempi di risposta del servizio clienti.» (senza dire entro quando)",
+   "Temporalmente definito",
+   "è specifico e misurabile, ma non ha una scadenza"
+  ]
+ ],
+ "o3_OPTS": [
+  "Specifico",
+  "Misurabile",
+  "Accordato",
+  "Realistico",
+  "Temporalmente definito"
+ ],
+ "b1": [
+  [
+   "Il correttore ortografico elimina gli errori di battitura",
+   "t"
+  ],
+  [
+   "Meno passaggi di informazioni da un foglio all'altro",
+   "t"
+  ],
+  [
+   "Si automatizza un lavoro prima manuale",
+   "t"
+  ],
+  [
+   "Economie di velocità",
+   "t"
+  ],
+  [
+   "L'internet banking porta nuovi clienti",
+   "i"
+  ],
+  [
+   "La prenotazione online migliora la posizione della compagnia aerea",
+   "i"
+  ],
+  [
+   "Il disaster recovery riduce i rischi per i clienti della banca",
+   "i"
+  ],
+  [
+   "Previsioni più accurate per il marketing",
+   "i"
+  ]
+ ],
+ "b1_BK": [
+  {
+   "id": "t",
+   "t": "Tangibili",
+   "s": "Risparmio di tempo"
+  },
+  {
+   "id": "i",
+   "t": "Intangibili",
+   "s": "Impatto organizzativo"
+  }
+ ],
+ "b2": [
+  [
+   "Decisioni più veloci abbassano il costo unitario di produzione.",
+   "Riduzione dei costi",
+   "a parità di output costa meno"
+  ],
+  [
+   "Uno strumento di lavoro di gruppo rende inutili molte verifiche di avanzamento.",
+   "Spostamento dei costi",
+   "si eliminano alcune attività"
+  ],
+  [
+   "La distinta base su computer costa uguale con 100 o con 10.000 codici.",
+   "Costi evitati",
+   "non servono costi in più quando i volumi crescono"
+  ],
+  [
+   "Il sistema di marketing prevede meglio le vendite.",
+   "Miglioramento delle prestazioni",
+   "migliora la capacità previsionale"
+  ],
+  [
+   "L'internet banking attira nuovi clienti.",
+   "Maggiori ricavi",
+   "nuova clientela grazie all'informatizzazione"
+  ],
+  [
+   "La prenotazione online fa preferire una compagnia aerea alle altre.",
+   "Vantaggi competitivi",
+   "migliora la posizione rispetto ai concorrenti"
+  ],
+  [
+   "Il disaster recovery protegge i dati dei correntisti.",
+   "Riduzione del rischio",
+   "diminuiscono i rischi per i clienti"
+  ],
+  [
+   "Senza adeguarsi agli standard di Internet l'azienda non potrebbe più lavorare con gli altri.",
+   "Sopravvivenza competitiva",
+   "è una necessità per restare sul mercato"
+  ]
+ ],
+ "b2_OPTS": [
+  "Riduzione dei costi",
+  "Spostamento dei costi",
+  "Costi evitati",
+  "Miglioramento delle prestazioni",
+  "Maggiori ricavi",
+  "Vantaggi competitivi",
+  "Riduzione del rischio",
+  "Sopravvivenza competitiva"
+ ],
+ "VF": [
+  [
+   "Un progetto è un'attività temporanea, con un inizio e una fine.",
+   true,
+   "Si chiude quando si raggiunge l'obiettivo, scade il tempo, finiscono i soldi o si scioglie l'organizzazione."
+  ],
+  [
+   "Il diagramma a barre per i progetti fu ideato da Henry Gantt.",
+   true,
+   "Nei primi del Novecento, per la costruzione navale."
+  ],
+  [
+   "Il PERT fu ideato da Du Pont per la manutenzione degli impianti.",
+   false,
+   "Du Pont ideò il CPM; il PERT è della Rand Corporation, per i missili."
+  ],
+  [
+   "Il PMBOK è lo standard internazionale delle pratiche di project management.",
+   true,
+   "Ed è aggiornato periodicamente."
+  ],
+  [
+   "La realizzazione è la fase più importante perché è la più lunga e costosa.",
+   false,
+   "Le più importanti sono concezione e definizione: lì si decide come verranno usati tempo e risorse."
+  ],
+  [
+   "Il PMBOK aggiunge alle quattro fasi generali il monitoraggio e controllo.",
+   true,
+   "Verifica l'avanzamento e gli scostamenti dal piano."
+  ],
+  [
+   "Più tardi emerge un vincolo, più costa intervenire.",
+   true,
+   "Per questo i vincoli vanno anticipati il più possibile."
+  ],
+  [
+   "Una partenza frettolosa accorcia sempre la durata del progetto.",
+   false,
+   "Sembra più veloce, ma i problemi non previsti allungano i tempi complessivi."
+  ],
+  [
+   "Gli obiettivi specifici riguardano qualità, tempo e costo.",
+   true,
+   "Sono misurabili e vivono solo per la durata del progetto."
+  ],
+  [
+   "Gli obiettivi di continuità li gestisce il responsabile di progetto.",
+   false,
+   "Li presidia l'imprenditore; il responsabile di progetto gestisce quelli specifici."
+  ],
+  [
+   "Nella sigla SMART la A sta per «Accordati».",
+   true,
+   "Concordati con le parti in causa."
+  ],
+  [
+   "I benefici tangibili delle tecnologie informatiche riguardano soprattutto il risparmio di tempo.",
+   true,
+   "Grazie all'automazione e all'eliminazione delle attività parassite."
+  ]
+ ],
+ "MC": [
+  [
+   "Da che cosa deriva la parola «progetto»?",
+   [
+    "Dal latino «gettato avanti»",
+    "Dal greco «costruire»",
+    "Dall'inglese «project»"
+   ],
+   "Dal latino «gettato avanti»",
+   "Pro (avanti) e jactus (gettato)."
+  ],
+  [
+   "Quali sono i quattro elementi costituenti di un progetto?",
+   [
+    "Obiettivo, limitazioni, specificità, organizzazione",
+    "Tempo, costo, qualità, cliente",
+    "Concezione, definizione, realizzazione, chiusura"
+   ],
+   "Obiettivo, limitazioni, specificità, organizzazione",
+   "Le fasi sono un'altra cosa."
+  ],
+  [
+   "Quando nasce il PMI?",
+   [
+    "1969",
+    "1967",
+    "1990"
+   ],
+   "1969",
+   "Nel 1967 nasce l'IPMA."
+  ],
+  [
+   "In quale fase si decide se attivare il progetto?",
+   [
+    "Concezione",
+    "Definizione",
+    "Chiusura"
+   ],
+   "Concezione",
+   "Si valutano fattibilità e convenienza."
+  ],
+  [
+   "Nei progetti dei sistemi informatici che fase si aggiunge di solito?",
+   [
+    "Testing e debugging",
+    "Monitoraggio",
+    "Marketing"
+   ],
+   "Testing e debugging",
+   "Nelle TLC invece il monitoraggio è integrato nella realizzazione."
+  ],
+  [
+   "Nei progetti quali interdipendenze prevalgono?",
+   [
+    "Reciproche",
+    "Sequenziali",
+    "Generiche"
+   ],
+   "Reciproche",
+   "Le fasi si scambiano informazioni nei due sensi."
+  ],
+  [
+   "Che cosa dice il principio dell'anticipazione dei vincoli?",
+   [
+    "Esaminare il prima possibile vincoli e opportunità",
+    "Iniziare subito a realizzare per raccogliere informazioni",
+    "Rimandare i problemi alle fasi finali"
+   ],
+   "Esaminare il prima possibile vincoli e opportunità",
+   "Partenza più lenta, realizzazione più rapida."
+  ],
+  [
+   "Chi deve far parte del team di impostazione?",
+   [
+    "Persone sia specialiste sia sistemiste",
+    "Solo gli specialisti più bravi",
+    "Solo il project manager"
+   ],
+   "Persone sia specialiste sia sistemiste",
+   "Conoscono la propria area e vedono l'impatto sulle altre."
+  ],
+  [
+   "Perché gli obiettivi specifici facilitano la delega?",
+   [
+    "Delineano aree di competenza e responsabilità",
+    "Riducono il budget",
+    "Eliminano i conflitti"
+   ],
+   "Delineano aree di competenza e responsabilità",
+   "È una delle tre ragioni della loro importanza."
+  ],
+  [
+   "Che cosa sono le attività parassite?",
+   [
+    "Consumi di tempo non previsti, come un numero sbagliato",
+    "Attività di supporto",
+    "Attività svolte dal cliente"
+   ],
+   "Consumi di tempo non previsti, come un numero sbagliato",
+   "L'informatica le riduce, per esempio con il correttore ortografico."
+  ]
+ ]
+};
+
+SG('#x_p1', D['p1'], D['p1_BK'], "\u00c8 un progetto?");
+SG('#x_p2', D['p2'], D['p2_BK'], "Perch\u00e9 per progetti");
+orderGame($('#x_p3'), asOrder(D['p3']), "Storia del project management", false);
+orderGame($('#x_f1'), asOrder(D['f1']), "Le quattro fasi", false);
+SG('#x_f2', D['f2'], D['f2_BK'], "In quale fase");
+SG('#x_a1', D['a1'], D['a1_BK'], "Vincoli inattesi");
+SG('#x_a2', D['a2'], D['a2_BK'], "Come anticipare");
+SG('#x_o1', D['o1'], D['o1_BK'], "Continuit\u00e0 o specifici");
+memory($('#x_o2'), () => D['o2'].flatMap((x, i) => [[i, x[0]], [i, x[1]]]), "Obiettivi SMART");
+const g_o3 = scGen(D['o3'], D['o3_OPTS'], "Che cosa manca?", "Caratteristica"); mount($('#x_o3'), g_o3, "Obiettivo non SMART");
+SG('#x_b1', D['b1'], D['b1_BK'], "Tangibili o intangibili");
+const g_b2 = scGen(D['b2'], D['b2_OPTS'], "Che beneficio \u00e8?", "Beneficio"); mount($('#x_b2'), g_b2, "Benefici intangibili");
+quiz();
+const SFIDA = [...mcAll(), ...vfAll(), g_o3, g_o3, g_b2, g_b2];
+mission($('#tot'), SFIDA, 'Sfida finale', 15);
+</script></body></html>

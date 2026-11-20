@@ -1,0 +1,307 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Il formato YAML</title><meta name="description" content="Coppie chiave-valore, indentazione, sequenze, blocchi di testo e il confronto con JSON, con i file di configurazione DevOps."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>Il formato YAML</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Il formato YAML</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso di YAML: a che cosa serve, come si scrivono mappe e sequenze, perché l'indentazione è importante e come si traduce in JSON.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">Questo valore YAML che tipo è? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine le righe di questo file YAML per una pipeline. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "nome: Ada",
+   "str"
+  ],
+  [
+   "citta: \"Pesaro\"",
+   "str"
+  ],
+  [
+   "anni: 17",
+   "num"
+  ],
+  [
+   "prezzo: 2.50",
+   "num"
+  ],
+  [
+   "attivo: true",
+   "bool"
+  ],
+  [
+   "promosso: false",
+   "bool"
+  ],
+  [
+   "nota: null",
+   "null"
+  ],
+  [
+   "nota: ~",
+   "null"
+  ],
+  [
+   "- rosso",
+   "seq"
+  ],
+  [
+   "colori: [rosso, verde]",
+   "seq"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "str",
+   "t": "Stringa",
+   "s": ""
+  },
+  {
+   "id": "num",
+   "t": "Numero",
+   "s": ""
+  },
+  {
+   "id": "bool",
+   "t": "Booleano",
+   "s": ""
+  },
+  {
+   "id": "null",
+   "t": "Valore nullo",
+   "s": ""
+  },
+  {
+   "id": "seq",
+   "t": "Sequenza (elenco)",
+   "s": ""
+  }
+ ],
+ "VF": [
+  [
+   "YAML è un linguaggio di serializzazione per archiviare e scambiare dati.",
+   true,
+   "Oggi si usa soprattutto per i file di configurazione."
+  ],
+  [
+   "In YAML l'indentazione si può fare indifferentemente con spazi o tabulazioni.",
+   false,
+   "Solo spazi: le tabulazioni non sono ammesse."
+  ],
+  [
+   "Un file YAML può contenere commenti, che iniziano con #.",
+   true,
+   "È uno dei vantaggi rispetto a JSON."
+  ],
+  [
+   "Ogni documento JSON valido è anche YAML valido.",
+   true,
+   "YAML (dalla versione 1.2) è un superinsieme di JSON."
+  ],
+  [
+   "Più documenti YAML nello stesso file si separano con tre trattini.",
+   true,
+   "La riga --- segna l'inizio di un nuovo documento."
+  ],
+  [
+   "Nella coppia chiave-valore lo spazio dopo i due punti è facoltativo.",
+   false,
+   "È obbligatorio: chiave: valore."
+  ],
+  [
+   "Il blocco con la barra verticale <code>|<\/code> mantiene gli a capo del testo.",
+   true,
+   "Con &gt; (folded) invece le righe vengono unite in una."
+  ],
+  [
+   "YAML significa «Yet Another Markup Language» anche oggi.",
+   false,
+   "Oggi è l'acronimo ricorsivo «YAML Ain't Markup Language», per sottolineare che non è un linguaggio di markup."
+  ]
+ ],
+ "MC": [
+  [
+   "Su che cosa si basa la sintassi di YAML?",
+   [
+    "Sull'indentazione con spazi, come Python",
+    "Sulle parentesi graffe, come JSON",
+    "Sui tag, come XML",
+    "Sui punti e virgola, come Java"
+   ],
+   "Sull'indentazione con spazi, come Python",
+   "Il livello di indentazione indica la struttura."
+  ],
+  [
+   "Per che cosa si usa soprattutto YAML?",
+   [
+    "File di configurazione, per esempio pipeline CI/CD e Docker Compose",
+    "Pagine web",
+    "Database relazionali",
+    "Fogli di calcolo"
+   ],
+   "File di configurazione, per esempio pipeline CI/CD e Docker Compose",
+   "GitHub Actions, Docker Compose, Kubernetes usano YAML."
+  ],
+  [
+   "Come si scrive un elemento di una sequenza in stile block?",
+   [
+    "Con un trattino e uno spazio: - elemento",
+    "Fra parentesi graffe",
+    "Con il cancelletto",
+    "Con un asterisco senza spazio"
+   ],
+   "Con un trattino e uno spazio: - elemento",
+   "Lo stile flow invece usa le quadre: [a, b]."
+  ],
+  [
+   "Quale rischio tipico di YAML non esiste in JSON?",
+   [
+    "Gli errori di indentazione",
+    "Le virgole finali",
+    "Le stringhe senza apici",
+    "I numeri decimali"
+   ],
+   "Gli errori di indentazione",
+   "Uno spazio in più o in meno cambia la struttura."
+  ],
+  [
+   "Quale vantaggio ha JSON su YAML?",
+   [
+    "È supportato nativamente da quasi tutti i linguaggi",
+    "Ammette i commenti",
+    "Non usa parentesi",
+    "È più leggibile"
+   ],
+   "È supportato nativamente da quasi tutti i linguaggi",
+   "JavaScript per esempio lo legge con JSON.parse senza librerie."
+  ],
+  [
+   "Come si scrive in YAML un valore nullo?",
+   [
+    "null oppure ~",
+    "none",
+    "nil",
+    "void"
+   ],
+   "null oppure ~",
+   "Anche lasciare vuoto il valore dà null."
+  ],
+  [
+   "Quale blocco unisce più righe in una sola, sostituendo gli a capo con spazi?",
+   [
+    "Il blocco folded con &gt;",
+    "Il blocco literal con |",
+    "La sequenza con -",
+    "Il documento con ---"
+   ],
+   "Il blocco folded con >",
+   "| invece mantiene gli a capo."
+  ],
+  [
+   "Che cosa descrive un file di configurazione nell'Infrastructure as Code?",
+   [
+    "Lo stato desiderato dell'infrastruttura",
+    "Il codice sorgente del programma",
+    "Le password degli utenti",
+    "Il diario delle modifiche"
+   ],
+   "Lo stato desiderato dell'infrastruttura",
+   "Gli strumenti di automazione poi lo realizzano."
+  ]
+ ],
+ "ORD": [
+  [
+   "<code>name: Test<\/code>",
+   "Nome del workflow."
+  ],
+  [
+   "<code>on: push<\/code>",
+   "Quando parte."
+  ],
+  [
+   "<code>jobs:<\/code>",
+   "Elenco dei lavori."
+  ],
+  [
+   "<code>  test:<\/code>",
+   "Un lavoro, indentato sotto jobs."
+  ],
+  [
+   "<code>    runs-on: ubuntu-latest<\/code>",
+   "Su quale macchina gira."
+  ],
+  [
+   "<code>    steps:<\/code>",
+   "I passi del lavoro."
+  ],
+  [
+   "<code>      - run: npm test<\/code>",
+   "Un passo, come elemento di sequenza."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "File YAML: una riga è sbagliata.",
+   "lines": [
+    "studente:",
+    "  nome: Ada",
+    "  classe:5M",
+    "  voti:",
+    "    - 8",
+    "    - 9"
+   ],
+   "bad": 2,
+   "why": "Dopo i due punti ci vuole uno spazio: classe: 5M."
+  },
+  {
+   "t": "File YAML: una riga è sbagliata.",
+   "lines": [
+    "server:",
+    "  porta: 8080",
+    "   host: localhost",
+    "  debug: false"
+   ],
+   "bad": 2,
+   "why": "host ha tre spazi invece di due: l'indentazione deve essere la stessa per gli elementi allo stesso livello."
+  },
+  {
+   "t": "File YAML: una riga è sbagliata.",
+   "lines": [
+    "linguaggi:",
+    "  - Java",
+    "  - Python",
+    "  • PHP"
+   ],
+   "bad": 3,
+   "why": "Gli elementi di una sequenza iniziano con il trattino seguito da uno spazio: - PHP."
+  },
+  {
+   "t": "YAML e JSON: una corrispondenza è sbagliata.",
+   "lines": [
+    "nome: Ada → {\"nome\": \"Ada\"}",
+    "voti: [8, 9] → {\"voti\": [8, 9]}",
+    "attivo: true → {\"attivo\": true}",
+    "# commento → {\"commento\": \"\"}"
+   ],
+   "bad": 3,
+   "why": "I commenti YAML vengono ignorati: in JSON non diventano niente."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>

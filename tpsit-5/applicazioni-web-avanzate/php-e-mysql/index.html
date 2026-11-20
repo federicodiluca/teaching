@@ -1,0 +1,271 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PHP e MySQL</title><meta name="description" content="Connessione con PDO, query preparate, lettura dei risultati e protezione dalla SQL injection."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>PHP e MySQL</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>PHP e MySQL</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso di come PHP lavora con un database MySQL usando PDO: connessione, query con parametri, risultati.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">Che cosa fa ciascuna istruzione PDO? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine le righe per leggere gli studenti di una classe. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "new PDO($dsn, $user, $pwd)",
+   "conn"
+  ],
+  [
+   "setAttribute(PDO::ATTR_ERRMODE, ...)",
+   "conn"
+  ],
+  [
+   "$pdo->prepare('SELECT ... WHERE id = ?')",
+   "query"
+  ],
+  [
+   "$st->execute([$id])",
+   "query"
+  ],
+  [
+   "$st->fetch()",
+   "ris"
+  ],
+  [
+   "$st->fetchAll()",
+   "ris"
+  ],
+  [
+   "$st->rowCount()",
+   "ris"
+  ],
+  [
+   "$pdo->lastInsertId()",
+   "ris"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "conn",
+   "t": "Connessione",
+   "s": ""
+  },
+  {
+   "id": "query",
+   "t": "Query con parametri",
+   "s": ""
+  },
+  {
+   "id": "ris",
+   "t": "Risultati",
+   "s": ""
+  }
+ ],
+ "VF": [
+  [
+   "PDO permette di lavorare con database diversi usando le stesse funzioni.",
+   true,
+   "Cambia solo la stringa di connessione (DSN)."
+  ],
+  [
+   "Le query preparate proteggono dalla SQL injection.",
+   true,
+   "I valori vengono passati separati dal testo SQL e non possono cambiarne il significato."
+  ],
+  [
+   "Inserire <code>$_GET['id']<\/code> direttamente nella stringa SQL è sicuro se l'id è un numero.",
+   false,
+   "Non si può sapere che cosa scriverà l'utente: si usa sempre una query preparata."
+  ],
+  [
+   "<code>fetchAll()<\/code> restituisce tutte le righe del risultato in un array.",
+   true,
+   "fetch() invece restituisce una riga alla volta."
+  ],
+  [
+   "Il segnaposto <code>?<\/code> in una query preparata va scritto fra apici: <code>'?'<\/code>.",
+   false,
+   "Senza apici: ci pensa PDO a trattare il valore come testo o numero."
+  ],
+  [
+   "Con XAMPP il database MySQL (MariaDB) si gestisce dal browser con phpMyAdmin.",
+   true,
+   "È all'indirizzo http://localhost/phpmyadmin."
+  ],
+  [
+   "<code>lastInsertId()<\/code> restituisce l'id dell'ultima riga inserita.",
+   true,
+   "Utile con le chiavi AUTO_INCREMENT."
+  ],
+  [
+   "Se la connessione fallisce, PDO lancia una <code>PDOException<\/code>.",
+   true,
+   "Si gestisce con try/catch."
+  ]
+ ],
+ "MC": [
+  [
+   "Che cosa protegge dalla SQL injection?",
+   [
+    "Le query preparate con segnaposto",
+    "Le password lunghe",
+    "HTTPS",
+    "Il metodo POST"
+   ],
+   "Le query preparate con segnaposto",
+   "Il valore dell'utente non entra mai nel testo SQL."
+  ],
+  [
+   "Quale metodo prepara una query con segnaposto?",
+   [
+    "prepare()",
+    "query()",
+    "fetch()",
+    "connect()"
+   ],
+   "prepare()",
+   "Poi si esegue con execute()."
+  ],
+  [
+   "Come si passano i valori ai segnaposto <code>?<\/code>?",
+   [
+    "$st-&gt;execute([$a, $b])",
+    "$st-&gt;bind($a + $b)",
+    "$st-&gt;query($a, $b)",
+    "Concatenandoli alla stringa SQL"
+   ],
+   "$st->execute([$a, $b])",
+   "Nell'ordine in cui compaiono i ?."
+  ],
+  [
+   "Che cosa restituisce <code>fetch()<\/code>?",
+   [
+    "Una riga del risultato, o false se non ce ne sono altre",
+    "Tutte le righe",
+    "Il numero di righe",
+    "Il testo della query"
+   ],
+   "Una riga del risultato, o false se non ce ne sono altre",
+   "Si usa spesso in un ciclo while."
+  ],
+  [
+   "Quale stringa di connessione (DSN) è corretta per MySQL?",
+   [
+    "mysql:host=localhost;dbname=scuola",
+    "localhost/scuola:mysql",
+    "db://scuola@localhost",
+    "mysql.scuola.localhost"
+   ],
+   "mysql:host=localhost;dbname=scuola",
+   "Tipo di database, host e nome del database."
+  ],
+  [
+   "Quale eccezione lancia PDO in caso di errore?",
+   [
+    "PDOException",
+    "SQLError",
+    "DatabaseException",
+    "MysqlWarning"
+   ],
+   "PDOException",
+   "Con ERRMODE_EXCEPTION ogni errore SQL diventa un'eccezione."
+  ],
+  [
+   "Che cosa restituisce <code>rowCount()<\/code> dopo un UPDATE?",
+   [
+    "Il numero di righe modificate",
+    "L'ultima riga",
+    "L'id inserito",
+    "Il nome della tabella"
+   ],
+   "Il numero di righe modificate",
+   "Utile per sapere se l'aggiornamento ha avuto effetto."
+  ],
+  [
+   "In quale cartella di XAMPP vanno salvati gli script PHP?",
+   [
+    "htdocs",
+    "cgi-bin",
+    "mysql",
+    "WEB-INF"
+   ],
+   "htdocs",
+   "Si aprono poi da http://localhost/."
+  ]
+ ],
+ "ORD": [
+  [
+   "<code>$pdo = new PDO('mysql:host=localhost;dbname=scuola', 'root', '');<\/code>",
+   "Connessione al database."
+  ],
+  [
+   "<code>$st = $pdo-&gt;prepare('SELECT nome FROM studenti WHERE classe = ?');<\/code>",
+   "Query preparata con un segnaposto."
+  ],
+  [
+   "<code>$st-&gt;execute([$_GET['classe']]);<\/code>",
+   "Esecuzione con il valore al posto del ?."
+  ],
+  [
+   "<code>foreach ($st-&gt;fetchAll() as $r) {<\/code>",
+   "Ciclo sulle righe del risultato."
+  ],
+  [
+   "<code>    echo htmlspecialchars($r['nome']) . '&lt;br&gt;';<\/code>",
+   "Stampa sicura di ogni nome."
+  ],
+  [
+   "<code>}<\/code>",
+   "Fine del ciclo."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "Ricerca di uno studente: una riga è pericolosa.",
+   "lines": [
+    "$nome = $_GET['nome'];",
+    "$sql = \"SELECT * FROM studenti WHERE nome = '$nome'\";",
+    "$righe = $pdo->query($sql)->fetchAll();",
+    "echo count($righe);"
+   ],
+   "bad": 1,
+   "why": "Inserire il dato dell'utente nella stringa SQL espone alla SQL injection: serve prepare con ? ed execute([$nome])."
+  },
+  {
+   "t": "Inserimento di un voto: una riga è sbagliata.",
+   "lines": [
+    "$st = $pdo->prepare('INSERT INTO voti (studente, voto) VALUES (?, ?)');",
+    "$st->execute($studente, $voto);",
+    "echo 'Voto salvato';"
+   ],
+   "bad": 1,
+   "why": "execute vuole un array di valori: $st->execute([$studente, $voto]);"
+  },
+  {
+   "t": "Lettura di uno studente: una riga è sbagliata.",
+   "lines": [
+    "$st = $pdo->prepare('SELECT nome FROM studenti WHERE id = ?');",
+    "$st->execute([$id]);",
+    "$r = $st->fetch();",
+    "echo $r->['nome'];"
+   ],
+   "bad": 3,
+   "why": "fetch restituisce di norma un array associativo: $r['nome']."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>

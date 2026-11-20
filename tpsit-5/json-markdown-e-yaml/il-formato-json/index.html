@@ -1,0 +1,308 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Il formato JSON</title><meta name="description" content="Oggetti, array e i sei tipi di valore di JSON, il confronto con XML e l&#x27;uso con JSON.parse e JSON.stringify."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>Il formato JSON</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Il formato JSON</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso di JSON: com'è fatto, quali valori ammette, che differenze ha con XML e come si legge e si scrive da JavaScript e da Java.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">Ogni valore JSON ha un tipo. Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine le righe per ottenere un documento JSON valido. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "\"Pesaro\"",
+   "string"
+  ],
+  [
+   "\"2026\"",
+   "string"
+  ],
+  [
+   "42",
+   "number"
+  ],
+  [
+   "-3.5",
+   "number"
+  ],
+  [
+   "true",
+   "boolean"
+  ],
+  [
+   "false",
+   "boolean"
+  ],
+  [
+   "null",
+   "null"
+  ],
+  [
+   "[1, 2, 3]",
+   "array"
+  ],
+  [
+   "[]",
+   "array"
+  ],
+  [
+   "{\"nome\": \"Ada\"}",
+   "object"
+  ],
+  [
+   "{}",
+   "object"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "string",
+   "t": "string",
+   "s": ""
+  },
+  {
+   "id": "number",
+   "t": "number",
+   "s": ""
+  },
+  {
+   "id": "boolean",
+   "t": "boolean",
+   "s": ""
+  },
+  {
+   "id": "null",
+   "t": "null",
+   "s": ""
+  },
+  {
+   "id": "array",
+   "t": "array",
+   "s": ""
+  },
+  {
+   "id": "object",
+   "t": "object",
+   "s": ""
+  }
+ ],
+ "VF": [
+  [
+   "JSON è costruito su due strutture: oggetti (coppie nome-valore) e array (liste ordinate).",
+   true,
+   "Oggetti fra graffe, array fra quadre."
+  ],
+  [
+   "In JSON le stringhe si possono scrivere fra apici singoli.",
+   false,
+   "Solo fra doppi apici."
+  ],
+  [
+   "JSON si può usare solo con JavaScript.",
+   false,
+   "Si usa con qualsiasi linguaggio: Java, Python, PHP..."
+  ],
+  [
+   "A parità di dati, un documento JSON è di solito più corto dello stesso documento in XML.",
+   true,
+   "Non ha tag di apertura e chiusura."
+  ],
+  [
+   "<code>JSON.stringify(obj)<\/code> trasforma un oggetto JavaScript in una stringa JSON.",
+   true,
+   "Il contrario lo fa JSON.parse(testo)."
+  ],
+  [
+   "JSON ha un tipo apposito per le date.",
+   false,
+   "Le date si scrivono come stringhe, di solito nel formato ISO: \"2026-12-10\"."
+  ],
+  [
+   "Usare <code>eval<\/code> per leggere JSON ricevuto dalla rete è pericoloso.",
+   true,
+   "Eseguirebbe qualsiasi codice: si usa JSON.parse."
+  ],
+  [
+   "In un oggetto JSON i nomi delle proprietà dovrebbero essere univoci.",
+   true,
+   "Fanno da chiave per ritrovare il valore."
+  ]
+ ],
+ "MC": [
+  [
+   "Quanti tipi di valore supporta JSON?",
+   [
+    "Sei: string, number, boolean, array, object, null",
+    "Quattro: testo, numero, data, lista",
+    "Due: oggetto e array",
+    "Otto, come Java"
+   ],
+   "Sei: string, number, boolean, array, object, null",
+   "Due strutture e quattro tipi semplici."
+  ],
+  [
+   "Come si converte una stringa JSON in un oggetto JavaScript?",
+   [
+    "JSON.parse(testo)",
+    "JSON.stringify(testo)",
+    "JSON.read(testo)",
+    "eval.json(testo)"
+   ],
+   "JSON.parse(testo)",
+   "parse legge, stringify scrive."
+  ],
+  [
+   "Quale di queste funzionalità di XML manca in JSON?",
+   [
+    "I commenti",
+    "Gli array",
+    "I numeri",
+    "Gli oggetti annidati"
+   ],
+   "I commenti",
+   "Per i commenti in un file di configurazione si usa spesso YAML."
+  ],
+  [
+   "Qual è il tipo MIME di un documento JSON?",
+   [
+    "application/json",
+    "text/xml",
+    "text/json-data",
+    "application/js"
+   ],
+   "application/json",
+   "Si indica nell'intestazione Content-Type delle risposte HTTP."
+  ],
+  [
+   "Quale libreria è la più diffusa per leggere e scrivere JSON in Java?",
+   [
+    "Jackson",
+    "JUnit",
+    "Swing",
+    "Tomcat"
+   ],
+   "Jackson",
+   "Anche Gson (di Google) è molto usata."
+  ],
+  [
+   "Che cosa rappresenta <code>null<\/code> in JSON?",
+   [
+    "Un valore assente",
+    "Lo zero",
+    "La stringa vuota",
+    "Il valore falso"
+   ],
+   "Un valore assente",
+   "null, 0, \"\" e false sono valori diversi."
+  ],
+  [
+   "Come si scrive un array vuoto in JSON?",
+   [
+    "[]",
+    "{}",
+    "()",
+    "null[]"
+   ],
+   "[]",
+   "{} è un oggetto vuoto."
+  ],
+  [
+   "Quale estensione ha di solito un file JSON?",
+   [
+    ".json",
+    ".js",
+    ".jsn",
+    ".xml"
+   ],
+   ".json",
+   "Il file contiene solo dati, non codice."
+  ]
+ ],
+ "ORD": [
+  [
+   "<code>{<\/code>",
+   "Si apre l'oggetto principale."
+  ],
+  [
+   "<code>  \"nome\": \"Ada\",<\/code>",
+   "Coppia nome-valore, con la virgola."
+  ],
+  [
+   "<code>  \"voti\": [8, 9, 7],<\/code>",
+   "Un array di numeri."
+  ],
+  [
+   "<code>  \"indirizzo\": { \"citta\": \"Pesaro\" }<\/code>",
+   "Un oggetto annidato, ultima coppia: niente virgola."
+  ],
+  [
+   "<code>}<\/code>",
+   "Si chiude l'oggetto principale."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "Documento JSON: una riga non è valida.",
+   "lines": [
+    "{",
+    "  \"nome\": \"Luca\",",
+    "  'classe': \"5M\",",
+    "  \"anno\": 2026",
+    "}"
+   ],
+   "bad": 2,
+   "why": "In JSON nomi e stringhe vanno sempre fra doppi apici: \"classe\"."
+  },
+  {
+   "t": "Documento JSON: una riga non è valida.",
+   "lines": [
+    "{",
+    "  \"prodotto\": \"Penna\",",
+    "  \"prezzo\": 1.5,",
+    "  \"disponibile\": true,",
+    "}"
+   ],
+   "bad": 3,
+   "why": "Dopo l'ultima coppia non ci vuole la virgola."
+  },
+  {
+   "t": "Documento JSON: una riga non è valida.",
+   "lines": [
+    "{",
+    "  \"titolo\": \"Verifica\",",
+    "  // data da confermare",
+    "  \"data\": \"2026-12-10\"",
+    "}"
+   ],
+   "bad": 2,
+   "why": "JSON non ammette commenti."
+  },
+  {
+   "t": "JavaScript: una riga è sbagliata.",
+   "lines": [
+    "const testo = '{\"nome\": \"Ada\", \"eta\": 17}';",
+    "const obj = JSON.stringify(testo);",
+    "console.log(obj.nome);"
+   ],
+   "bad": 1,
+   "why": "Per trasformare una stringa JSON in oggetto si usa JSON.parse(testo); stringify fa il contrario."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>

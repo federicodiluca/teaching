@@ -1,0 +1,268 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Git: concetti e aree</title><meta name="description" content="Repository, commit, working directory, staging area e cronologia: come Git tiene traccia delle versioni."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>Git: concetti e aree</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Git: concetti e aree</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso dei concetti di base di Git: che cos'è un repository, le tre aree di lavoro e il percorso di una modifica fino al commit.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">In quale area si trova il file? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine i passi per salvare la prima versione di un progetto con Git. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "Ho appena modificato index.html",
+   "wd"
+  ],
+  [
+   "Ho creato un file nuovo, mai aggiunto",
+   "wd"
+  ],
+  [
+   "Ho eseguito git add index.html",
+   "stage"
+  ],
+  [
+   "Pronto per il prossimo commit",
+   "stage"
+  ],
+  [
+   "Ho eseguito git commit",
+   "repo"
+  ],
+  [
+   "Compare in git log",
+   "repo"
+  ],
+  [
+   "Salvato nella cartella .git",
+   "repo"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "wd",
+   "t": "Working directory",
+   "s": "modifiche non aggiunte"
+  },
+  {
+   "id": "stage",
+   "t": "Staging area",
+   "s": "dopo git add"
+  },
+  {
+   "id": "repo",
+   "t": "Repository",
+   "s": "dopo git commit"
+  }
+ ],
+ "VF": [
+  [
+   "Git è un sistema di controllo di versione distribuito.",
+   true,
+   "Ogni copia del repository contiene tutta la cronologia."
+  ],
+  [
+   "Un commit è uno scatto fotografico dello stato del progetto in un preciso momento.",
+   true,
+   "Ogni commit ha un identificativo (hash), un autore, una data e un messaggio."
+  ],
+  [
+   "<code>git commit<\/code> salva automaticamente tutte le modifiche, anche quelle non aggiunte con <code>git add<\/code>.",
+   false,
+   "Salva solo ciò che è nella staging area (tranne con -a, che aggiunge i file già tracciati)."
+  ],
+  [
+   "Le informazioni del repository sono nella cartella nascosta <code>.git<\/code>.",
+   true,
+   "Se la si cancella, la cartella torna a essere una normale cartella senza cronologia."
+  ],
+  [
+   "Git e GitHub sono la stessa cosa.",
+   false,
+   "Git è il programma; GitHub è un servizio online che ospita repository Git."
+  ],
+  [
+   "<code>git status<\/code> mostra quali file sono modificati, aggiunti o non tracciati.",
+   true,
+   "È il comando da usare più spesso per capire dove siamo."
+  ],
+  [
+   "Il file <code>.gitignore<\/code> elenca i file che Git non deve tracciare.",
+   true,
+   "Per esempio file compilati, cartelle di dipendenze, password."
+  ],
+  [
+   "Per usare Git serve per forza una connessione a Internet.",
+   false,
+   "Si lavora in locale; Internet serve solo per push, pull e clone."
+  ]
+ ],
+ "MC": [
+  [
+   "Qual è il flusso di lavoro tipico in Git?",
+   [
+    "Si modifica, si fa git add e poi git commit",
+    "Si fa git commit e poi si modifica",
+    "Si fa git push e poi git add",
+    "Si fa git init a ogni modifica"
+   ],
+   "Si modifica, si fa git add e poi git commit",
+   "Modifica, aggiungi alla staging area, conferma."
+  ],
+  [
+   "Che cosa accade con <code>git commit<\/code>?",
+   [
+    "Il contenuto della staging area entra nella cronologia",
+    "I file vengono inviati a GitHub",
+    "Si crea un nuovo branch",
+    "Si cancellano le modifiche"
+   ],
+   "Il contenuto della staging area entra nella cronologia",
+   "L'invio a GitHub si fa con git push."
+  ],
+  [
+   "Quale comando crea un nuovo repository nella cartella corrente?",
+   [
+    "git init",
+    "git start",
+    "git new",
+    "git create"
+   ],
+   "git init",
+   "Crea la cartella .git."
+  ],
+  [
+   "Che cosa mostra <code>git log<\/code>?",
+   [
+    "La cronologia dei commit",
+    "I file modificati",
+    "I branch remoti",
+    "Le password salvate"
+   ],
+   "La cronologia dei commit",
+   "Con --oneline la mostra una riga per commit."
+  ],
+  [
+   "Che cos'è la staging area?",
+   [
+    "L'area delle modifiche pronte per il prossimo commit",
+    "Il server di GitHub",
+    "Il cestino di Git",
+    "Il ramo principale"
+   ],
+   "L'area delle modifiche pronte per il prossimo commit",
+   "Si chiama anche index."
+  ],
+  [
+   "Che cosa identifica un commit in modo univoco?",
+   [
+    "Il suo hash",
+    "Il nome del file",
+    "La data",
+    "Il nome dell'autore"
+   ],
+   "Il suo hash",
+   "Una stringa esadecimale, di solito abbreviata ai primi 7 caratteri."
+  ],
+  [
+   "Come si scrive un commit con il messaggio direttamente nel comando?",
+   [
+    "git commit -m \"messaggio\"",
+    "git commit \"messaggio\"",
+    "git save -m \"messaggio\"",
+    "git message \"messaggio\""
+   ],
+   "git commit -m \"messaggio\"",
+   "-m sta per message."
+  ],
+  [
+   "Da quale sito si scarica Git?",
+   [
+    "git-scm.com",
+    "github.com",
+    "git.org",
+    "gitlab.com"
+   ],
+   "git-scm.com",
+   "GitHub e GitLab sono servizi di hosting."
+  ]
+ ],
+ "ORD": [
+  [
+   "<code>git init<\/code>",
+   "Crea il repository (la cartella nascosta .git)."
+  ],
+  [
+   "Si scrivono o modificano i file",
+   "Le modifiche sono nella working directory."
+  ],
+  [
+   "<code>git status<\/code>",
+   "Si controlla che cosa è cambiato."
+  ],
+  [
+   "<code>git add .<\/code>",
+   "Le modifiche passano nella staging area."
+  ],
+  [
+   "<code>git commit -m \"Prima versione\"<\/code>",
+   "Si crea lo scatto nella cronologia."
+  ],
+  [
+   "<code>git log<\/code>",
+   "Si vede il commit appena creato."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "Flusso di lavoro: una riga è nel posto sbagliato.",
+   "lines": [
+    "Modifico i file",
+    "git commit -m \"Aggiunge il menu\"",
+    "git add .",
+    "git log"
+   ],
+   "bad": 1,
+   "why": "Prima si aggiungono le modifiche alla staging area con git add, poi si fa il commit."
+  },
+  {
+   "t": "Definizioni: una riga è sbagliata.",
+   "lines": [
+    "Repository: cartella del progetto tracciata da Git",
+    "Commit: scatto dello stato del progetto",
+    "Staging area: modifiche pronte per il commit",
+    "Working directory: copia del progetto su GitHub"
+   ],
+   "bad": 3,
+   "why": "La working directory è la cartella in cui lavoriamo sul nostro computer; la copia su GitHub è il repository remoto."
+  },
+  {
+   "t": "Configurazione iniziale: una riga è sbagliata.",
+   "lines": [
+    "git config --global user.name \"Ada Lovelace\"",
+    "git config --global user.email \"ada@esempio.it\"",
+    "git config --global password \"segreta\"",
+    "git config --list"
+   ],
+   "bad": 2,
+   "why": "Git non salva la password così: si configurano nome ed email, che compaiono in ogni commit."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>

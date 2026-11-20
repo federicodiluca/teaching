@@ -1,0 +1,267 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Web service e REST</title><meta name="description" content="Che cos&#x27;è un web service, SOAP e REST a confronto, verbi HTTP, risorse e risposte in JSON."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>Web service e REST</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Web service e REST</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso dei web service: servizi che si chiamano via HTTP, l'approccio SOAP e quello REST, con risorse, verbi e JSON.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">SOAP o REST? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine i passi di una chiamata REST da una pagina web. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "Messaggi in XML con busta (envelope)",
+   "soap"
+  ],
+  [
+   "Contratto descritto in WSDL",
+   "soap"
+  ],
+  [
+   "Stub e skeleton",
+   "soap"
+  ],
+  [
+   "Protocollo con regole rigide",
+   "soap"
+  ],
+  [
+   "Risorse identificate da URL",
+   "rest"
+  ],
+  [
+   "Usa i verbi GET, POST, PUT, DELETE",
+   "rest"
+  ],
+  [
+   "Risposte spesso in JSON",
+   "rest"
+  ],
+  [
+   "Stateless e leggero",
+   "rest"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "soap",
+   "t": "SOAP",
+   "s": ""
+  },
+  {
+   "id": "rest",
+   "t": "REST",
+   "s": ""
+  }
+ ],
+ "VF": [
+  [
+   "Un web service è un servizio che un programma può chiamare attraverso la rete con protocolli web.",
+   true,
+   "Lo chiama un'altra applicazione, non una persona con il browser."
+  ],
+  [
+   "Un web service può essere scritto in un linguaggio e usato da un programma scritto in un altro.",
+   true,
+   "È indipendente dalla piattaforma: comunicano con HTTP e XML o JSON."
+  ],
+  [
+   "SOAP scambia messaggi in JSON.",
+   false,
+   "SOAP usa messaggi XML racchiusi in una busta (envelope)."
+  ],
+  [
+   "Il documento WSDL descrive metodi, parametri e tipi di un servizio SOAP.",
+   true,
+   "È il contratto del servizio."
+  ],
+  [
+   "In REST ogni risorsa è identificata da un URL.",
+   true,
+   "Per esempio /studenti/7."
+  ],
+  [
+   "In REST il verbo DELETE si usa per leggere una risorsa.",
+   false,
+   "Per leggere si usa GET; DELETE la elimina."
+  ],
+  [
+   "Un'API REST è stateless: ogni richiesta contiene tutto quello che serve.",
+   true,
+   "Il server non ricorda le richieste precedenti."
+  ],
+  [
+   "<code>fetch()<\/code> in JavaScript permette di chiamare un'API senza ricaricare la pagina.",
+   true,
+   "È la base delle pagine dinamiche (AJAX)."
+  ]
+ ],
+ "MC": [
+  [
+   "Quali verbi HTTP usa REST per le operazioni CRUD?",
+   [
+    "GET, POST, PUT, DELETE",
+    "OPEN, READ, WRITE, CLOSE",
+    "SELECT, INSERT, UPDATE, DELETE",
+    "SEND, RECEIVE"
+   ],
+   "GET, POST, PUT, DELETE",
+   "Leggere, creare, modificare, cancellare."
+  ],
+  [
+   "Che cosa significa SOAP?",
+   [
+    "Simple Object Access Protocol",
+    "Service Oriented Application Program",
+    "Secure Online API Protocol",
+    "Server Object Answer Page"
+   ],
+   "Simple Object Access Protocol",
+   "È un protocollo basato su XML."
+  ],
+  [
+   "A che cosa serve il documento WSDL?",
+   [
+    "A descrivere metodi, parametri e tipi del servizio",
+    "A cifrare i messaggi",
+    "A salvare i dati",
+    "A disegnare l'interfaccia"
+   ],
+   "A descrivere metodi, parametri e tipi del servizio",
+   "Da lì gli strumenti generano lo stub del client."
+  ],
+  [
+   "Quale verbo si usa per creare una nuova risorsa?",
+   [
+    "POST",
+    "GET",
+    "DELETE",
+    "HEAD"
+   ],
+   "POST",
+   "PUT invece sostituisce una risorsa esistente."
+  ],
+  [
+   "In quale formato rispondono di solito le API REST?",
+   [
+    "JSON",
+    "WSDL",
+    "PDF",
+    "CSV soltanto"
+   ],
+   "JSON",
+   "Possono usare anche XML, ma JSON è il più diffuso."
+  ],
+  [
+   "Che illusione danno stub e skeleton nei web service SOAP?",
+   [
+    "Di chiamare un metodo locale",
+    "Di lavorare offline",
+    "Di avere un database locale",
+    "Di non usare la rete"
+   ],
+   "Di chiamare un metodo locale",
+   "In realtà la chiamata viaggia in rete."
+  ],
+  [
+   "Quale codice di stato restituisce un'API dopo aver creato una risorsa?",
+   [
+    "201",
+    "404",
+    "500",
+    "301"
+   ],
+   "201",
+   "201 Created."
+  ],
+  [
+   "Quale URL rispetta meglio lo stile REST per lo studente 7?",
+   [
+    "/studenti/7",
+    "/getStudente.php?azione=leggi&amp;id=7",
+    "/studenti/leggi/7/ora",
+    "/api?cmd=studente7"
+   ],
+   "/studenti/7",
+   "L'URL indica la risorsa, il verbo HTTP l'azione."
+  ]
+ ],
+ "ORD": [
+  [
+   "JavaScript chiama <code>fetch('/api/studenti/7')<\/code>",
+   "Richiesta GET alla risorsa."
+  ],
+  [
+   "Il server riceve la richiesta",
+   "Riconosce la risorsa dall'URL e il verbo."
+  ],
+  [
+   "Lo script legge lo studente 7 dal database",
+   "Con una query preparata."
+  ],
+  [
+   "Il server risponde 200 con il JSON",
+   "Content-Type: application/json."
+  ],
+  [
+   "JavaScript converte la risposta con <code>response.json()<\/code>",
+   "Ottiene un oggetto."
+  ],
+  [
+   "La pagina mostra i dati",
+   "Senza ricaricarsi."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "API REST di una biblioteca: una riga usa il verbo sbagliato.",
+   "lines": [
+    "GET /libri → elenco dei libri",
+    "GET /libri/12 → il libro 12",
+    "POST /libri → nuovo libro",
+    "GET /libri/12/cancella → elimina il libro 12"
+   ],
+   "bad": 3,
+   "why": "In REST l'azione la dice il verbo: DELETE /libri/12. L'URL indica la risorsa, non l'azione."
+  },
+  {
+   "t": "Endpoint PHP che risponde in JSON: una riga è sbagliata.",
+   "lines": [
+    "<?php",
+    "header('Content-Type: text/html');",
+    "$libri = [['id' => 1, 'titolo' => 'Fondazione']];",
+    "echo json_encode($libri);"
+   ],
+   "bad": 1,
+   "why": "Una risposta JSON va dichiarata con header('Content-Type: application/json');"
+  },
+  {
+   "t": "Codici di risposta di un'API: una riga è sbagliata.",
+   "lines": [
+    "200 → richiesta riuscita",
+    "201 → risorsa creata",
+    "404 → risorsa non trovata",
+    "201 → risorsa cancellata per errore"
+   ],
+   "bad": 3,
+   "why": "201 Created si usa dopo un POST riuscito; una cancellazione riuscita risponde di solito 200 o 204."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>

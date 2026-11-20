@@ -1,0 +1,294 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PHP: form e sessioni</title><meta name="description" content="Leggere i dati dei form con $_GET e $_POST, validarli, proteggere l&#x27;output e ricordare l&#x27;utente con cookie e sessioni."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>PHP: form e sessioni</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>PHP: form e sessioni</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso di come PHP riceve i dati dal browser e di come ricorda l'utente fra una pagina e l'altra.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">Da dove arriva o dove finisce il dato? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine le righe della pagina che controlla il login e ricorda l'utente. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "voti.php?classe=5M",
+   "get"
+  ],
+  [
+   "Un link con parametri nell'URL",
+   "get"
+  ],
+  [
+   "Un form di ricerca",
+   "get"
+  ],
+  [
+   "Un form di login",
+   "post"
+  ],
+  [
+   "Un form con molti campi",
+   "post"
+  ],
+  [
+   "$_SESSION['utente'] = 'ada'",
+   "session"
+  ],
+  [
+   "session_start()",
+   "session"
+  ],
+  [
+   "setcookie('tema', 'scuro')",
+   "cookie"
+  ],
+  [
+   "$_COOKIE['tema']",
+   "cookie"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "get",
+   "t": "$_GET",
+   "s": "parametri nell'URL"
+  },
+  {
+   "id": "post",
+   "t": "$_POST",
+   "s": "corpo della richiesta"
+  },
+  {
+   "id": "session",
+   "t": "Sessione",
+   "s": "dati sul server"
+  },
+  {
+   "id": "cookie",
+   "t": "Cookie",
+   "s": "dati nel browser"
+  }
+ ],
+ "VF": [
+  [
+   "<code>$_GET<\/code> contiene i parametri passati nell'URL dopo il punto interrogativo.",
+   true,
+   "Esempio: pagina.php?nome=Ada&amp;classe=5M."
+  ],
+  [
+   "<code>$_POST<\/code> contiene i dati inviati da un form con <code>method=\"post\"<\/code>.",
+   true,
+   "La chiave è il valore dell'attributo name del campo."
+  ],
+  [
+   "I dati della sessione sono salvati nel browser dell'utente.",
+   false,
+   "Sono sul server; nel browser c'è solo un cookie con l'identificativo della sessione."
+  ],
+  [
+   "<code>session_start()<\/code> va chiamata in ogni pagina che usa <code>$_SESSION<\/code>.",
+   true,
+   "E prima di qualsiasi output."
+  ],
+  [
+   "<code>htmlspecialchars()<\/code> serve a stampare in modo sicuro un testo scritto dall'utente.",
+   true,
+   "Trasforma &lt; &gt; &amp; \" in entità e blocca il Cross-Site Scripting."
+  ],
+  [
+   "Le password si salvano nel database in chiaro, così si possono recuperare.",
+   false,
+   "Si salva solo l'hash, con password_hash(), e si controlla con password_verify()."
+  ],
+  [
+   "<code>isset($_POST['invia'])<\/code> permette di sapere se il form è stato inviato.",
+   true,
+   "Restituisce true se la variabile esiste e non è null."
+  ],
+  [
+   "Un cookie può essere letto e modificato dall'utente.",
+   true,
+   "È nel suo browser: non ci si mettono dati di cui fidarsi senza controlli."
+  ]
+ ],
+ "MC": [
+  [
+   "Quale array contiene i dati di un form inviato con il metodo POST?",
+   [
+    "$_POST",
+    "$_GET",
+    "$_FORM",
+    "$_REQUEST_POST"
+   ],
+   "$_POST",
+   "Il nome del campo (name) fa da chiave."
+  ],
+  [
+   "Quale funzione va chiamata prima di usare <code>$_SESSION<\/code>?",
+   [
+    "session_start()",
+    "session_open()",
+    "start_session()",
+    "setcookie()"
+   ],
+   "session_start()",
+   "Riprende la sessione esistente o ne crea una nuova."
+  ],
+  [
+   "Dove sono memorizzati i dati di una sessione PHP?",
+   [
+    "Sul server",
+    "Nel browser",
+    "Nell'URL",
+    "Nel database del browser"
+   ],
+   "Sul server",
+   "Il browser conserva solo l'identificativo (cookie PHPSESSID)."
+  ],
+  [
+   "Quale funzione protegge dal Cross-Site Scripting quando si stampa un dato dell'utente?",
+   [
+    "htmlspecialchars()",
+    "strtoupper()",
+    "trim()",
+    "md5()"
+   ],
+   "htmlspecialchars()",
+   "Il browser mostra i tag come testo invece di eseguirli."
+  ],
+  [
+   "Come si salva una password in modo corretto?",
+   [
+    "Con password_hash()",
+    "In chiaro",
+    "Con base64_encode()",
+    "Al contrario, con strrev()"
+   ],
+   "Con password_hash()",
+   "Si verifica poi con password_verify()."
+  ],
+  [
+   "Come si porta l'utente a un'altra pagina dal codice PHP?",
+   [
+    "header('Location: pagina.php');",
+    "goto('pagina.php');",
+    "redirect pagina.php;",
+    "echo 'Location: pagina.php';"
+   ],
+   "header('Location: pagina.php');",
+   "Va chiamata prima di qualsiasi output."
+  ],
+  [
+   "Quale funzione crea un cookie?",
+   [
+    "setcookie()",
+    "cookie_create()",
+    "$_COOKIE-&gt;add()",
+    "session_cookie()"
+   ],
+   "setcookie()",
+   "Poi si legge con $_COOKIE['nome']."
+  ],
+  [
+   "Che cosa restituisce <code>isset($_GET['id'])<\/code> se l'URL è <code>pagina.php<\/code>?",
+   [
+    "false",
+    "true",
+    "null",
+    "Un errore"
+   ],
+   "false",
+   "Il parametro id non c'è."
+  ]
+ ],
+ "ORD": [
+  [
+   "<code>session_start();<\/code>",
+   "Si avvia (o riprende) la sessione, prima di qualsiasi output."
+  ],
+  [
+   "<code>$utente = $_POST['utente'] ?? '';<\/code>",
+   "Si legge il campo del form."
+  ],
+  [
+   "<code>if ($utente === 'ada' &amp;&amp; password_verify($_POST['pwd'], $hash)) {<\/code>",
+   "Si controllano le credenziali."
+  ],
+  [
+   "<code>    $_SESSION['utente'] = $utente;<\/code>",
+   "Si salva l'utente nella sessione."
+  ],
+  [
+   "<code>    header('Location: area.php');<\/code>",
+   "Si porta l'utente all'area riservata."
+  ],
+  [
+   "<code>}<\/code>",
+   "Fine del controllo."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "La pagina deve salutare l'utente che ha scritto il nome nel form (method=\"post\").",
+   "lines": [
+    "<?php",
+    "$nome = $_GET['nome'];",
+    "echo 'Ciao ' . htmlspecialchars($nome);",
+    "?>"
+   ],
+   "bad": 1,
+   "why": "Il form usa POST: il dato è in $_POST['nome']."
+  },
+  {
+   "t": "Pagina dell'area riservata: una riga è nel posto sbagliato.",
+   "lines": [
+    "<h1>Area riservata<\/h1>",
+    "<?php",
+    "session_start();",
+    "echo $_SESSION['utente'];",
+    "?>"
+   ],
+   "bad": 0,
+   "why": "session_start() deve essere chiamata prima di qualsiasi output: anche l'HTML del titolo è output."
+  },
+  {
+   "t": "Stampa sicura di un dato ricevuto: una riga è pericolosa.",
+   "lines": [
+    "$c = $_POST['commento'] ?? '';",
+    "if ($c === '') exit('Commento vuoto');",
+    "echo $c;",
+    "// fine"
+   ],
+   "bad": 2,
+   "why": "Stampare un dato dell'utente così espone al Cross-Site Scripting: si usa echo htmlspecialchars($c);"
+  },
+  {
+   "t": "Logout: una riga è sbagliata.",
+   "lines": [
+    "session_start();",
+    "$_SESSION = [];",
+    "session_destroy();",
+    "header('Location: login.html');",
+    "session_start('logout');"
+   ],
+   "bad": 4,
+   "why": "L'ultima riga non serve ed è sbagliata: dopo session_destroy e il redirect la sessione è chiusa."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>

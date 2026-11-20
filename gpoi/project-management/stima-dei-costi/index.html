@@ -1,0 +1,592 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>La stima dei costi</title><meta name="description" content="Stima parametrica e per analogia, budget e baseline, earned value con CV e SV, costi di un progetto informatico, risk management."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head><body class="tg-act" data-solo="1"><header><h1>La stima dei costi</h1></header><nav id="nav"></nav><main>
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>La stima dei costi</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.</p>
+<ol><li><b>Stima:</b> parametrica e per analogia, bottom-up e top-down.</li><li><b>Budget:</b> baseline, management reserve, curva a S.</li><li><b>Earned value:</b> BCWS, BCWP, ACWP e i calcoli di CV e SV.</li><li><b>Progetto informatico:</b> costi di costruzione e di avviamento.</li><li><b>Rischi:</b> approcci, fasi della valutazione, R = P × D, fattori di McFarlan.</li><li><b>Quiz</b> e <b>Sfida finale</b>.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+<section id="e1" data-g="Stima" data-t="1 Parametrica o analogia"><h2>Stima parametrica e stima per analogia</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_e1"></div></section>
+<section id="e2" data-g="Stima" data-t="2 Bottom-up o top-down"><h2>Approccio bottom-up e top-down</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_e2"></div></section>
+<section id="b1" data-g="Budget" data-t="1 Le parti del budget"><h2>Baseline, management reserve e margine</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_b1"></div></section>
+<section id="v1" data-g="Earned value" data-t="1 Le tre curve"><h2>BCWS, BCWP e ACWP</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_v1"></div></section>
+<section id="v2" data-g="Earned value" data-t="2 Calcoli"><h2>Calcoli con l&#x27;earned value</h2><p class="lead">Scegliete il tipo di esercizio dal menu, scrivete il risultato e premete «Controlla». I numeri cambiano a ogni esercizio.</p><div id="x_v2"></div></section>
+<section id="i1" data-g="Progetto informatico" data-t="1 Costruzione o avviamento"><h2>Costo di costruzione e costo di avviamento</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_i1"></div></section>
+<section id="i2" data-g="Progetto informatico" data-t="2 Interni o esterni"><h2>Costi interni diretti, interni indotti, esterni</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_i2"></div></section>
+<section id="r1" data-g="Rischi" data-t="1 Reattivi o preventivi"><h2>Approcci reattivi e preventivi</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_r1"></div></section>
+<section id="r2" data-g="Rischi" data-t="2 Valutare i rischi"><h2>Le fasi della valutazione dei rischi</h2><p class="lead">Mettete in ordine le tre fasi della valutazione dei rischi. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».</p><div id="x_r2"></div></section>
+<section id="r3" data-g="Rischi" data-t="3 R = P × D"><h2>Il punteggio di rischio</h2><p class="lead">Calcolate il punteggio di rischio e scegliete la priorità. I numeri cambiano a ogni esercizio.</p><div id="x_r3"></div></section>
+<section id="r4" data-g="Rischi" data-t="4 Fattori di McFarlan"><h2>Indeterminatezza e innovazione tecnica</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_r4"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Quindici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+const D = {
+ "e1": [
+  [
+   "Modelli di valutazione basati su parametri",
+   "p"
+  ],
+  [
+   "Più precisa se i dati storici sono accurati",
+   "p"
+  ],
+  [
+   "Il modello funziona per progetti piccoli e grandi",
+   "p"
+  ],
+  [
+   "Costo stimato in base al numero di pagine del sito",
+   "p"
+  ],
+  [
+   "Parte da esperienze passate confrontate con il progetto",
+   "a"
+  ],
+  [
+   "Utile se mancano dati affidabili ma ci sono progetti simili",
+   "a"
+  ],
+  [
+   "«L'anno scorso un'app simile ci è costata 40.000 €»",
+   "a"
+  ]
+ ],
+ "e1_BK": [
+  {
+   "id": "p",
+   "t": "Stima parametrica",
+   "s": ""
+  },
+  {
+   "id": "a",
+   "t": "Stima per analogia",
+   "s": ""
+  }
+ ],
+ "e2": [
+  [
+   "Ogni livello della WBS stima i propri costi",
+   "bu"
+  ],
+  [
+   "Si parte dalle singole attività e si sale",
+   "bu"
+  ],
+  [
+   "I responsabili dei work package sommano le loro stime",
+   "bu"
+  ],
+  [
+   "Si stabilisce una cifra per il progetto e poi la si divide",
+   "td"
+  ],
+  [
+   "Il budget viene ripartito tra i sottoprogetti",
+   "td"
+  ],
+  [
+   "«Abbiamo 100.000 €: 40 allo sviluppo, 30 ai test...»",
+   "td"
+  ]
+ ],
+ "e2_BK": [
+  {
+   "id": "bu",
+   "t": "Bottom-up",
+   "s": "Dal basso"
+  },
+  {
+   "id": "td",
+   "t": "Top-down",
+   "s": "Dall'alto"
+  }
+ ],
+ "b1": [
+  [
+   "La vera somma per svolgere le attività",
+   "bl"
+  ],
+  [
+   "L'importo più grande del budget di base",
+   "bl"
+  ],
+  [
+   "Si chiama anche BCWS",
+   "bl"
+  ],
+  [
+   "Ha la forma di una curva a S",
+   "bl"
+  ],
+  [
+   "Margine di sicurezza",
+   "mr"
+  ],
+  [
+   "Serve per esempio a pagare penali per ritardi",
+   "mr"
+  ],
+  [
+   "Si toglie dal budget totale per ottenere il budget di base",
+   "mg"
+  ],
+  [
+   "Il guadagno atteso dal progetto",
+   "mg"
+  ]
+ ],
+ "b1_BK": [
+  {
+   "id": "bl",
+   "t": "Baseline",
+   "s": ""
+  },
+  {
+   "id": "mr",
+   "t": "Management reserve",
+   "s": ""
+  },
+  {
+   "id": "mg",
+   "t": "Margine di guadagno",
+   "s": ""
+  }
+ ],
+ "v1": [
+  [
+   "Budgeted Cost of Work Scheduled",
+   "s"
+  ],
+  [
+   "I costi programmati: la baseline",
+   "s"
+  ],
+  [
+   "Quanto si prevedeva di spendere a questa data",
+   "s"
+  ],
+  [
+   "Budgeted Cost of Work Performed",
+   "p"
+  ],
+  [
+   "Il lavoro fatto, valutato ai costi di budget",
+   "p"
+  ],
+  [
+   "Quanto avrei dovuto spendere per il lavoro completato",
+   "p"
+  ],
+  [
+   "Actual Cost of Work Performed",
+   "a"
+  ],
+  [
+   "I costi effettivamente sostenuti",
+   "a"
+  ],
+  [
+   "Quanto si è davvero speso",
+   "a"
+  ]
+ ],
+ "v1_BK": [
+  {
+   "id": "s",
+   "t": "BCWS",
+   "s": ""
+  },
+  {
+   "id": "p",
+   "t": "BCWP",
+   "s": ""
+  },
+  {
+   "id": "a",
+   "t": "ACWP",
+   "s": ""
+  }
+ ],
+ "i1": [
+  [
+   "Le ore dei programmatori che scrivono il software",
+   "co"
+  ],
+  [
+   "Le licenze di una libreria acquistata per lo sviluppo",
+   "co"
+  ],
+  [
+   "Di solito è l'importo più grande",
+   "co"
+  ],
+  [
+   "La formazione degli utenti finali",
+   "av"
+  ],
+  [
+   "Il caricamento dei dati nel nuovo sistema",
+   "av"
+  ],
+  [
+   "Gli impianti hardware per mettere in funzione il sistema",
+   "av"
+  ],
+  [
+   "Cresce se l'azienda ha molte sedi",
+   "av"
+  ]
+ ],
+ "i1_BK": [
+  {
+   "id": "co",
+   "t": "Costo di costruzione",
+   "s": "Per costruire il sistema"
+  },
+  {
+   "id": "av",
+   "t": "Costo di avviamento",
+   "s": "Per metterlo in esercizio"
+  }
+ ],
+ "i2": [
+  [
+   "Il lavoro del personale del progetto",
+   "dir"
+  ],
+  [
+   "Dipendono da dimensioni e funzioni del sistema",
+   "dir"
+  ],
+  [
+   "L'impiego di uffici dell'azienda esterni al gruppo di progetto",
+   "ind"
+  ],
+  [
+   "Crescono con la complessità organizzativa, non tecnica",
+   "ind"
+  ],
+  [
+   "Prodotti e servizi acquistati da terzi",
+   "est"
+  ],
+  [
+   "Una consulenza di una software house esterna",
+   "est"
+  ]
+ ],
+ "i2_BK": [
+  {
+   "id": "dir",
+   "t": "Interni diretti",
+   "s": ""
+  },
+  {
+   "id": "ind",
+   "t": "Interni indotti",
+   "s": ""
+  },
+  {
+   "id": "est",
+   "t": "Esterni",
+   "s": ""
+  }
+ ],
+ "r1": [
+  [
+   "Gestione della crisi",
+   "re"
+  ],
+  [
+   "Correzione degli errori",
+   "re"
+  ],
+  [
+   "Compensazione dei rischi",
+   "re"
+  ],
+  [
+   "Nessuno sforzo prima, ma possono costare caro dopo",
+   "re"
+  ],
+  [
+   "Prevenzione",
+   "pr"
+  ],
+  [
+   "Eliminazione delle cause alla radice",
+   "pr"
+  ],
+  [
+   "Approcci da preferire",
+   "pr"
+  ]
+ ],
+ "r1_BK": [
+  {
+   "id": "re",
+   "t": "Approcci reattivi",
+   "s": ""
+  },
+  {
+   "id": "pr",
+   "t": "Approcci preventivi",
+   "s": ""
+  }
+ ],
+ "r2": [
+  [
+   "Identificazione",
+   "Si individuano le aree di rischio."
+  ],
+  [
+   "Analisi",
+   "Si valutano impatto e probabilità."
+  ],
+  [
+   "Definizione delle priorità",
+   "Si stabilisce quali rischi sono più critici."
+  ]
+ ],
+ "r4": [
+  [
+   "Difficile definire prima il disegno del sistema",
+   "ind"
+  ],
+  [
+   "Un sistema di controllo della produzione in tempo reale",
+   "ind"
+  ],
+  [
+   "Diminuisce quanto più input e output sono già codificati",
+   "ind"
+  ],
+  [
+   "Il primo progetto di e-commerce dell'azienda",
+   "inn"
+  ],
+  [
+   "Dipende dall'esperienza degli specialisti sulla tecnologia",
+   "inn"
+  ],
+  [
+   "Al quinto progetto simile non c'è quasi più",
+   "inn"
+  ]
+ ],
+ "r4_BK": [
+  {
+   "id": "ind",
+   "t": "Indeterminatezza",
+   "s": ""
+  },
+  {
+   "id": "inn",
+   "t": "Innovazione tecnica",
+   "s": ""
+  }
+ ],
+ "VF": [
+  [
+   "La stima parametrica è più precisa se i dati storici usati sono accurati.",
+   true,
+   "E se i parametri sono facili da quantificare."
+  ],
+  [
+   "Nell'approccio top-down si parte dalle stime delle singole attività.",
+   false,
+   "È il bottom-up; nel top-down si fissa una cifra e la si divide."
+  ],
+  [
+   "La baseline rappresentata nel tempo ha di solito una forma a S.",
+   true,
+   "Spesa bassa all'inizio, forte al centro, bassa alla fine."
+  ],
+  [
+   "La management reserve è il margine di guadagno del fornitore.",
+   false,
+   "È un margine di sicurezza, per esempio per pagare le penali."
+  ],
+  [
+   "Confrontare solo ACWP e baseline basta per capire come va il progetto.",
+   false,
+   "Potrei aver speso quanto previsto facendo meno lavoro: serve la BCWP."
+  ],
+  [
+   "CV = BCWP − ACWP.",
+   true,
+   "Se è negativa c'è uno sforo sui costi."
+  ],
+  [
+   "Una SV negativa indica che il progetto è in anticipo.",
+   false,
+   "Indica un ritardo: si è fatto meno lavoro del previsto."
+  ],
+  [
+   "Il costo di progetto comprende anche la manutenzione negli anni successivi.",
+   false,
+   "Comprende costruzione e avviamento; esercizio e manutenzione fanno parte del costo totale del sistema."
+  ],
+  [
+   "La formazione degli utenti è un costo di avviamento.",
+   true,
+   "Rientra nei costi di apprendimento organizzativo."
+  ],
+  [
+   "Gli approcci preventivi al rischio sono preferibili a quelli reattivi.",
+   true,
+   "Prevengono invece di rimediare a consuntivo."
+  ],
+  [
+   "Il rischio di un progetto è la probabilità che non raggiunga i risultati nei tempi e nei costi previsti.",
+   true,
+   "È la definizione vista nelle slide."
+  ],
+  [
+   "L'innovazione tecnica cresce con l'esperienza degli specialisti.",
+   false,
+   "È inversamente proporzionale all'esperienza: la prima volta è innovativo, la quinta no."
+  ]
+ ],
+ "MC": [
+  [
+   "Che cosa contiene il documento di stima dei costi?",
+   [
+    "Ambito, come si è ottenuta la stima, vincoli, intervallo di costo",
+    "Solo il prezzo finale",
+    "L'elenco dei dipendenti"
+   ],
+   "Ambito, come si è ottenuta la stima, vincoli, intervallo di costo",
+   "Così la stima è documentata e verificabile."
+  ],
+  [
+   "Il budget di base si divide in…",
+   [
+    "Baseline e management reserve",
+    "Costi fissi e variabili",
+    "BCWP e ACWP"
+   ],
+   "Baseline e management reserve",
+   "Si ottiene togliendo il margine di guadagno al budget totale."
+  ],
+  [
+   "Che cosa indica BCWP?",
+   [
+    "Il lavoro fatto valutato ai costi di budget",
+    "I costi effettivamente sostenuti",
+    "I costi programmati"
+   ],
+   "Il lavoro fatto valutato ai costi di budget",
+   "È il «valore guadagnato»."
+  ],
+  [
+   "Formula della Schedule Variance:",
+   [
+    "SV = BCWP − BCWS",
+    "SV = BCWP − ACWP",
+    "SV = ACWP − BCWS"
+   ],
+   "SV = BCWP − BCWS",
+   "La CV invece è BCWP − ACWP."
+  ],
+  [
+   "Nell'esempio delle slide BCWP = 140.000 € e ACWP = 180.000 €: quanto vale la CV?",
+   [
+    "−40.000 €",
+    "+40.000 €",
+    "−26.000 €"
+   ],
+   "−40.000 €",
+   "140.000 − 180.000 = −40.000: sforo sui costi."
+  ],
+  [
+   "Che cosa sono i costi interni indotti?",
+   [
+    "Costi per l'uso di risorse dell'azienda esterne al gruppo di progetto",
+    "Prodotti acquistati da terzi",
+    "Il lavoro dei programmatori del progetto"
+   ],
+   "Costi per l'uso di risorse dell'azienda esterne al gruppo di progetto",
+   "Crescono con la complessità organizzativa."
+  ],
+  [
+   "Quale fattore fa diminuire i costi di avviamento?",
+   [
+    "Usare gli stessi archivi del sistema sostituito",
+    "Avere molte sedi",
+    "Cambiare molte prassi operative"
+   ],
+   "Usare gli stessi archivi del sistema sostituito",
+   "Non serve ricaricare i dati da zero."
+  ],
+  [
+   "Come si calcola il punteggio di rischio?",
+   [
+    "R = P × D",
+    "R = P + D",
+    "R = D / P"
+   ],
+   "R = P × D",
+   "P è la probabilità, D il danno atteso."
+  ],
+  [
+   "Quali sono i tre fattori di rischio di McFarlan?",
+   [
+    "Indeterminatezza, innovazione tecnica, dimensione",
+    "Tempo, costo, qualità",
+    "Probabilità, danno, priorità"
+   ],
+   "Indeterminatezza, innovazione tecnica, dimensione",
+   "Proposti da McFarlan nel 1981."
+  ],
+  [
+   "L'analisi del rischio tecnico è…",
+   [
+    "Sia diagnostica sia normativa",
+    "Solo diagnostica",
+    "Solo economica"
+   ],
+   "Sia diagnostica sia normativa",
+   "Valuta il progetto e prescrive azioni."
+  ]
+ ]
+};
+
+const eur = n => sep(n) + ' €';
+const SIT = ['Sforo sui costi e ritardo', 'Sforo sui costi, in anticipo', 'Risparmio sui costi, in ritardo', 'Risparmio sui costi, in anticipo'];
+const GEN = {
+  ev: () => { let bcws, bcwp, acwp;
+    do { bcws = rnd(100, 500) * 1000; bcwp = Math.round(bcws * rnd(70, 120) / 100 / 1000) * 1000; acwp = Math.round(bcwp * rnd(80, 125) / 100 / 1000) * 1000 } while (bcwp === bcws || acwp === bcwp);
+    const cv = bcwp - acwp, sv = bcwp - bcws, s = SIT[(cv > 0 ? 2 : 0) + (sv > 0 ? 1 : 0)];
+    return { q: `Alla data di controllo: <b>BCWS = ${eur(bcws)}</b>, <b>BCWP = ${eur(bcwp)}</b>, <b>ACWP = ${eur(acwp)}</b>. Calcolate Cost Variance e Schedule Variance e dite com'è la situazione. <small>Scrivete i numeri senza punti, con il meno se negativi: per esempio -12000.</small>`,
+      fields: [{ label: 'CV (€)', kind: 'num', exp: cv, tol: 0 }, { label: 'SV (€)', kind: 'num', exp: sv, tol: 0 }, { label: 'Situazione', kind: 'choice', opts: ['', ...SIT], exp: s }],
+      sol: P(`CV = BCWP − ACWP = ${sep(bcwp)} − ${sep(acwp)} = ${sep(cv)} €\nSV = BCWP − BCWS = ${sep(bcwp)} − ${sep(bcws)} = ${sep(sv)} €`) + `<p>CV ${cv < 0 ? 'negativa: si è speso più del valore del lavoro fatto (sforo)' : 'positiva: si è speso meno del valore del lavoro fatto (risparmio)'}; SV ${sv < 0 ? 'negativa: si è fatto meno lavoro del previsto (ritardo)' : 'positiva: si è fatto più lavoro del previsto (anticipo)'}.</p>` }; },
+  perc: () => { let bcws, bcwp, acwp;
+    do { bcws = rnd(10, 50) * 10000; bcwp = Math.round(bcws * rnd(70, 110) / 100 / 1000) * 1000; acwp = Math.round(bcwp * rnd(90, 120) / 100 / 1000) * 1000 } while (bcwp === bcws || acwp === bcwp);
+    const cv = bcwp - acwp, pc = cv / bcws * 100;
+    return { q: `<b>BCWS = ${eur(bcws)}</b>, <b>BCWP = ${eur(bcwp)}</b>, <b>ACWP = ${eur(acwp)}</b>. Calcolate la Cost Variance in percentuale (%CV = CV / BCWS · 100), con un decimale.`,
+      fields: [{ label: '%CV', kind: 'num', exp: pc, tol: 0.02 }],
+      sol: P(`CV = ${sep(bcwp)} − ${sep(acwp)} = ${sep(cv)} €\n%CV = ${sep(cv)} / ${sep(bcws)} · 100 = ${fmt(pc.toFixed(1))}%`) }; },
+  rischio: () => { const RI = ['Rottura del disco del server di sviluppo', 'Il cliente trascura il progetto per altre priorità', 'Non si trovano i programmatori richiesti', 'Un fornitore consegna in ritardo l\'hardware', 'Cambia una legge che riguarda il software'];
+    const ns = shuffle(RI).slice(0, 3); let v;
+    do { v = ns.map(n => { const p = rnd(1, 9) / 10, d = rnd(1, 10); return { n, p, d, r: Math.round(p * d * 10) / 10 } }) } while (new Set(v.map(x => x.r)).size < 3);
+    const top = v.reduce((a, b) => b.r > a.r ? b : a);
+    return { q: `Calcolate il punteggio di rischio R = P × D del primo rischio e scegliete quale rischio ha la priorità.<br>${v.map(x => `• ${x.n}: P = ${fmt(x.p)}, D = ${x.d}`).join('<br>')}`,
+      fields: [{ label: 'R del primo rischio', kind: 'num', exp: v[0].r, tol: 0.001 }, { label: 'Rischio prioritario', kind: 'choice', opts: ['', ...v.map(x => x.n)], exp: top.n }],
+      sol: P(v.map(x => `${x.n}: R = ${fmt(x.p)} × ${x.d} = ${fmt(x.r)}`).join('\n')) + `<p>Ha la priorità il rischio con R più alto: <b>${top.n}</b>.</p>` }; }
+};
+
+SG('#x_e1', D['e1'], D['e1_BK'], "Parametrica o analogia");
+SG('#x_e2', D['e2'], D['e2_BK'], "Bottom-up o top-down");
+SG('#x_b1', D['b1'], D['b1_BK'], "Parti del budget");
+SG('#x_v1', D['v1'], D['v1_BK'], "Le tre curve");
+mountMenu($('#x_v2'), [["CV, SV e situazione", GEN.ev], ["Cost Variance in percentuale", GEN.perc]], "Earned value");
+SG('#x_i1', D['i1'], D['i1_BK'], "Costruzione o avviamento");
+SG('#x_i2', D['i2'], D['i2_BK'], "Interni o esterni");
+SG('#x_r1', D['r1'], D['r1_BK'], "Reattivi o preventivi");
+orderGame($('#x_r2'), asOrder(D['r2']), "Valutazione dei rischi", false);
+mountMenu($('#x_r3'), [["Punteggio e priorit\u00e0", GEN.rischio]], "Punteggio di rischio");
+SG('#x_r4', D['r4'], D['r4_BK'], "Fattori di McFarlan");
+quiz();
+const SFIDA = [...mcAll(), ...vfAll(), GEN.ev, GEN.perc, GEN.rischio, GEN.ev, GEN.ev, GEN.rischio];
+mission($('#tot'), SFIDA, 'Sfida finale', 15);
+</script></body></html>

@@ -1,0 +1,271 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GitHub e buone pratiche</title><meta name="description" content="Repository remoti, clone, push e pull, fork e pull request, messaggi di commit e lavoro in squadra."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>GitHub e buone pratiche</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>GitHub e buone pratiche</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso di come si lavora in squadra con GitHub: il repository remoto, fork e pull request, e le buone pratiche per commit e branch.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">Buona pratica o cattiva abitudine? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine i passi per proporre una modifica a un progetto su cui non si può scrivere. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "Messaggio: «Aggiunge la validazione dell'email nel form»",
+   "buona"
+  ],
+  [
+   "Un commit per ogni modifica che ha senso da sola",
+   "buona"
+  ],
+  [
+   "git pull prima di iniziare a lavorare",
+   "buona"
+  ],
+  [
+   "Un branch per ogni funzione nuova",
+   "buona"
+  ],
+  [
+   "File .gitignore per le cartelle generate",
+   "buona"
+  ],
+  [
+   "Messaggio: «modifiche varie»",
+   "cattiva"
+  ],
+  [
+   "Un solo commit enorme a fine progetto",
+   "cattiva"
+  ],
+  [
+   "Password e chiavi salvate nel repository",
+   "cattiva"
+  ],
+  [
+   "Lavorare sempre direttamente su main",
+   "cattiva"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "buona",
+   "t": "Buona pratica",
+   "s": ""
+  },
+  {
+   "id": "cattiva",
+   "t": "Cattiva abitudine",
+   "s": ""
+  }
+ ],
+ "VF": [
+  [
+   "Una pull request chiede di unire le modifiche di un branch a un altro, con la possibilità di discuterle.",
+   true,
+   "Su GitHub si commenta il codice riga per riga prima del merge."
+  ],
+  [
+   "Le pull request riducono i bug perché il codice viene controllato da più persone.",
+   true,
+   "È la code review."
+  ],
+  [
+   "Un fork è una copia di un repository nel proprio account GitHub.",
+   true,
+   "Si usa quando non si può scrivere sul progetto originale."
+  ],
+  [
+   "<code>git clone<\/code> va eseguito ogni giorno prima di lavorare.",
+   false,
+   "Si fa una volta sola; poi ogni giorno basta git pull."
+  ],
+  [
+   "È buona pratica salvare nel repository il file con le password del database.",
+   false,
+   "Le credenziali non vanno mai nel repository: si mettono in .gitignore o in variabili d'ambiente."
+  ],
+  [
+   "Un buon messaggio di commit descrive che cosa cambia, in modo breve e chiaro.",
+   true,
+   "Per esempio: «Aggiunge validazione email nel form di registrazione»."
+  ],
+  [
+   "Il file README.md presenta il progetto nella pagina del repository.",
+   true,
+   "GitHub lo mostra sotto l'elenco dei file."
+  ],
+  [
+   "Le Issues di GitHub servono a segnalare bug e proporre attività.",
+   true,
+   "Si possono collegare alle pull request che le risolvono."
+  ]
+ ],
+ "MC": [
+  [
+   "Qual è il primo comando da eseguire per lavorare su un progetto già esistente su GitHub?",
+   [
+    "git clone con l'URL del repository",
+    "git init",
+    "git push",
+    "git merge"
+   ],
+   "git clone con l'URL del repository",
+   "Scarica tutto il repository con la cronologia."
+  ],
+  [
+   "Quando si usa tipicamente un fork?",
+   [
+    "Quando non si può scrivere sul progetto originale",
+    "Per cancellare un repository",
+    "Per rinominare un branch",
+    "Per vedere la cronologia"
+   ],
+   "Quando non si può scrivere sul progetto originale",
+   "Si lavora sulla propria copia e poi si apre una pull request."
+  ],
+  [
+   "Quale di questi è un buon messaggio di commit?",
+   [
+    "Aggiunge validazione email nel form di registrazione",
+    "fix",
+    "modifiche",
+    "ho cambiato delle cose"
+   ],
+   "Aggiunge validazione email nel form di registrazione",
+   "Dice che cosa cambia e dove."
+  ],
+  [
+   "Chi esegue tipicamente il merge di una pull request approvata?",
+   [
+    "Spesso qualcuno diverso dall'autore della modifica",
+    "Sempre GitHub in automatico",
+    "Nessuno: resta aperta",
+    "Solo l'autore"
+   ],
+   "Spesso qualcuno diverso dall'autore della modifica",
+   "Così il codice ha sempre almeno due paia di occhi."
+  ],
+  [
+   "Come si chiama di solito il repository remoto collegato con il clone?",
+   [
+    "origin",
+    "main",
+    "remote",
+    "master"
+   ],
+   "origin",
+   "main è il branch, origin il remoto."
+  ],
+  [
+   "Che cosa si scrive nel file <code>.gitignore<\/code>?",
+   [
+    "I file e le cartelle che Git non deve tracciare",
+    "Gli utenti bloccati",
+    "I commit da annullare",
+    "I branch da cancellare"
+   ],
+   "I file e le cartelle che Git non deve tracciare",
+   "Per esempio node_modules/ o *.class."
+  ],
+  [
+   "A che cosa serve GitHub Pages?",
+   [
+    "A pubblicare un sito statico direttamente da un repository",
+    "A scrivere i test",
+    "A unire i branch",
+    "A creare i fork"
+   ],
+   "A pubblicare un sito statico direttamente da un repository",
+   "Questo sito è pubblicato proprio così."
+  ],
+  [
+   "Che cosa conviene fare prima di iniziare a lavorare ogni giorno su un progetto condiviso?",
+   [
+    "git pull",
+    "git init",
+    "git clone di nuovo",
+    "git branch -D main"
+   ],
+   "git pull",
+   "Così si parte dalla versione più recente."
+  ]
+ ],
+ "ORD": [
+  [
+   "Fork del progetto su GitHub",
+   "Si crea una copia nel proprio account."
+  ],
+  [
+   "<code>git clone<\/code> del proprio fork",
+   "La copia arriva sul computer."
+  ],
+  [
+   "Nuovo branch, modifiche e commit",
+   "Il lavoro resta separato."
+  ],
+  [
+   "<code>git push<\/code> sul proprio fork",
+   "Le modifiche vanno su GitHub."
+  ],
+  [
+   "Apertura della pull request",
+   "Si chiede di unire le modifiche al progetto originale."
+  ],
+  [
+   "Revisione e merge",
+   "Spesso li fa qualcuno diverso dall'autore."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "Iniziare su un progetto esistente: una riga è sbagliata.",
+   "lines": [
+    "git clone https://github.com/scuola/progetto.git",
+    "cd progetto",
+    "git init",
+    "git switch -c nuova-pagina"
+   ],
+   "bad": 2,
+   "why": "Dopo git clone il repository esiste già con tutta la cronologia: git init non serve."
+  },
+  {
+   "t": "Messaggi di commit: uno non va bene.",
+   "lines": [
+    "Corregge il calcolo della media nella pagella",
+    "Aggiunge il pulsante per scaricare il PDF",
+    "aaa",
+    "Rimuove il codice duplicato nel login"
+   ],
+   "bad": 2,
+   "why": "Un messaggio deve dire che cosa cambia e perché, in poche parole."
+  },
+  {
+   "t": "Remoti: una riga è sbagliata.",
+   "lines": [
+    "origin è il nome predefinito del remoto",
+    "git remote -v elenca i remoti",
+    "git push origin main invia main a origin",
+    "git pull cancella le modifiche locali"
+   ],
+   "bad": 3,
+   "why": "git pull scarica e unisce le modifiche remote con quelle locali; non le cancella (se ci sono conflitti, chiede di risolverli)."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>

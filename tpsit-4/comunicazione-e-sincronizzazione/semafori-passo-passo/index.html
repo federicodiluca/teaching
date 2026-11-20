@@ -1,0 +1,99 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Semafori passo passo</title><style>body.tg-pp{margin:0}
+.tg-pp .pp-top{padding:1rem max(16px,env(safe-area-inset-right,0px)) .3rem max(16px,env(safe-area-inset-left,0px));max-width:1400px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:baseline;gap:.3rem 1rem}
+.tg-pp .pp-top h1{font-size:clamp(1.4rem,2.6vw,1.9rem);margin:0}
+.tg-pp .pp-top p{margin:0;color:var(--tg-mute)}
+.tg-pp main{padding:0 max(16px,env(safe-area-inset-right,0px)) 2rem max(16px,env(safe-area-inset-left,0px));max-width:1400px;margin:0 auto}
+.pp-scen{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0}
+.pp-scen button{font:inherit;padding:.45rem .9rem;border-radius:999px;border:1px solid var(--tg-line-2);background:var(--tg-paper);color:var(--tg-ink);cursor:pointer;min-height:44px}
+.pp-scen button[aria-pressed=true]{background:var(--tg-acc-soft);border-color:var(--tg-acc);font-weight:600}
+.pp-desc{max-width:80ch;margin:.4rem 0 .8rem;line-height:1.5}
+.pp-ctl{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-bottom:1rem}
+.pp-btn{font:inherit;font-weight:600;min-height:46px;padding:.5rem 1.1rem;border-radius:10px;border:1px solid var(--tg-acc);background:var(--tg-acc);color:var(--tg-on-acc);cursor:pointer}
+.pp-btn.sec{background:var(--tg-paper-2);color:var(--tg-ink);border-color:var(--tg-line-2)}
+.pp-btn:disabled{opacity:.45;cursor:default}
+#pp-passo{color:var(--tg-mute);font-variant-numeric:tabular-nums;margin-left:auto}
+.pp-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,340px);gap:1rem;align-items:start}
+@media(max-width:900px){.pp-grid{grid-template-columns:minmax(0,1fr)}}
+.pp-procs{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.8rem}
+.pp-p{background:var(--tg-paper);border:1px solid var(--tg-line);border-radius:12px;padding:.7rem .8rem;display:flex;flex-direction:column;gap:.4rem;box-shadow:var(--tg-shadow-sm);min-width:0}
+.pp-p.bloccato{border-color:var(--tg-warn)}
+.pp-p.finito{opacity:.6}
+.pp-ph{display:flex;justify-content:space-between;align-items:center;gap:.5rem;font-size:1.15rem}
+.pp-b{font-size:.78rem;font-weight:600;padding:.15rem .5rem;border-radius:999px;white-space:nowrap}
+.pp-b.pro{background:var(--tg-acc-soft);color:var(--tg-ink)}
+.pp-b.blo{background:var(--tg-warn-soft);color:var(--tg-warn)}
+.pp-b.sc{background:var(--tg-hl-soft);color:var(--tg-ink)}
+.pp-b.fin{background:var(--tg-paper-2);color:var(--tg-mute)}
+.pp-giro{font-size:.8rem;color:var(--tg-mute)}
+.pp-code{list-style:none;margin:0;padding:0;font-family:var(--tg-mono);font-size:.92rem;display:grid;gap:2px}
+.pp-code li{padding:.2rem .45rem;border-radius:6px;border-left:3px solid transparent;overflow-wrap:anywhere}
+.pp-code li.sc{border-left-color:var(--tg-hl)}
+.pp-code li.last{color:var(--tg-mute)}
+.pp-code li.cur{background:var(--tg-acc-soft);font-weight:700;color:var(--tg-ink)}
+.pp-code li.cur::before{content:"▶ ";color:var(--tg-acc)}
+.pp-p.bloccato .pp-code li.cur{background:var(--tg-warn-soft)}
+.pp-loc{font-family:var(--tg-mono);font-size:.85rem;color:var(--tg-mute)}
+.pp-go{font:inherit;font-weight:600;margin-top:auto;min-height:44px;border-radius:9px;border:1px solid var(--tg-line-2);background:var(--tg-paper-2);color:var(--tg-ink);cursor:pointer}
+.pp-go:not(:disabled):hover{border-color:var(--tg-acc)}
+.pp-go:disabled{opacity:.4;cursor:default}
+.pp-go kbd{font-family:var(--tg-mono);font-size:.75rem;border:1px solid var(--tg-line-2);border-radius:4px;padding:0 .3rem;color:var(--tg-mute)}
+.pp-side{background:var(--tg-paper);border:1px solid var(--tg-line);border-radius:12px;padding:.8rem;display:flex;flex-direction:column;gap:.5rem;min-width:0}
+.pp-side h2{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--tg-mute);margin:.3rem 0 0}
+.pp-s{display:grid;grid-template-columns:1fr auto;align-items:center;gap:0 .6rem;padding:.45rem .6rem;border-radius:9px;border:1px solid var(--tg-line)}
+.pp-s.verde{background:var(--tg-ok-soft)}
+.pp-s.rosso{background:var(--tg-ko-soft)}
+.pp-sn{font-family:var(--tg-mono);font-weight:600}
+.pp-sv{font-family:var(--tg-mono);font-size:1.5rem;font-weight:700;grid-row:span 2;font-variant-numeric:tabular-nums}
+.pp-s.verde .pp-sv{color:var(--tg-ok)}
+.pp-s.rosso .pp-sv{color:var(--tg-ko)}
+.pp-sc{font-size:.82rem;color:var(--tg-mute)}
+.pp-var{display:flex;justify-content:space-between;gap:.5rem;font-family:var(--tg-mono)}
+.pp-msg p{margin:.3rem 0;padding:.5rem .6rem;border-radius:8px;font-weight:600;line-height:1.35}
+.pp-msg p.ko{background:var(--tg-ko-soft);color:var(--tg-ko)}
+.pp-msg p.ok{background:var(--tg-ok-soft);color:var(--tg-ok)}
+.pp-log{margin:0;padding-left:1.1rem;font-size:.85rem;color:var(--tg-mute);display:grid;gap:.2rem}
+.pp-log li:first-child{color:var(--tg-ink);font-weight:600}
+.pp-cells{display:flex;gap:.3rem;flex-wrap:wrap}
+.pp-cell{min-width:3.2rem;text-align:center;padding:.35rem;border:1px solid var(--tg-line-2);border-radius:8px;font-family:var(--tg-mono);background:var(--tg-paper-2)}
+.pp-cell.piena{background:var(--tg-acc-soft);border-color:var(--tg-acc)}
+.pp-cell small{display:block;color:var(--tg-mute);font-size:.7rem;min-height:1em}</style><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head><body class="tg-lim tg-pp"><header class="pp-top"><h1>Semafori passo passo</h1><p>Siete voi lo scheduler: scegliete chi esegue la prossima istruzione.</p></header><main></main><script src="../../temi/passo-passo.js"></script><script>
+const leggi={t:'r = contatore',f:(v,L)=>{L.r=v.contatore},sc:true},
+      incr={t:'r = r + 1',f:(v,L)=>{L.r++},sc:true},
+      scrivi={t:'contatore = r',f:(v,L)=>{v.contatore=L.r},sc:true};
+const fineCont=n=>v=>v.contatore===n?['ok',`Tutti hanno finito: contatore = ${n}, il valore giusto.`]:['ko',`Tutti hanno finito, ma contatore = ${v.contatore} invece di ${n}: un aggiornamento è andato perso.`];
+const seq=(nome,chi,dopo)=>({t:nome,f:v=>{v.fatte.push(nome);if(dopo&&!dopo.every(x=>v.fatte.includes(x)))return['ko',`${nome} è partita prima di ${dopo.filter(x=>!v.fatte.includes(x)).join(' e ')}: vincolo violato.`]}});
+const fatte=v=>`<div class="pp-var"><span>sequenze eseguite</span><b>${v.fatte.join(', ')||'nessuna'}</b></div>`;
+SIM({scenari:[
+ {id:'senza-semaforo',nome:'Contatore senza semaforo',
+  desc:'A e B incrementano lo stesso contatore in tre passi: leggono, sommano 1, scrivono. Provate ad alternarli (A, B, A, B...): che valore finale ottenete? E se fate finire prima A e poi B?',
+  vars:{contatore:0},procs:['A','B'].map(n=>({nome:n,code:[leggi,incr,scrivi]})),fine:fineCont(2)},
+ {id:'mutua-esclusione',nome:'Mutua esclusione',
+  desc:'Le stesse tre istruzioni, ora protette da P(mutex) e V(mutex), con mutex = 1. Comunque scegliate l\'ordine, nella sezione critica entra un processo alla volta e il contatore arriva a 3.',
+  sem:{mutex:1},vars:{contatore:0},procs:['A','B','C'].map(n=>({nome:n,code:[{P:'mutex'},leggi,incr,scrivi,{V:'mutex'}]})),fine:fineCont(3)},
+ {id:'stampanti',nome:'Due stampanti, quattro processi',
+  desc:'Un semaforo a conteggio inizializzato a 2: due processi possono stampare insieme, il terzo che arriva va in coda finché uno non esegue V.',
+  sem:{stampanti:2},vars:{stampano:[]},
+  procs:['A','B','C','D'].map(n=>({nome:n,code:[{P:'stampanti'},{t:'inizia a stampare',f:(v,L,p)=>{v.stampano.push(p)}},{t:'finisce di stampare',f:(v,L,p)=>{v.stampano=v.stampano.filter(x=>x!==p)}},{V:'stampanti'}]})),
+  vista:v=>`<div class="pp-var"><span>stanno stampando</span><b>${v.stampano.join(', ')||'nessuno'}</b></div>`},
+ {id:'precedenza',nome:'Vincolo di precedenza',
+  desc:'P2 deve eseguire sequenza2 solo dopo che P1 ha finito sequenza1. Il semaforo s parte rosso (0): provate a far partire prima P2.',
+  sem:{s:0},vars:{fatte:[]},procs:[{nome:'P1',code:[seq('sequenza1'),{V:'s'}]},{nome:'P2',code:[{P:'s'},seq('sequenza2',null,['sequenza1'])]}],vista:fatte},
+ {id:'rendez-vous',nome:'Rendez-vous',
+  desc:'A e B eseguono la prima sequenza, si aspettano e solo dopo eseguono la seconda. Due semafori, entrambi a 0: ognuno esegue V del semaforo dell\'altro e P del proprio.',
+  sem:{m1:0,m2:0},vars:{fatte:[]},
+  procs:[{nome:'A',code:[seq('seqA1'),{V:'m1'},{P:'m2'},seq('seqA2',null,['seqA1','seqB1'])]},{nome:'B',code:[seq('seqB1'),{V:'m2'},{P:'m1'},seq('seqB2',null,['seqA1','seqB1'])]}],vista:fatte},
+ {id:'buffer-cella',nome:'Buffer a una cella',
+  desc:'Il produttore deposita tre dati, uno alla volta; il consumatore li preleva. mutexBV parte da 1 (buffer vuoto) e mutexBP da 0 (buffer non pieno): i due processi si alternano per forza.',
+  sem:{mutexBV:1,mutexBP:0},vars:{buffer:null,prodotti:0,letti:[]},
+  procs:[{nome:'Produttore',rip:3,code:[{t:'produce un dato',f:(v,L)=>{L.dato='D'+(++v.prodotti)}},{P:'mutexBV'},{t:'inserisci(dato)',f:(v,L)=>{const r=v.buffer?['ko',`Il produttore ha sovrascritto ${v.buffer}, che nessuno aveva letto.`]:null;v.buffer=L.dato;return r}},{V:'mutexBP'}]},
+         {nome:'Consumatore',rip:3,code:[{P:'mutexBP'},{t:'estrai(dato)',f:(v,L)=>{if(!v.buffer)return['ko','Il consumatore ha letto un buffer vuoto.'];L.dato=v.buffer;v.letti.push(v.buffer);v.buffer=null}},{V:'mutexBV'},{t:'consuma il dato'}]}],
+  vista:v=>`<div class="pp-cells"><div class="pp-cell ${v.buffer?'piena':''}"><small>buffer</small>${v.buffer||'—'}</div></div><div class="pp-var"><span>letti</span><b>${v.letti.join(', ')||'nessuno'}</b></div>`,
+  fine:v=>v.letti.join()==='D1,D2,D3'?['ok','Il consumatore ha letto D1, D2, D3: nessun dato perso o letto due volte.']:['ko','Qualcosa non torna nei dati letti.']},
+ {id:'v-dimenticata',nome:'Errore: V dimenticata',
+  desc:'A esce dalla sezione critica senza eseguire V(mutex). Fate entrare prima A e poi provate con B.',
+  sem:{mutex:1},vars:{},procs:[{nome:'A',code:[{P:'mutex'},{t:'<sezione critica>',sc:true},{t:'esce senza V(mutex)'}]},{nome:'B',code:[{P:'mutex'},{t:'<sezione critica>',sc:true},{V:'mutex'}]}]},
+ {id:'p-v-invertite',nome:'Errore: P e V scambiate',
+  desc:'Qui ogni processo esegue V prima della sezione critica e P dopo. Fate entrare A e poi B: che cosa succede alla mutua esclusione e al valore di mutex?',
+  sem:{mutex:1},vars:{},procs:['A','B'].map(n=>({nome:n,code:[{V:'mutex'},{t:'<sezione critica>',sc:true},{P:'mutex'}]}))}
+]});
+</script></body></html>

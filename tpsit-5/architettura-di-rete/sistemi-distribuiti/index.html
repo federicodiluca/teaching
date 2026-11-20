@@ -1,0 +1,263 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sistemi distribuiti</title><meta name="description" content="Che cos&#x27;è un sistema distribuito, vantaggi, svantaggi e le forme di trasparenza."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>Sistemi distribuiti</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Sistemi distribuiti</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso dei sistemi distribuiti: quando un sistema si dice distribuito, che cosa si guadagna, che cosa si complica e che cosa vuol dire trasparenza.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">Vantaggio o svantaggio dei sistemi distribuiti? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine l'evoluzione dello sviluppo di software distribuito, dalla prima tappa all'ultima. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "Affidabilità: se un nodo si guasta gli altri continuano",
+   "pro"
+  ],
+  [
+   "Scalabilità: si aggiungono nodi quando il carico cresce",
+   "pro"
+  ],
+  [
+   "Condivisione di risorse fra più utenti",
+   "pro"
+  ],
+  [
+   "Costi minori: tanti PC al posto di un mainframe",
+   "pro"
+  ],
+  [
+   "Più punti di attacco e rischio di intercettazione",
+   "contro"
+  ],
+  [
+   "Software più complesso da progettare",
+   "contro"
+  ],
+  [
+   "Prestazioni difficili da prevedere",
+   "contro"
+  ],
+  [
+   "Picchi imprevedibili di traffico in rete",
+   "contro"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "pro",
+   "t": "Vantaggio",
+   "s": ""
+  },
+  {
+   "id": "contro",
+   "t": "Svantaggio",
+   "s": ""
+  }
+ ],
+ "VF": [
+  [
+   "Un sistema è distribuito quando le applicazioni o i dati risiedono su più host che collaborano.",
+   true,
+   "Per l'utente può comunque sembrare un unico sistema."
+  ],
+  [
+   "Un sistema distribuito si scala di solito orizzontalmente, aggiungendo nodi.",
+   true,
+   "È più economico e flessibile che sostituire la macchina."
+  ],
+  [
+   "La trasparenza fa percepire il sistema distribuito come un unico elaboratore.",
+   true,
+   "L'utente non vede la distribuzione."
+  ],
+  [
+   "Nei sistemi distribuiti la sicurezza è più semplice che in quelli centralizzati.",
+   false,
+   "Più host collegati significano più punti di attacco."
+  ],
+  [
+   "Le due forme di trasparenza più importanti sono di accesso e di locazione.",
+   true,
+   "Insieme sono chiamate anche trasparenza di rete."
+  ],
+  [
+   "In un sistema distribuito un nodo è sempre e solo client o sempre e solo server.",
+   false,
+   "Dipende dal software in esecuzione in quel momento."
+  ],
+  [
+   "Il recovery automatico dopo un guasto è un esempio di trasparenza ai guasti.",
+   true,
+   "L'utente non si accorge del problema."
+  ],
+  [
+   "Il Web è il più grande sistema distribuito esistente.",
+   true,
+   "Milioni di server e client che collaborano."
+  ]
+ ],
+ "MC": [
+  [
+   "Qual è il principale vantaggio dei sistemi distribuiti?",
+   [
+    "L'affidabilità grazie alla ridondanza",
+    "La semplicità del software",
+    "L'assenza di rete",
+    "La sicurezza automatica"
+   ],
+   "L'affidabilità grazie alla ridondanza",
+   "Se un nodo si guasta gli altri continuano."
+  ],
+  [
+   "Che cosa garantisce la trasparenza di accesso?",
+   [
+    "Le stesse operazioni per risorse locali e remote",
+    "La cifratura dei dati",
+    "L'accesso senza password",
+    "La velocità della rete"
+   ],
+   "Le stesse operazioni per risorse locali e remote",
+   "Per esempio aprire un file locale o di rete allo stesso modo."
+  ],
+  [
+   "Che cosa garantisce la trasparenza di locazione?",
+   [
+    "Che non serva sapere dove si trova fisicamente la risorsa",
+    "Che la risorsa non si sposti mai",
+    "Che i dati siano in Italia",
+    "Che ogni nodo abbia un IP pubblico"
+   ],
+   "Che non serva sapere dove si trova fisicamente la risorsa",
+   "Si usa un nome, non un indirizzo fisico."
+  ],
+  [
+   "Come si scala un sistema distribuito quando il carico cresce?",
+   [
+    "Aggiungendo nuovi nodi",
+    "Spegnendo i client",
+    "Riducendo gli utenti",
+    "Comprando un monitor più grande"
+   ],
+   "Aggiungendo nuovi nodi",
+   "Scalabilità orizzontale."
+  ],
+  [
+   "Perché la sicurezza è un problema nei sistemi distribuiti?",
+   [
+    "Più host collegati significano più punti di attacco",
+    "Perché non usano password",
+    "Perché i dati sono sempre pubblici",
+    "Perché non hanno server"
+   ],
+   "Più host collegati significano più punti di attacco",
+   "I dati viaggiano in rete e possono essere intercettati."
+  ],
+  [
+   "Nei sistemi centralizzati la sicurezza si otteneva soprattutto:",
+   [
+    "Proteggendo fisicamente i locali",
+    "Con la crittografia a chiave pubblica",
+    "Con i firewall cloud",
+    "Con l'autenticazione a due fattori"
+   ],
+   "Proteggendo fisicamente i locali",
+   "Bastava chiudere a chiave la sala macchine."
+  ],
+  [
+   "Che cosa determina se un nodo fa da client o da server?",
+   [
+    "Il software in esecuzione su quel nodo",
+    "La marca del computer",
+    "La velocità della CPU",
+    "Il sistema operativo"
+   ],
+   "Il software in esecuzione su quel nodo",
+   "Lo stesso PC può fare entrambe le cose."
+  ],
+  [
+   "Qual è stata la prima tappa dello sviluppo di software distribuito?",
+   [
+    "TCP/IP e programmazione con i socket",
+    "I microservizi",
+    "I web service REST",
+    "Il cloud"
+   ],
+   "TCP/IP e programmazione con i socket",
+   "Poi RPC, oggetti distribuiti, web service, microservizi."
+  ]
+ ],
+ "ORD": [
+  [
+   "TCP/IP e programmazione con i socket",
+   "Si scambiano byte fra processi."
+  ],
+  [
+   "Chiamate di procedura remota (RPC)",
+   "Si chiama una funzione su un altro host."
+  ],
+  [
+   "Oggetti distribuiti (CORBA, RMI)",
+   "Si invocano metodi di oggetti remoti."
+  ],
+  [
+   "Web service",
+   "Servizi chiamati con protocolli web, XML e JSON."
+  ],
+  [
+   "Microservizi e cloud",
+   "Tanti piccoli servizi indipendenti."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "Forme di trasparenza: una riga è sbagliata.",
+   "lines": [
+    "Di accesso: stesse operazioni per risorse locali e remote",
+    "Di locazione: non serve sapere dove si trova la risorsa",
+    "Ai guasti: il sistema si riprende senza che l'utente se ne accorga",
+    "Di replicazione: l'utente deve scegliere quale copia usare"
+   ],
+   "bad": 3,
+   "why": "Con la trasparenza di replicazione l'utente non sa nemmeno che esistono più copie."
+  },
+  {
+   "t": "Definizioni: una riga è sbagliata.",
+   "lines": [
+    "Sistema distribuito: più host che collaborano",
+    "Scalabilità orizzontale: aggiungere nodi",
+    "Il Web è un sistema distribuito",
+    "Scalabilità orizzontale: comprare un server più potente"
+   ],
+   "bad": 3,
+   "why": "Comprare una macchina più potente è la scalabilità verticale."
+  },
+  {
+   "t": "Esempi: una riga non è un sistema distribuito.",
+   "lines": [
+    "Il Web",
+    "Un servizio di posta come Gmail",
+    "Una rete peer-to-peer",
+    "Una calcolatrice offline sul telefono"
+   ],
+   "bad": 3,
+   "why": "Un programma che gira su un solo dispositivo senza collaborare con altri host non è distribuito."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>

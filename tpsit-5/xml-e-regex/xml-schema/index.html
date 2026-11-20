@@ -1,0 +1,291 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>XML Schema (XSD)</title><meta name="description" content="Documenti validi, tipi semplici e complessi, sequence, minOccurs e maxOccurs, attributi e restrizioni."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>XML Schema (XSD)</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>XML Schema (XSD)</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso di XML Schema: perché un documento ben formato non basta e come si descrivono elementi, tipi e vincoli.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">Questo elemento ha un tipo semplice o complesso? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine le righe dello schema per un elemento studente con nome e voto. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "<nome>Ada<\/nome>",
+   "semplice"
+  ],
+  [
+   "<voto>8<\/voto>",
+   "semplice"
+  ],
+  [
+   "<data>2026-12-10<\/data>",
+   "semplice"
+  ],
+  [
+   "<studente><nome>Ada<\/nome><\/studente>",
+   "complesso"
+  ],
+  [
+   "<prezzo valuta=\"EUR\">2.50<\/prezzo>",
+   "complesso"
+  ],
+  [
+   "<foto file=\"a.png\"/>",
+   "complesso"
+  ],
+  [
+   "<classe>con più <studente><\/classe>",
+   "complesso"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "semplice",
+   "t": "Tipo semplice",
+   "s": "solo testo"
+  },
+  {
+   "id": "complesso",
+   "t": "Tipo complesso",
+   "s": "figli o attributi"
+  }
+ ],
+ "VF": [
+  [
+   "Un documento ben formato non è per forza valido.",
+   true,
+   "Valido vuol dire che rispetta anche lo schema (DTD o XSD)."
+  ],
+  [
+   "Un XML Schema è scritto a sua volta in XML.",
+   true,
+   "Si usano gli stessi strumenti dei documenti XML."
+  ],
+  [
+   "Il valore predefinito di minOccurs e maxOccurs è 0.",
+   false,
+   "È 1: senza indicazioni l'elemento compare esattamente una volta."
+  ],
+  [
+   "Un elemento con attributi ma senza figli ha un tipo complesso.",
+   true,
+   "Basta un attributo per rendere il tipo complesso."
+  ],
+  [
+   "Con <code>xs:sequence<\/code> i figli devono comparire nell'ordine indicato.",
+   true,
+   "Con xs:all l'ordine è libero; con xs:choice ne compare uno solo."
+  ],
+  [
+   "Le facet length, minLength e maxLength si applicano ai numeri.",
+   false,
+   "Si applicano alle stringhe; per i numeri si usano minInclusive, maxInclusive e simili."
+  ],
+  [
+   "<code>xs:enumeration<\/code> elenca i valori ammessi.",
+   true,
+   "Per esempio le taglie S, M, L."
+  ],
+  [
+   "XML Schema offre più di quaranta tipi predefiniti.",
+   true,
+   "Fra questi xs:string, xs:integer, xs:decimal, xs:date, xs:boolean."
+  ]
+ ],
+ "MC": [
+  [
+   "Perché un documento ben formato non basta?",
+   [
+    "La sintassi giusta non garantisce che il contenuto abbia senso",
+    "Perché non si può aprire",
+    "Perché manca il CSS",
+    "Perché è troppo lungo"
+   ],
+   "La sintassi giusta non garantisce che il contenuto abbia senso",
+   "Lo schema stabilisce quali elementi e valori sono ammessi."
+  ],
+  [
+   "Come si vincolano i valori ammessi per un tipo semplice?",
+   [
+    "Con xs:simpleType e una xs:restriction",
+    "Con xs:sequence",
+    "Con un commento",
+    "Con xs:complexType vuoto"
+   ],
+   "Con xs:simpleType e una xs:restriction",
+   "Dentro la restriction si mettono le facet."
+  ],
+  [
+   "Come si indica che un elemento può ripetersi senza limite?",
+   [
+    "maxOccurs=\"unbounded\"",
+    "maxOccurs=\"0\"",
+    "repeat=\"yes\"",
+    "minOccurs=\"many\""
+   ],
+   "maxOccurs=\"unbounded\"",
+   "minOccurs=\"0\" invece lo rende facoltativo."
+  ],
+  [
+   "Che cos'è un elemento semplice in XSD?",
+   [
+    "Un elemento con solo testo, senza figli né attributi",
+    "Un elemento vuoto",
+    "La radice",
+    "Un commento"
+   ],
+   "Un elemento con solo testo, senza figli né attributi",
+   "Per esempio &lt;voto&gt;8&lt;/voto&gt;."
+  ],
+  [
+   "Quale tipo predefinito si usa per una data?",
+   [
+    "xs:date",
+    "xs:string",
+    "xs:time",
+    "xs:day"
+   ],
+   "xs:date",
+   "Formato AAAA-MM-GG."
+  ],
+  [
+   "Quale facet limita un numero a un massimo compreso?",
+   [
+    "maxInclusive",
+    "maxLength",
+    "length",
+    "pattern"
+   ],
+   "maxInclusive",
+   "maxExclusive esclude il valore indicato."
+  ],
+  [
+   "Quale facet permette di usare un'espressione regolare?",
+   [
+    "pattern",
+    "enumeration",
+    "length",
+    "whiteSpace"
+   ],
+   "pattern",
+   "Per esempio un codice postale di cinque cifre."
+  ],
+  [
+   "In che anno XML Schema è diventato raccomandazione W3C?",
+   [
+    "2001",
+    "1991",
+    "1998",
+    "2010"
+   ],
+   "2001",
+   "Ha sostituito in molti usi le DTD."
+  ]
+ ],
+ "ORD": [
+  [
+   "<code>&lt;xs:element name=\"studente\"&gt;<\/code>",
+   "Dichiarazione dell'elemento."
+  ],
+  [
+   "<code>  &lt;xs:complexType&gt;<\/code>",
+   "Ha figli: tipo complesso."
+  ],
+  [
+   "<code>    &lt;xs:sequence&gt;<\/code>",
+   "I figli in quest'ordine."
+  ],
+  [
+   "<code>      &lt;xs:element name=\"nome\" type=\"xs:string\"/&gt;<\/code>",
+   "Primo figlio."
+  ],
+  [
+   "<code>      &lt;xs:element name=\"voto\" type=\"xs:integer\"/&gt;<\/code>",
+   "Secondo figlio."
+  ],
+  [
+   "<code>    &lt;/xs:sequence&gt;<\/code>",
+   "Fine della sequenza."
+  ],
+  [
+   "<code>  &lt;/xs:complexType&gt;<\/code>",
+   "Fine del tipo."
+  ],
+  [
+   "<code>&lt;/xs:element&gt;<\/code>",
+   "Fine dell'elemento."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "Schema: una riga è sbagliata (il voto va da 1 a 10).",
+   "lines": [
+    "<xs:simpleType name=\"tipoVoto\">",
+    "  <xs:restriction base=\"xs:integer\">",
+    "    <xs:minInclusive value=\"1\"/>",
+    "    <xs:maxLength value=\"10\"/>",
+    "  <\/xs:restriction>",
+    "<\/xs:simpleType>"
+   ],
+   "bad": 3,
+   "why": "maxLength vale per le stringhe; per un numero il massimo si indica con maxInclusive."
+  },
+  {
+   "t": "Schema: una riga è sbagliata (un ordine con almeno un prodotto, senza limite).",
+   "lines": [
+    "<xs:element name=\"ordine\">",
+    "  <xs:complexType><xs:sequence>",
+    "    <xs:element name=\"prodotto\" minOccurs=\"1\" maxOccurs=\"infinito\"/>",
+    "  <\/xs:sequence><\/xs:complexType>",
+    "<\/xs:element>"
+   ],
+   "bad": 2,
+   "why": "Senza limite si scrive maxOccurs=\"unbounded\"."
+  },
+  {
+   "t": "Schema: una riga è sbagliata (l'attributo valuta è obbligatorio).",
+   "lines": [
+    "<xs:complexType>",
+    "  <xs:simpleContent>",
+    "    <xs:extension base=\"xs:decimal\">",
+    "      <xs:attribute name=\"valuta\" type=\"xs:string\" use=\"optional\"/>",
+    "    <\/xs:extension>",
+    "  <\/xs:simpleContent>",
+    "<\/xs:complexType>"
+   ],
+   "bad": 3,
+   "why": "Per un attributo obbligatorio si scrive use=\"required\"."
+  },
+  {
+   "t": "Schema: una riga è sbagliata (taglia S, M o L).",
+   "lines": [
+    "<xs:simpleType name=\"taglia\">",
+    "  <xs:restriction base=\"xs:string\">",
+    "    <xs:enumeration value=\"S\"/>",
+    "    <xs:enumeration value=\"M\"/>",
+    "    <xs:enumeration value=\"L\"/>",
+    "  <\/xs:restriction>",
+    "<\/xs:complexType>"
+   ],
+   "bad": 6,
+   "why": "La chiusura deve corrispondere all'apertura: <\/xs:simpleType>."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>

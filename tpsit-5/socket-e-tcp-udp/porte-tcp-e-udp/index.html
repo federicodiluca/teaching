@@ -1,0 +1,300 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Porte, TCP e UDP</title><meta name="description" content="Le porte logiche e i servizi più noti, l&#x27;incapsulamento e le differenze fra TCP e UDP."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>Porte, TCP e UDP</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Porte, TCP e UDP</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso del livello di trasporto: a che cosa servono le porte, quali servizi usano le porte più note, quando si sceglie TCP e quando UDP.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">TCP o UDP? Smistate caratteristiche e applicazioni. Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine l'incapsulamento di un messaggio, dal programma fino al cavo. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "Orientato alla connessione",
+   "tcp"
+  ],
+  [
+   "Handshake a 3 vie",
+   "tcp"
+  ],
+  [
+   "Consegna affidabile e in ordine",
+   "tcp"
+  ],
+  [
+   "Controllo di flusso e di congestione",
+   "tcp"
+  ],
+  [
+   "Posta elettronica (SMTP)",
+   "tcp"
+  ],
+  [
+   "Pagine web (HTTP)",
+   "tcp"
+  ],
+  [
+   "Trasferimento di file (FTP)",
+   "tcp"
+  ],
+  [
+   "Senza connessione",
+   "udp"
+  ],
+  [
+   "Datagrammi indipendenti",
+   "udp"
+  ],
+  [
+   "Nessuna garanzia di consegna",
+   "udp"
+  ],
+  [
+   "Intestazione piccola, poco overhead",
+   "udp"
+  ],
+  [
+   "Risoluzione dei nomi (DNS)",
+   "udp"
+  ],
+  [
+   "Streaming e VoIP in tempo reale",
+   "udp"
+  ],
+  [
+   "Può fare multicast e broadcast",
+   "udp"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "tcp",
+   "t": "TCP",
+   "s": "Transmission Control Protocol"
+  },
+  {
+   "id": "udp",
+   "t": "UDP",
+   "s": "User Datagram Protocol"
+  }
+ ],
+ "VF": [
+  [
+   "Le porte logiche servono a distinguere più applicazioni di rete sullo stesso computer.",
+   true,
+   "L'indirizzo IP identifica l'host, la porta identifica il processo."
+  ],
+  [
+   "UDP garantisce che i datagrammi arrivino nell'ordine in cui sono stati inviati.",
+   false,
+   "UDP non garantisce né la consegna né l'ordine: se servono, se ne occupa l'applicazione."
+  ],
+  [
+   "Il segmento è l'unità di informazione del livello di trasporto TCP.",
+   true,
+   "Livello di trasporto: segmento; livello Internet: pacchetto; accesso alla rete: frame."
+  ],
+  [
+   "Le porte da 0 a 1023 sono chiamate well-known ports.",
+   true,
+   "Sono riservate ai servizi più noti, come HTTP (80) e DNS (53)."
+  ],
+  [
+   "TCP garantisce una banda minima e tempi di risposta fissi.",
+   false,
+   "TCP garantisce affidabilità e ordine, non la banda né i tempi: per il tempo reale si usano protocolli come RTP."
+  ],
+  [
+   "Il DNS usa di solito UDP perché le richieste sono brevi e servono risposte rapide.",
+   true,
+   "Una domanda e una risposta in un datagramma ciascuna: non vale la pena aprire una connessione."
+  ],
+  [
+   "Una connessione TCP permette di inviare dati in entrambe le direzioni.",
+   true,
+   "TCP è full-duplex: client e server possono trasmettere contemporaneamente."
+  ],
+  [
+   "Per la posta elettronica è meglio UDP perché è più veloce.",
+   false,
+   "Una mail deve arrivare intera e corretta: serve l'affidabilità di TCP."
+  ]
+ ],
+ "MC": [
+  [
+   "Su quale porta lavora di norma HTTPS?",
+   [
+    "443",
+    "80",
+    "8443",
+    "21"
+   ],
+   "443",
+   "HTTP usa la 80, HTTPS la 443."
+  ],
+  [
+   "Che cosa identifica la porta di destinazione in un segmento?",
+   [
+    "Il processo che deve ricevere i dati",
+    "Il computer che deve ricevere i dati",
+    "La scheda di rete",
+    "Il router di uscita"
+   ],
+   "Il processo che deve ricevere i dati",
+   "L'host lo identifica l'indirizzo IP; la porta indica il processo dentro l'host."
+  ],
+  [
+   "Quale caratteristica distingue TCP da UDP?",
+   [
+    "Stabilisce una connessione prima di trasmettere",
+    "Usa gli indirizzi IP",
+    "Usa i numeri di porta",
+    "Funziona solo in rete locale"
+   ],
+   "Stabilisce una connessione prima di trasmettere",
+   "Sia TCP sia UDP usano porte e IP; solo TCP apre una connessione con l'handshake."
+  ],
+  [
+   "Come si chiama il meccanismo per cui ogni livello aggiunge le sue informazioni ai dati del livello superiore?",
+   [
+    "Incapsulamento",
+    "Multiplexing",
+    "Instradamento",
+    "Frammentazione"
+   ],
+   "Incapsulamento",
+   "Ogni livello aggiunge la propria intestazione; il destinatario le toglie in ordine inverso."
+  ],
+  [
+   "Quante porte esistono per ciascun protocollo di trasporto?",
+   [
+    "65536",
+    "1024",
+    "49151",
+    "4096"
+   ],
+   "65536",
+   "Il numero di porta è a 16 bit: da 0 a 65535."
+  ],
+  [
+   "Per una videochiamata, quale protocollo di trasporto è più adatto?",
+   [
+    "UDP",
+    "TCP",
+    "FTP",
+    "SMTP"
+   ],
+   "UDP",
+   "Meglio perdere qualche pacchetto che aspettare le ritrasmissioni: conta il tempo reale."
+  ],
+  [
+   "Su quale porta lavora di norma il DNS?",
+   [
+    "53",
+    "25",
+    "110",
+    "22"
+   ],
+   "53",
+   "DNS: porta 53, di solito con UDP."
+  ],
+  [
+   "In quale intervallo il sistema operativo sceglie di solito la porta del client?",
+   [
+    "Fra le porte dinamiche, sopra 49151",
+    "Fra le well-known ports",
+    "Sempre la porta 80",
+    "Sempre la stessa porta del server"
+   ],
+   "Fra le porte dinamiche, sopra 49151",
+   "La porta del client è temporanea (effimera) e viene assegnata in automatico."
+  ]
+ ],
+ "ORD": [
+  [
+   "Messaggio dell'applicazione",
+   "Per esempio una richiesta HTTP del browser."
+  ],
+  [
+   "Segmento (o datagramma UDP)",
+   "Il trasporto aggiunge porta di origine e di destinazione."
+  ],
+  [
+   "Pacchetto IP",
+   "Il livello Internet aggiunge indirizzo IP di origine e di destinazione."
+  ],
+  [
+   "Frame",
+   "Il livello di accesso alla rete aggiunge gli indirizzi MAC."
+  ],
+  [
+   "Bit sul mezzo fisico",
+   "Segnali elettrici, ottici o radio."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "Una sola associazione servizio, porta e trasporto è sbagliata.",
+   "lines": [
+    "HTTP  porta 80   TCP",
+    "HTTPS porta 443  TCP",
+    "DNS   porta 53   UDP",
+    "SSH   porta 25   TCP",
+    "FTP   porta 21   TCP"
+   ],
+   "bad": 3,
+   "why": "SSH usa la porta 22; la 25 è quella di SMTP."
+  },
+  {
+   "t": "Un solo intervallo di porte è sbagliato.",
+   "lines": [
+    "Well-known ports: 0 - 1023",
+    "Registered ports: 1024 - 49151",
+    "Porte dinamiche: 49152 - 65535",
+    "Numero di porta: 32 bit"
+   ],
+   "bad": 3,
+   "why": "La porta è un numero a 16 bit: va da 0 a 65535."
+  },
+  {
+   "t": "Una sola descrizione del 3-way handshake è sbagliata.",
+   "lines": [
+    "1. Il client invia SYN",
+    "2. Il server risponde SYN-ACK",
+    "3. Il client risponde ACK",
+    "4. Il server invia FIN per aprire la connessione"
+   ],
+   "bad": 3,
+   "why": "FIN serve a chiudere la connessione, non ad aprirla: dopo l'ACK la connessione è già aperta."
+  },
+  {
+   "t": "Una sola associazione servizio e porta è sbagliata.",
+   "lines": [
+    "SMTP    porta 25",
+    "POP3    porta 110",
+    "IMAP    porta 143",
+    "Telnet  porta 23",
+    "HTTP    porta 8080 obbligatoria"
+   ],
+   "bad": 4,
+   "why": "HTTP lavora di norma sulla porta 80; 8080 è solo una porta alternativa usata spesso per i test."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>

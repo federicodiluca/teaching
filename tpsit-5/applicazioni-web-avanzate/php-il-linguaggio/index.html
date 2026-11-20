@@ -1,0 +1,299 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PHP: il linguaggio</title><meta name="description" content="Variabili, tipi, stringhe, operatori, array e strutture di controllo in PHP, con la caccia all&#x27;errore nel codice."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>PHP: il linguaggio</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>PHP: il linguaggio</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso della sintassi di PHP: variabili con il dollaro, concatenazione con il punto, array, cicli e funzioni.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">Che cosa stampa ciascuna istruzione? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine le righe dello script che stampa i voti sufficienti. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "echo 'Ciao ' . 'Ada';",
+   "ciao"
+  ],
+  [
+   "$n = 'Ada'; echo \"Ciao $n\";",
+   "ciao"
+  ],
+  [
+   "echo 'Ciao $n';",
+   "dollaro"
+  ],
+  [
+   "echo 5 + 3;",
+   "otto"
+  ],
+  [
+   "echo '5' + 3;",
+   "otto"
+  ],
+  [
+   "echo '5' . 3;",
+   "cinque3"
+  ],
+  [
+   "echo count([1, 2, 3]) + 5;",
+   "otto"
+  ],
+  [
+   "echo strlen('Ada');",
+   "tre"
+  ],
+  [
+   "echo 10 % 7;",
+   "tre"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "ciao",
+   "t": "Ciao Ada",
+   "s": ""
+  },
+  {
+   "id": "dollaro",
+   "t": "Ciao $n",
+   "s": ""
+  },
+  {
+   "id": "otto",
+   "t": "8",
+   "s": ""
+  },
+  {
+   "id": "cinque3",
+   "t": "53",
+   "s": ""
+  },
+  {
+   "id": "tre",
+   "t": "3",
+   "s": ""
+  }
+ ],
+ "VF": [
+  [
+   "In PHP il nome di ogni variabile inizia con <code>$<\/code>.",
+   true,
+   "Per esempio $totale, $nome."
+  ],
+  [
+   "In PHP le stringhe si concatenano con il simbolo <code>+<\/code>.",
+   false,
+   "Si usa il punto: 'Ciao ' . $nome."
+  ],
+  [
+   "Fra doppi apici le variabili vengono sostituite dal loro valore, fra apici singoli no.",
+   true,
+   "\"Ciao $n\" stampa il nome, 'Ciao $n' stampa proprio $n."
+  ],
+  [
+   "<code>5 === \"5\"<\/code> vale <code>true<\/code> in PHP.",
+   false,
+   "=== confronta anche il tipo: intero e stringa sono diversi."
+  ],
+  [
+   "In PHP i nomi delle variabili sono case sensitive.",
+   true,
+   "$Nome e $nome sono due variabili diverse; le parole chiave come echo e if invece no."
+  ],
+  [
+   "<code>var_dump()<\/code> mostra tipo e valore di una variabile.",
+   true,
+   "Utile per il debug."
+  ],
+  [
+   "Un array associativo usa chiavi testuali al posto degli indici numerici.",
+   true,
+   "Esempio: ['nome' =&gt; 'Ada', 'classe' =&gt; '5M']."
+  ],
+  [
+   "In uno <code>switch<\/code> senza <code>break<\/code> l'esecuzione si ferma comunque alla fine del <code>case<\/code>.",
+   false,
+   "Prosegue nei case successivi (fall-through)."
+  ]
+ ],
+ "MC": [
+  [
+   "Quale operatore concatena due stringhe in PHP?",
+   [
+    ". (punto)",
+    "+",
+    "&amp;",
+    ","
+   ],
+   ". (punto)",
+   "Esiste anche .= per aggiungere in fondo a una stringa."
+  ],
+  [
+   "Dopo <code>$i = 5; $j = $i++;<\/code> quanto valgono <code>$j<\/code> e <code>$i<\/code>?",
+   [
+    "$j = 5 e $i = 6",
+    "$j = 6 e $i = 6",
+    "$j = 5 e $i = 5",
+    "$j = 6 e $i = 5"
+   ],
+   "$j = 5 e $i = 6",
+   "Il post-incremento restituisce prima il valore, poi incrementa."
+  ],
+  [
+   "Quale funzione restituisce il numero di elementi di un array?",
+   [
+    "count()",
+    "length()",
+    "size()",
+    "strlen()"
+   ],
+   "count()",
+   "strlen conta i caratteri di una stringa."
+  ],
+  [
+   "Con quale ciclo si scorre comodamente un array associativo?",
+   [
+    "foreach ($a as $chiave =&gt; $valore)",
+    "for ($a in $chiave)",
+    "while ($a =&gt; $valore)",
+    "loop ($a)"
+   ],
+   "foreach ($a as $chiave => $valore)",
+   "foreach dà chiave e valore a ogni giro."
+  ],
+  [
+   "Che cosa fa <code>$nome = $_GET['nome'] ?? 'ospite';<\/code>?",
+   [
+    "Usa il parametro se esiste, altrimenti 'ospite'",
+    "Stampa 'ospite'",
+    "Dà errore se manca il parametro",
+    "Confronta due valori"
+   ],
+   "Usa il parametro se esiste, altrimenti 'ospite'",
+   "?? è l'operatore di coalescenza null."
+  ],
+  [
+   "Quale di questi valori è considerato falso in un contesto booleano?",
+   [
+    "\"0\"",
+    "\"false\"",
+    "\"no\"",
+    "[0]"
+   ],
+   "\"0\"",
+   "La stringa \"0\" è falsa; \"false\" è una stringa non vuota, quindi vera."
+  ],
+  [
+   "Quale funzione converte un array in testo JSON?",
+   [
+    "json_encode()",
+    "json_decode()",
+    "to_json()",
+    "serialize_json()"
+   ],
+   "json_encode()",
+   "json_decode fa il contrario."
+  ],
+  [
+   "Come si definisce una funzione in PHP?",
+   [
+    "function somma($a, $b) { return $a + $b; }",
+    "def somma(a, b):",
+    "int somma(int a, int b)",
+    "fun somma($a, $b) =&gt; $a + $b"
+   ],
+   "function somma($a, $b) { return $a + $b; }",
+   "I parametri hanno il dollaro come tutte le variabili."
+  ]
+ ],
+ "ORD": [
+  [
+   "<code>&lt;?php<\/code>",
+   "Apertura del codice PHP."
+  ],
+  [
+   "<code>$voti = [5, 7, 8, 4];<\/code>",
+   "Array dei voti."
+  ],
+  [
+   "<code>foreach ($voti as $v) {<\/code>",
+   "Ciclo su ogni voto."
+  ],
+  [
+   "<code>    if ($v &gt;= 6) echo \"$v &lt;br&gt;\";<\/code>",
+   "Stampa se è sufficiente."
+  ],
+  [
+   "<code>}<\/code>",
+   "Fine del ciclo."
+  ],
+  [
+   "<code>?&gt;<\/code>",
+   "Chiusura del codice PHP."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "Lo script deve stampare il saluto.",
+   "lines": [
+    "<?php",
+    "nome = 'Ada';",
+    "echo 'Ciao ' . $nome;",
+    "?>"
+   ],
+   "bad": 1,
+   "why": "In PHP ogni variabile inizia con il dollaro: $nome = 'Ada';"
+  },
+  {
+   "t": "Lo script deve stampare il nome e la classe.",
+   "lines": [
+    "<?php",
+    "$nome = 'Ada';",
+    "$classe = '5M';",
+    "echo $nome + ' ' + $classe;",
+    "?>"
+   ],
+   "bad": 3,
+   "why": "In PHP le stringhe si concatenano con il punto: $nome . ' ' . $classe."
+  },
+  {
+   "t": "Lo script deve stampare i numeri da 1 a 5.",
+   "lines": [
+    "<?php",
+    "for ($i = 1; $i <= 5; $i++) {",
+    "    echo $i . '<br>'",
+    "}",
+    "?>"
+   ],
+   "bad": 2,
+   "why": "Manca il punto e virgola alla fine dell'istruzione echo."
+  },
+  {
+   "t": "Lo script deve stampare la capitale della Francia.",
+   "lines": [
+    "<?php",
+    "$capitali = ['Italia' => 'Roma', 'Francia' => 'Parigi'];",
+    "echo $capitali[1];",
+    "?>"
+   ],
+   "bad": 2,
+   "why": "È un array associativo: si accede con la chiave, $capitali['Francia']."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>

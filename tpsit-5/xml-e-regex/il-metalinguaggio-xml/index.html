@@ -1,0 +1,284 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Il metalinguaggio XML</title><meta name="description" content="Prologo e corpo, regole dei documenti ben formati, elementi e attributi, albero e namespace."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>Il metalinguaggio XML</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Il metalinguaggio XML</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso di XML: che cos'è un metalinguaggio, com'è fatto un documento e quali regole deve rispettare per essere ben formato.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">Questo frammento XML è ben formato? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine le righe di un documento XML. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "<voto>8<\/voto>",
+   "ok"
+  ],
+  [
+   "<studente nome=\"Ada\"/>",
+   "ok"
+  ],
+  [
+   "<a><b>testo<\/b><\/a>",
+   "ok"
+  ],
+  [
+   "<prezzo valuta=\"EUR\">2.50<\/prezzo>",
+   "ok"
+  ],
+  [
+   "<Voto>8<\/voto>",
+   "ko"
+  ],
+  [
+   "<a><b>testo<\/a><\/b>",
+   "ko"
+  ],
+  [
+   "<studente nome=Ada/>",
+   "ko"
+  ],
+  [
+   "<1voto>8<\/1voto>",
+   "ko"
+  ],
+  [
+   "<br>",
+   "ko"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "ok",
+   "t": "Ben formato",
+   "s": ""
+  },
+  {
+   "id": "ko",
+   "t": "Non ben formato",
+   "s": ""
+  }
+ ],
+ "VF": [
+  [
+   "XML è un metalinguaggio: permette di definire altri linguaggi di markup.",
+   true,
+   "I tag non sono predefiniti: li sceglie chi progetta il documento."
+  ],
+  [
+   "XML è un linguaggio di programmazione.",
+   false,
+   "Descrive dati: non esegue calcoli né contiene logica."
+  ],
+  [
+   "Un documento XML è formato da prologo e corpo.",
+   true,
+   "Il prologo contiene la dichiarazione XML; il corpo l'elemento radice."
+  ],
+  [
+   "In XML i tag sono case sensitive.",
+   true,
+   "&lt;Nome&gt; e &lt;nome&gt; sono elementi diversi."
+  ],
+  [
+   "Un documento XML può avere più elementi radice.",
+   false,
+   "Ha una sola radice, che contiene tutti gli altri elementi."
+  ],
+  [
+   "Un elemento vuoto si può scrivere in forma abbreviata, come <code>&lt;br/&gt;<\/code>.",
+   true,
+   "La barra prima del &gt; chiude subito l'elemento."
+  ],
+  [
+   "Il nome di un tag può iniziare con un numero.",
+   false,
+   "Non può iniziare con un numero, un trattino o un punto."
+  ],
+  [
+   "Il prefisso di un namespace è arbitrario: conta l'URI a cui è associato.",
+   true,
+   "L'URI deve essere univoco."
+  ]
+ ],
+ "MC": [
+  [
+   "Chi definisce le specifiche ufficiali di XML?",
+   [
+    "Il W3C",
+    "L'ISO",
+    "Microsoft",
+    "La IANA"
+   ],
+   "Il W3C",
+   "Il World Wide Web Consortium."
+  ],
+  [
+   "Che cosa significa che un documento XML è ben formato?",
+   [
+    "Che rispetta le regole sintattiche di XML",
+    "Che è valido rispetto a uno schema",
+    "Che è corto",
+    "Che ha un foglio di stile"
+   ],
+   "Che rispetta le regole sintattiche di XML",
+   "La validità è un controllo in più, con DTD o XSD."
+  ],
+  [
+   "Come si scrive in forma abbreviata un elemento vuoto in XML?",
+   [
+    "Con la barra subito prima del maggiore: nome/ fra minore e maggiore",
+    "Senza il tag di chiusura, come certi tag HTML",
+    "Con due barre dopo il nome",
+    "Non si può abbreviare"
+   ],
+   "Con la barra subito prima del maggiore: nome/ fra minore e maggiore",
+   "<code>&lt;nome/&gt;<\/code> equivale a <code>&lt;nome&gt;&lt;/nome&gt;<\/code>."
+  ],
+  [
+   "Che struttura ha un documento XML?",
+   [
+    "Un albero, con una radice",
+    "Una tabella",
+    "Un grafo con cicli",
+    "Una lista senza gerarchia"
+   ],
+   "Un albero, con una radice",
+   "Ogni elemento ha un solo padre."
+  ],
+  [
+   "Con quale sintassi si dichiara un namespace con prefisso?",
+   [
+    "xmlns:prefisso=\"URI\"",
+    "namespace prefisso URI",
+    "&lt;ns prefisso=\"URI\"&gt;",
+    "xml:ns=\"prefisso\""
+   ],
+   "xmlns:prefisso=\"URI\"",
+   "Poi i tag si scrivono prefisso:nome."
+  ],
+  [
+   "Come si scrive il carattere <code>&lt;<\/code> dentro il testo di un elemento?",
+   [
+    "Con un'entità: e commerciale, lt, punto e virgola",
+    "Così com'è",
+    "Con il backslash davanti",
+    "Fra apici"
+   ],
+   "Con un'entità: e commerciale, lt, punto e virgola",
+   "Si scrive <code>&amp;lt;<\/code>. Le altre entità: <code>&amp;gt;<\/code> <code>&amp;amp;<\/code> <code>&amp;quot;<\/code> <code>&amp;apos;<\/code>."
+  ],
+  [
+   "A che cosa serve la processing instruction <code>xml-stylesheet<\/code>?",
+   [
+    "A collegare un foglio di stile CSS o XSLT",
+    "A validare il documento",
+    "A dichiarare la versione",
+    "A inserire un commento"
+   ],
+   "A collegare un foglio di stile CSS o XSLT",
+   "Indica al programma come mostrare il documento."
+  ],
+  [
+   "Perché XML facilita lo scambio di dati fra sistemi diversi?",
+   [
+    "È testo semplice, leggibile da qualsiasi sistema",
+    "È compresso",
+    "È cifrato",
+    "Funziona solo su Windows"
+   ],
+   "È testo semplice, leggibile da qualsiasi sistema",
+   "Ogni linguaggio ha librerie per leggerlo."
+  ]
+ ],
+ "ORD": [
+  [
+   "<code>&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;<\/code>",
+   "Prologo: la dichiarazione XML."
+  ],
+  [
+   "<code>&lt;classe sezione=\"5M\"&gt;<\/code>",
+   "Apertura dell'elemento radice."
+  ],
+  [
+   "<code>  &lt;studente&gt;<\/code>",
+   "Un elemento figlio."
+  ],
+  [
+   "<code>    &lt;nome&gt;Ada&lt;/nome&gt;<\/code>",
+   "Elemento con solo testo."
+  ],
+  [
+   "<code>  &lt;/studente&gt;<\/code>",
+   "Chiusura del figlio."
+  ],
+  [
+   "<code>&lt;/classe&gt;<\/code>",
+   "Chiusura della radice."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "Documento XML: una riga lo rende non ben formato.",
+   "lines": [
+    "<?xml version=\"1.0\"?>",
+    "<libro>",
+    "  <titolo>Fondazione<\/Titolo>",
+    "  <autore>Asimov<\/autore>",
+    "<\/libro>"
+   ],
+   "bad": 2,
+   "why": "XML distingue maiuscole e minuscole: <titolo> si chiude con <\/titolo>."
+  },
+  {
+   "t": "Documento XML: una riga lo rende non ben formato.",
+   "lines": [
+    "<?xml version=\"1.0\"?>",
+    "<meteo>",
+    "  <citta nome=Pesaro>",
+    "    <temp>12<\/temp>",
+    "  <\/citta>",
+    "<\/meteo>"
+   ],
+   "bad": 2,
+   "why": "I valori degli attributi vanno sempre fra virgolette: nome=\"Pesaro\"."
+  },
+  {
+   "t": "Documento XML: una riga lo rende non ben formato.",
+   "lines": [
+    "<?xml version=\"1.0\"?>",
+    "<studente>Ada<\/studente>",
+    "<studente>Luca<\/studente>"
+   ],
+   "bad": 2,
+   "why": "Un documento ha una sola radice: i due studenti vanno racchiusi in un elemento, per esempio <classe>."
+  },
+  {
+   "t": "Documento XML: una riga lo rende non ben formato.",
+   "lines": [
+    "<?xml version=\"1.0\"?>",
+    "<negozio>",
+    "  <nome>Pane & Pasta<\/nome>",
+    "<\/negozio>"
+   ],
+   "bad": 2,
+   "why": "Il carattere & va scritto come entità: &amp;."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>

@@ -1,0 +1,275 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RegEx in Java e validazione</title><meta name="description" content="Le classi Pattern e Matcher, matches e find, e le RegEx per validare email, telefoni, date e campi dei form."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>RegEx in Java e validazione</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>RegEx in Java e validazione</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso di come si usano le espressioni regolari in Java e di come si validano i dati inseriti dall'utente.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">Quale campo convalida ciascuna RegEx? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine le righe Java che contano i numeri presenti in un testo. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "^\\d{5}$",
+   "cap"
+  ],
+  [
+   "^3\\d{8,9}$",
+   "cell"
+  ],
+  [
+   "^[\\w.+-]+@[\\w-]+(\\.[\\w-]+)+$",
+   "email"
+  ],
+  [
+   "^\\d{2}/\\d{2}/\\d{4}$",
+   "data"
+  ],
+  [
+   "^[A-Z]{2}\\d{3}[A-Z]{2}$",
+   "targa"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "cap",
+   "t": "CAP",
+   "s": ""
+  },
+  {
+   "id": "cell",
+   "t": "Cellulare italiano",
+   "s": ""
+  },
+  {
+   "id": "email",
+   "t": "Email",
+   "s": ""
+  },
+  {
+   "id": "data",
+   "t": "Data gg/mm/aaaa",
+   "s": ""
+  },
+  {
+   "id": "targa",
+   "t": "Targa",
+   "s": ""
+  }
+ ],
+ "VF": [
+  [
+   "In Java le espressioni regolari si usano con le classi Pattern e Matcher.",
+   true,
+   "Sono nel pacchetto java.util.regex."
+  ],
+  [
+   "<code>matches()<\/code> restituisce true se il pattern compare in qualsiasi punto del testo.",
+   false,
+   "matches() vuole che corrisponda tutta la stringa; per una parte si usa find()."
+  ],
+  [
+   "Per trovare tutte le occorrenze si usa <code>find()<\/code> dentro un ciclo <code>while<\/code>.",
+   true,
+   "Ogni chiamata riparte dal punto in cui si era fermata."
+  ],
+  [
+   "In una stringa Java <code>\\d<\/code> si scrive <code>\"\\\\d\"<\/code>.",
+   true,
+   "Il primo backslash fa da escape per il secondo."
+  ],
+  [
+   "La RegEx <code>^\\d{2}/\\d{2}/\\d{4}$<\/code> blocca anche il 31 febbraio.",
+   false,
+   "Controlla solo il formato, non la validità nel calendario."
+  ],
+  [
+   "Anche la classe String ha un metodo <code>matches()<\/code>.",
+   true,
+   "\"61121\".matches(\"\\\\d{5}\") restituisce true."
+  ],
+  [
+   "In HTML5 l'attributo <code>pattern<\/code> di un input usa un'espressione regolare.",
+   true,
+   "Il browser controlla il campo prima dell'invio; il server deve comunque ricontrollare."
+  ],
+  [
+   "<code>m.group()<\/code> restituisce il testo trovato dall'ultima ricerca.",
+   true,
+   "Con group(1), group(2) si leggono i gruppi catturati."
+  ]
+ ],
+ "MC": [
+  [
+   "Quali due classi si usano per le RegEx in Java?",
+   [
+    "Pattern e Matcher",
+    "Regex e Finder",
+    "String e Scanner",
+    "Match e Search"
+   ],
+   "Pattern e Matcher",
+   "Pattern compila, Matcher cerca nel testo."
+  ],
+  [
+   "Che cosa fa il metodo <code>find()<\/code> di Matcher?",
+   [
+    "Cerca l'occorrenza successiva del pattern nel testo",
+    "Controlla tutta la stringa",
+    "Sostituisce il testo",
+    "Compila il pattern"
+   ],
+   "Cerca l'occorrenza successiva del pattern nel testo",
+   "Restituisce true se ne trova una."
+  ],
+  [
+   "Come si trovano tutte le occorrenze di un pattern?",
+   [
+    "Con find() dentro un ciclo while",
+    "Con un solo matches()",
+    "Con compile() ripetuto",
+    "Con split()"
+   ],
+   "Con find() dentro un ciclo while",
+   "Dopo ogni find(), group() dà il testo trovato."
+  ],
+  [
+   "In quale pacchetto si trovano Pattern e Matcher?",
+   [
+    "java.util.regex",
+    "java.text",
+    "java.io",
+    "java.lang.regex"
+   ],
+   "java.util.regex",
+   "Va importato."
+  ],
+  [
+   "Con quale cifra iniziano i numeri di cellulare italiani?",
+   [
+    "3",
+    "0",
+    "1",
+    "9"
+   ],
+   "3",
+   "Per questo il pattern inizia con ^3."
+  ],
+  [
+   "Che limite ha la RegEx per la data gg/mm/aaaa?",
+   [
+    "Verifica il formato ma non la validità nel calendario",
+    "Non accetta le barre",
+    "Accetta solo il 2026",
+    "Non funziona in Java"
+   ],
+   "Verifica il formato ma non la validità nel calendario",
+   "Per la validità serve un controllo con le classi delle date."
+  ],
+  [
+   "Quale attributo HTML5 permette di validare un campo con una RegEx?",
+   [
+    "pattern",
+    "regex",
+    "validate",
+    "match"
+   ],
+   "pattern",
+   "Esempio: &lt;input pattern=\"\\d{5}\"&gt;."
+  ],
+  [
+   "Quale metodo di String sostituisce tutte le parti che corrispondono a una RegEx?",
+   [
+    "replaceAll()",
+    "replace() soltanto",
+    "change()",
+    "swap()"
+   ],
+   "replaceAll()",
+   "Esempio: testo.replaceAll(\"\\\\s+\", \" \")."
+  ]
+ ],
+ "ORD": [
+  [
+   "<code>Pattern p = Pattern.compile(\"\\\\d+\");<\/code>",
+   "Si compila il pattern."
+  ],
+  [
+   "<code>Matcher m = p.matcher(testo);<\/code>",
+   "Si crea il matcher sul testo."
+  ],
+  [
+   "<code>int conta = 0;<\/code>",
+   "Contatore."
+  ],
+  [
+   "<code>while (m.find()) {<\/code>",
+   "Si cerca l'occorrenza successiva."
+  ],
+  [
+   "<code>    conta++;<\/code>",
+   "Se ne trova una, si conta."
+  ],
+  [
+   "<code>}<\/code>",
+   "Fine del ciclo."
+  ],
+  [
+   "<code>System.out.println(conta);<\/code>",
+   "Stampa del risultato."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "Validazione di un CAP in Java: una riga è sbagliata.",
+   "lines": [
+    "String cap = \"61121\";",
+    "Pattern p = Pattern.compile(\"\\d{5}\");",
+    "Matcher m = p.matcher(cap);",
+    "System.out.println(m.matches());"
+   ],
+   "bad": 1,
+   "why": "In una stringa Java il backslash va raddoppiato: \"\\\\d{5}\"."
+  },
+  {
+   "t": "Trovare tutte le parole che iniziano con la maiuscola: una riga è sbagliata.",
+   "lines": [
+    "Pattern p = Pattern.compile(\"\\\\b[A-Z]\\\\w*\");",
+    "Matcher m = p.matcher(testo);",
+    "if (m.find()) {",
+    "    System.out.println(m.group());",
+    "}"
+   ],
+   "bad": 2,
+   "why": "Con if si trova solo la prima occorrenza: per trovarle tutte serve while (m.find())."
+  },
+  {
+   "t": "Classi e metodi: una riga è sbagliata.",
+   "lines": [
+    "Pattern.compile() crea il pattern",
+    "matcher() crea il Matcher su un testo",
+    "matches() controlla tutta la stringa",
+    "find() controlla che tutta la stringa corrisponda"
+   ],
+   "bad": 3,
+   "why": "find() cerca il pattern in una parte qualsiasi del testo; è matches() a controllare tutta la stringa."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>

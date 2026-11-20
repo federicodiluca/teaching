@@ -1,0 +1,197 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mercato e prezzo</title><meta name="description" content="Microeconomia, domanda e offerta, spostamenti delle curve, equilibrio di mercato e forme di mercato."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>Mercato e prezzo</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Mercato e prezzo</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.</p>
+<ol><li><b>Microeconomia:</b> micro e macro, consumatori e imprese, economia di mercato e pianificata.</li><li><b>Domanda e offerta:</b> le due curve, i beni succedanei e complementari, che cosa sposta le curve.</li><li><b>Equilibrio:</b> come cambiano prezzo e quantità, il calcolo dell'equilibrio, eccesso di domanda e di offerta, breve e lungo periodo.</li><li><b>Forme di mercato:</b> concorrenza perfetta e imperfetta, oligopolio, monopolio.</li><li><b>Quiz</b> e <b>Sfida finale</b>.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="m1" data-g="Microeconomia" data-t="1 Micro o macro"><h2>Microeconomia o macroeconomia</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="mm"></div></section>
+<section id="m2" data-g="Microeconomia" data-t="2 Consumatori o imprese"><h2>Consumatori e imprese</h2><p class="lead">Fate clic su una carta e poi sull'agente economico giusto.</p><div id="ag"></div></section>
+<section id="m3" data-g="Microeconomia" data-t="3 Mercato o pianificata"><h2>Economia di mercato ed economia pianificata</h2><p class="lead">Fate clic su una carta e poi sul sistema giusto.</p><div id="ep"></div></section>
+
+<section id="d1" data-g="Domanda e offerta" data-t="1 Domanda o offerta"><h2>Domanda o offerta?</h2><p class="lead">Fate clic su una carta e poi sulla curva giusta.</p><div id="do"></div></section>
+<section id="d2" data-g="Domanda e offerta" data-t="2 Succedanei o complementari"><h2>Beni succedanei e complementari</h2><p class="lead">Fate clic su una coppia di beni e poi sulla categoria giusta.</p><div id="sc"></div></section>
+<section id="d3" data-g="Domanda e offerta" data-t="3 Quale curva si sposta?"><h2>Quale curva si sposta, e dove?</h2><p class="lead">Leggete che cosa succede sul mercato del bene e scegliete come si sposta la curva.</p><div id="sp"></div></section>
+
+<section id="q1" data-g="Equilibrio" data-t="1 Prezzo e quantità"><h2>Che cosa succede a prezzo e quantità?</h2><p class="lead">Leggete la notizia e scegliete come cambiano prezzo e quantità di equilibrio.</p><div id="pq"></div></section>
+<section id="q2" data-g="Equilibrio" data-t="2 Calcoli"><h2>Calcolare l'equilibrio</h2><p class="lead">Scegliete il tipo di esercizio dal menu, scrivete il risultato e premete «Controlla». I numeri cambiano a ogni esercizio.</p><div id="eq"></div></section>
+<section id="q3" data-g="Equilibrio" data-t="3 Breve o lungo periodo"><h2>Breve e lungo periodo</h2><p class="lead">Fate clic su una carta e poi sul periodo giusto.</p><div id="bl"></div></section>
+
+<section id="f1" data-g="Forme di mercato" data-t="1 Le quattro forme"><h2>Le quattro forme di mercato</h2><p class="lead">Fate clic su una carta e poi sulla forma di mercato giusta.</p><div id="fm"></div></section>
+<section id="f2" data-g="Forme di mercato" data-t="2 Che mercato è?"><h2>Che mercato è?</h2><p class="lead">Leggete l'esempio e scegliete la forma di mercato.</p><div id="cm"></div></section>
+<section id="f3" data-g="Forme di mercato" data-t="3 Dal più libero"><h2>Dal mercato più libero al più concentrato</h2><p class="lead">Mettete in ordine le forme di mercato, da quella in cui le imprese non controllano il prezzo a quella in cui lo controllano del tutto. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».</p><div id="or"></div></section>
+
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Quindici domande miste su tutto l'argomento, calcoli compresi, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+const D = {
+  MM: [
+    ["Come un consumatore decide che cosa comprare", "mi"],
+    ["A quale prezzo un'impresa massimizza il profitto", "mi"],
+    ["Il mercato di un singolo bene", "mi"],
+    ["Curva di domanda, curva di offerta, funzione di costo", "mi"],
+    ["Come cambia il PIL di un Paese", "ma"],
+    ["Il tasso di inflazione", "ma"],
+    ["La disoccupazione", "ma"],
+    ["L'effetto della politica monetaria sull'occupazione", "ma"]
+  ],
+  MM_BK: [{ id: "mi", t: "Microeconomia", s: "I singoli agenti" }, { id: "ma", t: "Macroeconomia", s: "L'economia nel suo complesso" }],
+  AG: [
+    ["Singoli individui o famiglie", "c"],
+    ["Costituiscono la domanda del bene", "c"],
+    ["Cercano la quantità massima al prezzo più basso", "c"],
+    ["Produttori e venditori", "i"],
+    ["Costituiscono l'offerta del bene", "i"],
+    ["Hanno come scopo la massimizzazione del profitto", "i"],
+    ["Decidono che cosa, come e quanto produrre", "i"]
+  ],
+  AG_BK: [{ id: "c", t: "Consumatori", s: "" }, { id: "i", t: "Imprese", s: "" }],
+  EP: [
+    ["Le imprese decidono da sole che cosa, come e per chi produrre", "m"],
+    ["Il prezzo nasce dall'incontro tra domanda e offerta", "m"],
+    ["Le imprese osservano i consumatori per decidere che cosa produrre", "m"],
+    ["Il sistema delle democrazie occidentali", "m"],
+    ["Lo Stato fissa direttamente i prezzi", "p"],
+    ["Un'autorità centrale decide che cosa produrre", "p"],
+    ["Le imprese seguono i piani stabiliti dallo Stato", "p"],
+    ["Il sistema dell'URSS", "p"]
+  ],
+  EP_BK: [{ id: "m", t: "Economia di mercato", s: "" }, { id: "p", t: "Economia pianificata", s: "" }],
+  DO: [
+    ["La curva è decrescente", "d"],
+    ["Se il prezzo sale, la quantità diminuisce", "d"],
+    ["Si ottiene sommando le richieste di tutti i consumatori", "d"],
+    ["Dipende da reddito, gusti e prezzo del bene", "d"],
+    ["La curva è crescente", "o"],
+    ["Se il prezzo sale, la quantità aumenta", "o"],
+    ["Q = c + d·P, con d positivo", "o"],
+    ["Più il prezzo è alto, più conviene produrre e vendere", "o"]
+  ],
+  DO_BK: [{ id: "d", t: "Domanda", s: "Chi compra" }, { id: "o", t: "Offerta", s: "Chi vende" }],
+  SC: [
+    ["Zucchero e dolcificante", "s"], ["Burro e margarina", "s"], ["Treno e autobus per lo stesso viaggio", "s"], ["Tè e caffè", "s"],
+    ["Tastiera e mouse", "c"], ["Automobile e benzina", "c"], ["Stampante e cartucce", "c"], ["Console e videogiochi", "c"]
+  ],
+  SC_BK: [{ id: "s", t: "Succedanei", s: "Si sostituiscono" }, { id: "c", t: "Complementari", s: "Si usano insieme" }],
+  SP_OPTS: ["Domanda a destra", "Domanda a sinistra", "Offerta a destra", "Offerta a sinistra"],
+  SP: [
+    ["Gelati: un'estate caldissima fa venire a tutti voglia di gelato.", "Domanda a destra", "cambiano le preferenze dei consumatori: a ogni prezzo si compra di più"],
+    ["Biciclette: aumenta il reddito delle famiglie.", "Domanda a destra", "con più reddito a ogni prezzo si compra di più"],
+    ["Mouse: il prezzo delle tastiere aumenta molto.", "Domanda a sinistra", "sono beni complementari: si comprano meno tastiere e quindi meno mouse"],
+    ["Dolcificante: il prezzo dello zucchero aumenta.", "Domanda a destra", "sono beni succedanei: si passa al dolcificante"],
+    ["Bevande zuccherate: uno studio ne dimostra i danni alla salute.", "Domanda a sinistra", "le preferenze si allontanano dal bene"],
+    ["Smartphone: una nuova tecnologia riduce i costi di produzione.", "Offerta a destra", "la tecnologia permette di produrre di più agli stessi costi"],
+    ["Pane: il prezzo della farina cresce del 30%.", "Offerta a sinistra", "salgono i costi dei fattori produttivi"],
+    ["Pannelli solari: lo Stato dà un sussidio a chi li produce.", "Offerta a destra", "un sussidio riduce i costi di produzione"],
+    ["Pizza: in città aprono dieci nuove pizzerie.", "Offerta a destra", "aumenta il numero dei produttori"],
+    ["Auto: una nuova norma impone dispositivi di sicurezza costosi.", "Offerta a sinistra", "un obbligo normativo aumenta i costi di produzione"]
+  ],
+  PQ_OPTS: ["Prezzo sale, quantità sale", "Prezzo scende, quantità scende", "Prezzo scende, quantità sale", "Prezzo sale, quantità scende"],
+  PQ: [
+    ["Una campagna pubblicitaria riuscita aumenta la domanda di un succo di frutta.", "Prezzo sale, quantità sale", "la domanda si sposta a destra"],
+    ["Molti consumatori smettono di comprare un prodotto passato di moda.", "Prezzo scende, quantità scende", "la domanda si sposta a sinistra"],
+    ["Entrano sul mercato molti nuovi produttori di monopattini elettrici.", "Prezzo scende, quantità sale", "l'offerta si sposta a destra"],
+    ["Una gelata distrugge metà del raccolto di arance.", "Prezzo sale, quantità scende", "l'offerta si sposta a sinistra"],
+    ["Il prezzo delle materie prime per la carta aumenta molto.", "Prezzo sale, quantità scende", "salgono i costi e l'offerta si sposta a sinistra"],
+    ["Una nuova macchina dimezza i tempi di produzione delle scarpe.", "Prezzo scende, quantità sale", "con la nuova tecnologia l'offerta si sposta a destra"],
+    ["Cresce il numero di turisti che visitano una città d'arte (mercato degli alloggi).", "Prezzo sale, quantità sale", "aumentano i consumatori e la domanda si sposta a destra"],
+    ["Cala il reddito delle famiglie e si comprano meno viaggi.", "Prezzo scende, quantità scende", "la domanda di viaggi si sposta a sinistra"]
+  ],
+  BL: [
+    ["Non si può cambiare la quantità di tutti i fattori", "b"],
+    ["Il capitale è fisso: Q dipende solo dal lavoro", "b"],
+    ["Per produrre di più si fanno fare straordinari agli operai", "b"],
+    ["Ogni fattore si può cambiare liberamente", "l"],
+    ["Capitale e lavoro sono entrambi variabili", "l"],
+    ["Per produrre di più si costruisce un nuovo stabilimento", "l"]
+  ],
+  BL_BK: [{ id: "b", t: "Breve periodo", s: "" }, { id: "l", t: "Lungo periodo", s: "" }],
+  FM: [
+    ["Infinite imprese e prodotti omogenei", "cp"], ["Nessuna impresa può influenzare il prezzo", "cp"], ["Si verifica raramente", "cp"],
+    ["Molte imprese con prodotti simili ma differenziati", "ci"], ["Le imprese influenzano il prezzo solo in parte", "ci"],
+    ["Poche imprese con quote di mercato importanti", "ol"], ["Barriere all'ingresso medio-alte", "ol"], ["Strategie interdipendenti e a volte accordi tra imprese", "ol"],
+    ["Una sola impresa, con un prodotto unico", "mo"], ["Barriere all'ingresso molto forti", "mo"], ["Fissa liberamente prezzo e quantità", "mo"]
+  ],
+  FM_BK: [{ id: "cp", t: "Concorrenza perfetta", s: "" }, { id: "ci", t: "Concorrenza imperfetta", s: "" }, { id: "ol", t: "Oligopolio", s: "" }, { id: "mo", t: "Monopolio", s: "" }],
+  CM_OPTS: ["Concorrenza perfetta", "Concorrenza imperfetta", "Oligopolio", "Monopolio"],
+  CM: [
+    ["Il mercato ortofrutticolo: tanti venditori con la stessa merce.", "Concorrenza perfetta", "prodotti omogenei, nessuno controlla il prezzo"],
+    ["I ristoranti della città: ognuno ha il suo menu e il suo stile.", "Concorrenza imperfetta", "molte imprese con prodotti differenziati"],
+    ["I negozi di abbigliamento.", "Concorrenza imperfetta", "molte imprese, prodotti simili ma non uguali"],
+    ["La telefonia mobile, con pochi grandi operatori.", "Oligopolio", "poche imprese e barriere all'ingresso medio-alte"],
+    ["Le compagnie aeree su una rotta.", "Oligopolio", "poche imprese con strategie che si influenzano a vicenda"],
+    ["La rete ferroviaria nazionale.", "Monopolio", "una sola impresa e barriere molto forti"],
+    ["La distribuzione dell'acqua in molte città.", "Monopolio", "un solo fornitore per un servizio unico"]
+  ],
+  OR: [
+    ["Concorrenza perfetta", "Infinite imprese: il prezzo lo fa il mercato."],
+    ["Concorrenza imperfetta", "Molte imprese: controllo parziale del prezzo."],
+    ["Oligopolio", "Poche imprese: controllo forte del prezzo."],
+    ["Monopolio", "Una sola impresa: controllo totale."]
+  ],
+  VF: [
+    ["La microeconomia studia il comportamento dei singoli consumatori e delle singole imprese.", true, "La macroeconomia invece studia le grandezze aggregate, come PIL e inflazione."],
+    ["Se le risorse fossero infinite, non servirebbe l'economia.", true, "È la scarsità a costringere a scegliere tra alternative."],
+    ["L'ipotesi di razionalità dice che le persone non si lasciano mai influenzare dalle emozioni.", false, "È un'ipotesi del modello; l'economia comportamentale studia proprio gli scostamenti dalla razionalità."],
+    ["La curva di domanda è decrescente.", true, "Al crescere del prezzo la quantità domandata diminuisce."],
+    ["Se cambia il prezzo del bene, la sua curva di domanda si sposta.", false, "Se cambia il prezzo ci si muove lungo la curva; la curva si sposta quando cambiano le altre condizioni."],
+    ["Per i beni inferiori, se il reddito aumenta la domanda diminuisce.", true, "Con più reddito si smette di comprare i prodotti di bassa qualità."],
+    ["Se aumenta il prezzo delle tastiere, la domanda di mouse si sposta a destra.", false, "Sono complementari: si comprano meno tastiere e meno mouse, la curva si sposta a sinistra."],
+    ["Se l'offerta aumenta, il prezzo di equilibrio scende e la quantità sale.", true, "La curva di offerta si sposta a destra."],
+    ["Al prezzo di equilibrio la quantità domandata è uguale alla quantità offerta.", true, "È il market clearing price: non ci sono eccessi né carenze."],
+    ["Un tetto agli affitti più basso dell'equilibrio crea un eccesso di offerta di case.", false, "Un prezzo tenuto basso crea eccesso di domanda, e un mercato sommerso, come con l'equo canone."],
+    ["Il mercato di concorrenza perfetta distribuisce le risorse in modo efficiente, ma non per forza equo.", true, "Può essere in equilibrio anche con povertà e disuguaglianze."],
+    ["Nel breve periodo si possono cambiare liberamente capitale e lavoro.", false, "Nel breve periodo almeno un fattore, di solito il capitale, è fisso."],
+    ["Nell'oligopolio le imprese possono fare accordi tra loro.", true, "Le strategie sono interdipendenti e a volte ci sono accordi collusivi."],
+    ["In concorrenza perfetta una grande impresa può fissare il prezzo.", false, "Nessuna impresa può influenzarlo: il prezzo lo fa il mercato."]
+  ],
+  MC: [
+    ["Quale grandezza studia la macroeconomia?", ["Il tasso di inflazione", "Il prezzo di un singolo prodotto", "Le scelte di un consumatore"], "Il tasso di inflazione", "Le altre due sono temi della microeconomia."],
+    ["Che cos'è il mercato?", ["Il luogo, fisico o virtuale, dove si incontrano domanda e offerta", "L'insieme delle imprese di un Paese", "L'ufficio che fissa i prezzi"], "Il luogo, fisico o virtuale, dove si incontrano domanda e offerta", "In un'economia di mercato il prezzo si forma lì, senza intervento dello Stato."],
+    ["Da che cosa dipende la domanda di mercato, oltre a reddito, gusti e prezzo?", ["Dal numero di consumatori", "Dal numero di produttori", "Dalla tecnologia"], "Dal numero di consumatori", "Numero di produttori e tecnologia spostano l'offerta."],
+    ["Che cosa dice la legge dell'offerta?", ["Se il prezzo aumenta, aumenta la quantità offerta", "Se il prezzo aumenta, diminuisce la quantità offerta", "La quantità offerta non dipende dal prezzo"], "Se il prezzo aumenta, aumenta la quantità offerta", "Con un prezzo più alto produrre conviene di più."],
+    ["Quale di questi fatti sposta a sinistra la curva di offerta?", ["Un aumento delle tasse sulla produzione", "Una nuova tecnologia", "L'ingresso di nuove imprese"], "Un aumento delle tasse sulla produzione", "Gli altri due la spostano a destra."],
+    ["Se il prezzo è sopra quello di equilibrio, che cosa succede?", ["Eccesso di offerta", "Eccesso di domanda", "Niente, il mercato è in equilibrio"], "Eccesso di offerta", "Si produce più di quanto si compra, e il prezzo tende a scendere."],
+    ["Che cos'è l'efficienza paretiana?", ["Non si può migliorare la situazione di uno senza peggiorare quella di un altro", "Tutti gli attori sono soddisfatti", "Lo Stato fissa il prezzo giusto"], "Non si può migliorare la situazione di uno senza peggiorare quella di un altro", "È la condizione dell'equilibrio di concorrenza perfetta."],
+    ["Nella funzione di produzione Q = f(K, L), K indica…", ["Il capitale", "Il costo", "La quantità"], "Il capitale", "Macchine e impianti; L è il lavoro."],
+    ["Quale forma di mercato ha barriere all'ingresso medio-alte e poche imprese?", ["Oligopolio", "Monopolio", "Concorrenza imperfetta"], "Oligopolio", "Nel monopolio c'è una sola impresa e le barriere sono molto forti."],
+    ["Che cosa determina la capacità di acquisto di un consumatore?", ["Il prezzo del bene e il suo reddito", "Solo i suoi gusti", "Il numero di imprese"], "Il prezzo del bene e il suo reddito", "Indica quante unità può permettersi."]
+  ]
+};
+const GEN = {
+  equilibrio: () => { const pe = rnd(5, 30), b = rnd(2, 10), d = rnd(2, 10), c = rnd(1, 20) * 5, a = c + (b + d) * pe, qe = c + d * pe;
+    return { q: `Domanda: <b>Q = ${a} − ${b}·P</b>. Offerta: <b>Q = ${c} + ${d}·P</b>. Trovate il prezzo e la quantità di equilibrio.`,
+      fields: [{ label: 'Prezzo di equilibrio', kind: 'num', exp: pe, tol: 0 }, { label: 'Quantità di equilibrio', kind: 'num', exp: qe, tol: 0 }],
+      sol: P(`All'equilibrio domanda = offerta:\n${a} − ${b}·P = ${c} + ${d}·P\n${a} − ${c} = ${b}·P + ${d}·P\n${a - c} = ${b + d}·P  →  P = ${pe}\nQ = ${c} + ${d}·${pe} = ${qe}`) }; },
+  eccesso: () => { let pe, b, d, c, a, sopra, p, qd, qo;
+    do { pe = rnd(8, 30); b = rnd(2, 10); d = rnd(2, 10); c = rnd(1, 20) * 5; a = c + (b + d) * pe; sopra = rnd(0, 1) === 1; p = sopra ? pe + rnd(2, 6) : pe - rnd(2, 6); qd = a - b * p; qo = c + d * p } while (qd <= 0 || qo <= 0);
+    const ex = sopra ? 'Eccesso di offerta' : 'Eccesso di domanda';
+    return { q: `Domanda: <b>Q = ${a} − ${b}·P</b>. Offerta: <b>Q = ${c} + ${d}·P</b>. Il prezzo è fissato a <b>${p}</b>. Calcolate quantità domandata e offerta e dite che cosa succede.`,
+      fields: [{ label: 'Quantità domandata', kind: 'num', exp: qd, tol: 0 }, { label: 'Quantità offerta', kind: 'num', exp: qo, tol: 0 }, { label: 'Situazione', kind: 'choice', opts: ['', 'Eccesso di domanda', 'Eccesso di offerta'], exp: ex }],
+      sol: P(`Domandata: ${a} − ${b}·${p} = ${qd}\nOfferta: ${c} + ${d}·${p} = ${qo}`) + `<p>${sopra ? 'Si offre più di quanto si domanda: eccesso di offerta. Il prezzo è sopra l\'equilibrio e tende a scendere.' : 'Si domanda più di quanto si offre: eccesso di domanda. Il prezzo è sotto l\'equilibrio e tende a salire.'}</p>` }; },
+  domanda: () => { const b = rnd(2, 10), p = rnd(3, 30), a = b * p + rnd(5, 40) * 10, q = a - b * p;
+    return { q: `La curva di domanda di un bene è <b>Q = ${a} − ${b}·P</b>. Quante unità si domandano al prezzo di <b>${p}</b>?`, fields: [{ label: 'Quantità domandata', kind: 'num', exp: q, tol: 0 }],
+      sol: P(`Q = ${a} − ${b}·${p} = ${a} − ${b * p} = ${q}`) }; }
+};
+SG('#mm', D.MM, D.MM_BK, 'Micro o macro');
+SG('#ag', D.AG, D.AG_BK, 'Consumatori o imprese');
+SG('#ep', D.EP, D.EP_BK, 'Mercato o pianificata');
+SG('#do', D.DO, D.DO_BK, 'Domanda o offerta');
+SG('#sc', D.SC, D.SC_BK, 'Succedanei o complementari');
+const genSp = scGen(D.SP, D.SP_OPTS, 'Quale curva si sposta?', 'Spostamento');
+mount($('#sp'), genSp, 'Quale curva si sposta?');
+const genPq = scGen(D.PQ, D.PQ_OPTS, 'Che cosa succede?', 'Effetto');
+mount($('#pq'), genPq, 'Prezzo e quantità');
+mountMenu($('#eq'), [["Equilibrio di mercato", GEN.equilibrio], ["Eccesso di domanda o di offerta", GEN.eccesso], ["Quantità domandata", GEN.domanda]], 'Calcoli');
+SG('#bl', D.BL, D.BL_BK, 'Breve o lungo periodo');
+SG('#fm', D.FM, D.FM_BK, 'Forme di mercato');
+const genCm = scGen(D.CM, D.CM_OPTS, 'Che mercato è?', 'Forma di mercato');
+mount($('#cm'), genCm, 'Che mercato è?');
+orderGame($('#or'), asOrder(D.OR), 'Dal più libero al più concentrato', false);
+quiz();
+const SFIDA = [...mcAll(), ...vfAll(), genSp, genSp, genPq, genPq, genCm, GEN.equilibrio, GEN.eccesso];
+mission($('#tot'), SFIDA, 'Sfida finale', 15);
+</script></body></html>

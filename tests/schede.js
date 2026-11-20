@@ -39,7 +39,7 @@ const path = require("path");
         return { titolo: document.querySelector(`.tg-sch-voci input[data-i="${i}"]`).closest("label").textContent.trim(),
           es: document.querySelectorAll(".tg-sch-foglio .tg-sch-es").length, sol: document.querySelectorAll(".tg-sch-sol li").length,
           vuoti: [...document.querySelectorAll(".tg-sch-foglio .q")].filter(x => !x.textContent.trim()).length,
-          und: /undefined|NaN|\[object/.test(document.querySelector(".tg-sch-foglio").textContent) };
+          und: !/\/javascript\//.test(location.pathname) && /undefined|NaN|\[object/.test(document.querySelector(".tg-sch-foglio").textContent) /* nelle pagine di JavaScript undefined e NaN sono contenuto */ };
       }, i);
       if (!r.es || r.sol !== r.es || r.vuoti || r.und) fails.push(`${p}: «${r.titolo}» ${JSON.stringify(r)}`);
     }

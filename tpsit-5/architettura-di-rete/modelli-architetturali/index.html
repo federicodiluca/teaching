@@ -1,0 +1,273 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Modelli architetturali</title><meta name="description" content="La classificazione di Flynn, multiprocessori e cluster, le architetture software dai terminali ai microservizi e il middleware."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>Modelli architetturali</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Modelli architetturali</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso dei modelli architetturali: come si classificano le architetture hardware e come si sono evolute quelle software.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">A quale categoria di Flynn appartiene? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine l'evoluzione delle architetture software, dalla più vecchia. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "Macchina di Von Neumann classica",
+   "sisd"
+  ],
+  [
+   "PC con un core che esegue un programma",
+   "sisd"
+  ],
+  [
+   "Processore vettoriale",
+   "simd"
+  ],
+  [
+   "GPU che applica lo stesso filtro a tanti pixel",
+   "simd"
+  ],
+  [
+   "Esecuzione simile a una pipeline",
+   "misd"
+  ],
+  [
+   "Sistemi ridondanti che controllano gli stessi dati",
+   "misd"
+  ],
+  [
+   "Multiprocessore con più core indipendenti",
+   "mimd"
+  ],
+  [
+   "Cluster di computer",
+   "mimd"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "sisd",
+   "t": "SISD",
+   "s": "una istruzione, un dato"
+  },
+  {
+   "id": "simd",
+   "t": "SIMD",
+   "s": "una istruzione, tanti dati"
+  },
+  {
+   "id": "misd",
+   "t": "MISD",
+   "s": "tante istruzioni, un dato"
+  },
+  {
+   "id": "mimd",
+   "t": "MIMD",
+   "s": "tante istruzioni, tanti dati"
+  }
+ ],
+ "VF": [
+  [
+   "La legge di Moore dice che il numero di transistor in un chip raddoppia circa ogni 18-24 mesi.",
+   true,
+   "È un'osservazione empirica, oggi rallentata dai limiti fisici."
+  ],
+  [
+   "La classica macchina di Von Neumann appartiene alla categoria SISD.",
+   true,
+   "Un flusso di istruzioni su un flusso di dati."
+  ],
+  [
+   "Le GPU sono un esempio di architettura SIMD.",
+   true,
+   "Applicano la stessa operazione a moltissimi dati insieme."
+  ],
+  [
+   "Nell'architettura a terminali remoti i terminali eseguono gran parte dell'elaborazione.",
+   false,
+   "I terminali sono passivi: elabora tutto l'host centrale."
+  ],
+  [
+   "Il middleware è uno strato software fra il sistema operativo e le applicazioni.",
+   true,
+   "Nasconde le differenze fra piattaforme e semplifica la comunicazione."
+  ],
+  [
+   "Nei microservizi ogni componente ha la sua funzione e il suo database.",
+   true,
+   "Comunicano fra loro attraverso API."
+  ],
+  [
+   "CORBA è uno standard per l'architettura cooperativa a oggetti distribuiti.",
+   true,
+   "Permette a oggetti scritti in linguaggi diversi di collaborare."
+  ],
+  [
+   "Un cluster MOSIX non può spostare i processi fra i nodi.",
+   false,
+   "Bilancia il carico migrando i processi; il cluster appare come un unico sistema."
+  ]
+ ],
+ "MC": [
+  [
+   "A quale categoria di Flynn appartiene un cluster di computer?",
+   [
+    "MIMD",
+    "SISD",
+    "SIMD",
+    "MISD"
+   ],
+   "MIMD",
+   "Ogni nodo esegue le sue istruzioni sui suoi dati."
+  ],
+  [
+   "A quale modalità di esecuzione assomiglia MISD?",
+   [
+    "Alla pipeline",
+    "Al calcolo vettoriale",
+    "Al singolo core",
+    "Al cloud"
+   ],
+   "Alla pipeline",
+   "Più unità elaborano in sequenza lo stesso flusso di dati."
+  ],
+  [
+   "Che cos'è il middleware?",
+   [
+    "Uno strato software fra sistema operativo e applicazioni",
+    "Un cavo di rete",
+    "Un processore intermedio",
+    "Il BIOS"
+   ],
+   "Uno strato software fra sistema operativo e applicazioni",
+   "Esempi: CORBA, RMI, i broker di messaggi."
+  ],
+  [
+   "Che cosa caratterizza l'architettura a microservizi?",
+   [
+    "Componenti autonomi con funzione e database propri, che comunicano via API",
+    "Un unico programma con un unico database",
+    "Terminali passivi",
+    "Nessuna comunicazione di rete"
+   ],
+   "Componenti autonomi con funzione e database propri, che comunicano via API",
+   "Ogni microservizio si sviluppa e si scala da solo."
+  ],
+  [
+   "Che cosa serve nei multiprocessori per evitare conflitti di accesso?",
+   [
+    "Meccanismi di sincronizzazione come lock e semafori",
+    "Più RAM",
+    "Un monitor per ogni CPU",
+    "Un firewall"
+   ],
+   "Meccanismi di sincronizzazione come lock e semafori",
+   "La memoria è condivisa fra più CPU."
+  ],
+  [
+   "Perché nell'architettura web-centric i client tornano a essere quasi terminali?",
+   [
+    "Perché la computazione si sposta sui server web",
+    "Perché i PC sono più lenti",
+    "Perché non c'è rete",
+    "Perché i browser non esistono"
+   ],
+   "Perché la computazione si sposta sui server web",
+   "Il client mostra, il server elabora."
+  ],
+  [
+   "Che cosa afferma la legge di Moore?",
+   [
+    "I transistor in un chip raddoppiano ogni 18-24 mesi circa",
+    "La velocità della rete raddoppia ogni anno",
+    "Il prezzo dei PC si dimezza ogni mese",
+    "I programmi raddoppiano di dimensione"
+   ],
+   "I transistor in un chip raddoppiano ogni 18-24 mesi circa",
+   "Ha guidato decenni di crescita dell'hardware."
+  ],
+  [
+   "Che cosa differenzia un multicomputer da un multiprocessore?",
+   [
+    "Nel multicomputer ogni nodo ha la sua memoria",
+    "Il multicomputer ha una sola CPU",
+    "Il multiprocessore non ha memoria",
+    "Nessuna differenza"
+   ],
+   "Nel multicomputer ogni nodo ha la sua memoria",
+   "I nodi comunicano scambiandosi messaggi in rete."
+  ]
+ ],
+ "ORD": [
+  [
+   "Terminali remoti",
+   "Un host centrale e terminali passivi."
+  ],
+  [
+   "Client-server",
+   "Il client ha capacità di elaborazione."
+  ],
+  [
+   "Web-centric",
+   "Il browser come client universale."
+  ],
+  [
+   "Cooperativa (oggetti distribuiti)",
+   "Componenti che collaborano, con CORBA."
+  ],
+  [
+   "Microservizi",
+   "Servizi autonomi che comunicano con API."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "Flynn: una riga è sbagliata.",
+   "lines": [
+    "SISD: una istruzione su un dato",
+    "SIMD: una istruzione su più dati",
+    "MIMD: più istruzioni su più dati",
+    "MISD: la categoria dei normali PC multicore"
+   ],
+   "bad": 3,
+   "why": "I PC multicore sono MIMD; MISD è la categoria meno diffusa, simile a una pipeline."
+  },
+  {
+   "t": "Architetture software: una riga è sbagliata.",
+   "lines": [
+    "Terminali remoti: terminali senza capacità di elaborazione",
+    "Microservizi: ogni servizio ha funzione e database propri",
+    "Middleware: strato fra sistema operativo e applicazioni",
+    "Monolitica: tanti servizi indipendenti con database separati"
+   ],
+   "bad": 3,
+   "why": "Un'applicazione monolitica è un'unica entità, con un unico database: è il contrario dei microservizi."
+  },
+  {
+   "t": "Hardware parallelo: una riga è sbagliata.",
+   "lines": [
+    "Multiprocessore: più CPU con memoria condivisa",
+    "Multicomputer: nodi con memoria propria collegati in rete",
+    "Cluster SSI: appare come un unico sistema",
+    "Multiprocessore: non servono meccanismi di sincronizzazione"
+   ],
+   "bad": 3,
+   "why": "Con la memoria condivisa servono lock e semafori per evitare conflitti di accesso."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>

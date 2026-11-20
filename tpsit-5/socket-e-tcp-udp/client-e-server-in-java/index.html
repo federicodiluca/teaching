@@ -1,0 +1,297 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Client e server in Java</title><meta name="description" content="Gli schemi delle chiamate TCP e UDP e le classi Java ServerSocket, Socket, DatagramSocket e DatagramPacket."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>Client e server in Java</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Client e server in Java</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso degli schemi client-server con TCP e UDP e di come si scrivono in Java, con la caccia all'errore nel codice.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">Quale classe Java si usa? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine le istruzioni di un server TCP in Java che riceve una riga e la stampa. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "Server TCP in ascolto su una porta",
+   "ss"
+  ],
+  [
+   "new ServerSocket(5000)",
+   "ss"
+  ],
+  [
+   "Metodo accept()",
+   "ss"
+  ],
+  [
+   "Client TCP che si collega al server",
+   "s"
+  ],
+  [
+   "new Socket(\"localhost\", 5000)",
+   "s"
+  ],
+  [
+   "getInputStream() e getOutputStream()",
+   "s"
+  ],
+  [
+   "Socket UDP per inviare e ricevere",
+   "ds"
+  ],
+  [
+   "Metodi send() e receive() di UDP",
+   "ds"
+  ],
+  [
+   "Contiene i byte e l'indirizzo di un datagramma",
+   "dp"
+  ],
+  [
+   "new DatagramPacket(buf, buf.length)",
+   "dp"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "ss",
+   "t": "ServerSocket",
+   "s": ""
+  },
+  {
+   "id": "s",
+   "t": "Socket",
+   "s": ""
+  },
+  {
+   "id": "ds",
+   "t": "DatagramSocket",
+   "s": ""
+  },
+  {
+   "id": "dp",
+   "t": "DatagramPacket",
+   "s": ""
+  }
+ ],
+ "VF": [
+  [
+   "<code>server.accept()<\/code> blocca il programma finché non si collega un client.",
+   true,
+   "È una chiamata bloccante: il server resta fermo lì in attesa."
+  ],
+  [
+   "Con UDP in Java si usa <code>ServerSocket<\/code> sul server.",
+   false,
+   "ServerSocket è solo per TCP; con UDP si usa DatagramSocket sia sul client sia sul server."
+  ],
+  [
+   "La sequenza del server TCP è socket, bind, listen, accept.",
+   true,
+   "In Java new ServerSocket(porta) fa insieme socket, bind e listen."
+  ],
+  [
+   "Con UDP chi fa da server dipende solo dall'ordine delle chiamate.",
+   true,
+   "Fa da server chi si mette in attesa con receive su una porta nota."
+  ],
+  [
+   "Per servire più client contemporaneamente si può gestire ogni Socket accettato in un thread separato.",
+   true,
+   "Il thread principale torna subito ad accept() mentre gli altri thread parlano con i client."
+  ],
+  [
+   "Dopo <code>accept()<\/code> il socket in ascolto non può più accettare altri client.",
+   false,
+   "Resta libero: accept() restituisce un socket nuovo per quel client."
+  ],
+  [
+   "Un <code>DatagramPacket<\/code> da inviare contiene anche indirizzo e porta del destinatario.",
+   true,
+   "Ogni datagramma viaggia da solo, quindi porta con sé la destinazione."
+  ],
+  [
+   "Il 3-way handshake avviene quando il client crea <code>new Socket(host, porta)<\/code>.",
+   true,
+   "Il costruttore apre la connessione TCP: SYN, SYN-ACK, ACK."
+  ]
+ ],
+ "MC": [
+  [
+   "Quale classe Java crea il socket di ascolto del server TCP?",
+   [
+    "ServerSocket",
+    "Socket",
+    "DatagramSocket",
+    "ListenSocket"
+   ],
+   "ServerSocket",
+   "ServerSocket si mette in ascolto su una porta."
+  ],
+  [
+   "Come si legge comodamente una riga di testo da un Socket?",
+   [
+    "Con un BufferedReader su getInputStream()",
+    "Con System.in",
+    "Con un PrintWriter su getOutputStream()",
+    "Con DatagramPacket"
+   ],
+   "Con un BufferedReader su getInputStream()",
+   "BufferedReader offre readLine()."
+  ],
+  [
+   "Quale sequenza di segmenti forma il 3-way handshake?",
+   [
+    "SYN, SYN-ACK, ACK",
+    "ACK, SYN, FIN",
+    "SYN, ACK, FIN",
+    "HELLO, OK, START"
+   ],
+   "SYN, SYN-ACK, ACK",
+   "Il client chiede, il server conferma e chiede a sua volta, il client conferma."
+  ],
+  [
+   "Quale metodo usa il server UDP per aspettare un datagramma?",
+   [
+    "receive()",
+    "accept()",
+    "listen()",
+    "readLine()"
+   ],
+   "receive()",
+   "DatagramSocket.receive(pacchetto) blocca finché arriva un datagramma."
+  ],
+  [
+   "Che cosa fa <code>new ServerSocket(5000)<\/code>?",
+   [
+    "Crea un socket in ascolto sulla porta 5000",
+    "Si collega a un server sulla porta 5000",
+    "Invia 5000 byte",
+    "Apre 5000 connessioni"
+   ],
+   "Crea un socket in ascolto sulla porta 5000",
+   "Insieme fa socket, bind e listen."
+  ],
+  [
+   "Quale eccezione può lanciare il client se nessun server è in ascolto su quella porta?",
+   [
+    "ConnectException",
+    "NullPointerException",
+    "ArithmeticException",
+    "NumberFormatException"
+   ],
+   "ConnectException",
+   "Connessione rifiutata: è una IOException, da gestire con try/catch."
+  ],
+  [
+   "Nel client TCP, come si indica il server a cui collegarsi?",
+   [
+    "Con host e porta nel costruttore di Socket",
+    "Con il metodo accept()",
+    "Con bind() sulla porta del server",
+    "Non serve: si trova da solo"
+   ],
+   "Con host e porta nel costruttore di Socket",
+   "new Socket(\"localhost\", 5000)."
+  ],
+  [
+   "Perché <code>PrintWriter(out, true)<\/code> è comodo?",
+   [
+    "Fa il flush automatico a ogni println",
+    "Cifra i dati",
+    "Usa UDP al posto di TCP",
+    "Chiude il socket da solo"
+   ],
+   "Fa il flush automatico a ogni println",
+   "Senza flush i dati possono restare nel buffer e non partire."
+  ]
+ ],
+ "ORD": [
+  [
+   "<code>ServerSocket server = new ServerSocket(5000);<\/code>",
+   "Socket di ascolto sulla porta 5000."
+  ],
+  [
+   "<code>Socket client = server.accept();<\/code>",
+   "Attesa bloccante del client."
+  ],
+  [
+   "<code>BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));<\/code>",
+   "Lettore di righe sul flusso in ingresso."
+  ],
+  [
+   "<code>String riga = in.readLine();<\/code>",
+   "Lettura del messaggio."
+  ],
+  [
+   "<code>System.out.println(riga);<\/code>",
+   "Visualizzazione."
+  ],
+  [
+   "<code>client.close(); server.close();<\/code>",
+   "Chiusura dei socket."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "Il client deve collegarsi al server sulla porta 5000 e inviare una riga.",
+   "lines": [
+    "Socket s = new Socket(\"localhost\", 5000);",
+    "PrintWriter out = new PrintWriter(s.getInputStream(), true);",
+    "out.println(\"Ciao server\");",
+    "s.close();"
+   ],
+   "bad": 1,
+   "why": "Per scrivere serve il flusso in uscita: new PrintWriter(s.getOutputStream(), true)."
+  },
+  {
+   "t": "Il server deve accettare un client e leggere una riga.",
+   "lines": [
+    "ServerSocket server = new ServerSocket(5000);",
+    "Socket client = server.connect();",
+    "BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));",
+    "System.out.println(in.readLine());"
+   ],
+   "bad": 1,
+   "why": "Il server accetta con server.accept(); connect è un'operazione del client."
+  },
+  {
+   "t": "Il server UDP deve ricevere un datagramma.",
+   "lines": [
+    "DatagramSocket ds = new DatagramSocket(6000);",
+    "byte[] buf = new byte[1024];",
+    "DatagramPacket p = new DatagramPacket(buf, buf.length);",
+    "ds.accept(p);",
+    "String msg = new String(p.getData(), 0, p.getLength());"
+   ],
+   "bad": 3,
+   "why": "UDP non ha connessioni: si riceve con ds.receive(p)."
+  },
+  {
+   "t": "Il client invia una riga che il server legge con readLine().",
+   "lines": [
+    "PrintWriter out = new PrintWriter(s.getOutputStream());",
+    "out.print(\"Ciao\");",
+    "out.flush();",
+    "s.close();"
+   ],
+   "bad": 1,
+   "why": "readLine() aspetta il fine riga: serve out.println(\"Ciao\"), altrimenti il server resta in attesa."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>

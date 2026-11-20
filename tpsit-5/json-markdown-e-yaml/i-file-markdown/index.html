@@ -1,0 +1,290 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>I file markdown</title><meta name="description" content="Titoli, enfasi, elenchi, link, immagini, codice e tabelle in Markdown, e dove si usa."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>I file markdown</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>I file markdown</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso di Markdown: a che cosa serve, dove lo si incontra e come si scrivono titoli, elenchi, link, codice e tabelle.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">Che cosa produce ciascuna scrittura Markdown? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine le righe di una tabella Markdown. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "# Introduzione",
+   "titolo"
+  ],
+  [
+   "### Esempi",
+   "titolo"
+  ],
+  [
+   "**importante**",
+   "enfasi"
+  ],
+  [
+   "*parola*",
+   "enfasi"
+  ],
+  [
+   "~~vecchio~~",
+   "enfasi"
+  ],
+  [
+   "- primo punto",
+   "elenco"
+  ],
+  [
+   "1. primo passo",
+   "elenco"
+  ],
+  [
+   "- [ ] da fare",
+   "elenco"
+  ],
+  [
+   "[sito](https://esempio.it)",
+   "link"
+  ],
+  [
+   "![logo](logo.png)",
+   "link"
+  ],
+  [
+   "`codice`",
+   "codice"
+  ],
+  [
+   "> citazione",
+   "codice"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "titolo",
+   "t": "Titolo",
+   "s": ""
+  },
+  {
+   "id": "enfasi",
+   "t": "Grassetto, corsivo, barrato",
+   "s": ""
+  },
+  {
+   "id": "elenco",
+   "t": "Elenco",
+   "s": ""
+  },
+  {
+   "id": "link",
+   "t": "Link o immagine",
+   "s": ""
+  },
+  {
+   "id": "codice",
+   "t": "Codice o citazione",
+   "s": ""
+  }
+ ],
+ "VF": [
+  [
+   "Markdown è nato per conciliare formattazione e leggibilità del testo semplice.",
+   true,
+   "Anche senza essere trasformato, un file Markdown si legge bene."
+  ],
+  [
+   "In Markdown si possono scegliere font, colori e dimensioni come in Word.",
+   false,
+   "Si indica solo la struttura (titoli, elenchi, enfasi); l'aspetto lo decide chi lo mostra."
+  ],
+  [
+   "Markdown prevede sei livelli di intestazione.",
+   true,
+   "Da # a ######, come h1...h6 in HTML."
+  ],
+  [
+   "Il corsivo si ottiene racchiudendo il testo fra un asterisco o un underscore.",
+   true,
+   "*corsivo* oppure _corsivo_; con due si ottiene il grassetto."
+  ],
+  [
+   "Per andare a capo con un nuovo paragrafo basta una riga vuota.",
+   true,
+   "Le righe consecutive senza riga vuota vengono unite."
+  ],
+  [
+   "Un blocco di codice si racchiude fra tre apici inversi.",
+   true,
+   "Dopo i tre apici si può indicare il linguaggio per colorare la sintassi."
+  ],
+  [
+   "Il file README.md di un repository su GitHub viene mostrato come semplice testo senza formattazione.",
+   false,
+   "GitHub lo trasforma e lo mostra formattato nella pagina del repository."
+  ],
+  [
+   "Gli elementi di un elenco si nidificano indentandoli.",
+   true,
+   "Con due o quattro spazi."
+  ]
+ ],
+ "MC": [
+  [
+   "Quali sono le estensioni di un file Markdown?",
+   [
+    ".md oppure .markdown",
+    ".mk",
+    ".txt soltanto",
+    ".mdx soltanto"
+   ],
+   ".md oppure .markdown",
+   "La più usata è .md."
+  ],
+  [
+   "Come si scrive il grassetto in Markdown?",
+   [
+    "**testo**",
+    "*testo*",
+    "__testo_",
+    "&lt;b&gt;testo"
+   ],
+   "**testo**",
+   "Due asterischi (o due underscore) per parte."
+  ],
+  [
+   "Che cosa deve contenere la seconda riga di una tabella Markdown?",
+   [
+    "Almeno un trattino per ogni colonna",
+    "I titoli delle colonne",
+    "Il numero di righe",
+    "Niente: deve essere vuota"
+   ],
+   "Almeno un trattino per ogni colonna",
+   "Con i due punti si allinea il testo: :--- a sinistra, ---: a destra."
+  ],
+  [
+   "Come si inserisce un'immagine?",
+   [
+    "![testo alternativo](foto.png)",
+    "[foto.png]",
+    "(img)foto.png",
+    "!foto.png!"
+   ],
+   "![testo alternativo](foto.png)",
+   "È come un link, con il punto esclamativo davanti."
+  ],
+  [
+   "Quale generatore di siti statici usa file Markdown come sorgente?",
+   [
+    "Jekyll",
+    "Tomcat",
+    "Jenkins",
+    "Docker"
+   ],
+   "Jekyll",
+   "GitHub Pages lo supporta direttamente."
+  ],
+  [
+   "Come si scrive una citazione?",
+   [
+    "Con il simbolo &gt; all'inizio della riga",
+    "Fra virgolette",
+    "Con due trattini",
+    "Con il cancelletto"
+   ],
+   "Con il simbolo > all'inizio della riga",
+   "Si chiude con una riga vuota senza &gt;."
+  ],
+  [
+   "Che differenza c'è fra HTML e Markdown?",
+   [
+    "HTML usa tag pensati per la macchina, Markdown simboli leggibili",
+    "Markdown è un linguaggio di programmazione",
+    "HTML non si può convertire",
+    "Nessuna"
+   ],
+   "HTML usa tag pensati per la macchina, Markdown simboli leggibili",
+   "Markdown di solito viene convertito in HTML."
+  ],
+  [
+   "Quale scrittura crea una casella da spuntare in GitHub?",
+   [
+    "- [ ] compito",
+    "[x] - compito",
+    "( ) compito",
+    "* () compito"
+   ],
+   "- [ ] compito",
+   "Con - [x] la casella è già spuntata."
+  ]
+ ],
+ "ORD": [
+  [
+   "<code>| Nome | Voto |<\/code>",
+   "Riga di intestazione."
+  ],
+  [
+   "<code>| --- | --- |<\/code>",
+   "Seconda riga: almeno un trattino per colonna."
+  ],
+  [
+   "<code>| Ada | 9 |<\/code>",
+   "Prima riga di dati."
+  ],
+  [
+   "<code>| Luca | 7 |<\/code>",
+   "Seconda riga di dati."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "README.md: una riga non diventa un titolo.",
+   "lines": [
+    "# Progetto meteo",
+    "## Installazione",
+    "###Uso",
+    "## Licenza"
+   ],
+   "bad": 2,
+   "why": "Dopo i cancelletti serve uno spazio: ### Uso."
+  },
+  {
+   "t": "Link e immagini: una riga è sbagliata.",
+   "lines": [
+    "[Documentazione](https://esempio.it/docs)",
+    "![Schema](img/schema.png)",
+    "(Sito della scuola)[https://scuola.it]",
+    "<https://github.com>"
+   ],
+   "bad": 2,
+   "why": "Il testo del link va fra quadre e l'indirizzo fra tonde: [Sito della scuola](https://scuola.it)."
+  },
+  {
+   "t": "Tabella Markdown: una riga è sbagliata.",
+   "lines": [
+    "| Comando | Effetto |",
+    "| Commit | salva |",
+    "| git add | prepara |",
+    "| git push | invia |"
+   ],
+   "bad": 1,
+   "why": "La seconda riga deve contenere i trattini di separazione: | --- | --- |."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>

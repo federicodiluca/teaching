@@ -44,6 +44,10 @@
     threads: '<rect class="f" x="3" y="4" width="18" height="16" rx="2"/><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M6.5 8.5h6M10 12h7.5M6.5 15.5h4"/><path class="a" d="M15 8.5h2.5M13 15.5h4.5"/>',
     bep: '<path class="f" d="M14.7 10.7 20 6v3z"/><path d="M3.5 3.5v17h17M4 20 20 6"/><path class="a" d="M4 14l16-5"/><circle class="d" cx="14.7" cy="10.7" r="1.6"/>',
     org: '<rect class="f" x="9" y="3" width="6" height="5" rx="1"/><rect x="9" y="3" width="6" height="5" rx="1"/><rect x="2.5" y="16" width="6" height="5" rx="1"/><rect x="15.5" y="16" width="6" height="5" rx="1"/><path d="M5.5 16v-3.5h13V16"/><path class="a" d="M12 8v4.5"/>',
+    plug: '<path class="f" d="M7 8h10v4a5 5 0 0 1-10 0z"/><path d="M7 8h10v4a5 5 0 0 1-10 0zM9.5 8V3M14.5 8V3"/><path class="a" d="M12 17v4"/>',
+    branch: '<circle class="f" cx="6" cy="6" r="2.5"/><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="8" r="2.5"/><path d="M6 8.5v7"/><path class="a" d="M18 10.5c0 4-6 3-11 5.5"/>',
+    file: '<path class="f" d="M6 3h8l5 5v13H6z"/><path d="M6 3h8l5 5v13H6zM14 3v5h5"/><path class="a" d="M9 13h7M9 17h5"/>',
+    server: '<rect class="f" x="4" y="4" width="16" height="7" rx="1.5"/><rect x="4" y="4" width="16" height="7" rx="1.5"/><rect x="4" y="13" width="16" height="7" rx="1.5"/><path class="a" d="M7.5 7.5h3M7.5 16.5h3"/><path d="M16 7.5h.01M16 16.5h.01"/>',
     /* giochi */
     home: '<path class="f" d="M5 10.5 12 4l7 6.5V20H5z"/><path d="M3 12l9-8.5 9 8.5M5 10.5V20h14v-9.5"/><path class="a" d="M10 20v-5h4v5"/>',
     pencil: '<path class="f" d="M4 20l1-4L15.5 5.5l3 3L8 19z"/><path d="M4 20l1-4L15.5 5.5a2.1 2.1 0 0 1 3 3L8 19zM13.5 7.5l3 3"/><path class="a" d="M13 20h7"/>',
@@ -261,6 +265,11 @@
     }
     return ex;
   }
+  /* la risposta di una scelta come appare tra le opzioni (le opzioni possono essere testo già escapato) */
+  function scelta(f) {
+    var t = document.createElement("textarea"), o = (f.opts || []).filter(function (x) { t.innerHTML = x; return t.value === String(f.exp); })[0];
+    return o !== undefined ? o : esc(f.exp);
+  }
   function valore(x) { return typeof x === "number" ? String(x).replace(".", ",") : String(x); }
   function foglio(scelte, soluzioni) {
     var titolo = (document.querySelector("h1") || {}).textContent || document.title;
@@ -282,7 +291,7 @@
             }
             return '<p class="f"><b>' + f.label + '</b> <span class="riga"></span></p>';
           }).join("") + "</li>";
-          sol.push('<li value="' + n + '"><b>' + ex.fields.map(function (f) { return (ex.fields.length > 1 ? f.label + ": " : "") + valore(f.exp); }).join(" · ") +
+          sol.push('<li value="' + n + '"><b>' + ex.fields.map(function (f) { return (ex.fields.length > 1 ? f.label + ": " : "") + (f.kind === "choice" ? scelta(f) : valore(f.exp)); }).join(" · ") +
             "</b>" + (ex.sol ? '<div class="sp">' + ex.sol + "</div>" : "") + "</li>");
         }
         if (blocco) blocco = '<ol class="tg-sch-lista" start="' + (n - (blocco.match(/tg-sch-es/g) || []).length + 1) + '">' + blocco + "</ol>";
@@ -293,8 +302,8 @@
         v.buckets.forEach(function (b) { cat[b.id] = b.t; });
         blocco = '<ol class="tg-sch-lista" start="' + n + '"><li class="tg-sch-es"><div class="q">Scrivete accanto a ogni voce la categoria giusta: ' +
           v.buckets.map(function (b) { return "<b>" + b.t + "</b>" + (b.s ? " (" + b.s + ")" : ""); }).join(", ") + '.</div><table class="tg-sch-tab">' +
-          carte.map(function (x) { return "<tr><td>" + x[0] + '</td><td class="vuota"></td></tr>'; }).join("") + "</table></li></ol>";
-        sol.push('<li value="' + n + '">' + carte.map(function (x) { return x[0] + ": <b>" + cat[x[1]] + "</b>"; }).join("; ") + ".</li>");
+          carte.map(function (x) { return "<tr><td>" + esc(x[0]) + '</td><td class="vuota"></td></tr>'; }).join("") + "</table></li></ol>";
+        sol.push('<li value="' + n + '">' + carte.map(function (x) { return esc(x[0]) + ": <b>" + cat[x[1]] + "</b>"; }).join("; ") + ".</li>");
       } else if (v.tipo === "ordina") {
         n++;
         var ord = v.items.map(function (x, i) { return [x, i]; }), mix;

@@ -1,0 +1,266 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Le espressioni regolari</title><meta name="description" content="Metacaratteri, classi, quantificatori, ancore, gruppi e alternative, con esercizi su che cosa riconosce un pattern."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>Le espressioni regolari</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Le espressioni regolari</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso delle espressioni regolari: come si costruisce un pattern e che cosa riconosce.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">La stringa corrisponde per intero al pattern ^[A-Z][a-z]+$ ? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine i pezzi della RegEx per una targa italiana (due lettere, tre cifre, due lettere). Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "Ada",
+   "si"
+  ],
+  [
+   "Pesaro",
+   "si"
+  ],
+  [
+   "Lu",
+   "si"
+  ],
+  [
+   "ada",
+   "no"
+  ],
+  [
+   "A",
+   "no"
+  ],
+  [
+   "ADA",
+   "no"
+  ],
+  [
+   "Ada2",
+   "no"
+  ],
+  [
+   "Ada Rossi",
+   "no"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "si",
+   "t": "Corrisponde",
+   "s": ""
+  },
+  {
+   "id": "no",
+   "t": "Non corrisponde",
+   "s": ""
+  }
+ ],
+ "VF": [
+  [
+   "Un'espressione regolare è una sequenza di caratteri che definisce un pattern di ricerca.",
+   true,
+   "Si usa per cercare, validare, sostituire testo."
+  ],
+  [
+   "Il punto <code>.<\/code> corrisponde a un qualsiasi carattere (tranne l'a capo).",
+   true,
+   "Per cercare proprio il punto si scrive \\."
+  ],
+  [
+   "<code>[abc]<\/code> corrisponde alla sequenza abc.",
+   false,
+   "Corrisponde a un solo carattere: a, b oppure c."
+  ],
+  [
+   "Le ancore <code>^<\/code> e <code>$<\/code> non corrispondono a caratteri ma a posizioni.",
+   true,
+   "Inizio e fine della stringa (o della riga)."
+  ],
+  [
+   "Il backslash è il carattere di escape.",
+   true,
+   "Dà o toglie il significato speciale: \\d, \\."
+  ],
+  [
+   "Il pattern <code>colou?r<\/code> riconosce sia color sia colour.",
+   true,
+   "? rende facoltativa la u."
+  ],
+  [
+   "Il simbolo <code>|<\/code> indica l'alternanza, cioè «oppure».",
+   true,
+   "gatto|cane riconosce l'una o l'altra parola."
+  ],
+  [
+   "Il quantificatore <code>+<\/code> di base è lazy, cioè prende meno caratteri possibile.",
+   false,
+   "Di base i quantificatori sono greedy; con ? dopo (+?) diventano lazy."
+  ]
+ ],
+ "MC": [
+  [
+   "Che cosa indica il quantificatore <code>*<\/code>?",
+   [
+    "Zero o più volte",
+    "Una o più volte",
+    "Esattamente una volta",
+    "Al massimo una volta"
+   ],
+   "Zero o più volte",
+   "a* riconosce anche la stringa vuota."
+  ],
+  [
+   "Come si indica una ripetizione esatta di quattro volte?",
+   [
+    "{4}",
+    "(4)",
+    "[4]",
+    "*4"
+   ],
+   "{4}",
+   "{2,4} vuol dire da due a quattro volte."
+  ],
+  [
+   "Che cosa riconosce <code>\\w<\/code>?",
+   [
+    "Una lettera, una cifra o l'underscore",
+    "Solo una lettera",
+    "Uno spazio",
+    "Una parola intera"
+   ],
+   "Una lettera, una cifra o l'underscore",
+   "\\W è il contrario."
+  ],
+  [
+   "Che significato ha <code>^<\/code> all'inizio di una classe, come in <code>[^0-9]<\/code>?",
+   [
+    "Negazione: un carattere che non è nella classe",
+    "Inizio della stringa",
+    "Elevamento a potenza",
+    "Ripetizione"
+   ],
+   "Negazione: un carattere che non è nella classe",
+   "Fuori dalle quadre invece indica l'inizio."
+  ],
+  [
+   "Perché in una validazione si usano insieme <code>^<\/code> e <code>$<\/code>?",
+   [
+    "Per controllare l'intera stringa e non solo una parte",
+    "Per renderla più veloce",
+    "Per ignorare le maiuscole",
+    "Per cercare più occorrenze"
+   ],
+   "Per controllare l'intera stringa e non solo una parte",
+   "Senza ancore basta che il pattern compaia da qualche parte."
+  ],
+  [
+   "Quale stringa corrisponde per intero a <code>^\\d{3}-\\d{4}$<\/code>?",
+   [
+    "123-4567",
+    "1234567",
+    "12-34567",
+    "abc-defg"
+   ],
+   "123-4567",
+   "Tre cifre, trattino, quattro cifre."
+  ],
+  [
+   "Come si scrive un gruppo non catturante?",
+   [
+    "(?:...)",
+    "(...)",
+    "[?...]",
+    "{...}"
+   ],
+   "(?:...)",
+   "Raggruppa senza memorizzare il risultato."
+  ],
+  [
+   "Che cosa trova <code>\\bgatto\\b<\/code> nel testo «il gattone e il gatto»?",
+   [
+    "Solo la parola gatto intera",
+    "Anche gatto dentro gattone",
+    "Niente",
+    "Solo gattone"
+   ],
+   "Solo la parola gatto intera",
+   "\\b è il confine di parola."
+  ]
+ ],
+ "ORD": [
+  [
+   "<code>^[A-Z]{2}<\/code>",
+   "Inizio della stringa e due lettere maiuscole."
+  ],
+  [
+   "<code>\\d{3}<\/code>",
+   "Tre cifre."
+  ],
+  [
+   "<code>[A-Z]{2}$<\/code>",
+   "Altre due lettere maiuscole e fine della stringa."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "Significato dei simboli: una riga è sbagliata.",
+   "lines": [
+    "* → zero o più volte",
+    "+ → una o più volte",
+    "? → zero o una volta",
+    "{3} → almeno tre volte"
+   ],
+   "bad": 3,
+   "why": "{3} vuol dire esattamente tre volte; almeno tre si scrive {3,}."
+  },
+  {
+   "t": "Classi predefinite: una riga è sbagliata.",
+   "lines": [
+    "\\d → una cifra",
+    "\\w → lettera, cifra o underscore",
+    "\\s → uno spazio bianco",
+    "\\D → una cifra decimale"
+   ],
+   "bad": 3,
+   "why": "La maiuscola nega: \\D è qualsiasi carattere che non sia una cifra."
+  },
+  {
+   "t": "CAP italiano di cinque cifre: un pattern non va bene.",
+   "lines": [
+    "^\\d{5}$",
+    "^[0-9]{5}$",
+    "^\\d\\d\\d\\d\\d$",
+    "\\d{5}"
+   ],
+   "bad": 3,
+   "why": "Senza ^ e $ il pattern trova cinque cifre anche dentro una stringa più lunga, come 123456."
+  },
+  {
+   "t": "Ancore e gruppi: una riga è sbagliata.",
+   "lines": [
+    "^ all'inizio → inizio della stringa",
+    "$ → fine della stringa",
+    "\\b → confine di parola",
+    "[^abc] → inizio della stringa seguito da a, b o c"
+   ],
+   "bad": 3,
+   "why": "Dentro le quadre ^ nega la classe: un carattere diverso da a, b e c."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>

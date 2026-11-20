@@ -1,0 +1,275 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Integrazione e rilascio continui</title><meta name="description" content="Continuous Integration, Continuous Delivery e Continuous Deployment, pipeline e feature flag."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>Integrazione e rilascio continui</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Integrazione e rilascio continui</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso di CI/CD: integrare spesso, avere sempre una versione pronta e, se si vuole, rilasciarla in automatico.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">Di quale pratica stiamo parlando? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine i passi di una pipeline CI/CD. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "Ogni commit avvia build e test automatici",
+   "ci"
+  ],
+  [
+   "Si integra il codice nel ramo principale più volte al giorno",
+   "ci"
+  ],
+  [
+   "Gli errori di integrazione si scoprono subito",
+   "ci"
+  ],
+  [
+   "C'è sempre una versione pronta da rilasciare",
+   "cdel"
+  ],
+  [
+   "Il passaggio in produzione lo autorizza una persona",
+   "cdel"
+  ],
+  [
+   "Adatta ai settori regolamentati",
+   "cdel"
+  ],
+  [
+   "Ogni modifica che passa i test va in produzione da sola",
+   "cdep"
+  ],
+  [
+   "Nessun intervento umano prima della produzione",
+   "cdep"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "ci",
+   "t": "Continuous Integration",
+   "s": ""
+  },
+  {
+   "id": "cdel",
+   "t": "Continuous Delivery",
+   "s": ""
+  },
+  {
+   "id": "cdep",
+   "t": "Continuous Deployment",
+   "s": ""
+  }
+ ],
+ "VF": [
+  [
+   "Con la Continuous Integration ogni commit fa partire build e test automatici.",
+   true,
+   "Così gli errori di integrazione emergono subito."
+  ],
+  [
+   "Continuous Delivery e Continuous Deployment sono sinonimi.",
+   false,
+   "Nella Delivery il rilascio in produzione lo autorizza una persona; nel Deployment è automatico."
+  ],
+  [
+   "Cicli di commit brevi riducono la probabilità che più persone modifichino lo stesso codice insieme.",
+   true,
+   "Meno codice cambia fra un'integrazione e l'altra, meno conflitti ci sono."
+  ],
+  [
+   "La Continuous Delivery garantisce che ci sia sempre una versione pronta al deployment.",
+   true,
+   "Il rilascio diventa una decisione, non un problema tecnico."
+  ],
+  [
+   "Nel Continuous Deployment una modifica che non passa i test va comunque in produzione.",
+   false,
+   "Va in produzione solo ciò che supera tutti i test della pipeline."
+  ],
+  [
+   "Un feature flag permette di accendere o spegnere una funzione senza un nuovo rilascio.",
+   true,
+   "Strumenti come LaunchDarkly li gestiscono anche per gruppi di utenti."
+  ],
+  [
+   "Una pipeline è la sequenza automatica di passi dalla modifica del codice al rilascio.",
+   true,
+   "Build, test, rilascio: se un passo fallisce la pipeline si ferma."
+  ],
+  [
+   "Con la CI i test si eseguono a mano una volta al mese.",
+   false,
+   "I test sono automatici e girano a ogni integrazione."
+  ]
+ ],
+ "MC": [
+  [
+   "Che cosa distingue la Continuous Delivery dal Continuous Deployment?",
+   [
+    "Nella Delivery serve un intervento umano per andare in produzione",
+    "Nella Delivery non ci sono test",
+    "Il Deployment non usa la CI",
+    "Nessuna differenza"
+   ],
+   "Nella Delivery serve un intervento umano per andare in produzione",
+   "Delivery: pronto, ma si decide quando. Deployment: va da solo."
+  ],
+  [
+   "Per quali contesti è più adatta la Continuous Delivery?",
+   [
+    "Settori regolamentati, dove i rilasci vanno approvati",
+    "Siti personali",
+    "Videogiochi offline",
+    "Programmi senza test"
+   ],
+   "Settori regolamentati, dove i rilasci vanno approvati",
+   "Banche, sanità, pubblica amministrazione."
+  ],
+  [
+   "Che cosa fa partire di solito una pipeline CI?",
+   [
+    "Un push o una pull request",
+    "Lo spegnimento del server",
+    "Una mail del cliente",
+    "Il cambio di password"
+   ],
+   "Un push o una pull request",
+   "In GitHub Actions si scrive on: push."
+  ],
+  [
+   "Che cosa succede se un test fallisce nella pipeline?",
+   [
+    "La pipeline si ferma e la modifica non viene rilasciata",
+    "Il test viene saltato",
+    "Si rilascia lo stesso",
+    "Il repository viene cancellato"
+   ],
+   "La pipeline si ferma e la modifica non viene rilasciata",
+   "Chi ha rotto la build la ripara subito."
+  ],
+  [
+   "Quale di questi è uno strumento per i feature flag?",
+   [
+    "LaunchDarkly",
+    "Grafana",
+    "Selenium",
+    "Maven"
+   ],
+   "LaunchDarkly",
+   "Permette di attivare funzioni per gruppi di utenti."
+  ],
+  [
+   "In quale cartella si mettono i file delle GitHub Actions?",
+   [
+    ".github/workflows",
+    "src/actions",
+    ".git/hooks",
+    "docs/ci"
+   ],
+   ".github/workflows",
+   "Ogni file YAML in quella cartella descrive un workflow."
+  ],
+  [
+   "Che cos'è l'ambiente di staging?",
+   [
+    "Un ambiente di prova uguale alla produzione",
+    "Il PC dello sviluppatore",
+    "Il backup notturno",
+    "Il ramo main"
+   ],
+   "Un ambiente di prova uguale alla produzione",
+   "Si prova lì prima di rilasciare agli utenti veri."
+  ],
+  [
+   "Che cosa vuol dire «integrare» nella CI?",
+   [
+    "Unire spesso il proprio codice al ramo principale condiviso",
+    "Comprare un software",
+    "Scrivere la documentazione",
+    "Installare il sistema operativo"
+   ],
+   "Unire spesso il proprio codice al ramo principale condiviso",
+   "Più spesso si integra, più piccoli sono i conflitti."
+  ]
+ ],
+ "ORD": [
+  [
+   "Lo sviluppatore fa push del commit",
+   "Sul repository condiviso."
+  ],
+  [
+   "Il server CI scarica il codice",
+   "Per esempio GitHub Actions o Jenkins."
+  ],
+  [
+   "Build",
+   "Compilazione e creazione del pacchetto."
+  ],
+  [
+   "Test automatici",
+   "Se un test fallisce la pipeline si ferma."
+  ],
+  [
+   "Rilascio in un ambiente di prova (staging)",
+   "Uguale alla produzione."
+  ],
+  [
+   "Rilascio in produzione",
+   "Automatico o dopo approvazione."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "File di una pipeline con GitHub Actions: una riga è sbagliata.",
+   "lines": [
+    "on: push",
+    "jobs:",
+    "  test:",
+    "    runs-on: ubuntu-latest",
+    "    steps:",
+    "      - run: npm test",
+    "    when: tests-fail"
+   ],
+   "bad": 6,
+   "why": "when: tests-fail non esiste: se un passo fallisce il job si ferma da solo."
+  },
+  {
+   "t": "Definizioni: una riga è sbagliata.",
+   "lines": [
+    "CI: integrazione frequente con build e test automatici",
+    "Delivery: versione sempre pronta, rilascio approvato da una persona",
+    "Deployment: rilascio automatico in produzione",
+    "Feature flag: cancella le funzioni non finite dal codice"
+   ],
+   "bad": 3,
+   "why": "Un feature flag non cancella niente: lascia il codice nel programma ma accende o spegne la funzione senza un nuovo rilascio."
+  },
+  {
+   "t": "Buone pratiche CI: una riga è sbagliata.",
+   "lines": [
+    "Commit piccoli e frequenti",
+    "Build veloce",
+    "Se la build si rompe la si ripara subito",
+    "Si lavora per mesi su un ramo separato e si integra alla fine"
+   ],
+   "bad": 3,
+   "why": "Integrare dopo mesi crea molti conflitti: è proprio quello che la CI vuole evitare."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>

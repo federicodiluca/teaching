@@ -1,0 +1,230 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Organizzazione e processi</title><meta name="description" content="Specializzazione, coordinamento, micro e macrostruttura, processi aziendali e catena del valore."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>Organizzazione e processi</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Organizzazione e processi</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.</p>
+<ol><li><b>Coordinamento:</b> specializzazione del lavoro e i cinque meccanismi di Mintzberg.</li><li><b>Struttura:</b> microstruttura, strutture funzionale, divisionale e a matrice.</li><li><b>Processi:</b> visione dinamica, elementi di un processo, interdipendenze, processi primari e di supporto, catena del valore.</li><li><b>Mercato:</b> dal bisogno all'offerta, B2C e B2B.</li><li><b>Quiz</b> e <b>Sfida finale</b>.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="c1" data-g="Coordinamento" data-t="1 Specializzazione"><h2>Specializzazione verticale o orizzontale</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="spe"></div></section>
+<section id="c2" data-g="Coordinamento" data-t="2 Ex-post o ex-ante"><h2>Meccanismi ex-post ed ex-ante</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="exp"></div></section>
+<section id="c3" data-g="Coordinamento" data-t="3 Quale meccanismo?"><h2>Quale meccanismo di coordinamento?</h2><p class="lead">Leggete la situazione e scegliete il meccanismo che l'azienda sta usando.</p><div id="mec"></div></section>
+
+<section id="m1" data-g="Struttura" data-t="1 Microstruttura"><h2>Posizione, compito, mansione, ruolo</h2><p class="lead">Fate clic su una carta e poi sulla definizione giusta.</p><div id="mic"></div></section>
+<section id="m2" data-g="Struttura" data-t="2 Le tre strutture"><h2>Funzionale, divisionale, a matrice</h2><p class="lead">Fate clic su una carta e poi sulla struttura giusta.</p><div id="str"></div></section>
+<section id="m3" data-g="Struttura" data-t="3 Quale struttura?"><h2>Quale struttura conviene?</h2><p class="lead">Leggete la situazione e scegliete la struttura più coerente.</p><div id="qst"></div></section>
+
+<section id="p1" data-g="Processi" data-t="1 Statica o dinamica"><h2>Visione statica e visione dinamica</h2><p class="lead">Fate clic su una carta e poi sulla visione giusta.</p><div id="sd"></div></section>
+<section id="p2" data-g="Processi" data-t="2 Gli elementi"><h2>Gli elementi di un processo</h2><p class="lead">Il processo è la riparazione di uno smartphone in un centro assistenza. Fate clic su una carta e poi sull'elemento giusto.</p><div id="ele"></div></section>
+<section id="p3" data-g="Processi" data-t="3 Interdipendenze"><h2>Le interdipendenze tra le fasi</h2><p class="lead">Fate clic su una carta e poi sul tipo di interdipendenza.</p><div id="int"></div></section>
+<section id="p4" data-g="Processi" data-t="4 Primari o di supporto"><h2>Processi primari e di supporto</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="pri"></div></section>
+<section id="p5" data-g="Processi" data-t="5 Catena del valore"><h2>Le attività primarie di Porter</h2><p class="lead">Mettete in ordine le attività primarie, dall'arrivo delle materie prime al cliente. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».</p><div id="por"></div></section>
+
+<section id="k1" data-g="Mercato" data-t="1 Dal bisogno all'offerta"><h2>Dal bisogno all'offerta</h2><p class="lead">Mettete in ordine la catena logica del marketing. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».</p><div id="mkt"></div></section>
+<section id="k2" data-g="Mercato" data-t="2 B2C o B2B"><h2>B2C o B2B</h2><p class="lead">Fate clic su una carta e poi sul mercato giusto.</p><div id="b2"></div></section>
+
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Quindici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+const D = {
+  SPE: [
+    ["Un ingegnere progetta il layout del reparto, gli operai ci lavorano", "v"],
+    ["Chi decide come si svolge un'attività non è chi la esegue", "v"],
+    ["Il capocantiere stabilisce le procedure, la squadra le applica", "v"],
+    ["Separazione tra progettazione ed esecuzione del lavoro", "v"],
+    ["In una catena di montaggio ognuno monta un solo pezzo", "o"],
+    ["Poche attività semplici assegnate a ciascun operatore", "o"],
+    ["Nel fast food uno cuoce la carne, un altro prepara l'insalata", "o"],
+    ["Operatori diversi svolgono fasi diverse dello stesso processo", "o"],
+    ["Parcellizzazione del lavoro", "o"]
+  ],
+  SPE_BK: [{ id: "v", t: "Verticale", s: "Chi progetta e chi esegue" }, { id: "o", t: "Orizzontale", s: "Fasi diverse a persone diverse" }],
+  EXP: [
+    ["Adattamento reciproco", "p"], ["Supervisione diretta", "p"],
+    ["Standardizzazione dei processi", "a"], ["Standardizzazione dei risultati", "a"], ["Standardizzazione delle competenze", "a"],
+    ["Nasce nella prassi, senza pianificazione", "p"],
+    ["Due colleghi si accordano in una riunione informale", "p"],
+    ["Il capo interviene quando i colleghi non trovano un accordo", "p"],
+    ["Si progetta prima che i problemi si presentino", "a"],
+    ["Il manuale con le procedure del call center", "a"],
+    ["Il budget delle vendite da raggiungere", "a"]
+  ],
+  EXP_BK: [{ id: "p", t: "Ex-post", s: "Si instaurano nella prassi" }, { id: "a", t: "Ex-ante", s: "Progettati a priori" }],
+  MEC_OPTS: ["Adattamento reciproco", "Supervisione diretta", "Standardizzazione dei processi", "Standardizzazione dei risultati", "Standardizzazione delle competenze"],
+  MEC: [
+    ["In una piccola startup i quattro soci, quando nasce un problema, ne parlano davanti alla macchinetta del caffè e decidono insieme.", "Adattamento reciproco", "le persone si accordano direttamente, senza un capo e senza regole prestabilite"],
+    ["Un team di sviluppatori, davanti a un bug imprevisto, si riunisce al volo e si divide il lavoro.", "Adattamento reciproco", "è il meccanismo più flessibile, utile anche nei contesti complessi e incerti"],
+    ["Il capoturno assegna a ogni operaio la macchina su cui lavorare e controlla la produzione a fine turno.", "Supervisione diretta", "una persona ha formalmente il ruolo di capo: decide cosa fare e controlla gli esiti"],
+    ["Ogni mattina il responsabile del magazzino decide chi scarica i camion e chi prepara gli ordini.", "Supervisione diretta", "c'è un capo responsabile del lavoro degli altri"],
+    ["L'operatore del call center legge lo script previsto per ogni tipo di chiamata.", "Standardizzazione dei processi", "il «come fare» è definito a priori, in un manuale"],
+    ["In un fast food il panino si prepara in tutto il mondo con la stessa sequenza di passaggi.", "Standardizzazione dei processi", "la procedura è fissata in anticipo ed è uguale ovunque"],
+    ["Al direttore di filiale non interessa come lavorano i venditori, purché a fine anno raggiungano il budget.", "Standardizzazione dei risultati", "si controlla che cosa si ottiene, non come ci si arriva"],
+    ["Ogni reparto riceve un budget di produzione: quante unità produrre entro il mese.", "Standardizzazione dei risultati", "il budget fissa il risultato da raggiungere"],
+    ["Uno studio di ingegneria assume solo laureati e paga i corsi di aggiornamento a chi prepara le offerte per le gare d'appalto.", "Standardizzazione delle competenze", "il lavoro non si può standardizzare né come processo né come risultato: si garantiscono le capacità delle persone"],
+    ["In ospedale ogni chirurgo deve avere una specializzazione e aggiornarsi di continuo.", "Standardizzazione delle competenze", "in contesti molto incerti si punta sulla formazione e sull'esperienza"]
+  ],
+  MIC: [
+    ["La posizione lavorativa che una persona copre in azienda", "pos"],
+    ["È assegnata a una sola persona", "pos"],
+    ["Un insieme di attività collegate tra loro e inscindibili", "com"],
+    ["Dipende dal lavoro dell'uomo e dalle caratteristiche della tecnologia", "com"],
+    ["Un insieme di compiti attribuito a una posizione", "man"],
+    ["Può essere la stessa per più persone, come «disegnatore meccanico»", "man"],
+    ["È ciò che descrive il mansionario", "man"],
+    ["Le aspettative di comportamento verso chi occupa una posizione", "ruo"],
+    ["Ciò che l'organizzazione si aspetta da te, in relazione ai suoi obiettivi", "ruo"]
+  ],
+  MIC_BK: [{ id: "pos", t: "Posizione individuale", s: "" }, { id: "com", t: "Compito", s: "" }, { id: "man", t: "Mansione", s: "" }, { id: "ruo", t: "Ruolo", s: "" }],
+  STR: [
+    ["Unità raggruppate per funzioni: acquisti, produzione, vendite...", "f"],
+    ["Chi lavora nella stessa unità ha formazione ed esperienza simili", "f"],
+    ["Economie di scala e crescita delle competenze specialistiche", "f"],
+    ["Rischio: conflitti tra funzioni con obiettivi diversi", "f"],
+    ["Birrificio: le vendite vogliono entrambi i marchi pronti, la produzione uno solo alla volta", "f"],
+    ["Unità per prodotto, mercato, area geografica o cliente", "d"],
+    ["Ogni unità ha la propria produzione, il proprio marketing e la propria finanza", "d"],
+    ["Unità semi-autonome che riducono la complessità", "d"],
+    ["Rischio: funzioni duplicate e diseconomie di scala", "d"],
+    ["Doppia dipendenza: dal project manager e dal responsabile di funzione", "m"],
+    ["Specialisti delle funzioni assegnati a uno o più team di progetto", "m"],
+    ["Un suo caso particolare è la struttura per progetti", "m"]
+  ],
+  STR_BK: [{ id: "f", t: "Funzionale", s: "" }, { id: "d", t: "Divisionale", s: "" }, { id: "m", t: "A matrice", s: "" }],
+  QST_OPTS: ["Funzionale", "Divisionale", "A matrice"],
+  QST: [
+    ["Un'azienda produce un solo tipo di mobili e vuole sfruttare al massimo le economie di scala in produzione.", "Funzionale", "un solo prodotto e l'obiettivo dell'efficienza: si raggruppa per specializzazione tecnica"],
+    ["Una piccola officina vuole che i suoi tecnici crescano nelle loro competenze specialistiche.", "Funzionale", "le unità per funzione fanno crescere le competenze tecniche"],
+    ["Un gruppo vende elettrodomestici in Europa e in Asia, con clienti e normative molto diversi.", "Divisionale", "una divisione per area geografica si concentra sulle esigenze del proprio mercato"],
+    ["Un'azienda alimentare produce pasta, dolci e surgelati, ognuno con il proprio mercato.", "Divisionale", "una divisione per prodotto, ciascuna con le proprie funzioni"],
+    ["Una società di consulenza assegna sistemisti e programmatori a diversi progetti per i clienti, ognuno coordinato da un project manager.", "A matrice", "gli specialisti dipendono sia dalla loro funzione sia dal project manager"],
+    ["Gli ingegneri di più reparti lavorano contemporaneamente su commesse diverse, ognuna con un responsabile.", "A matrice", "doppia dipendenza: reparto di appartenenza e commessa"]
+  ],
+  SD: [
+    ["Chi fa cosa all'interno dell'impresa", "s"],
+    ["Si rappresenta con l'organigramma", "s"],
+    ["Microstruttura e macrostruttura", "s"],
+    ["Unità organizzative, gerarchia e responsabili", "s"],
+    ["Segue il flusso delle attività", "d"],
+    ["Dagli input in ingresso agli output realizzati", "d"],
+    ["Limita la frammentazione causata dalle unità organizzative", "d"],
+    ["Cerca l'ottimizzazione globale e non solo quelle locali", "d"]
+  ],
+  SD_BK: [{ id: "s", t: "Visione statica", s: "La struttura" }, { id: "d", t: "Visione dinamica", s: "I processi" }],
+  ELE: [
+    ["Lo smartphone guasto consegnato dal cliente", "in"],
+    ["Il pezzo di ricambio arrivato dal fornitore", "in"],
+    ["Lo smartphone riparato e funzionante", "out"],
+    ["Il dispositivo restituito al cliente", "out"],
+    ["Il manuale di riparazione del produttore", "ctr"],
+    ["Le regole della garanzia", "ctr"],
+    ["Le norme di sicurezza per le batterie al litio", "ctr"],
+    ["Il tecnico di laboratorio", "ris"],
+    ["La stazione di saldatura", "ris"],
+    ["Il software di diagnostica", "ris"],
+    ["Il sistema di ticket che segue lo stato di ogni riparazione", "ges"],
+    ["La regola: le riparazioni urgenti passano davanti alle altre", "ges"]
+  ],
+  ELE_BK: [{ id: "in", t: "Input", s: "Viene trasformato" }, { id: "out", t: "Output", s: "Ciò che riceve il cliente" }, { id: "ctr", t: "Controllo", s: "Regole e procedure" }, { id: "ris", t: "Risorse", s: "Umane o tecnologiche" }, { id: "ges", t: "Metodi di gestione", s: "Coordinano l'avanzamento" }],
+  INT: [
+    ["La spedizione parte solo dopo l'imballaggio", "seq"],
+    ["Verifica del magazzino, preparazione, corriere, consegna", "seq"],
+    ["L'uscita di una fase è l'ingresso della successiva", "seq"],
+    ["Progettista e produzione si rimandano il disegno finché non va bene", "rec"],
+    ["Lo sviluppatore corregge, il tester riprova, e così via", "rec"],
+    ["Due fasi si passano informazioni nei due sensi", "rec"],
+    ["Due reparti usano lo stesso furgone per le consegne", "gen"],
+    ["Due processi condividono la stessa sala riunioni", "gen"],
+    ["Legame dovuto a risorse, luoghi o tempi condivisi", "gen"]
+  ],
+  INT_BK: [{ id: "seq", t: "Sequenziali", s: "A cascata" }, { id: "rec", t: "Reciproche", s: "Bidirezionali" }, { id: "gen", t: "Generiche", s: "Per condivisione" }],
+  PRI: [
+    ["Preparazione dell'offerta per il cliente", "p"],
+    ["Sviluppo del progetto commissionato", "p"],
+    ["Consegna e chiusura economica della commessa", "p"],
+    ["Produzione vera e propria", "p"],
+    ["Distribuzione del prodotto finito", "p"],
+    ["Assistenza post-vendita", "p"],
+    ["Aggiornamento professionale dei tecnici", "s"],
+    ["Amministrazione contabile", "s"],
+    ["Gestione della qualità", "s"],
+    ["Approvvigionamenti", "s"],
+    ["Ricerca e sviluppo", "s"],
+    ["Gestione delle risorse umane", "s"]
+  ],
+  PRI_BK: [{ id: "p", t: "Primari", s: "Creano valore per il cliente" }, { id: "s", t: "Di supporto", s: "Servono ai processi primari" }],
+  POR: [
+    ["Logistica interna", "Movimentazione e trasformazione di materie prime e beni intermedi."],
+    ["Operations", "La produzione vera e propria."],
+    ["Logistica esterna", "La distribuzione del prodotto finito."],
+    ["Marketing e vendite", "La gestione del mercato: pre-vendita, vendita e post-vendita."],
+    ["Servizi", "Assistenza e servizi complementari."]
+  ],
+  MKT: [
+    ["Bisogno", "Il cliente sente che gli manca qualcosa: per esempio non avere freddo in inverno."],
+    ["Desiderio", "Il bisogno diventa voglia di un prodotto preciso: quel cappotto."],
+    ["Domanda economica", "Il desiderio diventa una richiesta effettiva sul mercato."],
+    ["Offerta", "La richiesta trova risposta con l'acquisto."]
+  ],
+  B2: [
+    ["Una catena di abbigliamento vende felpe ai ragazzi", "c"],
+    ["Acquisti influenzati da emozioni, moda e pubblicità", "c"],
+    ["Tra produttore e cliente c'è una rete di negozi", "c"],
+    ["Un'app di streaming venduta in abbonamento alle famiglie", "c"],
+    ["Un'azienda vende torni a controllo numerico alle officine", "b"],
+    ["Pochi clienti, di dimensioni molto diverse", "b"],
+    ["Clienti concentrati nei distretti industriali", "b"],
+    ["Si sceglie in base a specifiche tecniche, prezzo e affidabilità del fornitore", "b"],
+    ["Una software house vende un gestionale a un'azienda di logistica", "b"]
+  ],
+  B2_BK: [{ id: "c", t: "B2C", s: "Business to Consumer" }, { id: "b", t: "B2B", s: "Business to Business" }],
+  VF: [
+    ["Più aumenta la specializzazione, più diventa necessario coordinare le attività.", true, "La crescita porta specializzazione, e la specializzazione rende più difficile il coordinamento."],
+    ["L'adattamento reciproco funziona solo nelle piccole imprese.", false, "È diffuso nelle piccole imprese, ma è ottimo anche nei contesti complessi quando servono flessibilità e collaborazione."],
+    ["Lo span of control è il numero di persone che dipendono da un capo.", true, "Se diventa troppo grande, la supervisione diretta non funziona più."],
+    ["La standardizzazione dei processi funziona meglio nei contesti molto incerti.", false, "Funziona nei contesti stabili, dove i problemi si possono prevedere."],
+    ["Il mansionario descrive la macrostruttura dell'azienda.", false, "Descrive la microstruttura, cioè i compiti di ogni mansione. La macrostruttura si rappresenta con l'organigramma."],
+    ["La stessa mansione può essere assegnata a più persone.", true, "Ogni posizione è di una sola persona, ma più posizioni possono avere la stessa mansione."],
+    ["Esiste una struttura organizzativa migliore in assoluto.", false, "Dipende dall'ambiente competitivo, dalle scelte strategiche e dalle preferenze dei manager."],
+    ["Nella struttura divisionale pura ogni divisione ha la propria produzione, il proprio marketing e la propria finanza.", true, "Ripropone al suo interno la logica funzionale."],
+    ["Se ogni unità raggiunge il proprio obiettivo, l'impresa è ottimizzata nel suo insieme.", false, "Si ottengono solo ottimizzazioni locali: il commerciale può firmare contratti che poi le operations faticano a rispettare."],
+    ["Un processo può avere anche un cliente interno.", true, "È un'unità dell'impresa che usa l'output del processo, come il controllo qualità."],
+    ["Il controllo viene trasformato dalle attività del processo, come l'input.", false, "Il controllo non si trasforma: fornisce le regole e le procedure per svolgere le attività."],
+    ["I processi di supporto si possono eliminare, perché il cliente non ne vede il valore.", false, "Non creano un valore riconosciuto dal cliente esterno, ma servono al funzionamento dei processi primari."],
+    ["Per Porter il valore si misura con il prezzo che il cliente è disposto a pagare.", true, "La differenza tra questo valore e i costi è il margine dell'impresa."],
+    ["Il compito del marketing è indirizzare un bisogno verso il desiderio di un prodotto preciso.", true, "Così rende esplicita la domanda, per esempio con la pubblicità."]
+  ],
+  MC: [
+    ["Quali sono i meccanismi di coordinamento ex-post?", ["Adattamento reciproco e supervisione diretta", "Standardizzazione dei processi e dei risultati", "Supervisione diretta e standardizzazione delle competenze"], "Adattamento reciproco e supervisione diretta", "Si instaurano nella prassi, senza una pianificazione preventiva."],
+    ["Chi ha individuato i cinque meccanismi di coordinamento?", ["Mintzberg", "Porter", "Anthony"], "Mintzberg", "Henry Mintzberg, nel 1983."],
+    ["Che cos'è l'organigramma?", ["La rappresentazione grafica delle unità organizzative e della gerarchia", "L'elenco dei compiti di ogni mansione", "La sequenza delle fasi di un processo"], "La rappresentazione grafica delle unità organizzative e della gerarchia", "L'elenco dei compiti è il mansionario."],
+    ["In quale struttura c'è la doppia dipendenza gerarchica?", ["A matrice", "Funzionale", "Divisionale"], "A matrice", "Si dipende dal project manager e dal responsabile della propria funzione."],
+    ["Qual è lo svantaggio tipico della struttura divisionale?", ["Funzioni duplicate tra le divisioni", "Conflitti tra funzioni diverse", "Doppia dipendenza dai capi"], "Funzioni duplicate tra le divisioni", "I conflitti tra funzioni sono tipici della struttura funzionale, la doppia dipendenza di quella a matrice."],
+    ["Che cosa serve per riconoscere un processo aziendale?", ["Un cliente che trae valore dall'output", "Un reparto che lo svolge da solo", "Un capo che lo controlla"], "Un cliente che trae valore dall'output", "Senza un cliente, esterno o interno, non si può parlare di processo."],
+    ["Con che cosa il cliente misura il valore di un output?", ["Prezzo, qualità e tempi", "Numero di dipendenti e di reparti", "Fatturato e utile dell'azienda"], "Prezzo, qualità e tempi", "Prezzo di acquisizione, caratteristiche qualitative, tempi di consegna o di sviluppo."],
+    ["Le interdipendenze generiche nascono da…", ["Risorse, luoghi o tempi condivisi", "Fasi che si susseguono una dopo l'altra", "Scambi nei due sensi tra due fasi"], "Risorse, luoghi o tempi condivisi", "Le altre due sono le interdipendenze sequenziali e reciproche."],
+    ["Quale di queste è un'attività di supporto nella catena del valore?", ["Ricerca e sviluppo", "Logistica esterna", "Marketing e vendite"], "Ricerca e sviluppo", "Logistica esterna e marketing e vendite sono attività primarie."],
+    ["Pacchetti all inclusive e offerte last minute sono un esempio di…", ["Marketing che stimola una domanda inespressa", "Standardizzazione dei processi", "Logistica esterna"], "Marketing che stimola una domanda inespressa", "La domanda si può stimolare e canalizzare."],
+    ["Quale caratteristica è tipica del mercato B2B?", ["Pochi clienti concentrati geograficamente", "Acquisti guidati dalla moda", "Una rete di negozi tra produttore e cliente"], "Pochi clienti concentrati geograficamente", "Le altre due sono tipiche del mercato dei consumatori (B2C)."]
+  ]
+};
+SG('#spe', D.SPE, D.SPE_BK, 'Specializzazione');
+SG('#exp', D.EXP, D.EXP_BK, 'Ex-post o ex-ante');
+const genMec = scGen(D.MEC, D.MEC_OPTS, 'Quale meccanismo?', 'Meccanismo');
+mount($('#mec'), genMec, 'Quale meccanismo?');
+SG('#mic', D.MIC, D.MIC_BK, 'Microstruttura');
+SG('#str', D.STR, D.STR_BK, 'Le tre strutture');
+const genQst = scGen(D.QST, D.QST_OPTS, 'Quale struttura?', 'Struttura');
+mount($('#qst'), genQst, 'Quale struttura?');
+SG('#sd', D.SD, D.SD_BK, 'Statica o dinamica');
+SG('#ele', D.ELE, D.ELE_BK, 'Elementi del processo');
+SG('#int', D.INT, D.INT_BK, 'Interdipendenze');
+SG('#pri', D.PRI, D.PRI_BK, 'Primari o di supporto');
+orderGame($('#por'), asOrder(D.POR), 'Catena del valore', false);
+orderGame($('#mkt'), asOrder(D.MKT), 'Dal bisogno all\'offerta', false);
+SG('#b2', D.B2, D.B2_BK, 'B2C o B2B');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll(), genMec, genMec, genQst, genQst];
+mission($('#tot'), SFIDA, 'Sfida finale', 15);
+</script></body></html>

@@ -1,0 +1,721 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Organizzazione, persone e comunicazione</title><meta name="description" content="Strutture dei progetti, ruolo del project manager, gestione dei conflitti, matrice delle responsabilità, gruppo di lavoro e comunicazione di progetto."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head><body class="tg-act" data-solo="1"><header><h1>Organizzazione, persone e comunicazione</h1></header><nav id="nav"></nav><main>
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Organizzazione, persone e comunicazione</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.</p>
+<ol><li><b>Strutture:</b> funzionale, task force e a matrice, e il peso del project manager.</li><li><b>Project manager:</b> autorevolezza e flussi informativi.</li><li><b>Conflitti:</b> modalità di gestione, fasi, matrice delle responsabilità.</li><li><b>Gruppo di lavoro:</b> fattori, ciclo di sviluppo del gruppo.</li><li><b>Comunicazione:</b> i fattori della comunicazione di progetto e i report.</li><li><b>Quiz</b> e <b>Sfida finale</b>.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+<section id="s1" data-g="Strutture" data-t="1 Le tre strutture"><h2>Funzionale, task force, a matrice</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_s1"></div></section>
+<section id="s2" data-g="Strutture" data-t="2 Quale struttura?"><h2>Quale struttura per questo progetto?</h2><p class="lead">Leggete il progetto e scegliete la struttura organizzativa più adatta.</p><div id="x_s2"></div></section>
+<section id="s3" data-g="Strutture" data-t="3 Il peso del PM"><h2>I tre livelli di peso del project manager</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_s3"></div></section>
+<section id="m1" data-g="Project manager" data-t="1 Autorevolezza"><h2>Autorevolezza di merito e di diritto</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_m1"></div></section>
+<section id="m2" data-g="Project manager" data-t="2 Flussi informativi"><h2>Con chi comunica il project manager</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_m2"></div></section>
+<section id="c1" data-g="Conflitti" data-t="1 Come si gestisce?"><h2>Compromesso, pressione o confronto</h2><p class="lead">Leggete come viene gestito il conflitto e scegliete la modalità.</p><div id="x_c1"></div></section>
+<section id="c2" data-g="Conflitti" data-t="2 Le fasi"><h2>Le fasi dinamiche del conflitto</h2><p class="lead">Mettete in ordine le fasi del conflitto. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».</p><div id="x_c2"></div></section>
+<section id="c3" data-g="Conflitti" data-t="3 Matrice delle responsabilità"><h2>La matrice delle responsabilità e dei rapporti</h2><p class="lead">Abbinate ogni lettera al tipo di responsabilità. Girate due tessere alla volta.</p><div id="x_c3"></div></section>
+<section id="g1" data-g="Gruppo di lavoro" data-t="1 Le quattro fasi"><h2>Il ciclo di sviluppo del gruppo</h2><p class="lead">Mettete in ordine le fasi di sviluppo di un gruppo di lavoro. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».</p><div id="x_g1"></div></section>
+<section id="g2" data-g="Gruppo di lavoro" data-t="2 In che fase è?"><h2>In che fase è il gruppo?</h2><p class="lead">Leggete la situazione e scegliete la fase di sviluppo del gruppo.</p><div id="x_g2"></div></section>
+<section id="g3" data-g="Gruppo di lavoro" data-t="3 I cinque fattori"><h2>I fattori di un gruppo di lavoro</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_g3"></div></section>
+<section id="k1" data-g="Comunicazione" data-t="1 I quattro fattori"><h2>I fattori della comunicazione di progetto</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_k1"></div></section>
+<section id="k2" data-g="Comunicazione" data-t="2 Il report"><h2>Che cosa c&#x27;è in un report</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_k2"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Quindici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+const D = {
+ "s1": [
+  [
+   "Il progetto si divide in sottoprogetti assegnati alle funzioni",
+   "f"
+  ],
+  [
+   "Gestito dai responsabili funzionali",
+   "f"
+  ],
+  [
+   "Personale a tempo parziale, senza un responsabile dedicato",
+   "f"
+  ],
+  [
+   "Solo la direzione ha la visione d'insieme",
+   "f"
+  ],
+  [
+   "Un'unità autonoma con persone a tempo pieno",
+   "t"
+  ],
+  [
+   "A capo c'è il project manager, con un team coeso",
+   "t"
+  ],
+  [
+   "Le risorse restano inoperose nei tempi morti",
+   "t"
+  ],
+  [
+   "Al rientro le persone hanno perso l'aggiornamento della loro funzione",
+   "t"
+  ],
+  [
+   "C'è un project manager, ma le persone restano nelle loro funzioni",
+   "m"
+  ],
+  [
+   "Doppio comando: project manager e responsabile funzionale",
+   "m"
+  ],
+  [
+   "Il PM è responsabile dei risultati senza piena autorità",
+   "m"
+  ]
+ ],
+ "s1_BK": [
+  {
+   "id": "f",
+   "t": "Struttura funzionale",
+   "s": "Privilegia l'efficienza"
+  },
+  {
+   "id": "t",
+   "t": "Task force",
+   "s": "Privilegia il risultato"
+  },
+  {
+   "id": "m",
+   "t": "A matrice",
+   "s": "Soluzione intermedia"
+  }
+ ],
+ "s2": [
+  [
+   "Aggiornare il listino prezzi: ogni ufficio sistema la sua parte.",
+   "Struttura funzionale",
+   "progetto semplice, poco innovativo, divisibile tra le funzioni"
+  ],
+  [
+   "Il nuovo prodotto da cui dipende il futuro dell'azienda, da lanciare entro sei mesi.",
+   "Task force",
+   "progetto strategico e vitale: vale la pena dedicare risorse a tempo pieno"
+  ],
+  [
+   "Un nuovo portale clienti: troppo innovativo per lasciarlo agli uffici, ma non vitale per l'azienda.",
+   "Struttura a matrice",
+   "caso intermedio tra le altre due"
+  ],
+  [
+   "Preparare il bilancio annuale con il contributo di ogni reparto.",
+   "Struttura funzionale",
+   "attività vicina alla prassi normale"
+  ],
+  [
+   "Rispondere in poche settimane a un incidente grave che blocca la produzione.",
+   "Task force",
+   "serve focus totale sul risultato"
+  ]
+ ],
+ "s2_OPTS": [
+  "Struttura funzionale",
+  "Task force",
+  "Struttura a matrice"
+ ],
+ "s3": [
+  [
+   "Facilitatore",
+   "l"
+  ],
+  [
+   "Controlla solo i tempi",
+   "l"
+  ],
+  [
+   "Tipico della struttura funzionale",
+   "l"
+  ],
+  [
+   "Coordinatore e negoziatore",
+   "m"
+  ],
+  [
+   "Controlla tempi e costi",
+   "m"
+  ],
+  [
+   "Tipico della struttura a matrice",
+   "m"
+  ],
+  [
+   "Decisore",
+   "x"
+  ],
+  [
+   "Controlla tempi, costi e qualità",
+   "x"
+  ],
+  [
+   "Tipico della task force",
+   "x"
+  ]
+ ],
+ "s3_BK": [
+  {
+   "id": "l",
+   "t": "Peso leggero",
+   "s": ""
+  },
+  {
+   "id": "m",
+   "t": "Peso medio",
+   "s": ""
+  },
+  {
+   "id": "x",
+   "t": "Peso massimo",
+   "s": ""
+  }
+ ],
+ "m1": [
+  [
+   "Le sue competenze tecniche",
+   "me"
+  ],
+  [
+   "Le sue abilità manageriali",
+   "me"
+  ],
+  [
+   "Il suo stile di leadership",
+   "me"
+  ],
+  [
+   "Non dipende dalla posizione formale",
+   "me"
+  ],
+  [
+   "Il livello del committente a cui risponde",
+   "di"
+  ],
+  [
+   "I poteri che gli sono stati delegati",
+   "di"
+  ],
+  [
+   "Il livello che occupa in azienda",
+   "di"
+  ],
+  [
+   "Dipende dal contesto organizzativo",
+   "di"
+  ]
+ ],
+ "m1_BK": [
+  {
+   "id": "me",
+   "t": "Di merito",
+   "s": "Dalla persona"
+  },
+  {
+   "id": "di",
+   "t": "Di diritto",
+   "s": "Dall'organizzazione"
+  }
+ ],
+ "m2": [
+  [
+   "Riceve le politiche aziendali",
+   "dir"
+  ],
+  [
+   "Le rendiconta l'avanzamento del progetto",
+   "dir"
+  ],
+  [
+   "Gli dà indicazioni e specifiche",
+   "cli"
+  ],
+  [
+   "Vuole sapere come procede il lavoro commissionato",
+   "cli"
+  ],
+  [
+   "Il PM li coordina e riceve i loro report",
+   "fun"
+  ],
+  [
+   "Il PM lo dirige e ne riceve i report",
+   "per"
+  ]
+ ],
+ "m2_BK": [
+  {
+   "id": "dir",
+   "t": "Direzione aziendale",
+   "s": ""
+  },
+  {
+   "id": "cli",
+   "t": "Cliente o committente",
+   "s": ""
+  },
+  {
+   "id": "fun",
+   "t": "Manager funzionali",
+   "s": ""
+  },
+  {
+   "id": "per",
+   "t": "Personale del progetto",
+   "s": ""
+  }
+ ],
+ "c1": [
+  [
+   "Il grafico rinuncia a un'animazione e lo sviluppatore accetta di cambiare i colori.",
+   "Compromesso",
+   "si dà qualcosa per ottenere qualcosa"
+  ],
+  [
+   "Il responsabile tecnico impone la sua scelta perché «si fa così».",
+   "Pressione",
+   "si fa prevalere la propria opinione"
+  ],
+  [
+   "Il team analizza insieme le due proposte finché trova una soluzione che va bene a tutti.",
+   "Confronto",
+   "si sviscera il conflitto per trovare un punto d'incontro"
+  ],
+  [
+   "Marketing e produzione si dividono a metà le ore del tecnico condiviso.",
+   "Compromesso",
+   "ognuno cede qualcosa"
+  ],
+  [
+   "Il direttore chiude la discussione decidendo lui.",
+   "Pressione",
+   "prevale una parte"
+  ]
+ ],
+ "c1_OPTS": [
+  "Compromesso",
+  "Pressione",
+  "Confronto"
+ ],
+ "c2": [
+  [
+   "Condizioni antecedenti",
+   "Episodi passati o senso di non equità."
+  ],
+  [
+   "Conflitto percepito",
+   "Stati d'animo e valutazione dei possibili atteggiamenti."
+  ],
+  [
+   "Conflitto manifesto",
+   "Le parti reagiscono: atti aggressivi o comportamenti costruttivi."
+  ],
+  [
+   "Risoluzione e post-conflitto",
+   "Si risolve o si sopprime: armonia o rancore."
+  ]
+ ],
+ "c3": [
+  [
+   "A",
+   "Responsabilità generale"
+  ],
+  [
+   "B",
+   "Responsabilità operativa"
+  ],
+  [
+   "C",
+   "Responsabilità specifica"
+  ],
+  [
+   "D",
+   "Consultazione necessaria"
+  ],
+  [
+   "E",
+   "Consultazione possibile"
+  ],
+  [
+   "F",
+   "Comunicazione obbligatoria"
+  ],
+  [
+   "G",
+   "Approvazione necessaria"
+  ]
+ ],
+ "g1": [
+  [
+   "Forming",
+   "Orientamento: insicurezza, ognuno cerca il suo spazio."
+  ],
+  [
+   "Storming",
+   "Conflittualità: la coesione non è ancora raggiunta."
+  ],
+  [
+   "Norming",
+   "Coesione: ci si confronta senza paura di litigare."
+  ],
+  [
+   "Performing",
+   "Il gruppo è maturo e guarda verso l'esterno."
+  ]
+ ],
+ "g2": [
+  [
+   "Primo giorno: nessuno sa bene che cosa deve fare e tutti aspettano istruzioni.",
+   "Forming",
+   "fase di orientamento e insicurezza"
+  ],
+  [
+   "Due membri litigano su chi deve guidare lo sviluppo e il lavoro si blocca.",
+   "Storming",
+   "la coesione non c'è ancora"
+  ],
+  [
+   "Il team discute apertamente le proposte, anche criticandole, senza offendersi.",
+   "Norming",
+   "confronto senza scadere nel conflitto personale"
+  ],
+  [
+   "Il gruppo lavora da solo, rispetta le scadenze e presenta i risultati al cliente.",
+   "Performing",
+   "le energie si spostano verso l'esterno"
+  ],
+  [
+   "Si organizza una giornata di giochi di squadra per far conoscere meglio i membri.",
+   "Storming",
+   "il team building è tipico di questa fase"
+  ]
+ ],
+ "g2_OPTS": [
+  "Forming",
+  "Storming",
+  "Norming",
+  "Performing"
+ ],
+ "g3": [
+  [
+   "Chiari, condivisi e adeguati alle risorse del gruppo",
+   "obi"
+  ],
+  [
+   "Valorizzano le capacità di ognuno e le sinergie",
+   "met"
+  ],
+  [
+   "Chi fa che cosa rispetto ai compiti",
+   "ruo"
+  ],
+  [
+   "Chi guida e favorisce l'azione del gruppo",
+   "lea"
+  ],
+  [
+   "La qualità delle relazioni tra le persone",
+   "cli"
+  ]
+ ],
+ "g3_BK": [
+  {
+   "id": "obi",
+   "t": "Obiettivi",
+   "s": ""
+  },
+  {
+   "id": "met",
+   "t": "Metodi",
+   "s": ""
+  },
+  {
+   "id": "ruo",
+   "t": "Ruoli",
+   "s": ""
+  },
+  {
+   "id": "lea",
+   "t": "Leadership",
+   "s": ""
+  },
+  {
+   "id": "cli",
+   "t": "Clima relazionale",
+   "s": ""
+  }
+ ],
+ "k1": [
+  [
+   "Di persona, con documenti cartacei, in rete",
+   "mez"
+  ],
+  [
+   "Email e piattaforma di progetto",
+   "mez"
+  ],
+  [
+   "A blocchi oppure continua",
+   "fre"
+  ],
+  [
+   "Un aggiornamento ogni venerdì",
+   "fre"
+  ],
+  [
+   "A una via, a due vie, a due vie con feedback",
+   "dir"
+  ],
+  [
+   "Il PM chiede un riscontro dopo ogni messaggio",
+   "dir"
+  ],
+  [
+   "Informazioni complete ma tardi, o preliminari ma presto",
+   "tem"
+  ]
+ ],
+ "k1_BK": [
+  {
+   "id": "mez",
+   "t": "Mezzi",
+   "s": ""
+  },
+  {
+   "id": "fre",
+   "t": "Frequenza",
+   "s": ""
+  },
+  {
+   "id": "dir",
+   "t": "Direzionalità",
+   "s": ""
+  },
+  {
+   "id": "tem",
+   "t": "Tempificazione",
+   "s": ""
+  }
+ ],
+ "k2": [
+  [
+   "Diagrammi di avanzamento delle attività",
+   "con"
+  ],
+  [
+   "Andamento dei costi rispetto allo stato di sviluppo",
+   "con"
+  ],
+  [
+   "Efficienza della manodopera",
+   "con"
+  ],
+  [
+   "In quali momenti del progetto emetterlo",
+   "dec"
+  ],
+  [
+   "Quali informazioni e con quale dettaglio",
+   "dec"
+  ],
+  [
+   "A chi mandarlo",
+   "dec"
+  ]
+ ],
+ "k2_BK": [
+  {
+   "id": "con",
+   "t": "Contenuto del report",
+   "s": "I tre macro-temi"
+  },
+  {
+   "id": "dec",
+   "t": "Da decidere prima",
+   "s": "Per generare i report"
+  }
+ ],
+ "VF": [
+  [
+   "La struttura funzionale privilegia l'efficienza nell'uso delle risorse.",
+   true,
+   "A discapito dell'efficacia del progetto."
+  ],
+  [
+   "Nella task force le persone lavorano al progetto a tempo parziale.",
+   false,
+   "Lavorano a tempo pieno; a tempo parziale si lavora nella funzionale e nella matrice."
+  ],
+  [
+   "Nella struttura a matrice il PM ha piena autorità sulle risorse.",
+   false,
+   "È responsabile dei risultati senza piena autorità: è il problema principale della matrice."
+  ],
+  [
+   "Il project manager deve essere il miglior tecnico del gruppo.",
+   false,
+   "Le capacità più importanti sono gestionali e relazionali; meglio una conoscenza tecnica ampia che profonda."
+  ],
+  [
+   "Il PM cerca soluzioni fattibili nei vincoli, non soluzioni perfette.",
+   true,
+   "Guarda ai risultati globali del progetto."
+  ],
+  [
+   "Il conflitto in un progetto è sempre negativo.",
+   false,
+   "Stimola il confronto e può indicare un reale interesse per il successo del progetto."
+  ],
+  [
+   "La polarizzazione del gruppo va evitata.",
+   true,
+   "Quando i membri si schierano, il conflitto si acuisce."
+  ],
+  [
+   "Nella matrice delle responsabilità le fasi stanno sulle righe e le figure sulle colonne.",
+   true,
+   "In ogni cella si mette la lettera del tipo di responsabilità."
+  ],
+  [
+   "In un team ben fatto il risultato è maggiore della somma dei risultati individuali.",
+   true,
+   "È il principio del team working."
+  ],
+  [
+   "Lo skill management stabilisce quante persone servono.",
+   false,
+   "A questo stadio si stabilisce il tipo di competenze, non la quantità."
+  ],
+  [
+   "Il lavoro di gruppo si svolge sempre tutto insieme.",
+   false,
+   "Spesso prevale il lavoro individuale, coordinato con riunioni periodiche."
+  ],
+  [
+   "Nei report bisogna inserire tutti i dettagli, anche quelli poco significativi.",
+   false,
+   "Le informazioni vanno riportate in modo essenziale e sintetico."
+  ]
+ ],
+ "MC": [
+  [
+   "Quale struttura conviene per un progetto strategico e vitale?",
+   [
+    "Task force",
+    "Struttura funzionale",
+    "Struttura a matrice"
+   ],
+   "Task force",
+   "Vale la pena sostenerne i costi pur di concentrarsi sul risultato."
+  ],
+  [
+   "Che cosa serve perché la matrice funzioni?",
+   [
+    "Molta comunicazione e propensione al lavoro di gruppo",
+    "Una gerarchia rigida",
+    "Persone che lavorano da sole"
+   ],
+   "Molta comunicazione e propensione al lavoro di gruppo",
+   "Insieme a delega, lavoro per obiettivi e accettazione del rischio."
+  ],
+  [
+   "Perché a volte si dice project leader invece di project manager?",
+   [
+    "Per sottolineare che non è per forza un dirigente",
+    "Perché lavora da solo",
+    "Perché è il cliente"
+   ],
+   "Per sottolineare che non è per forza un dirigente",
+   "È il conduttore del progetto."
+  ],
+  [
+   "Su che cosa si basa il PM, che non ha autorità gerarchica?",
+   [
+    "Sull'autorevolezza",
+    "Sul contratto di lavoro",
+    "Sulle sanzioni"
+   ],
+   "Sull'autorevolezza",
+   "La capacità di orientare le persone verso gli obiettivi."
+  ],
+  [
+   "Quale di queste è una causa tipica di conflitto?",
+   [
+    "Errori di pianificazione",
+    "Obiettivi chiari",
+    "Riunioni ben gestite"
+   ],
+   "Errori di pianificazione",
+   "Per esempio la sottostima della durata delle attività."
+  ],
+  [
+   "Che cosa indica la lettera G nella matrice delle responsabilità?",
+   [
+    "Approvazione necessaria",
+    "Responsabilità generale",
+    "Consultazione possibile"
+   ],
+   "Approvazione necessaria",
+   "La responsabilità generale è la A."
+  ],
+  [
+   "In quale fase del gruppo si fanno tipicamente attività di team building?",
+   [
+    "Storming",
+    "Performing",
+    "Norming"
+   ],
+   "Storming",
+   "Giochi di ruolo, sport di squadra, adventure."
+  ],
+  [
+   "Che cos'è lo skill mapping?",
+   [
+    "La mappa delle competenze necessarie",
+    "L'elenco dei conflitti",
+    "Il calendario delle riunioni"
+   ],
+   "La mappa delle competenze necessarie",
+   "È il risultato dello skill management."
+  ],
+  [
+   "Quale di questi è un requisito minimo per essere un team?",
+   [
+    "Uno scopo chiaro",
+    "Membri della stessa età",
+    "Un ufficio comune"
+   ],
+   "Uno scopo chiaro",
+   "Con ruoli chiari, competenze, gerarchia di reporting e leadership."
+  ],
+  [
+   "Che cosa deve garantire il PM nella comunicazione?",
+   [
+    "La bidirezionalità e il feedback",
+    "Che le informazioni scendano solo dall'alto",
+    "Il segreto sulle decisioni"
+   ],
+   "La bidirezionalità e il feedback",
+   "Senza temere i rimandi negativi."
+  ]
+ ]
+};
+
+SG('#x_s1', D['s1'], D['s1_BK'], "Le tre strutture");
+const g_s2 = scGen(D['s2'], D['s2_OPTS'], "Quale struttura?", "Struttura"); mount($('#x_s2'), g_s2, "Quale struttura");
+SG('#x_s3', D['s3'], D['s3_BK'], "Peso del PM");
+SG('#x_m1', D['m1'], D['m1_BK'], "Autorevolezza");
+SG('#x_m2', D['m2'], D['m2_BK'], "Flussi del PM");
+const g_c1 = scGen(D['c1'], D['c1_OPTS'], "Che modalit\u00e0 \u00e8?", "Modalit\u00e0"); mount($('#x_c1'), g_c1, "Gestione del conflitto");
+orderGame($('#x_c2'), asOrder(D['c2']), "Fasi del conflitto", false);
+memory($('#x_c3'), () => D['c3'].flatMap((x, i) => [[i, x[0]], [i, x[1]]]), "Matrice delle responsabilit\u00e0");
+orderGame($('#x_g1'), asOrder(D['g1']), "Sviluppo del gruppo", false);
+const g_g2 = scGen(D['g2'], D['g2_OPTS'], "In che fase \u00e8?", "Fase"); mount($('#x_g2'), g_g2, "Fase del gruppo");
+SG('#x_g3', D['g3'], D['g3_BK'], "Fattori del gruppo");
+SG('#x_k1', D['k1'], D['k1_BK'], "Fattori della comunicazione");
+SG('#x_k2', D['k2'], D['k2_BK'], "Il report");
+quiz();
+const SFIDA = [...mcAll(), ...vfAll(), g_s2, g_s2, g_c1, g_c1, g_g2, g_g2];
+mission($('#tot'), SFIDA, 'Sfida finale', 15);
+</script></body></html>

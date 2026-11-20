@@ -1,0 +1,279 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Il socket e le sue API</title><meta name="description" content="Che cos&#x27;è un socket, l&#x27;association, le famiglie AF_INET e AF_UNIX, i tipi stream e datagram e le funzioni della API."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>Il socket e le sue API</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Il socket e le sue API</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso della teoria dei socket: la coppia indirizzo IP e porta, i cinque elementi dell'association e le funzioni della API nata in UNIX.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">Che cosa fa ciascuna funzione della API dei socket? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine i cinque elementi dell'association, come sono elencati di solito. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "socket()",
+   "crea"
+  ],
+  [
+   "bind()",
+   "crea"
+  ],
+  [
+   "close()",
+   "crea"
+  ],
+  [
+   "listen()",
+   "conn"
+  ],
+  [
+   "accept()",
+   "conn"
+  ],
+  [
+   "connect()",
+   "conn"
+  ],
+  [
+   "send() / write()",
+   "dati"
+  ],
+  [
+   "recv() / read()",
+   "dati"
+  ],
+  [
+   "sendto()",
+   "dati"
+  ],
+  [
+   "recvfrom()",
+   "dati"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "crea",
+   "t": "Creare, legare, chiudere",
+   "s": "il socket come risorsa"
+  },
+  {
+   "id": "conn",
+   "t": "Stabilire la connessione",
+   "s": "solo TCP"
+  },
+  {
+   "id": "dati",
+   "t": "Scambiare dati",
+   "s": "trasmettere e ricevere"
+  }
+ ],
+ "VF": [
+  [
+   "Un socket è individuato dalla coppia indirizzo IP e numero di porta.",
+   true,
+   "L'IP individua l'host, la porta il processo in esecuzione su quell'host."
+  ],
+  [
+   "I socket nascono dal modello UNIX dell'I/O su file: open, read/write, close.",
+   true,
+   "Per il programma leggere e scrivere su un socket è simile a lavorare con un file."
+  ],
+  [
+   "Due browser sullo stesso PC collegati allo stesso server web hanno la stessa association.",
+   false,
+   "Cambia la porta locale del client: ogni connessione ha una porta diversa, quindi l'association è diversa."
+  ],
+  [
+   "AF_UNIX è più veloce di AF_INET per processi sullo stesso host.",
+   true,
+   "I dati passano dal kernel senza attraversare tutto lo stack TCP/IP."
+  ],
+  [
+   "Per collegarsi a un servizio il client deve conoscere l'IP del server e la porta del servizio.",
+   true,
+   "Sono i due dati che identificano il socket del server."
+  ],
+  [
+   "La funzione <code>bind()<\/code> invia i dati al server.",
+   false,
+   "bind() lega il socket a un indirizzo e a una porta locali; per inviare si usa send() o sendto()."
+  ],
+  [
+   "<code>SOCK_DGRAM<\/code> corrisponde di solito a UDP.",
+   true,
+   "Datagram socket: messaggi indipendenti, senza connessione."
+  ],
+  [
+   "Un socket permette solo di ricevere dati, mai di inviarli.",
+   false,
+   "Su un socket si può sia trasmettere sia ricevere."
+  ]
+ ],
+ "MC": [
+  [
+   "Che cosa identifica la porta all'interno di un socket?",
+   [
+    "Il processo all'interno dell'host",
+    "La scheda di rete",
+    "La rete di appartenenza",
+    "Il router"
+   ],
+   "Il processo all'interno dell'host",
+   "IP per l'host, porta per il processo."
+  ],
+  [
+   "Che cosa fa la funzione <code>listen()<\/code>?",
+   [
+    "Mette il socket in attesa di richieste di connessione",
+    "Invia un messaggio",
+    "Chiude la connessione",
+    "Sceglie l'indirizzo IP"
+   ],
+   "Mette il socket in attesa di richieste di connessione",
+   "Si usa sul server TCP dopo bind()."
+  ],
+  [
+   "Quale coppia di funzioni si usa con UDP per inviare e ricevere?",
+   [
+    "sendto() e recvfrom()",
+    "connect() e accept()",
+    "listen() e bind()",
+    "open() e close()"
+   ],
+   "sendto() e recvfrom()",
+   "Senza connessione ogni invio deve indicare il destinatario: per questo si usa sendto()."
+  ],
+  [
+   "Quanti elementi formano l'association?",
+   [
+    "5",
+    "2",
+    "3",
+    "4"
+   ],
+   "5",
+   "Protocollo, IP locale, porta locale, IP remoto, porta remota."
+  ],
+  [
+   "Quale famiglia di indirizzi si usa per IPv4?",
+   [
+    "AF_INET",
+    "AF_UNIX",
+    "AF_INET6",
+    "AF_LOCAL"
+   ],
+   "AF_INET",
+   "AF_INET6 è per IPv6; AF_UNIX per i processi dello stesso host."
+  ],
+  [
+   "Che cosa restituisce <code>accept()<\/code> sul server TCP?",
+   [
+    "Un nuovo socket dedicato al client",
+    "Il messaggio del client",
+    "La porta del server",
+    "Niente: chiude il socket"
+   ],
+   "Un nuovo socket dedicato al client",
+   "Il socket in ascolto resta libero per altri client; la comunicazione avviene sul nuovo socket."
+  ],
+  [
+   "Quale tipo di socket si usa per una connessione TCP?",
+   [
+    "SOCK_STREAM",
+    "SOCK_DGRAM",
+    "SOCK_RAW",
+    "SOCK_TCP"
+   ],
+   "SOCK_STREAM",
+   "Stream: flusso di byte affidabile e ordinato."
+  ],
+  [
+   "Che cosa distingue due connessioni dello stesso client verso lo stesso server web?",
+   [
+    "La porta locale del client",
+    "L'indirizzo IP del server",
+    "La porta del server",
+    "Il protocollo"
+   ],
+   "La porta locale del client",
+   "Gli altri quattro elementi dell'association sono uguali."
+  ]
+ ],
+ "ORD": [
+  [
+   "Protocollo",
+   "TCP oppure UDP."
+  ],
+  [
+   "Indirizzo IP locale",
+   "L'host da cui parte la comunicazione."
+  ],
+  [
+   "Porta locale",
+   "Il processo sull'host locale."
+  ],
+  [
+   "Indirizzo IP remoto",
+   "L'host con cui si comunica."
+  ],
+  [
+   "Porta remota",
+   "Il processo sull'host remoto."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "Una sola riga sulle famiglie e sui tipi di socket è sbagliata.",
+   "lines": [
+    "AF_INET: indirizzo IPv4 a 32 bit e porta a 16 bit",
+    "AF_INET6: indirizzi IPv6",
+    "AF_UNIX: comunicazione fra processi dello stesso host",
+    "SOCK_STREAM: datagrammi senza connessione (UDP)",
+    "SOCK_DGRAM: datagrammi senza connessione (UDP)"
+   ],
+   "bad": 3,
+   "why": "SOCK_STREAM è il tipo per i flussi con connessione, cioè TCP."
+  },
+  {
+   "t": "Una sola affermazione sull'association è sbagliata.",
+   "lines": [
+    "È formata da cinque elementi",
+    "Comprende il protocollo di trasporto",
+    "Comprende indirizzo e porta locali",
+    "Comprende indirizzo e porta remoti",
+    "Comprende l'indirizzo MAC del server"
+   ],
+   "bad": 4,
+   "why": "L'indirizzo MAC appartiene al livello di accesso alla rete, non all'association."
+  },
+  {
+   "t": "Una sola funzione è assegnata al lato sbagliato in TCP.",
+   "lines": [
+    "Server: bind()",
+    "Server: listen()",
+    "Server: accept()",
+    "Client: connect()",
+    "Client: listen()"
+   ],
+   "bad": 4,
+   "why": "listen() mette in ascolto il socket del server; il client usa connect()."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>

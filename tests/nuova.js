@@ -34,10 +34,10 @@ for (const k of Object.keys(W0.UNITA)) {
 fs.rmSync(COPIA, { recursive: true, force: true });
 fs.cpSync(VERO, COPIA, { recursive: true, filter: s => !/[\\/](\.git|node_modules|risultati)([\\/]|$)/.test(path.relative(VERO, s)) });
 const CASI = [
-  ["tpsit-3/reti-e-protocolli/il-modello-iso-osi", ["--corso", "tpsit-3", "--corso-nome", "TPSIT", "--anno", "3° anno", "--colore", "#b45309", "--corso-icona", "cpu",
+  ["informatica-2/reti-e-protocolli/il-modello-iso-osi", ["--corso", "informatica-2", "--corso-nome", "Informatica", "--anno", "2° anno", "--colore", "#b45309", "--corso-icona", "cpu",
     "--unita", "reti-e-protocolli", "--unita-nome", "Reti e protocolli", "--titolo", "Il modello ISO/OSI", "--tipo", "lim",
     "--modalita", "alla lavagna", "--icona", "network", "--descrizione", "I sette livelli raccontati alla lavagna."]],
-  ["tpsit-3/reti-e-protocolli/indirizzi-e-sottoreti", ["--corso", "tpsit-3", "--unita", "reti-e-protocolli", "--titolo", "Indirizzi e sottoreti",
+  ["informatica-2/reti-e-protocolli/indirizzi-e-sottoreti", ["--corso", "informatica-2", "--unita", "reti-e-protocolli", "--titolo", "Indirizzi e sottoreti",
     "--tipo", "giochi", "--modalita", "a coppie", "--icona", "globe", "--descrizione", "Maschere e sottoreti, a coppie."]],
   ["informatica-1/reti/prova-di-rete", ["--corso", "informatica-1", "--unita", "reti", "--titolo", "Prova di rete",
     "--tipo", "giochi", "--modalita", "da soli", "--icona", "network", "--descrizione", "Una prova da soli."]],
@@ -64,25 +64,26 @@ for (const [nome, args] of [
 // 3) catalogo, sitemap e README
 const W = catalogo(COPIA);
 const ids = W.CORSI.map(c => c.id).join(",");
-if (ids !== "informatica-1,tpsit-3,tpsit-4,gpoi") fails.push("ordine dei corsi: " + ids);
+if (ids !== "informatica-1,informatica-2,tpsit-3,tpsit-4,tpsit-5,gpoi") fails.push("ordine dei corsi: " + ids);
 const uk = Object.keys(W.UNITA);
-if (uk.indexOf("tpsit-3/reti-e-protocolli") !== uk.indexOf("informatica-1/reti") + 1) fails.push("unità di TPSIT 3 fuori posto: " + uk.join(", "));
+const ultimaI1 = uk.filter(u => u.startsWith("informatica-1/")).pop();
+if (uk.indexOf("informatica-2/reti-e-protocolli") !== uk.indexOf(ultimaI1) + 1) fails.push("unità di Informatica 2 fuori posto: " + uk.join(", "));
 if (uk[uk.length - 1] !== "gpoi/mercati-digitali") fails.push("unità di GPOI fuori posto: " + uk.join(", "));
 const ps = W.CATALOGO.map(a => a.percorso);
 const pos = p => ps.indexOf(p);
 if (pos("informatica-1/reti/prova-di-rete") !== pos("informatica-1/reti/web-ricerca-e-sicurezza") + 1) fails.push("Prova di rete fuori posto");
-if (pos("tpsit-3/reti-e-protocolli/il-modello-iso-osi") !== pos("informatica-1/reti/prova-di-rete") + 1) fails.push("ISO/OSI fuori posto");
-if (pos("tpsit-3/reti-e-protocolli/indirizzi-e-sottoreti") !== pos("tpsit-3/reti-e-protocolli/il-modello-iso-osi") + 1) fails.push("Sottoreti fuori posto");
+if (pos("informatica-2/reti-e-protocolli/il-modello-iso-osi") !== pos(ps.filter(p => p.startsWith("informatica-1/")).pop()) + 1) fails.push("ISO/OSI fuori posto");
+if (pos("informatica-2/reti-e-protocolli/indirizzi-e-sottoreti") !== pos("informatica-2/reti-e-protocolli/il-modello-iso-osi") + 1) fails.push("Sottoreti fuori posto");
 if (ps[ps.length - 1] !== "gpoi/mercati-digitali/l-e-commerce") fails.push("e-commerce fuori posto");
 const voce = W.CATALOGO.find(a => a.percorso === "gpoi/mercati-digitali/l-e-commerce");
 if (!voce || voce.titolo !== "L'e-commerce" || voce.modalita !== "a squadre" || voce.icona !== "building") fails.push("voce del catalogo: " + JSON.stringify(voce));
 const sm = leggi("sitemap.xml");
-for (const p of ["tpsit-3", "tpsit-3/reti-e-protocolli", "gpoi/mercati-digitali", ...CASI.map(c => c[0])])
+for (const p of ["informatica-2", "informatica-2/reti-e-protocolli", "gpoi/mercati-digitali", ...CASI.map(c => c[0])])
   if ((sm.match(new RegExp("/" + p + "/</loc>", "g")) || []).length !== 1) fails.push("sitemap: " + p);
 const tab = leggi("README.md").split("\n").filter(r => r.startsWith("|"));
 const riga = s => tab.findIndex(r => r.includes(s));
-if (!tab.some(r => r === "| TPSIT, 3° anno | Reti e protocolli | Il modello ISO/OSI · Indirizzi e sottoreti |")) fails.push("README: riga di TPSIT 3");
-if (!(riga("TPSIT, 3° anno") > riga("Reti di calcolatori") && riga("TPSIT, 3° anno") < riga("TPSIT, 4° anno"))) fails.push("README: TPSIT 3 fuori posto");
+if (!tab.some(r => r === "| Informatica, 2° anno | Reti e protocolli | Il modello ISO/OSI · Indirizzi e sottoreti |")) fails.push("README: riga di Informatica 2");
+if (!(riga("Informatica, 2° anno") > riga("| Arduino |") && riga("Informatica, 2° anno") < riga("TPSIT, 3° anno"))) fails.push("README: Informatica 2 fuori posto");
 if (!tab.some(r => / \| Reti di calcolatori \| .* · Prova di rete \|$/.test(r))) fails.push("README: Prova di rete");
 if (!tab.some(r => r === "| | Mercati digitali | L'e-commerce |")) fails.push("README: riga di Mercati digitali");
 
@@ -104,18 +105,18 @@ if (lr.status !== 0) fails.push("link-rotti sulla copia:\n" + lr.stdout);
       await page.waitForTimeout(150);
       return page;
     };
-    // home: TPSIT 3 prima di TPSIT 4
+    // home: Informatica 2 prima di TPSIT 4
     let page = await apri("", "home");
     const home = await page.textContent("main");
-    if (!home.includes("Il modello ISO/OSI") || home.indexOf("3° anno") > home.indexOf("4° anno")) fails.push(`[${vw}] home: TPSIT 3 assente o fuori posto`);
+    if (!home.includes("Il modello ISO/OSI") || home.indexOf("2° anno") > home.indexOf("4° anno")) fails.push(`[${vw}] home: Informatica 2 assente o fuori posto`);
     await page.close();
-    for (const p of ["tpsit-3/", "tpsit-3/reti-e-protocolli/", "gpoi/mercati-digitali/"]) {
+    for (const p of ["informatica-2/", "informatica-2/reti-e-protocolli/", "gpoi/mercati-digitali/"]) {
       page = await apri(p, p);
       if (!(await page.$$("main#elenco a.tg-card")).length) fails.push(`[${vw}] ${p}: nessuna attività nell'elenco`);
       await page.close();
     }
     // da LIM
-    page = await apri("tpsit-3/reti-e-protocolli/il-modello-iso-osi/", "lim");
+    page = await apri("informatica-2/reti-e-protocolli/il-modello-iso-osi/", "lim");
     if (!(await page.$(".tg-bar"))) fails.push(`[${vw}] lim: manca la barra`);
     if ((await page.textContent("#pos")) !== "1 / 2") fails.push(`[${vw}] lim: posizione iniziale`);
     await page.click("#succ");
@@ -125,7 +126,7 @@ if (lr.status !== 0) fails.push("link-rotti sulla copia:\n" + lr.stdout);
     await page.screenshot({ path: path.join(OUT, `n_lim_${vw}.png`), fullPage: true });
     await page.close();
     // a schede con i giochi: a coppie e da soli
-    for (const [p, coppie] of [["tpsit-3/reti-e-protocolli/indirizzi-e-sottoreti/", true], ["informatica-1/reti/prova-di-rete/", false]]) {
+    for (const [p, coppie] of [["informatica-2/reti-e-protocolli/indirizzi-e-sottoreti/", true], ["informatica-1/reti/prova-di-rete/", false]]) {
       page = await apri(p, p);
       const st = await page.evaluate(() => ({
         gruppi: [...document.querySelectorAll("#nv1 button")].map(b => b.textContent.trim()).join(","),

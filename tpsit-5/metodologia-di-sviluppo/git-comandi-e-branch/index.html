@@ -1,0 +1,307 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Git: comandi e branch</title><meta name="description" content="I comandi di Git da usare ogni giorno, i branch, il merge e i conflitti."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>Git: comandi e branch</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Git: comandi e branch</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso dei comandi principali di Git e del lavoro con i branch: creare un ramo, spostarsi, unirlo e risolvere un conflitto.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">Che cosa fa ciascun comando? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine i comandi per sviluppare una funzione su un branch e unirla a main. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "git status",
+   "info"
+  ],
+  [
+   "git log --oneline",
+   "info"
+  ],
+  [
+   "git diff",
+   "info"
+  ],
+  [
+   "git add file.txt",
+   "salva"
+  ],
+  [
+   "git commit -m \"...\"",
+   "salva"
+  ],
+  [
+   "git commit -am \"...\"",
+   "salva"
+  ],
+  [
+   "git branch nuova",
+   "rami"
+  ],
+  [
+   "git checkout nuova",
+   "rami"
+  ],
+  [
+   "git switch -c nuova",
+   "rami"
+  ],
+  [
+   "git merge nuova",
+   "rami"
+  ],
+  [
+   "git clone URL",
+   "remoto"
+  ],
+  [
+   "git push",
+   "remoto"
+  ],
+  [
+   "git pull",
+   "remoto"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "info",
+   "t": "Informazioni",
+   "s": "guardare senza cambiare"
+  },
+  {
+   "id": "salva",
+   "t": "Salvare modifiche",
+   "s": ""
+  },
+  {
+   "id": "rami",
+   "t": "Branch",
+   "s": ""
+  },
+  {
+   "id": "remoto",
+   "t": "Repository remoto",
+   "s": ""
+  }
+ ],
+ "VF": [
+  [
+   "<code>git commit -am \"msg\"<\/code> aggiunge le modifiche ai file già tracciati e crea il commit.",
+   true,
+   "I file nuovi, mai aggiunti, vanno comunque aggiunti con git add."
+  ],
+  [
+   "<code>git diff<\/code> senza argomenti mostra le modifiche non ancora aggiunte con <code>git add<\/code>.",
+   true,
+   "Confronta la working directory con la staging area."
+  ],
+  [
+   "Un branch è una linea di sviluppo separata, che non tocca main finché non si fa il merge.",
+   true,
+   "Si può sperimentare senza rompere il ramo principale."
+  ],
+  [
+   "<code>git branch nuova<\/code> crea il branch e ci si sposta subito.",
+   false,
+   "Lo crea soltanto; per spostarsi serve git checkout nuova (o git switch -c per fare entrambe le cose)."
+  ],
+  [
+   "Un conflitto nasce quando due branch modificano le stesse righe dello stesso file.",
+   true,
+   "Git non sa quale versione tenere e chiede di scegliere."
+  ],
+  [
+   "Dopo aver risolto un conflitto bisogna fare <code>git add<\/code> e <code>git commit<\/code>.",
+   true,
+   "Così si conferma la versione scelta."
+  ],
+  [
+   "<code>git add .<\/code> aggiunge solo i file della cartella corrente, senza le sottocartelle.",
+   false,
+   "Aggiunge i file modificati e nuovi della cartella corrente e di tutte le sottocartelle."
+  ],
+  [
+   "<code>git pull<\/code> scarica le modifiche dal remoto e le unisce al branch corrente.",
+   true,
+   "È come fare git fetch seguito da git merge."
+  ]
+ ],
+ "MC": [
+  [
+   "Qual è l'ordine corretto per unire feature-login in main?",
+   [
+    "Prima git checkout main, poi git merge feature-login",
+    "Prima git merge main, poi git checkout feature-login",
+    "Solo git push feature-login",
+    "git branch -d feature-login"
+   ],
+   "Prima git checkout main, poi git merge feature-login",
+   "Si sta sul ramo che riceve le modifiche."
+  ],
+  [
+   "Quale comando elimina un branch già unito a main?",
+   [
+    "git branch -d nome-branch",
+    "git delete nome-branch",
+    "git remove nome-branch",
+    "git merge -d nome-branch"
+   ],
+   "git branch -d nome-branch",
+   "Con -D si forza l'eliminazione anche se non è unito."
+  ],
+  [
+   "Quale comando crea un branch e ci si sposta in un colpo solo?",
+   [
+    "git switch -c nuova",
+    "git branch nuova",
+    "git merge nuova",
+    "git add nuova"
+   ],
+   "git switch -c nuova",
+   "Equivale a git checkout -b nuova."
+  ],
+  [
+   "Che cosa indicano i simboli <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;<\/code> e <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<\/code> in un file?",
+   [
+    "Un conflitto di merge da risolvere",
+    "Un commento di Git",
+    "Un file binario",
+    "Un branch eliminato"
+   ],
+   "Un conflitto di merge da risolvere",
+   "In mezzo ci sono le due versioni, separate da =======."
+  ],
+  [
+   "Quale comando invia i commit locali al repository remoto?",
+   [
+    "git push",
+    "git pull",
+    "git fetch",
+    "git clone"
+   ],
+   "git push",
+   "pull e fetch scaricano, clone copia un repository intero."
+  ],
+  [
+   "Quale comando mostra la cronologia in forma compatta, una riga per commit?",
+   [
+    "git log --oneline",
+    "git status -s",
+    "git diff --short",
+    "git show all"
+   ],
+   "git log --oneline",
+   "Ogni riga: hash abbreviato e messaggio."
+  ],
+  [
+   "Che cosa fa <code>git restore file.txt<\/code>?",
+   [
+    "Annulla le modifiche non aggiunte del file",
+    "Ripristina un branch eliminato",
+    "Scarica il file da GitHub",
+    "Crea un backup"
+   ],
+   "Annulla le modifiche non aggiunte del file",
+   "Il file torna com'era all'ultimo commit."
+  ],
+  [
+   "Su quale branch nasce di solito un repository nuovo?",
+   [
+    "main",
+    "dev",
+    "feature",
+    "origin"
+   ],
+   "main",
+   "In passato si chiamava master. origin è il nome del remoto."
+  ]
+ ],
+ "ORD": [
+  [
+   "<code>git switch -c feature-login<\/code>",
+   "Crea il branch e ci si sposta."
+  ],
+  [
+   "Si scrive il codice",
+   "Sul branch feature-login."
+  ],
+  [
+   "<code>git add .<\/code> e <code>git commit -m \"Aggiunge il login\"<\/code>",
+   "Si salva il lavoro sul branch."
+  ],
+  [
+   "<code>git checkout main<\/code>",
+   "Si torna sul ramo principale."
+  ],
+  [
+   "<code>git merge feature-login<\/code>",
+   "Le modifiche entrano in main."
+  ],
+  [
+   "<code>git branch -d feature-login<\/code>",
+   "Si elimina il branch ormai unito."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "Unire feature-login in main: una riga è sbagliata.",
+   "lines": [
+    "git checkout feature-login",
+    "git merge main",
+    "# ora main contiene il login"
+   ],
+   "bad": 1,
+   "why": "Così si porta main dentro feature-login. Bisogna stare su main (git checkout main) e poi git merge feature-login."
+  },
+  {
+   "t": "Il conflitto sembra risolto, ma nel file è rimasto qualcosa: trovatelo.",
+   "lines": [
+    "<h1>Benvenuto<\/h1>",
+    "<p>Orari della segreteria<\/p>",
+    "=======",
+    "<footer>Scuola<\/footer>"
+   ],
+   "bad": 2,
+   "why": "======= è un marcatore di conflitto, come <<<<<<< e >>>>>>>: va tolto prima di git add e git commit."
+  },
+  {
+   "t": "Annullare una modifica non ancora aggiunta: una riga è sbagliata.",
+   "lines": [
+    "git status",
+    "# index.html è modificato ma non aggiunto",
+    "git restore index.html",
+    "git push --undo"
+   ],
+   "bad": 3,
+   "why": "git push --undo non esiste. Per annullare la modifica locale basta git restore index.html."
+  },
+  {
+   "t": "Comandi e significati: una riga è sbagliata.",
+   "lines": [
+    "git diff → modifiche non ancora aggiunte",
+    "git branch → elenca i branch",
+    "git branch -d nome → elimina un branch unito",
+    "git log → elenca i file modificati"
+   ],
+   "bad": 3,
+   "why": "git log mostra la cronologia dei commit; i file modificati li mostra git status."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>

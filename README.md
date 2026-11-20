@@ -13,9 +13,29 @@ senza installare nulla, senza account e senza raccogliere dati degli studenti.
 | Informatica, 1° anno | Computer e codici | Numeri e basi · Aritmetica binaria · Logica e tavole di verità · Immagini e video · Informazione e codifiche · Palestra dei numeri |
 | | Sistemi operativi | Storia dei sistemi operativi e licenze · Percorsi assoluti e relativi · Prompt dei comandi di Windows |
 | | Reti di calcolatori | La rete e i suoi pezzi · Indirizzi IP, DNS e URL · Il Web, la ricerca e i rischi |
+| | Architettura dei calcolatori e AI | L'informatica intorno a te · Architettura dei calcolatori |
+| | Problem solving e algoritmi | Problem solving e algoritmi · Algoritmi con Flowgorithm |
+| | C e C++ | Dall'algoritmo al codice · Primi passi in C++ · La selezione in C++ · L'iterazione in C++ |
+| | Arduino | Arduino ed elettronica · Arduino: output e input digitali · Arduino: sensori, PWM e attuatori |
+| TPSIT, 3° anno | La rappresentazione delle informazioni | Informazione e comunicazione · Digitale e binario · Sistemi di numerazione posizionali · Conversioni di numeri reali e tra basi binarie · Immagini, suoni e video |
+| | HTML | La struttura di una pagina HTML · Titoli, paragrafi e formattazione · Liste, link e ancore · Immagini e tabelle · I form · Tag semantici e buone pratiche |
+| | I codici digitali | Codici digitali pesati · Codici digitali non pesati · Rilevazione e correzione degli errori · Le codifiche nella vita quotidiana · Codici a barre e QR Code |
+| | CSS | Sintassi e selettori · Cascata, ereditarietà e specificità · Il box model · Testo, colori e sfondi · Display e Flexbox · Pseudo-classi, unità e media query |
+| | Sistemi operativi | Il sistema operativo · La gestione del processore · La gestione della memoria · Il file system |
+| | JavaScript | Le basi di JavaScript · Funzioni, oggetti e array · DOM ed eventi · Errori e librerie standard · JSON e API |
 | TPSIT, 4° anno | Processi sequenziali e paralleli | Processi e thread |
-| GPOI, 5° anno | Aziende e mercati | Il BEP vivo |
-| | Organizzazione d'impresa | Che struttura è? |
+| | Comunicazione e sincronizzazione | La comunicazione tra processi · La sincronizzazione tra processi · I semafori · Applicazione dei semafori · Semafori passo passo |
+| | Problemi e soluzioni della concorrenza | Produttori e consumatori · Lettori e scrittori · Il deadlock · I monitor · Lo scambio di messaggi · Problemi classici passo passo |
+| TPSIT, 5° anno | Architettura di rete | Sistemi distribuiti · Modelli architetturali · Applicazioni web e client-server · Applicazioni di rete |
+| | XML e RegEx | Il metalinguaggio XML · XML Schema (XSD) · Le espressioni regolari · RegEx in Java e validazione |
+| | Socket e TCP/UDP | Porte, TCP e UDP · Il socket e le sue API · Client e server in Java · Unicast e multicast |
+| | Metodologia di sviluppo | DevOps e SRE · Integrazione e rilascio continui · Git: concetti e aree · Git: comandi e branch · GitHub e buone pratiche |
+| | JSON, markdown e YAML | Il formato JSON · I file markdown · Il formato YAML |
+| | Applicazioni web avanzate | Le applicazioni lato server · PHP: il linguaggio · PHP: form e sessioni · PHP e MySQL · Web service e REST |
+| GPOI, 5° anno | Aziende e mercati | Il BEP vivo · L'azienda e i costi · Il mercato e il prezzo |
+| | Organizzazione aziendale | Che struttura è? · Organizzazione e processi · Sistema informativo ed ERP |
+| | Project management | Il progetto: fasi e obiettivi · Organizzazione, persone e comunicazione · La stima dei costi |
+| | PM nei progetti informatici | Progetti informatici e modelli di sviluppo · I requisiti · Pianificazione, documentazione e qualità |
 
 ## Come è fatto
 
@@ -38,7 +58,8 @@ senza installare nulla, senza account e senza raccogliere dati degli studenti.
   per esempio `informatica-1/reti/indirizzi-dns-e-url/#qz2`. Cambiando scheda l'indirizzo si aggiorna da solo
   (senza aggiungere passi alla cronologia), quindi il QR e i link copiati portano sempre alla scheda aperta.
   Vale per le attività `tg-act`, per le due schede del BEP (`#p2`) e per Processi e thread, che lo faceva già
-  (`#quiz`, `#smistamento`, `#stati`, `#precedenze`, `#holt`).
+  (`#quiz`, `#smistamento`, `#stati`, `#precedenze`, `#holt`). Le pagine «passo passo» aprono allo stesso modo lo scenario
+  (per esempio `tpsit-4/problemi-e-soluzioni-della-concorrenza/problemi-classici-passo-passo/#filosofi`).
 - **Progressi salvati nel browser** (attività `tg-act`): punteggi e nomi restano in `localStorage`, una chiave
   per pagina (`tg-progressi:<percorso>`), e tornano ricaricando o riaprendo la pagina, con un avviso in alto.
   Non esce nulla dal browser. Nella scheda Risultato, **Ricomincia da capo** cancella il salvataggio e riparte
@@ -74,6 +95,7 @@ assets/
 <corso>/<unità>/<attività>/index.html   l'attività
 informatica-1/computer-e-codici/temi/   codice di argomento (numeri, aritmetica, logica, immagini, informazione)
                                         condiviso tra le pagine dell'unità e Palestra dei numeri
+tpsit-4/temi/passo-passo.js  simulatore delle pagine «passo passo» di TPSIT (semafori e problemi classici)
 strumenti/nuova.js         npm run nuova: prepara una nuova attività (non fa parte del sito)
 tests/                     controlli automatici (Playwright), non fanno parte del sito
 .github/workflows/         i controlli girano su GitHub a ogni push

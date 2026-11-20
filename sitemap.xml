@@ -4,12 +4,34 @@
   <url><loc>https://teaching.federicodiluca.com/informatica-1/</loc><lastmod>2026-11-19</lastmod></url>
   <url><loc>https://teaching.federicodiluca.com/tpsit-4/</loc><lastmod>2026-11-19</lastmod></url>
   <url><loc>https://teaching.federicodiluca.com/gpoi/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/</loc><lastmod>2026-11-20</lastmod></url>
   <url><loc>https://teaching.federicodiluca.com/informatica-1/computer-e-codici/</loc><lastmod>2026-11-19</lastmod></url>
   <url><loc>https://teaching.federicodiluca.com/informatica-1/sistemi-operativi/</loc><lastmod>2026-11-19</lastmod></url>
   <url><loc>https://teaching.federicodiluca.com/informatica-1/reti/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/informatica-1/architettura-e-ai/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/informatica-1/problem-solving/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/informatica-1/cpp/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/informatica-1/arduino/</loc><lastmod>2026-11-19</lastmod></url>
   <url><loc>https://teaching.federicodiluca.com/tpsit-4/processi-sequenziali-e-paralleli/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-4/comunicazione-e-sincronizzazione/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-4/problemi-e-soluzioni-della-concorrenza/</loc><lastmod>2026-11-20</lastmod></url>
   <url><loc>https://teaching.federicodiluca.com/gpoi/aziende-e-mercati/</loc><lastmod>2026-11-19</lastmod></url>
   <url><loc>https://teaching.federicodiluca.com/gpoi/organizzazione-d-impresa/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/rappresentazione-delle-informazioni/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/html/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/codici-digitali/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/css/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/sistemi-operativi/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/javascript/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/gpoi/project-management/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/gpoi/pm-nei-progetti-informatici/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/socket-e-tcp-udp/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/metodologia-di-sviluppo/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/architettura-di-rete/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/xml-e-regex/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/json-markdown-e-yaml/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/applicazioni-web-avanzate/</loc><lastmod>2026-11-20</lastmod></url>
   <url><loc>https://teaching.federicodiluca.com/informatica-1/computer-e-codici/numeri-e-basi/</loc><lastmod>2026-11-19</lastmod></url>
   <url><loc>https://teaching.federicodiluca.com/informatica-1/computer-e-codici/aritmetica-binaria/</loc><lastmod>2026-11-19</lastmod></url>
   <url><loc>https://teaching.federicodiluca.com/informatica-1/computer-e-codici/logica-e-tavole-di-verita/</loc><lastmod>2026-11-19</lastmod></url>
@@ -22,7 +44,95 @@
   <url><loc>https://teaching.federicodiluca.com/informatica-1/reti/la-rete-e-i-suoi-pezzi/</loc><lastmod>2026-11-19</lastmod></url>
   <url><loc>https://teaching.federicodiluca.com/informatica-1/reti/indirizzi-dns-e-url/</loc><lastmod>2026-11-19</lastmod></url>
   <url><loc>https://teaching.federicodiluca.com/informatica-1/reti/web-ricerca-e-sicurezza/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/informatica-1/architettura-e-ai/l-informatica-intorno-a-te/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/informatica-1/architettura-e-ai/architettura-dei-calcolatori/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/informatica-1/problem-solving/problem-solving-e-algoritmi/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/informatica-1/problem-solving/algoritmi-con-flowgorithm/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/informatica-1/cpp/dall-algoritmo-al-codice/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/informatica-1/cpp/primi-passi-in-cpp/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/informatica-1/cpp/la-selezione-in-cpp/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/informatica-1/cpp/l-iterazione-in-cpp/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/informatica-1/arduino/arduino-ed-elettronica/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/informatica-1/arduino/output-e-input-digitali/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/informatica-1/arduino/sensori-pwm-e-attuatori/</loc><lastmod>2026-11-19</lastmod></url>
   <url><loc>https://teaching.federicodiluca.com/tpsit-4/processi-sequenziali-e-paralleli/processi-e-thread/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-4/comunicazione-e-sincronizzazione/comunicazione-tra-processi/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-4/comunicazione-e-sincronizzazione/sincronizzazione-tra-processi/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-4/comunicazione-e-sincronizzazione/semafori/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-4/comunicazione-e-sincronizzazione/applicazione-dei-semafori/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-4/comunicazione-e-sincronizzazione/semafori-passo-passo/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-4/problemi-e-soluzioni-della-concorrenza/produttori-e-consumatori/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-4/problemi-e-soluzioni-della-concorrenza/lettori-e-scrittori/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-4/problemi-e-soluzioni-della-concorrenza/deadlock/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-4/problemi-e-soluzioni-della-concorrenza/monitor/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-4/problemi-e-soluzioni-della-concorrenza/scambio-di-messaggi/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-4/problemi-e-soluzioni-della-concorrenza/problemi-classici-passo-passo/</loc><lastmod>2026-11-20</lastmod></url>
   <url><loc>https://teaching.federicodiluca.com/gpoi/aziende-e-mercati/bep/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/gpoi/aziende-e-mercati/azienda-e-costi/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/gpoi/aziende-e-mercati/mercato-e-prezzo/</loc><lastmod>2026-11-20</lastmod></url>
   <url><loc>https://teaching.federicodiluca.com/gpoi/organizzazione-d-impresa/che-struttura-e/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/gpoi/organizzazione-d-impresa/organizzazione-e-processi/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/gpoi/organizzazione-d-impresa/sistema-informativo-ed-erp/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/rappresentazione-delle-informazioni/informazione-e-comunicazione/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/rappresentazione-delle-informazioni/digitale-e-binario/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/rappresentazione-delle-informazioni/sistemi-di-numerazione/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/rappresentazione-delle-informazioni/conversioni-tra-basi/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/rappresentazione-delle-informazioni/immagini-suoni-e-video/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/html/struttura-della-pagina/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/html/testo-e-formattazione/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/html/liste-e-link/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/html/immagini-e-tabelle/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/html/form/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/html/semantica-e-buone-pratiche/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/codici-digitali/codici-pesati/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/codici-digitali/codici-non-pesati/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/codici-digitali/rilevazione-e-correzione-errori/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/codici-digitali/codifiche-quotidiane/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/codici-digitali/codici-ottici/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/css/sintassi-e-selettori/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/css/cascata-e-specificita/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/css/box-model/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/css/testo-colori-e-sfondi/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/css/display-e-flexbox/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/css/pseudo-classi-unita-e-media-query/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/sistemi-operativi/il-sistema-operativo/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/sistemi-operativi/gestione-del-processore/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/sistemi-operativi/gestione-della-memoria/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/sistemi-operativi/il-file-system/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/javascript/le-basi-del-linguaggio/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/javascript/funzioni-oggetti-e-array/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/javascript/dom-ed-eventi/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/javascript/errori-e-librerie-standard/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-3/javascript/json-e-api/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/gpoi/project-management/progetto-fasi-e-obiettivi/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/gpoi/project-management/organizzazione-persone-e-comunicazione/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/gpoi/project-management/stima-dei-costi/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/gpoi/pm-nei-progetti-informatici/progetti-informatici-e-modelli/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/gpoi/pm-nei-progetti-informatici/i-requisiti/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/gpoi/pm-nei-progetti-informatici/pianificazione-documentazione-e-qualita/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/socket-e-tcp-udp/porte-tcp-e-udp/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/socket-e-tcp-udp/il-socket-e-le-sue-api/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/socket-e-tcp-udp/client-e-server-in-java/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/socket-e-tcp-udp/unicast-e-multicast/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/metodologia-di-sviluppo/devops-e-sre/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/metodologia-di-sviluppo/integrazione-e-rilascio-continui/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/metodologia-di-sviluppo/git-concetti-e-aree/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/metodologia-di-sviluppo/git-comandi-e-branch/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/metodologia-di-sviluppo/github-e-buone-pratiche/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/architettura-di-rete/sistemi-distribuiti/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/architettura-di-rete/modelli-architetturali/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/architettura-di-rete/applicazioni-web-e-client-server/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/architettura-di-rete/applicazioni-di-rete/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/xml-e-regex/il-metalinguaggio-xml/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/xml-e-regex/xml-schema/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/xml-e-regex/le-espressioni-regolari/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/xml-e-regex/regex-in-java-e-validazione/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/json-markdown-e-yaml/il-formato-json/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/json-markdown-e-yaml/i-file-markdown/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/json-markdown-e-yaml/il-formato-yaml/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/applicazioni-web-avanzate/le-applicazioni-lato-server/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/applicazioni-web-avanzate/php-il-linguaggio/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/applicazioni-web-avanzate/php-form-e-sessioni/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/applicazioni-web-avanzate/php-e-mysql/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://teaching.federicodiluca.com/tpsit-5/applicazioni-web-avanzate/web-service-e-rest/</loc><lastmod>2026-11-20</lastmod></url>
 </urlset>

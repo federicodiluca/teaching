@@ -1,0 +1,272 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Applicazioni web e client-server</title><meta name="description" content="Il modello client-server, livelli fisici (tier) e strati logici, architetture 2-tier e 3-tier, thin e thick client."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>Applicazioni web e client-server</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Applicazioni web e client-server</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso del modello client-server e di come si divide un'applicazione in strati logici e livelli fisici.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">A quale strato logico appartiene? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine il percorso di una richiesta in un'architettura 3-tier. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "Il form di registrazione",
+   "pres"
+  ],
+  [
+   "La pagina HTML con CSS",
+   "pres"
+  ],
+  [
+   "Il pulsante «Invia»",
+   "pres"
+  ],
+  [
+   "Il calcolo della media dei voti",
+   "logic"
+  ],
+  [
+   "La regola «non si accettano voti oltre il 10»",
+   "logic"
+  ],
+  [
+   "Lo script PHP che elabora l'ordine",
+   "logic"
+  ],
+  [
+   "La tabella studenti in MySQL",
+   "data"
+  ],
+  [
+   "La query INSERT sul database",
+   "data"
+  ],
+  [
+   "Il backup del database",
+   "data"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "pres",
+   "t": "Presentation",
+   "s": "interfaccia utente"
+  },
+  {
+   "id": "logic",
+   "t": "Business logic",
+   "s": "regole ed elaborazione"
+  },
+  {
+   "id": "data",
+   "t": "Data",
+   "s": "memorizzazione dei dati"
+  }
+ ],
+ "VF": [
+  [
+   "Nel modello client-server il server è il processo che gestisce risorse e le mette a disposizione.",
+   true,
+   "Il client le richiede."
+  ],
+  [
+   "Un tier è un livello fisico, mentre un layer è uno strato logico del software.",
+   true,
+   "Più strati possono stare sullo stesso livello fisico."
+  ],
+  [
+   "Nell'architettura 3-tier il database è direttamente esposto ai client.",
+   false,
+   "Il database parla solo con l'application server."
+  ],
+  [
+   "Il thick client esegue anche parte della logica applicativa.",
+   true,
+   "È stato possibile con l'aumento di potenza dei PC."
+  ],
+  [
+   "Lo strato di presentazione si occupa dell'interfaccia utente.",
+   true,
+   "Acquisisce i dati dall'utente e glieli mostra."
+  ],
+  [
+   "Un server HTTP ascolta di norma sulla porta 25.",
+   false,
+   "Sulla porta 80 (443 per HTTPS); la 25 è di SMTP."
+  ],
+  [
+   "Il resolver DNS chiede a un server DNS di tradurre un nome in indirizzo IP.",
+   true,
+   "È il primo passo prima di contattare un sito."
+  ],
+  [
+   "In un'architettura 3-tier si può aggiornare la logica senza toccare i client.",
+   true,
+   "La logica sta sul server: basta aggiornare quello."
+  ]
+ ],
+ "MC": [
+  [
+   "Quale strato si occupa dell'interfaccia utente?",
+   [
+    "Presentation layer",
+    "Data layer",
+    "Business logic layer",
+    "Network layer"
+   ],
+   "Presentation layer",
+   "Acquisizione e presentazione dei dati."
+  ],
+  [
+   "Nell'architettura 2-tier thin-client, come sono divisi i compiti?",
+   [
+    "Il server fa logica e dati, il client solo la presentazione",
+    "Il client fa tutto",
+    "Il server fa solo la presentazione",
+    "Non c'è server"
+   ],
+   "Il server fa logica e dati, il client solo la presentazione",
+   "Thin = leggero."
+  ],
+  [
+   "Quale vantaggio di sicurezza offre l'architettura 3-tier?",
+   [
+    "Il database non è mai esposto direttamente ai client",
+    "Non servono password",
+    "I dati non viaggiano in rete",
+    "Il client è più veloce"
+   ],
+   "Il database non è mai esposto direttamente ai client",
+   "C'è un livello intermedio di controllo."
+  ],
+  [
+   "Che cos'è un tier?",
+   [
+    "Un nodo fisico o gruppo di nodi su cui è distribuito il sistema",
+    "Una tabella del database",
+    "Un tag HTML",
+    "Un protocollo di rete"
+   ],
+   "Un nodo fisico o gruppo di nodi su cui è distribuito il sistema",
+   "Il layer invece è logico."
+  ],
+  [
+   "Che cosa ha reso possibile il thick client alla fine degli anni Ottanta?",
+   [
+    "L'aumento di potenza dei personal computer",
+    "L'arrivo degli smartphone",
+    "Il cloud",
+    "La fibra ottica"
+   ],
+   "L'aumento di potenza dei personal computer",
+   "I PC potevano eseguire anche la logica."
+  ],
+  [
+   "Su quale porta standard ascolta un server HTTP?",
+   [
+    "80",
+    "21",
+    "25",
+    "443 sempre"
+   ],
+   "80",
+   "443 è la porta di HTTPS."
+  ],
+  [
+   "Quale protocollo si usa per inviare la posta elettronica?",
+   [
+    "SMTP",
+    "POP3",
+    "IMAP",
+    "HTTP"
+   ],
+   "SMTP",
+   "POP3 e IMAP servono a leggerla."
+  ],
+  [
+   "Nel modello client-server, chi inizia la comunicazione?",
+   [
+    "Il client, con una richiesta",
+    "Il server",
+    "Il router",
+    "Il DNS"
+   ],
+   "Il client, con una richiesta",
+   "Il server resta in attesa delle richieste."
+  ]
+ ],
+ "ORD": [
+  [
+   "Il browser invia la richiesta",
+   "Livello 1: client."
+  ],
+  [
+   "Il web server la riceve",
+   "Livello 2: application server."
+  ],
+  [
+   "Lo script applica la logica e interroga il database",
+   "Il database è al livello 3."
+  ],
+  [
+   "Il database restituisce i dati",
+   "Solo all'application server."
+  ],
+  [
+   "Il server costruisce la pagina e la invia",
+   "Il client mostra il risultato."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "Porte e protocolli: una riga è sbagliata.",
+   "lines": [
+    "HTTP → porta 80",
+    "SMTP → invio della posta",
+    "DNS → traduce nomi in indirizzi IP",
+    "FTP → invio della posta"
+   ],
+   "bad": 3,
+   "why": "FTP serve al trasferimento di file; la posta si invia con SMTP."
+  },
+  {
+   "t": "Architetture: una riga è sbagliata.",
+   "lines": [
+    "2-tier thin client: il client fa solo la presentazione",
+    "2-tier thick client: il client fa presentazione e logica",
+    "3-tier: il database non è esposto ai client",
+    "3-tier: il client accede direttamente al database"
+   ],
+   "bad": 3,
+   "why": "Nel 3-tier il client parla solo con l'application server: è questo il vantaggio di sicurezza."
+  },
+  {
+   "t": "Definizioni: una riga è sbagliata.",
+   "lines": [
+    "Server: processo che mette risorse a disposizione",
+    "Client: processo che chiede un servizio",
+    "Tier: livello fisico, cioè un nodo o gruppo di nodi",
+    "Layer: un computer fisico della sala server"
+   ],
+   "bad": 3,
+   "why": "Il layer (strato) è una divisione logica del software; il tier è il livello fisico."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>

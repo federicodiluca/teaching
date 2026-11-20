@@ -424,12 +424,12 @@ const events = [
              `Il forno nuovo conviene quando i costi in più sono recuperati dal risparmio: ${eur(n.cf-BASE.cf)} / ${eur2(b.mc-a.mc)} = <b>${fmt(qx)} candele</b>. Sopra quella quantità l\'utile è maggiore, sotto è minore.`];
    }, chart:true},
   {t:'L\'ordine del negozio', mod:s=>s,
-   text:'Un negozio chiede 600 candele a 10 € l\'una, sotto il prezzo di listino. Quest\'anno ne vendete già 1.500 al prezzo normale.',
+   text:'Un negozio chiede 600 candele a 10 € l\'una, sotto il prezzo di listino. Quest\'anno ne vendete già 1.500 al prezzo normale (15 €), e la capacità produttiva è di 2.500 candele.',
    ask:'Conviene accettare? Di quanto cambia l\'utile? La capacità basta?',
    sol:(a,b,n)=>{
-     const mcs = 10-n.cv, extra = mcs*600;
+     const mcs = 10-n.cv, extra = mcs*600, bepN = Math.ceil(+(n.cf/(n.p-n.cv)).toFixed(6));
      return [`Margine di contribuzione dell\'ordine: 10 € − ${eur2(n.cv)} = <b>${eur2(mcs)}</b> a candela.`,
-             `I costi fissi sono già coperti dalle altre vendite, quindi l\'utile aumenta di ${fmt(600)} × ${eur2(mcs)} = <b>${eur(extra)}</b>.`,
+             `Le 1.500 candele già vendute superano il pareggio (${fmt(bepN)} candele): i costi fissi sono già coperti, quindi l\'ordine non ne aggiunge altri e l\'utile aumenta di ${fmt(600)} × ${eur2(mcs)} = <b>${eur(extra)}</b>.`,
              `Utile prima: ${eur(risultato(n,1500))}; dopo: <b>${eur(risultato(n,1500)+extra)}</b>. Capacità: 1.500 + 600 = ${fmt(2100)} ≤ ${fmt(BASE.cap)}, basta.`,
              `Conviene finché il prezzo dell\'ordine resta sopra il costo variabile (6 €). Resta da valutare l\'effetto sui clienti che pagano 15 €.`];
    }, chart:false},

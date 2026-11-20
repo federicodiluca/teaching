@@ -1,0 +1,539 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pianificazione, documentazione e qualità</title><meta name="description" content="Milestone e deliverable, tipi di pianificazione, WBS e regola del 100%, project charter, project status, registro delle issue, lesson learned e piano di qualità."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head><body class="tg-act" data-solo="1"><header><h1>Pianificazione, documentazione e qualità</h1></header><nav id="nav"></nav><main>
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Pianificazione, documentazione e qualità</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.</p>
+<ol><li><b>Pianificazione:</b> milestone e deliverable, i quattro aspetti, gli obiettivi operativi.</li><li><b>WBS:</b> livelli, regola del 100%, durata dei work package, logiche di disaggregazione.</li><li><b>Documenti:</b> project charter, project status, registro delle issue, lesson learned, piano di qualità.</li><li><b>Quiz</b> e <b>Sfida finale</b>.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+<section id="p1" data-g="Pianificazione" data-t="1 Milestone o deliverable"><h2>Milestone e deliverable</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_p1"></div></section>
+<section id="p2" data-g="Pianificazione" data-t="2 I quattro aspetti"><h2>I quattro aspetti della pianificazione</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_p2"></div></section>
+<section id="p3" data-g="Pianificazione" data-t="3 Obiettivi operativi"><h2>Attività, personale, costi</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_p3"></div></section>
+<section id="w1" data-g="WBS" data-t="1 I livelli"><h2>I livelli della WBS</h2><p class="lead">Mettete in ordine i livelli della WBS, dal più generale al più dettagliato. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».</p><div id="x_w1"></div></section>
+<section id="w2" data-g="WBS" data-t="2 Calcoli"><h2>Regola del 100% e durata</h2><p class="lead">Scegliete il tipo di esercizio dal menu, scrivete il risultato e premete «Controlla». I numeri cambiano a ogni esercizio.</p><div id="x_w2"></div></section>
+<section id="w3" data-g="WBS" data-t="3 Come scomporre"><h2>Le logiche di disaggregazione</h2><p class="lead">Leggete come viene scomposto il progetto e scegliete la logica.</p><div id="x_w3"></div></section>
+<section id="d1" data-g="Documenti" data-t="1 Fasi e documenti"><h2>Ogni fase ha i suoi documenti</h2><p class="lead">Abbinate ogni fase del progetto al suo documento. Girate due tessere alla volta.</p><div id="x_d1"></div></section>
+<section id="d2" data-g="Documenti" data-t="2 Il project charter"><h2>Le cinque sezioni del project charter</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_d2"></div></section>
+<section id="d3" data-g="Documenti" data-t="3 Quale documento?"><h2>Project status, registro delle issue, lesson learned, piano di qualità</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_d3"></div></section>
+<section id="d4" data-g="Documenti" data-t="4 Rischio pesato"><h2>Il prospetto di rischio</h2><p class="lead">Calcolate l&#x27;indicatore di rischio sommando le valutazioni pesate. I numeri cambiano a ogni esercizio.</p><div id="x_d4"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Quindici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+const D = {
+ "p1": [
+  [
+   "La riunione di fine analisi con il cliente",
+   "m"
+  ],
+  [
+   "Un punto di controllo programmato nel piano",
+   "m"
+  ],
+  [
+   "Si decidono eventuali azioni correttive",
+   "m"
+  ],
+  [
+   "Il documento dei requisiti",
+   "d"
+  ],
+  [
+   "Il report di avanzamento",
+   "d"
+  ],
+  [
+   "Il prototipo dell'app",
+   "d"
+  ],
+  [
+   "Un risultato misurabile e verificabile",
+   "d"
+  ]
+ ],
+ "p1_BK": [
+  {
+   "id": "m",
+   "t": "Milestone",
+   "s": "Momento di verifica"
+  },
+  {
+   "id": "d",
+   "t": "Deliverable",
+   "s": "Risultato consegnato"
+  }
+ ],
+ "p2": [
+  [
+   "Scegliere il modello di sviluppo",
+   "tec"
+  ],
+  [
+   "Scegliere linguaggi e ambienti",
+   "tec"
+  ],
+  [
+   "Definire i requisiti di qualità e i punti di verifica",
+   "qua"
+  ],
+  [
+   "Valutare i rischi",
+   "qua"
+  ],
+  [
+   "Individuare le risorse aziendali necessarie e assegnarle",
+   "org"
+  ],
+  [
+   "Scomporre il lavoro in fasi con le dipendenze temporali",
+   "tem"
+  ],
+  [
+   "Stabilire chi fa cosa e quando",
+   "tem"
+  ]
+ ],
+ "p2_BK": [
+  {
+   "id": "tec",
+   "t": "Tecnica",
+   "s": ""
+  },
+  {
+   "id": "qua",
+   "t": "Della qualità",
+   "s": ""
+  },
+  {
+   "id": "org",
+   "t": "Organizzativa",
+   "s": ""
+  },
+  {
+   "id": "tem",
+   "t": "Dei tempi e degli incarichi",
+   "s": ""
+  }
+ ],
+ "p3": [
+  [
+   "Date di inizio e fine di ogni attività",
+   "att"
+  ],
+  [
+   "La schedulazione dei tempi",
+   "att"
+  ],
+  [
+   "Chi fa cosa e per quanto tempo",
+   "per"
+  ],
+  [
+   "Time sheet e carichi di lavoro",
+   "per"
+  ],
+  [
+   "Team building e skill management",
+   "per"
+  ],
+  [
+   "Ripartire le risorse finanziarie sulle attività",
+   "cos"
+  ],
+  [
+   "Monitorare continuamente la spesa",
+   "cos"
+  ]
+ ],
+ "p3_BK": [
+  {
+   "id": "att",
+   "t": "Pianificazione delle attività",
+   "s": ""
+  },
+  {
+   "id": "per",
+   "t": "Pianificazione del personale",
+   "s": ""
+  },
+  {
+   "id": "cos",
+   "t": "Pianificazione dei costi",
+   "s": ""
+  }
+ ],
+ "w1": [
+  [
+   "Livello 0: progetto",
+   "Tutto il lavoro da fare."
+  ],
+  [
+   "Livello 1: sotto-progetto",
+   "Le grandi parti del progetto."
+  ],
+  [
+   "Livello 2: attività",
+   "Il lavoro di ogni sotto-progetto."
+  ],
+  [
+   "Livello 3: sotto-attività",
+   "Il dettaglio delle attività."
+  ]
+ ],
+ "w3": [
+  [
+   "Robot: telaio, motori, sensori, scheda di controllo.",
+   "Per parti",
+   "si scompone l'output nei suoi componenti, come una distinta base"
+  ],
+  [
+   "App della biblioteca: ricerca libri, prestito, restituzione, avvisi.",
+   "Per funzioni",
+   "si scompone secondo le funzionalità dell'output"
+  ],
+  [
+   "Fase 1: prototipo approvato; fase 2: versione beta; fase 3: rilascio.",
+   "Per obiettivi",
+   "si scompone in base agli obiettivi di ogni fase"
+  ],
+  [
+   "Gestionale: anagrafica clienti, ordini, fatturazione, magazzino.",
+   "Per funzioni",
+   "funzionalità software distinte"
+  ]
+ ],
+ "w3_OPTS": [
+  "Per parti",
+  "Per funzioni",
+  "Per obiettivi"
+ ],
+ "d1": [
+  [
+   "Avvio",
+   "Project charter"
+  ],
+  [
+   "Pianificazione",
+   "WBS e diagramma di Gantt"
+  ],
+  [
+   "Esecuzione",
+   "Convalida dei deliverable"
+  ],
+  [
+   "Monitoraggio e controllo",
+   "Project status e registro delle issue"
+  ],
+  [
+   "Chiusura",
+   "Lesson learned"
+  ]
+ ],
+ "d2": [
+  [
+   "Obiettivo, prodotti, esclusioni, requisiti di alto livello",
+   "amb"
+  ],
+  [
+   "Project manager, team, sponsor, stakeholder",
+   "org"
+  ],
+  [
+   "Cultura aziendale e standard di settore",
+   "org"
+  ],
+  [
+   "Gantt di massima e milestone",
+   "dur"
+  ],
+  [
+   "Stima minima, media e massima di spesa",
+   "bud"
+  ],
+  [
+   "Voci di rischio con peso e valutazione",
+   "vin"
+  ],
+  [
+   "Eventi che possono compromettere il progetto",
+   "vin"
+  ]
+ ],
+ "d2_BK": [
+  {
+   "id": "amb",
+   "t": "Ambito",
+   "s": ""
+  },
+  {
+   "id": "org",
+   "t": "Organizzazione",
+   "s": ""
+  },
+  {
+   "id": "dur",
+   "t": "Durata",
+   "s": ""
+  },
+  {
+   "id": "bud",
+   "t": "Budget",
+   "s": ""
+  },
+  {
+   "id": "vin",
+   "t": "Vincoli e rischi",
+   "s": ""
+  }
+ ],
+ "d3": [
+  [
+   "Percentuale di completamento delle attività",
+   "ps"
+  ],
+  [
+   "Tempi pianificati e tempi reali a confronto",
+   "ps"
+  ],
+  [
+   "Chi ha segnalato il problema, quando, a chi è assegnato",
+   "is"
+  ],
+  [
+   "La soluzione proposta e il suo stato",
+   "is"
+  ],
+  [
+   "Che cosa si è imparato e come riusarlo",
+   "ll"
+  ],
+  [
+   "L'eredità del progetto per quelli futuri",
+   "ll"
+  ],
+  [
+   "Gli standard di qualità di ogni deliverable",
+   "pq"
+  ],
+  [
+   "Criteri di accettazione e responsabilità delle revisioni",
+   "pq"
+  ]
+ ],
+ "d3_BK": [
+  {
+   "id": "ps",
+   "t": "Project status",
+   "s": ""
+  },
+  {
+   "id": "is",
+   "t": "Registro delle issue",
+   "s": ""
+  },
+  {
+   "id": "ll",
+   "t": "Lesson learned",
+   "s": ""
+  },
+  {
+   "id": "pq",
+   "t": "Piano di qualità",
+   "s": ""
+  }
+ ],
+ "VF": [
+  [
+   "L'obiettivo primario della pianificazione è fissare gli obiettivi temporali.",
+   true,
+   "Per ogni componente: attività, precedenze, durate e costi."
+  ],
+  [
+   "Per ridurre i tempi di un progetto di solito servono più risorse.",
+   true,
+   "Tempi e costi sono strettamente legati."
+  ],
+  [
+   "I deliverable sono solo prodotti software.",
+   false,
+   "Possono essere anche documenti, come piani e report di avanzamento."
+  ],
+  [
+   "Nella WBS ogni elemento ha uno e un solo elemento padre.",
+   true,
+   "Con un codice gerarchico."
+  ],
+  [
+   "La regola del 100% esclude il lavoro di gestione del progetto.",
+   false,
+   "La WBS deve includere tutto il lavoro, anche la gestione del progetto."
+  ],
+  [
+   "La durata in tempo solare si calcola come impegno diviso numero di persone.",
+   true,
+   "Oppure impegno diviso produttività standard."
+  ],
+  [
+   "Nella WBS non serve inserire la documentazione.",
+   false,
+   "Manuali, istruzioni di installazione e guida in linea vanno previsti."
+  ],
+  [
+   "Il project charter dà al project manager l'autorità sulle risorse.",
+   true,
+   "Dà l'avvio ufficiale al progetto."
+  ],
+  [
+   "Lo sponsor è lo stakeholder che ha voluto il progetto e lo finanzia.",
+   true,
+   "Incarica il project manager con un documento formale."
+  ],
+  [
+   "In caso di ritardo, una misura correttiva è rinegoziare le scadenze con il committente.",
+   true,
+   "Insieme a più ore di lavoro o all'esternalizzazione di attività."
+  ],
+  [
+   "Il registro delle issue serve solo durante il progetto e poi si butta.",
+   false,
+   "Diventa memoria storica e alimenta le lesson learned."
+  ],
+  [
+   "Il piano di qualità specifica i criteri di accettazione dei deliverable.",
+   true,
+   "Insieme a ruoli e responsabilità per la qualità."
+  ]
+ ],
+ "MC": [
+  [
+   "Che cos'è la WBS?",
+   [
+    "Un albero che scompone tutto il lavoro del progetto",
+    "Un diagramma dei tempi",
+    "Il contratto con il cliente"
+   ],
+   "Un albero che scompone tutto il lavoro del progetto",
+   "Work Breakdown Structure."
+  ],
+  [
+   "Che cos'è un work package?",
+   [
+    "Un insieme di attività elementari con input e output definiti",
+    "Il budget di progetto",
+    "Una riunione di verifica"
+   ],
+   "Un insieme di attività elementari con input e output definiti",
+   "È la base per pianificare e controllare."
+  ],
+  [
+   "Con quale strumento si rappresentano soprattutto le dipendenze tra attività?",
+   [
+    "PERT",
+    "Gantt",
+    "Project charter"
+   ],
+   "PERT",
+   "Il Gantt rappresenta soprattutto i tempi."
+  ],
+  [
+   "Le attività della WBS devono essere…",
+   [
+    "Significative, misurabili, controllabili, di breve durata",
+    "Lunghe e generiche",
+    "Tutte assegnate al PM"
+   ],
+   "Significative, misurabili, controllabili, di breve durata",
+   "Anche descrivibili, con risultati tangibili."
+  ],
+  [
+   "Nell'esempio della riunione, A vale 70% e B 30%. I figli di A sono 50%, 5%, 10% e…",
+   [
+    "5%",
+    "15%",
+    "30%"
+   ],
+   "5%",
+   "50 + 5 + 10 + 5 = 70."
+  ],
+  [
+   "Come si chiama anche il project charter?",
+   [
+    "PID, Project Initial Document",
+    "SRS",
+    "WBS"
+   ],
+   "PID, Project Initial Document",
+   "Oppure assignment."
+  ],
+  [
+   "Quante sezioni ha il project charter?",
+   [
+    "Cinque",
+    "Tre",
+    "Sette"
+   ],
+   "Cinque",
+   "Ambito, organizzazione, durata, budget, vincoli e rischi."
+  ],
+  [
+   "Su quale metodo si basa di solito il controllo dei costi nei report?",
+   [
+    "Earned value",
+    "Scala di Likert",
+    "Regola del 100%"
+   ],
+   "Earned value",
+   "Con BCWS, BCWP e ACWP."
+  ],
+  [
+   "Che cosa sono le lesson learned?",
+   [
+    "Quanto si è appreso e si può riusare",
+    "Le lezioni del corso",
+    "Le penali del contratto"
+   ],
+   "Quanto si è appreso e si può riusare",
+   "Sono un deliverable della chiusura."
+  ],
+  [
+   "Quale metodologia di PM è riconosciuta come standard IEEE?",
+   [
+    "Il PMBOK del PMI",
+    "L'eXtreme Programming",
+    "Il modello a cascata"
+   ],
+   "Il PMBOK del PMI",
+   "Ma non sempre si adatta ai progetti informatici."
+  ]
+ ]
+};
+
+const GEN = {
+  cento: () => { const padre = pick([100, 100, 70, 60, 50, 40]), n = rnd(3, 4); let sc;
+    do { sc = Array.from({ length: n - 1 }, () => rnd(1, Math.floor(padre / 5 / (n - 1))) * 5) } while (sc.reduce((a, b) => a + b, 0) >= padre);
+    const mis = padre - sc.reduce((a, b) => a + b, 0), nomi = shuffle(['Analisi', 'Progettazione', 'Sviluppo', 'Test', 'Documentazione', 'Gestione del progetto']).slice(0, n);
+    return { q: `Il nodo «${padre === 100 ? 'Progetto' : 'Sotto-progetto A'}» vale <b>${padre}%</b> del lavoro. I suoi figli sono: ${sc.map((p, i) => `${nomi[i]} ${p}%`).join(', ')} e ${nomi[n - 1]}. Quanto deve valere ${nomi[n - 1]}?`,
+      fields: [{ label: nomi[n - 1] + ' (%)', kind: 'num', exp: mis, tol: 0 }], sl: 'Spiegazione',
+      sol: P(`Regola del 100%: i figli sommano al valore del padre.\n${padre} − (${sc.join(' + ')}) = ${mis}%`) }; },
+  durata: () => { const pers = rnd(2, 6), dur = rnd(3, 20), imp = pers * dur;
+    return { q: `Un work package richiede un impegno di <b>${imp} giorni/uomo</b> e ci lavorano <b>${pers} persone</b>. Quanti giorni dura in tempo solare?`,
+      fields: [{ label: 'Durata (giorni)', kind: 'num', exp: dur, tol: 0 }], sol: P(`durata = impegno / numero di persone = ${imp} / ${pers} = ${dur} giorni`) }; },
+  pesato: () => { const voci = shuffle(['Tecnologia nuova per il team', 'Requisiti poco chiari', 'Fornitore esterno', 'Scadenza molto stretta', 'Pochi sviluppatori esperti']).slice(0, 3);
+    const v = voci.map(n => ({ n, p: rnd(1, 5), s: rnd(1, 5) })), tot = v.reduce((a, x) => a + x.p * x.s, 0);
+    return { q: `Prospetto di rischio di un'alternativa (peso e valutazione da 1 a 5):<br>${v.map(x => `• ${x.n}: peso ${x.p}, valutazione ${x.s}`).join('<br>')}<br>Calcolate l'indicatore di rischio totale.`,
+      fields: [{ label: 'Rischio totale', kind: 'num', exp: tot, tol: 0 }],
+      sol: P(v.map(x => `${x.n}: ${x.p} × ${x.s} = ${x.p * x.s}`).join('\n') + `\nTotale = ${tot}`) }; }
+};
+
+SG('#x_p1', D['p1'], D['p1_BK'], "Milestone o deliverable");
+SG('#x_p2', D['p2'], D['p2_BK'], "Aspetti della pianificazione");
+SG('#x_p3', D['p3'], D['p3_BK'], "Obiettivi operativi");
+orderGame($('#x_w1'), asOrder(D['w1']), "Livelli della WBS", false);
+mountMenu($('#x_w2'), [["Regola del 100%", GEN.cento], ["Durata di un work package", GEN.durata]], "Calcoli WBS");
+const g_w3 = scGen(D['w3'], D['w3_OPTS'], "Che logica \u00e8?", "Logica"); mount($('#x_w3'), g_w3, "Logica di disaggregazione");
+memory($('#x_d1'), () => D['d1'].flatMap((x, i) => [[i, x[0]], [i, x[1]]]), "Fasi e documenti");
+SG('#x_d2', D['d2'], D['d2_BK'], "Project charter");
+SG('#x_d3', D['d3'], D['d3_BK'], "Quale documento");
+mountMenu($('#x_d4'), [["Indicatore di rischio", GEN.pesato]], "Prospetto di rischio");
+quiz();
+const SFIDA = [...mcAll(), ...vfAll(), GEN.cento, GEN.durata, g_w3, g_w3, GEN.pesato, GEN.durata, GEN.pesato];
+mission($('#tot'), SFIDA, 'Sfida finale', 15);
+</script></body></html>

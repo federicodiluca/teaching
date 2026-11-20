@@ -1,0 +1,310 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DevOps e SRE</title><meta name="description" content="Che cos&#x27;è DevOps, il ciclo di vita, gli strumenti di ogni fase e il ruolo del Site Reliability Engineering."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>DevOps e SRE</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>DevOps e SRE</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso di DevOps: perché è nato, come è fatto il suo ciclo continuo, quali strumenti si usano e che cosa fa un SRE.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">A quale fase del ciclo DevOps appartiene lo strumento? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine le fasi del ciclo DevOps (il simbolo dell'infinito), partendo dalla pianificazione. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "Git",
+   "code"
+  ],
+  [
+   "GitHub",
+   "code"
+  ],
+  [
+   "Jenkins",
+   "build"
+  ],
+  [
+   "GitHub Actions",
+   "build"
+  ],
+  [
+   "Maven",
+   "build"
+  ],
+  [
+   "Selenium",
+   "test"
+  ],
+  [
+   "JUnit",
+   "test"
+  ],
+  [
+   "Docker",
+   "deploy"
+  ],
+  [
+   "Kubernetes",
+   "deploy"
+  ],
+  [
+   "Ansible",
+   "deploy"
+  ],
+  [
+   "Prometheus",
+   "monitor"
+  ],
+  [
+   "Grafana",
+   "monitor"
+  ],
+  [
+   "ELK Stack",
+   "monitor"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "code",
+   "t": "Codice",
+   "s": "versioni e collaborazione"
+  },
+  {
+   "id": "build",
+   "t": "Build e integrazione",
+   "s": ""
+  },
+  {
+   "id": "test",
+   "t": "Test automatici",
+   "s": ""
+  },
+  {
+   "id": "deploy",
+   "t": "Rilascio e infrastruttura",
+   "s": "container, configurazione"
+  },
+  {
+   "id": "monitor",
+   "t": "Monitoraggio",
+   "s": "in produzione"
+  }
+ ],
+ "VF": [
+  [
+   "DevOps nasce per avvicinare chi sviluppa il software e chi lo gestisce in produzione.",
+   true,
+   "Dev (development) e Ops (operations) lavorano come un'unica squadra."
+  ],
+  [
+   "Storicamente gli sviluppatori volevano stabilità e le operations volevano rilasciare in fretta.",
+   false,
+   "Il contrario: Dev voleva rilasciare spesso, Ops voleva stabilità e pochi rischi."
+  ],
+  [
+   "DevOps è soprattutto un singolo programma da installare.",
+   false,
+   "È una cultura e un insieme di pratiche, sostenute da molti strumenti."
+  ],
+  [
+   "Nel ciclo DevOps il monitoraggio fornisce informazioni che tornano alla pianificazione.",
+   true,
+   "Per questo il ciclo si disegna come il simbolo dell'infinito."
+  ],
+  [
+   "SRE significa Site Reliability Engineering.",
+   true,
+   "È l'approccio nato in Google per rendere affidabili i servizi."
+  ],
+  [
+   "Con DevOps la sicurezza si controlla solo alla fine, prima del rilascio.",
+   false,
+   "Va integrata in tutto il ciclo (si parla di DevSecOps): le norme vanno rispettate a ogni rilascio."
+  ],
+  [
+   "Automatizzare build e test riduce gli errori umani.",
+   true,
+   "Le stesse operazioni vengono eseguite sempre nello stesso modo."
+  ],
+  [
+   "Docker serve a impacchettare un'applicazione con tutto quello che le serve in un container.",
+   true,
+   "Così gira allo stesso modo sul PC dello sviluppatore e sul server."
+  ]
+ ],
+ "MC": [
+  [
+   "Quale conflitto risolve DevOps?",
+   [
+    "Dev vuole rilasciare in fretta, Ops vuole stabilità",
+    "Clienti e fornitori",
+    "Frontend e backend",
+    "Hardware e software"
+   ],
+   "Dev vuole rilasciare in fretta, Ops vuole stabilità",
+   "DevOps allinea gli obiettivi delle due squadre."
+  ],
+  [
+   "Quale strumento è associato all'integrazione continua?",
+   [
+    "Jenkins",
+    "Grafana",
+    "Kubernetes",
+    "Selenium"
+   ],
+   "Jenkins",
+   "Jenkins esegue build e test a ogni modifica."
+  ],
+  [
+   "Quali strumenti si usano per il monitoraggio?",
+   [
+    "Prometheus e Grafana",
+    "Git e GitHub",
+    "JUnit e Selenium",
+    "Maven e Gradle"
+   ],
+   "Prometheus e Grafana",
+   "Prometheus raccoglie le metriche, Grafana le mostra in grafici."
+  ],
+  [
+   "Che cosa fa Kubernetes?",
+   [
+    "Orchestra i container su più macchine",
+    "Scrive i test",
+    "Gestisce le versioni del codice",
+    "Disegna l'interfaccia"
+   ],
+   "Orchestra i container su più macchine",
+   "Avvia, ferma e scala i container."
+  ],
+  [
+   "Che cosa fissa uno SLO?",
+   [
+    "Un obiettivo di affidabilità, per esempio il 99,9% di disponibilità",
+    "Il prezzo del servizio",
+    "Il linguaggio da usare",
+    "Il numero di sviluppatori"
+   ],
+   "Un obiettivo di affidabilità, per esempio il 99,9% di disponibilità",
+   "SLO = Service Level Objective."
+  ],
+  [
+   "Perché i rilasci frequenti e piccoli sono più sicuri?",
+   [
+    "Ogni modifica è piccola, facile da controllare e da annullare",
+    "Perché non servono test",
+    "Perché il codice è più corto",
+    "Perché i server sono più veloci"
+   ],
+   "Ogni modifica è piccola, facile da controllare e da annullare",
+   "Se qualcosa va storto si sa subito quale modifica l'ha causato."
+  ],
+  [
+   "Con che cosa si apre il ciclo DevOps?",
+   [
+    "Plan",
+    "Deploy",
+    "Monitor",
+    "Test"
+   ],
+   "Plan",
+   "Plan, Code, Build, Test, Release, Deploy, Operate, Monitor."
+  ],
+  [
+   "Quale strumento automatizza i test di un'interfaccia web nel browser?",
+   [
+    "Selenium",
+    "Docker",
+    "Ansible",
+    "Prometheus"
+   ],
+   "Selenium",
+   "Selenium comanda il browser come farebbe un utente."
+  ]
+ ],
+ "ORD": [
+  [
+   "Plan",
+   "Si decide che cosa sviluppare."
+  ],
+  [
+   "Code",
+   "Si scrive il codice e lo si versiona."
+  ],
+  [
+   "Build",
+   "Si compila e si crea il pacchetto."
+  ],
+  [
+   "Test",
+   "Si eseguono i test automatici."
+  ],
+  [
+   "Release",
+   "Si prepara la versione da rilasciare."
+  ],
+  [
+   "Deploy",
+   "Si installa in produzione."
+  ],
+  [
+   "Operate",
+   "Il sistema è in esercizio."
+  ],
+  [
+   "Monitor",
+   "Si raccolgono dati e feedback, poi il ciclo riparte."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "Principi DevOps: una riga è sbagliata.",
+   "lines": [
+    "Collaborazione fra sviluppo e operations",
+    "Automazione di build, test e rilascio",
+    "Rilasci piccoli e frequenti",
+    "Un solo grande rilascio all'anno per ridurre i rischi"
+   ],
+   "bad": 3,
+   "why": "DevOps punta su rilasci piccoli e frequenti: ogni cambiamento è meno rischioso e più facile da annullare."
+  },
+  {
+   "t": "Strumenti: una riga è sbagliata.",
+   "lines": [
+    "Jenkins → integrazione continua",
+    "Selenium → test automatici",
+    "Grafana → monitoraggio",
+    "Prometheus → controllo di versione"
+   ],
+   "bad": 3,
+   "why": "Prometheus raccoglie metriche per il monitoraggio; il controllo di versione è Git."
+  },
+  {
+   "t": "SRE: una riga è sbagliata.",
+   "lines": [
+    "Applica metodi dell'ingegneria del software alle operations",
+    "Misura l'affidabilità con indicatori e obiettivi (SLI e SLO)",
+    "Automatizza il lavoro ripetitivo",
+    "Vieta ogni guasto: l'obiettivo è il 100% di disponibilità"
+   ],
+   "bad": 3,
+   "why": "Il 100% non è realistico: si fissa un obiettivo (per esempio 99,9%) e un margine di errore accettabile."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>

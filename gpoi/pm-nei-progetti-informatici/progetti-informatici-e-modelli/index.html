@@ -1,0 +1,725 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Progetti informatici e modelli di sviluppo</title><meta name="description" content="Tipi di progetti informatici, crisi del software, processo di produzione, manutenzione, ruoli, gara di appalto, ciclo di vita e modelli di sviluppo."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head><body class="tg-act" data-solo="1"><header><h1>Progetti informatici e modelli di sviluppo</h1></header><nav id="nav"></nav><main>
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Progetti informatici e modelli di sviluppo</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.</p>
+<ol><li><b>Progetti informatici:</b> ad hoc e pacchettizzati, tipologie, cause dei fallimenti, programmatore e software engineer.</li><li><b>Il processo:</b> macro fasi, manutenzione, ruoli di cliente e fornitore, gara di appalto, modalità di conduzione.</li><li><b>Ciclo di vita:</b> le sette fasi e i modelli di sviluppo, dalla cascata all'agile.</li><li><b>Quiz</b> e <b>Sfida finale</b>.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+<section id="i1" data-g="Progetti informatici" data-t="1 Ad hoc o pacchettizzato"><h2>Software ad hoc o prodotto pacchettizzato</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_i1"></div></section>
+<section id="i2" data-g="Progetti informatici" data-t="2 Che tipo di progetto?"><h2>Le quattro tipologie di progetti informatici</h2><p class="lead">Leggete il progetto e scegliete la tipologia.</p><div id="x_i2"></div></section>
+<section id="i3" data-g="Progetti informatici" data-t="3 Perché falliscono"><h2>Le tre cause del fallimento dei progetti software</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_i3"></div></section>
+<section id="i4" data-g="Progetti informatici" data-t="4 Programmatore o ingegnere"><h2>Programmatore o software engineer</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_i4"></div></section>
+<section id="p1" data-g="Il processo" data-t="1 Le macro fasi"><h2>Progetto, sviluppo, manutenzione</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_p1"></div></section>
+<section id="p2" data-g="Il processo" data-t="2 Che manutenzione è?"><h2>I quattro tipi di manutenzione</h2><p class="lead">Leggete l&#x27;intervento e scegliete il tipo di manutenzione.</p><div id="x_p2"></div></section>
+<section id="p3" data-g="Il processo" data-t="3 Cliente o fornitore"><h2>I ruoli del cliente e del fornitore</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_p3"></div></section>
+<section id="p4" data-g="Il processo" data-t="4 La gara di appalto"><h2>Le cinque fasi della gara</h2><p class="lead">Mettete in ordine le fasi della gara di appalto. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».</p><div id="x_p4"></div></section>
+<section id="p5" data-g="Il processo" data-t="5 Modalità di conduzione"><h2>Chiavi in mano, responsabilità condivisa, body rental</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_p5"></div></section>
+<section id="c1" data-g="Ciclo di vita" data-t="1 Le sette fasi"><h2>Le sette fasi del ciclo di vita del software</h2><p class="lead">Mettete in ordine le fasi del ciclo di vita del software. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».</p><div id="x_c1"></div></section>
+<section id="c2" data-g="Ciclo di vita" data-t="2 Quale modello?"><h2>Quale modello di sviluppo?</h2><p class="lead">Leggete come lavora il team e scegliete il modello di sviluppo.</p><div id="x_c2"></div></section>
+<section id="c3" data-g="Ciclo di vita" data-t="3 La spirale"><h2>Le quattro fasi del modello a spirale</h2><p class="lead">Mettete in ordine le fasi di un giro della spirale di Boehm. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».</p><div id="x_c3"></div></section>
+<section id="c4" data-g="Ciclo di vita" data-t="4 Agile o tradizionale"><h2>Modelli agili e modelli tradizionali</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_c4"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Quindici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+const D = {
+ "i1": [
+  [
+   "Sviluppato per un particolare committente",
+   "h"
+  ],
+  [
+   "Costruito da zero sulle esigenze dell'azienda",
+   "h"
+  ],
+  [
+   "Il gestionale su misura per una catena di farmacie",
+   "h"
+  ],
+  [
+   "Sviluppato per il mercato in generale",
+   "p"
+  ],
+  [
+   "Soddisfa necessità standard",
+   "p"
+  ],
+  [
+   "Una suite di office automation",
+   "p"
+  ],
+  [
+   "Un'app per smartphone scaricabile da tutti",
+   "p"
+  ],
+  [
+   "Pensato per piccole aziende o per il singolo utente",
+   "p"
+  ]
+ ],
+ "i1_BK": [
+  {
+   "id": "h",
+   "t": "Software ad hoc",
+   "s": ""
+  },
+  {
+   "id": "p",
+   "t": "Pacchettizzato (COTS)",
+   "s": ""
+  }
+ ],
+ "i2": [
+  [
+   "Un cliente chiede a una software house un'app per prenotare i campi da tennis.",
+   "Commerciale",
+   "nasce dalla richiesta specifica di un cliente"
+  ],
+  [
+   "L'azienda rifà i suoi prodotti per sfruttare l'intelligenza artificiale.",
+   "Di innovazione e investimento",
+   "segue un cambiamento tecnologico"
+  ],
+  [
+   "Si installano posta elettronica e intranet in tutti gli uffici.",
+   "Di miglioramento gestionale",
+   "informatizzazione di base e diffusione di servizi"
+  ],
+  [
+   "Si affida a un'azienda esterna la gestione di tutti i server.",
+   "Di riorganizzazione aziendale",
+   "gestione operativa e outsourcing"
+  ],
+  [
+   "Si reingegnerizza l'intera infrastruttura informatica dopo una fusione tra due aziende.",
+   "Di riorganizzazione aziendale",
+   "realizzazione o reingegnerizzazione di sistemi e infrastrutture"
+  ]
+ ],
+ "i2_OPTS": [
+  "Commerciale",
+  "Di innovazione e investimento",
+  "Di miglioramento gestionale",
+  "Di riorganizzazione aziendale"
+ ],
+ "i3": [
+  [
+   "Progettisti con poca formazione in una disciplina giovane",
+   "met"
+  ],
+  [
+   "Approccio artigianale",
+   "met"
+  ],
+  [
+   "Il software deve interagire con persone e organizzazioni",
+   "com"
+  ],
+  [
+   "Il software deve interagire con sistemi elettrici e meccanici",
+   "com"
+  ],
+  [
+   "Un programma funziona in certi casi e in altri no",
+   "nat"
+  ],
+  [
+   "I requisiti cambiano di continuo",
+   "nat"
+  ],
+  [
+   "Committente e progettista faticano a capirsi",
+   "nat"
+  ]
+ ],
+ "i3_BK": [
+  {
+   "id": "met",
+   "t": "Metodologie inefficaci",
+   "s": ""
+  },
+  {
+   "id": "com",
+   "t": "Complessità delle applicazioni",
+   "s": ""
+  },
+  {
+   "id": "nat",
+   "t": "Natura particolare del software",
+   "s": ""
+  }
+ ],
+ "i4": [
+  [
+   "Sviluppa da solo un programma su specifiche date",
+   "p"
+  ],
+  [
+   "Programming in the small",
+   "p"
+  ],
+  [
+   "Usa linguaggi e strumenti che conosce",
+   "p"
+  ],
+  [
+   "Progetta componenti da integrare in un prodotto",
+   "e"
+  ],
+  [
+   "Programming in the large",
+   "e"
+  ],
+  [
+   "Segue tutto il ciclo di vita del software",
+   "e"
+  ],
+  [
+   "Segue un codice etico professionale",
+   "e"
+  ]
+ ],
+ "i4_BK": [
+  {
+   "id": "p",
+   "t": "Programmatore",
+   "s": ""
+  },
+  {
+   "id": "e",
+   "t": "Software engineer",
+   "s": ""
+  }
+ ],
+ "p1": [
+  [
+   "Studio di fattibilità",
+   "pr"
+  ],
+  [
+   "Pianificazione con Gantt e PERT",
+   "pr"
+  ],
+  [
+   "Analisi dei requisiti e contratto",
+   "pr"
+  ],
+  [
+   "Coordinare molti sviluppatori in parallelo",
+   "sv"
+  ],
+  [
+   "Installazione, test e avviamento",
+   "sv"
+  ],
+  [
+   "Inizia con la consegna del prodotto",
+   "ma"
+  ],
+  [
+   "Dura per tutta la vita del prodotto",
+   "ma"
+  ]
+ ],
+ "p1_BK": [
+  {
+   "id": "pr",
+   "t": "Progetto",
+   "s": ""
+  },
+  {
+   "id": "sv",
+   "t": "Sviluppo",
+   "s": ""
+  },
+  {
+   "id": "ma",
+   "t": "Manutenzione",
+   "s": ""
+  }
+ ],
+ "p2": [
+  [
+   "Si corregge un errore che fa chiudere l'app quando si salva un file.",
+   "Correttiva",
+   "si tolgono gli errori presenti nel software"
+  ],
+  [
+   "Il cliente chiede in corso d'opera di aggiungere un campo al modulo di iscrizione.",
+   "Adattativa",
+   "ritocchi per aggiunte o cambiamenti alle specifiche"
+  ],
+  [
+   "Si rende più veloce la ricerca dei prodotti, che già funzionava.",
+   "Perfettiva",
+   "migliorativa: ottimizza un requisito già presente"
+  ],
+  [
+   "Si aggiunge l'esportazione dei dati in PDF.",
+   "Perfettiva",
+   "evolutiva: aggiunge un nuovo requisito funzionale secondario"
+  ],
+  [
+   "Si sistemano indentazione e commenti del codice per facilitare i futuri interventi.",
+   "Preventiva",
+   "si migliora la struttura del codice per il debugging futuro"
+  ],
+  [
+   "Si corregge un calcolo sbagliato dell'IVA nelle fatture.",
+   "Correttiva",
+   "è un errore da eliminare"
+  ]
+ ],
+ "p2_OPTS": [
+  "Correttiva",
+  "Adattativa",
+  "Perfettiva",
+  "Preventiva"
+ ],
+ "p3": [
+  [
+   "Committente: firma il contratto e gestisce le risorse economiche",
+   "cl"
+  ],
+  [
+   "Sponsor: può interrompere il progetto se si prevedono perdite",
+   "cl"
+  ],
+  [
+   "Utenti di riferimento per i test di accettazione",
+   "cl"
+  ],
+  [
+   "Specialisti di ambiente del CED",
+   "cl"
+  ],
+  [
+   "Utenti finali",
+   "cl"
+  ],
+  [
+   "Responsabile commerciale: cura offerta e contratto",
+   "fo"
+  ],
+  [
+   "Supervisore delle risorse su più progetti",
+   "fo"
+  ],
+  [
+   "Analisti programmatori",
+   "fo"
+  ],
+  [
+   "Personale di supporto per formazione e assistenza",
+   "fo"
+  ]
+ ],
+ "p3_BK": [
+  {
+   "id": "cl",
+   "t": "Cliente",
+   "s": ""
+  },
+  {
+   "id": "fo",
+   "t": "Fornitore",
+   "s": ""
+  }
+ ],
+ "p4": [
+  [
+   "Pubblicazione del bando",
+   "Il committente annuncia che vuole realizzare il progetto."
+  ],
+  [
+   "Capitolato",
+   "Specifiche, aspettative, consegna e modalità delle offerte."
+  ],
+  [
+   "Offerte",
+   "I fornitori preparano preventivo e relazione tecnica."
+  ],
+  [
+   "Esame delle offerte",
+   "Una commissione le confronta e fa la graduatoria."
+  ],
+  [
+   "Firma del contratto",
+   "Clausole, impegni economici e temporali, penali."
+  ]
+ ],
+ "p5": [
+  [
+   "Capitolato molto dettagliato, progetto senza rischi",
+   "ch"
+  ],
+  [
+   "Tutto a carico del fornitore, protetto da penali",
+   "ch"
+  ],
+  [
+   "Rispetta tempi e costi, a scapito della qualità",
+   "ch"
+  ],
+  [
+   "Due capi progetto, uno del cliente e uno del fornitore",
+   "rc"
+  ],
+  [
+   "Il caso più diffuso",
+   "rc"
+  ],
+  [
+   "Più qualità, ma spesso tempi e costi saltano",
+   "rc"
+  ],
+  [
+   "Il fornitore presta poche risorse per piccoli lavori",
+   "br"
+  ],
+  [
+   "La responsabilità resta tutta al cliente",
+   "br"
+  ],
+  [
+   "Il cliente deve avere le competenze in casa",
+   "br"
+  ]
+ ],
+ "p5_BK": [
+  {
+   "id": "ch",
+   "t": "Chiavi in mano",
+   "s": ""
+  },
+  {
+   "id": "rc",
+   "t": "Responsabilità condivisa",
+   "s": ""
+  },
+  {
+   "id": "br",
+   "t": "Body rental",
+   "s": ""
+  }
+ ],
+ "c1": [
+  [
+   "Pianificazione del sistema",
+   "Quali parti del sistema realizzare con il software."
+  ],
+  [
+   "Analisi",
+   "Che cosa deve fare l'applicazione: il documento dei requisiti."
+  ],
+  [
+   "Progettazione",
+   "Come farlo: strategia, strutture dati, classi."
+  ],
+  [
+   "Codifica",
+   "Scrittura e compilazione del codice."
+  ],
+  [
+   "Test e debug",
+   "Si cercano e correggono gli errori."
+  ],
+  [
+   "Installazione, verifica e collaudo",
+   "Consegna e prove con dati reali."
+  ],
+  [
+   "Manutenzione",
+   "Fase permanente dopo la consegna."
+  ]
+ ],
+ "c2": [
+  [
+   "Si scrive subito una prima versione senza documentazione e la si corregge finché il cliente è contento.",
+   "Build and Fix",
+   "prodotto approssimativo modificato su richiesta, quasi senza documentazione"
+  ],
+  [
+   "Ogni fase si chiude e si approva prima di passare alla successiva.",
+   "A cascata",
+   "ogni passo parte solo se i precedenti sono completati"
+  ],
+  [
+   "Si costruisce in pochi giorni una versione di prova per chiarire con il cliente che cosa vuole.",
+   "Prototipazione rapida (RAD)",
+   "il prototipo serve a raffinare i requisiti"
+  ],
+  [
+   "Prima si rilasciano le funzioni più critiche, poi a ogni versione si aggiungono le altre.",
+   "Incrementale",
+   "versioni successive dello stesso prodotto, partendo dai requisiti più critici"
+  ],
+  [
+   "A ogni giro si pianifica, si analizzano i rischi, si sviluppa e il cliente valuta.",
+   "A spirale",
+   "quattro fasi ripetute più volte, con l'analisi dei rischi"
+  ],
+  [
+   "Programmazione a coppie, rilasci frequenti, test continui e cliente sempre disponibile.",
+   "Agile (XP)",
+   "sono alcune delle regole di Kent Beck"
+  ]
+ ],
+ "c2_OPTS": [
+  "Build and Fix",
+  "A cascata",
+  "Prototipazione rapida (RAD)",
+  "Incrementale",
+  "A spirale",
+  "Agile (XP)"
+ ],
+ "c3": [
+  [
+   "Pianificazione",
+   "Obiettivi, alternative e vincoli."
+  ],
+  [
+   "Analisi dei rischi",
+   "Problemi e strategie per controllarli."
+  ],
+  [
+   "Sviluppo",
+   "La realizzazione vera e propria."
+  ],
+  [
+   "Valutazione",
+   "Il committente verifica: se serve si riparte con un nuovo giro."
+  ]
+ ],
+ "c4": [
+  [
+   "Un risultato piccolo e ben definito alla volta",
+   "ag"
+  ],
+  [
+   "Adattativo: segue i requisiti che cambiano",
+   "ag"
+  ],
+  [
+   "Rilasci frequenti",
+   "ag"
+  ],
+  [
+   "Test continui",
+   "ag"
+  ],
+  [
+   "Team piccolo e in contatto continuo con il cliente",
+   "ag"
+  ],
+  [
+   "Test solo alla fine, su migliaia di righe di codice",
+   "tr"
+  ],
+  [
+   "Documento dei requisiti vincolante",
+   "tr"
+  ],
+  [
+   "Il cliente vede il prodotto solo alla fine",
+   "tr"
+  ],
+  [
+   "Predittivo: si pianifica tutto in anticipo",
+   "tr"
+  ]
+ ],
+ "c4_BK": [
+  {
+   "id": "ag",
+   "t": "Agile",
+   "s": ""
+  },
+  {
+   "id": "tr",
+   "t": "Tradizionale (cascata)",
+   "s": ""
+  }
+ ],
+ "VF": [
+  [
+   "La particolarità dei progetti informatici è dover inventare un algoritmo, di cui è difficile stimare i tempi.",
+   true,
+   "Soprattutto quando c'è innovazione tecnologica."
+  ],
+  [
+   "Oltre i tre anni si parla di programmi di sviluppo più che di progetti.",
+   true,
+   "Escono dalle metodologie standard di project management."
+  ],
+  [
+   "Nella crisi del software la maggior parte dei soldi andava ad applicazioni usate così come consegnate.",
+   false,
+   "Solo 0,1 milioni su 9 progetti: il resto andò in applicazioni mai consegnate, mai usate o rifatte."
+  ],
+  [
+   "Al software si possono applicare senza modifiche le tecniche dei sistemi industriali.",
+   false,
+   "Proprio per questo è nata l'ingegneria del software."
+  ],
+  [
+   "Il software si consuma con l'uso come un prodotto industriale.",
+   false,
+   "Non si consuma: viene continuamente modificato."
+  ],
+  [
+   "La manutenzione perfettiva è quella che pesa di più.",
+   true,
+   "Circa il 50% degli interventi."
+  ],
+  [
+   "La pubblica amministrazione può scegliere il fornitore solo con una gara.",
+   true,
+   "È una gara formale regolata dal diritto amministrativo."
+  ],
+  [
+   "Nel body rental la responsabilità del progetto passa al fornitore.",
+   false,
+   "Resta tutta al cliente, che deve avere le competenze necessarie."
+  ],
+  [
+   "L'analisi stabilisce che cosa deve fare il sistema, senza dire come.",
+   true,
+   "Il «come» è compito della progettazione."
+  ],
+  [
+   "Il modello a cascata oggi è il più usato.",
+   false,
+   "È quasi abbandonato o integrato in altri modelli."
+  ],
+  [
+   "Il modello a spirale è stato proposto da Barry Boehm.",
+   true,
+   "Nel 1988, e comprende i modelli precedenti."
+  ],
+  [
+   "Le metodologie agili sono predittive.",
+   false,
+   "Sono adattative: si adattano ai requisiti che cambiano."
+  ]
+ ],
+ "MC": [
+  [
+   "Che cos'è un prodotto COTS?",
+   [
+    "Un software pacchettizzato per il mercato",
+    "Un software su misura",
+    "Un tipo di contratto"
+   ],
+   "Un software pacchettizzato per il mercato",
+   "Commercial Off-The-Shelf."
+  ],
+  [
+   "Che cosa dice la legge di Weinberg?",
+   [
+    "Se i costruttori costruissero come i programmatori programmano, un picchio distruggerebbe la civiltà",
+    "Il software raddoppia ogni 18 mesi",
+    "Ogni progetto è in ritardo"
+   ],
+   "Se i costruttori costruissero come i programmatori programmano, un picchio distruggerebbe la civiltà",
+   "È umorismo nero nato dalla crisi del software."
+  ],
+  [
+   "Quali sono le tre macro fasi del processo di produzione del software?",
+   [
+    "Progetto, sviluppo, manutenzione",
+    "Analisi, codifica, test",
+    "Bando, offerta, contratto"
+   ],
+   "Progetto, sviluppo, manutenzione",
+   "Il progetto si divide in preprogetto e system design."
+  ],
+  [
+   "Che documento valida il preprogetto prima del system design?",
+   [
+    "Il project charter",
+    "Il capitolato",
+    "Il manuale utente"
+   ],
+   "Il project charter",
+   "Serve la validazione di tutti i soggetti coinvolti."
+  ],
+  [
+   "Chi può interrompere il progetto se prevede perdite?",
+   [
+    "Lo sponsor",
+    "L'analista programmatore",
+    "L'utente finale"
+   ],
+   "Lo sponsor",
+   "Ha la responsabilità finale di proteggere il business."
+  ],
+  [
+   "Nella gara, che cosa contiene il capitolato?",
+   [
+    "Specifiche, aspettative, termini di consegna e modalità delle offerte",
+    "Il prezzo offerto dal fornitore",
+    "La graduatoria finale"
+   ],
+   "Specifiche, aspettative, termini di consegna e modalità delle offerte",
+   "Viene preparato dal committente."
+  ],
+  [
+   "Qual è la modalità di conduzione più diffusa?",
+   [
+    "Responsabilità condivisa",
+    "Chiavi in mano",
+    "Body rental"
+   ],
+   "Responsabilità condivisa",
+   "Con due capi progetto."
+  ],
+  [
+   "Il problema principale del RAD è che…",
+   [
+    "Il prototipo diventa la base del prodotto invece di chiarire i requisiti",
+    "Non coinvolge mai il cliente",
+    "Richiede anni per il primo rilascio"
+   ],
+   "Il prototipo diventa la base del prodotto invece di chiarire i requisiti",
+   "E il cliente spesso giudica dettagli secondari come i colori."
+  ],
+  [
+   "Chi ha definito l'eXtreme Programming?",
+   [
+    "Kent Beck",
+    "Winston Royce",
+    "Barry Boehm"
+   ],
+   "Kent Beck",
+   "Nel 1999; Royce è legato alla cascata, Boehm alla spirale."
+  ],
+  [
+   "Quale modello ha secondo le slide più possibilità di successo?",
+   [
+    "A spirale",
+    "A cascata",
+    "Build and Fix"
+   ],
+   "A spirale",
+   "Grazie al confronto continuo con l'utente."
+  ]
+ ]
+};
+
+SG('#x_i1', D['i1'], D['i1_BK'], "Ad hoc o pacchettizzato");
+const g_i2 = scGen(D['i2'], D['i2_OPTS'], "Che tipo di progetto \u00e8?", "Tipologia"); mount($('#x_i2'), g_i2, "Tipo di progetto");
+SG('#x_i3', D['i3'], D['i3_BK'], "Cause dei fallimenti");
+SG('#x_i4', D['i4'], D['i4_BK'], "Programmatore o software engineer");
+SG('#x_p1', D['p1'], D['p1_BK'], "Macro fasi");
+const g_p2 = scGen(D['p2'], D['p2_OPTS'], "Che manutenzione \u00e8?", "Manutenzione"); mount($('#x_p2'), g_p2, "Tipo di manutenzione");
+SG('#x_p3', D['p3'], D['p3_BK'], "Ruoli cliente e fornitore");
+orderGame($('#x_p4'), asOrder(D['p4']), "Gara di appalto", false);
+SG('#x_p5', D['p5'], D['p5_BK'], "Modalit\u00e0 di conduzione");
+orderGame($('#x_c1'), asOrder(D['c1']), "Sette fasi", false);
+const g_c2 = scGen(D['c2'], D['c2_OPTS'], "Quale modello?", "Modello"); mount($('#x_c2'), g_c2, "Quale modello");
+orderGame($('#x_c3'), asOrder(D['c3']), "Modello a spirale", false);
+SG('#x_c4', D['c4'], D['c4_BK'], "Agile o tradizionale");
+quiz();
+const SFIDA = [...mcAll(), ...vfAll(), g_i2, g_i2, g_p2, g_p2, g_c2, g_c2];
+mission($('#tot'), SFIDA, 'Sfida finale', 15);
+</script></body></html>

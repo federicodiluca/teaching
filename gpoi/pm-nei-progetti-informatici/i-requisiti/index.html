@@ -1,0 +1,622 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>I requisiti</title><meta name="description" content="Studio di fattibilità, analisi e classificazione dei requisiti, stakeholder, tipi di raccolta, tecniche di esplorazione e loro difficoltà."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head><body class="tg-act" data-solo="1"><header><h1>I requisiti</h1></header><nav id="nav"></nav><main>
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>I requisiti</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.</p>
+<ol><li><b>Fattibilità:</b> i cinque aspetti, le attività dell'analisi e dell'ingegneria dei requisiti.</li><li><b>Classificazione:</b> requisiti utente e di sistema, funzionali, non funzionali e di dominio.</li><li><b>Raccolta:</b> greenfield e re-engineering, coinvolgere gli stakeholder, tecniche di esplorazione, interviste, difficoltà.</li><li><b>Quiz</b> e <b>Sfida finale</b>.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+<section id="f1" data-g="Fattibilità" data-t="1 I cinque aspetti"><h2>I cinque aspetti dello studio di fattibilità</h2><p class="lead">Leggete la domanda che si pone il team e scegliete l&#x27;aspetto della fattibilità.</p><div id="x_f1"></div></section>
+<section id="f2" data-g="Fattibilità" data-t="2 Analisi dei requisiti"><h2>Le attività dell&#x27;analisi dei requisiti</h2><p class="lead">Mettete in ordine le quattro attività dell&#x27;analisi dei requisiti nel preprogetto. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».</p><div id="x_f2"></div></section>
+<section id="f3" data-g="Fattibilità" data-t="3 Ingegneria dei requisiti"><h2>Le quattro attività dell&#x27;ingegneria dei requisiti</h2><p class="lead">Mettete in ordine le attività dell&#x27;ingegneria dei requisiti. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».</p><div id="x_f3"></div></section>
+<section id="k1" data-g="Classificazione" data-t="1 Utente o sistema"><h2>Requisiti utente e di sistema</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_k1"></div></section>
+<section id="k2" data-g="Classificazione" data-t="2 Che tipo di requisito?"><h2>Funzionali, non funzionali, di dominio</h2><p class="lead">Si parla di un sito di e-commerce e del sistema di una carta di credito. Fate clic su una carta e poi sul tipo di requisito.</p><div id="x_k2"></div></section>
+<section id="k3" data-g="Classificazione" data-t="3 Sommerville"><h2>Requisiti non funzionali secondo Sommerville</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_k3"></div></section>
+<section id="r1" data-g="Raccolta" data-t="1 Tipo di raccolta"><h2>Greenfield, re-engineering, interface engineering</h2><p class="lead">Leggete il progetto e scegliete il tipo di raccolta dei requisiti.</p><div id="x_r1"></div></section>
+<section id="r2" data-g="Raccolta" data-t="2 Coinvolgere davvero"><h2>Che cosa significa coinvolgere gli stakeholder</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_r2"></div></section>
+<section id="r3" data-g="Raccolta" data-t="3 Quale tecnica?"><h2>Le tecniche di esplorazione</h2><p class="lead">Leggete che cosa fa l&#x27;analista e scegliete la tecnica di esplorazione.</p><div id="x_r3"></div></section>
+<section id="r4" data-g="Raccolta" data-t="4 Le interviste"><h2>Interviste non strutturate, strutturate, semistrutturate</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_r4"></div></section>
+<section id="r5" data-g="Raccolta" data-t="5 Le difficoltà"><h2>Le difficoltà della fase di esplorazione</h2><p class="lead">Leggete il problema e scegliete il tipo di difficoltà.</p><div id="x_r5"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Quindici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+const D = {
+ "f1": [
+  [
+   "Esiste sul mercato una tecnologia per riconoscere le targhe dalle telecamere?",
+   "Tecnico",
+   "riguarda la tecnologia disponibile"
+  ],
+  [
+   "Come cambierà il lavoro degli uffici con il nuovo gestionale?",
+   "Organizzativo",
+   "riguarda l'impatto sull'organizzazione"
+  ],
+  [
+   "I dipendenti avranno voglia di usare la nuova app o la eviteranno?",
+   "Motivazionale",
+   "il sistema sarà desiderato dagli utilizzatori?"
+  ],
+  [
+   "I benefici attesi valgono i 60.000 € di spesa?",
+   "Economico",
+   "analisi costi e benefici"
+  ],
+  [
+   "Si può finire prima dell'inizio dell'anno scolastico?",
+   "Temporale",
+   "orizzonte temporale realistico"
+  ]
+ ],
+ "f1_OPTS": [
+  "Tecnico",
+  "Organizzativo",
+  "Motivazionale",
+  "Economico",
+  "Temporale"
+ ],
+ "f2": [
+  [
+   "Analisi del problema",
+   "Che cosa deve fare il sistema, i bisogni degli utenti."
+  ],
+  [
+   "Definizione delle funzionalità",
+   "Operatività, vincoli, prestazioni."
+  ],
+  [
+   "Redazione dell'SRS",
+   "I requisiti diventano un documento formale."
+  ],
+  [
+   "Convalida delle specifiche",
+   "Si rivede l'SRS con il committente."
+  ]
+ ],
+ "f3": [
+  [
+   "Raccolta dei requisiti",
+   "La fase di esplorazione."
+  ],
+  [
+   "Analisi dei requisiti",
+   "Si studia e si organizza ciò che si è raccolto."
+  ],
+  [
+   "Stesura dell'SRS",
+   "Software Requirement Specification."
+  ],
+  [
+   "Verifica e approvazione",
+   "I requisiti vengono approvati."
+  ]
+ ],
+ "k1": [
+  [
+   "Le esigenze sentite dall'utente finale",
+   "u"
+  ],
+  [
+   "Scritti con il linguaggio del cliente",
+   "u"
+  ],
+  [
+   "Detti anche requisiti aperti",
+   "u"
+  ],
+  [
+   "«L'app deve mostrare i file creati da altri programmi»",
+   "u"
+  ],
+  [
+   "Imposti da apparecchiature e sistemi già presenti",
+   "s"
+  ],
+  [
+   "Scritti in linguaggio tecnico o formale",
+   "s"
+  ],
+  [
+   "Detti anche requisiti chiusi",
+   "s"
+  ],
+  [
+   "Spesso li conosce solo il programmatore",
+   "s"
+  ],
+  [
+   "«Ogni tipo di file ha un'icona scelta dall'utente»",
+   "s"
+  ]
+ ],
+ "k1_BK": [
+  {
+   "id": "u",
+   "t": "Requisiti utente",
+   "s": ""
+  },
+  {
+   "id": "s",
+   "t": "Requisiti di sistema",
+   "s": ""
+  }
+ ],
+ "k2": [
+  [
+   "Il sito permette di inserire prodotti nel carrello",
+   "f"
+  ],
+  [
+   "Si può pagare con carta di credito",
+   "f"
+  ],
+  [
+   "Ogni scheda prodotto mostra foto, nome e prezzo",
+   "f"
+  ],
+  [
+   "La risposta del sistema arriva in meno di un minuto",
+   "n"
+  ],
+  [
+   "L'acquisto dovrebbe richiedere al massimo 5 minuti",
+   "n"
+  ],
+  [
+   "Il software deve girare anche su tablet",
+   "n"
+  ],
+  [
+   "Rispettare le norme bancarie di sicurezza",
+   "d"
+  ],
+  [
+   "Riservatezza dei dati sensibili dei clienti",
+   "d"
+  ]
+ ],
+ "k2_BK": [
+  {
+   "id": "f",
+   "t": "Funzionali",
+   "s": "Che cosa fa"
+  },
+  {
+   "id": "n",
+   "t": "Non funzionali",
+   "s": "Come si comporta"
+  },
+  {
+   "id": "d",
+   "t": "Di dominio",
+   "s": "Dipendono dal settore"
+  }
+ ],
+ "k3": [
+  [
+   "Affidabilità",
+   "pr"
+  ],
+  [
+   "Portabilità",
+   "pr"
+  ],
+  [
+   "Efficienza",
+   "pr"
+  ],
+  [
+   "Usabilità",
+   "pr"
+  ],
+  [
+   "Tempi di consegna",
+   "or"
+  ],
+  [
+   "Standard da seguire nello sviluppo",
+   "or"
+  ],
+  [
+   "Leggi da rispettare",
+   "es"
+  ],
+  [
+   "Aspetti etici",
+   "es"
+  ],
+  [
+   "Interoperabilità con altri sistemi",
+   "es"
+  ]
+ ],
+ "k3_BK": [
+  {
+   "id": "pr",
+   "t": "Di prodotto",
+   "s": ""
+  },
+  {
+   "id": "or",
+   "t": "Organizzativi",
+   "s": ""
+  },
+  {
+   "id": "es",
+   "t": "Esterni",
+   "s": ""
+  }
+ ],
+ "r1": [
+  [
+   "Una startup vuole un'app che oggi non esiste in nessuna forma.",
+   "Greenfield engineering",
+   "si parte da zero, senza un sistema precedente"
+  ],
+  [
+   "Il Comune rifà il vecchio programma delle multe, tenendo le funzioni buone e aggiungendone di nuove.",
+   "Re-engineering",
+   "esiste un sistema da riprogettare"
+  ],
+  [
+   "Si crea una nuova interfaccia web per un gestionale che resta uguale sotto.",
+   "Interface engineering",
+   "cambia solo l'interfaccia, il sistema legacy resta"
+  ],
+  [
+   "Una palestra vuole per la prima volta un sistema di prenotazione dei corsi.",
+   "Greenfield engineering",
+   "prima non c'era niente"
+  ]
+ ],
+ "r1_OPTS": [
+  "Greenfield engineering",
+  "Re-engineering",
+  "Interface engineering"
+ ],
+ "r2": [
+  [
+   "Comunicare in modo interattivo",
+   "si"
+  ],
+  [
+   "Confrontarsi e dialogare",
+   "si"
+  ],
+  [
+   "Saper ascoltare",
+   "si"
+  ],
+  [
+   "Prendere impegni",
+   "si"
+  ],
+  [
+   "Fare un sondaggio e basta",
+   "no"
+  ],
+  [
+   "Proporre soluzioni preconfezionate",
+   "no"
+  ],
+  [
+   "Comunicare scelte già fatte da altri",
+   "no"
+  ]
+ ],
+ "r2_BK": [
+  {
+   "id": "si",
+   "t": "Coinvolgere",
+   "s": ""
+  },
+  {
+   "id": "no",
+   "t": "Non è coinvolgere",
+   "s": ""
+  }
+ ],
+ "r3": [
+  [
+   "L'analista passa una mattina accanto alla segretaria per vedere come registra le assenze.",
+   "Osservazione sul campo",
+   "si affianca l'utente nel lavoro quotidiano"
+  ],
+  [
+   "Sei docenti discutono insieme, guidati da un mediatore, del nuovo registro.",
+   "Focus group",
+   "intervista di gruppo, come un brainstorming"
+  ],
+  [
+   "Si manda a 300 genitori un modulo online con la scala di Likert.",
+   "Questionario",
+   "molte persone, poco sforzo, risposte poco attendibili"
+  ],
+  [
+   "L'analista incontra il preside da solo per capire che cosa vuole.",
+   "Intervista individuale",
+   "la fonte migliore, si parte dal committente"
+  ],
+  [
+   "Si provano le app di registro elettronico già sul mercato.",
+   "Analisi della concorrenza",
+   "per non reinventare la ruota"
+  ],
+  [
+   "Si descrive passo passo come un genitore giustifica un'assenza, con i casi di errore.",
+   "Casi d'uso",
+   "sequenza normale e sequenze alternative"
+  ]
+ ],
+ "r3_OPTS": [
+  "Intervista individuale",
+  "Focus group",
+  "Osservazione sul campo",
+  "Questionario",
+  "Analisi della concorrenza",
+  "Casi d'uso"
+ ],
+ "r4": [
+  [
+   "Domande aperte prestabilite",
+   "ns"
+  ],
+  [
+   "Si approfondisce prendendo spunto dalle risposte",
+   "ns"
+  ],
+  [
+   "«Che cosa non funziona nel sistema attuale?»",
+   "ns"
+  ],
+  [
+   "Simili a un questionario, ma a voce",
+   "st"
+  ],
+  [
+   "Domande specifiche su un requisito già noto",
+   "st"
+  ],
+  [
+   "Danno dati statistici facili da leggere",
+   "st"
+  ],
+  [
+   "Risposte aperte e domande chiuse insieme",
+   "se"
+  ],
+  [
+   "Una via di mezzo tra le altre due",
+   "se"
+  ]
+ ],
+ "r4_BK": [
+  {
+   "id": "ns",
+   "t": "Non strutturate",
+   "s": ""
+  },
+  {
+   "id": "st",
+   "t": "Strutturate",
+   "s": ""
+  },
+  {
+   "id": "se",
+   "t": "Semistrutturate",
+   "s": ""
+  }
+ ],
+ "r5": [
+  [
+   "Il magazziniere dà per scontato che i codici abbiano 8 cifre e non lo dice.",
+   "Problema di comprensione",
+   "gli stakeholder non danno importanza agli aspetti «ovvi»"
+  ],
+  [
+   "Il commerciale chiede l'ordine in tre clic, il contabile vuole dieci campi obbligatori.",
+   "Problema di conflitto",
+   "lo stesso requisito descritto in modo incompatibile da gruppi diversi"
+  ],
+  [
+   "A metà progetto esce una nuova legge sulla fatturazione elettronica.",
+   "Problema di volatilità",
+   "i requisiti cambiano per cause esterne"
+  ],
+  [
+   "L'intervistato inizia a parlare del parcheggio aziendale invece del gestionale.",
+   "Problema di ambito",
+   "si sconfina in aree fuori dal sistema"
+  ],
+  [
+   "Dopo una riorganizzazione cambia il modo in cui si approvano gli ordini.",
+   "Problema di volatilità",
+   "i requisiti cambiano per cause interne"
+  ]
+ ],
+ "r5_OPTS": [
+  "Problema di ambito",
+  "Problema di comprensione",
+  "Problema di conflitto",
+  "Problema di volatilità"
+ ],
+ "VF": [
+  [
+   "Lo studio di fattibilità è una perdita di tempo da ridurre al minimo.",
+   false,
+   "Riduce incertezza, rischi e costi di sviluppo."
+  ],
+  [
+   "Nella pubblica amministrazione fattibilità e pianificazione si fanno prima della gara.",
+   true,
+   "Servono per scrivere il capitolato."
+  ],
+  [
+   "L'SRS risponde alla domanda «come deve funzionare il sistema?».",
+   false,
+   "Risponde a «che cosa deve fare?», senza occuparsi del come."
+  ],
+  [
+   "Un errore nell'analisi dei requisiti porta molti errori nel sistema finale.",
+   true,
+   "Per questo è una fase fondamentale."
+  ],
+  [
+   "Gli stakeholder sono solo i clienti che pagano il progetto.",
+   false,
+   "Sono tutti quelli che influenzano o sono influenzati dalle attività dell'organizzazione."
+  ],
+  [
+   "La norma ISO 13407 riguarda la progettazione centrata sull'essere umano.",
+   true,
+   "Fondare il progetto sui reali bisogni degli utenti."
+  ],
+  [
+   "Il tempo di risposta del sistema è un requisito funzionale.",
+   false,
+   "È un requisito non funzionale."
+  ],
+  [
+   "Un sistema legacy è un sistema vecchio e da buttare.",
+   false,
+   "È uno strumento su cui l'azienda conta anche per il futuro."
+  ],
+  [
+   "Le interviste individuali sono la migliore fonte di requisiti.",
+   true,
+   "Si parte dal committente, che indica gli stakeholder più importanti."
+  ],
+  [
+   "Le risposte ai questionari sono di solito molto attendibili.",
+   false,
+   "Il loro limite principale è proprio la bassa attendibilità."
+  ],
+  [
+   "L'osservazione sul campo fa scoprire dettagli che l'utente non saprebbe spiegare.",
+   true,
+   "Ma è onerosa e osserva solo le funzioni già presenti."
+  ],
+  [
+   "Spesso l'utente confonde i desideri con i requisiti.",
+   true,
+   "È il primo problema della fase di esplorazione."
+  ]
+ ],
+ "MC": [
+  [
+   "Quali sono le due parti del preprogetto?",
+   [
+    "Studio di fattibilità e pianificazione",
+    "Analisi e codifica",
+    "Bando e contratto"
+   ],
+   "Studio di fattibilità e pianificazione",
+   "Precedono il progetto vero e proprio."
+  ],
+  [
+   "Che cosa significa SRS?",
+   [
+    "Software Requirement Specification",
+    "System Risk Study",
+    "Software Release Schedule"
+   ],
+   "Software Requirement Specification",
+   "Il documento con la specifica dei requisiti."
+  ],
+  [
+   "Chi ha dato la definizione di stakeholder citata nelle slide?",
+   [
+    "Edward Freeman",
+    "Fred Brooks",
+    "Ian Sommerville"
+   ],
+   "Edward Freeman",
+   "Brooks è citato sulla difficoltà di decidere che cosa costruire."
+  ],
+  [
+   "Quali colonne ha la matrice degli stakeholder, oltre allo stakeholder?",
+   [
+    "Rilevanza, benefici, contributi, conflitti",
+    "Costo, tempo, qualità",
+    "Probabilità e danno"
+   ],
+   "Rilevanza, benefici, contributi, conflitti",
+   "Evidenzia chi conta di più e i possibili conflitti."
+  ],
+  [
+   "Le norme bancarie di sicurezza per una carta di credito sono requisiti…",
+   [
+    "Di dominio",
+    "Funzionali",
+    "Utente"
+   ],
+   "Di dominio",
+   "Dipendono dal settore in cui opera il sistema."
+  ],
+  [
+   "Come si chiama anche la raccolta dei requisiti?",
+   [
+    "Fase di esplorazione (elicitation)",
+    "Fase di collaudo",
+    "Fase di avviamento"
+   ],
+   "Fase di esplorazione (elicitation)",
+   "I requisiti vanno spesso «scoperti»."
+  ],
+  [
+   "Quante risposte ha la scala di Likert?",
+   [
+    "Cinque",
+    "Tre",
+    "Dieci"
+   ],
+   "Cinque",
+   "Da «completamente d'accordo» a «in completo disaccordo»."
+  ],
+  [
+   "Qual è il rischio tipico del focus group?",
+   [
+    "Figure dominanti che orientano la discussione",
+    "Costa troppo poco",
+    "Coinvolge una sola persona"
+   ],
+   "Figure dominanti che orientano la discussione",
+   "Serve un mediatore esperto."
+  ],
+  [
+   "Che cosa illustra la metafora del telefono senza fili?",
+   [
+    "Più lunga è la catena, più il requisito viene frainteso",
+    "Che bisogna usare il telefono per le interviste",
+    "Che i requisiti non cambiano mai"
+   ],
+   "Più lunga è la catena, più il requisito viene frainteso",
+   "Aumentano costi, tempi e rischi."
+  ],
+  [
+   "Nel re-engineering…",
+   [
+    "Si riprogetta un sistema che esiste già",
+    "Si parte da zero",
+    "Si cambia solo l'interfaccia"
+   ],
+   "Si riprogetta un sistema che esiste già",
+   "Si valutano pregi e difetti e si migrano le funzionalità."
+  ]
+ ]
+};
+
+const g_f1 = scGen(D['f1'], D['f1_OPTS'], "Che aspetto \u00e8?", "Aspetto"); mount($('#x_f1'), g_f1, "Aspetti della fattibilit\u00e0");
+orderGame($('#x_f2'), asOrder(D['f2']), "Analisi dei requisiti", false);
+orderGame($('#x_f3'), asOrder(D['f3']), "Ingegneria dei requisiti", false);
+SG('#x_k1', D['k1'], D['k1_BK'], "Utente o sistema");
+SG('#x_k2', D['k2'], D['k2_BK'], "Tipo di requisito");
+SG('#x_k3', D['k3'], D['k3_BK'], "Sommerville");
+const g_r1 = scGen(D['r1'], D['r1_OPTS'], "Che tipo di raccolta \u00e8?", "Tipo"); mount($('#x_r1'), g_r1, "Tipo di raccolta");
+SG('#x_r2', D['r2'], D['r2_BK'], "Stakeholder engagement");
+const g_r3 = scGen(D['r3'], D['r3_OPTS'], "Quale tecnica?", "Tecnica"); mount($('#x_r3'), g_r3, "Tecnica di esplorazione");
+SG('#x_r4', D['r4'], D['r4_BK'], "Tipi di intervista");
+const g_r5 = scGen(D['r5'], D['r5_OPTS'], "Che difficolt\u00e0 \u00e8?", "Difficolt\u00e0"); mount($('#x_r5'), g_r5, "Difficolt\u00e0");
+quiz();
+const SFIDA = [...mcAll(), ...vfAll(), g_f1, g_f1, g_r1, g_r1, g_r3, g_r3, g_r5, g_r5];
+mission($('#tot'), SFIDA, 'Sfida finale', 15);
+</script></body></html>

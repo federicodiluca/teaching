@@ -1,0 +1,271 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Le applicazioni lato server</title><meta name="description" content="Pagine statiche e dinamiche, client-side e server-side, GET e POST, codici di stato e CGI."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>Le applicazioni lato server</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Le applicazioni lato server</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso di che cosa succede sul server quando si apre una pagina dinamica: richiesta, elaborazione, risposta.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">Succede sul client (nel browser) o sul server? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine che cosa succede quando il browser chiede una pagina PHP. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "Il codice PHP viene eseguito",
+   "server"
+  ],
+  [
+   "La query al database",
+   "server"
+  ],
+  [
+   "Il controllo della password",
+   "server"
+  ],
+  [
+   "La sessione dell'utente viene memorizzata",
+   "server"
+  ],
+  [
+   "JavaScript cambia il colore di un pulsante",
+   "client"
+  ],
+  [
+   "Il CSS impagina il testo",
+   "client"
+  ],
+  [
+   "Un controllo veloce del form prima dell'invio",
+   "client"
+  ],
+  [
+   "L'HTML ricevuto viene mostrato",
+   "client"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "client",
+   "t": "Client-side",
+   "s": "nel browser"
+  },
+  {
+   "id": "server",
+   "t": "Server-side",
+   "s": "sul server"
+  }
+ ],
+ "VF": [
+  [
+   "Una pagina statica è un file HTML inviato così com'è.",
+   true,
+   "Una pagina dinamica invece viene generata dal server a ogni richiesta."
+  ],
+  [
+   "L'utente può vedere il codice PHP con «Visualizza sorgente».",
+   false,
+   "Vede solo l'HTML prodotto: il codice resta sul server."
+  ],
+  [
+   "HTTP è stateless: ogni richiesta è indipendente dalle precedenti.",
+   true,
+   "Per ricordare l'utente servono cookie e sessioni."
+  ],
+  [
+   "Il codice di stato 404 indica un errore interno del server.",
+   false,
+   "404 = risorsa non trovata; l'errore interno è 500."
+  ],
+  [
+   "Con il metodo POST i parametri viaggiano nel corpo della richiesta.",
+   true,
+   "Con GET invece sono nell'URL, dopo il punto interrogativo."
+  ],
+  [
+   "Un controllo fatto solo in JavaScript nel browser è sufficiente per la sicurezza.",
+   false,
+   "Si può aggirare facilmente: i dati vanno sempre controllati anche sul server."
+  ],
+  [
+   "Un programma CGI produce la risposta scrivendo l'HTML sullo standard output.",
+   true,
+   "Il web server prende quell'output e lo invia al browser."
+  ],
+  [
+   "Le servlet sono componenti Java eseguiti da un container come Tomcat.",
+   true,
+   "Il container gestisce thread e ciclo di vita."
+  ]
+ ],
+ "MC": [
+  [
+   "Che cos'è la programmazione server-side?",
+   [
+    "La generazione delle pagine tramite elaborazione sul server",
+    "La grafica del sito",
+    "Il codice JavaScript nel browser",
+    "La configurazione del router"
+   ],
+   "La generazione delle pagine tramite elaborazione sul server",
+   "Il server elabora e invia il risultato."
+  ],
+  [
+   "Con il metodo POST, dove viaggiano i parametri?",
+   [
+    "Nel corpo della richiesta",
+    "Nell'URL",
+    "Nei cookie",
+    "Nell'indirizzo IP"
+   ],
+   "Nel corpo della richiesta",
+   "Per questo POST si usa per form con molti dati o dati riservati."
+  ],
+  [
+   "Che cosa indica il codice di stato 500?",
+   [
+    "Errore interno del server",
+    "Pagina non trovata",
+    "Tutto a posto",
+    "Pagina spostata"
+   ],
+   "Errore interno del server",
+   "Spesso è un errore nello script."
+  ],
+  [
+   "Che cosa fa il web server quando riceve la richiesta di un file .php?",
+   [
+    "Lo passa all'interprete PHP, che lo esegue",
+    "Lo invia al browser così com'è",
+    "Lo cancella",
+    "Lo compila in Java"
+   ],
+   "Lo passa all'interprete PHP, che lo esegue",
+   "Il browser riceve solo il risultato."
+  ],
+  [
+   "Quale fra questi è un linguaggio tipicamente server-side?",
+   [
+    "PHP",
+    "CSS",
+    "HTML",
+    "SVG"
+   ],
+   "PHP",
+   "Anche Java (servlet), Python, Node.js."
+  ],
+  [
+   "Che cosa significa che HTTP è stateless?",
+   [
+    "Il server non ricorda le richieste precedenti",
+    "Non usa lo stato 200",
+    "Funziona senza server",
+    "Non ha intestazioni"
+   ],
+   "Il server non ricorda le richieste precedenti",
+   "Ogni richiesta è indipendente."
+  ],
+  [
+   "In quale cartella si trovano tradizionalmente i programmi CGI?",
+   [
+    "cgi-bin",
+    "htdocs",
+    "WEB-INF",
+    "public"
+   ],
+   "cgi-bin",
+   "htdocs è la cartella dei documenti di Apache (e di XAMPP)."
+  ],
+  [
+   "Quale codice di stato indica una richiesta andata a buon fine?",
+   [
+    "200",
+    "404",
+    "302",
+    "503"
+   ],
+   "200",
+   "2xx successo, 3xx redirezione, 4xx errore del client, 5xx errore del server."
+  ]
+ ],
+ "ORD": [
+  [
+   "L'utente apre l'indirizzo della pagina",
+   "Per esempio http://localhost/voti.php."
+  ],
+  [
+   "Il browser invia la richiesta HTTP",
+   "Con il metodo GET."
+  ],
+  [
+   "Il web server riconosce il file .php",
+   "E lo passa all'interprete PHP."
+  ],
+  [
+   "PHP esegue lo script",
+   "Legge i parametri, interroga il database."
+  ],
+  [
+   "Lo script produce l'HTML",
+   "Il codice PHP non lascia il server."
+  ],
+  [
+   "Il server invia la risposta",
+   "Con il codice di stato, per esempio 200."
+  ],
+  [
+   "Il browser mostra la pagina",
+   "L'utente vede solo l'HTML."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "Codici di stato HTTP: una riga è sbagliata.",
+   "lines": [
+    "200 → OK",
+    "404 → risorsa non trovata",
+    "500 → errore interno del server",
+    "301 → accesso negato"
+   ],
+   "bad": 3,
+   "why": "301 indica che la risorsa è stata spostata in modo permanente; l'accesso negato è 403."
+  },
+  {
+   "t": "GET e POST: una riga è sbagliata.",
+   "lines": [
+    "GET: i parametri sono nell'URL",
+    "POST: i parametri sono nel corpo della richiesta",
+    "GET va bene per una ricerca",
+    "POST mostra la password nella barra degli indirizzi"
+   ],
+   "bad": 3,
+   "why": "È GET a mettere i parametri nell'URL; con POST viaggiano nel corpo della richiesta (che senza HTTPS resta comunque leggibile in rete)."
+  },
+  {
+   "t": "CGI: una riga è sbagliata.",
+   "lines": [
+    "Il server avvia un programma esterno per ogni richiesta",
+    "Il programma scrive l'HTML sullo standard output",
+    "I programmi stanno tradizionalmente in cgi-bin",
+    "Un solo processo serve tutte le richieste, quindi è velocissimo"
+   ],
+   "bad": 3,
+   "why": "Il limite della CGI è proprio un processo nuovo per ogni richiesta: per questo sono nate soluzioni come i moduli del server, le servlet e PHP."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>

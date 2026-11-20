@@ -1,0 +1,280 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Unicast e multicast</title><meta name="description" content="Unicast, broadcast e multicast, gli indirizzi di classe D e il protocollo IGMP."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>Unicast e multicast</h1></header><nav id="nav"></nav><main>
+
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Unicast e multicast</h2>
+<p class="lead">Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato.</p>
+<p>Ripasso dei modi di inviare un messaggio a uno, a tutti o a un gruppo di destinatari, e di come funziona il multicast IP.</p>
+<ol><li><b>Smistamento</b>, <b>In ordine</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+
+<section id="g1" data-g="Giochi" data-t="1 Smistamento"><h2>Smistamento</h2><p class="lead">Unicast, broadcast o multicast? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
+<section id="g2" data-g="Giochi" data-t="2 In ordine"><h2>In ordine</h2><p class="lead">Mettete in ordine i passi con cui un host riceve un flusso multicast. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="g3" data-g="Giochi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script>
+/* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
+const D = {
+ "SORT": [
+  [
+   "Un mittente, un solo destinatario",
+   "uni"
+  ],
+  [
+   "Una connessione TCP",
+   "uni"
+  ],
+  [
+   "Scaricare una pagina web",
+   "uni"
+  ],
+  [
+   "A tutti gli host della rete locale",
+   "broad"
+  ],
+  [
+   "Indirizzo 192.168.1.255 in una rete /24",
+   "broad"
+  ],
+  [
+   "Richiesta ARP",
+   "broad"
+  ],
+  [
+   "A un gruppo di host interessati",
+   "multi"
+  ],
+  [
+   "Indirizzi di classe D",
+   "multi"
+  ],
+  [
+   "IPTV a più spettatori",
+   "multi"
+  ],
+  [
+   "Serve IGMP per iscriversi",
+   "multi"
+  ]
+ ],
+ "SORT_BK": [
+  {
+   "id": "uni",
+   "t": "Unicast",
+   "s": "uno a uno"
+  },
+  {
+   "id": "broad",
+   "t": "Broadcast",
+   "s": "uno a tutti"
+  },
+  {
+   "id": "multi",
+   "t": "Multicast",
+   "s": "uno a un gruppo"
+  }
+ ],
+ "VF": [
+  [
+   "TCP è sempre unicast.",
+   true,
+   "È orientato alla connessione fra due soli interlocutori."
+  ],
+  [
+   "Gli indirizzi multicast appartengono alla classe D.",
+   true,
+   "Vanno da 224.0.0.0 a 239.255.255.255."
+  ],
+  [
+   "Con il multicast il mittente deve inviare una copia del messaggio a ogni destinatario.",
+   false,
+   "Invia un solo flusso al gruppo; sono i router a duplicare i pacchetti dove serve."
+  ],
+  [
+   "IGMP permette a un host di comunicare al router che vuole entrare in un gruppo multicast.",
+   true,
+   "Internet Group Management Protocol: adesione e uscita dai gruppi."
+  ],
+  [
+   "Il broadcast attraversa i router e raggiunge tutta Internet.",
+   false,
+   "Il broadcast resta nella rete locale: i router non lo inoltrano."
+  ],
+  [
+   "In Java un ricevitore multicast usa la classe <code>MulticastSocket<\/code>.",
+   true,
+   "Poi si iscrive al gruppo con joinGroup."
+  ],
+  [
+   "Il multicast richiede router che lo supportino.",
+   true,
+   "Servono indirizzamento di gruppo e router multicast."
+  ],
+  [
+   "In un indirizzo di classe D i bit che identificano il gruppo sono 16.",
+   false,
+   "Sono 28: i primi 4 bit (1110) indicano la classe D."
+  ]
+ ],
+ "MC": [
+  [
+   "Che cos'è la comunicazione multicast?",
+   [
+    "Un mittente invia a un gruppo di destinatari",
+    "Un mittente invia a un solo destinatario",
+    "Un mittente invia a tutti gli host della rete",
+    "Più mittenti inviano a un solo server"
+   ],
+   "Un mittente invia a un gruppo di destinatari",
+   "Uno a molti, ma solo a chi si è iscritto al gruppo."
+  ],
+  [
+   "Quale protocollo di trasporto si usa per il multicast?",
+   [
+    "UDP",
+    "TCP",
+    "HTTP",
+    "ARP"
+   ],
+   "UDP",
+   "TCP è una connessione fra due host, quindi non può essere multicast."
+  ],
+  [
+   "Con quali bit iniziano gli indirizzi di classe D?",
+   [
+    "1110",
+    "10",
+    "110",
+    "0"
+   ],
+   "1110",
+   "1110 seguito da 28 bit per il gruppo."
+  ],
+  [
+   "Quale protocollo gestisce l'adesione ai gruppi multicast?",
+   [
+    "IGMP",
+    "ICMP",
+    "DHCP",
+    "DNS"
+   ],
+   "IGMP",
+   "IGMP: Internet Group Management Protocol."
+  ],
+  [
+   "Quale vantaggio ha il multicast rispetto a tanti unicast per lo stesso contenuto?",
+   [
+    "Risparmia banda: un solo flusso per tutto il gruppo",
+    "È più sicuro perché cifra i dati",
+    "Garantisce la consegna",
+    "Non richiede indirizzi IP"
+   ],
+   "Risparmia banda: un solo flusso per tutto il gruppo",
+   "Sulla rete del mittente passa un solo flusso, non una copia per spettatore."
+  ],
+  [
+   "Quale metodo usa un <code>MulticastSocket<\/code> per entrare in un gruppo?",
+   [
+    "joinGroup()",
+    "connect()",
+    "accept()",
+    "bind()"
+   ],
+   "joinGroup()",
+   "joinGroup(indirizzo) iscrive il socket al gruppo; leaveGroup lo toglie."
+  ],
+  [
+   "Quale di questi indirizzi è multicast?",
+   [
+    "224.0.0.5",
+    "10.0.0.5",
+    "172.16.0.5",
+    "127.0.0.1"
+   ],
+   "224.0.0.5",
+   "La classe D parte da 224.0.0.0."
+  ],
+  [
+   "Fino a dove arriva un broadcast?",
+   [
+    "Solo alla rete locale",
+    "A tutta Internet",
+    "Solo al router",
+    "Solo agli host iscritti a un gruppo"
+   ],
+   "Solo alla rete locale",
+   "I router non inoltrano il broadcast."
+  ]
+ ],
+ "ORD": [
+  [
+   "L'applicazione sceglie il gruppo",
+   "Un indirizzo di classe D, per esempio 230.0.0.1."
+  ],
+  [
+   "L'host invia un messaggio IGMP di adesione",
+   "Comunica al router locale che vuole entrare nel gruppo."
+  ],
+  [
+   "Il router multicast registra l'iscrizione",
+   "Sa che nella sua rete c'è almeno un membro del gruppo."
+  ],
+  [
+   "Il mittente invia un solo flusso al gruppo",
+   "Non una copia per ogni destinatario."
+  ],
+  [
+   "I router duplicano i pacchetti solo dove serve",
+   "Il flusso arriva a tutti gli iscritti."
+  ],
+  [
+   "L'host lascia il gruppo con IGMP",
+   "Il router smette di inoltrare se non ci sono altri membri."
+  ]
+ ],
+ "HUNT": [
+  {
+   "t": "Un solo indirizzo non è multicast.",
+   "lines": [
+    "224.0.0.1",
+    "230.0.0.1",
+    "239.255.255.250",
+    "192.168.0.255"
+   ],
+   "bad": 3,
+   "why": "192.168.0.255 è un indirizzo privato di classe C (broadcast di una /24); il multicast va da 224.0.0.0 a 239.255.255.255."
+  },
+  {
+   "t": "Una sola affermazione sul multicast è sbagliata.",
+   "lines": [
+    "Usa indirizzi di classe D",
+    "I primi 4 bit sono 1110",
+    "Il gruppo è identificato da 28 bit",
+    "Funziona con TCP perché è affidabile"
+   ],
+   "bad": 3,
+   "why": "TCP è sempre unicast, perché è una connessione fra due soli interlocutori: il multicast usa UDP."
+  },
+  {
+   "t": "Una sola riga del ricevitore multicast in Java è sbagliata.",
+   "lines": [
+    "MulticastSocket ms = new MulticastSocket(4446);",
+    "InetAddress gruppo = InetAddress.getByName(\"230.0.0.1\");",
+    "ms.joinGroup(gruppo);",
+    "ms.accept();"
+   ],
+   "bad": 3,
+   "why": "Non esistono connessioni da accettare: si riceve con ms.receive(pacchetto)."
+  }
+ ]
+};
+SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
+orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
+let lastH = -1;
+hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+quiz();
+const SFIDA = [...mcAll(), ...vfAll()];
+mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
+</script></body></html>
