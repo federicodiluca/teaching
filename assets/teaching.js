@@ -160,6 +160,15 @@
       });
       if (!lista.length) { box.innerHTML = '<p class="tg-empty">' + ico("search") + "Nessuna attività trovata.</p>"; return; }
 
+      /* nella home, senza ricerca, una scheda per unità con l'elenco delle attività (le attività sono più di cento) */
+      var compatta = !fC && !stato.testo;
+      function schedaUnita(chiave) {
+        var att = lista.filter(function (a) { return a.percorso.indexOf(chiave + "/") === 0; });
+        return '<div class="tg-card tg-ucard"><span class="tg-head"><span class="tg-badge">' + ico(att[0].icona) + '</span><h3><a href="' + link(chiave) + '">' +
+          esc(UNITA[chiave] || chiave) + '</a></h3></span><ul>' + att.map(function (a) {
+            return '<li><a href="' + link(a.percorso) + '">' + esc(a.titolo) + "</a></li>";
+          }).join("") + '</ul><span class="tg-meta"><b>' + att.length + " attività" + '</b><a href="' + link(chiave) + '">Tutte ' + ico("arrow") + "</a></span></div>";
+      }
       var html = "", ordine = [];
       lista.forEach(function (a) { var c = a.percorso.split("/")[0]; if (ordine.indexOf(c) < 0) ordine.push(c); });
       ordine.forEach(function (cid) {
@@ -168,8 +177,10 @@
         if (!fC) html += '<h2><span class="tg-badge sm">' + ico(c.icona) + '</span><a href="' + link(cid) + '">' + esc(c.nome) + "</a><small>" + esc(c.anno) + "</small></h2>";
         var unita = [];
         lista.forEach(function (a) { var p = a.percorso.split("/"); if (p[0] === cid && unita.indexOf(p[1]) < 0) unita.push(p[1]); });
+        if (compatta) html += '<div class="tg-grid">';
         unita.forEach(function (u) {
           var chiave = cid + "/" + u;
+          if (compatta) { html += schedaUnita(chiave); return; }
           if (!fU) html += '<h3 class="tg-unit"><a href="' + link(chiave) + '">' + esc(UNITA[chiave] || u) + "</a></h3>";
           html += '<div class="tg-grid">';
           lista.forEach(function (a) {
@@ -180,6 +191,7 @@
           });
           html += "</div>";
         });
+        if (compatta) html += "</div>";
         html += "</section>";
       });
       box.innerHTML = html;

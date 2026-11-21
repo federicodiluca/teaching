@@ -78,7 +78,7 @@ senza installare nulla, senza account e senza raccogliere dati degli studenti.
   I giochi si annotano da soli in `SCHEDA` (giochi.js) mentre si montano: le attività nuove ce l'hanno già.
 
 ```
-index.html                 home con l'elenco di tutte le attività
+index.html                 home: una scheda per unità con le sue attività; cercando, le schede delle attività trovate
 sitemap.xml, robots.txt   per i motori di ricerca
 assets/
   catalogo.js              elenco di corsi, unità e attività (l'unico file da aggiornare)
