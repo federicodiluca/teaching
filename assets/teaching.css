@@ -34,6 +34,10 @@
   --tg-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --tg-mono: ui-monospace, "Cascadia Code", Consolas, "SFMono-Regular", Menlo, monospace;
 }
+
+/* niente legature: con Cascadia Code (Windows) <= != -> << diventerebbero un solo simbolo,
+   mentre nel codice si devono vedere i caratteri da scrivere */
+*, *::before, *::after { font-variant-ligatures: none !important; }
 :root[data-theme="light"] {
   color-scheme: light;
   --tg-bg: #f6f4ef;
@@ -151,6 +155,13 @@ body.tg-home {
 .tg-course > h2 { display: flex; align-items: center; gap: 12px; font-size: 22px; margin: 0 0 4px; letter-spacing: -.01em; }
 .tg-course > h2 a { color: inherit; text-decoration: none; }
 .tg-course > h2 small { font: 500 13px var(--tg-mono); color: var(--tg-mute); }
+.tg-tendina { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; background: none; border: 1px solid var(--tg-line); border-radius: 999px;
+  padding: 5px 10px 5px 12px; color: var(--tg-mute); font: 500 12px var(--tg-mono); cursor: pointer; }
+.tg-tendina:hover, .tg-tendina:focus-visible { color: var(--tg-ink); border-color: color-mix(in srgb, var(--c) 50%, var(--tg-line)); }
+.tg-tendina .tg-ico { transition: transform .2s ease; }
+.tg-course.chiuso .tg-tendina .tg-ico { transform: rotate(-90deg); }
+.tg-course.chiuso > :not(h2) { display: none; }
+.tg-course.chiuso { margin-bottom: 18px; }
 .tg-unit { font: 600 12px var(--tg-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--tg-mute); margin: 18px 0 10px; }
 .tg-unit a { color: inherit; text-decoration: none; }
 .tg-unit a:hover { color: var(--tg-ink); }

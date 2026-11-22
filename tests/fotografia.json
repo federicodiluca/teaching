@@ -2070,7 +2070,7 @@
   "sez": {
    "inizio": {
     "nav": "Inizio\nCondizioni\nif ed else\nelse if\nSelezioni annidate\nswitch\nErrori tipici\nQuiz\nSfida finale\nRisultato",
-    "testo": "La selezione in C++\n\nRipasso di condizioni, if, else if, selezioni annidate, switch e errori tipici.\n\nCondizioni: operatori di confronto, logici, tavole di verità.\nif ed else if: selezione semplice, binaria e a più casi.\nAnnidate e switch: if annidati, massimo di tre numeri, switch e break.\nErrori: caccia all'errore ed effetti.\nQuiz e Sfida finale su tutta la presentazione.\n\nSi gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.\n\nIl vostro nome: "
+    "testo": "La selezione in C++\n\nRipasso di condizioni, if, else if, selezioni annidate, switch e errori tipici.\n\nCondizioni: operatori di confronto, logici, tavole di verità.\nif ed else if: selezione semplice, binaria e a più casi, anche passo passo.\nAnnidate e switch: if annidati, massimo di tre numeri, switch e break.\nErrori: caccia all'errore ed effetti.\nQuiz e Sfida finale su tutta la presentazione.\n\nSi gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.\n\nIl vostro nome: "
    },
    "a1": {
     "nav": "Inizio\nCondizioni\nif ed else\nelse if\nSelezioni annidate\nswitch\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 Operatori di confronto\n2 true o false\n3 Tavole di verità",
@@ -2089,8 +2089,12 @@
     "testo": "if, if ... else, else if o switch?\n\nQuale costrutto è il più adatto?\n\nProblema: Scegliere un ramo in base a un voto double con intervalli\n\nCostrutto\nif semplice\nif ... else\nelse if\nswitch\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
    "c1": {
-    "nav": "Inizio\nCondizioni\nif ed else\nelse if\nSelezioni annidate\nswitch\nErrori tipici\nQuiz\nSfida finale\nRisultato",
+    "nav": "Inizio\nCondizioni\nif ed else\nelse if\nSelezioni annidate\nswitch\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 La catena\nPasso passo",
     "testo": "La catena else if\n\nEseguite il programma: premete «Altro esercizio» per cambiare il voto.\n\nChe cosa stampa con voto = 11?\n\nif (voto < 1 || voto > 10)  cout << \"Voto non valido\";\nelse if (voto < 6)       cout << \"Insufficiente\";\nelse if (voto < 8)       cout << \"Sufficiente o discreto\";\nelse                     cout << \"Buono o ottimo\";\n\nOutput\nVoto non valido\nInsufficiente\nSufficiente o discreto\nBuono o ottimo\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "cpp": {
+    "nav": "Inizio\nCondizioni\nif ed else\nelse if\nSelezioni annidate\nswitch\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 La catena\nPasso passo",
+    "testo": "else if passo passo\n\nCon «Guarda» si vede quale ramo viene eseguito e quali si saltano; con «Prevedi» dovete dire voi che cosa scrive. Funzionano anche le frecce della tastiera.\n\nSelezione multipla con else if: il voto è 8.\n\nGuarda\nPrevedi\nPasso 0 di 3\nint voto = 8;\nif (voto >= 8) {\n    cout << \"Buono\";\n} else if (voto >= 6) {\n    cout << \"Sufficiente\";\n} else {\n    cout << \"Insufficiente\";\n}\nVariabile\tValore\nancora nessuna\nOUTPUT\n\nPremete «Avanti» per eseguire la prima riga.\n\n⏮\n◀ Indietro\nAvanti ▶\nAutomatico\nAltro programma"
    },
    "d1": {
     "nav": "Inizio\nCondizioni\nif ed else\nelse if\nSelezioni annidate\nswitch\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 Primo grado\n2 Il massimo di tre",
@@ -2134,12 +2138,13 @@
    }
   },
   "dopo": {
-   "inizio": "La selezione in C++\n\nRipasso di condizioni, if, else if, selezioni annidate, switch e errori tipici.\n\nCondizioni: operatori di confronto, logici, tavole di verità.\nif ed else if: selezione semplice, binaria e a più casi.\nAnnidate e switch: if annidati, massimo di tre numeri, switch e break.\nErrori: caccia all'errore ed effetti.\nQuiz e Sfida finale su tutta la presentazione.\n\nSi gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.\n\nIl vostro nome: ",
+   "inizio": "La selezione in C++\n\nRipasso di condizioni, if, else if, selezioni annidate, switch e errori tipici.\n\nCondizioni: operatori di confronto, logici, tavole di verità.\nif ed else if: selezione semplice, binaria e a più casi, anche passo passo.\nAnnidate e switch: if annidati, massimo di tre numeri, switch e break.\nErrori: caccia all'errore ed effetti.\nQuiz e Sfida finale su tutta la presentazione.\n\nSi gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.\n\nIl vostro nome: ",
    "a1": "Gli operatori di confronto\n\nQual è il significato di questo operatore?\n\nOperatore =\n\nSignificato\nUguale a\nDiverso da\nMinore di\nMinore o uguale a\nMaggiore di\nMaggiore o uguale a\nAssegnamento (non è un confronto)\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
    "a2": "Condizioni con && || !\n\nValutate la condizione: premete «Altro esercizio» per cambiare i valori.\n\nCon x = 1 e y = 5, la condizione x != y && y >= 0 vale true o false?\n\nValore\ntrue\nfalse\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
    "a3": "Le tavole di verità\n\nValutate l'espressione con i valori dati: premete «Altro esercizio» per cambiare.\n\nCon A = true e B = false, quanto vale A && B?\n\nValore\ntrue\nfalse\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
    "b1": "if, if ... else, else if o switch?\n\nQuale costrutto è il più adatto?\n\nProblema: Scegliere un ramo in base a un voto double con intervalli\n\nCostrutto\nif semplice\nif ... else\nelse if\nswitch\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
    "c1": "La catena else if\n\nEseguite il programma: premete «Altro esercizio» per cambiare il voto.\n\nChe cosa stampa con voto = 11?\n\nif (voto < 1 || voto > 10)  cout << \"Voto non valido\";\nelse if (voto < 6)       cout << \"Insufficiente\";\nelse if (voto < 8)       cout << \"Sufficiente o discreto\";\nelse                     cout << \"Buono o ottimo\";\n\nOutput\nVoto non valido\nInsufficiente\nSufficiente o discreto\nBuono o ottimo\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "cpp": "else if passo passo\n\nCon «Guarda» si vede quale ramo viene eseguito e quali si saltano; con «Prevedi» dovete dire voi che cosa scrive. Funzionano anche le frecce della tastiera.\n\nSelezione multipla con else if: il voto è 8.\n\nGuarda\nPrevedi\nPasso 0 di 3\nint voto = 8;\nif (voto >= 8) {\n    cout << \"Buono\";\n} else if (voto >= 6) {\n    cout << \"Sufficiente\";\n} else {\n    cout << \"Insufficiente\";\n}\nVariabile\tValore\nancora nessuna\nOUTPUT\n\nPremete «Avanti» per eseguire la prima riga.\n\n⏮\n◀ Indietro\nAvanti ▶\nAutomatico\nAltro programma",
    "d1": "L'equazione a·x + b = 0\n\nQuale caso si verifica?\n\nCon a = -1, b = 7\n\nCaso\nUna soluzione\nIndeterminata\nImpossibile\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
    "d2": "Il massimo di tre numeri\n\nEseguite l'algoritmo: premete «Altro esercizio» per cambiare i numeri.\n\nIl programma legge a = 4, b = 19, c = 17 ed esegue if (a >= b && a >= c) massimo = a; else if (b >= c) massimo = b; else massimo = c;. Quanto vale massimo?\n\nmassimo\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
    "e1": "Il costrutto switch\n\nEseguite lo switch: premete «Altro esercizio» per cambiare.\n\nChe cosa stampa con livello = 3?\n\nswitch (livello) {\n    case 1: cout << \"Facile \"; break;\n    case 2: cout << \"Medio \"; break;\n    case 3: cout << \"Difficile \"; break;\n}\n(scrivete le parole stampate separate da spazi)\n\nOutput\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
@@ -2167,6 +2172,7 @@
    "c1": [
     "controlla"
    ],
+   "cpp": [],
    "d1": [
     "controlla"
    ],
@@ -2195,79 +2201,84 @@
     "missione"
    ]
   },
-  "st": "{\"g\":{\"Gli operatori di confronto\":{\"ok\":0,\"tot\":1},\"Condizioni con && || !\":{\"ok\":0,\"tot\":1},\"Le tavole di verità\":{\"ok\":0,\"tot\":1},\"Quale costrutto\":{\"ok\":0,\"tot\":1},\"La catena else if\":{\"ok\":0,\"tot\":1},\"Equazione di primo grado\":{\"ok\":0,\"tot\":1},\"Il massimo di tre numeri\":{\"ok\":0,\"tot\":1},\"Il costrutto switch\":{\"ok\":0,\"tot\":1},\"Quando funziona lo switch\":{\"ok\":0,\"tot\":1},\"Gli errori più frequenti nella selezione\":{\"ok\":1,\"tot\":1},\"Effetti degli errori nella selezione\":{\"ok\":0,\"tot\":1},\"Vero o falso\":{\"ok\":0,\"tot\":1},\"Risposta multipla\":{\"ok\":0,\"tot\":1}},\"m\":{\"Sfida finale\":{\"pts\":0,\"t\":\"00:00\",\"count\":12}}}"
+  "st": "{\"g\":{\"Gli operatori di confronto\":{\"ok\":0,\"tot\":1},\"Condizioni con && || !\":{\"ok\":0,\"tot\":1},\"Le tavole di verità\":{\"ok\":0,\"tot\":1},\"Quale costrutto\":{\"ok\":0,\"tot\":1},\"La catena else if\":{\"ok\":0,\"tot\":1},\"Equazione di primo grado\":{\"ok\":0,\"tot\":1},\"Il massimo di tre numeri\":{\"ok\":0,\"tot\":1},\"Il costrutto switch\":{\"ok\":0,\"tot\":1},\"Quando funziona lo switch\":{\"ok\":0,\"tot\":1},\"Gli errori più frequenti nella selezione\":{\"ok\":1,\"tot\":1},\"Effetti degli errori nella selezione\":{\"ok\":0,\"tot\":1},\"else if passo passo\":{\"ok\":0,\"tot\":0},\"Vero o falso\":{\"ok\":0,\"tot\":1},\"Risposta multipla\":{\"ok\":0,\"tot\":1}},\"m\":{\"Sfida finale\":{\"pts\":0,\"t\":\"00:00\",\"count\":12}}}"
  },
  "informatica-1/cpp/l-iterazione-in-cpp": {
   "nav": [],
   "sez": {
    "inizio": {
-    "nav": "Inizio\nPerché serve\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato",
-    "testo": "L'iterazione in C++\n\nRipasso dei cicli while, do while e for, degli schemi tipici e degli errori nei cicli.\n\nPerché serve: quale ciclo scegliere.\nwhile e do ... while: controllo in testa e in coda, validare l'input.\nfor: iterazioni, errore di uno, cicli annidati.\nSchemi tipici: contatori, accumulatori, sentinella, fattoriale.\nErrori: caccia all'errore ed effetti.\nQuiz e Sfida finale su tutta la presentazione.\n\nSi gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.\n\nIl vostro nome: "
+    "nav": "Inizio\nPerché serve\nPasso passo\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato",
+    "testo": "L'iterazione in C++\n\nRipasso dei cicli while, do while e for, degli schemi tipici e degli errori nei cicli.\n\nPerché serve: quale ciclo scegliere.\nPasso passo: while, for, do ... while e cicli annidati eseguiti una riga alla volta.\nwhile e do ... while: controllo in testa e in coda, validare l'input.\nfor: iterazioni, errore di uno, cicli annidati.\nSchemi tipici: contatori, accumulatori, sentinella, fattoriale.\nErrori: caccia all'errore ed effetti.\nQuiz e Sfida finale su tutta la presentazione.\n\nSi gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.\n\nIl vostro nome: "
    },
    "a1": {
-    "nav": "Inizio\nPerché serve\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato",
+    "nav": "Inizio\nPerché serve\nPasso passo\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato",
     "testo": "while, do ... while o for?\n\nQuale ciclo è il più adatto?\n\nProblema: Conto alla rovescia da 5 a 1\n\nCiclo\nwhile\ndo ... while\nfor\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
+   "pp": {
+    "nav": "Inizio\nPerché serve\nPasso passo\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato",
+    "testo": "Il programma passo passo\n\nCon «Guarda» si esegue una riga alla volta e si vedono le variabili cambiare; con «Prevedi» prima di alcune righe dovete dire voi che cosa succederà. Funzionano anche le frecce della tastiera.\n\nwhile: conto alla rovescia\nfor: somma da 1 a N\ndo ... while: validare un dato\nIl fattoriale\nCicli annidati\n\nConto alla rovescia con while.\n\nGuarda\nPrevedi\nPasso 0 di 12\nint n = 7;\nwhile (n > 0) {\n    cout << n << \" \";\n    n = n - 3;\n}\ncout << \"Via!\" << endl;\nVariabile\tValore\nancora nessuna\nOUTPUT\n\nPremete «Avanti» per eseguire la prima riga.\n\n⏮\n◀ Indietro\nAvanti ▶\nAutomatico\nAltro programma"
+   },
    "b1": {
-    "nav": "Inizio\nPerché serve\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 Che cosa stampa\n2 Validare l'input",
+    "nav": "Inizio\nPerché serve\nPasso passo\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 Che cosa stampa\n2 Validare l'input",
     "testo": "Il ciclo while\n\nEseguite il ciclo: premete «Altro esercizio» per cambiare.\n\nChe cosa stampa?\n\nint n = 5;\nwhile (n > 0) {\n    cout << n << \" \";\n    n -= 2;\n}\n(scrivete i numeri separati da spazi)\n\nOutput\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
    "b2": {
-    "nav": "Inizio\nPerché serve\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 Che cosa stampa\n2 Validare l'input",
+    "nav": "Inizio\nPerché serve\nPasso passo\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 Che cosa stampa\n2 Validare l'input",
     "testo": "Validare con while\n\nFate clic su una carta e poi sulla categoria giusta.\n\nIl blocco è eseguito almeno una volta\nIl ; dopo while (condizione) è obbligatorio\nIl ciclo non parte se il primo valore è già corretto\nIl blocco può essere eseguito zero volte\nLa lettura sta una sola volta dentro il ciclo\nCondizione controllata dopo il blocco\nSi legge il dato una prima volta prima del ciclo\nIl prezzo è scrivere la lettura due volte\nAdatto quando il blocco può non servire\nPerfetto per un menu che si ripete\nwhile\ncontrollo in testa\ndo ... while\ncontrollo in coda\nCarte da smistare: 10. Errori: 0.\nRicomincia"
    },
    "c1": {
-    "nav": "Inizio\nPerché serve\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato",
+    "nav": "Inizio\nPerché serve\nPasso passo\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato",
     "testo": "while contro do ... while\n\nFate clic su una carta e poi sul ciclo giusto.\n\nCondizione controllata dopo il blocco\nEsempio: menu e richiesta di un dato\nCondizione controllata prima del blocco\nEsempio: elaborare dati finché ce ne sono\nIl blocco può non essere mai eseguito\nIl blocco viene eseguito almeno una volta\nwhile\ndo ... while\nCarte da smistare: 6. Errori: 0.\nRicomincia"
    },
    "d1": {
-    "nav": "Inizio\nPerché serve\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 Che cosa stampa\n2 Quante iterazioni\n3 Cicli annidati",
+    "nav": "Inizio\nPerché serve\nPasso passo\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 Che cosa stampa\n2 Quante iterazioni\n3 Cicli annidati",
     "testo": "Il ciclo for\n\nEseguite il ciclo: premete «Altro esercizio» per cambiare.\n\nChe cosa stampa?\n\nfor (int i = 1; i <= 26; i += 5)\n    cout << i << \" \";\n(scrivete i numeri separati da spazi)\n\nOutput\nNumero di iterazioni\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
    "d2": {
-    "nav": "Inizio\nPerché serve\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 Che cosa stampa\n2 Quante iterazioni\n3 Cicli annidati",
+    "nav": "Inizio\nPerché serve\nPasso passo\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 Che cosa stampa\n2 Quante iterazioni\n3 Cicli annidati",
     "testo": "Iterazioni e errore di uno\n\nContate le iterazioni: premete «Altro esercizio» per cambiare.\n\nQuante volte viene eseguito il corpo del ciclo? for (int i = 1; i <= 11; i++)\n\nIterazioni\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
    "d3": {
-    "nav": "Inizio\nPerché serve\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 Che cosa stampa\n2 Quante iterazioni\n3 Cicli annidati",
+    "nav": "Inizio\nPerché serve\nPasso passo\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 Che cosa stampa\n2 Quante iterazioni\n3 Cicli annidati",
     "testo": "Cicli annidati\n\nContate gli asterischi: premete «Altro esercizio» per cambiare.\n\nQuanti asterischi stampa?\n\nfor (int r = 1; r <= 5; r++) {\n    for (int c = 1; c <= 5; c++)\n        cout << \"*\";\n    cout << endl;\n}\n\nAsterischi\nRighe\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
    "e1": {
-    "nav": "Inizio\nPerché serve\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 Quale schema?\n2 Calcoli",
+    "nav": "Inizio\nPerché serve\nPasso passo\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 Quale schema?\n2 Calcoli",
     "testo": "Contatori, accumulatori, sentinella\n\nFate clic su una carta e poi sullo schema giusto.\n\nUna somma parte da 0, un prodotto da 1\nint massimo = x, minimo = x;\nVa inizializzato prima del ciclo, mai dentro\nValore speciale che non è un dato vero\nSi usa quando non si sa quanti dati arriveranno\nPartire da 0 sbaglia se i valori sono tutti negativi\nSi legge 0 per segnalare la fine dei dati\nConta quante volte succede qualcosa, parte da 0\nsomma += voto;\nif (voto >= 6) promossi++;\nContatore\nAccumulatore\nValore sentinella\nMassimo e minimo\nCarte da smistare: 10. Errori: 0.\nRicomincia"
    },
    "e2": {
-    "nav": "Inizio\nPerché serve\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 Quale schema?\n2 Calcoli",
+    "nav": "Inizio\nPerché serve\nPasso passo\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 Quale schema?\n2 Calcoli",
     "testo": "Fattoriale e voti con sentinella\n\nEseguite l'algoritmo: premete «Altro esercizio» per cambiare.\n\nFattoriale\nVoti con sentinella\n\nCalcolo di 4!:\n\nint fatt = 1;\nfor (int i = 1; i <= 4; i++)\n    fatt *= i;\nQuanto vale fatt alla fine?\n\nfatt\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
    "f1": {
-    "nav": "Inizio\nPerché serve\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 Caccia all'errore\n2 Effetti",
+    "nav": "Inizio\nPerché serve\nPasso passo\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 Caccia all'errore\n2 Effetti",
     "testo": "Gli errori più frequenti nei cicli\n\nFate clic sulla riga sbagliata.\n\nIl ciclo non fa niente di quello che deve. Quale riga è sbagliata?\n\nint i = 1;\nwhile (i <= 5);\n{\ncout << i++;\n}\nAltro esercizio\nTrovati: 0 su 0"
    },
    "f2": {
-    "nav": "Inizio\nPerché serve\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 Caccia all'errore\n2 Effetti",
+    "nav": "Inizio\nPerché serve\nPasso passo\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 Caccia all'errore\n2 Effetti",
     "testo": "Che cosa succede?\n\nQual è l'effetto di questo errore?\n\nErrore: La variabile della condizione non cambia mai\n\nEffetto\nCiclo infinito\nIl ; diventa il corpo del ciclo\nUn'iterazione in meno\nL'accumulatore riparte da zero a ogni giro\nRisultato troncato\nErrore di compilazione\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
    "qz1": {
-    "nav": "Inizio\nPerché serve\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 Vero o falso\n2 Risposta multipla",
-    "testo": "Vero o falso?\n\nScegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.\n\nVero o falso? Un prodotto va inizializzato a 0.\n\nRisposta\nVero\nFalso\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+    "nav": "Inizio\nPerché serve\nPasso passo\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 Vero o falso\n2 Risposta multipla",
+    "testo": "Vero o falso?\n\nScegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.\n\nVero o falso? La variabile i dichiarata nel for esiste solo dentro il ciclo.\n\nRisposta\nVero\nFalso\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
    "qz2": {
-    "nav": "Inizio\nPerché serve\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 Vero o falso\n2 Risposta multipla",
-    "testo": "Risposta multipla\n\nScegliete una risposta e premete «Controlla».\n\nPer calcolare la media dopo un ciclo si fa attenzione a:\n\nRisposta\nLe costanti\nI commenti\nIl colore dello schermo\nContatore diverso da zero e divisione tra interi\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+    "nav": "Inizio\nPerché serve\nPasso passo\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato\n1 Vero o falso\n2 Risposta multipla",
+    "testo": "Risposta multipla\n\nScegliete una risposta e premete «Controlla».\n\nChe cosa fa x++?\n\nRisposta\nAumenta x di 1\nAzzera x\nConfronta x\nRaddoppia x\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
    "fin": {
-    "nav": "Inizio\nPerché serve\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato",
+    "nav": "Inizio\nPerché serve\nPasso passo\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato",
     "testo": "Sfida finale\n\nDodici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nInizia la sfida finale"
    },
    "res": {
-    "nav": "Inizio\nPerché serve\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato",
+    "nav": "Inizio\nPerché serve\nPasso passo\nwhile\ndo ... while\nfor\nSchemi tipici\nErrori tipici\nQuiz\nSfida finale\nRisultato",
     "testo": "Risultato\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la sfida finale."
    }
   },
   "dopo": {
-   "inizio": "L'iterazione in C++\n\nRipasso dei cicli while, do while e for, degli schemi tipici e degli errori nei cicli.\n\nPerché serve: quale ciclo scegliere.\nwhile e do ... while: controllo in testa e in coda, validare l'input.\nfor: iterazioni, errore di uno, cicli annidati.\nSchemi tipici: contatori, accumulatori, sentinella, fattoriale.\nErrori: caccia all'errore ed effetti.\nQuiz e Sfida finale su tutta la presentazione.\n\nSi gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.\n\nIl vostro nome: ",
+   "inizio": "L'iterazione in C++\n\nRipasso dei cicli while, do while e for, degli schemi tipici e degli errori nei cicli.\n\nPerché serve: quale ciclo scegliere.\nPasso passo: while, for, do ... while e cicli annidati eseguiti una riga alla volta.\nwhile e do ... while: controllo in testa e in coda, validare l'input.\nfor: iterazioni, errore di uno, cicli annidati.\nSchemi tipici: contatori, accumulatori, sentinella, fattoriale.\nErrori: caccia all'errore ed effetti.\nQuiz e Sfida finale su tutta la presentazione.\n\nSi gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.\n\nIl vostro nome: ",
    "a1": "while, do ... while o for?\n\nQuale ciclo è il più adatto?\n\nProblema: Conto alla rovescia da 5 a 1\n\nCiclo\nwhile\ndo ... while\nfor\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "pp": "Il programma passo passo\n\nCon «Guarda» si esegue una riga alla volta e si vedono le variabili cambiare; con «Prevedi» prima di alcune righe dovete dire voi che cosa succederà. Funzionano anche le frecce della tastiera.\n\nwhile: conto alla rovescia\nfor: somma da 1 a N\ndo ... while: validare un dato\nIl fattoriale\nCicli annidati\n\nConto alla rovescia con while.\n\nGuarda\nPrevedi\nPasso 0 di 12\nint n = 7;\nwhile (n > 0) {\n    cout << n << \" \";\n    n = n - 3;\n}\ncout << \"Via!\" << endl;\nVariabile\tValore\nancora nessuna\nOUTPUT\n\nPremete «Avanti» per eseguire la prima riga.\n\n⏮\n◀ Indietro\nAvanti ▶\nAutomatico\nAltro programma",
    "b1": "Il ciclo while\n\nEseguite il ciclo: premete «Altro esercizio» per cambiare.\n\nChe cosa stampa?\n\nint n = 5;\nwhile (n > 0) {\n    cout << n << \" \";\n    n -= 2;\n}\n(scrivete i numeri separati da spazi)\n\nOutput\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
    "b2": "Validare con while\n\nFate clic su una carta e poi sulla categoria giusta.\n\nwhile\ncontrollo in testa\nIl ciclo non parte se il primo valore è già corretto\nIl blocco può essere eseguito zero volte\nSi legge il dato una prima volta prima del ciclo\nIl prezzo è scrivere la lettura due volte\nAdatto quando il blocco può non servire\ndo ... while\ncontrollo in coda\nIl blocco è eseguito almeno una volta\nIl ; dopo while (condizione) è obbligatorio\nLa lettura sta una sola volta dentro il ciclo\nCondizione controllata dopo il blocco\nPerfetto per un menu che si ripete\nFinito! Errori: 5.\nRicomincia",
    "c1": "while contro do ... while\n\nFate clic su una carta e poi sul ciclo giusto.\n\nwhile\nCondizione controllata prima del blocco\nEsempio: elaborare dati finché ce ne sono\nIl blocco può non essere mai eseguito\ndo ... while\nCondizione controllata dopo il blocco\nEsempio: menu e richiesta di un dato\nIl blocco viene eseguito almeno una volta\nFinito! Errori: 3.\nRicomincia",
@@ -2278,8 +2289,8 @@
    "e2": "Fattoriale e voti con sentinella\n\nEseguite l'algoritmo: premete «Altro esercizio» per cambiare.\n\nFattoriale\nVoti con sentinella\n\nCalcolo di 4!:\n\nint fatt = 1;\nfor (int i = 1; i <= 4; i++)\n    fatt *= i;\nQuanto vale fatt alla fine?\n\nfatt\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
    "f1": "Gli errori più frequenti nei cicli\n\nFate clic sulla riga sbagliata.\n\nIl ciclo non fa niente di quello che deve. Quale riga è sbagliata?\n\nint i = 1;\nwhile (i <= 5);\n{\ncout << i++;\n}\nNo: la riga sbagliata era un'altra. Il ; dopo while diventa il corpo del ciclo: il programma resta bloccato su una riga vuota.\nAltro esercizio\nTrovati: 0 su 1",
    "f2": "Che cosa succede?\n\nQual è l'effetto di questo errore?\n\nErrore: La variabile della condizione non cambia mai\n\nEffetto\nCiclo infinito\nIl ; diventa il corpo del ciclo\nUn'iterazione in meno\nL'accumulatore riparte da zero a ogni giro\nRisultato troncato\nErrore di compilazione\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
-   "qz1": "Vero o falso?\n\nScegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.\n\nVero o falso? Un prodotto va inizializzato a 0.\n\nRisposta\nVero\nFalso\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
-   "qz2": "Risposta multipla\n\nScegliete una risposta e premete «Controlla».\n\nPer calcolare la media dopo un ciclo si fa attenzione a:\n\nRisposta\nLe costanti\nI commenti\nIl colore dello schermo\nContatore diverso da zero e divisione tra interi\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "qz1": "Vero o falso?\n\nScegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.\n\nVero o falso? La variabile i dichiarata nel for esiste solo dentro il ciclo.\n\nRisposta\nVero\nFalso\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "qz2": "Risposta multipla\n\nScegliete una risposta e premete «Controlla».\n\nChe cosa fa x++?\n\nRisposta\nAumenta x di 1\nAzzera x\nConfronta x\nRaddoppia x\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
    "fin": "Sfida finale\n\nDodici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nRiprova la sfida finale\n\nFinita: 0 su 12 in 00:00.",
    "res": "Risultato\n\nNome: Ada\n\nNessun gioco ancora completato\n0 di 1 attività svolte\nSfida finale\nnon ancora fatta\nCopia il risultato\nStampa\nRicomincia da capo\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la sfida finale."
   },
@@ -2287,6 +2298,7 @@
    "a1": [
     "controlla"
    ],
+   "pp": [],
    "b1": [
     "controlla"
    ],
@@ -2327,7 +2339,7 @@
     "missione"
    ]
   },
-  "st": "{\"g\":{\"Quale ciclo\":{\"ok\":0,\"tot\":1},\"Il ciclo while\":{\"ok\":0,\"tot\":1},\"Validare l'input con while e do ... while\":{\"ok\":0,\"tot\":1},\"while contro do ... while\":{\"ok\":0,\"tot\":1},\"Il ciclo for\":{\"ok\":0,\"tot\":1},\"Iterazioni e errore di uno\":{\"ok\":0,\"tot\":1},\"Cicli annidati\":{\"ok\":0,\"tot\":1},\"Schemi tipici dei cicli\":{\"ok\":0,\"tot\":1},\"Fattoriale e voti con sentinella: Fattoriale\":{\"ok\":0,\"tot\":1},\"Gli errori più frequenti nei cicli\":{\"ok\":0,\"tot\":1},\"Effetti degli errori nei cicli\":{\"ok\":0,\"tot\":1},\"Vero o falso\":{\"ok\":0,\"tot\":1},\"Risposta multipla\":{\"ok\":0,\"tot\":1}},\"m\":{\"Sfida finale\":{\"pts\":0,\"t\":\"00:00\",\"count\":12}}}"
+  "st": "{\"g\":{\"Quale ciclo\":{\"ok\":0,\"tot\":1},\"Il ciclo while\":{\"ok\":0,\"tot\":1},\"Validare l'input con while e do ... while\":{\"ok\":0,\"tot\":1},\"while contro do ... while\":{\"ok\":0,\"tot\":1},\"Il ciclo for\":{\"ok\":0,\"tot\":1},\"Iterazioni e errore di uno\":{\"ok\":0,\"tot\":1},\"Cicli annidati\":{\"ok\":0,\"tot\":1},\"Schemi tipici dei cicli\":{\"ok\":0,\"tot\":1},\"Fattoriale e voti con sentinella: Fattoriale\":{\"ok\":0,\"tot\":1},\"Gli errori più frequenti nei cicli\":{\"ok\":0,\"tot\":1},\"Effetti degli errori nei cicli\":{\"ok\":0,\"tot\":1},\"Cicli passo passo\":{\"ok\":0,\"tot\":0},\"Vero o falso\":{\"ok\":0,\"tot\":1},\"Risposta multipla\":{\"ok\":0,\"tot\":1}},\"m\":{\"Sfida finale\":{\"pts\":0,\"t\":\"00:00\",\"count\":12}}}"
  },
  "informatica-1/arduino/arduino-ed-elettronica": {
   "nav": [],

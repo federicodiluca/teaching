@@ -164,3 +164,100 @@ function huntIter() {
     { t: 'Deve calcolare il prodotto 1 x 2 x ... x n. Quale riga è sbagliata?', lines: ['int fatt = 0;', 'for (int i = 1; i <= n; i++)', '    fatt *= i;', 'cout << fatt;'], bad: 0, why: 'Un prodotto parte da 1: con 0 il risultato resterebbe sempre 0.' }
   ]);
 }
+
+/* ---------- programmi per l'esecuzione passo passo (traccia in assets/codice.js) ----------
+   Ogni generatore restituisce {t, lang, code, run}: run(S) esegue il programma e chiama S(riga, variabili, scritto, nota). */
+function ppWhile() {
+  const n0 = rnd(4, 8), p = pick([1, 2, 3]);
+  return {
+    t: 'Conto alla rovescia con <code>while</code>.', lang: 'cpp',
+    code: [`int n = ${n0};`, 'while (n > 0) {', '    cout << n << " ";', `    n = n - ${p};`, '}', 'cout << "Via!" << endl;'],
+    run(S) {
+      let n = n0; S(0, { n }, '', `Si crea la variabile n con valore ${n0}.`);
+      while (n > 0) {
+        S(1, { n }, '', `${n} &gt; 0 è vero: si entra nel ciclo.`);
+        S(2, { n }, n + ' ', 'Si scrive il valore di n.');
+        n -= p; S(3, { n }, '', `n diminuisce di ${p}.`);
+      }
+      S(1, { n }, '', `${n} &gt; 0 è falso: si esce dal ciclo.`);
+      S(5, { n }, 'Via!\n', 'La riga dopo il ciclo si esegue una volta sola.');
+    }
+  };
+}
+function ppForSomma() {
+  const N = rnd(3, 6);
+  return {
+    t: `Somma dei numeri da 1 a ${N} con <code>for</code> (accumulatore).`, lang: 'cpp',
+    code: ['int somma = 0;', `for (int i = 1; i <= ${N}; i++) {`, '    somma = somma + i;', '}', 'cout << "Somma: " << somma << endl;'],
+    run(S) {
+      let s = 0; S(0, { somma: s }, '', 'L\'accumulatore parte da 0, prima del ciclo.');
+      for (let i = 1; i <= N; i++) {
+        S(1, { somma: s, i }, '', i === 1 ? `Inizializzazione: i = 1. Condizione 1 &lt;= ${N} vera.` : `i++: i vale ${i}. ${i} &lt;= ${N} è vero.`);
+        s += i; S(2, { somma: s, i }, '', `somma = ${s - i} + ${i} = ${s}.`);
+      }
+      S(1, { somma: s, i: N + 1 }, '', `i++: i vale ${N + 1}. ${N + 1} &lt;= ${N} è falso: si esce.`);
+      S(4, { somma: s }, `Somma: ${s}\n`, 'Fuori dal ciclo i non esiste più: era dichiarata nel for.');
+    }
+  };
+}
+function ppFattoriale() {
+  const N = rnd(3, 6);
+  return {
+    t: `Il fattoriale di ${N}: un accumulatore che moltiplica parte da 1.`, lang: 'cpp',
+    code: [`int n = ${N};`, 'int f = 1;', 'for (int i = 2; i <= n; i++) {', '    f = f * i;', '}', 'cout << n << "! = " << f << endl;'],
+    run(S) {
+      let f = 1; S(0, { n: N }); S(1, { n: N, f }, '', 'Il prodotto parte da 1, non da 0.');
+      for (let i = 2; i <= N; i++) { S(2, { n: N, f, i }, '', `${i} &lt;= ${N} è vero.`); f *= i; S(3, { n: N, f, i }, '', `f = ${f / i} × ${i} = ${f}.`); }
+      S(2, { n: N, f, i: N + 1 }, '', `${N + 1} &lt;= ${N} è falso: si esce.`);
+      S(5, { n: N, f }, `${N}! = ${f}\n`);
+    }
+  };
+}
+function ppDoWhile() {
+  const ok = rnd(1, 10), sbagli = shuffle([rnd(-5, 0), rnd(11, 20), 0, rnd(11, 15)]).slice(0, rnd(1, 2)), ins = [...sbagli, ok];
+  return {
+    t: `Validare l'input con <code>do ... while</code>. L'utente scrive, uno dopo l'altro: <b>${ins.join(', ')}</b>.`, lang: 'cpp',
+    code: ['int voto;', 'do {', '    cout << "Voto (1-10): ";', '    cin >> voto;', '} while (voto < 1 || voto > 10);', 'cout << "Hai inserito " << voto << endl;'],
+    run(S) {
+      let v = null; S(0, { voto: v }, '', 'La variabile esiste ma non ha ancora un valore.');
+      for (const x of ins) {
+        S(1, { voto: v }, '', 'Con do ... while il blocco si esegue almeno una volta.');
+        S(2, { voto: v }, 'Voto (1-10): ');
+        v = x; S(3, { voto: v }, x + '\n', `L'utente scrive ${x}.`);
+        const fuori = v < 1 || v > 10;
+        S(4, { voto: v }, '', fuori ? `${v} è fuori dall'intervallo: la condizione è vera, si ripete.` : `${v} va bene: la condizione è falsa, si esce.`);
+      }
+      S(5, { voto: v }, `Hai inserito ${v}\n`);
+    }
+  };
+}
+function ppAnnidati() {
+  const R = rnd(2, 3), C = rnd(2, 4);
+  return {
+    t: `Cicli annidati: un rettangolo di ${R} righe e ${C} colonne.`, lang: 'cpp',
+    code: [`for (int r = 1; r <= ${R}; r++) {`, `    for (int c = 1; c <= ${C}; c++) {`, '        cout << "*";', '    }', '    cout << endl;', '}'],
+    run(S) {
+      for (let r = 1; r <= R; r++) {
+        S(0, { r }, '', `${r} &lt;= ${R}: si esegue la riga ${r}.`);
+        for (let c = 1; c <= C; c++) { S(1, { r, c }, '', c === 1 ? 'Il ciclo interno riparte da 1.' : ''); S(2, { r, c }, '*'); }
+        S(1, { r, c: C + 1 }, '', `${C + 1} &lt;= ${C} è falso: finisce il ciclo interno.`);
+        S(4, { r }, '\n', 'A capo: la riga è finita.');
+      }
+      S(0, { r: R + 1 }, '', `${R + 1} &lt;= ${R} è falso: finisce anche il ciclo esterno.`);
+    }
+  };
+}
+function ppElseIf() {
+  const v = rnd(2, 10);
+  return {
+    t: `Selezione multipla con <code>else if</code>: il voto è ${v}.`, lang: 'cpp',
+    code: [`int voto = ${v};`, 'if (voto >= 8) {', '    cout << "Buono";', '} else if (voto >= 6) {', '    cout << "Sufficiente";', '} else {', '    cout << "Insufficiente";', '}'],
+    run(S) {
+      S(0, { voto: v });
+      if (v >= 8) { S(1, { voto: v }, '', `${v} &gt;= 8 è vero.`); S(2, { voto: v }, 'Buono', 'Gli altri rami si saltano.'); return; }
+      S(1, { voto: v }, '', `${v} &gt;= 8 è falso: si passa all'else if.`);
+      if (v >= 6) { S(3, { voto: v }, '', `${v} &gt;= 6 è vero.`); S(4, { voto: v }, 'Sufficiente', 'L\'else finale si salta.'); return; }
+      S(3, { voto: v }, '', `${v} &gt;= 6 è falso: resta l'else.`); S(6, { voto: v }, 'Insufficiente');
+    }
+  };
+}

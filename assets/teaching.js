@@ -72,6 +72,7 @@
     restart: '<circle class="f" cx="12" cy="12" r="8"/><path d="M4 12a8 8 0 1 0 2.3-5.7M4 4v4h4"/><path class="a" d="M12 8v4l2.5 2.5"/>',
     check: '<circle class="f" cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="9"/><path class="a" d="M8 12.5l2.5 2.5L16 9.5"/>',
     arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+    chev: '<path d="M6 9l6 6 6-6"/>',
     close: '<path d="M6 6l12 12M18 6 6 18"/>',
     user: '<circle class="f" cx="12" cy="8" r="3.5"/><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/>',
     users: '<circle class="f" cx="9" cy="8" r="3.2"/><circle cx="9" cy="8" r="3.2"/><path d="M3 20a6 6 0 0 1 12 0"/><path class="a" d="M15.5 4.9a3.2 3.2 0 0 1 0 6.2M17 14.2a6 6 0 0 1 4 5.8"/>'
@@ -173,8 +174,11 @@
       lista.forEach(function (a) { var c = a.percorso.split("/")[0]; if (ordine.indexOf(c) < 0) ordine.push(c); });
       ordine.forEach(function (cid) {
         var c = corso(cid);
-        html += '<section class="tg-course" style="--c:' + esc(c.colore) + '">';
-        if (!fC) html += '<h2><span class="tg-badge sm">' + ico(c.icona) + '</span><a href="' + link(cid) + '">' + esc(c.nome) + "</a><small>" + esc(c.anno) + "</small></h2>";
+        var chiuso = compatta && chiusi.indexOf(cid) >= 0;
+        html += '<section class="tg-course' + (chiuso ? " chiuso" : "") + '" data-c="' + esc(cid) + '" style="--c:' + esc(c.colore) + '">';
+        if (!fC) html += '<h2><span class="tg-badge sm">' + ico(c.icona) + '</span><a href="' + link(cid) + '">' + esc(c.nome) + "</a><small>" + esc(c.anno) + "</small>" +
+          (compatta ? '<button class="tg-tendina" type="button" aria-expanded="' + !chiuso + '" title="' + (chiuso ? "Mostra" : "Nascondi") + " le attività di " + esc(c.nome) + " " + esc(c.anno) + '"><span>' +
+            lista.filter(function (a) { return a.percorso.indexOf(cid + "/") === 0; }).length + " attività</span>" + ico("chev") + "</button>" : "") + "</h2>";
         var unita = [];
         lista.forEach(function (a) { var p = a.percorso.split("/"); if (p[0] === cid && unita.indexOf(p[1]) < 0) unita.push(p[1]); });
         if (compatta) html += '<div class="tg-grid">';
@@ -196,6 +200,18 @@
       });
       box.innerHTML = html;
     }
+    /* home: i corsi si chiudono a tendina; la scelta resta nel browser */
+    var chiusi = (leggi("tg-chiusi") || "").split(",").filter(Boolean);
+    box.addEventListener("click", function (e) {
+      var b = e.target.closest(".tg-tendina"); if (!b) return;
+      var sec = b.closest(".tg-course"), cid = sec.dataset.c, ora = !sec.classList.contains("chiuso");
+      sec.classList.toggle("chiuso", ora);
+      b.setAttribute("aria-expanded", String(!ora));
+      b.title = b.title.replace(/^(Mostra|Nascondi)/, ora ? "Mostra" : "Nascondi");
+      chiusi = chiusi.filter(function (x) { return x !== cid; });
+      if (ora) chiusi.push(cid);
+      salva("tg-chiusi", chiusi.join(","));
+    });
     disegna();
   }
 

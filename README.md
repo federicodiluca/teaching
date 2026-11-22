@@ -89,6 +89,8 @@ assets/
   giochi.js, giochi.css    motore comune delle attività di Informatica 1: schede, giocatori, esercizi,
                            allenatore, missione a tempo, smistamento, riordino, memory, caccia all'errore,
                            quiz da dati, risultato e salvataggio dei progressi
+  codice.js                strumenti sul codice (dopo giochi.js): colori della sintassi ed esecuzione passo passo
+                           (traccia), con i modi Guarda (per spiegare) e Prevedi (per ripassare)
   qr.js                    generatore di QR code (Kazuhiko Arase, licenza MIT), caricato solo al clic su "QR"
 <corso>/index.html         elenco delle attività del corso
 <corso>/<unità>/index.html elenco delle attività dell'unità
@@ -190,6 +192,10 @@ Com'è fatta una pagina, per scriverla o sistemarla a mano:
    `<link rel="stylesheet" href="../../../assets/giochi.css">` prima di quelle del punto 4.
    Se più pagine usano gli stessi generatori di esercizi, mettili in un file `temi/<argomento>.js` dell'unità
    (solo definizioni) e caricalo dopo `giochi.js`, come fanno le pagine di Computer e codici.
+   **Esecuzione passo passo**: carica anche `assets/codice.js` dopo `giochi.js` e chiama
+   `traccia($('#tra'), gen, 'Etichetta')` (oppure un elenco `[['Nome', gen], ...]` per avere un menu di programmi).
+   `gen()` restituisce `{t, lang, code: [righe], run(S)}`: `run` esegue il programma in JavaScript e dopo ogni riga
+   chiama `S(riga, {variabili}, scritto, nota)`. Esempi in `informatica-1/cpp/temi/cpp.js` (funzioni `pp...`).
 3. **Attività con un layout proprio** (pensate per la LIM): `<body class="tg-lim tg-<nome>">`, con stile e script
    nella pagina e poche regole dedicate in `teaching.css`. Nessuna risorsa esterna (font, librerie da CDN):
    tutto deve funzionare anche offline.
