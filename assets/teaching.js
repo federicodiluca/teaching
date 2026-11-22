@@ -48,6 +48,9 @@
     branch: '<circle class="f" cx="6" cy="6" r="2.5"/><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="8" r="2.5"/><path d="M6 8.5v7"/><path class="a" d="M18 10.5c0 4-6 3-11 5.5"/>',
     file: '<path class="f" d="M6 3h8l5 5v13H6z"/><path d="M6 3h8l5 5v13H6zM14 3v5h5"/><path class="a" d="M9 13h7M9 17h5"/>',
     server: '<rect class="f" x="4" y="4" width="16" height="7" rx="1.5"/><rect x="4" y="4" width="16" height="7" rx="1.5"/><rect x="4" y="13" width="16" height="7" rx="1.5"/><path class="a" d="M7.5 7.5h3M7.5 16.5h3"/><path d="M16 7.5h.01M16 16.5h.01"/>',
+    cup: '<path class="f" d="M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z"/><path d="M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5zM16 11h1.5a2.5 2.5 0 0 1 0 5H16"/><path class="a" d="M8.5 3.5c0 1.5 1.5 1.5 1.5 3M12.5 3.5c0 1.5 1.5 1.5 1.5 3"/>',
+    box: '<path class="f" d="M12 3 20 7.5v9L12 21 4 16.5v-9z"/><path d="M12 3 20 7.5v9L12 21 4 16.5v-9zM4 7.5 12 12l8-4.5M12 12v9"/><path class="a" d="M8 5.2l8 4.5"/>',
+    window: '<rect class="f" x="3" y="4" width="18" height="16" rx="2"/><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 8.5h18"/><path class="a" d="M7 13h6M7 16h4"/>',
     /* giochi */
     home: '<path class="f" d="M5 10.5 12 4l7 6.5V20H5z"/><path d="M3 12l9-8.5 9 8.5M5 10.5V20h14v-9.5"/><path class="a" d="M10 20v-5h4v5"/>',
     pencil: '<path class="f" d="M4 20l1-4L15.5 5.5l3 3L8 19z"/><path d="M4 20l1-4L15.5 5.5a2.1 2.1 0 0 1 3 3L8 19zM13.5 7.5l3 3"/><path class="a" d="M13 20h7"/>',

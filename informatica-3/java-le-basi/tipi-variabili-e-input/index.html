@@ -1,0 +1,69 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tipi, variabili e input</title><meta name="description" content="Ripasso di tipi primitivi e String, operatori, divisione intera, cast e lettura dei dati con Scanner."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>Tipi, variabili e input</h1></header><nav id="nav"></nav><main>
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Tipi, variabili e input</h2>
+<p class="lead">Ripasso di tipi primitivi e String, operatori, divisione intera, cast e lettura dei dati con Scanner.</p>
+<ol><li><b>I tipi:</b> che tipo ha un valore, quanto occupa, gli errori di tipo.</li><li><b>Operatori e cast:</b> divisione intera, resto, operatori composti, conversioni.</li><li><b>Leggere i dati:</b> Scanner passo passo e quale metodo usare.</li><li><b>Quiz</b> e <b>Sfida finale</b>.</li></ol>
+<p>Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.</p>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+<section id="t1" data-g="I tipi" data-t="1 Che tipo è?"><h2>Che tipo è?</h2><p class="lead">Scegliete il tipo Java del valore: «Altro esercizio» ne propone un altro.</p><div id="tip"></div></section>
+<section id="t2" data-g="I tipi" data-t="2 Interi o decimali"><h2>Interi, decimali o altro?</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="fam"></div></section>
+<section id="t3" data-g="I tipi" data-t="3 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga non compila: fate clic su quella.</p><div id="hun"></div></section>
+<section id="o1" data-g="Operatori e cast" data-t="1 Divisione e cast"><h2>Divisione, resto e cast</h2><p class="lead">Calcolate come farebbe Java: «Altro esercizio» ne propone un altro.</p><div id="div"></div></section>
+<section id="o2" data-g="Operatori e cast" data-t="2 Operatori composti"><h2>Operatori composti</h2><p class="lead">Seguite le istruzioni una dopo l'altra e scrivete il valore finale.</p><div id="ope"></div></section>
+<section id="o3" data-g="Operatori e cast" data-t="3 Testo e numeri"><h2>Testo + numeri</h2><p class="lead">Il + somma i numeri ma attacca il testo, e si valuta da sinistra a destra.</p><div id="con"></div></section>
+<section id="l1" data-g="Leggere i dati" data-t="1 Passo passo"><h2>Scanner passo passo</h2><p class="lead">Con «Guarda» si esegue una riga alla volta; con «Prevedi» dovete dire voi che cosa succede.</p><div id="tra"></div></section>
+<section id="l2" data-g="Leggere i dati" data-t="2 Quale metodo?"><h2>Quale metodo dello Scanner?</h2><p class="lead">Scegliete il metodo giusto per leggere il dato.</p><div id="sca"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Dodici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script src="../../../assets/codice.js"></script><script src="../temi/java.js"></script><script>
+/* L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati, dopo la pubblicazione non si cambia. */
+const D = {
+  TIP: [["42", "int", "Un intero senza suffisso è un int."], ["-7", "int", "Anche i negativi senza virgola sono int."], ["3.14", "double", "Un numero con il punto è un double."], ["0.0", "double", "Il punto lo rende double, anche se vale zero."],
+    ["2.5f", "float", "La f finale lo rende float."], ["10000000000L", "long", "La L finale lo rende long: senza, non entrerebbe in un int."], ["'A'", "char", "Un solo carattere tra apici singoli."], ["'7'", "char", "Tra apici singoli è il carattere 7, non il numero."],
+    ["\"A\"", "String", "Tra virgolette doppie è una String, anche se è una lettera sola."], ["\"true\"", "String", "Tra virgolette è testo, non un boolean."], ["true", "boolean", "true e false sono i due valori boolean."], ["false", "boolean", "true e false sono i due valori boolean."]],
+  TIP_OPTS: ["int", "long", "float", "double", "char", "boolean", "String"],
+  FAM: [
+    ["byte: 8 bit", "int"], ["short: 16 bit", "int"], ["int: 32 bit, il più usato", "int"], ["long: 64 bit, con la L finale", "int"],
+    ["float: 32 bit, con la f finale", "dec"], ["double: 64 bit, il più usato per i decimali", "dec"],
+    ["char: un carattere tra apici singoli", "altro"], ["boolean: true o false", "altro"], ["String: una classe, non un primitivo", "altro"]
+  ],
+  FAM_BK: [{ id: "int", t: "Numeri interi", s: "" }, { id: "dec", t: "Numeri decimali", s: "virgola mobile" }, { id: "altro", t: "Altro", s: "" }],
+  SCA: [
+    ["l'età di una persona", "nextInt()", "Un numero intero."], ["il prezzo di un prodotto, con i centesimi", "nextDouble()", "Un numero decimale."],
+    ["nome e cognome insieme, con lo spazio", "nextLine()", "Legge tutta la riga, spazi compresi."], ["una sola parola", "next()", "Si ferma al primo spazio."],
+    ["una risposta true o false", "nextBoolean()", "Legge un boolean."], ["un indirizzo completo", "nextLine()", "Contiene spazi: serve tutta la riga."],
+    ["il numero di studenti di una classe", "nextInt()", "Un numero intero."]
+  ],
+  SCA_OPTS: ["nextInt()", "nextDouble()", "next()", "nextLine()", "nextBoolean()"],
+  VF: [
+    ["In Java int occupa sempre 32 bit, su qualsiasi computer.", true, "Le dimensioni dei tipi primitivi sono fissate dal linguaggio: è uno dei motivi della portabilità."],
+    ["7 / 2 in Java vale 3.5.", false, "Tra due int la divisione è intera: vale 3."],
+    ["(int) 9.99 vale 10.", false, "Il cast a int tronca: vale 9."],
+    ["Un char si scrive tra apici singoli.", true, "Tra virgolette doppie sarebbe una String."],
+    ["Per usare Scanner serve import java.util.Scanner.", true, "Scanner sta nel pacchetto java.util."],
+    ["Dopo nextInt() un nextLine() legge subito la riga successiva scritta dall'utente.", false, "Legge il resto della riga del numero, spesso vuoto: per questo si aggiunge un nextLine() in più."],
+    ["x += 3 è come scrivere x = x + 3.", true, "Vale lo stesso per -=, *=, /= e %=."],
+    ["Una variabile final si può cambiare dopo averle dato un valore.", false, "final la rende una costante."]
+  ],
+  MC: [
+    ["Quale tipo si usa di solito per i numeri con la virgola?", ["double", "int", "char", "boolean"], "double", "double ha più precisione di float."],
+    ["Quanto vale 17 % 5?", ["2", "3", "3.4", "5"], "2", "17 = 5 × 3 + 2."],
+    ["Come si dichiara una costante?", ["final double IVA = 0.22;", "const double IVA = 0.22;", "double final IVA = 0.22;", "static IVA = 0.22;"], "final double IVA = 0.22;", "In Java si usa final; per convenzione il nome è in maiuscolo."],
+    ["Quale metodo legge una riga intera, spazi compresi?", ["nextLine()", "next()", "nextInt()", "read()"], "nextLine()", "next() si ferma al primo spazio."],
+    ["Quanto vale (double) 7 / 2?", ["3.5", "3", "3.0", "4"], "3.5", "Il cast si applica a 7 prima della divisione."],
+    ["Quale assegnazione non compila?", ["int n = 2.5;", "double d = 2;", "long l = 5;", "char c = 'x';"], "int n = 2.5;", "Da double a int si perde la parte decimale: serve un cast esplicito."]
+  ]
+};
+mount($('#tip'), scGen(D.TIP, D.TIP_OPTS, 'Che tipo ha il valore', 'Tipo'), 'Che tipo è');
+SG('#fam', D.FAM, D.FAM_BK, 'Famiglie di tipi');
+hunt($('#hun'), huntJavaTipi, 'Errori di tipo');
+mount($('#div'), divJavaGen, 'Divisione, resto e cast');
+mount($('#ope'), opGen, 'Operatori composti');
+mount($('#con'), concatGen, 'Testo e numeri');
+traccia($('#tra'), [['Leggere con Scanner', ppJavaScanner], ['Testo e numeri', ppJavaCiao]], 'Scanner passo passo');
+mount($('#sca'), scGen(D.SCA, D.SCA_OPTS, 'Per leggere', 'Metodo'), 'Quale metodo dello Scanner');
+quiz();
+mission($('#tot'), [...mcAll(), ...vfAll(), divJavaGen, divJavaGen, opGen, opGen, concatGen, huntJavaTipi, scGen(D.TIP, D.TIP_OPTS, 'Che tipo ha il valore', 'Tipo')], 'Sfida finale', 12);
+</script></body></html>

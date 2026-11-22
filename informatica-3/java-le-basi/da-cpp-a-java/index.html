@@ -1,0 +1,80 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Da C++ a Java</title><meta name="description" content="Ripasso di JDK, JVM e bytecode, struttura di un programma Java, main, System.out e differenze con il C++."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>Da C++ a Java</h1></header><nav id="nav"></nav><main>
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Da C++ a Java</h2>
+<p class="lead">Ripasso di JDK, JVM e bytecode, struttura di un programma Java, main, System.out e differenze con il C++.</p>
+<ol><li><b>La piattaforma:</b> che cosa fa il compilatore javac e che cosa fa la JVM, dal sorgente all'output.</li><li><b>Il primo programma:</b> eseguito passo passo, print e println, caccia all'errore.</li><li><b>C++ o Java?:</b> che cosa cambia e che cosa resta uguale.</li><li><b>Quiz</b> e <b>Sfida finale</b>.</li></ol>
+<p>Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.</p>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+<section id="p1" data-g="La piattaforma" data-t="1 Chi fa che cosa"><h2>javac, JVM o file?</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="pia"></div></section>
+<section id="p2" data-g="La piattaforma" data-t="2 Dal sorgente all'output"><h2>Dal sorgente all'output</h2><p class="lead">Mettete in ordine i passi, dal file scritto nell'editor fino alla scritta sullo schermo. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="c1" data-g="Il primo programma" data-t="1 Passo passo"><h2>Il primo programma, passo passo</h2><p class="lead">Con «Guarda» si esegue una riga alla volta; con «Prevedi» prima di alcune righe dovete dire voi che cosa succederà. Funzionano anche le frecce della tastiera.</p><div id="tra"></div></section>
+<section id="c2" data-g="Il primo programma" data-t="2 print e println"><h2>print o println?</h2><p class="lead">Scrivete che cosa compare sullo schermo: «Altro esercizio» ne propone un altro.</p><div id="pri"></div></section>
+<section id="c3" data-g="Il primo programma" data-t="3 Testo e numeri"><h2>Testo + numeri</h2><p class="lead">Il + somma i numeri ma attacca il testo, e si valuta da sinistra a destra.</p><div id="con"></div></section>
+<section id="c4" data-g="Il primo programma" data-t="4 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hun"></div></section>
+<section id="d1" data-g="C++ o Java?" data-t="C++ o Java?"><h2>C++, Java o entrambi?</h2><p class="lead">Fate clic su una carta e poi sul linguaggio giusto.</p><div id="dif"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Dodici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script src="../../../assets/codice.js"></script><script src="../temi/java.js"></script><script>
+/* L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati, dopo la pubblicazione non si cambia. */
+const D = {
+  PIA: [
+    ["Traduce il codice sorgente in bytecode", "javac"],
+    ["Segnala gli errori di sintassi prima dell'esecuzione", "javac"],
+    ["Si avvia con il comando javac Ciao.java", "javac"],
+    ["Esegue il bytecode sul computer", "jvm"],
+    ["Esiste per Windows, Linux e macOS: per questo il bytecode è portabile", "jvm"],
+    ["Libera la memoria degli oggetti che non servono più (garbage collector)", "jvm"],
+    ["Si avvia con il comando java Ciao", "jvm"],
+    ["Ciao.java, il codice sorgente scritto da noi", "file"],
+    ["Ciao.class, il bytecode", "file"]
+  ],
+  PIA_BK: [{ id: "javac", t: "Il compilatore javac", s: "" }, { id: "jvm", t: "La Java Virtual Machine", s: "" }, { id: "file", t: "Un file del progetto", s: "" }],
+  ORD: [
+    ["Si scrive il codice sorgente nel file Ciao.java", "Il nome del file è uguale a quello della classe pubblica."],
+    ["Il comando javac Ciao.java controlla il codice e lo traduce", "Se ci sono errori di sintassi si ferma qui."],
+    ["Nasce il file Ciao.class, che contiene il bytecode", "Il bytecode non è ancora codice macchina."],
+    ["Il comando java Ciao avvia la JVM", "Senza estensione: si indica la classe, non il file."],
+    ["La JVM carica la classe e cerca il metodo main", "Il main è il punto di partenza del programma."],
+    ["La JVM esegue il bytecode e compare l'output", "La JVM traduce il bytecode per il processore mentre lo esegue."]
+  ],
+  DIF: [
+    ["cout << x << endl;", "cpp"], ["System.out.println(x);", "java"],
+    ["#include <iostream>", "cpp"], ["import java.util.Scanner;", "java"],
+    ["Il tipo logico si chiama bool", "cpp"], ["Il tipo logico si chiama boolean", "java"],
+    ["La memoria degli oggetti la libera il garbage collector", "java"], ["Si usano i puntatori e si libera la memoria con delete", "cpp"],
+    ["Il compilatore produce un eseguibile per un solo sistema operativo", "cpp"], ["Il compilatore produce bytecode che gira dove c'è una JVM", "java"],
+    ["Tutto il codice sta dentro una classe", "java"],
+    ["if, while e for si scrivono allo stesso modo", "both"], ["Ogni istruzione finisce con il punto e virgola", "both"], ["int, double e char sono tipi primitivi", "both"]
+  ],
+  DIF_BK: [{ id: "cpp", t: "Solo C++", s: "" }, { id: "java", t: "Solo Java", s: "" }, { id: "both", t: "Entrambi", s: "" }],
+  VF: [
+    ["Il bytecode è il codice macchina del processore.", false, "È un codice intermedio: lo esegue la JVM, non direttamente il processore."],
+    ["Lo stesso file .class può girare su Windows e su Linux.", true, "Basta che ci sia una JVM: «scrivi una volta, esegui ovunque»."],
+    ["Il file Ciao.java può contenere la classe pubblica Saluto.", false, "La classe pubblica deve chiamarsi come il file: Ciao."],
+    ["println va a capo dopo aver scritto.", true, "print invece resta sulla stessa riga."],
+    ["In Java la memoria degli oggetti si libera con delete.", false, "Ci pensa il garbage collector della JVM."],
+    ["Java distingue maiuscole e minuscole.", true, "System e system sono due nomi diversi."],
+    ["Il metodo main si scrive public static void main(String[] args).", true, "È la firma che la JVM cerca per avviare il programma."],
+    ["In Java String è un tipo primitivo come int.", false, "È una classe: per questo si scrive con la maiuscola."]
+  ],
+  MC: [
+    ["Quale comando compila il file Ciao.java?", ["javac Ciao.java", "java Ciao.java", "run Ciao", "compile Ciao"], "javac Ciao.java", "javac è il compilatore del JDK."],
+    ["Che cosa produce il compilatore javac?", ["Il bytecode (file .class)", "Un file .exe", "Il codice sorgente", "Una pagina web"], "Il bytecode (file .class)", "Il bytecode poi lo esegue la JVM."],
+    ["Chi esegue il bytecode?", ["La Java Virtual Machine", "Il compilatore javac", "Direttamente il processore", "L'editor"], "La Java Virtual Machine", "La JVM esiste per ogni sistema operativo."],
+    ["Che cosa scrive System.out.println(\"A\" + 1 + 2);?", ["A12", "A3", "3A", "Dà errore"], "A12", "Dopo il testo ogni + concatena."],
+    ["Qual è l'equivalente Java di cout << x << endl;?", ["System.out.println(x);", "System.out.print(x);", "print(x);", "cout.println(x);"], "System.out.println(x);", "println scrive e va a capo, come endl."],
+    ["Che cosa libera la memoria degli oggetti che non servono più?", ["Il garbage collector", "L'istruzione delete", "Il compilatore", "Il metodo main"], "Il garbage collector", "È una parte della JVM."]
+  ]
+};
+SG('#pia', D.PIA, D.PIA_BK, 'javac, JVM o file');
+orderGame($('#ord'), asOrder(D.ORD), 'Dal sorgente all\'output', false);
+traccia($('#tra'), [['Il primo programma', ppJavaCiao], ['Leggere con Scanner', ppJavaScanner]], 'Il primo programma passo passo');
+mount($('#pri'), printGen, 'print o println');
+mount($('#con'), concatGen, 'Testo e numeri');
+hunt($('#hun'), huntJavaBase, 'Gli errori del primo programma');
+SG('#dif', D.DIF, D.DIF_BK, 'C++ o Java');
+quiz();
+mission($('#tot'), [...mcAll(), ...vfAll(), printGen, printGen, concatGen, concatGen, huntJavaBase, huntJavaBase], 'Sfida finale', 12);
+</script></body></html>

@@ -1,0 +1,54 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Selezione e cicli in Java</title><meta name="description" content="Ripasso di if, else if, switch, condizioni logiche e dei cicli while, do while e for, anche passo passo."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>Selezione e cicli in Java</h1></header><nav id="nav"></nav><main>
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Selezione e cicli in Java</h2>
+<p class="lead">Ripasso di if, else if, switch, condizioni logiche e dei cicli while, do while e for, anche passo passo.</p>
+<ol><li><b>Selezione:</b> if, else if e switch passo passo, condizioni con &amp;&amp;, || e !, confronto tra stringhe.</li><li><b>Cicli:</b> while, for e do ... while passo passo, quante volte gira un for.</li><li><b>Errori tipici:</b> caccia all'errore e quale ciclo scegliere.</li><li><b>Quiz</b> e <b>Sfida finale</b>.</li></ol>
+<p>Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.</p>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+<section id="s1" data-g="Selezione" data-t="1 Passo passo"><h2>Selezione passo passo</h2><p class="lead">Con «Guarda» si vede quale ramo viene eseguito; con «Prevedi» dovete dire voi che cosa scrive. Provate lo switch con e senza break.</p><div id="sel"></div></section>
+<section id="s2" data-g="Selezione" data-t="2 Condizioni"><h2>true o false?</h2><p class="lead">Calcolate il valore della condizione: «Altro esercizio» ne propone un'altra.</p><div id="con"></div></section>
+<section id="c1" data-g="Cicli" data-t="1 Passo passo"><h2>Cicli passo passo</h2><p class="lead">Seguite le variabili giro dopo giro; con «Prevedi» dovete anticipare i valori.</p><div id="cic"></div></section>
+<section id="c2" data-g="Cicli" data-t="2 Quante volte?"><h2>Quante volte gira?</h2><p class="lead">Contate le iterazioni del for e l'ultimo valore della variabile di controllo.</p><div id="vol"></div></section>
+<section id="e1" data-g="Errori tipici" data-t="1 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hun"></div></section>
+<section id="e2" data-g="Errori tipici" data-t="2 Quale ciclo?"><h2>while, do ... while o for?</h2><p class="lead">Fate clic su una carta e poi sul ciclo più adatto.</p><div id="qua"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Dodici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script src="../../../assets/codice.js"></script><script src="../temi/java.js"></script><script>
+/* L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati, dopo la pubblicazione non si cambia. */
+const D = {
+  QUA: [
+    ["Stampare i numeri da 1 a 100", "for"], ["Ripetere un'operazione per ogni elemento di un array", "for"], ["Fare la tabellina del 7", "for"],
+    ["Chiedere un voto finché non è tra 1 e 10", "do"], ["Mostrare un menu almeno una volta e ripeterlo finché non si sceglie Esci", "do"],
+    ["Leggere numeri finché l'utente non scrive 0", "while"], ["Raddoppiare una cifra finché non supera 1000", "while"], ["Aspettare che un file sia pronto, se non lo è già", "while"]
+  ],
+  QUA_BK: [{ id: "for", t: "for", s: "numero di ripetizioni noto" }, { id: "while", t: "while", s: "controllo in testa" }, { id: "do", t: "do ... while", s: "almeno una volta" }],
+  VF: [
+    ["In Java la condizione di un if deve essere di tipo boolean.", true, "Per questo if (x = 3) non compila, a differenza del C++."],
+    ["Due stringhe si confrontano con ==.", false, "Si usa equals: == confronta i riferimenti agli oggetti."],
+    ["In uno switch senza break l'esecuzione prosegue nel case successivo.", true, "Si chiama fall-through."],
+    ["Il ciclo do ... while può non eseguire mai il corpo.", false, "Il controllo è in coda: il corpo si esegue almeno una volta."],
+    ["Una variabile dichiarata nel for esiste anche dopo il ciclo.", false, "Esiste solo dentro il for."],
+    ["&& valuta la seconda condizione solo se la prima è vera.", true, "È la valutazione a corto circuito: con || si salta la seconda se la prima è vera."],
+    ["Il default di uno switch è obbligatorio.", false, "È facoltativo, ma è buona abitudine metterlo."],
+    ["while (true) senza break non finisce mai.", true, "È un ciclo infinito."]
+  ],
+  MC: [
+    ["Come si controlla se la String s contiene il testo \"ok\"?", ["s.equals(\"ok\")", "s == \"ok\"", "s = \"ok\"", "equals(s, \"ok\")"], "s.equals(\"ok\")", "equals confronta il contenuto."],
+    ["Quante volte stampa for (int i = 0; i < 5; i++)?", ["5", "4", "6", "Infinite"], "5", "i vale 0, 1, 2, 3, 4."],
+    ["Quale ciclo esegue il corpo almeno una volta?", ["do ... while", "while", "for", "Nessuno"], "do ... while", "Il controllo è in coda."],
+    ["Che cosa fa break in un ciclo?", ["Esce dal ciclo", "Passa al giro successivo", "Ferma il programma", "Ricomincia il ciclo"], "Esce dal ciclo", "continue invece salta al giro successivo."],
+    ["Quale condizione è vera se x è tra 1 e 10, estremi compresi?", ["x >= 1 && x <= 10", "x >= 1 || x <= 10", "1 <= x <= 10", "x > 1 && x < 10"], "x >= 1 && x <= 10", "1 <= x <= 10 in Java non compila."],
+    ["Che cosa scrive int x = 5; if (x > 3) if (x > 8) System.out.print(\"A\"); else System.out.print(\"B\");?", ["B", "A", "Niente", "AB"], "B", "L'else si lega all'if più vicino: x > 8 è falso."]
+  ]
+};
+traccia($('#sel'), [['if, else if, else', ppJavaIf], ['switch e break', ppJavaSwitch]], 'Selezione passo passo');
+mount($('#con'), condJavaGen, 'Condizioni logiche');
+traccia($('#cic'), [['while: il salvadanaio', ppJavaWhile], ['for: la tabellina', ppJavaFor], ['do ... while: il menu', ppJavaDoWhile]], 'Cicli passo passo');
+mount($('#vol'), forCountGen, 'Quante volte gira il for');
+hunt($('#hun'), huntJavaCicli, 'Errori su selezione e cicli');
+SG('#qua', D.QUA, D.QUA_BK, 'Quale ciclo');
+quiz();
+mission($('#tot'), [...mcAll(), ...vfAll(), condJavaGen, condJavaGen, forCountGen, forCountGen, huntJavaCicli, huntJavaCicli], 'Sfida finale', 12);
+</script></body></html>

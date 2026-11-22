@@ -64,7 +64,7 @@ for (const [nome, args] of [
 // 3) catalogo, sitemap e README
 const W = catalogo(COPIA);
 const ids = W.CORSI.map(c => c.id).join(",");
-if (ids !== "informatica-1,informatica-2,tpsit-3,tpsit-4,tpsit-5,gpoi") fails.push("ordine dei corsi: " + ids);
+if (ids !== "informatica-1,informatica-2,informatica-3,tpsit-3,tpsit-4,tpsit-5,gpoi") fails.push("ordine dei corsi: " + ids);
 const uk = Object.keys(W.UNITA);
 const ultimaI1 = uk.filter(u => u.startsWith("informatica-1/")).pop();
 if (uk.indexOf("informatica-2/reti-e-protocolli") !== uk.indexOf(ultimaI1) + 1) fails.push("unità di Informatica 2 fuori posto: " + uk.join(", "));

@@ -71,7 +71,7 @@ async function scelta(chiave, testo, voci, { altro = "", predefinita = "" } = {}
 }
 
 /* ---------- utilità ---------- */
-const slug = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase()
+const slug = s => s.replace(/c\+\+/gi, "cpp").replace(/c#/gi, "csharp").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase()
   .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const js = s => JSON.stringify(s);
@@ -293,9 +293,14 @@ function inTesta(testo, nome, voce) {
   const i = testo.indexOf("\n", testo.indexOf("window." + nome + " = ")) + 1;
   return testo.slice(0, i) + voce + ",\n" + testo.slice(i);
 }
-// un corso nuovo va in ordine di anno: dopo l'ultimo corso esistente con anno minore o uguale (null = in testa)
+// un corso nuovo va accanto ai corsi con lo stesso nome (Informatica 1, 2, 3...), in ordine di anno;
+// se non ce ne sono, dopo l'ultimo corso con anno minore o uguale (null = in testa)
 const numAnno = c => parseInt(c.anno, 10) || 0;
-const corsoPrima = (c, W) => W.CORSI.filter(x => x.id !== c.id && numAnno(x) <= numAnno(c)).pop() || null;
+const corsoPrima = (c, W) => {
+  const altri = W.CORSI.filter(x => x.id !== c.id), stessi = altri.filter(x => x.nome === c.nome);
+  if (stessi.length) return stessi.filter(x => numAnno(x) <= numAnno(c)).pop() || altri[altri.indexOf(stessi[0]) - 1] || null;
+  return altri.filter(x => numAnno(x) <= numAnno(c)).pop() || null;
+};
 function aggiornaCatalogo(sel) {
   let t = leggi("assets/catalogo.js");
   const { c, nuovoCorso, uChiave, uNome, nuovaUnita, a, W } = sel;
