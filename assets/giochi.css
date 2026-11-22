@@ -341,3 +341,60 @@ table.pg td.pf { color: var(--tg-ko); font-weight: 700; }
 @media (max-width: 560px) { .mf-ram { flex-wrap: wrap; } .mf-blocco { flex-basis: 30%; }
   table.pg th, table.pg td { min-width: 0; width: 27px; height: 30px; padding: 1px; font-size: 13px; } .pg-l { display: none; } .pg-s { display: inline; } }
 @media (prefers-reduced-motion: reduce) { .scossa { animation: none; } }
+/* laboratorio di Git (tpsit-5/metodologia-di-sviluppo/temi/git.js) */
+.git-mis { margin: 0 0 12px; padding-left: 22px; display: grid; gap: 4px; }
+.git-mis li { color: var(--tg-mute); }
+.git-mis li.ora { color: var(--tg-ink); font-weight: 600; }
+.git-mis li.fatta { color: var(--tg-ok); }
+.git-box { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 14px; }
+.git-term { background: #0d1117; color: #e6edf3; border-radius: 10px; padding: 8px 12px; display: flex; flex-direction: column; min-height: 240px; }
+.git-out { flex: 1; margin: 0; max-height: 260px; overflow-y: auto; font: 13px/1.5 var(--tg-mono); white-space: pre-wrap; }
+.git-riga { display: flex; gap: 8px; align-items: center; border-top: 1px solid #30363d; padding-top: 6px; }
+.git-riga span { color: #7ee787; font: 600 14px var(--tg-mono); }
+.git .git-riga input { flex: 1; width: auto; min-height: 0; background: transparent !important; border: none !important; border-radius: 0; box-shadow: none !important; color: #e6edf3 !important; font: 14px var(--tg-mono); padding: 4px 0; outline: none; caret-color: #7ee787; }
+.git .git-riga input::placeholder { color: #6e7681; }
+.git-aree { display: grid; gap: 8px; }
+.git-aree > div { border: 1px solid var(--tg-line); border-radius: 10px; padding: 6px 10px; min-height: 52px; }
+.git-aree small { display: block; font: 500 11px var(--tg-mono); color: var(--tg-mute); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
+.git-aree em { color: var(--tg-mute); font-size: 13px; }
+.git-f { display: inline-block; font: 12px var(--tg-mono); padding: 3px 7px; margin: 2px 4px 2px 0; border-radius: 6px; border: 1px solid var(--tg-line); }
+.git-f.mod { border-color: var(--tg-ko); color: var(--tg-ko); }
+.git-f.st { border-color: var(--tg-hl); background: var(--tg-hl-soft); }
+.git-f.re { border-color: var(--tg-ok); color: var(--tg-ok); }
+.git-grafo { margin: 12px 0 4px; overflow-x: auto; }
+.git-vuoto { color: var(--tg-mute); font-style: italic; }
+.git-svg path { fill: none; stroke-width: 3; }
+.git-svg circle { stroke: var(--tg-paper); stroke-width: 3; }
+.git-svg circle.merge { stroke: var(--tg-ink); stroke-width: 2; }
+.git-svg .git-id { font: 10px var(--tg-mono); fill: var(--tg-mute); text-anchor: middle; }
+.git-tag rect { fill: var(--tg-paper); stroke: var(--tg-line); }
+.git-tag text { font: 600 11px var(--tg-mono); fill: var(--tg-ink); }
+.git-tag.head rect { fill: var(--tg-acc); stroke: var(--tg-acc); }
+.git-tag.head text { fill: #fff; }
+.git-nota { min-height: 1.5em; color: var(--tg-mute); }
+@media (max-width: 760px) { .git-box { grid-template-columns: 1fr; } }
+/* tester di espressioni regolari (tpsit-5/xml-e-regex/temi/regex.js) */
+.rx-stato { margin-left: auto; font-size: 14px; }
+.rx-pat { display: flex; align-items: center; gap: 0; margin: 8px 0 2px; background: #0d1117; border-radius: 10px; padding: 4px 12px; }
+.rx-pat span { font: 500 11px var(--tg-mono); color: #8b949e; text-transform: uppercase; letter-spacing: .08em; margin-right: 10px; }
+.rx-pat::before, .rx-pat::after { content: "/"; color: #7ee787; font: 600 18px var(--tg-mono); order: 1; }
+.rx-pat::after { order: 3; }
+.rx .rx-pat input { order: 2; flex: 1; min-width: 0; background: transparent !important; border: none !important; box-shadow: none !important; color: #e6edf3 !important; font: 17px var(--tg-mono); padding: 6px 4px; outline: none; }
+.rx-err { min-height: 1.3em; margin: 2px 0 6px; color: var(--tg-ko); font-size: 14px; }
+.rx-casi { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.rx-casi small { display: block; font: 500 11px var(--tg-mono); color: var(--tg-mute); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+.rx-casi ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; }
+.rx-casi li { display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--tg-line); border-radius: 8px; padding: 5px 10px; }
+.rx-casi li code { background: none; padding: 0; font-size: 15px; }
+.rx-casi li.ok { border-color: var(--tg-ok); background: var(--tg-ok-soft); }
+.rx-casi li.ko { border-color: var(--tg-ko); background: var(--tg-ko-soft); }
+.rx-casi li span { font-weight: 700; }
+.rx-casi li.ok span { color: var(--tg-ok); }
+.rx-casi li.ko span { color: var(--tg-ko); }
+.rx-libero { margin: 14px 0 8px; border: 1px solid var(--tg-line); border-radius: 10px; padding: 8px 12px; }
+.rx-libero summary { cursor: pointer; font-weight: 600; }
+.rx-libero textarea { width: 100%; box-sizing: border-box; min-height: 110px; margin-top: 8px; font: 14px/1.5 var(--tg-mono); background: var(--tg-bg); color: var(--tg-ink); border: 1px solid var(--tg-line); border-radius: 8px; padding: 8px; resize: vertical; }
+.rx-trov small { display: block; color: var(--tg-mute); margin: 8px 0 4px; }
+.rx-trov pre { margin: 0; font: 14px/1.6 var(--tg-mono); white-space: pre-wrap; }
+.rx-trov mark { background: color-mix(in srgb, var(--tg-hl) 55%, transparent); color: inherit; border-radius: 3px; padding: 0 1px; }
+@media (max-width: 560px) { .rx-casi { grid-template-columns: 1fr; } }

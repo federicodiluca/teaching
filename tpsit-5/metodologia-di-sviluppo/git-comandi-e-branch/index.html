@@ -3,18 +3,19 @@
 
 <section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Git: comandi e branch</h2>
 <p class="lead">Ripasso dei comandi principali di Git e del lavoro con i branch: creare un ramo, spostarsi, unirlo e risolvere un conflitto.</p>
-<ol><li><b>I comandi</b>, <b>Lavorare su un branch</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<ol><li><b>I comandi</b>, <b>Lavorare su un branch</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Laboratorio</b>: un terminale simulato con il grafo dei commit, per creare branch e fare merge.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
 <p>Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.</p>
 <div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
 
 <section id="g1" data-g="I comandi" data-t="I comandi"><h2>I comandi di Git</h2><p class="lead">Che cosa fa ciascun comando? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
 <section id="g2" data-g="Lavorare su un branch" data-t="Lavorare su un branch"><h2>Una funzione su un branch</h2><p class="lead">Mettete in ordine i comandi per sviluppare una funzione su un branch e unirla a main. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
 <section id="g3" data-g="Caccia all'errore" data-t="Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="lab" data-g="Laboratorio" data-t="Laboratorio"><h2>Laboratorio: branch e merge</h2><p class="lead">Scrivete i comandi nel terminale e premete Invio: le tre aree e il grafo dei commit cambiano a ogni comando. Per cambiare un file come se lo modificaste nell'editor scrivete <code>modifica nomefile</code>; con la freccia in su ritorna il comando precedente.</p><div id="gitlab"></div></section>
 <section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
 <section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
 <section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
 <section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
-</main><script src="../../../assets/giochi.js"></script><script>
+</main><script src="../../../assets/giochi.js"></script><script src="../temi/git.js"></script><script>
 /* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
 const D = {
  "SORT": [
@@ -301,6 +302,13 @@ SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
 orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
 let lastH = -1;
 hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+gitLab($('#gitlab'),[
+ {t:'Fate il primo commit con tutti i file.',ok:s=>s.commit.length>=1&&Object.keys(s.commit[s.commit.length-1].foto).length===3},
+ {t:'Create il branch <b>login</b> e spostatevi su quel branch.',ok:s=>s.head==='login'},
+ {t:'Su <b>login</b> modificate <b>index.html</b> e fate un commit.',ok:s=>'login' in s.rami&&s.rami.login!==s.rami.main},
+ {t:'Tornate su <b>main</b> e unite <b>login</b>: guardate che cosa fa il fast-forward.',ok:s=>s.head==='main'&&s.rami.main===s.rami.login},
+ {t:'Create il branch <b>footer</b>, fate un commit lì, tornate su <b>main</b> e fate un commit anche lì.',ok:s=>'footer' in s.rami&&s.head==='main'&&!antenati(s,s.rami.main).has(s.rami.footer)&&!antenati(s,s.rami.footer).has(s.rami.main)},
+ {t:'Ora unite <b>footer</b> in <b>main</b>: nascerà un commit di merge con due genitori.',ok:s=>s.commit.some(c=>c.genitori.length===2)}],'Laboratorio: branch e merge');
 quiz();
 const SFIDA = [...mcAll(), ...vfAll()];
 mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));

@@ -3,18 +3,19 @@
 
 <section id="inizio" data-g="Inizio" data-t="Inizio"><h2>RegEx in Java e validazione</h2>
 <p class="lead">Ripasso di come si usano le espressioni regolari in Java e di come si validano i dati inseriti dall'utente.</p>
-<ol><li><b>Validare i campi</b>, <b>Contare i numeri</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<ol><li><b>Validare i campi</b>, <b>Contare i numeri</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Tester</b>: scrivete i pattern per email, cellulare, data, password e orario e provateli subito.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
 <p>Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.</p>
 <div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
 
 <section id="g1" data-g="Validare i campi" data-t="Validare i campi"><h2>La validazione dei campi</h2><p class="lead">Quale campo convalida ciascuna RegEx? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
 <section id="g2" data-g="Contare i numeri" data-t="Contare i numeri"><h2>Contare i numeri in Java</h2><p class="lead">Mettete in ordine le righe Java che contano i numeri presenti in un testo. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
 <section id="g3" data-g="Caccia all'errore" data-t="Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="lab" data-g="Tester" data-t="Tester"><h2>Pattern per validare i campi</h2><p class="lead">Scrivete il pattern: ogni stringa diventa verde se va bene e rossa se no, mentre scrivete. Qui il pattern deve corrispondere a <b>tutta</b> la stringa, come con <code>matches()</code> in Java. Sotto potete provarlo anche su un testo libero, come con <code>find()</code>.</p><div id="rxlab"></div></section>
 <section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
 <section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
 <section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
 <section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
-</main><script src="../../../assets/giochi.js"></script><script>
+</main><script src="../../../assets/giochi.js"></script><script src="../temi/regex.js"></script><script>
 /* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
 const D = {
  "SORT": [
@@ -269,6 +270,7 @@ SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
 orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
 let lastH = -1;
 hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+regexLab($('#rxlab'),[{"nome": "Email", "t": "Un indirizzo email semplice: caratteri, <b>@</b>, dominio, <b>punto</b> e almeno due lettere.", "si": ["ada@scuola.it", "bruno.rossi@mail.com", "c_3@x.org"], "no": ["ada@", "@scuola.it", "ada scuola.it", "ada@scuola"], "sol": "[\\w.+-]+@[\\w-]+\\.[a-z]{2,}", "aiuto": "Il punto da solo vuol dire «qualsiasi carattere»: per il punto vero serve <code>\\.</code>"}, {"nome": "Cellulare", "t": "Un cellulare italiano: comincia con <b>3</b> e ha <b>10 cifre</b> in tutto.", "si": ["3331234567", "3209876543"], "no": ["0612345678", "333123456", "33312345678"], "sol": "3[0-9]{9}", "aiuto": "Il 3 fisso e poi altre 9 cifre."}, {"nome": "Data", "t": "Una data nel formato <b>gg/mm/aaaa</b> (bastano le cifre, non si controlla che il giorno esista).", "si": ["01/02/2024", "31/12/1999"], "no": ["1/2/2024", "01-02-2024", "01/02/24"], "sol": "[0-9]{2}/[0-9]{2}/[0-9]{4}", "aiuto": "Due cifre, barra, due cifre, barra, quattro cifre."}, {"nome": "Password", "t": "Una password di <b>almeno 8 caratteri</b>, solo lettere e cifre.", "si": ["abc12345", "Password1", "ABCDEFGH"], "no": ["abc123", "abc 12345", "abc!12345"], "sol": "[A-Za-z0-9]{8,}", "aiuto": "<code>{8,}</code> vuol dire «8 o più volte»."}, {"nome": "Orario", "t": "Un orario <b>hh:mm</b> nelle 24 ore, da 00:00 a 23:59.", "si": ["09:30", "23:59", "00:00", "14:05"], "no": ["24:00", "9:30", "12:60"], "sol": "([01][0-9]|2[0-3]):[0-5][0-9]", "aiuto": "Le ore vanno da 00 a 19 oppure da 20 a 23: <code>([01][0-9]|2[0-3])</code>."}],'Tester di validazione');
 quiz();
 const SFIDA = [...mcAll(), ...vfAll()];
 mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));

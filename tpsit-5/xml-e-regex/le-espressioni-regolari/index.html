@@ -3,18 +3,19 @@
 
 <section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Le espressioni regolari</h2>
 <p class="lead">Ripasso delle espressioni regolari: come si costruisce un pattern e che cosa riconosce.</p>
-<ol><li><b>Corrisponde?</b>, <b>Una targa</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<ol><li><b>Corrisponde?</b>, <b>Una targa</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Tester</b>: scrivete i pattern e guardate subito quali stringhe corrispondono.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
 <p>Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.</p>
 <div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
 
 <section id="g1" data-g="Corrisponde?" data-t="Corrisponde?"><h2>Stringhe e pattern</h2><p class="lead">La stringa corrisponde per intero al pattern ^[A-Z][a-z]+$ ? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
 <section id="g2" data-g="Una targa" data-t="Una targa"><h2>La RegEx di una targa</h2><p class="lead">Mettete in ordine i pezzi della RegEx per una targa italiana (due lettere, tre cifre, due lettere). Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
 <section id="g3" data-g="Caccia all'errore" data-t="Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="lab" data-g="Tester" data-t="Tester"><h2>Scrivete voi il pattern</h2><p class="lead">Scrivete il pattern: ogni stringa diventa verde se va bene e rossa se no, mentre scrivete. Qui il pattern deve corrispondere a <b>tutta</b> la stringa, come con <code>matches()</code> in Java. Sotto potete provarlo anche su un testo libero, come con <code>find()</code>.</p><div id="rxlab"></div></section>
 <section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
 <section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
 <section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
 <section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
-</main><script src="../../../assets/giochi.js"></script><script>
+</main><script src="../../../assets/giochi.js"></script><script src="../temi/regex.js"></script><script>
 /* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
 const D = {
  "SORT": [
@@ -260,6 +261,7 @@ SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
 orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
 let lastH = -1;
 hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+regexLab($('#rxlab'),[{"nome": "Tre cifre", "t": "Scrivete un pattern per un numero di <b>esattamente tre cifre</b>.", "si": ["123", "007", "999"], "no": ["12", "1234", "12a"], "sol": "[0-9]{3}", "aiuto": "Una cifra è <code>[0-9]</code> (oppure <code>\\d</code>); <code>{3}</code> la ripete tre volte."}, {"nome": "Nome con la maiuscola", "t": "Un nome: <b>una maiuscola</b> e poi <b>una o più minuscole</b>.", "si": ["Ada", "Bruno", "Zoe"], "no": ["ada", "BRUNO", "Al2", "A"], "sol": "[A-Z][a-z]+", "aiuto": "<code>+</code> vuol dire «una o più volte»."}, {"nome": "Targa italiana", "t": "Una targa: <b>due lettere maiuscole, tre cifre, due lettere maiuscole</b>.", "si": ["AB123CD", "ZZ999ZZ"], "no": ["ab123cd", "AB12CD", "AB1234CD", "A1B23CD"], "sol": "[A-Z]{2}[0-9]{3}[A-Z]{2}", "aiuto": "Tre pezzi uno dopo l'altro, ognuno con il suo <code>{n}</code>."}, {"nome": "Sì o no", "t": "Accettate solo <b>si</b> o <b>no</b>, tutto minuscolo o tutto maiuscolo.", "si": ["si", "no", "SI", "NO"], "no": ["s", "sino", "Si", "forse"], "sol": "si|no|SI|NO", "aiuto": "La barra <code>|</code> vuol dire «oppure»."}, {"nome": "CAP", "t": "Un codice di avviamento postale: <b>cinque cifre</b>.", "si": ["00184", "20121", "10100"], "no": ["1234", "123456", "2012a"], "sol": "\\d{5}", "aiuto": "<code>\\d</code> è una cifra."}, {"nome": "Segno facoltativo", "t": "Un numero intero con il <b>segno + o − facoltativo</b> davanti.", "si": ["5", "-12", "+300"], "no": ["--5", "5-", "+", "12.5"], "sol": "[+-]?[0-9]+", "aiuto": "<code>?</code> vuol dire «zero o una volta»."}],'Tester di espressioni regolari');
 quiz();
 const SFIDA = [...mcAll(), ...vfAll()];
 mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));

@@ -3,18 +3,19 @@
 
 <section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Git: concetti e aree</h2>
 <p class="lead">Ripasso dei concetti di base di Git: che cos'è un repository, le tre aree di lavoro e il percorso di una modifica fino al commit.</p>
-<ol><li><b>Le tre aree</b>, <b>Il primo commit</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
+<ol><li><b>Le tre aree</b>, <b>Il primo commit</b> e <b>Caccia all'errore</b>: i giochi sull'argomento.</li><li><b>Laboratorio</b>: un terminale simulato per vedere i file passare dalla working directory alla staging area e al repository.</li><li><b>Quiz</b>: vero o falso e risposta multipla, con la spiegazione dopo ogni risposta.</li><li><b>Sfida finale</b>: dieci domande miste a tempo.</li></ol>
 <p>Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.</p>
 <div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
 
 <section id="g1" data-g="Le tre aree" data-t="Le tre aree"><h2>Le tre aree di Git</h2><p class="lead">In quale area si trova il file? Fate clic su una carta e poi sulla categoria giusta.</p><div id="srt"></div></section>
 <section id="g2" data-g="Il primo commit" data-t="Il primo commit"><h2>La prima versione con Git</h2><p class="lead">Mettete in ordine i passi per salvare la prima versione di un progetto con Git. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
 <section id="g3" data-g="Caccia all'errore" data-t="Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hunt"></div></section>
+<section id="lab" data-g="Laboratorio" data-t="Laboratorio"><h2>Laboratorio: le tre aree</h2><p class="lead">Scrivete i comandi nel terminale e premete Invio: le tre aree e il grafo dei commit cambiano a ogni comando. Per cambiare un file come se lo modificaste nell'editor scrivete <code>modifica nomefile</code>; con la freccia in su ritorna il comando precedente.</p><div id="gitlab"></div></section>
 <section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
 <section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
 <section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
 <section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
-</main><script src="../../../assets/giochi.js"></script><script>
+</main><script src="../../../assets/giochi.js"></script><script src="../temi/git.js"></script><script>
 /* Dati del ripasso. L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati. */
 const D = {
  "SORT": [
@@ -262,6 +263,13 @@ SG('#srt', D.SORT, D.SORT_BK, 'Smistamento');
 orderGame($('#ord'), asOrder(D.ORD), 'In ordine', false);
 let lastH = -1;
 hunt($('#hunt'), () => { let i; do { i = rnd(0, D.HUNT.length - 1) } while (i === lastH && D.HUNT.length > 1); lastH = i; return D.HUNT[i]; }, 'Caccia all\'errore');
+gitLab($('#gitlab'),[
+ {t:'Guardate in che stato sono i file: <code>git status</code>.',ok:s=>s.ultimo==='status'},
+ {t:'Mettete <b>index.html</b> nella staging area.',ok:s=>s.file['index.html'].st!==null},
+ {t:'Aggiungete anche gli altri file e fate il primo commit con un messaggio.',ok:s=>s.commit.length>=1&&Object.keys(s.commit[0].foto).length===3},
+ {t:'Modificate <b>stile.css</b> (<code>modifica stile.css</code>) e guardate dove compare.',ok:s=>s.file['stile.css'].wd>1},
+ {t:'Salvate la modifica in un secondo commit.',ok:s=>s.commit.length>=2},
+ {t:'Rileggete la storia: <code>git log --oneline</code>.',ok:s=>s.ultimo==='log'}],'Laboratorio: le tre aree');
 quiz();
 const SFIDA = [...mcAll(), ...vfAll()];
 mission($('#tot'), SFIDA, 'Sfida finale', Math.min(10, SFIDA.length));
