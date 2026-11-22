@@ -102,6 +102,8 @@ assets/
 informatica-1/computer-e-codici/temi/   codice di argomento (numeri, aritmetica, logica, immagini, informazione)
                                         condiviso tra le pagine dell'unità e Palestra dei numeri
 tpsit-4/temi/passo-passo.js  simulatore delle pagine «passo passo» di TPSIT (semafori e problemi classici)
+tpsit-3/sistemi-operativi/temi/so.js  simulatori di sistemi operativi: diagramma di Gantt, allocazione della memoria,
+                                      sostituzione delle pagine
 strumenti/nuova.js         npm run nuova: prepara una nuova attività (non fa parte del sito)
 tests/                     controlli automatici (Playwright), non fanno parte del sito
 .github/workflows/         i controlli girano su GitHub a ogni push
