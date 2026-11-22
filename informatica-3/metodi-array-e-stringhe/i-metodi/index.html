@@ -1,0 +1,193 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>I metodi</title><meta name="description" content="Ripasso di metodi statici, parametri e valore restituito, passaggio per valore, overloading e ricorsione."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>I metodi</h1></header><nav id="nav"></nav><main>
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>I metodi</h2>
+<p class="lead">Ripasso di metodi statici, parametri e valore restituito, passaggio per valore, overloading e ricorsione.</p>
+<ol><li><b>Come si scrive:</b> void o valore restituito, firma e overloading.</li><li><b>Chiamate passo passo:</b> parametri, return, passaggio per valore e ricorsione.</li><li><b>Errori tipici:</b> che cosa scrive una chiamata e caccia all'errore.</li><li><b>Quiz</b> e <b>Sfida finale</b>.</li></ol>
+<p>Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.</p>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+<section id="m1" data-g="Come si scrive" data-t="1 void o return?"><h2>void o valore restituito?</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="voi"></div></section>
+<section id="m2" data-g="Come si scrive" data-t="2 La firma"><h2>Leggere la firma</h2><p class="lead">Scegliete la risposta giusta: «Altro esercizio» ne propone un'altra.</p><div id="fir"></div></section>
+<section id="p1" data-g="Chiamate passo passo" data-t="Chiamate passo passo"><h2>Chiamate passo passo</h2><p class="lead">Con «Guarda» si esegue una riga alla volta; con «Prevedi» prima di alcune righe dovete dire voi che cosa succederà. Funzionano anche le frecce della tastiera.</p><div id="tra"></div></section>
+<section id="e1" data-g="Errori tipici" data-t="1 Che cosa scrive"><h2>Che cosa scrive?</h2><p class="lead">Seguite la chiamata e scrivete l'output: «Altro esercizio» ne propone un altro.</p><div id="out"></div></section>
+<section id="e2" data-g="Errori tipici" data-t="2 Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hun"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Dodici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script src="../../../assets/codice.js"></script><script src="../temi/java.js"></script><script>
+/* L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati, dopo la pubblicazione non si cambia. */
+const D = {
+ "VOI": [
+  [
+   "Stampa il menu del programma",
+   "void"
+  ],
+  [
+   "Saluta l'utente per nome",
+   "void"
+  ],
+  [
+   "Disegna una riga di asterischi",
+   "void"
+  ],
+  [
+   "Calcola l'area di un rettangolo",
+   "ret"
+  ],
+  [
+   "Dice se un numero è primo",
+   "ret"
+  ],
+  [
+   "Restituisce il massimo di due numeri",
+   "ret"
+  ],
+  [
+   "Converte euro in dollari",
+   "ret"
+  ]
+ ],
+ "VOI_BK": [
+  {
+   "id": "void",
+   "t": "void",
+   "s": "fa qualcosa e basta"
+  },
+  {
+   "id": "ret",
+   "t": "Restituisce un valore",
+   "s": "con return"
+  }
+ ],
+ "FIR": [
+  [
+   "static double media(int a, int b)",
+   "Restituisce un double e riceve due int",
+   "Il tipo prima del nome è quello restituito; tra parentesi i parametri."
+  ],
+  [
+   "static void stampa(String s)",
+   "Non restituisce niente e riceve una String",
+   "void significa che non c'è valore restituito."
+  ],
+  [
+   "static boolean pari(int n)",
+   "Restituisce un boolean e riceve un int",
+   "Risponde vero o falso."
+  ],
+  [
+   "static int lancia()",
+   "Restituisce un int e non riceve parametri",
+   "Le parentesi vuote: nessun parametro."
+  ],
+  [
+   "static String nomeCompleto(String n, String c)",
+   "Restituisce una String e riceve due String",
+   "Il tipo restituito può essere anche una classe."
+  ]
+ ],
+ "FIR_OPTS": [
+  "Restituisce un double e riceve due int",
+  "Non restituisce niente e riceve una String",
+  "Restituisce un boolean e riceve un int",
+  "Restituisce un int e non riceve parametri",
+  "Restituisce una String e riceve due String"
+ ],
+ "VF": [
+  [
+   "Un metodo void può restituire un valore con return.",
+   false,
+   "void significa che non restituisce niente: si può solo scrivere return; per uscire."
+  ],
+  [
+   "In Java i tipi primitivi si passano per valore.",
+   true,
+   "Il metodo riceve una copia: cambiarla non cambia la variabile di chi chiama."
+  ],
+  [
+   "Due metodi possono avere lo stesso nome se hanno parametri diversi.",
+   true,
+   "Si chiama overloading."
+  ],
+  [
+   "Le variabili dichiarate in un metodo esistono anche dopo il return.",
+   false,
+   "Sono locali: spariscono quando il metodo finisce."
+  ],
+  [
+   "Un metodo ricorsivo senza caso base finisce con StackOverflowError.",
+   true,
+   "Le chiamate si accumulano finché la memoria dello stack non basta."
+  ],
+  [
+   "Il main è un metodo come gli altri, ma è il punto di partenza.",
+   true,
+   "La JVM chiama main per avviare il programma."
+  ]
+ ],
+ "MC": [
+  [
+   "Che cosa restituisce static int doppio(int x) { return x * 2; } con doppio(4)?",
+   [
+    "8",
+    "4",
+    "x * 2",
+    "Niente"
+   ],
+   "8",
+   "return restituisce il valore calcolato."
+  ],
+  [
+   "Quale parola indica che un metodo non restituisce niente?",
+   [
+    "void",
+    "null",
+    "static",
+    "return"
+   ],
+   "void",
+   "void sta al posto del tipo restituito."
+  ],
+  [
+   "Come si chiamano le variabili tra le parentesi della firma?",
+   [
+    "Parametri",
+    "Argomenti globali",
+    "Attributi",
+    "Costanti"
+   ],
+   "Parametri",
+   "I valori passati nella chiamata si chiamano argomenti."
+  ],
+  [
+   "Che cosa succede alla variabile n del main se un metodo cambia il suo parametro int?",
+   [
+    "Non cambia",
+    "Cambia anche lei",
+    "Diventa 0",
+    "Il programma si ferma"
+   ],
+   "Non cambia",
+   "Passaggio per valore: il metodo ha una copia."
+  ],
+  [
+   "Che cos'è il caso base in un metodo ricorsivo?",
+   [
+    "Il caso che si risolve senza richiamare il metodo",
+    "La prima riga del metodo",
+    "Il valore di default",
+    "L'ultimo return"
+   ],
+   "Il caso che si risolve senza richiamare il metodo",
+   "Senza caso base la ricorsione non finisce."
+  ]
+ ]
+};
+SG('#voi', D.VOI, D.VOI_BK, 'void o return');
+mount($('#fir'), scGen(D.FIR, D.FIR_OPTS, 'Firma:', 'Significato'), 'Leggere la firma');
+traccia($('#tra'), [['Un metodo con return', ppMetodo], ['Passaggio per valore', ppPerValore], ['Ricorsione: il fattoriale', ppRicorsione]], 'Chiamate passo passo');
+mount($('#out'), metodoGen, 'Che cosa scrive la chiamata');
+hunt($('#hun'), huntMetodi, 'Errori nei metodi');
+quiz();
+mission($('#tot'), [...mcAll(), ...vfAll(), metodoGen, metodoGen, metodoGen, huntMetodi, huntMetodi, scGen(D.FIR, D.FIR_OPTS, 'Firma:', 'Significato')], 'Sfida finale', 12);
+</script></body></html>

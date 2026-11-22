@@ -1,0 +1,173 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Gli array</title><meta name="description" content="Ripasso di dichiarazione e creazione, indici, length, for e for-each, massimo, media e copia di un array."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>Gli array</h1></header><nav id="nav"></nav><main>
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Gli array</h2>
+<p class="lead">Ripasso di dichiarazione e creazione, indici, length, for e for-each, massimo, media e copia di un array.</p>
+<ol><li><b>Creare e leggere:</b> dichiarare, creare, leggere gli elementi e length.</li><li><b>Passo passo:</b> massimo, media con il for-each, copia e riferimento, con l'array nello heap.</li><li><b>Errori tipici:</b> indici fuori dall'array e caccia all'errore.</li><li><b>Quiz</b> e <b>Sfida finale</b>.</li></ol>
+<p>Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.</p>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+<section id="a1" data-g="Creare e leggere" data-t="1 Quanto vale?"><h2>Quanto vale?</h2><p class="lead">Leggete l'array e calcolate: «Altro esercizio» ne propone un altro.</p><div id="val"></div></section>
+<section id="a2" data-g="Creare e leggere" data-t="2 Dichiarazioni"><h2>Che cosa crea?</h2><p class="lead">Scegliete che cosa crea la dichiarazione.</p><div id="dic"></div></section>
+<section id="a3" data-g="Creare e leggere" data-t="3 Ricerca"><h2>La ricerca sequenziale</h2><p class="lead">Mettete in ordine i passi per cercare un valore in un array. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».</p><div id="ord"></div></section>
+<section id="p1" data-g="Passo passo" data-t="Passo passo"><h2>Array passo passo</h2><p class="lead">Un array è un oggetto: sta nello heap e la variabile contiene il riferimento. Con «Guarda» si esegue una riga alla volta; con «Prevedi» prima di alcune righe dovete dire voi che cosa succederà. Funzionano anche le frecce della tastiera.</p><div id="tra"></div></section>
+<section id="e1" data-g="Errori tipici" data-t="Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hun"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Dodici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script src="../../../assets/codice.js"></script><script src="../temi/java.js"></script><script>
+/* L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati, dopo la pubblicazione non si cambia. */
+const D = {
+ "DIC": [
+  [
+   "int[] v = new int[5];",
+   "Un array di 5 int, tutti a 0",
+   "new crea l'array con i valori di default: 0 per i numeri."
+  ],
+  [
+   "String[] s = new String[3];",
+   "Un array di 3 String, tutte null",
+   "Per gli oggetti il valore di default è null."
+  ],
+  [
+   "double[] d = {1.5, 2.0};",
+   "Un array di 2 double già riempito",
+   "Con le graffe si creano e riempiono insieme."
+  ],
+  [
+   "boolean[] b = new boolean[4];",
+   "Un array di 4 boolean, tutti false",
+   "Per i boolean il default è false."
+  ],
+  [
+   "int[] v;",
+   "Solo la variabile, senza array",
+   "Manca new: v non punta ancora a nessun array."
+  ]
+ ],
+ "DIC_OPTS": [
+  "Un array di 5 int, tutti a 0",
+  "Un array di 3 String, tutte null",
+  "Un array di 2 double già riempito",
+  "Un array di 4 boolean, tutti false",
+  "Solo la variabile, senza array"
+ ],
+ "ORD": [
+  [
+   "Si parte dall'indice 0",
+   "Il primo elemento è v[0]."
+  ],
+  [
+   "Si confronta v[i] con il valore cercato",
+   "Con == per i numeri, con equals per le String."
+  ],
+  [
+   "Se sono uguali, si restituisce i",
+   "Trovato: la ricerca finisce."
+  ],
+  [
+   "Altrimenti si passa all'indice successivo",
+   "i++"
+  ],
+  [
+   "Se si arriva a v.length senza trovarlo, si restituisce -1",
+   "-1 significa: non c'è."
+  ]
+ ],
+ "VF": [
+  [
+   "Il primo elemento di un array ha indice 1.",
+   false,
+   "Gli indici partono da 0."
+  ],
+  [
+   "La lunghezza di un array si legge con v.length, senza parentesi.",
+   true,
+   "Per le String invece è length()."
+  ],
+  [
+   "Un array può cambiare lunghezza dopo essere stato creato.",
+   false,
+   "La lunghezza è fissa; per una lista che cresce si usa ArrayList."
+  ],
+  [
+   "int[] b = a; crea una copia dell'array a.",
+   false,
+   "Copia il riferimento: a e b indicano lo stesso array."
+  ],
+  [
+   "Leggere v[v.length] provoca un errore.",
+   true,
+   "L'ultimo indice è v.length - 1: si ottiene ArrayIndexOutOfBoundsException."
+  ],
+  [
+   "Nel for-each la variabile contiene il valore dell'elemento, non l'indice.",
+   true,
+   "for (int x : v): x prende i valori uno dopo l'altro."
+  ]
+ ],
+ "MC": [
+  [
+   "Quanti elementi ha new int[10]?",
+   [
+    "10",
+    "9",
+    "11",
+    "0"
+   ],
+   "10",
+   "Gli indici vanno da 0 a 9."
+  ],
+  [
+   "Quanto vale un elemento di new int[3] appena creato?",
+   [
+    "0",
+    "null",
+    "Un valore casuale",
+    "-1"
+   ],
+   "0",
+   "Java inizializza sempre gli array."
+  ],
+  [
+   "Qual è l'ultimo elemento dell'array v?",
+   [
+    "v[v.length - 1]",
+    "v[v.length]",
+    "v[-1]",
+    "v.last()"
+   ],
+   "v[v.length - 1]",
+   "L'ultimo indice è length - 1."
+  ],
+  [
+   "Quale ciclo è più comodo per leggere tutti gli elementi senza usare l'indice?",
+   [
+    "for-each",
+    "do ... while",
+    "while(true)",
+    "switch"
+   ],
+   "for-each",
+   "for (int x : v)"
+  ],
+  [
+   "Che cosa restituisce di solito una ricerca sequenziale se non trova il valore?",
+   [
+    "-1",
+    "0",
+    "null",
+    "v.length"
+   ],
+   "-1",
+   "Un indice che non può esistere."
+  ]
+ ]
+};
+mount($('#val'), arrayGen, 'Quanto vale nell\'array');
+mount($('#dic'), scGen(D.DIC, D.DIC_OPTS, 'Dichiarazione:', 'Che cosa crea'), 'Che cosa crea la dichiarazione');
+orderGame($('#ord'), asOrder(D.ORD), 'La ricerca sequenziale', false);
+traccia($('#tra'), [['Il massimo', ppArrayMax], ['La media con il for-each', ppArrayMedia], ['Copia o riferimento?', ppArrayCopia]], 'Array passo passo');
+hunt($('#hun'), huntArray, 'Errori con gli array');
+quiz();
+mission($('#tot'), [...mcAll(), ...vfAll(), arrayGen, arrayGen, arrayGen, huntArray, huntArray, scGen(D.DIC, D.DIC_OPTS, 'Dichiarazione:', 'Che cosa crea')], 'Sfida finale', 12);
+</script></body></html>

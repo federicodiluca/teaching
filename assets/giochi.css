@@ -188,7 +188,7 @@ table.res td, table.res th { border: 1px solid var(--tg-line); padding: 8px 14px
 .cod { counter-reset: r; list-style: none; margin: 0; padding: 8px 0; font: 14px/1.55 var(--tg-mono); background: var(--tg-bg); border: 1px solid var(--tg-line); border-radius: 10px; overflow-x: auto; }
 .cod li { counter-increment: r; display: flex; padding: 0 12px 0 0; border-left: 3px solid transparent; transition: background .2s; }
 .cod li::before { content: counter(r); width: 2.6em; flex: none; text-align: right; padding-right: 12px; color: var(--tg-mute); opacity: .6; user-select: none; }
-.cod li code { white-space: pre; font: inherit; background: none; padding: 0; }
+.cod li code { white-space: pre-wrap; overflow-wrap: anywhere; font: inherit; background: none; padding: 0; min-width: 0; }
 .cod li.on { background: color-mix(in srgb, var(--tg-acc) 22%, transparent); border-left-color: var(--tg-acc); }
 .cod li.dopo { background: color-mix(in srgb, var(--tg-hl) 25%, transparent); border-left-color: var(--tg-hl); }
 .cod .k { color: var(--tg-acc); font-weight: 600; }

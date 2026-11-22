@@ -18,6 +18,7 @@ senza installare nulla, senza account e senza raccogliere dati degli studenti.
 | | C e C++ | Dall'algoritmo al codice · Primi passi in C++ · La selezione in C++ · L'iterazione in C++ |
 | | Arduino | Arduino ed elettronica · Arduino: output e input digitali · Arduino: sensori, PWM e attuatori |
 | Informatica, 3° anno | Java: le basi | Da C++ a Java · Tipi, variabili e input · Selezione e cicli in Java |
+| | Metodi, array e stringhe | I metodi · Gli array · Le stringhe |
 | TPSIT, 3° anno | La rappresentazione delle informazioni | Informazione e comunicazione · Digitale e binario · Sistemi di numerazione posizionali · Conversioni di numeri reali e tra basi binarie · Immagini, suoni e video |
 | | HTML | La struttura di una pagina HTML · Titoli, paragrafi e formattazione · Liste, link e ancore · Immagini e tabelle · I form · Tag semantici e buone pratiche |
 | | I codici digitali | Codici digitali pesati · Codici digitali non pesati · Rilevazione e correzione degli errori · Le codifiche nella vita quotidiana · Codici a barre e QR Code |

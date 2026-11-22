@@ -1,0 +1,175 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Le stringhe</title><meta name="description" content="Ripasso dei metodi di String: length, charAt, substring, indexOf, equals, maiuscole e minuscole, e del perché una String non si modifica."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<body class="tg-act" data-solo="1"><header><h1>Le stringhe</h1></header><nav id="nav"></nav><main>
+<section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Le stringhe</h2>
+<p class="lead">Ripasso dei metodi di String: length, charAt, substring, indexOf, equals, maiuscole e minuscole, e del perché una String non si modifica.</p>
+<ol><li><b>I metodi di String:</b> che cosa restituiscono e quanto valgono.</li><li><b>Passo passo:</b> contare le vocali con charAt.</li><li><b>Errori tipici:</b> equals, indici e stringhe che non cambiano.</li><li><b>Quiz</b> e <b>Sfida finale</b>.</li></ol>
+<p>Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.</p>
+<div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
+<section id="s1" data-g="I metodi di String" data-t="1 Quanto vale?"><h2>Quanto vale?</h2><p class="lead">Calcolate il risultato del metodo: «Altro esercizio» ne propone un altro.</p><div id="str"></div></section>
+<section id="s2" data-g="I metodi di String" data-t="2 Che tipo restituisce?"><h2>Che tipo restituisce?</h2><p class="lead">Fate clic su un metodo e poi sul tipo che restituisce.</p><div id="tip"></div></section>
+<section id="p1" data-g="Passo passo" data-t="Passo passo"><h2>Contare le vocali</h2><p class="lead">Con «Guarda» si esegue una riga alla volta; con «Prevedi» prima di alcune righe dovete dire voi che cosa succederà. Funzionano anche le frecce della tastiera.</p><div id="tra"></div></section>
+<section id="e1" data-g="Errori tipici" data-t="Caccia all'errore"><h2>Caccia all'errore</h2><p class="lead">In ogni esercizio una sola riga è sbagliata: fate clic su quella.</p><div id="hun"></div></section>
+<section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
+<section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
+<section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Dodici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
+<section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
+</main><script src="../../../assets/giochi.js"></script><script src="../../../assets/codice.js"></script><script src="../temi/java.js"></script><script>
+/* L'ultimo argomento di ogni gioco è la sua etichetta: è la chiave dei progressi salvati, dopo la pubblicazione non si cambia. */
+const D = {
+ "TIP": [
+  [
+   "s.length()",
+   "int"
+  ],
+  [
+   "s.indexOf('a')",
+   "int"
+  ],
+  [
+   "s.charAt(0)",
+   "char"
+  ],
+  [
+   "s.substring(1, 3)",
+   "String"
+  ],
+  [
+   "s.toUpperCase()",
+   "String"
+  ],
+  [
+   "s.trim()",
+   "String"
+  ],
+  [
+   "s.equals(t)",
+   "boolean"
+  ],
+  [
+   "s.isEmpty()",
+   "boolean"
+  ],
+  [
+   "s.contains(\"ab\")",
+   "boolean"
+  ]
+ ],
+ "TIP_BK": [
+  {
+   "id": "int",
+   "t": "int",
+   "s": "un numero"
+  },
+  {
+   "id": "char",
+   "t": "char",
+   "s": "un carattere"
+  },
+  {
+   "id": "String",
+   "t": "String",
+   "s": "una stringa nuova"
+  },
+  {
+   "id": "boolean",
+   "t": "boolean",
+   "s": "vero o falso"
+  }
+ ],
+ "VF": [
+  [
+   "Il primo carattere di una String ha indice 0.",
+   true,
+   "Come negli array."
+  ],
+  [
+   "s.toUpperCase() trasforma s in maiuscolo.",
+   false,
+   "Restituisce una stringa nuova: s resta com'è (le String sono immutabili)."
+  ],
+  [
+   "s.substring(2, 5) contiene 3 caratteri.",
+   true,
+   "Da 2 compreso a 5 escluso: 5 - 2 = 3."
+  ],
+  [
+   "Per confrontare due String si usa ==.",
+   false,
+   "Si usa equals: == confronta i riferimenti."
+  ],
+  [
+   "s.indexOf('z') restituisce -1 se la z non c'è.",
+   true,
+   "-1 vuol dire: non trovato."
+  ],
+  [
+   "s.length() e v.length si scrivono allo stesso modo.",
+   false,
+   "Per le String è un metodo, con le parentesi; per gli array un attributo."
+  ]
+ ],
+ "MC": [
+  [
+   "Quanto vale \"java\".length()?",
+   [
+    "4",
+    "3",
+    "5",
+    "0"
+   ],
+   "4",
+   "j, a, v, a."
+  ],
+  [
+   "Quanto vale \"scuola\".charAt(2)?",
+   [
+    "u",
+    "c",
+    "o",
+    "s"
+   ],
+   "u",
+   "s = 0, c = 1, u = 2."
+  ],
+  [
+   "Quanto vale \"informatica\".substring(2, 5)?",
+   [
+    "for",
+    "nfo",
+    "form",
+    "orm"
+   ],
+   "for",
+   "Da 2 a 5 escluso."
+  ],
+  [
+   "Quale metodo confronta due stringhe senza badare alle maiuscole?",
+   [
+    "equalsIgnoreCase",
+    "equals",
+    "==",
+    "compare"
+   ],
+   "equalsIgnoreCase",
+   "\"Ciao\".equalsIgnoreCase(\"CIAO\") è true."
+  ],
+  [
+   "Che cosa vuol dire che le String sono immutabili?",
+   [
+    "Non si possono modificare: i metodi ne creano di nuove",
+    "Non si possono stampare",
+    "Hanno lunghezza massima",
+    "Non si possono confrontare"
+   ],
+   "Non si possono modificare: i metodi ne creano di nuove",
+   "Per questo si scrive s = s.toUpperCase();"
+  ]
+ ]
+};
+mount($('#str'), stringGen, 'Quanto vale il metodo di String');
+SG('#tip', D.TIP, D.TIP_BK, 'Che tipo restituisce');
+traccia($('#tra'), [['Contare le vocali', ppVocali]], 'Stringhe passo passo');
+hunt($('#hun'), huntStringhe, 'Errori con le stringhe');
+quiz();
+mission($('#tot'), [...mcAll(), ...vfAll(), stringGen, stringGen, stringGen, stringGen, huntStringhe, huntStringhe], 'Sfida finale', 12);
+</script></body></html>
