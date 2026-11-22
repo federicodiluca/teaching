@@ -1,4 +1,8 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Organizzazione e processi</title><meta name="description" content="Specializzazione, coordinamento, micro e macrostruttura, processi aziendali e catena del valore."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head>
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Organizzazione e processi</title><meta name="description" content="Specializzazione, coordinamento, micro e macrostruttura, processi aziendali e catena del valore."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script><style>
+#mem1 .mem,#mem2 .mem{grid-template-columns:repeat(3,1fr);max-width:760px}
+#mem1 .tile,#mem2 .tile{height:92px;font-family:inherit;font-size:.9rem;line-height:1.25;overflow:hidden;overflow-wrap:anywhere}
+@media(max-width:560px){#mem1 .mem,#mem2 .mem{grid-template-columns:repeat(2,1fr)}#mem1 .tile,#mem2 .tile{height:84px;font-size:.84rem}}
+</style></head>
 <body class="tg-act" data-solo="1"><header><h1>Organizzazione e processi</h1></header><nav id="nav"></nav><main>
 
 <section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Organizzazione e processi</h2>
@@ -10,19 +14,27 @@
 <section id="c1" data-g="Coordinamento" data-t="1 Specializzazione"><h2>Specializzazione verticale o orizzontale</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="spe"></div></section>
 <section id="c2" data-g="Coordinamento" data-t="2 Ex-post o ex-ante"><h2>Meccanismi ex-post ed ex-ante</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="exp"></div></section>
 <section id="c3" data-g="Coordinamento" data-t="3 Quale meccanismo?"><h2>Quale meccanismo di coordinamento?</h2><p class="lead">Leggete la situazione e scegliete il meccanismo che l'azienda sta usando.</p><div id="mec"></div></section>
+<section id="c4" data-g="Coordinamento" data-t="4 Memory"><h2>Memory dei meccanismi</h2><p class="lead">Girate due tessere alla volta e abbinate ogni nome al suo significato. Ad ogni partita le coppie cambiano.</p><div id="mem1"></div></section>
+<section id="c5" data-g="Coordinamento" data-t="5 Trova l'errore"><h2>Trova l'errore</h2><p class="lead">Una sola riga è sbagliata: fate clic su quella.</p><div id="hc"></div></section>
 
 <section id="m1" data-g="Struttura" data-t="1 Microstruttura"><h2>Posizione, compito, mansione, ruolo</h2><p class="lead">Fate clic su una carta e poi sulla definizione giusta.</p><div id="mic"></div></section>
 <section id="m2" data-g="Struttura" data-t="2 Le tre strutture"><h2>Funzionale, divisionale, a matrice</h2><p class="lead">Fate clic su una carta e poi sulla struttura giusta.</p><div id="str"></div></section>
 <section id="m3" data-g="Struttura" data-t="3 Quale struttura?"><h2>Quale struttura conviene?</h2><p class="lead">Leggete la situazione e scegliete la struttura più coerente.</p><div id="qst"></div></section>
+<section id="m4" data-g="Struttura" data-t="4 Leggi l'organigramma"><h2>Che struttura mostra l'organigramma?</h2><p class="lead">Guardate lo schema e scegliete la struttura. Ogni volta l'azienda è diversa.</p><div id="org"></div></section>
+<section id="m5" data-g="Struttura" data-t="5 Contiamo la matrice"><h2>Contiamo i capi nella matrice</h2><p class="lead">Un piccolo calcolo: in una struttura a matrice chi risponde a chi? Scrivete i numeri senza unità.</p><div id="mat"></div></section>
 
 <section id="p1" data-g="Processi" data-t="1 Statica o dinamica"><h2>Visione statica e visione dinamica</h2><p class="lead">Fate clic su una carta e poi sulla visione giusta.</p><div id="sd"></div></section>
 <section id="p2" data-g="Processi" data-t="2 Gli elementi"><h2>Gli elementi di un processo</h2><p class="lead">Il processo è la riparazione di uno smartphone in un centro assistenza. Fate clic su una carta e poi sull'elemento giusto.</p><div id="ele"></div></section>
 <section id="p3" data-g="Processi" data-t="3 Interdipendenze"><h2>Le interdipendenze tra le fasi</h2><p class="lead">Fate clic su una carta e poi sul tipo di interdipendenza.</p><div id="int"></div></section>
 <section id="p4" data-g="Processi" data-t="4 Primari o di supporto"><h2>Processi primari e di supporto</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="pri"></div></section>
 <section id="p5" data-g="Processi" data-t="5 Catena del valore"><h2>Le attività primarie di Porter</h2><p class="lead">Mettete in ordine le attività primarie, dall'arrivo delle materie prime al cliente. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».</p><div id="por"></div></section>
+<section id="p6" data-g="Processi" data-t="6 Che interdipendenza?"><h2>Che interdipendenza c'è tra le fasi?</h2><p class="lead">Leggete la situazione e scegliete il tipo di interdipendenza.</p><div id="ind"></div></section>
+<section id="p7" data-g="Processi" data-t="7 Un ordine online"><h2>Un ordine online, passo per passo</h2><p class="lead">Mettete in ordine le fasi del processo, dall'ordine alla consegna. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».</p><div id="onl"></div></section>
+<section id="p8" data-g="Processi" data-t="8 Memory dei processi"><h2>Memory dei processi</h2><p class="lead">Girate due tessere alla volta e abbinate ogni termine alla sua definizione. Ad ogni partita le coppie cambiano.</p><div id="mem2"></div></section>
 
 <section id="k1" data-g="Mercato" data-t="1 Dal bisogno all'offerta"><h2>Dal bisogno all'offerta</h2><p class="lead">Mettete in ordine la catena logica del marketing. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».</p><div id="mkt"></div></section>
 <section id="k2" data-g="Mercato" data-t="2 B2C o B2B"><h2>B2C o B2B</h2><p class="lead">Fate clic su una carta e poi sul mercato giusto.</p><div id="b2"></div></section>
+<section id="k3" data-g="Mercato" data-t="3 Quale mercato?"><h2>B2C o B2B: quale mercato?</h2><p class="lead">Leggete la situazione e scegliete il mercato.</p><div id="mer"></div></section>
 
 <section id="qz1" data-g="Quiz" data-t="1 Vero o falso"><h2>Vero o falso?</h2><p class="lead">Scegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.</p><div id="vf"></div></section>
 <section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
@@ -210,6 +222,164 @@ const D = {
     ["Quale caratteristica è tipica del mercato B2B?", ["Pochi clienti concentrati geograficamente", "Acquisti guidati dalla moda", "Una rete di negozi tra produttore e cliente"], "Pochi clienti concentrati geograficamente", "Le altre due sono tipiche del mercato dei consumatori (B2C)."]
   ]
 };
+
+/* ---- giochi aggiunti: dati ---- */
+const N = {
+  MEM1: [
+    ["Adattamento reciproco", "Ci si accorda parlando tra colleghi"],
+    ["Supervisione diretta", "Un capo decide e controlla"],
+    ["Standardizzazione dei processi", "Il «come» è scritto in un manuale"],
+    ["Standardizzazione dei risultati", "Si fissa il budget da raggiungere"],
+    ["Standardizzazione delle competenze", "Si punta su titoli e aggiornamento"],
+    ["Specializzazione verticale", "Chi decide non è chi esegue"],
+    ["Specializzazione orizzontale", "Ognuno svolge una sola fase"],
+    ["Meccanismo ex-post", "Nasce nella prassi quotidiana"],
+    ["Meccanismo ex-ante", "Si progetta prima che il lavoro cominci"]
+  ],
+  HC: [
+    { t: "Quale abbinamento tra situazione e meccanismo di coordinamento è sbagliato?",
+      ok: ["Il caposquadra assegna i turni: supervisione diretta", "Il manuale del call center fissa le risposte: standardizzazione dei processi", "Il budget di vendita del mese: standardizzazione dei risultati"],
+      ko: "Due colleghi si accordano a voce: standardizzazione delle competenze",
+      why: "Quando le persone si accordano direttamente è adattamento reciproco; la standardizzazione delle competenze riguarda la formazione richiesta." },
+    { t: "Quale abbinamento tra situazione e meccanismo di coordinamento è sbagliato?",
+      ok: ["Il chirurgo deve avere la specializzazione: standardizzazione delle competenze", "Il capo reparto risolve il conflitto tra due operai: supervisione diretta", "La stessa ricetta in ogni punto vendita: standardizzazione dei processi"],
+      ko: "Ogni reparto riceve un budget di produzione: adattamento reciproco",
+      why: "Un budget fissa il risultato da raggiungere: è standardizzazione dei risultati." },
+    { t: "Quale affermazione sui meccanismi di coordinamento è sbagliata?",
+      ok: ["L'adattamento reciproco è un meccanismo ex-post", "Le tre standardizzazioni sono meccanismi ex-ante", "La supervisione diretta è un meccanismo ex-post"],
+      ko: "I meccanismi ex-ante si instaurano nella prassi, senza pianificazione",
+      why: "A nascere nella prassi sono i meccanismi ex-post; quelli ex-ante si progettano a priori." },
+    { t: "Quale abbinamento tra situazione e tipo di specializzazione è sbagliato?",
+      ok: ["Nella catena di montaggio ognuno monta un pezzo: specializzazione orizzontale", "L'ingegnere progetta il reparto e gli operai lavorano: specializzazione verticale", "Il fast food divide cottura e preparazione: specializzazione orizzontale"],
+      ko: "Il capocantiere stabilisce le procedure e la squadra le applica: specializzazione orizzontale",
+      why: "La separazione tra chi decide come lavorare e chi esegue è specializzazione verticale." },
+    { t: "Quale affermazione sui meccanismi di coordinamento è sbagliata?",
+      ok: ["I meccanismi individuati da Mintzberg sono cinque", "L'adattamento reciproco è il più flessibile", "La supervisione diretta richiede una persona con il ruolo di capo"],
+      ko: "La standardizzazione dei risultati controlla come si lavora, non che cosa si ottiene",
+      why: "È il contrario: i risultati fissano che cosa si deve ottenere, senza dire come." },
+    { t: "Quale affermazione sulle strutture organizzative è sbagliata?",
+      ok: ["Nella struttura funzionale i rischi sono i conflitti tra funzioni", "Nella struttura divisionale le funzioni si possono duplicare", "Nella struttura a matrice si dipende da due capi"],
+      ko: "Nella struttura funzionale ogni unità ha la propria produzione e il proprio marketing",
+      why: "Questo vale per la struttura divisionale; in quella funzionale le unità sono raggruppate per specializzazione." },
+    { t: "Quale affermazione sui processi è sbagliata?",
+      ok: ["Il processo ha sempre un cliente, esterno o interno", "Gli input vengono trasformati in output", "I processi di supporto servono al funzionamento di quelli primari"],
+      ko: "Il controllo è un input che il processo trasforma",
+      why: "Il controllo non si trasforma: fornisce regole e procedure per svolgere le attività." },
+    { t: "Quale affermazione sull'organizzazione è sbagliata?",
+      ok: ["L'organigramma mostra la visione statica dell'impresa", "La visione dinamica segue il flusso delle attività", "Il ruolo descrive le aspettative di comportamento verso chi occupa una posizione"],
+      ko: "La mansione è una posizione individuale assegnata a una sola persona",
+      why: "A una sola persona è assegnata la posizione; la mansione è un insieme di compiti che può essere comune a più persone." }
+  ],
+  INT: [
+    ["La cucina prepara l'ordine e solo dopo il fattorino lo porta al cliente.", "Sequenziale", "l'output di una fase è l'input della successiva"],
+    ["Il grafico e lo sviluppatore del sito si scambiano bozze e correzioni più volte, finché il cliente approva.", "Reciproca", "le due fasi si passano informazioni nei due sensi"],
+    ["Due reparti prenotano la stessa sala prove per lo stesso pomeriggio.", "Generica", "il legame nasce da una risorsa condivisa, non dal flusso del lavoro"],
+    ["Il magazzino prepara l'ordine; l'ufficio spedizioni può stampare l'etichetta solo dopo.", "Sequenziale", "una fase parte quando l'altra ha finito"],
+    ["Il collaudo segnala un difetto alla produzione, che lo corregge e rimanda il pezzo al collaudo, più volte.", "Reciproca", "si va avanti e indietro tra le due fasi"],
+    ["Due processi diversi usano lo stesso magazzino e lo stesso muletto.", "Generica", "condividono risorse e luoghi, senza dipendere uno dall'output dell'altro"],
+    ["Il preventivo, una volta approvato dal cliente, passa all'ufficio acquisti che ordina i materiali.", "Sequenziale", "il passaggio va in un solo senso, a cascata"],
+    ["Medico e infermiere si aggiornano a vicenda sulla terapia per tutta la degenza del paziente.", "Reciproca", "lo scambio è continuo e bidirezionale"]
+  ],
+  MER: [
+    ["Un'azienda installa impianti di climatizzazione industriale in pochi grandi stabilimenti.", "B2B", "pochi clienti, che sono imprese"],
+    ["Un negozio online di scarpe vende a migliaia di persone.", "B2C", "i clienti sono consumatori finali"],
+    ["Un produttore di imballaggi fornisce cartoni a un'azienda alimentare.", "B2B", "il cliente è un'impresa che li usa per produrre"],
+    ["Una catena di abbigliamento punta sulla moda della stagione.", "B2C", "gli acquisti dei consumatori sono guidati dalla moda"],
+    ["Una software house sviluppa un gestionale su misura per uno studio di commercialisti.", "B2B", "vende a un'impresa, con rapporto diretto"],
+    ["Un'app consegna la cena a casa dei privati.", "B2C", "il cliente è la singola persona"],
+    ["Un'azienda agricola vende i suoi prodotti a una rete di negozi che li rivende.", "B2B", "il cliente è il negozio, non chi consuma"],
+    ["Un cinema vende i biglietti ai singoli spettatori.", "B2C", "il pubblico è fatto di consumatori finali"]
+  ],
+  MEM2: [
+    ["Input", "Ciò che il processo trasforma"],
+    ["Output", "Ciò che riceve il cliente"],
+    ["Controllo", "Regole e procedure da rispettare"],
+    ["Risorse", "Persone e tecnologie impiegate"],
+    ["Metodi di gestione", "Coordinano l'avanzamento delle attività"],
+    ["Processo primario", "Crea valore per il cliente esterno"],
+    ["Processo di supporto", "Serve al funzionamento dei primari"],
+    ["Interdipendenza sequenziale", "L'output di una fase è l'input della successiva"],
+    ["Interdipendenza reciproca", "Scambi nei due sensi tra le fasi"],
+    ["Interdipendenza generica", "Risorse, luoghi o tempi condivisi"]
+  ],
+  ONL: [
+    ["Il cliente invia l'ordine dal sito", "Il processo parte da una richiesta del cliente."],
+    ["Il sistema verifica la disponibilità a magazzino", "Si controlla che i prodotti ci siano."],
+    ["Il magazzino prepara i prodotti", "Si raccolgono gli articoli dell'ordine."],
+    ["L'ufficio spedizioni imballa e stampa l'etichetta", "Il pacco è pronto per il corriere."],
+    ["Il corriere ritira il pacco", "Il pacco lascia l'azienda."],
+    ["Il cliente riceve il prodotto", "L'output arriva al cliente."]
+  ]
+};
+const memGen = (pairs, n) => () => shuffle(pairs).slice(0, n).flatMap((p, i) => [[i, p[0]], [i, p[1]]]);
+const huntC = () => { const h = pick(N.HC), lines = shuffle([...h.ok, h.ko]); return { t: h.t, lines, bad: lines.indexOf(h.ko), why: h.why }; };
+
+/* organigrammi disegnati: funzionale, divisionale, a matrice */
+function svgOrg(kind) {
+  const st = 'style="fill:var(--tg-paper-2,#eef2f7);stroke:var(--tg-line-2,#9aa4b2);stroke-width:1.2"';
+  const tx = 'style="fill:var(--tg-ink,#1d2433);font:12px sans-serif" text-anchor="middle"';
+  const ln = 'style="stroke:var(--tg-mute,#7b8494);stroke-width:1.4;fill:none"';
+  const box = (x, y, w, h, s) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="6" ${st}/><text x="${x + w / 2}" y="${y + h / 2 + 4}" ${tx}>${s}</text>`;
+  const line = (x1, y1, x2, y2) => `<path d="M${x1} ${y1}L${x2} ${y2}" ${ln}/>`;
+  let W, H, g = '';
+  if (kind === 'f') {
+    const fn = shuffle(["Acquisti", "Produzione", "Vendite", "Amministrazione", "Logistica", "Qualità"]).slice(0, 4);
+    W = 580; H = 140;
+    g += box(220, 8, 140, 34, 'Direzione');
+    g += line(290, 42, 290, 66) + line(77, 66, 497, 66);
+    fn.forEach((n, i) => { const x = 20 + i * 140; g += line(x + 57, 66, x + 57, 92) + box(x, 92, 114, 34, n) });
+  } else if (kind === 'd') {
+    const set = pick([["Nord", "Centro", "Sud"], ["Pasta", "Dolci", "Surgelati"], ["Italia", "Europa", "Asia"]]);
+    W = 580; H = 192;
+    g += box(220, 8, 140, 34, 'Direzione generale');
+    g += line(290, 42, 290, 62) + line(105, 62, 465, 62);
+    set.forEach((n, i) => {
+      const x = 40 + i * 180, cx = x + 65;
+      g += line(cx, 62, cx, 78) + box(x, 78, 130, 34, 'Divisione ' + n);
+      g += line(cx, 112, cx, 134) + line(cx - 45, 134, cx + 45, 134) + line(cx - 45, 134, cx - 45, 150) + line(cx + 45, 134, cx + 45, 150);
+      g += box(cx - 88, 150, 86, 30, 'Produzione') + box(cx + 2, 150, 86, 30, 'Vendite');
+    });
+  } else {
+    const fn = shuffle(["Progettazione", "Produzione", "Qualità", "Acquisti"]).slice(0, 3), pr = rnd(0, 1) ? 3 : 2;
+    W = 580; H = 172;
+    g += box(220, 6, 140, 30, 'Direzione');
+    for (let j = 0; j < pr; j++) { const x = 190 + j * 125; g += line(290, 36, 290, 50) + box(x, 56, 110, 30, 'Progetto ' + 'ABC'[j]) }
+    g += line(290, 50, 190 + 55, 50) + line(190 + 55, 50, 190 + 55, 56);
+    if (pr > 1) g += line(290, 50, 190 + (pr - 1) * 125 + 55, 50) + line(190 + (pr - 1) * 125 + 55, 50, 190 + (pr - 1) * 125 + 55, 56);
+    fn.forEach((n, i) => {
+      const y = 100 + i * 36;
+      g += box(20, y, 140, 30, n);
+      for (let j = 0; j < pr; j++) g += `<rect x="${190 + j * 125}" y="${y}" width="110" height="30" rx="6" ${st}/><circle cx="${245 + j * 125}" cy="${y + 15}" r="5" style="fill:var(--tg-ink,#1d2433)"/>`;
+    });
+    g += line(220, 21, 10, 21) + line(10, 21, 10, 100 + (fn.length - 1) * 36 + 15);
+    fn.forEach((n, i) => { g += line(10, 115 + i * 36, 20, 115 + i * 36) });
+  }
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" style="max-width:${W}px;display:block;margin:.6rem 0" role="img" aria-label="Organigramma">${g}</svg>`;
+}
+const ORG_WHY = {
+  f: "Le unità sono raggruppate per funzione: acquisti, produzione, vendite... Ogni persona ha un solo capo.",
+  d: "Le unità sono raggruppate per prodotto, mercato o area, e ogni divisione ha le proprie funzioni.",
+  m: "Le persone dipendono da due capi: il responsabile della funzione (riga) e il project manager (colonna)."
+};
+const ORG_NAME = { f: 'Funzionale', d: 'Divisionale', m: 'A matrice' };
+const genOrg = () => {
+  const k = pick(['f', 'd', 'm']);
+  return { q: `Che struttura ha quest'azienda?${svgOrg(k)}`, sl: 'Spiegazione',
+    fields: [{ label: 'Struttura', kind: 'choice', opts: ['', 'Funzionale', 'Divisionale', 'A matrice'], exp: ORG_NAME[k] }],
+    sol: `<p>Risposta: <b>${ORG_NAME[k]}</b>. ${ORG_WHY[k]}</p>` };
+};
+const genMat = () => {
+  const F = rnd(3, 5), P = rnd(2, 4), k = rnd(1, 3);
+  const fn = shuffle(["Progettazione", "Produzione", "Qualità", "Acquisti", "Marketing", "Assistenza"]).slice(0, F);
+  return { q: `Un'azienda a matrice ha ${F} funzioni (${fn.join(', ')}) e ${P} progetti. Ogni funzione assegna ${k} ${k === 1 ? 'specialista' : 'specialisti'} a ciascun progetto, e ogni progetto ha un project manager. Ogni specialista risponde sia al responsabile della sua funzione sia al project manager del suo progetto.`,
+    sl: 'Procedimento',
+    fields: [{ label: 'Quanti specialisti hanno due capi?', kind: 'num', exp: F * P * k, tol: 0 },
+             { label: 'Quanti capi ci sono in tutto (responsabili di funzione e project manager)?', kind: 'num', exp: F + P, tol: 0 }],
+    sol: `<p>Ogni funzione manda ${k} ${k === 1 ? 'specialista' : 'specialisti'} in ognuno dei ${P} progetti: ${F} × ${P} × ${k} = <b>${F * P * k}</b>.</p><p>I capi sono ${F} responsabili di funzione e ${P} project manager: ${F} + ${P} = <b>${F + P}</b>.</p>` };
+};
+const genInt = scGen(N.INT, ['Sequenziale', 'Reciproca', 'Generica'], 'Che interdipendenza c\'è?', 'Interdipendenza');
+const genMer = scGen(N.MER, ['B2C', 'B2B'], 'Quale mercato?', 'Mercato');
+
 SG('#spe', D.SPE, D.SPE_BK, 'Specializzazione');
 SG('#exp', D.EXP, D.EXP_BK, 'Ex-post o ex-ante');
 const genMec = scGen(D.MEC, D.MEC_OPTS, 'Quale meccanismo?', 'Meccanismo');
@@ -225,7 +395,15 @@ SG('#pri', D.PRI, D.PRI_BK, 'Primari o di supporto');
 orderGame($('#por'), asOrder(D.POR), 'Catena del valore', false);
 orderGame($('#mkt'), asOrder(D.MKT), 'Dal bisogno all\'offerta', false);
 SG('#b2', D.B2, D.B2_BK, 'B2C o B2B');
+memory($('#mem1'), memGen(N.MEM1, 6), 'Memory dei meccanismi', 'Stesso significato: le tessere restano scoperte.');
+hunt($('#hc'), huntC, 'Trova l\'errore (organizzazione)');
+mount($('#org'), genOrg, 'Leggi l\'organigramma');
+mount($('#mat'), genMat, 'Contiamo la matrice');
+mount($('#ind'), genInt, 'Che interdipendenza?');
+orderGame($('#onl'), asOrder(N.ONL), 'Un ordine online', false);
+memory($('#mem2'), memGen(N.MEM2, 6), 'Memory dei processi', 'Stesso significato: le tessere restano scoperte.');
+mount($('#mer'), genMer, 'Quale mercato?');
 quiz();
-const SFIDA = [...mcAll(), ...vfAll(), genMec, genMec, genQst, genQst];
+const SFIDA = [...mcAll(), ...vfAll(), genMec, genMec, genQst, genQst, genInt, genMer, genOrg, genMat];
 mission($('#tot'), SFIDA, 'Sfida finale', 15);
 </script></body></html>
