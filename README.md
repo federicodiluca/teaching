@@ -89,8 +89,9 @@ assets/
   giochi.js, giochi.css    motore comune delle attività di Informatica 1: schede, giocatori, esercizi,
                            allenatore, missione a tempo, smistamento, riordino, memory, caccia all'errore,
                            quiz da dati, risultato e salvataggio dei progressi
-  codice.js                strumenti sul codice (dopo giochi.js): colori della sintassi ed esecuzione passo passo
-                           (traccia), con i modi Guarda (per spiegare) e Prevedi (per ripassare)
+  codice.js                strumenti sul codice (dopo giochi.js): colori della sintassi, esecuzione passo passo
+                           (traccia), con i modi Guarda (per spiegare) e Prevedi (per ripassare), e laboratorio
+                           dal vivo per HTML, CSS e JavaScript con anteprima, console e controlli automatici
   qr.js                    generatore di QR code (Kazuhiko Arase, licenza MIT), caricato solo al clic su "QR"
 <corso>/index.html         elenco delle attività del corso
 <corso>/<unità>/index.html elenco delle attività dell'unità
@@ -196,6 +197,11 @@ Com'è fatta una pagina, per scriverla o sistemarla a mano:
    `traccia($('#tra'), gen, 'Etichetta')` (oppure un elenco `[['Nome', gen], ...]` per avere un menu di programmi).
    `gen()` restituisce `{t, lang, code: [righe], run(S)}`: `run` esegue il programma in JavaScript e dopo ogni riga
    chiama `S(riga, {variabili}, scritto, nota)`. Esempi in `informatica-1/cpp/temi/cpp.js` (funzioni `pp...`).
+   **Laboratorio dal vivo**: `laboratorio($('#lab'), [sfide], 'Etichetta')`; ogni sfida ha `t`, `nome`, il codice di
+   partenza (`html`, `css`, `js`), `edit` (le parti modificabili), `controlli: [[descrizione, (doc, win, log) => ...], ...]`
+   e `sol`. I controlli girano in una copia nascosta della pagina (possono premere pulsanti) e devono usare solo i loro
+   argomenti; `stile(doc, 'selettore', 'proprietà')` legge lo stile calcolato. Esempi in TPSIT 3: Il box model,
+   DOM ed eventi, Liste e link.
 3. **Attività con un layout proprio** (pensate per la LIM): `<body class="tg-lim tg-<nome>">`, con stile e script
    nella pagina e poche regole dedicate in `teaching.css`. Nessuna risorsa esterna (font, librerie da CDN):
    tutto deve funzionare anche offline.

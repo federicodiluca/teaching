@@ -217,3 +217,24 @@ table.res td, table.res th { border: 1px solid var(--tg-line); padding: 8px 14px
 .trc-dom input { font: 15px var(--tg-mono); }
 @media (max-width: 700px) { .trc-box { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .trc-var tr.nuovo td { animation: none; } }
+
+/* laboratorio dal vivo */
+.lab-stato { margin-left: auto; font-size: 14px; }
+.lab-box { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; margin: 12px 0; }
+.lab-ed, .lab-vista { display: flex; flex-direction: column; min-width: 0; }
+.lab-tab { display: flex; gap: 4px; flex-wrap: wrap; }
+.lab-tab button { background: none; border: 1px solid var(--tg-line); border-bottom: none; border-radius: 8px 8px 0 0; padding: 6px 12px; font: 600 13px var(--tg-mono); color: var(--tg-mute); cursor: pointer; }
+.lab-tab button.on { background: #0d1117; color: #e6edf3; border-color: #0d1117; }
+.lab-aree textarea { width: 100%; box-sizing: border-box; min-height: 260px; resize: vertical; background: #0d1117; color: #e6edf3; border: 1px solid #0d1117; border-radius: 0 10px 10px 10px;
+  padding: 10px 12px; font: 14px/1.55 var(--tg-mono); tab-size: 2; caret-color: var(--tg-hl); }
+.lab-aree textarea:focus { outline: 2px solid var(--tg-acc); outline-offset: 1px; }
+.lab-aree textarea[readonly] { opacity: .75; }
+.lab-tit { font: 500 11px var(--tg-mono); color: var(--tg-mute); text-transform: uppercase; letter-spacing: .08em; margin: 6px 0 4px; }
+.lab-vista iframe { width: 100%; min-height: 200px; flex: 1; background: #fff; border: 1px solid var(--tg-line); border-radius: 10px; }
+.lab-con pre { margin: 0; min-height: 44px; max-height: 140px; overflow: auto; background: #0d1117; color: #e6edf3; border-radius: 10px; padding: 8px 12px; font: 13px/1.5 var(--tg-mono); white-space: pre-wrap; }
+.lab-chk { list-style: none; padding: 0; margin: 4px 0 10px; display: grid; gap: 4px; }
+.lab-chk li { color: var(--tg-mute); }
+.lab-chk li.ok { color: var(--tg-ok); font-weight: 600; }
+@media (max-width: 760px) { .lab-box { grid-template-columns: 1fr; } }
+.lab-vista { position: relative; }
+.lab-prova { position: absolute; left: -10000px; top: 0; height: 300px; visibility: hidden; }

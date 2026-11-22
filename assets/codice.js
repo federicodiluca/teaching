@@ -1,6 +1,7 @@
 /* codice: strumenti sul codice per le attività tg-act. Va caricato dopo assets/giochi.js:
      <script src="../../../assets/giochi.js"></script><script src="../../../assets/codice.js"></script><script> ... </script>
-   Per ora contiene l'esecuzione passo passo (traccia). Gli stili sono in giochi.css (sezione "codice"). */
+   Contiene l'esecuzione passo passo (traccia) e il laboratorio dal vivo per HTML, CSS e JavaScript (laboratorio).
+   Gli stili sono in giochi.css (sezione "codice"). */
 
 /* ---------- colori della sintassi ----------
    lang: 'cpp' | 'java' | 'js' | 'php' | 'flow' (pseudocodice di Flowgorithm) | 'sql' */
@@ -78,3 +79,60 @@ function traccia(el,gen,label='Passo passo'){const st=stat(label);let ex,P,k,mod
  $$('[data-a=x]').onclick=()=>{if(timer)return fermaAuto();$$('[data-a=x]').textContent='Ferma';timer=setInterval(()=>{if(attesa||k>=P.length-1)return fermaAuto();avanti()},1100)};
  c.addEventListener('keydown',e=>{if(e.target.tagName==='INPUT')return;if(e.key==='ArrowRight'){e.preventDefault();avanti()}else if(e.key==='ArrowLeft'){e.preventDefault();$$('[data-a=i]').click()}});
  giro=0;nuovo()}
+
+/* ---------- laboratorio dal vivo (HTML, CSS, JavaScript) ----------
+   laboratorio(el, sfide, etichetta)
+   sfide = [{t: consegna, nome: titolo breve, html, css, js: codice di partenza,
+             edit: ['css'] quali parti si modificano (le altre si vedono ma non si cambiano; default tutte quelle presenti),
+             controlli: [[descrizione, funzione], ...], sol: {html, css, js} soluzione da mostrare}]
+   L'anteprima gira in un iframe; i controlli girano in una seconda copia nascosta della pagina, dopo ogni modifica,
+   così possono premere pulsanti e scrivere nei campi senza toccare l'anteprima.
+   Ogni funzione riceve (doc, win, log) e restituisce true se il controllo è superato.
+   Le funzioni vengono copiate nell'iframe come testo: devono usare solo i loro argomenti.
+   log = elenco dei testi scritti con console.log. Aiuti per i controlli: stile(doc, 'selettore', 'proprietà').
+   Punti: una sfida vale 1 se la si completa senza aprire la soluzione. */
+function laboratorio(el,sfide,label='Laboratorio'){const st=stat(label),id='lab'+Math.random().toString(36).slice(2);let n=0,cod,fatti={},timer,ultimo='';
+ const PARTI=[['html','HTML'],['css','CSS'],['js','JavaScript']];
+ el.innerHTML=`<div class="card lab">${turn()}<div class="row">${sfide.length>1?`<select class="mt">${sfide.map((s,i)=>`<option value="${i}">${i+1}. ${escH(s.nome||'Sfida '+(i+1))}</option>`).join('')}</select>`:''}<span class="lab-stato"></span></div>
+  <p class="q"></p><div class="lab-box"><div class="lab-ed"><div class="lab-tab"></div><div class="lab-aree"></div></div>
+  <div class="lab-vista"><div class="lab-tit">Anteprima</div><iframe title="Anteprima" sandbox="allow-scripts allow-modals"></iframe><iframe class="lab-prova" title="Controlli" sandbox="allow-scripts" aria-hidden="true" tabindex="-1"></iframe><div class="lab-con"><div class="lab-tit">Console</div><pre></pre></div></div></div>
+  <ul class="lab-chk"></ul><div class="row"><button class="btn sec" data-l="r">Ricomincia la sfida</button><button class="btn sec" data-l="s">Mostra la soluzione</button><button class="btn" data-l="n">Sfida successiva ▶</button></div><div class="stat"></div></div>`;
+ const c=el.querySelector('.lab'),q=s=>c.querySelector(s),fr=q('iframe'),prova=q('.lab-prova');
+ const up=()=>{q('.stat').textContent=`Sfide completate: ${Object.values(fatti).filter(x=>x==='ok').length} su ${sfide.length}`};
+ function carica(i){n=i;const s=sfide[n];if(q('.mt'))q('.mt').value=n;cod={html:s.html||'',css:s.css||'',js:s.js||''};
+  const edit=s.edit||PARTI.map(p=>p[0]).filter(k=>s[k]!==undefined);
+  const parti=PARTI.filter(p=>s[p[0]]!==undefined||edit.includes(p[0]));
+  q('.q').innerHTML=s.t;
+  q('.lab-tab').innerHTML=parti.map((p,j)=>`<button class="${j===parti.findIndex(x=>edit.includes(x[0]))?'on':''}" data-p="${p[0]}">${p[1]}${edit.includes(p[0])?'':' 🔒'}</button>`).join('');
+  q('.lab-aree').innerHTML=parti.map(p=>`<textarea data-p="${p[0]}" spellcheck="false" autocomplete="off" autocapitalize="off" ${edit.includes(p[0])?'':'readonly'} aria-label="${p[1]}"></textarea>`).join('');
+  c.querySelectorAll('.lab-aree textarea').forEach(t=>{t.value=cod[t.dataset.p];t.oninput=()=>{cod[t.dataset.p]=t.value;programma()};
+   t.onkeydown=e=>{if(e.key==='Tab'&&!e.shiftKey&&!t.readOnly){e.preventDefault();const a=t.selectionStart;t.setRangeText('  ',a,t.selectionEnd,'end');t.oninput()}}});
+  mostraParte((q('.lab-tab .on')||q('.lab-tab button')).dataset.p);
+  q('[data-l=n]').style.display=n<sfide.length-1?'':'none';esegui()}
+ function mostraParte(p){c.querySelectorAll('.lab-tab button').forEach(b=>b.classList.toggle('on',b.dataset.p===p));c.querySelectorAll('.lab-aree textarea').forEach(t=>t.style.display=t.dataset.p===p?'':'none')}
+ function programma(){clearTimeout(timer);timer=setTimeout(esegui,350)}
+ function esegui(){const s=sfide[n];q('.lab-con pre').textContent='';
+  const ctl=(s.controlli||[]).map(x=>'('+x[1].toString()+')').join(',');
+  const pagina=chk=>`<!doctype html><html><head><meta charset="utf-8">${spia(chk)}<style>body{font-family:system-ui,sans-serif;margin:12px}${cod.css}</style></head><body>${cod.html}${js}</body></html>`;
+  const spia=chk=>`<script>(function(){var P=function(t,x){if(${chk?'t==="chk"':'t!=="chk"'})parent.postMessage({lab:${JSON.stringify(id)},t:t,x:x},'*')},log=[];
+   var testo=function(a){return Array.prototype.map.call(a,function(v){try{return typeof v==='object'?JSON.stringify(v):String(v)}catch(e){return String(v)}}).join(' ')};
+   ['log','info','warn','error'].forEach(function(k){var o=console[k];console[k]=function(){var t=testo(arguments);log.push(t);P('log',(k==='error'?'✖ ':k==='warn'?'⚠ ':'')+t);o&&o.apply(console,arguments)}});
+   window.onerror=function(m,u,r){P('log','✖ Errore'+(r?' alla riga '+r:'')+': '+m)};
+   window.stile=function(doc,sel,pr){var e=doc.querySelector(sel);return e?getComputedStyle(e).getPropertyValue(pr).trim():''};
+   window.__controlla=function(){var C=[${ctl}],r=C.map(function(f){try{return !!f(document,window,log)}catch(e){return false}});P('chk',r)};
+   ${chk?"window.addEventListener('load',function(){setTimeout(__controlla,30)});":''}})()<\/script>`;
+  const js=cod.js?`<script>${cod.js.replace(/<\/script/gi,'<\\/script')}\n<\/script>`:'';
+  prova.style.width=(fr.clientWidth||400)+'px';fr.srcdoc=pagina(false);prova.srcdoc=pagina(true)}
+ window.addEventListener('message',e=>{const d=e.data;if(!d||d.lab!==id)return;
+  if(d.t==='log'){const p=q('.lab-con pre');p.textContent+=(p.textContent?'\n':'')+d.x}
+  if(d.t==='chk'){const s=sfide[n];q('.lab-chk').innerHTML=(s.controlli||[]).map((x,i)=>`<li class="${d.x[i]?'ok':''}">${d.x[i]?'✔':'○'} ${x[0]}</li>`).join('');
+   const tutti=d.x.length&&d.x.every(Boolean);
+   if(tutti&&!fatti[n]){fatti[n]='ok';st.tot++;st.ok++;up()}
+   q('.lab-stato').innerHTML=tutti?'<b style="color:var(--ok)">Sfida completata!</b>':fatti[n]==='sol'?'<span style="color:var(--mute)">Soluzione mostrata</span>':''}});
+ q('[data-l=r]').onclick=()=>carica(n);
+ q('[data-l=s]').onclick=()=>{const s=sfide[n];if(!s.sol)return;if(!fatti[n]){fatti[n]='sol';st.tot++;up()}
+  c.querySelectorAll('.lab-aree textarea').forEach(t=>{if(s.sol[t.dataset.p]!==undefined){t.value=s.sol[t.dataset.p];cod[t.dataset.p]=t.value}});esegui()};
+ q('[data-l=n]').onclick=()=>carica(Math.min(n+1,sfide.length-1));
+ c.querySelector('.lab-tab').onclick=e=>{const b=e.target.closest('button');if(b)mostraParte(b.dataset.p)};
+ if(q('.mt'))q('.mt').onchange=()=>carica(+q('.mt').value);
+ up();carica(0)}
