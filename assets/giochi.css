@@ -264,3 +264,19 @@ table.res td, table.res th { border: 1px solid var(--tg-line); padding: 8px 14px
 @media (max-width: 700px) { .trc-box.mem { grid-template-columns: 1fr; } .trc-box.mem .trc-memoria { grid-template-columns: minmax(0, .8fr) minmax(0, 1fr); gap: 28px; } }
 @media (max-width: 420px) { .trc-box.mem .trc-memoria { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .ogg.nuovo { animation: none; } }
+
+/* completa il codice e riordina le righe (assets/codice.js) */
+.cod.cmp li code { white-space: pre-wrap; }
+.cod .cmp-f { width: auto; height: auto; min-height: 0; line-height: 1.3; font: 14px var(--tg-mono); padding: 1px 4px; margin: 1px 2px; border: 1px dashed var(--tg-acc); border-radius: 6px; background: var(--tg-paper); color: var(--tg-ink); min-width: 3ch; }
+.cod select.cmp-f { padding: 1px 2px; min-width: 9ch; }
+.cod .cmp-f.ok { border-style: solid; border-color: var(--tg-ok); background: var(--tg-ok-soft); }
+.cod .cmp-f.ko { border-style: solid; border-color: var(--tg-ko); background: var(--tg-ko-soft); }
+.cod.par li { align-items: center; padding: 3px 6px 3px 0; border-bottom: 1px solid var(--tg-line); cursor: grab; }
+.cod.par li:last-child { border-bottom: none; }
+.cod.par li code { flex: 1; min-width: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.cod.par li.drag { opacity: .4; }
+.cod.par li.over { box-shadow: inset 0 2px var(--tg-acc); }
+.cod.par li.via code { text-decoration: line-through; opacity: .45; }
+.cod.par .mv { display: flex; gap: 4px; flex: none; }
+.cod.par .mv button { font: 13px var(--tg-mono); width: 30px; height: 28px; border: 1px solid var(--tg-line); border-radius: 6px; background: var(--tg-paper); color: var(--tg-ink); cursor: pointer; }
+.cod.par .mv button:hover { border-color: var(--tg-acc); }
