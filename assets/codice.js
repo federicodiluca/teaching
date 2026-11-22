@@ -32,37 +32,59 @@ function codiceHTML(righe,lang){return `<ol class="cod">${righe.map(r=>`<li><cod
      scritto = testo stampato da quella riga (facoltativo), nota = spiegazione del passo (facoltativa).
    In alternativa a run si può dare steps: [{l, v, out, nota}] già pronti (out = solo il testo nuovo).
    Due modi: "Guarda" (si va avanti e indietro, per spiegare) e "Prevedi" (prima di alcuni passi si chiede
-   il valore nuovo di una variabile o che cosa viene scritto; i punti vanno nel risultato). */
-function valoreTraccia(x,lang){if(typeof x==='string')return '"'+x+'"';if(typeof x==='boolean')return lang==='flow'?(x?'Vero':'Falso'):String(x);
- if(Array.isArray(x))return (lang==='php'?'[':'{')+x.map(y=>valoreTraccia(y,lang)).join(', ')+(lang==='php'?']':'}');if(x===null||x===undefined)return lang==='php'?'null':lang==='js'?String(x):'?';
+   il valore nuovo di una variabile o che cosa viene scritto; i punti vanno nel risultato).
+
+   Oggetti in memoria: run riceve anche H, la memoria dinamica (heap). H.nuovo('Classe', {campi}) crea un oggetto
+   e restituisce il suo riferimento, da mettere nelle variabili o nei campi di altri oggetti; H.campo(rif, 'nome', valore)
+   cambia un campo; H.di(rif) dà i campi per leggerli. Se il programma usa H, accanto al codice compaiono lo stack
+   (le variabili) e lo heap (gli oggetti), collegati da frecce; gli oggetti senza più riferimenti diventano grigi. */
+const isRif=x=>!!x&&typeof x==='object'&&!Array.isArray(x)&&'@' in x;
+function valoreTraccia(x,lang){if(isRif(x))return '→ oggetto';if(typeof x==='string')return '"'+x+'"';if(typeof x==='boolean')return lang==='flow'?(x?'Vero':'Falso'):String(x);
+ if(Array.isArray(x))return (lang==='php'?'[':'{')+x.map(y=>valoreTraccia(y,lang)).join(', ')+(lang==='php'?']':'}');
+ if(x===null||x===undefined)return lang==='js'?String(x):lang==='java'||lang==='php'?'null':'?';
  return typeof x==='number'?String(+x.toFixed(6)).replace('.',lang==='flow'?',':'.'):String(x)}
 function normTraccia(s){return String(s).trim().toLowerCase().replace(/^["']|["']$/g,'').replace(/\s+/g,' ').replace(/,(?=\d)/g,'.').replace(/^vero$/,'true').replace(/^falso$/,'false')}
-function passiTraccia(ex){if(ex.steps)return ex.steps.map(p=>({l:p.l,v:{...p.v},out:p.out||'',nota:p.nota||''}));const st=[];
- ex.run((l,v,out,nota)=>{st.push({l,v:JSON.parse(JSON.stringify(v||{})),out:out===undefined||out===null?'':String(out),nota:nota||''})});return st}
+function passiTraccia(ex){if(ex.steps)return ex.steps.map(p=>({l:p.l,v:{...p.v},h:p.h||{},out:p.out||'',nota:p.nota||''}));const st=[],ogg={};let n=0;
+ const H={nuovo:(c,f)=>{n++;ogg[n]={c,f:{...(f||{})}};return {'@':n}},campo:(r,k,v)=>{ogg[r['@']].f[k]=v},di:r=>ogg[r['@']].f};
+ ex.run((l,v,out,nota)=>{st.push({l,v:JSON.parse(JSON.stringify(v||{})),h:JSON.parse(JSON.stringify(ogg)),out:out===undefined||out===null?'':String(out),nota:nota||''})},H);
+ return st}
+/* oggetti raggiungibili dalle variabili (direttamente o attraverso i campi di altri oggetti) */
+function raggiungibili(v,h){const vis=new Set(),coda=Object.values(v).filter(isRif).map(r=>r['@']);
+ while(coda.length){const id=coda.pop();if(vis.has(id)||!h[id])continue;vis.add(id);Object.values(h[id].f).forEach(x=>{if(isRif(x))coda.push(x['@']);if(Array.isArray(x))x.filter(isRif).forEach(r=>coda.push(r['@']))})}
+ return vis}
 function traccia(el,gen,label='Passo passo'){const st=stat(label);let ex,P,k,modo='g',giro,chiesti,attesa,timer;
  /* gen può essere anche un elenco [["Nome", gen], ...]: compare un menu per scegliere il programma */
  const menu=Array.isArray(gen)?gen:null;
  el.innerHTML=`<div class="card trc" tabindex="0">${turn()}${menu?`<div class="row"><select class="mt">${menu.map((a,i)=>`<option value="${i}">${escH(a[0])}</option>`).join('')}</select></div>`:''}<p class="q"></p><div class="row trc-modo"><button class="btn sec on" data-m="g">Guarda</button><button class="btn sec" data-m="p">Prevedi</button><span class="trc-pos"></span></div>
-  <div class="trc-box"><div class="trc-cod"></div><div class="trc-lato"><table class="trc-var"><thead><tr><th>Variabile</th><th>Valore</th></tr></thead><tbody></tbody></table><div class="trc-out"><small>Output</small><pre></pre></div></div></div>
+  <div class="trc-box"><div class="trc-cod"></div><div class="trc-lato"><div class="trc-memoria"><table class="trc-var"><thead><tr><th>Variabile</th><th>Valore</th></tr></thead><tbody></tbody></table><div class="trc-heap"><div class="trc-tit">Heap: oggetti</div><div class="trc-ogg"></div></div><svg class="trc-frecce" aria-hidden="true"><defs><marker id="pt-${escH(label.replace(/\W/g,''))}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z"/></marker></defs><g></g></svg></div><div class="trc-out"><small>Output</small><pre></pre></div></div></div>
   <p class="trc-nota"></p><div class="trc-ask"></div>
   <div class="row"><button class="btn sec" data-a="r" title="Ricomincia">⏮</button><button class="btn sec" data-a="i" title="Indietro (freccia a sinistra)">◀ Indietro</button><button class="btn" data-a="a" title="Avanti (freccia a destra)">Avanti ▶</button><button class="btn sec" data-a="x">Automatico</button><button class="btn sec" data-a="n">Altro programma</button></div><div class="stat"></div></div>`;
  const c=el.querySelector('.trc'),$$=s=>c.querySelector(s),up=()=>$$('.stat').textContent=modo==='p'?`Previsioni esatte: ${st.ok} su ${st.tot}`:'';
  function nuovo(){ex=menu?menu[+$$('.mt').value][1]():gen();P=passiTraccia(ex);k=-1;giro++;fermaAuto();attesa=null;$$('.q').innerHTML=ex.t;$$('.trc-cod').innerHTML=codiceHTML(ex.code,ex.lang);
   /* in Prevedi si chiede su alcuni passi (al massimo 4) in cui cambia una variabile o si scrive qualcosa */
-  const cand=[];P.forEach((p,i)=>{const prima=i?P[i-1].v:{};const cambia=Object.keys(p.v).filter(n=>JSON.stringify(p.v[n])!==JSON.stringify(prima[n])&&n in prima);
-   if(p.out.trim())cand.push({i,tipo:'out'});else if(cambia.length)cand.push({i,tipo:'var',nome:pick(cambia)})});
-  chiesti=shuffle(cand).slice(0,4).sort((a,b)=>a.i-b.i);mostra()}
- function mostra(){const p=P[k]||{l:-1,v:{},out:'',nota:''},prima=k>0?P[k-1].v:{};
+  const cand=[];P.forEach((p,i)=>{const prima=i?P[i-1]:{v:{},h:{}};const cambia=Object.keys(p.v).filter(n=>!isRif(p.v[n])&&JSON.stringify(p.v[n])!==JSON.stringify(prima.v[n])&&n in prima.v);
+   /* campi di oggetti già esistenti che cambiano, se una variabile punta all'oggetto: si chiede var.campo */
+   const campi=[];Object.keys(p.h).forEach(id=>{if(!prima.h[id])return;const nv=Object.keys(p.v).find(n=>isRif(p.v[n])&&p.v[n]['@']==id);if(!nv)return;
+    Object.keys(p.h[id].f).forEach(f=>{const x=p.h[id].f[f];if(!isRif(x)&&f in prima.h[id].f&&JSON.stringify(x)!==JSON.stringify(prima.h[id].f[f]))campi.push({nome:nv+'.'+f,val:x})})});
+   if(p.out.trim())cand.push({i,tipo:'out'});else if(campi.length){const q=pick(campi);cand.push({i,tipo:'var',nome:q.nome,val:q.val})}else if(cambia.length)cand.push({i,tipo:'var',nome:pick(cambia)})});
+  chiesti=shuffle(cand).slice(0,4).sort((a,b)=>a.i-b.i);
+  const mem=P.some(p=>Object.keys(p.h).length);$$('.trc-box').classList.toggle('mem',mem);$$('.trc-heap').style.display=mem?'':'none';
+  $$('.trc-var th').textContent=mem?'Stack: variabili':'Variabile';mostra()}
+ function cella(x){return isRif(x)?`<span class="rif" data-r="${x['@']}" title="riferimento a un oggetto"></span>`:`<code>${escH(valoreTraccia(x,ex.lang))}</code>`}
+ function mostra(){const p=P[k]||{l:-1,v:{},h:{},out:'',nota:''},pp=k>0?P[k-1]:{v:{},h:{}},prima=pp.v;
   c.querySelectorAll('.cod li').forEach((li,i)=>li.classList.toggle('on',i===p.l));
   const nomi=[...new Set(P.slice(0,k+1).flatMap(q=>Object.keys(q.v)))];
-  $$('.trc-var tbody').innerHTML=nomi.length?nomi.map(n=>`<tr class="${k>=0&&JSON.stringify(p.v[n])!==JSON.stringify(prima[n])?'nuovo':''}"><td><code>${escH(n)}</code></td><td><code>${n in p.v?escH(valoreTraccia(p.v[n],ex.lang)):''}</code></td></tr>`).join(''):'<tr><td colspan="2" class="vuoto">ancora nessuna</td></tr>';
+  $$('.trc-var tbody').innerHTML=nomi.length?nomi.map(n=>`<tr class="${k>=0&&JSON.stringify(p.v[n])!==JSON.stringify(prima[n])?'nuovo':''}"><td><code>${escH(n)}</code></td><td>${n in p.v?cella(p.v[n]):''}</td></tr>`).join(''):'<tr><td colspan="2" class="vuoto">ancora nessuna</td></tr>';
+  const vivi=raggiungibili(p.v,p.h);
+  $$('.trc-ogg').innerHTML=Object.keys(p.h).map(id=>{const o=p.h[id],o0=pp.h[id];return `<div class="ogg${vivi.has(+id)?'':' orfano'}${!o0?' nuovo':''}" data-o="${id}"><b>${escH(o.c)}</b>${vivi.has(+id)?'':'<small>nessun riferimento: lo eliminerà il garbage collector</small>'}<table>${Object.keys(o.f).map(f=>`<tr class="${o0&&JSON.stringify(o.f[f])!==JSON.stringify(o0.f[f])?'nuovo':''}"><td><code>${escH(f)}</code></td><td>${cella(o.f[f])}</td></tr>`).join('')}</table></div>`}).join('')||'<p class="vuoto">ancora nessun oggetto</p>';
+  requestAnimationFrame(frecce);
   $$('.trc-out pre').textContent=P.slice(0,k+1).map(q=>q.out).join('');
   $$('.trc-nota').innerHTML=k<0?'Premete «Avanti» per eseguire la prima riga.':k===P.length-1?(p.nota?p.nota+' ':'')+'<b>Fine del programma.</b>':p.nota||'';
   $$('.trc-pos').textContent=`Passo ${k+1} di ${P.length}`;$$('[data-a=i]').disabled=k<0;$$('[data-a=a]').disabled=k>=P.length-1||!!attesa;
   const s=c.querySelector('.cod li.on');if(s&&s.scrollIntoView&&c.contains(document.activeElement))s.scrollIntoView({block:'nearest'});up()}
  function avanti(){if(attesa||k>=P.length-1)return;const q=modo==='p'&&chiesti.find(x=>x.i===k+1&&!x.fatto);if(q)return domanda(q);k++;mostra();if(k>=P.length-1)fermaAuto()}
  function domanda(q){fermaAuto();attesa=q;const p=P[q.i],riga=ex.code[p.l].trim();
-  const exp=q.tipo==='out'?p.out.replace(/\n$/,''):valoreTraccia(p.v[q.nome],ex.lang);q.exp=exp;
+  const exp=q.tipo==='out'?p.out.replace(/\n$/,''):valoreTraccia('val' in q?q.val:p.v[q.nome],ex.lang);q.exp=exp;
   $$('.trc-ask').innerHTML=`<div class="trc-dom"><p>Si esegue <code>${escH(riga)}</code>. ${q.tipo==='out'?'Che cosa viene scritto?':`Quanto varrà <code>${escH(q.nome)}</code>?`}</p><div class="row"><input type="text" autocomplete="off" spellcheck="false"><button class="btn" data-a="c">Controlla</button><span class="msg"></span></div></div>`;
   c.querySelectorAll('.cod li').forEach((li,i)=>li.classList.toggle('dopo',i===p.l));
   const inp=$$('.trc-ask input');inp.focus();inp.onkeydown=e=>{if(e.key==='Enter')controlla()};$$('[data-a=c]').onclick=controlla;mostra()}
@@ -70,6 +92,19 @@ function traccia(el,gen,label='Passo passo'){const st=stat(label);let ex,P,k,mod
   st.tot++;if(ok)st.ok++;q.fatto=true;attesa=null;
   $$('.trc-ask').innerHTML=`<p class="msg" style="color:var(--${ok?'ok':'ko'})">${ok?'Esatto!':'No: '+(q.tipo==='out'?'viene scritto':'vale')+' <code>'+escH(q.exp)+'</code>.'}</p>`;
   c.querySelectorAll('.cod li.dopo').forEach(li=>li.classList.remove('dopo'));k++;mostra();c.focus()}
+ /* frecce dai riferimenti (nelle variabili o nei campi) agli oggetti */
+ const idFreccia='pt-'+label.replace(/\W/g,'');
+ function frecce(){const box=$$('.trc-memoria'),svg=$$('.trc-frecce'),g=svg.querySelector('g');g.innerHTML='';if(!$$('.trc-box').classList.contains('mem'))return;
+  const B=box.getBoundingClientRect();svg.setAttribute('width',B.width);svg.setAttribute('height',B.height);
+  box.querySelectorAll('.rif').forEach(r=>{const o=box.querySelector(`.ogg[data-o="${r.dataset.r}"]`);if(!o)return;const a=r.getBoundingClientRect(),b=o.getBoundingClientRect();
+   const x1=a.left+a.width/2-B.left,y1=a.top+a.height/2-B.top;let x2,y2,c1,c2;
+   if(b.left>=a.right-2){x2=b.left-B.left;y2=Math.min(Math.max(y1,b.top-B.top+12),b.bottom-B.top-12);c1=[x1+40,y1];c2=[x2-40,y2]}
+   else if(b.top>=a.bottom){x2=b.left-B.left+24;y2=b.top-B.top;c1=[x1,y1+30];c2=[x2,y2-30]}
+   else if(b.bottom<=a.top){x2=b.left-B.left+24;y2=b.bottom-B.top;c1=[x1,y1-30];c2=[x2,y2+30]}
+   else{x2=b.right-B.left;y2=b.top-B.top+14;c1=[x1+40,y1];c2=[x2+40,y2]}
+   const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d',`M${x1} ${y1}C${c1} ${c2} ${x2} ${y2}`);path.setAttribute('marker-end',`url(#${idFreccia})`);
+   if(o.classList.contains('orfano'))path.setAttribute('class','orfano');g.appendChild(path)})}
+ window.addEventListener('resize',()=>requestAnimationFrame(frecce));
  function fermaAuto(){clearInterval(timer);timer=null;const b=$$('[data-a=x]');if(b)b.textContent='Automatico'}
  c.querySelectorAll('.trc-modo button').forEach(b=>b.onclick=()=>{modo=b.dataset.m;c.querySelectorAll('.trc-modo button').forEach(x=>x.classList.toggle('on',x===b));
   k=-1;attesa=null;chiesti.forEach(q=>delete q.fatto);$$('.trc-ask').innerHTML='';fermaAuto();mostra()});

@@ -238,3 +238,29 @@ table.res td, table.res th { border: 1px solid var(--tg-line); padding: 8px 14px
 @media (max-width: 760px) { .lab-box { grid-template-columns: 1fr; } }
 .lab-vista { position: relative; }
 .lab-prova { position: absolute; left: -10000px; top: 0; height: 300px; visibility: hidden; }
+
+/* oggetti in memoria (traccia con H) */
+.trc-box.mem { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); }
+.trc-memoria { position: relative; display: grid; gap: 12px; }
+.trc-box.mem .trc-memoria { grid-template-columns: minmax(0, .8fr) minmax(0, 1fr); gap: 36px; align-items: start; }
+.trc-tit { font: 500 12px var(--tg-mono); color: var(--tg-mute); padding: 4px 0; border-bottom: 1px solid var(--tg-line); margin-bottom: 8px; }
+.trc-ogg { display: flex; flex-direction: column; gap: 12px; }
+.trc-ogg .vuoto { color: var(--tg-mute); font-style: italic; margin: 0; font-size: 14px; }
+.ogg { position: relative; z-index: 1; background: var(--tg-paper); border: 2px solid var(--tg-acc); border-radius: 10px; padding: 6px 10px 8px; font-size: 14px; transition: opacity .3s, border-color .3s; }
+.ogg > b { display: block; font: 600 13px var(--tg-mono); color: var(--tg-acc); margin-bottom: 4px; }
+.ogg > small { display: block; color: var(--tg-mute); font-size: 12px; margin-bottom: 4px; }
+.ogg table { border-collapse: collapse; width: 100%; }
+.ogg td { padding: 3px 6px; border-top: 1px solid var(--tg-line); }
+.ogg tr.nuovo td { background: var(--tg-hl-soft); }
+.ogg.nuovo { animation: trc-nasce .5s ease; }
+.ogg.orfano { opacity: .45; border-style: dashed; border-color: var(--tg-mute); }
+.ogg.orfano > b { color: var(--tg-mute); }
+@keyframes trc-nasce { from { transform: scale(.85); opacity: 0; } }
+.rif { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--tg-acc); vertical-align: middle; box-shadow: 0 0 0 3px color-mix(in srgb, var(--tg-acc) 25%, transparent); }
+.trc-frecce { position: absolute; left: 0; top: 0; pointer-events: none; overflow: visible; z-index: 2; }
+.trc-frecce path { fill: none; stroke: var(--tg-acc); stroke-width: 2; }
+.trc-frecce path.orfano { stroke: var(--tg-mute); stroke-dasharray: 4 3; }
+.trc-frecce marker path { fill: var(--tg-acc); stroke: none; }
+@media (max-width: 700px) { .trc-box.mem { grid-template-columns: 1fr; } .trc-box.mem .trc-memoria { grid-template-columns: minmax(0, .8fr) minmax(0, 1fr); gap: 28px; } }
+@media (max-width: 420px) { .trc-box.mem .trc-memoria { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .ogg.nuovo { animation: none; } }

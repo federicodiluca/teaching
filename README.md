@@ -197,6 +197,9 @@ Com'è fatta una pagina, per scriverla o sistemarla a mano:
    `traccia($('#tra'), gen, 'Etichetta')` (oppure un elenco `[['Nome', gen], ...]` per avere un menu di programmi).
    `gen()` restituisce `{t, lang, code: [righe], run(S)}`: `run` esegue il programma in JavaScript e dopo ogni riga
    chiama `S(riga, {variabili}, scritto, nota)`. Esempi in `informatica-1/cpp/temi/cpp.js` (funzioni `pp...`).
+   **Oggetti in memoria**: `run(S, H)` riceve anche lo heap; `H.nuovo('Classe', {campi})` crea un oggetto e restituisce
+   il riferimento da mettere nelle variabili, `H.campo(rif, 'nome', valore)` lo modifica. Accanto al codice compaiono
+   stack e heap con le frecce; gli oggetti senza riferimenti diventano grigi. Esempio in TPSIT 3, Funzioni, oggetti e array.
    **Laboratorio dal vivo**: `laboratorio($('#lab'), [sfide], 'Etichetta')`; ogni sfida ha `t`, `nome`, il codice di
    partenza (`html`, `css`, `js`), `edit` (le parti modificabili), `controlli: [[descrizione, (doc, win, log) => ...], ...]`
    e `sol`. I controlli girano in una copia nascosta della pagina (possono premere pulsanti) e devono usare solo i loro
