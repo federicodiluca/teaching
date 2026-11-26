@@ -104,3 +104,47 @@ function erroreAlgoritmo() {
     { t: 'Questo algoritmo deve calcolare la media di N voti. Quale riga è sbagliata?', lines: ['somma = 0', 'Per i da 1 a N', '    Lettura voto', '    somma = somma + voto', 'media = somma / voto'], bad: 4, why: 'La media si calcola dividendo la somma per il numero dei voti (N), non per l\'ultimo voto letto.' }
   ]);
 }
+
+/* ---------- programmi Flowgorithm per l'esecuzione passo passo (traccia in assets/codice.js, lang 'flow') ---------- */
+function ppFlowMedia() {
+  const v = [rnd(4, 10), rnd(4, 10), rnd(4, 10)], m = (v[0] + v[1] + v[2]) / 3;
+  return {
+    t: `La media di tre voti con il ciclo <b>Per</b>. L'utente scrive <b>${v.join(', ')}</b>.`, lang: 'flow',
+    code: ['Dichiarazione Intero somma, i, voto', 'Assegnazione somma = 0', 'Per i da 1 a 3', '    Lettura voto', '    Assegnazione somma = somma + voto', 'Fine Per', 'Scrittura "Media: " & somma / 3'],
+    run(S) {
+      S(0, { somma: null, i: null, voto: null }, '', 'Si creano le variabili: non hanno ancora un valore.');
+      let s = 0; S(1, { somma: s, i: null, voto: null }, '', 'L\'accumulatore parte da 0.');
+      v.forEach((x, k) => {
+        S(2, { somma: s, i: k + 1, voto: k ? v[k - 1] : null }, '', `Il contatore i vale ${k + 1}: si esegue il blocco del ciclo.`);
+        S(3, { somma: s, i: k + 1, voto: x }, x + '\n', `L'utente scrive ${x}.`);
+        s += x; S(4, { somma: s, i: k + 1, voto: x }, '', `somma = ${s - x} + ${x} = ${s}.`);
+      });
+      S(5, { somma: s, i: 3, voto: v[2] }, '', 'Il ciclo è stato eseguito 3 volte: si esce.');
+      S(6, { somma: s, i: 3, voto: v[2] }, `Media: ${String(+m.toFixed(4)).replace('.', ',')}\n`, 'Con & si concatenano testo e valori.');
+    }
+  };
+}
+function ppFlowMentre() {
+  const n0 = pick([5, 9, 12, 20, 33, 40]);
+  return {
+    t: `Quante volte si può dimezzare ${n0} (divisione intera) prima di arrivare a 1? Ciclo <b>Mentre</b>.`, lang: 'flow',
+    code: ['Dichiarazione Intero n, conta', `Assegnazione n = ${n0}`, 'Assegnazione conta = 0', 'Mentre n > 1', '    Assegnazione n = n / 2', '    Assegnazione conta = conta + 1', 'Fine Mentre', 'Scrittura conta'],
+    run(S) {
+      S(0, { n: null, conta: null }); let n = n0, c = 0; S(1, { n, conta: null }); S(2, { n, conta: c });
+      while (n > 1) { S(3, { n, conta: c }, '', `${n} > 1 è vero: si entra nel ciclo.`); n = Math.trunc(n / 2); S(4, { n, conta: c }, '', 'Con gli interi la divisione scarta la parte decimale.'); c++; S(5, { n, conta: c }); }
+      S(3, { n, conta: c }, '', `${n} > 1 è falso: si esce.`); S(7, { n, conta: c }, c + '\n');
+    }
+  };
+}
+function ppFlowSe() {
+  const v = rnd(2, 10);
+  return {
+    t: `Selezioni annidate con il blocco <b>Se</b>: il voto è ${v}.`, lang: 'flow',
+    code: ['Dichiarazione Intero voto', `Assegnazione voto = ${v}`, 'Se voto >= 6', '    Se voto >= 8', '        Scrittura "Buono"', '    Altrimenti', '        Scrittura "Sufficiente"', '    Fine Se', 'Altrimenti', '    Scrittura "Insufficiente"', 'Fine Se'],
+    run(S) {
+      S(0, { voto: null }); S(1, { voto: v });
+      if (v >= 6) { S(2, { voto: v }, '', `${v} >= 6 è vero: ramo Vero.`); if (v >= 8) { S(3, { voto: v }, '', `${v} >= 8 è vero.`); S(4, { voto: v }, 'Buono\n'); } else { S(3, { voto: v }, '', `${v} >= 8 è falso: ramo Falso del Se interno.`); S(6, { voto: v }, 'Sufficiente\n'); } }
+      else { S(2, { voto: v }, '', `${v} >= 6 è falso: ramo Falso, il Se interno non si guarda nemmeno.`); S(9, { voto: v }, 'Insufficiente\n'); }
+    }
+  };
+}

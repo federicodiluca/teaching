@@ -112,6 +112,7 @@ informatica-1/computer-e-codici/temi/circuiti.js  circuiti con porte AND, OR e N
 informatica-1/arduino/temi/simulatori.js  codice colori, Arduino virtuale (sketch riga per riga con LED e pulsante), PWM e servo
 informatica-1/architettura-e-ai/temi/vonneumann.js  macchina di Von Neumann: fetch, decode, execute fase per fase con bus e registri
 informatica-1/problem-solving/temi/robot.js  robot da programmare a blocchi (Avanti, Gira, Ripeti) su una griglia, a livelli
+informatica-1/reti/temi/reti.js  viaggio del pacchetto, risoluzione DNS, parti di un URL, caccia al phishing
 strumenti/nuova.js         npm run nuova: prepara una nuova attività (non fa parte del sito)
 tests/                     controlli automatici (Playwright), non fanno parte del sito
 .github/workflows/         i controlli girano su GitHub a ogni push

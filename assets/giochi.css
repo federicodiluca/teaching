@@ -568,3 +568,45 @@ svg.rob-s { width: 100%; height: auto; max-height: 360px; display: block; }
 .rob-rip { display: inline-flex; gap: 4px; flex-wrap: wrap; }
 @media (max-width: 700px) { .rob-box { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .rob-s .robot { transition: none; } }
+/* reti di Informatica 1 (informatica-1/reti/temi/reti.js) */
+svg.via-s { width: 100%; height: auto; display: block; margin: 8px 0; }
+.via-s .lk { stroke: var(--tg-line); stroke-width: 4; }
+.via-s .lk.internet { stroke-dasharray: 8 6; }
+.via-s .lk.usato { stroke: var(--tg-acc); }
+.via-s .nodo rect, .via-s .nodo ellipse { fill: var(--tg-paper); stroke: var(--tg-line); stroke-width: 2; transition: fill .2s, stroke .2s; }
+.via-s .nodo text { font: 600 12px var(--tg-sans, system-ui); fill: var(--tg-ink); text-anchor: middle; }
+.via-s .nodo.visto rect, .via-s .nodo.visto ellipse { stroke: var(--tg-acc); }
+.via-s .nodo.qui rect, .via-s .nodo.qui ellipse { fill: color-mix(in srgb, var(--tg-acc) 25%, var(--tg-paper)); stroke: var(--tg-acc); stroke-width: 3; }
+.via-s .nodo.scegli { cursor: pointer; }
+.via-s .nodo.scegli rect, .via-s .nodo.scegli ellipse { stroke: var(--tg-hl); stroke-dasharray: 5 3; }
+.via-s .nodo.scegli:hover rect, .via-s .nodo.scegli:hover ellipse { fill: var(--tg-hl-soft); }
+.via-s .pacchetto { transition: transform .5s ease; }
+.via-s .pacchetto rect { fill: var(--tg-hl); stroke: var(--tg-ink); stroke-width: 1.5; }
+.via-s .pacchetto path { fill: none; stroke: var(--tg-ink); stroke-width: 1.5; }
+.dns-att { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin: 10px 0; }
+.dns-a { text-align: left; border: 2px solid var(--tg-line); border-radius: 12px; background: var(--tg-paper); color: var(--tg-ink); padding: 10px 12px; cursor: pointer; font: inherit; }
+.dns-a b { display: block; font-size: 14px; }
+.dns-a.qui { border-color: var(--tg-acc); background: color-mix(in srgb, var(--tg-acc) 18%, var(--tg-paper)); }
+.dns-a.fatto:not(.qui) { border-color: color-mix(in srgb, var(--tg-acc) 45%, var(--tg-line)); }
+.dns-a:hover { border-color: var(--tg-hl); }
+.dns-log { margin: 6px 0; padding-left: 22px; display: grid; gap: 4px; }
+.dns-log li { animation: dns-entra .3s ease; }
+@keyframes dns-entra { from { opacity: 0; transform: translateY(-4px); } }
+.url-tip { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 12px; }
+.url-tip .btn.on { background: var(--tg-acc); color: #fff; border-color: var(--tg-acc); }
+.url-riga { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 2px; font: 600 17px var(--tg-mono); background: var(--tg-bg); border: 1px solid var(--tg-line); border-radius: 10px; padding: 12px; }
+.url-p { font: inherit; background: var(--tg-paper); color: var(--tg-ink); border: 2px dashed var(--tg-line); border-radius: 6px; padding: 4px 6px; cursor: pointer; display: inline-flex; flex-direction: column; align-items: center; }
+.url-p:hover { border-color: var(--tg-hl); }
+.url-p.fatto { border-style: solid; border-color: var(--tg-ok); background: var(--tg-ok-soft); cursor: default; }
+.url-p small { font: 500 10px var(--tg-mono); color: var(--tg-ok); text-transform: uppercase; letter-spacing: .06em; margin-top: 2px; }
+.url-s { padding: 6px 0; color: var(--tg-mute); }
+.phi-cont { margin-left: auto; font: 500 13px var(--tg-mono); color: var(--tg-mute); }
+.phi-mail { border: 1px solid var(--tg-line); border-radius: 12px; overflow: hidden; margin: 10px 0; background: var(--tg-paper); }
+.phi-h { display: flex; flex-direction: column; gap: 4px; padding: 10px 14px; border-bottom: 1px solid var(--tg-line); background: color-mix(in srgb, var(--tg-mute) 10%, transparent); font-size: 14px; }
+.phi-c { padding: 10px 14px; }
+.phi-c p { margin: 6px 0; }
+.phi-x { cursor: pointer; border-radius: 6px; padding: 2px 4px; margin-left: -4px; }
+.phi-x:hover { background: var(--tg-hl-soft); }
+.phi-x.trovato { background: var(--tg-ko-soft); outline: 2px solid var(--tg-ko); }
+.phi-all { display: inline-block; border: 1px solid var(--tg-line); }
+.phi-trov { list-style: none; padding: 0; margin: 6px 0; display: grid; gap: 4px; color: var(--tg-ko); font-size: 14px; }
