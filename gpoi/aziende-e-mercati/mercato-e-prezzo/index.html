@@ -3,7 +3,7 @@
 
 <section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Mercato e prezzo</h2>
 <p class="lead">Ripasso su domanda, offerta, prezzo di equilibrio, eccesso di domanda o di offerta e forme di mercato.</p>
-<ol><li><b>Microeconomia:</b> micro e macro, consumatori e imprese, economia di mercato e pianificata.</li><li><b>Domanda e offerta:</b> le due curve, i beni succedanei e complementari, che cosa sposta le curve.</li><li><b>Equilibrio:</b> come cambiano prezzo e quantità, il calcolo dell'equilibrio, eccesso di domanda e di offerta, breve e lungo periodo.</li><li><b>Forme di mercato:</b> concorrenza perfetta e imperfetta, oligopolio, monopolio.</li><li><b>Quiz</b> e <b>Sfida finale</b>.</li></ol>
+<ol><li><b>Microeconomia:</b> micro e macro, consumatori e imprese, economia di mercato e pianificata.</li><li><b>Domanda e offerta:</b> le due curve, i beni succedanei e complementari, che cosa sposta le curve.</li><li><b>Equilibrio:</b> come cambiano prezzo e quantità, il calcolo dell'equilibrio (anche sul grafico), eccesso di domanda e di offerta, breve e lungo periodo.</li><li><b>Forme di mercato:</b> concorrenza perfetta e imperfetta, oligopolio, monopolio.</li><li><b>Quiz</b> e <b>Sfida finale</b>.</li></ol>
 <p>Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.</p>
 <div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
 
@@ -17,6 +17,7 @@
 
 <section id="q1" data-g="Equilibrio" data-t="1 Prezzo e quantità"><h2>Che cosa succede a prezzo e quantità?</h2><p class="lead">Leggete la notizia e scegliete come cambiano prezzo e quantità di equilibrio.</p><div id="pq"></div></section>
 <section id="q2" data-g="Equilibrio" data-t="2 Calcoli"><h2>Calcolare l'equilibrio</h2><p class="lead">Scegliete il tipo di esercizio dal menu, scrivete il risultato e premete «Controlla». I numeri cambiano a ogni esercizio.</p><div id="eq"></div></section>
+<section id="q2b" data-g="Equilibrio" data-t="2b Sul grafico"><h2>Domanda e offerta sul grafico</h2><p class="lead">Trascinate il prezzo e guardate le quantità e l'eccesso, oppure fate spostare le curve con un evento e leggete il nuovo equilibrio.</p><div id="merlab"></div></section>
 <section id="q3" data-g="Equilibrio" data-t="3 Breve o lungo periodo"><h2>Breve e lungo periodo</h2><p class="lead">Fate clic su una carta e poi sul periodo giusto.</p><div id="bl"></div></section>
 
 <section id="f1" data-g="Forme di mercato" data-t="1 Le quattro forme"><h2>Le quattro forme di mercato</h2><p class="lead">Fate clic su una carta e poi sulla forma di mercato giusta.</p><div id="fm"></div></section>
@@ -27,7 +28,7 @@
 <section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
 <section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Quindici domande miste su tutto l'argomento, calcoli compresi, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
 <section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
-</main><script src="../../../assets/giochi.js"></script><script>
+</main><script src="../../../assets/giochi.js"></script><script src="../temi/mercato.js"></script><script>
 const D = {
   MM: [
     ["Come un consumatore decide che cosa comprare", "mi"],
@@ -192,6 +193,7 @@ SG('#fm', D.FM, D.FM_BK, 'Forme di mercato');
 const genCm = scGen(D.CM, D.CM_OPTS, 'Che mercato è?', 'Forma di mercato');
 mount($('#cm'), genCm, 'Che mercato è?');
 orderGame($('#or'), asOrder(D.OR), 'Dal più libero al più concentrato', false);
+mercatoLab($('#merlab'),'Domanda e offerta sul grafico');
 quiz();
 const SFIDA = [...mcAll(), ...vfAll(), genSp, genSp, genPq, genPq, genCm, GEN.equilibrio, GEN.eccesso];
 mission($('#tot'), SFIDA, 'Sfida finale', 15);

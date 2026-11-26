@@ -854,3 +854,29 @@ table.lu-t { border-collapse: collapse; font: 18px var(--tg-mono); margin: 10px 
 .lu-t td.ctrl { background: var(--tg-ok-soft); color: var(--tg-ok); font-weight: 700; }
 .lu-nota { min-height: 3em; }
 @media (max-width: 560px) { .lu-t td { width: 26px; height: 32px; font-size: 14px; } .lu-t td.mini { font-size: 9px; } }
+/* domanda e offerta (gpoi/aziende-e-mercati/temi/mercato.js) */
+.mer .btn.on { background: var(--tg-acc); color: #fff; border-color: var(--tg-acc); }
+.mer-box { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+svg.mer-s { width: 100%; height: auto; display: block; touch-action: none; cursor: ns-resize; user-select: none; }
+.mer-s .ax { stroke: var(--tg-ink); stroke-width: 1.5; }
+.mer-s .al { font: 700 14px var(--tg-mono); fill: var(--tg-ink); }
+.mer-s .tk { font: 10px var(--tg-mono); fill: var(--tg-mute); text-anchor: middle; }
+.mer-s .tk.dx { text-anchor: end; }
+.mer-s .cur { fill: none; stroke-width: 3.5; }
+.mer-s .cur.d { stroke: #3b82f6; } .mer-s .cur.o { stroke: #f97316; }
+.mer-s .cur.vecchia { stroke-dasharray: 5 5; opacity: .45; stroke-width: 2.5; }
+.mer-s .cl { font: 700 15px var(--tg-mono); } .mer-s .cl.d { fill: #3b82f6; } .mer-s .cl.o { fill: #f97316; }
+.mer-s .prezzo { stroke: var(--tg-ink); stroke-width: 1.5; stroke-dasharray: 6 4; }
+.mer-s .mani { fill: var(--tg-acc); stroke: var(--tg-paper); stroke-width: 2; }
+.mer-s .pl { font: 700 12px var(--tg-mono); fill: var(--tg-ink); }
+.mer-s .ecc { stroke-width: 12; stroke-linecap: round; opacity: .35; }
+.mer-s .ecc.dom { stroke: #3b82f6; } .mer-s .ecc.off { stroke: #f97316; }
+.mer-s .pt.d { fill: #3b82f6; } .mer-s .pt.o { fill: #f97316; }
+.mer-s .pt.vecchio { fill: var(--tg-mute); } .mer-s .pt.nuovo { fill: var(--tg-ok); stroke: var(--tg-paper); stroke-width: 2; }
+.mer-s .guida { stroke: var(--tg-ok); stroke-dasharray: 4 3; }
+.mer-lato p { margin: 6px 0; }
+.mer-lato .d { color: #3b82f6; } .mer-lato .o { color: #f97316; }
+.mer-lato .eq { color: var(--tg-ok); } .mer-lato .dom { color: #3b82f6; } .mer-lato .off { color: #f97316; }
+.mer-scelte { display: grid; gap: 6px; }
+.mer-sl { width: 100%; accent-color: var(--tg-acc); margin: 6px 0; }
+@media (max-width: 700px) { .mer-box { grid-template-columns: 1fr; } }
