@@ -114,6 +114,8 @@ informatica-1/arduino/temi/simulatori.js  codice colori, Arduino virtuale (sketc
 informatica-1/architettura-e-ai/temi/vonneumann.js  macchina di Von Neumann: fetch, decode, execute fase per fase con bus e registri
 informatica-1/problem-solving/temi/robot.js  robot da programmare a blocchi (Avanti, Gira, Ripeti) su una griglia, a livelli
 informatica-1/reti/temi/reti.js  viaggio del pacchetto, risoluzione DNS, parti di un URL, caccia al phishing
+gpoi/organizzazione-d-impresa/temi/organizzazione.js  organigramma da costruire, catena del valore di Porter, piramide di Anthony,
+                                      processo a corsie, viaggio di un ordine con i programmi a isole e con l'ERP
 strumenti/nuova.js         npm run nuova: prepara una nuova attività (non fa parte del sito)
 tests/                     controlli automatici (Playwright), non fanno parte del sito
 .github/workflows/         i controlli girano su GitHub a ogni push

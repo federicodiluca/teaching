@@ -3,7 +3,7 @@
 
 <section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Sistema informativo ed ERP</h2>
 <p class="lead">Direzione aziendale, risorse e processi, informazione e piramide di Anthony, sistemi ERP.</p>
-<ol><li><b>Direzione:</b> le quattro funzioni della direzione e i sottosistemi del sistema impresa.</li><li><b>Risorse:</b> tipi di risorse, ciclo di vita e processi del personale.</li><li><b>Informazione:</b> dati e informazioni, piramide di Anthony, modi, luoghi e tempi, flussi.</li><li><b>Sistema informatico:</b> informativo e informatico, ciclo di vita del SIA, operazioni sui dati.</li><li><b>ERP:</b> isole e database unico, data warehouse, caratteristiche, moduli, Extended ERP.</li><li><b>Quiz</b> e <b>Sfida finale</b>.</li></ol>
+<ol><li><b>Direzione:</b> le quattro funzioni della direzione e i sottosistemi del sistema impresa.</li><li><b>Risorse:</b> tipi di risorse, ciclo di vita e processi del personale.</li><li><b>Informazione:</b> dati e informazioni, piramide di Anthony (anche da costruire), modi, luoghi e tempi, flussi.</li><li><b>Sistema informatico:</b> informativo e informatico, ciclo di vita del SIA, operazioni sui dati.</li><li><b>ERP:</b> isole e database unico (con il viaggio di un ordine), data warehouse, caratteristiche, moduli, Extended ERP.</li><li><b>Quiz</b> e <b>Sfida finale</b>.</li></ol>
 <p>Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.</p>
 <div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
 
@@ -17,6 +17,7 @@
 <section id="i1" data-g="Informazione" data-t="1 Dato o informazione"><h2>Dato o informazione?</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="dat"></div></section>
 <section id="i2" data-g="Informazione" data-t="2 Le cinque attività"><h2>Le cinque attività sull'informazione</h2><p class="lead">Al supermercato: abbinate ogni attività all'esempio giusto. Girate due tessere alla volta.</p><div id="cin"></div></section>
 <section id="i3" data-g="Informazione" data-t="3 Piramide di Anthony"><h2>La piramide di Anthony</h2><p class="lead">Fate clic su una carta e poi sul livello giusto.</p><div id="ant"></div></section>
+<section id="i3b" data-g="Informazione" data-t="3b Costruite la piramide"><h2>Costruite la piramide di Anthony</h2><p class="lead">Mettete ogni attività, decisione o persona al suo livello della piramide.</p><div id="pira"></div></section>
 <section id="i4" data-g="Informazione" data-t="4 Modi, luoghi, tempi"><h2>Modi, luoghi e tempi</h2><p class="lead">Fate clic su una carta e poi sulla modalità di presentazione giusta.</p><div id="mlt"></div></section>
 <section id="i5" data-g="Informazione" data-t="5 Che flusso è?"><h2>Flussi orizzontali e verticali</h2><p class="lead">Leggete la situazione e scegliete il tipo di flusso informativo.</p><div id="flu"></div></section>
 
@@ -25,6 +26,7 @@
 <section id="s3" data-g="Sistema informatico" data-t="3 Operazioni sui dati"><h2>Le operazioni sui dati</h2><p class="lead">Abbinate ogni operazione alla sua descrizione. Girate due tessere alla volta.</p><div id="ope"></div></section>
 
 <section id="e1" data-g="ERP" data-t="1 Isole o ERP"><h2>Architettura a isole o ERP</h2><p class="lead">Fate clic su una carta e poi sull'architettura giusta.</p><div id="iso"></div></section>
+<section id="e1b" data-g="ERP" data-t="1b Il viaggio di un ordine"><h2>Isole o ERP? Il viaggio di un ordine</h2><p class="lead">Fate passare lo stesso ordine in quattro reparti: prima con i programmi a isole, ricopiando i dati a mano, poi con l'ERP. Alla fine il cliente cambia idea sulla quantità... e si confrontano i risultati.</p><div id="erpv"></div></section>
 <section id="e2" data-g="ERP" data-t="2 Database o data warehouse"><h2>Database o data warehouse</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="dw"></div></section>
 <section id="e3" data-g="ERP" data-t="3 Le tre caratteristiche"><h2>Le caratteristiche dei sistemi ERP</h2><p class="lead">Fate clic su una carta e poi sulla caratteristica giusta.</p><div id="car"></div></section>
 <section id="e4" data-g="ERP" data-t="4 Quale modulo?"><h2>Quale modulo dell'ERP?</h2><p class="lead">Leggete l'attività e scegliete il modulo che se ne occupa.</p><div id="mod"></div></section>
@@ -34,7 +36,7 @@
 <section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
 <section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Quindici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
 <section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
-</main><script src="../../../assets/giochi.js"></script><script>
+</main><script src="../../../assets/giochi.js"></script><script src="../temi/organizzazione.js"></script><script>
 const D = {
   FUN: [
     ["Programmare", "Stabilire in anticipo obiettivi, decisioni, modalità e risorse da impiegare."],
@@ -248,6 +250,8 @@ SG('#car', D.CAR, D.CAR_BK, 'Caratteristiche degli ERP');
 const genMod = scGen(D.MOD, D.MOD_OPTS, 'Quale modulo?', 'Modulo');
 mount($('#mod'), genMod, 'Quale modulo?');
 SG('#ext', D.EXT, D.EXT_BK, 'Extended ERP');
+piramide($('#pira'),D.ANT,'La piramide di Anthony');
+isoleErp($('#erpv'),'Isole o ERP');
 quiz();
 const SFIDA = [...mcAll(), ...vfAll(), genFlu, genFlu, genMod, genMod];
 mission($('#tot'), SFIDA, 'Sfida finale', 15);
