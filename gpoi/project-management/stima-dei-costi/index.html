@@ -1,7 +1,7 @@
 <!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>La stima dei costi</title><meta name="description" content="Stima parametrica e per analogia, budget e baseline, earned value con CV e SV, costi di un progetto informatico, risk management."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head><body class="tg-act" data-solo="1"><header><h1>La stima dei costi</h1></header><nav id="nav"></nav><main>
 <section id="inizio" data-g="Inizio" data-t="Inizio"><h2>La stima dei costi</h2>
 <p class="lead">Stime, budget e baseline, earned value, costi di costruzione e avviamento, rischi: con calcoli di CV, SV e R = P × D.</p>
-<ol><li><b>Stima:</b> parametrica e per analogia, bottom-up e top-down.</li><li><b>Budget:</b> baseline, management reserve, curva a S.</li><li><b>Earned value:</b> BCWS, BCWP, ACWP e i calcoli di CV e SV.</li><li><b>Progetto informatico:</b> costi di costruzione e di avviamento.</li><li><b>Rischi:</b> approcci, fasi della valutazione, R = P × D, fattori di McFarlan.</li><li><b>Quiz</b> e <b>Sfida finale</b>.</li></ol>
+<ol><li><b>Stima:</b> parametrica e per analogia, bottom-up e top-down.</li><li><b>Budget:</b> baseline, management reserve, curva a S.</li><li><b>Earned value:</b> BCWS, BCWP, ACWP e i calcoli di CV e SV, anche letti sul grafico.</li><li><b>Progetto informatico:</b> costi di costruzione e di avviamento.</li><li><b>Rischi:</b> approcci, fasi della valutazione, R = P × D, fattori di McFarlan.</li><li><b>Quiz</b> e <b>Sfida finale</b>.</li></ol>
 <p>Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.</p>
 <div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
 <section id="e1" data-g="Stima" data-t="1 Parametrica o analogia"><h2>Stima parametrica e stima per analogia</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_e1"></div></section>
@@ -9,6 +9,7 @@
 <section id="b1" data-g="Budget" data-t="1 Le parti del budget"><h2>Baseline, management reserve e margine</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_b1"></div></section>
 <section id="v1" data-g="Earned value" data-t="1 Le tre curve"><h2>BCWS, BCWP e ACWP</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_v1"></div></section>
 <section id="v2" data-g="Earned value" data-t="2 Calcoli"><h2>Calcoli con l&#x27;earned value</h2><p class="lead">Scegliete il tipo di esercizio dal menu, scrivete il risultato e premete «Controlla». I numeri cambiano a ogni esercizio.</p><div id="x_v2"></div></section>
+<section id="v3" data-g="Earned value" data-t="3 Sul grafico"><h2>L'earned value sul grafico</h2><p class="lead">Un progetto a metà strada: leggete i tre valori alla data di controllo, calcolate CV e SV e dite come sta andando.</p><div id="evlab"></div></section>
 <section id="i1" data-g="Progetto informatico" data-t="1 Costruzione o avviamento"><h2>Costo di costruzione e costo di avviamento</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_i1"></div></section>
 <section id="i2" data-g="Progetto informatico" data-t="2 Interni o esterni"><h2>Costi interni diretti, interni indotti, esterni</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_i2"></div></section>
 <section id="r1" data-g="Rischi" data-t="1 Reattivi o preventivi"><h2>Approcci reattivi e preventivi</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_r1"></div></section>
@@ -19,7 +20,7 @@
 <section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
 <section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Quindici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
 <section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
-</main><script src="../../../assets/giochi.js"></script><script>
+</main><script src="../../../assets/giochi.js"></script><script src="../temi/pm.js"></script><script>
 const D = {
  "e1": [
   [
@@ -587,6 +588,7 @@ SG('#x_r1', D['r1'], D['r1_BK'], "Reattivi o preventivi");
 orderGame($('#x_r2'), asOrder(D['r2']), "Valutazione dei rischi", false);
 mountMenu($('#x_r3'), [["Punteggio e priorit\u00e0", GEN.rischio]], "Punteggio di rischio");
 SG('#x_r4', D['r4'], D['r4_BK'], "Fattori di McFarlan");
+earnedValue($('#evlab'),'L’earned value sul grafico');
 quiz();
 const SFIDA = [...mcAll(), ...vfAll(), GEN.ev, GEN.perc, GEN.rischio, GEN.ev, GEN.ev, GEN.rischio];
 mission($('#tot'), SFIDA, 'Sfida finale', 15);

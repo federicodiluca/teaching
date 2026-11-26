@@ -880,3 +880,24 @@ svg.mer-s { width: 100%; height: auto; display: block; touch-action: none; curso
 .mer-scelte { display: grid; gap: 6px; }
 .mer-sl { width: 100%; accent-color: var(--tg-acc); margin: 6px 0; }
 @media (max-width: 700px) { .mer-box { grid-template-columns: 1fr; } }
+
+/* earned value (gpoi/project-management/temi/pm.js) */
+.ev-campi { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; margin: 10px 0; }
+svg.ev-s { width: 100%; max-width: 620px; height: auto; display: block; }
+.ev-s .ax { stroke: var(--tg-ink); stroke-width: 1.5; }
+.ev-s .gr { stroke: var(--tg-line); stroke-dasharray: 2 4; }
+.ev-s .tk { font: 10px var(--tg-mono); fill: var(--tg-mute); text-anchor: middle; }
+.ev-s .tk.dx { text-anchor: end; } .ev-s .tk.sx { text-anchor: start; }
+.ev-s polyline { fill: none; stroke-width: 3; }
+.ev-s .pv { stroke: #64748b; stroke-dasharray: 6 4; } .ev-s .evl { stroke: #10b981; } .ev-s .ac { stroke: #ef4444; }
+.ev-s .oggi { stroke: var(--tg-acc); stroke-width: 2; }
+.ev-s circle.pv { fill: #64748b; stroke: none; } .ev-s circle.evl { fill: #10b981; stroke: none; } .ev-s circle.ac { fill: #ef4444; stroke: none; }
+.ev-s .vl { font: 700 12px var(--tg-mono); } .ev-s .vl.pv { fill: #94a3b8; stroke: none; } .ev-s .vl.evl { fill: #10b981; stroke: none; } .ev-s .vl.ac { fill: #ef4444; stroke: none; }
+.ev-leg { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 13px; margin: 4px 0; }
+.ev-leg span::before { content: ""; display: inline-block; width: 18px; height: 4px; margin-right: 6px; vertical-align: middle; border-radius: 2px; }
+.ev-leg .pv::before { background: #64748b; } .ev-leg .evl::before { background: #10b981; } .ev-leg .ac::before { background: #ef4444; }
+.ev-campi input.ok, .ev-campi select.ok { border-color: var(--tg-ok); background: var(--tg-ok-soft); }
+.ev-campi input.ko, .ev-campi select.ko { border-color: var(--tg-ko); background: var(--tg-ko-soft); }
+.ev-campi .f { display: flex; flex-direction: column; gap: 4px; margin: 0; min-width: 0; }
+.ev-campi .f input, .ev-campi .f select { width: 100%; box-sizing: border-box; min-height: 38px; }
+.ev-campi .f select { min-width: 0; max-width: 100%; }
