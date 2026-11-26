@@ -104,6 +104,7 @@ informatica-1/computer-e-codici/temi/   codice di argomento (numeri, aritmetica,
 tpsit-4/temi/passo-passo.js  simulatore delle pagine «passo passo» di TPSIT (semafori e problemi classici)
 tpsit-3/sistemi-operativi/temi/so.js  simulatori di sistemi operativi: diagramma di Gantt, allocazione della memoria,
                                       sostituzione delle pagine
+tpsit-3/codici-digitali/temi/codici.js  Hamming con i tre cerchi, parità incrociata, CRC passo passo, display a 7 segmenti, encoder binario/Gray
 tpsit-5/metodologia-di-sviluppo/temi/git.js  laboratorio di Git: terminale simulato, tre aree e grafo dei commit con missioni
 tpsit-5/xml-e-regex/temi/regex.js  tester di espressioni regolari: matches() sulle stringhe date, find() su un testo libero
 tpsit-5/applicazioni-web-avanzate/temi/rest.js  client REST con un server finto (/api/studenti): metodi, codici di stato, JSON

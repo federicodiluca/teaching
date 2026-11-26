@@ -610,3 +610,77 @@ svg.via-s { width: 100%; height: auto; display: block; margin: 8px 0; }
 .phi-x.trovato { background: var(--tg-ko-soft); outline: 2px solid var(--tg-ko); }
 .phi-all { display: inline-block; border: 1px solid var(--tg-line); }
 .phi-trov { list-style: none; padding: 0; margin: 6px 0; display: grid; gap: 4px; color: var(--tg-ko); font-size: 14px; }
+/* codici digitali (tpsit-3/codici-digitali/temi/codici.js) */
+.hv-fase { margin-left: auto; font: 600 13px var(--tg-mono); color: var(--tg-acc); }
+.hv-box { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 14px; align-items: center; }
+svg.hv-s { width: 100%; max-width: 460px; height: auto; display: block; }
+.hv-s.fulmine, .hv-svg.fulmine svg { animation: hv-lampo .6s ease; }
+@keyframes hv-lampo { 0%, 100% { filter: none; } 20% { filter: brightness(2.2) drop-shadow(0 0 12px #facc15); } 40% { transform: translateX(-4px); } 60% { transform: translateX(4px); } }
+.hv-s .cerchio { fill: none; stroke-width: 4; transition: stroke .3s, fill .3s; }
+.hv-s .cerchio.c1 { stroke: #3b82f6; } .hv-s .cerchio.c2 { stroke: #f59e0b; } .hv-s .cerchio.c4 { stroke: #a855f7; }
+.hv-s .cerchio.pari { stroke: var(--tg-ok); fill: color-mix(in srgb, var(--tg-ok) 7%, transparent); }
+.hv-s .cerchio.dispari { stroke: var(--tg-ko); fill: color-mix(in srgb, var(--tg-ko) 12%, transparent); stroke-width: 6; }
+.hv-s .cn { font: 600 12px var(--tg-mono); fill: var(--tg-mute); text-anchor: middle; }
+.hv-s .bit circle { fill: var(--tg-paper); stroke: var(--tg-ink); stroke-width: 2; }
+.hv-s .bit.ctrl circle { stroke-dasharray: 4 3; }
+.hv-s .bit.uno circle { fill: color-mix(in srgb, var(--tg-hl) 55%, var(--tg-paper)); }
+.hv-s .bit text { font: 700 20px var(--tg-mono); fill: var(--tg-ink); text-anchor: middle; }
+.hv-s .bit .pn { font: 500 10px var(--tg-mono); fill: var(--tg-mute); }
+.hv-s .bit.clic { cursor: pointer; }
+.hv-s .bit.clic:hover circle { stroke: var(--tg-acc); stroke-width: 3; }
+.hv-s .bit.evid circle { stroke: var(--tg-ko); stroke-width: 4; }
+.hv-cw small, .s7-cod small { display: block; font: 500 11px var(--tg-mono); color: var(--tg-mute); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+.hv-cw div, .s7-cod div { display: flex; gap: 4px; flex-wrap: wrap; }
+.hv-cw span, .s7-cod span { display: inline-flex; flex-direction: column; align-items: center; min-width: 30px; border: 1px solid var(--tg-line); border-radius: 6px; padding: 4px 2px; font-family: var(--tg-mono); }
+.hv-cw span b, .s7-cod span b { font-size: 18px; }
+.hv-cw span i, .s7-cod span i { font-size: 10px; color: var(--tg-mute); font-style: normal; }
+.hv-cw span.ctrl { border-style: dashed; }
+.hv-cw span.evid { border-color: var(--tg-ko); background: var(--tg-ko-soft); }
+.q b.ko { color: var(--tg-ko); }
+.pg2-chk { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; margin-left: 8px; }
+table.pg2-t { border-collapse: collapse; font: 16px var(--tg-mono); margin: 10px 0; }
+.pg2-t th { font: 500 11px var(--tg-mono); color: var(--tg-mute); padding: 4px 8px; text-align: center; }
+.pg2-t td { width: 42px; height: 40px; text-align: center; border: 1px solid var(--tg-line); cursor: pointer; transition: background .2s; }
+.pg2-t td:hover { background: var(--tg-hl-soft); }
+.pg2-t td.par { background: color-mix(in srgb, var(--tg-acc) 10%, transparent); }
+.pg2-t td.sosp { background: color-mix(in srgb, var(--tg-ko) 10%, transparent); }
+.pg2-t td.incrocio { background: color-mix(in srgb, var(--tg-ko) 30%, transparent); }
+.pg2-t td.giusta { background: var(--tg-ok-soft); outline: 3px solid var(--tg-ok); outline-offset: -3px; }
+.pg2-t td.ck { border: none; cursor: default; font-weight: 700; }
+.pg2-t td.ck.ok { color: var(--tg-ok); } .pg2-t td.ck.ko { color: var(--tg-ko); }
+.crc-pos { margin-left: auto; font: 500 13px var(--tg-mono); color: var(--tg-mute); }
+.crc-div { font: 18px/1.5 var(--tg-mono); background: var(--tg-bg); border: 1px solid var(--tg-line); border-radius: 10px; padding: 10px 14px; overflow-x: auto; white-space: pre; }
+.crc-r b { font-weight: 500; }
+.crc-r.g { color: var(--tg-acc); font-weight: 700; border-bottom: 2px solid var(--tg-line); display: inline-block; }
+.crc-r.g span { font: 600 11px var(--tg-mono); color: var(--tg-mute); margin-left: 10px; }
+.crc-r b.tocca { color: var(--tg-hl); font-weight: 700; }
+.crc-r.ora { background: var(--tg-hl-soft); }
+.crc-r b.resto { text-decoration: underline; text-decoration-color: var(--tg-ok); }
+.crc-nota { min-height: 3em; }
+.s7-box { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+svg.s7-s { width: 150px; height: auto; }
+.s7-s .fondo { fill: #111; }
+.s7-s .seg { fill: #3a1f1f; stroke: #111; stroke-width: 1; transition: fill .15s; }
+.s7-s .seg.on { fill: #ef4444; filter: drop-shadow(0 0 5px #ef4444); }
+.s7-s .seg.clic { cursor: pointer; }
+.s7-s .seg.clic:hover { fill: #7f1d1d; }
+.s7-s .seg.on.clic:hover { fill: #f87171; }
+.s7-s .sl { font: 600 9px var(--tg-mono); fill: #9ca3af; text-anchor: middle; pointer-events: none; }
+.s7-cod span.uno { border-color: #ef4444; background: color-mix(in srgb, #ef4444 15%, transparent); }
+.s7-big { font: 700 26px var(--tg-mono); color: #ef4444; }
+.s7 .btn.on { background: var(--tg-acc); color: #fff; border-color: var(--tg-acc); }
+.s7-r { min-width: 46px; font-family: var(--tg-mono); }
+.enc-sl { display: flex; flex-direction: column; gap: 4px; font-size: 14px; margin: 6px 0; }
+.enc-sl input { width: 100%; accent-color: var(--tg-acc); }
+.enc-box { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+svg.enc-s { width: 100%; max-width: 240px; height: auto; display: block; margin: 6px auto; }
+.enc-s .ner { fill: #1f2937; stroke: #6b7280; stroke-width: .5; }
+.enc-s .bia { fill: #f9fafb; stroke: #9ca3af; stroke-width: .5; }
+.enc-s .ns { font: 700 10px var(--tg-mono); fill: var(--tg-ink); text-anchor: middle; }
+.enc-s .testina { stroke: var(--tg-ko); stroke-width: 3; }
+.enc-s .perno { fill: var(--tg-ink); }
+.enc-l { font-size: 14px; min-height: 3em; }
+.enc-l code.falsa { background: var(--tg-ko-soft); color: var(--tg-ko); }
+.enc-l.male { color: var(--tg-ko); }
+.enc-l.bene { color: var(--tg-ok); }
+@media (max-width: 700px) { .hv-box, .enc-box { grid-template-columns: 1fr; } }
