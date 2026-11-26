@@ -103,45 +103,50 @@
   "nav": [],
   "sez": {
    "inizio": {
-    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\nMissione finale\nRisultato",
-    "testo": "Operatori logici AND, OR e NOT\n\nGiochi per costruire e leggere tavole di verità.\n\nTavole di verità: compilate l'uscita di espressioni a due e a tre ingressi.\nRiconosci l'espressione: data la tavola, scegliete l'espressione.\nUguali o diverse? confrontate due espressioni.\nQuando vale 1? trovate le combinazioni che accendono l'uscita.\nAllenatore e Missione finale.\n\nSi gioca in coppia: ad ogni esercizio tocca a uno dei due scrivere, mentre l'altro controlla e discute. Nelle risposte potete usare la virgola o il punto; gli zeri iniziali e le maiuscole non contano.\n\nPrimo nome: \nSecondo nome: "
+    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\n6 Circuiti\nMissione finale\nRisultato",
+    "testo": "Operatori logici AND, OR e NOT\n\nGiochi per costruire e leggere tavole di verità.\n\nTavole di verità: compilate l'uscita di espressioni a due e a tre ingressi.\nRiconosci l'espressione: data la tavola, scegliete l'espressione.\nUguali o diverse? confrontate due espressioni.\nQuando vale 1? trovate le combinazioni che accendono l'uscita.\nCircuiti: porte AND, OR e NOT disegnate, con la corrente che passa.\nAllenatore e Missione finale.\n\nSi gioca in coppia: ad ogni esercizio tocca a uno dei due scrivere, mentre l'altro controlla e discute. Nelle risposte potete usare la virgola o il punto; gli zeri iniziali e le maiuscole non contano.\n\nPrimo nome: \nSecondo nome: "
    },
    "s1": {
-    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\nMissione finale\nRisultato",
+    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\n6 Circuiti\nMissione finale\nRisultato",
     "testo": "1. Tavole di verità\n\nFate clic sulle celle «Uscita» per scegliere 0 o 1, poi premete «Verifica».\n\nLivello 1: espressioni semplici a 2 ingressi\nLivello 2: espressioni composte a 2 ingressi\nLivello 3: 3 ingressi\nTocca a Giocatore 1 (scrive) · Giocatore 2 controlla\n\nCompilate la tavola di verità di NOT (A AND B)\n\nA\tB\tUscita\n0\t0\t?\n0\t1\t?\n1\t0\t?\n1\t1\t?\nVerifica\nAltra espressione\nPerfette: 0 su 0"
    },
    "s2": {
-    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\nMissione finale\nRisultato",
+    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\n6 Circuiti\nMissione finale\nRisultato",
     "testo": "2. Riconosci l'espressione\n2 ingressi\n3 ingressi\nTocca a Giocatore 2 (scrive) · Giocatore 1 controlla\n\nQuale espressione produce questa tavola di verità?\n\nA\tB\tUscita\n0\t0\t1\n0\t1\t0\n1\t0\t0\n1\t1\t0\nA AND (A OR B)\nNOT (A OR B)\n(NOT A) OR (NOT B)\nA AND (NOT B)\nAltra tavola\nEsatte: 0 su 0"
    },
    "s3": {
-    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\nMissione finale\nRisultato",
+    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\n6 Circuiti\nMissione finale\nRisultato",
     "testo": "3. Uguali o diverse?\nTocca a Giocatore 1 (scrive) · Giocatore 2 controlla\n\nLe due espressioni hanno sempre la stessa uscita (cioè sono equivalenti)?\n\n① (NOT A) AND (NOT B)\n② NOT (A OR B)\n\nSì, sono equivalenti\nNo, sono diverse\nAltra coppia\nEsatte: 0 su 0"
    },
    "s4": {
-    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\nMissione finale\nRisultato",
+    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\n6 Circuiti\nMissione finale\nRisultato",
     "testo": "4. Quando vale 1?\n2 ingressi\n3 ingressi\nTocca a Giocatore 2 (scrive) · Giocatore 1 controlla\n\nPer quali combinazioni di ingressi l'uscita di A AND B vale 1? Selezionatele tutte.\n\n A=0 B=0 A=0 B=1 A=1 B=0 A=1 B=1\nControlla\nAltra espressione\nEsatte: 0 su 0"
    },
    "s5": {
-    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\nMissione finale\nRisultato",
+    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\n6 Circuiti\nMissione finale\nRisultato",
     "testo": "5. Allenatore\nQuanto vale l'uscita?\nContare gli 1\nScrivere la colonna delle uscite\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\nTocca a Giocatore 1 (scrive) · Giocatore 2 controlla\n\nQuanto vale l'uscita di (NOT A) AND B quando A=1, B=1?\n\nUscita (0 o 1)\nControlla\nMostra il procedimento\nAltro esercizio\nEsatti: 0 su 0"
    },
+   "s6": {
+    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\n6 Circuiti\nMissione finale\nRisultato",
+    "testo": "6. Circuiti con le porte logiche\n\nGuardate gli interruttori e prevedete se il LED si accende; poi avviate la simulazione e seguite la corrente porta dopo porta. Alla fine potete cambiare gli interruttori per esplorare.\n\nTocca a Giocatore 2 (scrive) · Giocatore 1 controlla\nLivello 1: una porta\nLivello 2: due porte\nLivello 3: tre porte\nNuova situazione\nAND\nA\n0\nB\n1\n\nEspressione: A AND B\n\nGli interruttori sono già impostati (1 = acceso). Il LED d'uscita si accende o resta spento?\n\n💡 Il LED si accende\nIl LED resta spento\n\nPrevisioni giuste: 0 su 0"
+   },
    "ms-sec": {
-    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\nMissione finale\nRisultato",
+    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\n6 Circuiti\nMissione finale\nRisultato",
     "testo": "Missione finale\n\nDieci domande miste, a turno. Il tempo parte con il primo clic. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nInizia la missione finale"
    },
    "res": {
-    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\nMissione finale\nRisultato",
+    "nav": "Inizio\n1 Tavole\n2 Riconosci\n3 Uguali o diverse\n4 Quando vale 1\n5 Allenatore\n6 Circuiti\nMissione finale\nRisultato",
     "testo": "Risultato\n\nCoppia: Giocatore 1 e Giocatore 2\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la missione finale."
    }
   },
   "dopo": {
-   "inizio": "Operatori logici AND, OR e NOT\n\nGiochi per costruire e leggere tavole di verità.\n\nTavole di verità: compilate l'uscita di espressioni a due e a tre ingressi.\nRiconosci l'espressione: data la tavola, scegliete l'espressione.\nUguali o diverse? confrontate due espressioni.\nQuando vale 1? trovate le combinazioni che accendono l'uscita.\nAllenatore e Missione finale.\n\nSi gioca in coppia: ad ogni esercizio tocca a uno dei due scrivere, mentre l'altro controlla e discute. Nelle risposte potete usare la virgola o il punto; gli zeri iniziali e le maiuscole non contano.\n\nPrimo nome: \nSecondo nome: ",
+   "inizio": "Operatori logici AND, OR e NOT\n\nGiochi per costruire e leggere tavole di verità.\n\nTavole di verità: compilate l'uscita di espressioni a due e a tre ingressi.\nRiconosci l'espressione: data la tavola, scegliete l'espressione.\nUguali o diverse? confrontate due espressioni.\nQuando vale 1? trovate le combinazioni che accendono l'uscita.\nCircuiti: porte AND, OR e NOT disegnate, con la corrente che passa.\nAllenatore e Missione finale.\n\nSi gioca in coppia: ad ogni esercizio tocca a uno dei due scrivere, mentre l'altro controlla e discute. Nelle risposte potete usare la virgola o il punto; gli zeri iniziali e le maiuscole non contano.\n\nPrimo nome: \nSecondo nome: ",
    "s1": "1. Tavole di verità\n\nFate clic sulle celle «Uscita» per scegliere 0 o 1, poi premete «Verifica».\n\nLivello 1: espressioni semplici a 2 ingressi\nLivello 2: espressioni composte a 2 ingressi\nLivello 3: 3 ingressi\nTocca a Giocatore 1 (scrive) · Giocatore 2 controlla\n\nCompilate la tavola di verità di NOT (A AND B)\n\nA\tB\tUscita\n0\t0\t?\n0\t1\t?\n1\t0\t?\n1\t1\t?\nVerifica\nAltra espressione\nPerfette: 0 su 0",
    "s2": "2. Riconosci l'espressione\n2 ingressi\n3 ingressi\nTocca a Giocatore 2 (scrive) · Giocatore 1 controlla\n\nQuale espressione produce questa tavola di verità?\n\nA\tB\tUscita\n0\t0\t1\n0\t1\t0\n1\t0\t0\n1\t1\t0\nA AND (A OR B)\nNOT (A OR B)\n(NOT A) OR (NOT B)\nA AND (NOT B)\nNo: provate a calcolare la tavola di ogni espressione.\nAltra tavola\nEsatte: 0 su 1",
    "s3": "3. Uguali o diverse?\nTocca a Giocatore 1 (scrive) · Giocatore 2 controlla\n\nLe due espressioni hanno sempre la stessa uscita (cioè sono equivalenti)?\n\n① (NOT A) AND (NOT B)\n② NOT (A OR B)\n\nSì, sono equivalenti\nNo, sono diverse\nAltra coppia\nEsatte: 0 su 0",
    "s4": "4. Quando vale 1?\n2 ingressi\n3 ingressi\nTocca a Giocatore 2 (scrive) · Giocatore 1 controlla\n\nPer quali combinazioni di ingressi l'uscita di A AND B vale 1? Selezionatele tutte.\n\n A=0 B=0 A=0 B=1 A=1 B=0 A=1 B=1\nControlla\nAltra espressione\nEsatte: 0 su 0",
    "s5": "5. Allenatore\nQuanto vale l'uscita?\nContare gli 1\nScrivere la colonna delle uscite\nLivello 1: facile\nLivello 2: medio\nLivello 3: difficile\nTocca a Giocatore 1 (scrive) · Giocatore 2 controlla\n\nQuanto vale l'uscita di (NOT A) AND B quando A=1, B=1?\n\nUscita (0 o 1)\nControlla\nMostra il procedimento\nAltro esercizio\nEsatto!\nEsatti: 1 su 1",
+   "s6": "6. Circuiti con le porte logiche\n\nGuardate gli interruttori e prevedete se il LED si accende; poi avviate la simulazione e seguite la corrente porta dopo porta. Alla fine potete cambiare gli interruttori per esplorare.\n\nTocca a Giocatore 2 (scrive) · Giocatore 1 controlla\nLivello 1: una porta\nLivello 2: due porte\nLivello 3: tre porte\nNuova situazione\nAND\nA\n0\nB\n1\n\nEspressione: A AND B\n\nGli interruttori sono già impostati (1 = acceso). Il LED d'uscita si accende o resta spento?\n\n💡 Il LED si accende\nIl LED resta spento\n\nPrevisioni giuste: 0 su 0",
    "ms-sec": "Missione finale\n\nDieci domande miste, a turno. Il tempo parte con il primo clic. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nRiprova la missione finale\n\nFinita: 2 su 10 in 00:00.",
    "res": "Risultato\n\nCoppia: Ada e Bruno\n\nNessun gioco ancora completato\n0 di 1 attività svolte\nMissione finale\nnon ancora fatta\nCopia il risultato\nStampa\nRicomincia da capo\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la missione finale."
   },
@@ -155,11 +160,12 @@
    "s5": [
     "controlla"
    ],
+   "s6": [],
    "ms-sec": [
     "missione"
    ]
   },
-  "st": "{\"g\":{\"Tavole di verità\":{\"ok\":0,\"tot\":0},\"Riconosci l'espressione\":{\"ok\":0,\"tot\":1},\"Uguali o diverse?\":{\"ok\":0,\"tot\":0},\"Quando vale 1?\":{\"ok\":0,\"tot\":0},\"Allenatore: Quanto vale l'uscita? (liv. 1)\":{\"ok\":1,\"tot\":1}},\"m\":{\"Missione finale\":{\"pts\":2,\"t\":\"00:00\",\"count\":10}}}"
+  "st": "{\"g\":{\"Tavole di verità\":{\"ok\":0,\"tot\":0},\"Riconosci l'espressione\":{\"ok\":0,\"tot\":1},\"Uguali o diverse?\":{\"ok\":0,\"tot\":0},\"Quando vale 1?\":{\"ok\":0,\"tot\":0},\"Allenatore: Quanto vale l'uscita? (liv. 1)\":{\"ok\":1,\"tot\":1},\"Circuiti con le porte logiche\":{\"ok\":0,\"tot\":0}},\"m\":{\"Missione finale\":{\"pts\":2,\"t\":\"00:00\",\"count\":10}}}"
  },
  "informatica-1/computer-e-codici/immagini-e-video": {
   "nav": [],
@@ -2346,7 +2352,7 @@
   "sez": {
    "inizio": {
     "nav": "Inizio\nChe cos'è Arduino\nLa scheda UNO\nElettronica\nComponenti\nIDE e Tinkercad\nSicurezza\nQuiz\nSfida finale\nRisultato",
-    "testo": "Arduino ed elettronica\n\nRipasso di scheda UNO, grandezze elettriche, legge di Ohm, breadboard, resistori, LED, sensori e sicurezza.\n\nChe cos'è Arduino: storia, microcontrollore contro PC, famiglia delle schede.\nLa scheda UNO: parti della scheda e memorie.\nElettronica: tensione, corrente, resistenza, legge di Ohm, digitale e analogico.\nComponenti: breadboard, resistori, LED, sensori e attuatori.\nIDE e sicurezza: Arduino IDE, caricamento dello sketch, regole di laboratorio.\nQuiz e Sfida finale su tutta la presentazione.\n\nSi gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.\n\nIl vostro nome: "
+    "testo": "Arduino ed elettronica\n\nRipasso di scheda UNO, grandezze elettriche, legge di Ohm, breadboard, resistori, LED, sensori e sicurezza.\n\nChe cos'è Arduino: storia, microcontrollore contro PC, famiglia delle schede.\nLa scheda UNO: parti della scheda e memorie.\nElettronica: tensione, corrente, resistenza, legge di Ohm, digitale e analogico.\nComponenti: breadboard, resistori (anche il codice colori da costruire), LED, sensori e attuatori.\nIDE e sicurezza: Arduino IDE, caricamento dello sketch, regole di laboratorio.\nQuiz e Sfida finale su tutta la presentazione.\n\nSi gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.\n\nIl vostro nome: "
    },
    "a1": {
     "nav": "Inizio\nChe cos'è Arduino\nLa scheda UNO\nElettronica\nComponenti\nIDE e Tinkercad\nSicurezza\nQuiz\nSfida finale\nRisultato\n1 Storia e idea\n2 Micro o PC\n3 Le schede",
@@ -2381,19 +2387,23 @@
     "testo": "Segnali digitali e analogici\n\nFate clic su una carta e poi sulla categoria giusta.\n\nSi legge con digitalRead()\nSolo due valori: HIGH (5 V) o LOW (0 V)\nPulsante premuto o rilasciato\nInfiniti valori tra 0 e 5 V\nLuce, temperatura, posizione di una manopola\nResistente ai disturbi\nSi legge con analogRead() grazie all'ADC\nSegnale digitale\nSegnale analogico\nCarte da smistare: 7. Errori: 0.\nRicomincia"
    },
    "d1": {
-    "nav": "Inizio\nChe cos'è Arduino\nLa scheda UNO\nElettronica\nComponenti\nIDE e Tinkercad\nSicurezza\nQuiz\nSfida finale\nRisultato\n1 Breadboard\n2 Resistori\n3 Il LED\n4 Sensori e attuatori",
+    "nav": "Inizio\nChe cos'è Arduino\nLa scheda UNO\nElettronica\nComponenti\nIDE e Tinkercad\nSicurezza\nQuiz\nSfida finale\nRisultato\n1 Breadboard\n2 Resistori\n2b Codice colori\n3 Il LED\n4 Sensori e attuatori",
     "testo": "La breadboard\n\nVero o falso? Fate clic su una carta e poi sulla categoria giusta.\n\nLe strisce a sinistra e a destra del solco sono collegate\nServe saldare i componenti sulla breadboard\nAlcune breadboard hanno i binari interrotti a metà\nI fori centrali sono collegati in orizzontale per tutta la lunghezza\nPer convenzione il jumper rosso è 5V e quello nero GND\nIl solco centrale separa due metà non collegate\nI binari lungo i bordi distribuiscono 5V e GND\nI fori di una striscia centrale sono collegati tra loro a gruppi di 5\nVero\nFalso\nCarte da smistare: 8. Errori: 0.\nRicomincia"
    },
    "d2": {
-    "nav": "Inizio\nChe cos'è Arduino\nLa scheda UNO\nElettronica\nComponenti\nIDE e Tinkercad\nSicurezza\nQuiz\nSfida finale\nRisultato\n1 Breadboard\n2 Resistori\n3 Il LED\n4 Sensori e attuatori",
+    "nav": "Inizio\nChe cos'è Arduino\nLa scheda UNO\nElettronica\nComponenti\nIDE e Tinkercad\nSicurezza\nQuiz\nSfida finale\nRisultato\n1 Breadboard\n2 Resistori\n2b Codice colori\n3 Il LED\n4 Sensori e attuatori",
     "testo": "Il codice colori dei resistori\n\nCalcolate il valore: premete «Altro esercizio» per cambiare i colori.\n\nUn resistore ha le bande blu - bianco - marrone (prima cifra, seconda cifra, moltiplicatore). Quanti ohm vale?\n\nValore (Ω)\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
+   "d2b": {
+    "nav": "Inizio\nChe cos'è Arduino\nLa scheda UNO\nElettronica\nComponenti\nIDE e Tinkercad\nSicurezza\nQuiz\nSfida finale\nRisultato\n1 Breadboard\n2 Resistori\n2b Codice colori\n3 Il LED\n4 Sensori e attuatori",
+    "testo": "Il codice colori\n\nLeggete il valore di un resistore dalle bande, oppure costruitelo voi facendo clic sulle bande finché non vale quanto richiesto.\n\nLeggi il valore\nCostruisci il resistore\nAltro resistore\n\nLeggete le bande da sinistra: prima cifra, seconda cifra, moltiplicatore (la banda oro è la tolleranza, ±5%). Quanti ohm vale?\n\nnero 0\nmarrone 1\nrosso 2\narancione 3\ngiallo 4\nverde 5\nblu 6\nviola 7\ngrigio 8\nbianco 9\nValore (Ω)\nControlla\nGiusti al primo colpo: 0 su 0"
+   },
    "d3": {
-    "nav": "Inizio\nChe cos'è Arduino\nLa scheda UNO\nElettronica\nComponenti\nIDE e Tinkercad\nSicurezza\nQuiz\nSfida finale\nRisultato\n1 Breadboard\n2 Resistori\n3 Il LED\n4 Sensori e attuatori",
+    "nav": "Inizio\nChe cos'è Arduino\nLa scheda UNO\nElettronica\nComponenti\nIDE e Tinkercad\nSicurezza\nQuiz\nSfida finale\nRisultato\n1 Breadboard\n2 Resistori\n2b Codice colori\n3 Il LED\n4 Sensori e attuatori",
     "testo": "Il LED e il suo resistore\n\nCalcolate la resistenza: premete «Altro esercizio» per cambiare.\n\nLED giallo (tensione di soglia Vf ≈ 2 V) alimentato a 5 V con corrente desiderata 10 mA. Quanti ohm deve valere il resistore in serie? (R = (Vs − Vf) / I)\n\nResistenza (Ω)\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
    "d4": {
-    "nav": "Inizio\nChe cos'è Arduino\nLa scheda UNO\nElettronica\nComponenti\nIDE e Tinkercad\nSicurezza\nQuiz\nSfida finale\nRisultato\n1 Breadboard\n2 Resistori\n3 Il LED\n4 Sensori e attuatori",
+    "nav": "Inizio\nChe cos'è Arduino\nLa scheda UNO\nElettronica\nComponenti\nIDE e Tinkercad\nSicurezza\nQuiz\nSfida finale\nRisultato\n1 Breadboard\n2 Resistori\n2b Codice colori\n3 Il LED\n4 Sensori e attuatori",
     "testo": "Sensori e attuatori del kit\n\nIl componente è un sensore digitale, un sensore analogico o un attuatore?\n\nComponente: Buzzer piezoelettrico\n\nTipo\nSensore digitale\nSensore analogico\nAttuatore\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
    "e1": {
@@ -2410,11 +2420,11 @@
    },
    "qz1": {
     "nav": "Inizio\nChe cos'è Arduino\nLa scheda UNO\nElettronica\nComponenti\nIDE e Tinkercad\nSicurezza\nQuiz\nSfida finale\nRisultato\n1 Vero o falso\n2 Risposta multipla",
-    "testo": "Vero o falso?\n\nScegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.\n\nVero o falso? Una breadboard richiede di saldare i componenti.\n\nRisposta\nVero\nFalso\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+    "testo": "Vero o falso?\n\nScegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.\n\nVero o falso? Tinkercad permette di simulare circuiti senza comprare componenti.\n\nRisposta\nVero\nFalso\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
    "qz2": {
     "nav": "Inizio\nChe cos'è Arduino\nLa scheda UNO\nElettronica\nComponenti\nIDE e Tinkercad\nSicurezza\nQuiz\nSfida finale\nRisultato\n1 Vero o falso\n2 Risposta multipla",
-    "testo": "Risposta multipla\n\nScegliete una risposta e premete «Controlla».\n\nQuale gamba del LED va verso il pin di Arduino?\n\nRisposta\nCatodo, la più corta\nNessuna\nQualsiasi\nAnodo, la più lunga\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+    "testo": "Risposta multipla\n\nScegliete una risposta e premete «Controlla».\n\nQuale pulsante dell'IDE compila e carica sulla scheda?\n\nRisposta\nVerifica\nMonitor seriale\nCarica\nReset\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
    "fin": {
     "nav": "Inizio\nChe cos'è Arduino\nLa scheda UNO\nElettronica\nComponenti\nIDE e Tinkercad\nSicurezza\nQuiz\nSfida finale\nRisultato",
@@ -2426,7 +2436,7 @@
    }
   },
   "dopo": {
-   "inizio": "Arduino ed elettronica\n\nRipasso di scheda UNO, grandezze elettriche, legge di Ohm, breadboard, resistori, LED, sensori e sicurezza.\n\nChe cos'è Arduino: storia, microcontrollore contro PC, famiglia delle schede.\nLa scheda UNO: parti della scheda e memorie.\nElettronica: tensione, corrente, resistenza, legge di Ohm, digitale e analogico.\nComponenti: breadboard, resistori, LED, sensori e attuatori.\nIDE e sicurezza: Arduino IDE, caricamento dello sketch, regole di laboratorio.\nQuiz e Sfida finale su tutta la presentazione.\n\nSi gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.\n\nIl vostro nome: ",
+   "inizio": "Arduino ed elettronica\n\nRipasso di scheda UNO, grandezze elettriche, legge di Ohm, breadboard, resistori, LED, sensori e sicurezza.\n\nChe cos'è Arduino: storia, microcontrollore contro PC, famiglia delle schede.\nLa scheda UNO: parti della scheda e memorie.\nElettronica: tensione, corrente, resistenza, legge di Ohm, digitale e analogico.\nComponenti: breadboard, resistori (anche il codice colori da costruire), LED, sensori e attuatori.\nIDE e sicurezza: Arduino IDE, caricamento dello sketch, regole di laboratorio.\nQuiz e Sfida finale su tutta la presentazione.\n\nSi gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.\n\nIl vostro nome: ",
    "a1": "Che cos'è Arduino\n\nScegliete la risposta giusta.\n\nChe cosa fanno i sensori e gli attuatori?\n\nRisposta\nI sensori percepiscono il mondo esterno, gli attuatori agiscono su di esso\nEntrambi memorizzano dati\nEntrambi alimentano la scheda\nI sensori agiscono e gli attuatori percepiscono\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
    "a2": "Microcontrollore o personal computer?\n\nFate clic su una carta e poi sulla categoria giusta.\n\nMicrocontrollore (Arduino)\nEsegue un solo programma ripetendolo all'infinito\nClock di decine di MHz e pochi kilobyte di memoria\nUn unico chip integra CPU, memoria e porte di I/O\nNessun sistema operativo\nConsuma pochissimo e costa pochi euro\nPersonal computer\nEsegue molti programmi insieme gestiti dal sistema operativo\nClock di GHz e memoria di gigabyte\nCPU, RAM e periferiche sono componenti separati sulla scheda madre\nÈ un computer general purpose, con costo e consumi molto più alti\nFinito! Errori: 4.\nRicomincia",
    "a3": "La famiglia delle schede\n\nQuale scheda è descritta?\n\nQuale scheda? Wi-Fi e Bluetooth integrati, adatta all'Internet delle cose\n\nScheda\nUNO R3\nUNO R4\nNano\nMega 2560\nNano ESP32\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
@@ -2437,13 +2447,14 @@
    "c3": "Segnali digitali e analogici\n\nFate clic su una carta e poi sulla categoria giusta.\n\nSegnale digitale\nSi legge con digitalRead()\nSolo due valori: HIGH (5 V) o LOW (0 V)\nPulsante premuto o rilasciato\nResistente ai disturbi\nSegnale analogico\nInfiniti valori tra 0 e 5 V\nLuce, temperatura, posizione di una manopola\nSi legge con analogRead() grazie all'ADC\nFinito! Errori: 3.\nRicomincia",
    "d1": "La breadboard\n\nVero o falso? Fate clic su una carta e poi sulla categoria giusta.\n\nVero\nAlcune breadboard hanno i binari interrotti a metà\nPer convenzione il jumper rosso è 5V e quello nero GND\nIl solco centrale separa due metà non collegate\nI binari lungo i bordi distribuiscono 5V e GND\nI fori di una striscia centrale sono collegati tra loro a gruppi di 5\nFalso\nLe strisce a sinistra e a destra del solco sono collegate\nServe saldare i componenti sulla breadboard\nI fori centrali sono collegati in orizzontale per tutta la lunghezza\nFinito! Errori: 3.\nRicomincia",
    "d2": "Il codice colori dei resistori\n\nCalcolate il valore: premete «Altro esercizio» per cambiare i colori.\n\nUn resistore ha le bande blu - bianco - marrone (prima cifra, seconda cifra, moltiplicatore). Quanti ohm vale?\n\nValore (Ω)\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "d2b": "Il codice colori\n\nLeggete il valore di un resistore dalle bande, oppure costruitelo voi facendo clic sulle bande finché non vale quanto richiesto.\n\nLeggi il valore\nCostruisci il resistore\nAltro resistore\n\nLeggete le bande da sinistra: prima cifra, seconda cifra, moltiplicatore (la banda oro è la tolleranza, ±5%). Quanti ohm vale?\n\nnero 0\nmarrone 1\nrosso 2\narancione 3\ngiallo 4\nverde 5\nblu 6\nviola 7\ngrigio 8\nbianco 9\nValore (Ω)\nControlla\nNo: blu 6, rosso 2, moltiplicatore nero = ×1, quindi 62 × 1 = 62 Ω.\nGiusti al primo colpo: 0 su 1",
    "d3": "Il LED e il suo resistore\n\nCalcolate la resistenza: premete «Altro esercizio» per cambiare.\n\nLED giallo (tensione di soglia Vf ≈ 2 V) alimentato a 5 V con corrente desiderata 10 mA. Quanti ohm deve valere il resistore in serie? (R = (Vs − Vf) / I)\n\nResistenza (Ω)\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
    "d4": "Sensori e attuatori del kit\n\nIl componente è un sensore digitale, un sensore analogico o un attuatore?\n\nComponente: Buzzer piezoelettrico\n\nTipo\nSensore digitale\nSensore analogico\nAttuatore\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
    "e1": "Arduino IDE\n\nQuale pulsante o elemento dell'IDE è descritto?\n\nQuale elemento? Dove si sceglie Arduino UNO e la porta COM\n\nElemento\nVerifica\nCarica\nMonitor seriale\nFile .ino\nSelettore scheda e porta\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
    "e2": "Dal codice alla scheda\n\nOrdinate i passaggi. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».\n\nEsecuzione\nLo sketch parte subito e resta in memoria anche senza corrente.\nCaricamento (upload)\nIl binario viene inviato via USB nella memoria flash grazie al bootloader.\nCompilazione\nIl compilatore traduce lo sketch in linguaggio macchina dell'ATmega328P.\nScrittura\nLo sketch viene scritto nell'IDE.\nVerifica\nRimescola\nPosizioni corrette: 0 su 4. Le righe rosse sono fuori posto: premete «Rimescola» per riprovare.\nGiusti al primo tentativo: 0 su 1",
    "f1": "Sicurezza in laboratorio\n\nFate clic su una carta e poi sulla categoria giusta.\n\nSi fa\nregola di sicurezza\nUsare un driver e un'alimentazione esterna per motori e relè\nMettere sempre un resistore in serie ai LED\nControllare il circuito prima di alimentarlo\nScollegare subito l'USB se un componente scalda\nRiporre i componenti nel kit a fine lezione\nModificare il circuito a scheda scollegata dall'USB\nMai\npericoloso per te o per la scheda\nCollegare direttamente 5V a GND\nCollegare un motore direttamente a un pin\nCollegare un LED direttamente a 5 V senza resistore\nUsare la tensione di rete (230 V) con Arduino\nModificare il circuito con la scheda alimentata\nFinito! Errori: 5.\nRicomincia",
-   "qz1": "Vero o falso?\n\nScegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.\n\nVero o falso? Una breadboard richiede di saldare i componenti.\n\nRisposta\nVero\nFalso\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
-   "qz2": "Risposta multipla\n\nScegliete una risposta e premete «Controlla».\n\nQuale gamba del LED va verso il pin di Arduino?\n\nRisposta\nCatodo, la più corta\nNessuna\nQualsiasi\nAnodo, la più lunga\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "qz1": "Vero o falso?\n\nScegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.\n\nVero o falso? Tinkercad permette di simulare circuiti senza comprare componenti.\n\nRisposta\nVero\nFalso\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "qz2": "Risposta multipla\n\nScegliete una risposta e premete «Controlla».\n\nQuale pulsante dell'IDE compila e carica sulla scheda?\n\nRisposta\nVerifica\nMonitor seriale\nCarica\nReset\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
    "fin": "Sfida finale\n\nQuindici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nRiprova la sfida finale\n\nFinita: 0 su 15 in 00:00.",
    "res": "Risultato\n\nNome: Ada\n\nNessun gioco ancora completato\n0 di 1 attività svolte\nSfida finale\nnon ancora fatta\nCopia il risultato\nStampa\nRicomincia da capo\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la sfida finale."
   },
@@ -2478,6 +2489,9 @@
    "d2": [
     "controlla"
    ],
+   "d2b": [
+    "controlla"
+   ],
    "d3": [
     "controlla"
    ],
@@ -2503,78 +2517,82 @@
     "missione"
    ]
   },
-  "st": "{\"g\":{\"Storia e idea di Arduino\":{\"ok\":0,\"tot\":1},\"Microcontrollore o personal computer\":{\"ok\":0,\"tot\":1},\"La famiglia delle schede\":{\"ok\":0,\"tot\":1},\"Anatomia di Arduino UNO\":{\"ok\":0,\"tot\":1},\"Flash, SRAM, EEPROM\":{\"ok\":0,\"tot\":1},\"Tensione, corrente, resistenza\":{\"ok\":0,\"tot\":1},\"La legge di Ohm\":{\"ok\":0,\"tot\":1},\"Segnali digitali e analogici\":{\"ok\":0,\"tot\":1},\"La breadboard\":{\"ok\":0,\"tot\":1},\"Il codice colori dei resistori\":{\"ok\":0,\"tot\":1},\"Il resistore del LED\":{\"ok\":0,\"tot\":1},\"Sensori e attuatori del kit\":{\"ok\":0,\"tot\":1},\"Arduino IDE\":{\"ok\":0,\"tot\":1},\"Dal codice alla scheda\":{\"ok\":0,\"tot\":1},\"Sicurezza in laboratorio\":{\"ok\":0,\"tot\":1},\"Vero o falso\":{\"ok\":0,\"tot\":1},\"Risposta multipla\":{\"ok\":0,\"tot\":1}},\"m\":{\"Sfida finale\":{\"pts\":0,\"t\":\"00:00\",\"count\":15}}}"
+  "st": "{\"g\":{\"Storia e idea di Arduino\":{\"ok\":0,\"tot\":1},\"Microcontrollore o personal computer\":{\"ok\":0,\"tot\":1},\"La famiglia delle schede\":{\"ok\":0,\"tot\":1},\"Anatomia di Arduino UNO\":{\"ok\":0,\"tot\":1},\"Flash, SRAM, EEPROM\":{\"ok\":0,\"tot\":1},\"Tensione, corrente, resistenza\":{\"ok\":0,\"tot\":1},\"La legge di Ohm\":{\"ok\":0,\"tot\":1},\"Segnali digitali e analogici\":{\"ok\":0,\"tot\":1},\"La breadboard\":{\"ok\":0,\"tot\":1},\"Il codice colori dei resistori\":{\"ok\":0,\"tot\":1},\"Il resistore del LED\":{\"ok\":0,\"tot\":1},\"Sensori e attuatori del kit\":{\"ok\":0,\"tot\":1},\"Arduino IDE\":{\"ok\":0,\"tot\":1},\"Dal codice alla scheda\":{\"ok\":0,\"tot\":1},\"Sicurezza in laboratorio\":{\"ok\":0,\"tot\":1},\"Il codice colori\":{\"ok\":0,\"tot\":1},\"Vero o falso\":{\"ok\":0,\"tot\":1},\"Risposta multipla\":{\"ok\":0,\"tot\":1}},\"m\":{\"Sfida finale\":{\"pts\":0,\"t\":\"00:00\",\"count\":15}}}"
  },
  "informatica-1/arduino/output-e-input-digitali": {
   "nav": [],
   "sez": {
    "inizio": {
-    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato",
-    "testo": "Arduino: output e input digitali\n\nRipasso di setup e loop, pinMode, digitalWrite, pulsanti, pull-up, monitor seriale e debug.\n\nStruttura dello sketch: setup, loop, tipi e funzioni.\nOutput digitale: Blink, sequenze di LED, semaforo.\nInput digitale: pulsante, pull-down, pull-up, rimbalzo.\nMonitor seriale e debug: comunicazione seriale e ricerca degli errori.\nQuiz e Sfida finale su tutta la presentazione.\n\nSi gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.\n\nIl vostro nome: "
+    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nArduino virtuale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato",
+    "testo": "Arduino: output e input digitali\n\nRipasso di setup e loop, pinMode, digitalWrite, pulsanti, pull-up, monitor seriale e debug.\n\nStruttura dello sketch: setup, loop, tipi e funzioni.\nOutput digitale: Blink, sequenze di LED, semaforo.\nInput digitale: pulsante, pull-down, pull-up, rimbalzo.\nArduino virtuale: Blink, semaforo e pulsante eseguiti riga per riga su una scheda simulata.\nMonitor seriale e debug: comunicazione seriale e ricerca degli errori.\nQuiz e Sfida finale su tutta la presentazione.\n\nSi gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.\n\nIl vostro nome: "
    },
    "a1": {
-    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 setup e loop\n2 Tipi di dato\n3 Funzioni base",
+    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nArduino virtuale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 setup e loop\n2 Tipi di dato\n3 Funzioni base",
     "testo": "setup() e loop()\n\nDove va ogni istruzione? Fate clic su una carta e poi sulla categoria giusta.\n\nLettura del pulsante con digitalRead()\nSi esegue una volta sola all'avvio, per esempio pinMode()\nAccensione e spegnimento del LED con digitalWrite()\nSi ripete all'infinito, finché la scheda è alimentata\nAvvio della comunicazione seriale con Serial.begin()\nDichiarazione dei pin come INPUT o OUTPUT\nPause con delay()\nVa in setup()\nVa in loop()\nCarte da smistare: 7. Errori: 0.\nRicomincia"
    },
    "a2": {
-    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 setup e loop\n2 Tipi di dato\n3 Funzioni base",
+    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nArduino virtuale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 setup e loop\n2 Tipi di dato\n3 Funzioni base",
     "testo": "I tipi di dato\n\nQuale tipo scegliereste?\n\nChe tipo? Un numero intero piccolo, come il numero di un pin (occupa 2 byte e arriva a 32767)\n\nTipo\nint\nfloat\nbool\nchar\nunsigned long\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
    "a3": {
-    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 setup e loop\n2 Tipi di dato\n3 Funzioni base",
+    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nArduino virtuale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 setup e loop\n2 Tipi di dato\n3 Funzioni base",
     "testo": "Le funzioni fondamentali\n\nQuale funzione è descritta?\n\nQuale funzione? Ferma il programma per un certo numero di millisecondi\n\nFunzione\npinMode()\ndigitalWrite()\ndigitalRead()\ndelay()\nSerial.println()\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
    "b1": {
-    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 Blink\n2 Sequenza di LED\n3 Semaforo",
+    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nArduino virtuale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 Blink\n2 Sequenza di LED\n3 Semaforo",
     "testo": "Blink: il primo sketch\n\nTempi del lampeggio: premete «Altro esercizio» per cambiare i numeri.\n\nIl loop accende il LED, fa delay(1500), lo spegne e fa delay(1500). Quanti lampeggi completi (acceso+spento) fa in un minuto? (le altre istruzioni durano pochissimo)\n\nLampeggi al minuto\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
    "b2": {
-    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 Blink\n2 Sequenza di LED\n3 Semaforo",
+    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nArduino virtuale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 Blink\n2 Sequenza di LED\n3 Semaforo",
     "testo": "Più LED con il ciclo for\n\nChe cosa accende la sequenza? Premete «Altro esercizio».\n\nfor (int pin = 3; pin <= 8; pin++) {\n  digitalWrite(pin, HIGH);\n  delay(200);\n  digitalWrite(pin, LOW);\n}\nQuanti LED si accendono e quanti millisecondi dura il ciclo completo?\n\nLED accesi\nDurata (ms)\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
    "b3": {
-    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 Blink\n2 Sequenza di LED\n3 Semaforo",
+    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nArduino virtuale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 Blink\n2 Sequenza di LED\n3 Semaforo",
     "testo": "Il semaforo\n\nOrdinate le fasi del semaforo. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».\n\nRosso\nLe auto si fermano.\n▲▼\nVerde\nIl semaforo è verde per le auto.\n▲▼\nGiallo\nIl giallo avvisa che sta per diventare rosso.\n▲▼\nRosso e verde pedoni\nPassano i pedoni.\n▲▼\nVerifica\nRimescola\nGiusti al primo tentativo: 0 su 0"
    },
    "c1": {
-    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 Il pulsante\n2 Pull-down e pull-up\n3 Rimbalzo",
+    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nArduino virtuale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 Il pulsante\n2 Pull-down e pull-up\n3 Rimbalzo",
     "testo": "Leggere un pulsante\n\nQuale configurazione è descritta?\n\nQuale configurazione? Il pulsante tra il pin e GND, senza resistore esterno: a riposo si legge HIGH\n\nConfigurazione\nPull-down esterno\nINPUT_PULLUP\nPin flottante\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
    "c2": {
-    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 Il pulsante\n2 Pull-down e pull-up\n3 Rimbalzo",
+    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nArduino virtuale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 Il pulsante\n2 Pull-down e pull-up\n3 Rimbalzo",
     "testo": "Pull-down e pull-up\n\nQuale valore legge digitalRead()? Premete «Altro esercizio».\n\nPulsante con pull-down (resistore da 10 kΩ verso GND), premuto. Che cosa restituisce digitalRead?\n\ndigitalRead\nHIGH\nLOW\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
    "c3": {
-    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 Il pulsante\n2 Pull-down e pull-up\n3 Rimbalzo",
+    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nArduino virtuale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 Il pulsante\n2 Pull-down e pull-up\n3 Rimbalzo",
     "testo": "Il rimbalzo del pulsante\n\nVero o falso? Fate clic su una carta e poi sulla categoria giusta.\n\nSi risolve con un piccolo delay() dopo il rilevamento\nQuando si preme un pulsante il contatto rimbalza per pochi millisecondi\nLo sketch può contare più pressioni per errore\nIl rimbalzo si evita con un resistore più grande\nIl rimbalzo succede solo con i pulsanti rotti\nUna pressione può sembrare molte pressioni a 16 MHz\nIl rimbalzo non esiste nei circuiti reali\nVero\nFalso\nCarte da smistare: 7. Errori: 0.\nRicomincia"
    },
    "d1": {
-    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato",
+    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nArduino virtuale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato",
     "testo": "Il monitor seriale\n\nQuale istruzione serve?\n\nQuale istruzione? Serve nel setup() per iniziare la comunicazione a 9600 baud\n\nIstruzione\nSerial.begin(9600);\nSerial.println(x);\nSerial.print(x);\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
+   "sim": {
+    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nArduino virtuale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato",
+    "testo": "Arduino virtuale\n\nLo sketch gira riga per riga accanto alla scheda: guardate i LED, tenete premuto il pulsante e leggete il monitor seriale. Si può rallentare per seguirlo meglio.\n\nBlink\nSemaforo\nPulsante (pull-down)\nPulsante con INPUT_PULLUP\n▶ Avvia\n⏮ Riavvia\nlento\nnormale\nveloce\n\nIl LED sul pin 13 lampeggia: acceso un secondo, spento un secondo.\n\nvoid setup() {\n  pinMode(13, OUTPUT);\n}\nvoid loop() {\n  digitalWrite(13, HIGH);\n  delay(1000);\n  digitalWrite(13, LOW);\n  delay(1000);\n}\nARDUINO UNO\n13\n12\n11\n10\n9\n8\n7\n6\n5\n4\n3\n2\nL\npin 13\n\nPremete «Avvia»: prima si esegue setup() una volta, poi loop() all'infinito."
+   },
    "e1": {
-    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato",
+    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nArduino virtuale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato",
     "testo": "Caccia all'errore\n\nNello sketch c'è un errore: fate clic sulla riga sbagliata.\n\nDeve confrontare lo stato del pulsante. Quale riga è sbagliata?\n\nint stato = digitalRead(2);\nif (stato = HIGH) {\ndigitalWrite(13, HIGH);\n}\nAltro esercizio\nTrovati: 0 su 0"
    },
    "qz1": {
-    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 Vero o falso\n2 Risposta multipla",
+    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nArduino virtuale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 Vero o falso\n2 Risposta multipla",
     "testo": "Vero o falso?\n\nScegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.\n\nVero o falso? setup() viene eseguita ripetutamente.\n\nRisposta\nVero\nFalso\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
    "qz2": {
-    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 Vero o falso\n2 Risposta multipla",
+    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nArduino virtuale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 Vero o falso\n2 Risposta multipla",
     "testo": "Risposta multipla\n\nScegliete una risposta e premete «Controlla».\n\nCon quale valore baud si apre di solito il monitor seriale negli esempi?\n\nRisposta\n9\n16\n5000000\n9600\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
    "fin": {
-    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato",
+    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nArduino virtuale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato",
     "testo": "Sfida finale\n\nDodici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nInizia la sfida finale"
    },
    "res": {
-    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato",
+    "nav": "Inizio\nStruttura dello sketch\nOutput digitale\nInput digitale\nMonitor seriale\nArduino virtuale\nCaccia all'errore\nQuiz\nSfida finale\nRisultato",
     "testo": "Risultato\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la sfida finale."
    }
   },
   "dopo": {
-   "inizio": "Arduino: output e input digitali\n\nRipasso di setup e loop, pinMode, digitalWrite, pulsanti, pull-up, monitor seriale e debug.\n\nStruttura dello sketch: setup, loop, tipi e funzioni.\nOutput digitale: Blink, sequenze di LED, semaforo.\nInput digitale: pulsante, pull-down, pull-up, rimbalzo.\nMonitor seriale e debug: comunicazione seriale e ricerca degli errori.\nQuiz e Sfida finale su tutta la presentazione.\n\nSi gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.\n\nIl vostro nome: ",
+   "inizio": "Arduino: output e input digitali\n\nRipasso di setup e loop, pinMode, digitalWrite, pulsanti, pull-up, monitor seriale e debug.\n\nStruttura dello sketch: setup, loop, tipi e funzioni.\nOutput digitale: Blink, sequenze di LED, semaforo.\nInput digitale: pulsante, pull-down, pull-up, rimbalzo.\nArduino virtuale: Blink, semaforo e pulsante eseguiti riga per riga su una scheda simulata.\nMonitor seriale e debug: comunicazione seriale e ricerca degli errori.\nQuiz e Sfida finale su tutta la presentazione.\n\nSi gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.\n\nIl vostro nome: ",
    "a1": "setup() e loop()\n\nDove va ogni istruzione? Fate clic su una carta e poi sulla categoria giusta.\n\nVa in setup()\nSi esegue una volta sola all'avvio, per esempio pinMode()\nAvvio della comunicazione seriale con Serial.begin()\nDichiarazione dei pin come INPUT o OUTPUT\nVa in loop()\nLettura del pulsante con digitalRead()\nAccensione e spegnimento del LED con digitalWrite()\nSi ripete all'infinito, finché la scheda è alimentata\nPause con delay()\nFinito! Errori: 4.\nRicomincia",
    "a2": "I tipi di dato\n\nQuale tipo scegliereste?\n\nChe tipo? Un numero intero piccolo, come il numero di un pin (occupa 2 byte e arriva a 32767)\n\nTipo\nint\nfloat\nbool\nchar\nunsigned long\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
    "a3": "Le funzioni fondamentali\n\nQuale funzione è descritta?\n\nQuale funzione? Ferma il programma per un certo numero di millisecondi\n\nFunzione\npinMode()\ndigitalWrite()\ndigitalRead()\ndelay()\nSerial.println()\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
@@ -2585,6 +2603,7 @@
    "c2": "Pull-down e pull-up\n\nQuale valore legge digitalRead()? Premete «Altro esercizio».\n\nPulsante con pull-down (resistore da 10 kΩ verso GND), premuto. Che cosa restituisce digitalRead?\n\ndigitalRead\nHIGH\nLOW\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
    "c3": "Il rimbalzo del pulsante\n\nVero o falso? Fate clic su una carta e poi sulla categoria giusta.\n\nVero\nSi risolve con un piccolo delay() dopo il rilevamento\nQuando si preme un pulsante il contatto rimbalza per pochi millisecondi\nLo sketch può contare più pressioni per errore\nUna pressione può sembrare molte pressioni a 16 MHz\nFalso\nIl rimbalzo si evita con un resistore più grande\nIl rimbalzo succede solo con i pulsanti rotti\nIl rimbalzo non esiste nei circuiti reali\nFinito! Errori: 3.\nRicomincia",
    "d1": "Il monitor seriale\n\nQuale istruzione serve?\n\nQuale istruzione? Serve nel setup() per iniziare la comunicazione a 9600 baud\n\nIstruzione\nSerial.begin(9600);\nSerial.println(x);\nSerial.print(x);\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "sim": "Arduino virtuale\n\nLo sketch gira riga per riga accanto alla scheda: guardate i LED, tenete premuto il pulsante e leggete il monitor seriale. Si può rallentare per seguirlo meglio.\n\nBlink\nSemaforo\nPulsante (pull-down)\nPulsante con INPUT_PULLUP\n▶ Avvia\n⏮ Riavvia\nlento\nnormale\nveloce\n\nIl LED sul pin 13 lampeggia: acceso un secondo, spento un secondo.\n\nvoid setup() {\n  pinMode(13, OUTPUT);\n}\nvoid loop() {\n  digitalWrite(13, HIGH);\n  delay(1000);\n  digitalWrite(13, LOW);\n  delay(1000);\n}\nARDUINO UNO\n13\n12\n11\n10\n9\n8\n7\n6\n5\n4\n3\n2\nL\npin 13\n\nPremete «Avvia»: prima si esegue setup() una volta, poi loop() all'infinito.",
    "e1": "Caccia all'errore\n\nNello sketch c'è un errore: fate clic sulla riga sbagliata.\n\nDeve confrontare lo stato del pulsante. Quale riga è sbagliata?\n\nint stato = digitalRead(2);\nif (stato = HIGH) {\ndigitalWrite(13, HIGH);\n}\nNo: la riga sbagliata era un'altra. = assegna e rende la condizione sempre vera: per confrontare serve ==.\nAltro esercizio\nTrovati: 0 su 1",
    "qz1": "Vero o falso?\n\nScegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.\n\nVero o falso? setup() viene eseguita ripetutamente.\n\nRisposta\nVero\nFalso\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
    "qz2": "Risposta multipla\n\nScegliete una risposta e premete «Controlla».\n\nCon quale valore baud si apre di solito il monitor seriale negli esempi?\n\nRisposta\n9\n16\n5000000\n9600\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
@@ -2622,6 +2641,7 @@
    "d1": [
     "controlla"
    ],
+   "sim": [],
    "e1": [
     "caccia"
    ],
@@ -2635,14 +2655,14 @@
     "missione"
    ]
   },
-  "st": "{\"g\":{\"setup o loop\":{\"ok\":0,\"tot\":1},\"I tipi di dato\":{\"ok\":0,\"tot\":1},\"Le funzioni fondamentali\":{\"ok\":0,\"tot\":1},\"Blink\":{\"ok\":0,\"tot\":1},\"Sequenza di LED\":{\"ok\":0,\"tot\":1},\"Il semaforo\":{\"ok\":0,\"tot\":1},\"Leggere un pulsante\":{\"ok\":0,\"tot\":1},\"Pull-down e pull-up\":{\"ok\":0,\"tot\":1},\"Il rimbalzo\":{\"ok\":0,\"tot\":1},\"Il monitor seriale\":{\"ok\":0,\"tot\":1},\"Trova l'errore (digitale)\":{\"ok\":0,\"tot\":1},\"Vero o falso\":{\"ok\":0,\"tot\":1},\"Risposta multipla\":{\"ok\":0,\"tot\":1}},\"m\":{\"Sfida finale\":{\"pts\":0,\"t\":\"00:00\",\"count\":12}}}"
+  "st": "{\"g\":{\"setup o loop\":{\"ok\":0,\"tot\":1},\"I tipi di dato\":{\"ok\":0,\"tot\":1},\"Le funzioni fondamentali\":{\"ok\":0,\"tot\":1},\"Blink\":{\"ok\":0,\"tot\":1},\"Sequenza di LED\":{\"ok\":0,\"tot\":1},\"Il semaforo\":{\"ok\":0,\"tot\":1},\"Leggere un pulsante\":{\"ok\":0,\"tot\":1},\"Pull-down e pull-up\":{\"ok\":0,\"tot\":1},\"Il rimbalzo\":{\"ok\":0,\"tot\":1},\"Il monitor seriale\":{\"ok\":0,\"tot\":1},\"Trova l'errore (digitale)\":{\"ok\":0,\"tot\":1},\"Arduino virtuale\":{\"ok\":0,\"tot\":0},\"Vero o falso\":{\"ok\":0,\"tot\":1},\"Risposta multipla\":{\"ok\":0,\"tot\":1}},\"m\":{\"Sfida finale\":{\"pts\":0,\"t\":\"00:00\",\"count\":12}}}"
  },
  "informatica-1/arduino/sensori-pwm-e-attuatori": {
   "nav": [],
   "sez": {
    "inizio": {
     "nav": "Inizio\nSegnali analogici\nSensori\nPWM\nAttuatori\nCaccia all'errore\nQuiz\nSfida finale\nRisultato",
-    "testo": "Arduino: sensori, PWM e attuatori\n\nRipasso di analogRead, map, PWM, buzzer, servomotore e sensore a ultrasuoni.\n\nSegnali analogici: ADC, analogRead e map.\nSensori: LDR, TMP36 e HC-SR04.\nPWM: duty cycle e analogWrite.\nAttuatori: RGB, buzzer, servo, motori e IoT.\nQuiz e Sfida finale su tutta la presentazione.\n\nSi gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.\n\nIl vostro nome: "
+    "testo": "Arduino: sensori, PWM e attuatori\n\nRipasso di analogRead, map, PWM, buzzer, servomotore e sensore a ultrasuoni.\n\nSegnali analogici: ADC, analogRead e map.\nSensori: LDR, TMP36 e HC-SR04.\nPWM: duty cycle e analogWrite, con onda quadra, LED e servo da comandare.\nAttuatori: RGB, buzzer, servo, motori e IoT.\nQuiz e Sfida finale su tutta la presentazione.\n\nSi gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.\n\nIl vostro nome: "
    },
    "a1": {
     "nav": "Inizio\nSegnali analogici\nSensori\nPWM\nAttuatori\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 ADC\n2 Conversione\n3 map()",
@@ -2669,12 +2689,16 @@
     "testo": "Quale sensore scegliere\n\nQuale componente userebbe un progetto?\n\nProgetto: Rilevare quanta luce c'è in una stanza\n\nSensore\nFotoresistenza (LDR)\nSensore TMP36\nSensore HC-SR04\nPotenziometro\nPulsante\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
    },
    "c1": {
-    "nav": "Inizio\nSegnali analogici\nSensori\nPWM\nAttuatori\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 Idea\n2 Duty cycle",
+    "nav": "Inizio\nSegnali analogici\nSensori\nPWM\nAttuatori\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 Idea\n2 Duty cycle\n3 PWM e servo",
     "testo": "PWM: la modulazione di larghezza di impulso\n\nFate clic su una carta e poi sulla categoria giusta.\n\nAlterna velocemente HIGH e LOW con un rapporto variabile\nCon analogWrite(9, 255) il LED è sempre acceso\nDisponibile solo sui pin contrassegnati con ~\nUn duty cycle del 50% dà in media circa 2,5 V\nSi usa per leggere un sensore analogico\nÈ disponibile su tutti i pin digitali\nUn duty cycle del 100% significa sempre spento\nVero\nFalso\nCarte da smistare: 7. Errori: 0.\nRicomincia"
    },
    "c2": {
-    "nav": "Inizio\nSegnali analogici\nSensori\nPWM\nAttuatori\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 Idea\n2 Duty cycle",
+    "nav": "Inizio\nSegnali analogici\nSensori\nPWM\nAttuatori\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 Idea\n2 Duty cycle\n3 PWM e servo",
     "testo": "Il duty cycle\n\nCalcolate: premete «Altro esercizio» per cambiare i numeri.\n\nSi vuole un duty cycle del 75% su un pin PWM. Quale valore si passa ad analogWrite? (valori da 0 a 255, arrotondate all'intero)\n\nValore\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "c3": {
+    "nav": "Inizio\nSegnali analogici\nSensori\nPWM\nAttuatori\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 Idea\n2 Duty cycle\n3 PWM e servo",
+    "testo": "PWM, potenziometro e servo\n\nMuovete i cursori: a sinistra cambia il duty cycle e il LED si illumina di più o di meno, a destra il potenziometro passa per analogRead e map() fino all'angolo del servo. Raggiungete gli obiettivi.\n\nPortate il duty cycle al 50% circa (analogWrite 127 o 128).\nPortate il duty cycle al 25% circa (analogWrite 63 o 64).\nAccendete il LED al massimo.\nPortate il servo a 90°.\nLeggete circa metà scala dal potenziometro (tra 500 e 524).\nLED sul pin 9\nanalogWrite(9, 0)\n5V\n0\nduty cycle 0 %\ntensione media 0 V\nPotenziometro su A0 e servo sul pin 6\nposizione della manopola\n0°\n90°\n180°\nanalogRead(A0) = 0\nmap(…, 0, 1023, 0, 180) = 0°\n\nObiettivi raggiunti: 0 su 5"
    },
    "d1": {
     "nav": "Inizio\nSegnali analogici\nSensori\nPWM\nAttuatori\nCaccia all'errore\nQuiz\nSfida finale\nRisultato\n1 RGB, buzzer, servo\n2 Parcheggio\n3 Motori e IoT",
@@ -2710,7 +2734,7 @@
    }
   },
   "dopo": {
-   "inizio": "Arduino: sensori, PWM e attuatori\n\nRipasso di analogRead, map, PWM, buzzer, servomotore e sensore a ultrasuoni.\n\nSegnali analogici: ADC, analogRead e map.\nSensori: LDR, TMP36 e HC-SR04.\nPWM: duty cycle e analogWrite.\nAttuatori: RGB, buzzer, servo, motori e IoT.\nQuiz e Sfida finale su tutta la presentazione.\n\nSi gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.\n\nIl vostro nome: ",
+   "inizio": "Arduino: sensori, PWM e attuatori\n\nRipasso di analogRead, map, PWM, buzzer, servomotore e sensore a ultrasuoni.\n\nSegnali analogici: ADC, analogRead e map.\nSensori: LDR, TMP36 e HC-SR04.\nPWM: duty cycle e analogWrite, con onda quadra, LED e servo da comandare.\nAttuatori: RGB, buzzer, servo, motori e IoT.\nQuiz e Sfida finale su tutta la presentazione.\n\nSi gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.\n\nIl vostro nome: ",
    "a1": "Dal segnale analogico al numero\n\nQuale grandezza o funzione è descritta?\n\nQuale? Il valore massimo accettato da analogWrite()\n\nTermine\nADC\nanalogRead()\nanalogWrite()\n1023\n255\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
    "a2": "Il convertitore ADC\n\nCalcolate la lettura: premete «Altro esercizio» per cambiare i numeri.\n\nanalogRead(A0) restituisce 256 (ADC a 10 bit, da 0 a 1023, riferimento 5 V). Quanti volt ci sono sul pin? (volt = valore x 5 / 1023)\n\nTensione (V)\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
    "a3": "La funzione map()\n\nCalcolate il risultato di map(): premete «Altro esercizio».\n\nQuanto restituisce map(400, 0, 1023, 0, 100)? (map lavora con interi: i decimali sono troncati)\n\nRisultato\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
@@ -2719,6 +2743,7 @@
    "b3": "Quale sensore scegliere\n\nQuale componente userebbe un progetto?\n\nProgetto: Rilevare quanta luce c'è in una stanza\n\nSensore\nFotoresistenza (LDR)\nSensore TMP36\nSensore HC-SR04\nPotenziometro\nPulsante\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
    "c1": "PWM: la modulazione di larghezza di impulso\n\nFate clic su una carta e poi sulla categoria giusta.\n\nVero\nAlterna velocemente HIGH e LOW con un rapporto variabile\nCon analogWrite(9, 255) il LED è sempre acceso\nDisponibile solo sui pin contrassegnati con ~\nUn duty cycle del 50% dà in media circa 2,5 V\nFalso\nSi usa per leggere un sensore analogico\nÈ disponibile su tutti i pin digitali\nUn duty cycle del 100% significa sempre spento\nFinito! Errori: 3.\nRicomincia",
    "c2": "Il duty cycle\n\nCalcolate: premete «Altro esercizio» per cambiare i numeri.\n\nSi vuole un duty cycle del 75% su un pin PWM. Quale valore si passa ad analogWrite? (valori da 0 a 255, arrotondate all'intero)\n\nValore\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "c3": "PWM, potenziometro e servo\n\nMuovete i cursori: a sinistra cambia il duty cycle e il LED si illumina di più o di meno, a destra il potenziometro passa per analogRead e map() fino all'angolo del servo. Raggiungete gli obiettivi.\n\nPortate il duty cycle al 50% circa (analogWrite 127 o 128).\nPortate il duty cycle al 25% circa (analogWrite 63 o 64).\nAccendete il LED al massimo.\nPortate il servo a 90°.\nLeggete circa metà scala dal potenziometro (tra 500 e 524).\nLED sul pin 9\nanalogWrite(9, 0)\n5V\n0\nduty cycle 0 %\ntensione media 0 V\nPotenziometro su A0 e servo sul pin 6\nposizione della manopola\n0°\n90°\n180°\nanalogRead(A0) = 0\nmap(…, 0, 1023, 0, 180) = 0°\n\nObiettivi raggiunti: 0 su 5",
    "d1": "Attuatori del kit\n\nQuale attuatore è descritto?\n\nQuale attuatore? Tre LED in un unico componente: rosso, verde e blu con tre pin PWM\n\nAttuatore\nLED RGB\nBuzzer\nServomotore\nMotore DC\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
    "d2": "Il sensore di parcheggio\n\nOrdinate i passaggi. Trascinate le righe (oppure usate le frecce), poi premete «Verifica».\n\nCalcolo della distanza\ndistanza = durata x 0,0343 / 2.\nReazione\nSe la distanza è piccola, il buzzer suona più veloce.\nInvio dell'impulso\nSi porta TRIG a HIGH per 10 microsecondi.\nMisura del tempo\npulseIn() misura quanto resta HIGH il pin ECHO.\nVerifica\nRimescola\nPosizioni corrette: 0 su 4. Le righe rosse sono fuori posto: premete «Rimescola» per riprovare.\nGiusti al primo tentativo: 0 su 1",
    "d3": "Motori, driver e Internet delle cose\n\nVero o falso? Fate clic su una carta e poi sulla categoria giusta.\n\nVero\nUn diodo protegge dalle extratensioni del motore\nUn motore assorbe molta più corrente di quella che un pin può fornire\nServe un driver, come un ponte H o un transistor\nUn dispositivo IoT si collega a Internet e scambia dati\nFalso\nIl motore si collega direttamente al pin 13\nArduino UNO ha il Wi-Fi integrato\nIl Wi-Fi della UNO R3 è sul pin A0\nFinito! Errori: 3.\nRicomincia",
@@ -2753,6 +2778,7 @@
    "c2": [
     "controlla"
    ],
+   "c3": [],
    "d1": [
     "controlla"
    ],
@@ -2775,6 +2801,6 @@
     "missione"
    ]
   },
-  "st": "{\"g\":{\"Dal segnale analogico al numero\":{\"ok\":0,\"tot\":1},\"Il convertitore ADC\":{\"ok\":0,\"tot\":1},\"La funzione map()\":{\"ok\":0,\"tot\":1},\"Fotoresistenza e temperatura\":{\"ok\":0,\"tot\":1},\"Il sensore a ultrasuoni\":{\"ok\":0,\"tot\":1},\"Quale sensore scegliere\":{\"ok\":0,\"tot\":1},\"PWM vero o falso\":{\"ok\":0,\"tot\":1},\"Il duty cycle\":{\"ok\":0,\"tot\":1},\"Attuatori del kit\":{\"ok\":0,\"tot\":1},\"Il sensore di parcheggio\":{\"ok\":0,\"tot\":1},\"Motori e IoT\":{\"ok\":0,\"tot\":1},\"Trova l'errore (sensori)\":{\"ok\":1,\"tot\":1},\"Vero o falso\":{\"ok\":0,\"tot\":1},\"Risposta multipla\":{\"ok\":0,\"tot\":1}},\"m\":{\"Sfida finale\":{\"pts\":0,\"t\":\"00:00\",\"count\":12}}}"
+  "st": "{\"g\":{\"Dal segnale analogico al numero\":{\"ok\":0,\"tot\":1},\"Il convertitore ADC\":{\"ok\":0,\"tot\":1},\"La funzione map()\":{\"ok\":0,\"tot\":1},\"Fotoresistenza e temperatura\":{\"ok\":0,\"tot\":1},\"Il sensore a ultrasuoni\":{\"ok\":0,\"tot\":1},\"Quale sensore scegliere\":{\"ok\":0,\"tot\":1},\"PWM vero o falso\":{\"ok\":0,\"tot\":1},\"Il duty cycle\":{\"ok\":0,\"tot\":1},\"Attuatori del kit\":{\"ok\":0,\"tot\":1},\"Il sensore di parcheggio\":{\"ok\":0,\"tot\":1},\"Motori e IoT\":{\"ok\":0,\"tot\":1},\"Trova l'errore (sensori)\":{\"ok\":1,\"tot\":1},\"PWM e servo\":{\"ok\":0,\"tot\":0},\"Vero o falso\":{\"ok\":0,\"tot\":1},\"Risposta multipla\":{\"ok\":0,\"tot\":1}},\"m\":{\"Sfida finale\":{\"pts\":0,\"t\":\"00:00\",\"count\":12}}}"
  }
 }

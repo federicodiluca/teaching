@@ -398,3 +398,117 @@ table.pg td.pf { color: var(--tg-ko); font-weight: 700; }
 .rx-trov pre { margin: 0; font: 14px/1.6 var(--tg-mono); white-space: pre-wrap; }
 .rx-trov mark { background: color-mix(in srgb, var(--tg-hl) 55%, transparent); color: inherit; border-radius: 3px; padding: 0 1px; }
 @media (max-width: 560px) { .rx-casi { grid-template-columns: 1fr; } }
+/* client REST (tpsit-5/applicazioni-web-avanzate/temi/rest.js); le missioni usano .git-mis */
+.rest-req { display: flex; gap: 8px; align-items: stretch; margin: 6px 0 10px; flex-wrap: wrap; }
+.rest-req .rest-met { width: auto; font: 600 14px var(--tg-mono); }
+.rest-req .rest-url { flex: 1; min-width: 220px; font: 14px var(--tg-mono); }
+.rest-corpo small, .rest-stato small { display: block; font: 500 11px var(--tg-mono); color: var(--tg-mute); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
+.rest-corpo textarea { width: 100%; box-sizing: border-box; min-height: 110px; font: 14px/1.5 var(--tg-mono); background: #0d1117; color: #e6edf3; border: 1px solid #0d1117; border-radius: 10px; padding: 8px 12px; resize: vertical; }
+.rest-corpo.spento { opacity: .45; }
+.rest-ris { margin-top: 12px; border: 1px solid var(--tg-line); border-radius: 12px; padding: 10px 12px; }
+.rest-stato span { font: 15px var(--tg-mono); }
+.rest-stato b.c2 { color: var(--tg-ok); }
+.rest-stato b.c4 { color: var(--tg-ko); }
+.rest-h { margin: 8px 0 0; font: 13px/1.5 var(--tg-mono); color: var(--tg-mute); white-space: pre-wrap; }
+.rest-b { margin: 6px 0 0; font: 13px/1.5 var(--tg-mono); background: var(--tg-bg); border-radius: 8px; padding: 8px 10px; white-space: pre-wrap; max-height: 260px; overflow-y: auto; }
+.rest-nota { min-height: 1.5em; color: var(--tg-mute); }
+.rest-db { margin: 6px 0 10px; }
+.rest-db summary { cursor: pointer; font-weight: 600; }
+.rest-db pre { font: 13px/1.5 var(--tg-mono); white-space: pre-wrap; }
+/* handshake TCP (tpsit-5/socket-e-tcp-udp/temi/tcp.js) */
+.tcp-pos { margin-left: auto; font: 500 13px var(--tg-mono); color: var(--tg-mute); }
+.tcp-svg { width: 100%; max-width: 620px; display: block; margin: 8px auto; }
+.tcp-svg .vita { stroke: var(--tg-line); stroke-width: 3; }
+.tcp-svg .att { font: 600 15px var(--tg-mono); fill: var(--tg-ink); text-anchor: middle; }
+.tcp-svg .fase { font: 600 9px var(--tg-mono); fill: var(--tg-mute); text-anchor: end; text-transform: uppercase; letter-spacing: .06em; }
+.tcp-svg .seg { stroke-width: 2.5; }
+.tcp-svg .seg.syn { stroke: var(--tg-acc); }
+.tcp-svg .seg.ack { stroke: var(--tg-ok); }
+.tcp-svg .seg.fin { stroke: var(--tg-ko); }
+.tcp-svg marker path { fill: var(--tg-ink); }
+.tcp-svg .lab { font: 11px var(--tg-mono); fill: var(--tg-ink); text-anchor: middle; paint-order: stroke; stroke: var(--tg-paper); stroke-width: 5px; stroke-linejoin: round; white-space: pre; }
+.tcp-svg .seg.vola { stroke-dasharray: 100; stroke-dashoffset: 100; animation: tcp-vola .6s ease forwards; }
+@keyframes tcp-vola { to { stroke-dashoffset: 0; } }
+.tcp-campi { display: flex; flex-wrap: wrap; gap: 10px; }
+.tcp-campi .f { flex: 1 1 140px; }
+.tcp-nota { min-height: 1.5em; color: var(--tg-mute); }
+@media (prefers-reduced-motion: reduce) { .tcp-svg .seg.vola { animation: none; stroke-dashoffset: 0; } }
+/* hidden deve vincere anche su .row e sugli altri display dei simulatori */
+[hidden] { display: none !important; }
+/* circuiti logici (informatica-1/computer-e-codici/temi/circuiti.js) */
+.cc-svg { margin: 8px 0; }
+svg.cc { width: 100%; max-width: 720px; height: auto; display: block; }
+.cc .filo { fill: none; stroke: var(--tg-line); stroke-width: 4; stroke-linejoin: round; transition: stroke .3s; }
+.cc .filo.off { stroke: color-mix(in srgb, var(--tg-mute) 60%, transparent); }
+.cc .filo.on { stroke: var(--tg-hl); stroke-dasharray: 12 8; animation: cc-flusso .6s linear infinite; filter: drop-shadow(0 0 3px var(--tg-hl)); }
+@keyframes cc-flusso { to { stroke-dashoffset: -20; } }
+.cc .corpo { fill: var(--tg-paper); stroke: var(--tg-ink); stroke-width: 2.5; }
+.cc .nome { font: 600 12px var(--tg-mono); fill: var(--tg-mute); text-anchor: middle; }
+.cc .usc { font: 700 17px var(--tg-mono); text-anchor: middle; }
+.cc .usc.u1 { fill: var(--tg-hl); }
+.cc .usc.u0 { fill: var(--tg-mute); }
+.cc .ingr rect { stroke-width: 2; }
+.cc .ingr rect.v1 { fill: color-mix(in srgb, var(--tg-hl) 70%, transparent); stroke: var(--tg-hl); }
+.cc .ingr rect.v0 { fill: var(--tg-bg); stroke: var(--tg-line); }
+.cc .ingr circle { fill: #fff; stroke: var(--tg-line); }
+.cc .ingr .lett { font: 700 16px var(--tg-mono); fill: var(--tg-ink); text-anchor: middle; }
+.cc .ingr .bit { font: 600 13px var(--tg-mono); fill: var(--tg-mute); text-anchor: middle; }
+.cc .ingr.cliccabile { cursor: pointer; }
+.cc .ingr.cliccabile:hover rect { stroke: var(--tg-acc); }
+.cc .led circle { fill: var(--tg-bg); stroke: var(--tg-ink); stroke-width: 2.5; transition: fill .3s; }
+.cc .led path { stroke: var(--tg-ink); stroke-width: 2.5; }
+.cc .led.acceso circle { fill: #facc15; filter: drop-shadow(0 0 10px #facc15); }
+.cc-espr code { font-size: 15px; }
+@media (prefers-reduced-motion: reduce) { .cc .filo.on { animation: none; } }
+/* simulatori Arduino (informatica-1/arduino/temi/simulatori.js) */
+.res-lab .btn.on, .ard .btn.on { background: var(--tg-acc); color: #fff; border-color: var(--tg-acc); }
+svg.rl { width: 100%; max-width: 460px; display: block; margin: 8px 0; }
+.rl .gamba { stroke: #9ca3af; stroke-width: 5; }
+.rl .corpo { fill: #d9c3a0; stroke: #8b7355; stroke-width: 2; transition: fill .3s; }
+.rl .corpo.giusto { fill: #bbf7d0; stroke: var(--tg-ok); }
+.rl .banda.clic { cursor: pointer; }
+.rl .banda.clic:hover { stroke: var(--tg-acc); stroke-width: 3; }
+.rl .val { font: 700 16px var(--tg-mono); fill: var(--tg-ink); text-anchor: middle; }
+.rl-leg { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 13px; color: var(--tg-mute); margin-bottom: 8px; }
+.rl-leg i { display: inline-block; width: 14px; height: 14px; border-radius: 3px; border: 1px solid var(--tg-line); vertical-align: -2px; margin-right: 4px; }
+.ard-box { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; margin: 10px 0; }
+.ard-lato { display: flex; flex-direction: column; gap: 8px; }
+svg.ard-s { width: 100%; height: auto; }
+.ard-s .scheda { fill: #0e5f8a; stroke: #0b4a6b; stroke-width: 3; }
+.ard-s .marca { font: 700 13px var(--tg-mono); fill: #e0f2fe; letter-spacing: .1em; }
+.ard-s .pin { fill: #111827; stroke: #374151; }
+.ard-s .pin.alto { fill: #facc15; }
+.ard-s .np { font: 11px var(--tg-mono); fill: var(--tg-mute); text-anchor: middle; }
+.ard-s .scheda ~ .np { fill: #e0f2fe; }
+.ard-s .l13 { fill: #3f3f46; } .ard-s .l13.alto { fill: #fb923c; filter: drop-shadow(0 0 4px #fb923c); }
+.ard-s .filo { fill: none; stroke: var(--tg-mute); stroke-width: 2; stroke-dasharray: 5 4; }
+.ard-s .led-a circle { fill: color-mix(in srgb, var(--lc) 25%, var(--tg-bg)); stroke: var(--lc); stroke-width: 3; transition: fill .15s; }
+.ard-s .led-a.on circle { fill: var(--lc); filter: drop-shadow(0 0 12px var(--lc)); }
+.ard-s .led-a text, .ard-s .puls text { fill: var(--tg-mute); }
+.ard-s .puls { cursor: pointer; }
+.ard-s .puls rect { fill: #374151; stroke: #1f2937; stroke-width: 2; }
+.ard-s .puls circle { fill: #9ca3af; transition: r .1s; }
+.ard-s .puls.giu circle { fill: #e5e7eb; r: 8; }
+.ard-btn.giu { background: var(--tg-acc); color: #fff; }
+.ard-btn { touch-action: none; user-select: none; }
+.ard-ser { background: #0d1117; color: #e6edf3; border-radius: 10px; padding: 6px 12px; }
+.ard-ser small { font: 500 11px var(--tg-mono); color: #8b949e; text-transform: uppercase; letter-spacing: .08em; }
+.ard-ser pre { margin: 4px 0 0; min-height: 40px; max-height: 140px; overflow-y: auto; font: 13px/1.4 var(--tg-mono); }
+.ard-nota { min-height: 1.5em; color: var(--tg-mute); }
+.pwm-box { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.pwm-p { border: 1px solid var(--tg-line); border-radius: 12px; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; }
+.pwm-p label { font: 13px var(--tg-mono); display: flex; flex-direction: column; gap: 4px; }
+.pwm-p input[type=range] { width: 100%; accent-color: var(--tg-acc); }
+.pwm-num { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 14px; }
+.pwm-num b { font-family: var(--tg-mono); }
+svg.onda, svg.servo { width: 100%; height: auto; }
+.onda .asse { stroke: var(--tg-line); }
+.onda .sq { fill: none; stroke: var(--tg-acc); stroke-width: 3; stroke-linejoin: round; }
+.onda .np, .servo .np { font: 10px var(--tg-mono); fill: var(--tg-mute); }
+.servo .np { text-anchor: middle; }
+.pwm-led { display: flex; justify-content: center; padding: 6px; }
+.pwm-led i { width: 34px; height: 34px; border-radius: 50%; background: #ef4444; border: 3px solid #b91c1c; transition: opacity .1s; }
+.servo .arco { fill: none; stroke: var(--tg-line); stroke-width: 2; stroke-dasharray: 4 4; }
+.servo .braccio { stroke: var(--tg-acc); stroke-width: 8; stroke-linecap: round; }
+.servo .perno { fill: var(--tg-ink); }
+@media (max-width: 700px) { .ard-box, .pwm-box { grid-template-columns: 1fr; } }

@@ -106,6 +106,10 @@ tpsit-3/sistemi-operativi/temi/so.js  simulatori di sistemi operativi: diagramma
                                       sostituzione delle pagine
 tpsit-5/metodologia-di-sviluppo/temi/git.js  laboratorio di Git: terminale simulato, tre aree e grafo dei commit con missioni
 tpsit-5/xml-e-regex/temi/regex.js  tester di espressioni regolari: matches() sulle stringhe date, find() su un testo libero
+tpsit-5/applicazioni-web-avanzate/temi/rest.js  client REST con un server finto (/api/studenti): metodi, codici di stato, JSON
+tpsit-5/socket-e-tcp-udp/temi/tcp.js  handshake TCP su un diagramma di sequenza: flag, seq e ack da prevedere
+informatica-1/computer-e-codici/temi/circuiti.js  circuiti con porte AND, OR e NOT in SVG: si prevede il LED, poi si simula
+informatica-1/arduino/temi/simulatori.js  codice colori, Arduino virtuale (sketch riga per riga con LED e pulsante), PWM e servo
 strumenti/nuova.js         npm run nuova: prepara una nuova attività (non fa parte del sito)
 tests/                     controlli automatici (Playwright), non fanno parte del sito
 .github/workflows/         i controlli girano su GitHub a ogni push
