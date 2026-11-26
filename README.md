@@ -110,6 +110,8 @@ tpsit-5/applicazioni-web-avanzate/temi/rest.js  client REST con un server finto 
 tpsit-5/socket-e-tcp-udp/temi/tcp.js  handshake TCP su un diagramma di sequenza: flag, seq e ack da prevedere
 informatica-1/computer-e-codici/temi/circuiti.js  circuiti con porte AND, OR e NOT in SVG: si prevede il LED, poi si simula
 informatica-1/arduino/temi/simulatori.js  codice colori, Arduino virtuale (sketch riga per riga con LED e pulsante), PWM e servo
+informatica-1/architettura-e-ai/temi/vonneumann.js  macchina di Von Neumann: fetch, decode, execute fase per fase con bus e registri
+informatica-1/problem-solving/temi/robot.js  robot da programmare a blocchi (Avanti, Gira, Ripeti) su una griglia, a livelli
 strumenti/nuova.js         npm run nuova: prepara una nuova attività (non fa parte del sito)
 tests/                     controlli automatici (Playwright), non fanno parte del sito
 .github/workflows/         i controlli girano su GitHub a ogni push

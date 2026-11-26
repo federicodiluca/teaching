@@ -512,3 +512,59 @@ svg.onda, svg.servo { width: 100%; height: auto; }
 .servo .braccio { stroke: var(--tg-acc); stroke-width: 8; stroke-linecap: round; }
 .servo .perno { fill: var(--tg-ink); }
 @media (max-width: 700px) { .ard-box, .pwm-box { grid-template-columns: 1fr; } }
+/* macchina di Von Neumann (informatica-1/architettura-e-ai/temi/vonneumann.js) */
+.vn-modo .btn.on { background: var(--tg-acc); color: #fff; border-color: var(--tg-acc); }
+.vn-pos { margin-left: auto; font: 500 13px var(--tg-mono); color: var(--tg-mute); }
+svg.vn-s { width: 100%; height: auto; display: block; margin: 8px 0; }
+.vn-s .box { fill: var(--tg-paper); stroke: var(--tg-line); stroke-width: 2; }
+.vn-s .tit { font: 700 15px var(--tg-mono); fill: var(--tg-ink); }
+.vn-s .sub { font: 600 11px var(--tg-mono); fill: var(--tg-mute); text-transform: uppercase; letter-spacing: .06em; }
+.vn-s .cu, .vn-s .alu { fill: color-mix(in srgb, var(--tg-acc) 8%, transparent); stroke: var(--tg-line); stroke-width: 1.5; transition: fill .3s, stroke .3s; }
+.vn-s .cu.on, .vn-s .alu.on { fill: color-mix(in srgb, var(--tg-hl) 25%, transparent); stroke: var(--tg-hl); stroke-width: 2.5; }
+.vn-s .reg { fill: var(--tg-bg); stroke: var(--tg-line); stroke-width: 2; transition: fill .3s, stroke .3s; }
+.vn-s g.on .reg { stroke: var(--tg-hl); fill: color-mix(in srgb, var(--tg-hl) 30%, var(--tg-bg)); }
+.vn-s .rn { font: 600 11px var(--tg-mono); fill: var(--tg-mute); text-anchor: middle; }
+.vn-s .rv { font: 700 16px var(--tg-mono); fill: var(--tg-ink); text-anchor: middle; }
+.vn-s .op { font: 700 28px var(--tg-mono); fill: var(--tg-hl); }
+.vn-s .bus path { stroke: var(--tg-line); stroke-width: 10; stroke-linecap: round; transition: stroke .3s; }
+.vn-s .bus.on path { stroke: color-mix(in srgb, var(--tg-acc) 70%, transparent); }
+.vn-s .bus.dati.on path { stroke: color-mix(in srgb, var(--tg-ok) 70%, transparent); }
+.vn-s .bn { font: 600 11px var(--tg-mono); fill: var(--tg-mute); text-anchor: middle; }
+.vn-s .pacco { fill: var(--tg-paper); stroke: var(--tg-ink); stroke-width: 1.5; animation: vn-pacco .5s ease; }
+@keyframes vn-pacco { from { transform: translateX(-30px); opacity: 0; } }
+.vn-s .pv { font: 700 13px var(--tg-mono); fill: var(--tg-ink); text-anchor: middle; }
+.vn-s .cella rect { fill: var(--tg-bg); stroke: var(--tg-line); transition: fill .3s; }
+.vn-s .cella.pc rect { stroke: var(--tg-acc); stroke-width: 2; }
+.vn-s .cella.on rect { fill: color-mix(in srgb, var(--tg-hl) 35%, var(--tg-bg)); stroke: var(--tg-hl); }
+.vn-s .ind { font: 11px var(--tg-mono); fill: var(--tg-mute); }
+.vn-s .cv { font: 600 13px var(--tg-mono); fill: var(--tg-ink); }
+.vn-nota { min-height: 3em; }
+.vn-nota .fase { color: var(--tg-acc); }
+@media (prefers-reduced-motion: reduce) { .vn-s .pacco { animation: none; } }
+/* il robot da programmare (informatica-1/problem-solving/temi/robot.js) */
+.rob-liv { margin-left: auto; font: 500 13px var(--tg-mono); color: var(--tg-mute); }
+.rob-box { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: start; margin: 10px 0; }
+svg.rob-s { width: 100%; height: auto; max-height: 360px; display: block; }
+.rob-s .muro { fill: #64748b; stroke: #475569; }
+.rob-s .pav { fill: var(--tg-paper); stroke: var(--tg-line); }
+.rob-s .batt rect { fill: #22c55e; stroke: #15803d; stroke-width: 2; }
+.rob-s .batt path { fill: #fde047; }
+.rob-s .robot { transition: transform .35s ease; transform-box: view-box; }
+.rob-s .robot rect { fill: var(--tg-acc); stroke: var(--tg-ink); stroke-width: 2; }
+.rob-s .robot .occhio { fill: #fff; }
+.rob-s .robot .naso { fill: var(--tg-hl); }
+.rob-s .robot.urto rect { fill: var(--tg-ko); }
+.rob-ed small { display: block; font: 500 11px var(--tg-mono); color: var(--tg-mute); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
+.rob-prog { margin: 0 0 6px; padding-left: 26px; font: 14px var(--tg-mono); min-height: 60px; border: 1px solid var(--tg-line); border-radius: 10px; padding-top: 6px; padding-bottom: 6px; }
+.rob-prog li { padding: 2px 0; }
+.rob-prog li.vuoto { list-style: none; margin-left: -18px; color: var(--tg-mute); font-family: inherit; font-style: italic; }
+.rob-prog li.rip > span { font-weight: 700; color: var(--tg-acc); }
+.rob-prog li.rip > ol { border-left: 3px solid var(--tg-acc); margin: 2px 0 2px 4px; padding-left: 22px; }
+.rob-prog li.rip.aperto > ol { border-left-style: dashed; }
+.rob-prog li.segnaposto { list-style: none; margin-left: -14px; color: var(--tg-mute); font-style: italic; }
+.rob-cont { margin: 0 0 8px; font-size: 14px; color: var(--tg-mute); }
+.rob-cont b.troppi { color: var(--tg-ko); }
+.rob-pal { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.rob-rip { display: inline-flex; gap: 4px; flex-wrap: wrap; }
+@media (max-width: 700px) { .rob-box { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .rob-s .robot { transition: none; } }
