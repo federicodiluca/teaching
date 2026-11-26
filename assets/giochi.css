@@ -758,3 +758,43 @@ table.cor-t { border-collapse: collapse; width: 100%; min-width: 560px; font-siz
 .erp-campi input { width: 150px; }
 @media (max-width: 700px) { .pir-svg { grid-template-columns: 1fr; } .erp-fr, .erp-db { display: none; } }
 @media (max-width: 560px) { .og-posto { min-width: 64px; max-width: 110px; font-size: 11px; padding: 4px 5px; } .og-tree li { padding-left: 3px; padding-right: 3px; } }
+/* codici ottici (tpsit-3/codici-digitali/temi/ottici.js) */
+.ean-cif { display: flex; flex-wrap: wrap; gap: 4px; margin: 8px 0; }
+.ean-cif span { display: inline-flex; flex-direction: column; align-items: center; min-width: 32px; border: 1px solid var(--tg-line); border-radius: 6px; padding: 4px 2px; font-family: var(--tg-mono); }
+.ean-cif span b { font-size: 20px; }
+.ean-cif span i { font-size: 11px; color: var(--tg-acc); font-style: normal; }
+.ean-cif span.chk { border: 2px dashed var(--tg-acc); }
+svg.ean-s { width: 100%; max-width: 560px; height: auto; display: block; margin: 10px 0; background: #fff; border-radius: 8px; }
+.ean-s .barra { fill: #111; }
+.ean-s.nuovo .barra { animation: ean-barra .25s ease both; }
+@keyframes ean-barra { from { transform: scaleY(0); transform-origin: top; } }
+.ean-s .barra.guardia { fill: #333; }
+.ean-s .barra.sel { fill: #dc2626; }
+.ean-s .cn { font: 600 9px "Courier New", var(--tg-mono); fill: #111; text-anchor: middle; cursor: pointer; }
+.ean-s .cn.sel { fill: #dc2626; font-weight: 800; }
+.ean-s .laser { stroke: #ef4444; stroke-width: 1.2; opacity: 0; filter: drop-shadow(0 0 2px #ef4444); }
+.ean-s .laser.va { animation: ean-laser 1.2s ease-in-out .9s; }
+@keyframes ean-laser { 0% { opacity: 1; transform: translateX(0); } 100% { opacity: 1; transform: translateX(240px); } }
+.ean-nota { min-height: 1.5em; }
+.qrl-in input { flex: 1; min-width: 200px; }
+.qrl-z .btn.on { background: var(--tg-acc); color: #fff; border-color: var(--tg-acc); }
+.qrl-box { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.qrl-svg small { color: var(--tg-mute); font-size: 13px; }
+svg.qrl-s { width: 100%; max-width: 380px; height: auto; display: block; }
+.qrl-s .qz { fill: #fff; cursor: pointer; }
+.qrl-s .mod { fill: #fff; cursor: pointer; }
+.qrl-s .mod.nero { fill: #111; }
+.qrl-s .trovata[data-c="0"] { fill: #fde68a; }
+.qrl-s .mod.trovata[data-c="1"] { fill: #fca5a5; } .qrl-s .mod.nero.trovata[data-c="1"] { fill: #b91c1c; }
+.qrl-s .mod.trovata[data-c="2"] { fill: #c4b5fd; } .qrl-s .mod.nero.trovata[data-c="2"] { fill: #6d28d9; }
+.qrl-s .mod.trovata[data-c="3"] { fill: #93c5fd; } .qrl-s .mod.nero.trovata[data-c="3"] { fill: #1d4ed8; }
+.qrl-s .mod.trovata[data-c="4"] { fill: #86efac; } .qrl-s .mod.nero.trovata[data-c="4"] { fill: #15803d; }
+.qrl-s .mod.trovata[data-c="5"] { fill: #e5e7eb; } .qrl-s .mod.nero.trovata[data-c="5"] { fill: #6b7280; }
+.qrl-tr { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; font-size: 14px; }
+.qrl-tr li { border-left: 6px solid var(--tg-line); padding-left: 8px; }
+.qrl-tr .z0 { border-color: #fbbf24; } .qrl-tr .z1 { border-color: #b91c1c; } .qrl-tr .z2 { border-color: #6d28d9; } .qrl-tr .z3 { border-color: #1d4ed8; } .qrl-tr .z4 { border-color: #15803d; } .qrl-tr .z5 { border-color: #6b7280; }
+@media (max-width: 700px) { .qrl-box { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .ean-s.nuovo .barra, .ean-s .laser.va { animation: none; } }
+
+/* un campo con etichetta dentro una riga flessibile non deve schiacciarsi a larghezza zero */
+.row > .f { flex: 0 1 220px; min-width: 160px; }
