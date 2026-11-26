@@ -106,6 +106,7 @@ tpsit-3/sistemi-operativi/temi/so.js  simulatori di sistemi operativi: diagramma
                                       sostituzione delle pagine
 tpsit-3/codici-digitali/temi/codici.js  Hamming con i tre cerchi, parità incrociata, CRC passo passo, display a 7 segmenti, encoder binario/Gray
 tpsit-3/codici-digitali/temi/ottici.js  codice a barre EAN-13 disegnato dalle cifre e QR Code vero con le zone da trovare
+tpsit-3/codici-digitali/temi/pesati.js  dentro UTF-8 (byte di qualsiasi carattere, anche da costruire) e somma BCD passo passo
 tpsit-5/metodologia-di-sviluppo/temi/git.js  laboratorio di Git: terminale simulato, tre aree e grafo dei commit con missioni
 tpsit-5/xml-e-regex/temi/regex.js  tester di espressioni regolari: matches() sulle stringhe date, find() su un testo libero
 tpsit-5/applicazioni-web-avanzate/temi/rest.js  client REST con un server finto (/api/studenti): metodi, codici di stato, JSON
