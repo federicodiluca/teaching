@@ -828,3 +828,29 @@ table.bcd-t { border-collapse: collapse; font: 18px var(--tg-mono); margin: 10px
 .bcd-t td.corr { background: var(--tg-ok-soft); color: var(--tg-ok); }
 .bcd-t td.nuovo { background: var(--tg-hl-soft); }
 .bcd-nota { min-height: 3em; }
+/* codifiche quotidiane (tpsit-3/codici-digitali/temi/quotidiane.js) */
+.cf-dati { margin: 8px 0; font-size: 16px; }
+.cf-cod { display: flex; flex-wrap: wrap; gap: 4px; margin: 10px 0; }
+.cf-p { display: inline-flex; flex-direction: column; align-items: center; border: 2px solid var(--tg-line); border-radius: 8px; padding: 6px 10px; min-width: 40px; }
+.cf-p b { font: 700 24px var(--tg-mono); letter-spacing: .12em; }
+.cf-p small { font: 500 10px var(--tg-mono); color: var(--tg-mute); text-transform: uppercase; }
+.cf-p.ora { border-style: dashed; border-color: var(--tg-acc); }
+.cf-p.fatto.p0, .cf-sp .p0 { border-color: #3b82f6; } .cf-p.fatto.p1, .cf-sp .p1 { border-color: #f59e0b; } .cf-p.fatto.p2, .cf-sp .p2 { border-color: #10b981; }
+.cf-p.fatto.p3, .cf-sp .p3 { border-color: #ec4899; } .cf-p.fatto.p4, .cf-sp .p4 { border-color: #8b5cf6; } .cf-p.fatto.p5, .cf-sp .p5 { border-color: #ef4444; }
+.cf-p.fatto { animation: cf-entra .35s ease; }
+@keyframes cf-entra { from { transform: scale(.8); } }
+.cf-sp { list-style: none; padding: 0; display: grid; gap: 6px; font-size: 14px; }
+.cf-sp li { border-left: 5px solid var(--tg-line); padding-left: 8px; }
+.cf-dom input { text-transform: uppercase; font: 18px var(--tg-mono); }
+.lu input { width: 150px; font: 16px var(--tg-mono); margin-left: 6px; }
+.lu-pos { margin-left: auto; font: 500 13px var(--tg-mono); color: var(--tg-mute); }
+table.lu-t { border-collapse: collapse; font: 18px var(--tg-mono); margin: 10px 0; }
+.lu-t th { font: 500 11px var(--tg-mono); color: var(--tg-mute); padding: 4px 6px; }
+.lu-t td { width: 40px; height: 40px; text-align: center; border: 1px solid var(--tg-line); transition: background .2s; }
+.lu-t td.mini { border: none; height: auto; font-size: 11px; color: var(--tg-acc); }
+.lu-t td.disp { background: color-mix(in srgb, #3b82f6 22%, transparent); }
+.lu-t td.pari { background: color-mix(in srgb, #f59e0b 22%, transparent); }
+.lu-t td.z { outline: 3px solid var(--tg-ko); outline-offset: -3px; }
+.lu-t td.ctrl { background: var(--tg-ok-soft); color: var(--tg-ok); font-weight: 700; }
+.lu-nota { min-height: 3em; }
+@media (max-width: 560px) { .lu-t td { width: 26px; height: 32px; font-size: 14px; } .lu-t td.mini { font-size: 9px; } }
