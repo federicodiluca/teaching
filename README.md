@@ -120,7 +120,8 @@ informatica-1/reti/temi/reti.js  viaggio del pacchetto, risoluzione DNS, parti d
 gpoi/organizzazione-d-impresa/temi/organizzazione.js  organigramma da costruire, catena del valore di Porter, piramide di Anthony,
                                       processo a corsie, viaggio di un ordine con i programmi a isole e con l'ERP
 gpoi/aziende-e-mercati/temi/mercato.js  domanda e offerta sul grafico: prezzo da trascinare fino all'equilibrio, curve che si spostano
-gpoi/project-management/temi/pm.js  earned value sulla curva a S: BCWS, BCWP, ACWP, CV e SV da leggere e interpretare
+gpoi/project-management/temi/pm.js  earned value sulla curva a S (BCWS, BCWP, ACWP, CV, SV) e diagramma di Gantt da costruire
+                                      con percorso critico e margini
 strumenti/nuova.js         npm run nuova: prepara una nuova attività (non fa parte del sito)
 tests/                     controlli automatici (Playwright), non fanno parte del sito
 .github/workflows/         i controlli girano su GitHub a ogni push

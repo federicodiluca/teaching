@@ -901,3 +901,19 @@ svg.ev-s { width: 100%; max-width: 620px; height: auto; display: block; }
 .ev-campi .f { display: flex; flex-direction: column; gap: 4px; margin: 0; min-width: 0; }
 .ev-campi .f input, .ev-campi .f select { width: 100%; box-sizing: border-box; min-height: 38px; }
 .ev-campi .f select { min-width: 0; max-width: 100%; }
+
+/* Gantt da costruire (gpoi/project-management/temi/pm.js) */
+.gnt-gr { overflow-x: auto; }
+table.gnt-tab { border-collapse: collapse; font-size: 13px; margin: 8px 0; }
+.gnt-tab th { font: 500 11px var(--tg-mono); color: var(--tg-mute); padding: 4px; text-align: left; }
+.gnt-tab th.w { text-align: center; width: 30px; }
+.gnt-tab td { padding: 4px 6px; border-bottom: 1px solid var(--tg-line); white-space: nowrap; }
+.gnt-tab td.nm { font-weight: 600; white-space: normal; min-width: 130px; }
+.gnt-tab td.c { padding: 0; width: 30px; height: 30px; border: 1px solid var(--tg-line); cursor: pointer; }
+.gnt-tab td.c:hover { background: var(--tg-hl-soft); }
+.gnt-tab td.bar { background: var(--tg-acc); }
+.gnt-tab tr.crit td.bar { background: var(--tg-ko); }
+.gnt-tab tr.crit td.nm { color: var(--tg-ko); }
+.gnt-tab td.marg { background: repeating-linear-gradient(45deg, transparent 0 4px, color-mix(in srgb, var(--tg-acc) 30%, transparent) 4px 7px); }
+.gnt-tab td.mile { color: var(--tg-ko); font-size: 18px; text-align: center; }
+.gnt-num { display: none; }

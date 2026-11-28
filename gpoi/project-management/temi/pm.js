@@ -1,6 +1,7 @@
 /* Project management (GPOI): giochi ad hoc. Solo definizioni: va caricato dopo assets/giochi.js.
    - earnedValue(el, etichetta): la curva a S del pianificato (BCWS) con il valore realizzato (BCWP) e il costo reale (ACWP)
      fino alla data di controllo; si leggono i valori, si calcolano CV e SV e si interpreta lo stato del progetto.
+   - ganttLab(el, progetti, etichetta): il diagramma di Gantt da costruire, con percorso critico e margini.
    Gli stili sono in assets/giochi.css (sezione "simulatori"). */
 function earnedValue(el, label = 'L\'earned value sul grafico') {
   const st = stat(label);
@@ -46,3 +47,55 @@ function earnedValue(el, label = 'L\'earned value sul grafico') {
   };
   $q('[data-a=n]').onclick = nuovo; up(); nuovo();
 }
+
+/* ---------- il diagramma di Gantt da costruire ----------
+   ganttLab(el, progetti, etichetta): per ogni attività si sceglie la settimana di inizio facendo clic sulla riga;
+   ogni attività deve iniziare il prima possibile, dopo che sono finite quelle da cui dipende.
+   Alla verifica si vedono durata totale, percorso critico (attività senza margine) e margini.
+   progetti = [{nome, t, att: [[nome, durata, [indici dei predecessori]], ...]}] */
+function pianificaGantt(att) {
+  const n = att.length, ES = Array(n).fill(0), EF = Array(n).fill(0);
+  att.forEach((a, i) => { ES[i] = Math.max(0, ...a[2].map(p => EF[p])); EF[i] = ES[i] + a[1]; });
+  const fine = Math.max(...EF), LF = Array(n).fill(fine), LS = Array(n).fill(0);
+  for (let i = n - 1; i >= 0; i--) { const succ = att.map((x, j) => [x, j]).filter(([x]) => x[2].includes(i)).map(([, j]) => LS[j]); LF[i] = succ.length ? Math.min(...succ) : fine; LS[i] = LF[i] - att[i][1]; }
+  return { ES, EF, LS, fine, margine: ES.map((e, i) => LS[i] - e) };
+}
+function ganttLab(el, progetti, label = 'Il diagramma di Gantt') {
+  const st = stat(label);
+  let Pr, piano, inizio, primo, verificato;
+  el.innerHTML = `<div class="card gnt">${turn()}<div class="row"><select class="mt">${progetti.map((p, i) => `<option value="${i}">${escH(p.nome)}</option>`).join('')}</select></div>
+   <p class="q gnt-t"></p><div class="gnt-gr"></div><div class="row"><button class="btn" data-a="v">Verifica</button><button class="btn sec" data-a="r">Cancella</button></div><p class="msg"></p><div class="stat"></div></div>`;
+  const c = el.querySelector('.gnt'), $q = s => c.querySelector(s), up = () => $q('.stat').textContent = `Diagrammi giusti al primo colpo: ${st.ok} su ${st.tot}`;
+  function carica() { Pr = progetti[+$q('.mt').value]; piano = pianificaGantt(Pr.att); inizio = Pr.att.map(() => null); primo = true; verificato = false; $q('.msg').textContent = ''; $q('.gnt-t').innerHTML = Pr.t + ' Per ogni attività fate clic sulla settimana in cui inizia: <b>il prima possibile</b>, ma solo quando sono finite le attività da cui dipende.'; disegna(); }
+  function disegna() {
+    const T = piano.fine + 3;
+    $q('.gnt-gr').innerHTML = `<table class="gnt-tab"><tr><th>Attività</th><th>Durata</th><th>Dopo</th>${Array.from({ length: T }, (_, w) => `<th class="w">${w + 1}</th>`).join('')}</tr>` +
+      Pr.att.map((a, i) => { const s = inizio[i], crit = verificato && piano.margine[i] === 0;
+        return `<tr class="${crit ? 'crit' : ''}"><td class="nm">${i + 1}. ${escH(a[0])}</td><td>${a[1]} sett.</td><td>${a[2].map(p => p + 1).join(', ') || '—'}</td>` +
+          Array.from({ length: T }, (_, w) => { const dentro = s !== null && w >= s && w < s + a[1], marg = verificato && piano.margine[i] > 0 && w >= piano.EF[i] && w < piano.EF[i] + piano.margine[i];
+            return `<td class="c${dentro ? ' bar' : ''}${marg ? ' marg' : ''}" data-i="${i}" data-w="${w}"></td>`; }).join('') + '</tr>'; }).join('') +
+      (verificato ? `<tr><td class="nm">Fine progetto</td><td></td><td></td>${Array.from({ length: T }, (_, w) => `<td class="${w === piano.fine - 1 ? 'mile' : ''}">${w === piano.fine - 1 ? '◆' : ''}</td>`).join('')}</tr>` : '') + '</table>' +
+      `<p class="gnt-num">${Pr.att.map((a, i) => `<span>${i + 1}. ${escH(a[0])}</span>`).join('')}</p>`;
+  }
+  c.addEventListener('click', e => {
+    const td = e.target.closest('.gnt-tab td.c'); if (!td || verificato) return; const i = +td.dataset.i, w = +td.dataset.w;
+    inizio[i] = w; disegna();
+  });
+  $q('[data-a=r]').onclick = () => { inizio = inizio.map(() => null); verificato = false; $q('.msg').textContent = ''; disegna(); };
+  $q('[data-a=v]').onclick = () => {
+    const m = $q('.msg');
+    if (inizio.some(x => x === null)) { m.textContent = 'Mancano alcune attività: fate clic sulla loro riga.'; m.style.color = 'var(--mute)'; return; }
+    const errori = Pr.att.map((a, i) => { const pronto = Math.max(0, ...a[2].map(p => inizio[p] + Pr.att[p][1])); return inizio[i] < pronto ? `«${a[0]}» parte prima che siano finite le attività ${a[2].map(p => p + 1).join(', ')}` : inizio[i] > pronto ? `«${a[0]}» potrebbe partire prima, nella settimana ${pronto + 1}` : null; }).filter(Boolean);
+    const ok = !errori.length; if (primo) { st.tot++; if (ok) st.ok++; primo = false; up(); }
+    if (!ok) { m.innerHTML = 'Non ancora: ' + errori.join('; ') + '.'; m.style.color = 'var(--ko)'; return; }
+    verificato = true; disegna();
+    const crit = Pr.att.map((a, i) => piano.margine[i] === 0 ? a[0] : null).filter(Boolean);
+    m.innerHTML = `Giusto! Il progetto dura <b>${piano.fine} settimane</b>. In rosso il <b>percorso critico</b> (${crit.join(' → ')}): se una di queste attività ritarda, ritarda tutto il progetto. Le zone chiare sono i <b>margini</b> delle altre attività.`; m.style.color = 'var(--ok)';
+  };
+  $q('.mt').onchange = carica; up(); carica();
+}
+const PROGETTI_GANTT = [
+  { nome: 'Il sito della scuola', t: 'Il nuovo sito della scuola.', att: [['Raccolta dei requisiti', 2, []], ['Progetto grafico', 2, [0]], ['Database dei contenuti', 3, [0]], ['Sviluppo delle pagine', 3, [1, 2]], ['Scrittura dei testi', 2, [1]], ['Test e messa online', 1, [3, 4]]] },
+  { nome: 'Una app per la mensa', t: 'Una app per prenotare i pasti in mensa.', att: [['Studio di fattibilità', 1, []], ['Analisi dei requisiti', 2, [0]], ['Progetto dell\'interfaccia', 2, [1]], ['Server e database', 4, [1]], ['Sviluppo dell\'app', 3, [2]], ['Integrazione e collaudo', 2, [3, 4]], ['Formazione del personale', 1, [5]]] },
+  { nome: 'Il nuovo laboratorio', t: 'Rinnovare il laboratorio di informatica.', att: [['Inventario e richieste', 1, []], ['Acquisto dei PC', 3, [0]], ['Cablaggio della rete', 2, [0]], ['Installazione dei PC', 2, [1, 2]], ['Configurazione del server', 2, [2]], ['Prove con una classe', 1, [3, 4]]] }
+];

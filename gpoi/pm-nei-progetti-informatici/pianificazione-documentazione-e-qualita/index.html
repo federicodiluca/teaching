@@ -1,7 +1,7 @@
 <!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pianificazione, documentazione e qualità</title><meta name="description" content="Milestone e deliverable, tipi di pianificazione, WBS e regola del 100%, project charter, project status, registro delle issue, lesson learned e piano di qualità."><link rel="stylesheet" href="../../../assets/giochi.css"><link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../../assets/teaching.css"><script src="../../../assets/catalogo.js" defer></script><script src="../../../assets/teaching.js" defer></script></head><body class="tg-act" data-solo="1"><header><h1>Pianificazione, documentazione e qualità</h1></header><nav id="nav"></nav><main>
 <section id="inizio" data-g="Inizio" data-t="Inizio"><h2>Pianificazione, documentazione e qualità</h2>
 <p class="lead">Milestone e deliverable, WBS, project charter, status, registro delle issue, lesson learned e piano di qualità.</p>
-<ol><li><b>Pianificazione:</b> milestone e deliverable, i quattro aspetti, gli obiettivi operativi.</li><li><b>WBS:</b> livelli, regola del 100%, durata dei work package, logiche di disaggregazione.</li><li><b>Documenti:</b> project charter, project status, registro delle issue, lesson learned, piano di qualità.</li><li><b>Quiz</b> e <b>Sfida finale</b>.</li></ol>
+<ol><li><b>Pianificazione:</b> milestone e deliverable, i quattro aspetti, gli obiettivi operativi.</li><li><b>WBS:</b> livelli, regola del 100%, durata dei work package, logiche di disaggregazione, il diagramma di Gantt con il percorso critico.</li><li><b>Documenti:</b> project charter, project status, registro delle issue, lesson learned, piano di qualità.</li><li><b>Quiz</b> e <b>Sfida finale</b>.</li></ol>
 <p>Si gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.</p>
 <div class="row"><label>Il vostro nome: <input type="text" id="n1" placeholder="Scrivete qui il nome"></label></div></section>
 <section id="p1" data-g="Pianificazione" data-t="1 Milestone o deliverable"><h2>Milestone e deliverable</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_p1"></div></section>
@@ -10,6 +10,7 @@
 <section id="w1" data-g="WBS" data-t="1 I livelli"><h2>I livelli della WBS</h2><p class="lead">Mettete in ordine i livelli della WBS, dal più generale al più dettagliato. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».</p><div id="x_w1"></div></section>
 <section id="w2" data-g="WBS" data-t="2 Calcoli"><h2>Regola del 100% e durata</h2><p class="lead">Scegliete il tipo di esercizio dal menu, scrivete il risultato e premete «Controlla». I numeri cambiano a ogni esercizio.</p><div id="x_w2"></div></section>
 <section id="w3" data-g="WBS" data-t="3 Come scomporre"><h2>Le logiche di disaggregazione</h2><p class="lead">Leggete come viene scomposto il progetto e scegliete la logica.</p><div id="x_w3"></div></section>
+<section id="w4" data-g="WBS" data-t="4 Il diagramma di Gantt"><h2>Dalla WBS al diagramma di Gantt</h2><p class="lead">I work package di un progetto, con durata e dipendenze: mettetegli una data di inizio e scoprite quanto dura il progetto e qual è il percorso critico.</p><div id="gntlab"></div></section>
 <section id="d1" data-g="Documenti" data-t="1 Fasi e documenti"><h2>Ogni fase ha i suoi documenti</h2><p class="lead">Abbinate ogni fase del progetto al suo documento. Girate due tessere alla volta.</p><div id="x_d1"></div></section>
 <section id="d2" data-g="Documenti" data-t="2 Il project charter"><h2>Le cinque sezioni del project charter</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_d2"></div></section>
 <section id="d3" data-g="Documenti" data-t="3 Quale documento?"><h2>Project status, registro delle issue, lesson learned, piano di qualità</h2><p class="lead">Fate clic su una carta e poi sulla categoria giusta.</p><div id="x_d3"></div></section>
@@ -18,7 +19,7 @@
 <section id="qz2" data-g="Quiz" data-t="2 Risposta multipla"><h2>Risposta multipla</h2><p class="lead">Scegliete una risposta e premete «Controlla».</p><div id="mc"></div></section>
 <section id="fin" data-g="Sfida finale" data-t="Sfida finale"><h2>Sfida finale</h2><p class="lead">Quindici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.</p><div id="tot"></div></section>
 <section id="res" data-g="Risultato" data-t="Risultato"><h2>Risultato</h2><p id="who" class="lead"></p><table class="res" id="restab"></table><p class="msg" id="rmsg"></p></section>
-</main><script src="../../../assets/giochi.js"></script><script>
+</main><script src="../../../assets/giochi.js"></script><script src="../../project-management/temi/pm.js"></script><script>
 const D = {
  "p1": [
   [
@@ -534,6 +535,7 @@ memory($('#x_d1'), () => D['d1'].flatMap((x, i) => [[i, x[0]], [i, x[1]]]), "Fas
 SG('#x_d2', D['d2'], D['d2_BK'], "Project charter");
 SG('#x_d3', D['d3'], D['d3_BK'], "Quale documento");
 mountMenu($('#x_d4'), [["Indicatore di rischio", GEN.pesato]], "Prospetto di rischio");
+ganttLab($('#gntlab'),PROGETTI_GANTT,'Dalla WBS al Gantt');
 quiz();
 const SFIDA = [...mcAll(), ...vfAll(), GEN.cento, GEN.durata, g_w3, g_w3, GEN.pesato, GEN.durata, GEN.pesato];
 mission($('#tot'), SFIDA, 'Sfida finale', 15);
