@@ -119,7 +119,7 @@ informatica-1/computer-e-codici/temi/circuiti.js  circuiti con porte AND, OR e N
 informatica-1/arduino/temi/simulatori.js  codice colori, Arduino virtuale (sketch riga per riga con LED e pulsante), PWM e servo
 informatica-1/architettura-e-ai/temi/vonneumann.js  macchina di Von Neumann: fetch, decode, execute fase per fase con bus e registri
 informatica-1/problem-solving/temi/robot.js  robot da programmare a blocchi (Avanti, Gira, Ripeti) su una griglia, a livelli
-informatica-1/reti/temi/reti.js  viaggio del pacchetto, risoluzione DNS, parti di un URL, caccia al phishing
+informatica-1/reti/temi/reti.js  viaggio del pacchetto, risoluzione DNS, parti di un URL, caccia al phishing, la password giusta (tempo per indovinarla e sfida)
 gpoi/organizzazione-d-impresa/temi/organizzazione.js  organigramma da costruire, catena del valore di Porter, piramide di Anthony,
                                       processo a corsie, viaggio di un ordine con i programmi a isole e con l'ERP
 gpoi/aziende-e-mercati/temi/mercato.js  domanda e offerta sul grafico: prezzo da trascinare fino all'equilibrio, curve che si spostano

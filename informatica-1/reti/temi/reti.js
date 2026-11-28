@@ -3,6 +3,7 @@
    - dnsLab(el, etichetta): la risoluzione di un nome di dominio, domanda dopo domanda, dal browser al server autorevole.
    - urlLab(el, etichetta): si etichettano le parti di un indirizzo (protocollo, dominio, porta, percorso, parametri, frammento).
    - phishing(el, etichetta): un'email sospetta in cui trovare tutti i segnali di phishing.
+   - passwordLab(el, etichetta): il tempo per indovinare una password scritta dal vivo e la sfida tra due password.
    Gli stili sono in assets/giochi.css (sezione "simulatori"). */
 
 /* ---------- viaggio di un pacchetto ---------- */
@@ -151,4 +152,65 @@ function phishing(el, label = 'Caccia al phishing') {
     up();
   });
   $q('[data-a=n]').onclick = nuovo; nuovo();
+}
+
+/* ---------- la password giusta ----------
+   passwordLab(el, etichetta): due parti. Il laboratorio: si scrive una password (mai salvata né inviata) e si vede
+   quanti tentativi servono e quanto tempo ci mette un attaccante che prova dieci miliardi di password al secondo.
+   La sfida: due password, si sceglie la più robusta, poi compaiono i tempi e il motivo. */
+const PW_COMUNI = ['password', 'qwerty', 'ciao', 'admin', 'juventus', 'inter', 'milan', 'roma', 'napoli', 'amore', 'italia', 'calcio', 'gatto', 'cane', 'pippo', 'ciccio', 'iloveyou', 'welcome', 'letmein', 'dragon', 'football', 'scuola', 'marco', 'giulia', 'luca', 'sole', 'mare', 'abc', 'asdf'];
+function forzaPassword(pw) {
+  const motivi = []; let alf = 0;
+  const cl = [[/[a-z]/, 26, 'minuscole'], [/[A-Z]/, 26, 'maiuscole'], [/[0-9]/, 10, 'cifre'], [/[^a-zA-Z0-9]/, 33, 'simboli']];
+  const usate = cl.filter(([re]) => re.test(pw)); usate.forEach(([, n]) => alf += n);
+  let bit = pw.length ? pw.length * Math.log2(Math.max(alf, 2)) : 0;
+  const basso = pw.toLowerCase().replace(/0/g, 'o').replace(/1/g, 'i').replace(/3/g, 'e').replace(/4/g, 'a').replace(/5/g, 's').replace(/@/g, 'a').replace(/\$/g, 's');
+  const parola = PW_COMUNI.find(w => basso.includes(w));
+  if (parola && basso.length - parola.length < 8) { const resto = basso.replace(parola, '').length; bit = Math.min(bit, 14 + resto * Math.log2(Math.max(alf, 2)) * 0.7); motivi.push(`contiene una parola comunissima («${parola}»): è tra le prime che si provano, anche scritta con 0 al posto di o`); }
+  if (/^(.)\1+$/.test(pw)) { bit = Math.min(bit, 6); motivi.push('è un solo carattere ripetuto'); }
+  if (/(0123|1234|2345|3456|4567|5678|6789|abcd|qwer|asdf)/i.test(pw)) { bit = Math.min(bit, bit * 0.5); motivi.push('contiene una sequenza della tastiera o dei numeri'); }
+  if (/(19|20)\d\d/.test(pw)) { bit -= 6; motivi.push('contiene un anno: date di nascita e anni si provano subito'); }
+  if (pw.length && pw.length < 8) motivi.push('è più corta di 8 caratteri');
+  if (pw.length >= 8 && pw.length < 14 && usate.length < 3) motivi.push(`usa solo ${usate.map(x => x[2]).join(' e ')}: aggiungete altri tipi di carattere o allungatela`);
+  if (pw.length >= 14) motivi.push('è lunga: la lunghezza è ciò che conta di più');
+  bit = Math.max(0, bit);
+  const sec = Math.pow(2, bit) / 2 / 1e10;
+  return { bit, sec, motivi, usate: usate.map(x => x[2]) };
+}
+function tempoLeggibile(s) {
+  const U = [[3.15e9 * 1000, 'più di mille secoli'], [3.15e7 * 100, 'secoli'], [3.15e7, 'anni'], [86400 * 30, 'mesi'], [86400, 'giorni'], [3600, 'ore'], [60, 'minuti'], [1, 'secondi']];
+  if (s < 1) return 'meno di un secondo';
+  if (s >= U[0][0]) return U[0][1];
+  for (const [v, n] of U.slice(1)) if (s >= v) { const q = Math.floor(s / v); return n === 'secoli' ? `circa ${Math.floor(s / 3.15e9)} secoli` : `circa ${q} ${q === 1 ? { anni: 'anno', mesi: 'mese', giorni: 'giorno', ore: 'ora', minuti: 'minuto', secondi: 'secondo' }[n] : n}`; }
+}
+const PW_SFIDE = ['juventus2008', 'Gatto!', 'p4ssw0rd', 'Marco1999', 'qwerty123', 'ciaociao', 'aaaaaaaaaaaa', 'Tr3n0!', 'mela-treno-nuvola-37', 'BiciclettaGialla', 'Xk7#pQ', 'cavallo batteria graffetta', 'ilmiocanesichiamaFuffi', 'Sole2024!', '7wK!r2Lm#9qZ', 'giulia', 'Napoli1926', 'lampone.ventilatore.8', 'Az1!', 'trenoverdetrenoblu', 'Fragola#71', 'zebra7k2', 'Mz9kq2Wt', 'nuvolarossa', 'Pk3!x'];
+function passwordLab(el, label = 'La password giusta') {
+  const st = stat(label);
+  let A, B, primo, fatto;
+  el.innerHTML = `<div class="card pwl">${turn()}<p class="q"><b>Il laboratorio.</b> Scrivete una password inventata (mai quella vera!): non viene salvata né inviata da nessuna parte.</p>
+   <input class="pw-in" type="text" autocomplete="off" spellcheck="false" placeholder="per esempio: gatto2010"><div class="pw-bar"><i></i></div><p class="pw-t"></p><ul class="pw-mot"></ul>
+   <hr><p class="q"><b>La sfida.</b> Quale delle due password resiste di più a un attaccante che ne prova dieci miliardi al secondo?</p>
+   <div class="pw-duello"></div><div class="row"><button class="btn sec" data-a="n">Altra coppia</button></div><p class="msg"></p><div class="stat"></div></div>`;
+  const c = el.querySelector('.pwl'), $q = s => c.querySelector(s), up = () => $q('.stat').textContent = `Sfide indovinate al primo colpo: ${st.ok} su ${st.tot}`;
+  const colore = b => b < 35 ? 'var(--ko)' : b < 60 ? '#f59e0b' : 'var(--ok)';
+  function analizza() {
+    const pw = $q('.pw-in').value, F = forzaPassword(pw), bar = $q('.pw-bar i');
+    bar.style.width = Math.min(100, F.bit / 90 * 100) + '%'; bar.style.background = colore(F.bit);
+    $q('.pw-t').innerHTML = pw ? `Tempo per indovinarla: <b>${tempoLeggibile(F.sec)}</b>` : '';
+    $q('.pw-mot').innerHTML = pw ? F.motivi.map(m => `<li>${escH(m)}</li>`).join('') : '';
+  }
+  function nuovo() {
+    let a, b; do { [a, b] = shuffle(PW_SFIDE).slice(0, 2); } while (Math.abs(forzaPassword(a).bit - forzaPassword(b).bit) < 8 || tempoLeggibile(forzaPassword(a).sec) === tempoLeggibile(forzaPassword(b).sec));
+    A = a; B = b; primo = true; fatto = false; $q('.msg').textContent = '';
+    $q('.pw-duello').innerHTML = [A, B].map((p, i) => `<button class="pw-c" data-i="${i}"><code>${escH(p)}</code><span class="pw-r"></span></button>`).join('');
+  }
+  c.addEventListener('click', e => {
+    const b = e.target.closest('.pw-c'); if (!b || fatto) return; fatto = true;
+    const F = [A, B].map(forzaPassword), vince = F[0].bit > F[1].bit ? 0 : 1, ok = +b.dataset.i === vince;
+    if (primo) { st.tot++; if (ok) st.ok++; primo = false; up(); }
+    c.querySelectorAll('.pw-c').forEach((x, i) => { x.classList.add(i === vince ? 'giusto' : 'debole'); x.querySelector('.pw-r').textContent = tempoLeggibile(F[i].sec); });
+    const m = $q('.msg'), w = F[vince], l = F[1 - vince];
+    m.innerHTML = (ok ? 'Esatto! ' : 'No. ') + `<code>${escH([A, B][vince])}</code> resiste ${tempoLeggibile(w.sec)}, l’altra ${tempoLeggibile(l.sec)}.` + (l.motivi.length ? ` La più debole ${escH(l.motivi[0])}.` : ''); m.style.color = ok ? 'var(--ok)' : 'var(--ko)';
+  });
+  $q('.pw-in').addEventListener('input', analizza); $q('[data-a=n]').onclick = nuovo; up(); nuovo(); analizza();
 }
