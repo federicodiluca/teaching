@@ -2856,5 +2856,103 @@
    ]
   },
   "st": "{\"g\":{\"Dal segnale analogico al numero\":{\"ok\":0,\"tot\":1},\"Il convertitore ADC\":{\"ok\":0,\"tot\":1},\"La funzione map()\":{\"ok\":0,\"tot\":1},\"Fotoresistenza e temperatura\":{\"ok\":0,\"tot\":1},\"Il sensore a ultrasuoni\":{\"ok\":0,\"tot\":1},\"Quale sensore scegliere\":{\"ok\":0,\"tot\":1},\"PWM vero o falso\":{\"ok\":0,\"tot\":1},\"Il duty cycle\":{\"ok\":0,\"tot\":1},\"Attuatori del kit\":{\"ok\":0,\"tot\":1},\"Il sensore di parcheggio\":{\"ok\":0,\"tot\":1},\"Motori e IoT\":{\"ok\":0,\"tot\":1},\"Trova l'errore (sensori)\":{\"ok\":1,\"tot\":1},\"PWM e servo\":{\"ok\":0,\"tot\":0},\"Vero o falso\":{\"ok\":0,\"tot\":1},\"Risposta multipla\":{\"ok\":0,\"tot\":1}},\"m\":{\"Sfida finale\":{\"pts\":0,\"t\":\"00:00\",\"count\":12}}}"
+ },
+ "informatica-1/office-automation/fogli-di-calcolo": {
+  "nav": [],
+  "sez": {
+   "inizio": {
+    "nav": "Inizio\nCelle e formule\nRiferimenti\nFunzioni ed errori\nGrafici\nQuiz\nSfida finale\nRisultato",
+    "testo": "Fogli di calcolo\n\nCelle, formule, riferimenti relativi e assoluti, funzioni, errori e grafici, con un foglio di calcolo vero da usare.\n\nCelle e formule: la formula passo passo e la formula giusta da scrivere in un foglio vero.\nRiferimenti: relativi, assoluti e misti, e i $ da mettere prima di copiare la formula.\nFunzioni ed errori: che cosa mostra la cella, da SOMMA a CERCA.VERT, e i messaggi di errore.\nGrafici: quale grafico per quali dati.\nQuiz e Sfida finale.\n\nSi gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.\n\nIl vostro nome: "
+   },
+   "f1": {
+    "nav": "Inizio\nCelle e formule\nRiferimenti\nFunzioni ed errori\nGrafici\nQuiz\nSfida finale\nRisultato\n1 Passo passo\n2 La formula giusta",
+    "testo": "La formula passo passo\n\nMettete in ordine i passaggi per calcolare in C1 la somma di A1 e B1. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».\n\nScrivete i valori nelle celle A1 e B1\nPrima ci vogliono i dati: per esempio 5 in A1 e 1 in B1.\n▲▼\nFate clic sulla cella A1\nNella cella e nella barra della formula compare =A1.\n▲▼\nDigitate il simbolo =\nOgni formula comincia con =: senza, la cella conterrebbe un testo.\n▲▼\nDigitate + e fate clic su B1\nLa formula diventa =A1+B1.\n▲▼\nSelezionate la cella C1\nIl risultato comparirà nella cella selezionata.\n▲▼\nPremete Invio\nIn C1 compare 6; se cambiate A1 o B1 il risultato si aggiorna da solo.\n▲▼\nVerifica\nRimescola\nGiusti al primo tentativo: 0 su 0"
+   },
+   "f2": {
+    "nav": "Inizio\nCelle e formule\nRiferimenti\nFunzioni ed errori\nGrafici\nQuiz\nSfida finale\nRisultato\n1 Passo passo\n2 La formula giusta",
+    "testo": "La formula giusta\n\nUn foglio di calcolo vero: scrivete la formula che chiede la consegna e guardate il risultato mentre scrivete. Il controllo prova la formula anche con altri numeri, quindi deve usare i riferimenti alle celle.\n\nAltra consegna\n\nIn B8 contate quanti hanno preso almeno 8.\n\n\tA\tB\n1\tStudente\tVoto\n2\tMatteo\t3\n3\tMarco\t5\n4\tChiara\t3\n5\tLuca\t8\n6\tAnna\t10\n7\tSara\t5\n8\tAlmeno 8\t\nB8\nfx\n\nMentre scrivete, il foglio calcola dal vivo. Fate clic su una cella per inserire il suo riferimento nella formula.\n\nVerifica\n\nFormule giuste al primo colpo: 0 su 0"
+   },
+   "r1": {
+    "nav": "Inizio\nCelle e formule\nRiferimenti\nFunzioni ed errori\nGrafici\nQuiz\nSfida finale\nRisultato\n1 Relativi o assoluti\n2 I $ al posto giusto",
+    "testo": "Relativi, assoluti e misti\n\nFate clic su una carta e poi sulla categoria giusta.\n\nLa colonna resta ferma, la riga può cambiare\nNella tavola pitagorica, per i numeri della riga 1\nResta uguale dovunque si copi la formula\nVa bene per il totale progressivo, che usa sempre la cella sopra\nLa riga resta ferma, la colonna può cambiare\nNella tavola pitagorica, per i numeri della colonna A\nVa bene per il cambio o l'aliquota IVA scritti in una sola cella\nCopiato in giù cambia la riga, copiato a destra cambia la colonna\nÈ il tipo di riferimento predefinito\nA1\nrelativo\n$A$1\nassoluto\n$A1\nmisto, colonna bloccata\nA$1\nmisto, riga bloccata\nCarte da smistare: 9. Errori: 0.\nRicomincia"
+   },
+   "r2": {
+    "nav": "Inizio\nCelle e formule\nRiferimenti\nFunzioni ed errori\nGrafici\nQuiz\nSfida finale\nRisultato\n1 Relativi o assoluti\n2 I $ al posto giusto",
+    "testo": "I $ al posto giusto\n\nMettete i $ dove servono, poi copiate la formula con il quadratino di riempimento: si vede subito, cella per cella, dove sono finiti i riferimenti.\n\nLivello 1: si copia in giù\nLivello 2: in giù e a destra\nAltro schema\n\nI prezzi sono in euro e il cambio in dollari è in F1. La formula in C2 va copiata fino a C6.\n\n\tA\tB\tC\tD\tE\tF\n1\tProdotto\tEuro\tDollari\t\tCambio\t1,12\n2\tLibro\t69\t77,28\t\t\t\n3\tZaino\t42\t\t\t\t\n4\tFelpa\t28\t\t\t\t\n5\tCuffie\t28\t\t\t\t\n6\tLampada\t46\t\t\t\t\n\nFate clic su un riferimento per cambiarlo: A1 → $A$1 → A$1 → $A1 → A1. Poi copiate la formula con il quadratino.\n\nC2\n=\nB2\n*\nF1\nCopia con il quadratino\nC2\nfx\n=B2*F1\n\nSchemi giusti alla prima copia: 0 su 0"
+   },
+   "e1": {
+    "nav": "Inizio\nCelle e formule\nRiferimenti\nFunzioni ed errori\nGrafici\nQuiz\nSfida finale\nRisultato\n1 Che cosa mostra la cella?\n2 I messaggi di errore",
+    "testo": "Che cosa mostra la cella?\n\nGuardate il foglio e la formula: prevedete il risultato, poi premete «Controlla». A volte la risposta è un messaggio di errore.\n\nIn D1 c'è la formula =RADQ(A1-B1). Che cosa mostra la cella?\n\n\tA\tB\tC\tD\n1\t2\t8\t\t?\n2\t\t\t\t\n3\t\t\t\t\n4\t\t\t\t\n\nD1 mostra\n0\n#NUM!\n#VALORE!\n2,44949\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "e2": {
+    "nav": "Inizio\nCelle e formule\nRiferimenti\nFunzioni ed errori\nGrafici\nQuiz\nSfida finale\nRisultato\n1 Che cosa mostra la cella?\n2 I messaggi di errore",
+    "testo": "I messaggi di errore\n\nFate clic su una carta e poi sulla categoria giusta.\n\n=A1/B1 con B1 vuota\nLa radice quadrata di un numero negativo\n=SOMA(A1:A3)\nUna formula che usava una cella di una colonna eliminata\n=RADQ(-4)\n=CERCA.VERT(\"P09\";A1:B4;2;FALSO), ma P09 non c'è\nUna ricerca con corrispondenza esatta che non trova il valore\n=\"ciao\"+1\n=ciao+1, con un testo senza virgolette\n=A1*2 con A1 che contiene il testo «dieci»\n=CERCA.VERT(5;A1:B4;3;FALSO), ma la tabella ha solo 2 colonne\n=MEDIA(A1:A3) con le tre celle vuote\n=A1/0\n#DIV/0!\ndivisione per zero\n#VALORE!\ntipo sbagliato\n#NOME?\nnome sconosciuto\n#RIF!\nriferimento non valido\n#NUM!\nnumero non valido\n#N/D\nvalore non trovato\nCarte da smistare: 13. Errori: 0.\nRicomincia"
+   },
+   "g1": {
+    "nav": "Inizio\nCelle e formule\nRiferimenti\nFunzioni ed errori\nGrafici\nQuiz\nSfida finale\nRisultato",
+    "testo": "Quale grafico?\n\nPer ogni insieme di dati scegliete il grafico che lo comunica meglio. Fate clic su una carta e poi sulla categoria giusta.\n\nLa temperatura giorno per giorno in un mese\nCome arrivano a scuola gli studenti, in percentuale sul totale\nIl numero di iscritti a ogni corso pomeridiano\nLe ore di studio e il voto della verifica di ogni studente\nAltezza e peso di trenta studenti\nIl numero di iscritti alla scuola negli ultimi dieci anni\nIl grafico di una funzione nel piano cartesiano\nLe parti del bilancio di una famiglia\nLe vendite di tre prodotti nello stesso mese\nLe fette di una sola serie che insieme fanno il 100%\nConfrontare i voti medi di cinque classi\nIstogramma\nper confrontare categorie\nTorta\nper le proporzioni di una serie\nLinee\nper gli andamenti nel tempo\nDispersione\nper due serie di dati\nCarte da smistare: 11. Errori: 0.\nRicomincia"
+   },
+   "qz1": {
+    "nav": "Inizio\nCelle e formule\nRiferimenti\nFunzioni ed errori\nGrafici\nQuiz\nSfida finale\nRisultato\n1 Vero o falso\n2 Risposta multipla",
+    "testo": "Vero o falso?\n\nScegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.\n\nVero o falso? Il grafico a torta è adatto all'andamento della temperatura nel tempo.\n\nRisposta\nVero\nFalso\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "qz2": {
+    "nav": "Inizio\nCelle e formule\nRiferimenti\nFunzioni ed errori\nGrafici\nQuiz\nSfida finale\nRisultato\n1 Vero o falso\n2 Risposta multipla",
+    "testo": "Risposta multipla\n\nLe domande delle verifiche: scegliete una risposta e premete «Controlla».\n\nIl riferimento $E5 significa che:\n\nRisposta\nil riferimento non è valido\nla riga 5 è bloccata mentre la colonna può variare\nsia la riga sia la colonna sono bloccate\nla colonna E è bloccata mentre la riga può variare\nControlla\nMostra la spiegazione\nAltro esercizio\nEsatti: 0 su 0"
+   },
+   "fin": {
+    "nav": "Inizio\nCelle e formule\nRiferimenti\nFunzioni ed errori\nGrafici\nQuiz\nSfida finale\nRisultato",
+    "testo": "Sfida finale\n\nQuindici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nInizia la sfida finale"
+   },
+   "res": {
+    "nav": "Inizio\nCelle e formule\nRiferimenti\nFunzioni ed errori\nGrafici\nQuiz\nSfida finale\nRisultato",
+    "testo": "Risultato\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la sfida finale."
+   }
+  },
+  "dopo": {
+   "inizio": "Fogli di calcolo\n\nCelle, formule, riferimenti relativi e assoluti, funzioni, errori e grafici, con un foglio di calcolo vero da usare.\n\nCelle e formule: la formula passo passo e la formula giusta da scrivere in un foglio vero.\nRiferimenti: relativi, assoluti e misti, e i $ da mettere prima di copiare la formula.\nFunzioni ed errori: che cosa mostra la cella, da SOMMA a CERCA.VERT, e i messaggi di errore.\nGrafici: quale grafico per quali dati.\nQuiz e Sfida finale.\n\nSi gioca da soli, quando e quanto volete. Ogni gioco vi dice subito se avete sbagliato: tenete aperte le slide per consultarle.\n\nIl vostro nome: ",
+   "f1": "La formula passo passo\n\nMettete in ordine i passaggi per calcolare in C1 la somma di A1 e B1. Trascinate le righe (oppure usate le frecce) per metterle in ordine, poi premete «Verifica».\n\nScrivete i valori nelle celle A1 e B1\nPrima ci vogliono i dati: per esempio 5 in A1 e 1 in B1.\nFate clic sulla cella A1\nNella cella e nella barra della formula compare =A1.\nDigitate il simbolo =\nOgni formula comincia con =: senza, la cella conterrebbe un testo.\nDigitate + e fate clic su B1\nLa formula diventa =A1+B1.\nSelezionate la cella C1\nIl risultato comparirà nella cella selezionata.\nPremete Invio\nIn C1 compare 6; se cambiate A1 o B1 il risultato si aggiorna da solo.\nVerifica\nRimescola\nPosizioni corrette: 3 su 6. Le righe rosse sono fuori posto: premete «Rimescola» per riprovare.\nGiusti al primo tentativo: 0 su 1",
+   "f2": "La formula giusta\n\nUn foglio di calcolo vero: scrivete la formula che chiede la consegna e guardate il risultato mentre scrivete. Il controllo prova la formula anche con altri numeri, quindi deve usare i riferimenti alle celle.\n\nAltra consegna\n\nIn B8 contate quanti hanno preso almeno 8.\n\n\tA\tB\n1\tStudente\tVoto\n2\tMatteo\t3\n3\tMarco\t5\n4\tChiara\t3\n5\tLuca\t8\n6\tAnna\t10\n7\tSara\t5\n8\tAlmeno 8\t\nB8\nfx\n\nMentre scrivete, il foglio calcola dal vivo. Fate clic su una cella per inserire il suo riferimento nella formula.\n\nVerifica\n\nFormule giuste al primo colpo: 0 su 0",
+   "r1": "Relativi, assoluti e misti\n\nFate clic su una carta e poi sulla categoria giusta.\n\nA1\nrelativo\nVa bene per il totale progressivo, che usa sempre la cella sopra\nCopiato in giù cambia la riga, copiato a destra cambia la colonna\nÈ il tipo di riferimento predefinito\n$A$1\nassoluto\nResta uguale dovunque si copi la formula\nVa bene per il cambio o l'aliquota IVA scritti in una sola cella\n$A1\nmisto, colonna bloccata\nLa colonna resta ferma, la riga può cambiare\nNella tavola pitagorica, per i numeri della colonna A\nA$1\nmisto, riga bloccata\nNella tavola pitagorica, per i numeri della riga 1\nLa riga resta ferma, la colonna può cambiare\nFinito! Errori: 12.\nRicomincia",
+   "r2": "I $ al posto giusto\n\nMettete i $ dove servono, poi copiate la formula con il quadratino di riempimento: si vede subito, cella per cella, dove sono finiti i riferimenti.\n\nLivello 1: si copia in giù\nLivello 2: in giù e a destra\nAltro schema\n\nI prezzi sono in euro e il cambio in dollari è in F1. La formula in C2 va copiata fino a C6.\n\n\tA\tB\tC\tD\tE\tF\n1\tProdotto\tEuro\tDollari\t\tCambio\t1,12\n2\tLibro\t69\t77,28\t\t\t\n3\tZaino\t42\t0\t\t\t\n4\tFelpa\t28\t0\t\t\t\n5\tCuffie\t28\t0\t\t\t\n6\tLampada\t46\t0\t\t\t\n\nFate clic su un riferimento per cambiarlo: A1 → $A$1 → A$1 → $A1 → A1. Poi copiate la formula con il quadratino.\n\nC2\n=\nB2\n*\nF1\nRiprova\nC3\nfx\n=B3*F2\n\n4 celle sono sbagliate. Per esempio in C3 la formula è diventata =B3*F2: fate clic sulle celle rosse per vedere dove sono finiti i riferimenti, poi riprovate.\n\nSchemi giusti alla prima copia: 0 su 1",
+   "e1": "Che cosa mostra la cella?\n\nGuardate il foglio e la formula: prevedete il risultato, poi premete «Controlla». A volte la risposta è un messaggio di errore.\n\nIn D1 c'è la formula =RADQ(A1-B1). Che cosa mostra la cella?\n\n\tA\tB\tC\tD\n1\t2\t8\t\t?\n2\t\t\t\t\n3\t\t\t\t\n4\t\t\t\t\n\nD1 mostra\n0\n#NUM!\n#VALORE!\n2,44949\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "e2": "I messaggi di errore\n\nFate clic su una carta e poi sulla categoria giusta.\n\n#DIV/0!\ndivisione per zero\n=A1/B1 con B1 vuota\n=MEDIA(A1:A3) con le tre celle vuote\n=A1/0\n#VALORE!\ntipo sbagliato\n=\"ciao\"+1\n=A1*2 con A1 che contiene il testo «dieci»\n#NOME?\nnome sconosciuto\n=SOMA(A1:A3)\n=ciao+1, con un testo senza virgolette\n#RIF!\nriferimento non valido\nUna formula che usava una cella di una colonna eliminata\n=CERCA.VERT(5;A1:B4;3;FALSO), ma la tabella ha solo 2 colonne\n#NUM!\nnumero non valido\nLa radice quadrata di un numero negativo\n=RADQ(-4)\n#N/D\nvalore non trovato\n=CERCA.VERT(\"P09\";A1:B4;2;FALSO), ma P09 non c'è\nUna ricerca con corrispondenza esatta che non trova il valore\nFinito! Errori: 30.\nRicomincia",
+   "g1": "Quale grafico?\n\nPer ogni insieme di dati scegliete il grafico che lo comunica meglio. Fate clic su una carta e poi sulla categoria giusta.\n\nIstogramma\nper confrontare categorie\nIl numero di iscritti a ogni corso pomeridiano\nLe vendite di tre prodotti nello stesso mese\nConfrontare i voti medi di cinque classi\nTorta\nper le proporzioni di una serie\nCome arrivano a scuola gli studenti, in percentuale sul totale\nLe parti del bilancio di una famiglia\nLe fette di una sola serie che insieme fanno il 100%\nLinee\nper gli andamenti nel tempo\nLa temperatura giorno per giorno in un mese\nIl numero di iscritti alla scuola negli ultimi dieci anni\nIl grafico di una funzione nel piano cartesiano\nDispersione\nper due serie di dati\nLe ore di studio e il voto della verifica di ogni studente\nAltezza e peso di trenta studenti\nFinito! Errori: 15.\nRicomincia",
+   "qz1": "Vero o falso?\n\nScegliete e premete «Controlla». Dopo ogni risposta potete leggere la spiegazione.\n\nVero o falso? Il grafico a torta è adatto all'andamento della temperatura nel tempo.\n\nRisposta\nVero\nFalso\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "qz2": "Risposta multipla\n\nLe domande delle verifiche: scegliete una risposta e premete «Controlla».\n\nIl riferimento $E5 significa che:\n\nRisposta\nil riferimento non è valido\nla riga 5 è bloccata mentre la colonna può variare\nsia la riga sia la colonna sono bloccate\nla colonna E è bloccata mentre la riga può variare\nControlla\nMostra la spiegazione\nAltro esercizio\nNon ancora: controllate i campi rossi o aprite il procedimento.\nEsatti: 0 su 1",
+   "fin": "Sfida finale\n\nQuindici domande miste su tutto l'argomento, a tempo. Ogni domanda vale 1 punto se giusta al primo controllo.\n\nRiprova la sfida finale\n\nFinita: 0 su 15 in 00:00.",
+   "res": "Risultato\n\nNome: Ada\n\nNessun gioco ancora completato\n0 di 1 attività svolte\nSfida finale\nnon ancora fatta\nCopia il risultato\nStampa\nRicomincia da capo\n\nRifate i giochi in cui avete sbagliato di più e poi riprovate la sfida finale."
+  },
+  "giocati": {
+   "f1": [
+    "ordine"
+   ],
+   "f2": [],
+   "r1": [
+    "smistamento"
+   ],
+   "r2": [
+    "controlla"
+   ],
+   "e1": [
+    "controlla"
+   ],
+   "e2": [
+    "smistamento"
+   ],
+   "g1": [
+    "smistamento"
+   ],
+   "qz1": [
+    "controlla"
+   ],
+   "qz2": [
+    "controlla"
+   ],
+   "fin": [
+    "missione"
+   ]
+  },
+  "st": "{\"g\":{\"La formula passo passo\":{\"ok\":0,\"tot\":1},\"La formula giusta\":{\"ok\":0,\"tot\":0},\"Relativi, assoluti e misti\":{\"ok\":0,\"tot\":1},\"I $ al posto giusto\":{\"ok\":0,\"tot\":1},\"Che cosa mostra la cella?\":{\"ok\":0,\"tot\":1},\"I messaggi di errore\":{\"ok\":0,\"tot\":1},\"Quale grafico?\":{\"ok\":0,\"tot\":1},\"Vero o falso\":{\"ok\":0,\"tot\":1},\"Risposta multipla\":{\"ok\":0,\"tot\":1}},\"m\":{\"Sfida finale\":{\"pts\":0,\"t\":\"00:00\",\"count\":15}}}"
  }
 }
