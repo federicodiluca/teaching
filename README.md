@@ -110,7 +110,7 @@ tpsit-3/codici-digitali/temi/ottici.js  codice a barre EAN-13 disegnato dalle ci
 tpsit-3/codici-digitali/temi/pesati.js  dentro UTF-8 (byte di qualsiasi carattere, anche da costruire) e somma BCD passo passo
 tpsit-3/codici-digitali/temi/quotidiane.js  codice fiscale pezzo per pezzo (con il carattere di controllo) e partita IVA passo passo
 tpsit-3/css/temi/css.js  duello delle regole CSS (il colore lo decide il browser, poi specificità regola per regola) e flexbox da regolare dal vivo
-tpsit-3/javascript/temi/js.js  albero del DOM: i nodi restituiti da querySelector, querySelectorAll, getElementById e simili
+tpsit-3/javascript/temi/js.js  albero del DOM (i nodi restituiti da querySelector e simili) ed event loop passo passo (stack, microtask, task)
 tpsit-5/metodologia-di-sviluppo/temi/git.js  laboratorio di Git: terminale simulato, tre aree e grafo dei commit con missioni
 tpsit-5/xml-e-regex/temi/regex.js  tester di espressioni regolari: matches() sulle stringhe date, find() su un testo libero
 tpsit-5/applicazioni-web-avanzate/temi/rest.js  client REST con un server finto (/api/studenti): metodi, codici di stato, JSON

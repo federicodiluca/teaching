@@ -993,3 +993,18 @@ svg.hl-s { width: 100%; max-width: 560px; height: auto; display: block; margin: 
 .dt-at { color: var(--tg-acc); }
 .dt-tx { color: var(--tg-mute); }
 .dt-q code { overflow-wrap: anywhere; white-space: normal; }
+/* event loop (tpsit-3/javascript/temi/js.js) */
+.el-lettere, .el-scelta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 6px 0; }
+.el-l { min-width: 44px; font: 700 16px var(--tg-mono); }
+.el-chip { display: inline-grid; place-items: center; min-width: 28px; height: 28px; padding: 0 6px; border-radius: 6px; background: var(--tg-acc); color: var(--tg-bg); font: 700 14px var(--tg-mono); margin: 2px; }
+.el-sim { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin: 10px 0 4px; }
+.el-col { border: 2px solid var(--tg-line); border-radius: 10px; padding: 8px; min-height: 80px; font-size: 13px; }
+.el-col > b { display: block; margin-bottom: 6px; }
+.el-col > div { display: flex; flex-direction: column; gap: 4px; }
+.el-col:last-child > div { flex-direction: row; flex-wrap: wrap; }
+.el-col i { color: var(--tg-mute); }
+.el-s, .el-m, .el-t { padding: 4px 8px; border-radius: 6px; font: 12px var(--tg-mono); }
+.el-s { background: var(--tg-paper-2); border-left: 4px solid var(--tg-acc); }
+.el-m { background: color-mix(in srgb, #8b5cf6 22%, transparent); border-left: 4px solid #8b5cf6; }
+.el-t { background: color-mix(in srgb, #f59e0b 22%, transparent); border-left: 4px solid #f59e0b; }
+.el-txt { min-height: 1.5em; font-weight: 600; }

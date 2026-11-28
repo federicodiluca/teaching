@@ -1,6 +1,8 @@
 /* JavaScript (TPSIT 3): giochi ad hoc. Solo definizioni: va caricato dopo assets/giochi.js.
    - alberoDOM(el, etichetta): un pezzo di HTML diventa l'albero del DOM; data una chiamata come querySelector('nav a')
      si fa clic sui nodi che restituisce. La risposta la calcola il browser sullo stesso HTML.
+   - eventLoop(el, etichetta): console.log, setTimeout e Promise.then: si prevede l'ordine di stampa, poi si segue
+     il passo passo con stack, coda dei microtask e coda dei task.
    Gli stili sono in assets/giochi.css (sezione "simulatori"). */
 
 const ALBERI_DOM = [
@@ -85,4 +87,92 @@ function alberoDOM(el, label = "L'albero del DOM") {
     if (a.dataset.a === 'n') nuovo(); else if (a.dataset.a === 'v') verifica(false); else if (a.dataset.a === 'null') verifica(true);
   });
   up(); nuovo();
+}
+
+/* ---------- l'event loop: chi stampa prima? ----------
+   eventLoop(el, etichetta): un programma con console.log, setTimeout e Promise.then. Si mette in ordine l'output
+   facendo clic sulle lettere, poi si guarda l'esecuzione passo passo con stack, coda dei microtask e coda dei task.
+   Un'istruzione è ['log', 'A'] | ['timer', ritardo, [istruzioni]] | ['then', [istruzioni]]. */
+function programmaEL(liv) {
+  let lettera = 0; const L = () => 'ABCDEFGH'[lettera++];
+  const foglia = () => ['log', L()];
+  for (let t = 0; t < 200; t++) {
+    lettera = 0; const n = rnd(4, liv === 1 ? 5 : 6), P = [];
+    for (let i = 0; i < n; i++) {
+      const r = Math.random();
+      if (r < 0.34) P.push(foglia());
+      else if (r < 0.67) P.push(['timer', liv === 1 ? 0 : pick([0, 0, 100, 50]), liv === 2 && Math.random() < 0.35 ? [foglia(), Math.random() < 0.5 ? ['then', [foglia()]] : foglia()] : [foglia()]]);
+      else P.push(['then', liv === 2 && Math.random() < 0.35 ? [foglia(), Math.random() < 0.5 ? ['timer', 0, [foglia()]] : ['then', [foglia()]]] : [foglia()]]);
+    }
+    const tipi = new Set(P.map(x => x[0]));
+    if (tipi.size === 3 && lettera <= 7) return P;
+  }
+}
+function codiceEL(P, ind = '') {
+  return P.flatMap(x => x[0] === 'log' ? [`${ind}console.log('${x[1]}');`]
+    : x[0] === 'timer' ? [`${ind}setTimeout(() => {`, ...codiceEL(x[2], ind + '  '), `${ind}}, ${x[1]});`]
+    : [`${ind}Promise.resolve().then(() => {`, ...codiceEL(x[1], ind + '  '), `${ind}});`]);
+}
+/* simulazione: restituisce l'output e le fotografie per il passo passo */
+function simulaEL(P) {
+  const out = [], micro = [], task = [], foto = []; let seq = 0, ora = 0;
+  const nome = b => b.map(x => x[0] === 'log' ? x[1] : x[0] === 'timer' ? 'timer' : 'then').join(' ');
+  const scatta = (stack, txt) => foto.push({ stack, micro: micro.map(m => m.et), task: task.slice().sort((a, b) => a.due - b.due || a.seq - b.seq).map(t => t.et), out: out.slice(), txt });
+  const esegui = (b, dove) => b.forEach(x => {
+    if (x[0] === 'log') { out.push(x[1]); scatta(dove, `${dove}: console.log('${x[1]}') stampa ${x[1]} subito.`); }
+    else if (x[0] === 'timer') { const et = `timer ${x[1]} ms → ${nome(x[2])}`; task.push({ b: x[2], due: ora + x[1], seq: seq++, et }); scatta(dove, `${dove}: setTimeout non esegue niente adesso, mette la funzione nella coda dei task${x[1] ? ` (pronta tra ${x[1]} ms)` : ''}.`); }
+    else { const et = `then → ${nome(x[1])}`; micro.push({ b: x[1], et }); scatta(dove, `${dove}: la Promise è già risolta, quindi la funzione del then va nella coda dei microtask.`); }
+  });
+  scatta('script principale', 'Parte lo script principale.');
+  esegui(P, 'script principale');
+  scatta('', 'Lo script principale è finito: lo stack è vuoto e l\'event loop guarda le code. Prima tutti i microtask.');
+  const svuota = () => { while (micro.length) { const m = micro.shift(); scatta('microtask', `Dal fronte della coda dei microtask: ${m.et}.`); esegui(m.b, 'microtask'); } };
+  svuota();
+  while (task.length) {
+    task.sort((a, b) => a.due - b.due || a.seq - b.seq); const t = task.shift(); ora = Math.max(ora, t.due);
+    scatta('task', `Nessun microtask in attesa: l'event loop prende il primo task pronto, ${t.et}.`); esegui(t.b, 'task'); svuota();
+  }
+  scatta('', 'Code vuote: il programma è finito.');
+  return { out, foto };
+}
+function eventLoop(el, label = 'Chi stampa prima?') {
+  const st = stat(label);
+  let P, S, ord, primo, k, fatto;
+  el.innerHTML = `<div class="card evl">${turn()}<div class="row"><select class="el-liv"><option value="1">Livello 1: tutto subito</option><option value="2">Livello 2: ritardi e annidamenti</option></select><button class="btn sec" data-a="n">Altro programma</button></div>
+   <ol class="cod el-cod"></ol><p class="q">In che ordine compaiono le lettere nella console? Fate clic sulle lettere nell'ordine giusto.</p>
+   <div class="el-lettere"></div><div class="el-scelta"></div><div class="row"><button class="btn" data-a="v">Verifica</button><button class="btn sec" data-a="r">Cancella</button></div>
+   <div class="el-sim" hidden><div class="el-col"><b>Stack</b><div class="el-stack"></div></div><div class="el-col"><b>Coda dei microtask</b><div class="el-micro"></div></div><div class="el-col"><b>Coda dei task</b><div class="el-task"></div></div><div class="el-col"><b>Console</b><div class="el-out"></div></div></div>
+   <p class="el-txt"></p><div class="row el-pas"></div><p class="msg"></p><div class="stat"></div></div>`;
+  const c = el.querySelector('.evl'), $q = s => c.querySelector(s), up = () => $q('.stat').textContent = `Ordini giusti al primo colpo: ${st.ok} su ${st.tot}`;
+  function nuovo() {
+    P = programmaEL(+$q('.el-liv').value); S = simulaEL(P); ord = []; primo = true; k = -1; fatto = false;
+    $q('.el-cod').innerHTML = codiceEL(P).map(r => `<li><code>${escH(r)}</code></li>`).join('');
+    $q('.el-lettere').innerHTML = S.out.slice().sort().map(l => `<button class="btn sec el-l" data-l="${l}">${l}</button>`).join('');
+    $q('.el-sim').hidden = true; $q('.el-txt').textContent = ''; $q('.el-pas').innerHTML = ''; $q('.msg').textContent = ''; scelta();
+  }
+  function scelta() { $q('.el-scelta').innerHTML = `Console: ${ord.length ? ord.map(l => `<span class="el-chip">${l}</span>`).join('') : '<i>vuota</i>'}`; c.querySelectorAll('.el-l').forEach(b => b.disabled = fatto || ord.includes(b.dataset.l)); }
+  function passo() {
+    const f = S.foto[k], lista = (a, cl) => a.length ? a.map(x => `<span class="${cl}">${escH(x)}</span>`).join('') : '<i>vuota</i>';
+    $q('.el-sim').hidden = false;
+    $q('.el-stack').innerHTML = f.stack ? `<span class="el-s">${escH(f.stack)}</span>` : '<i>vuoto</i>';
+    $q('.el-micro').innerHTML = lista(f.micro, 'el-m'); $q('.el-task').innerHTML = lista(f.task, 'el-t'); $q('.el-out').innerHTML = f.out.map(l => `<span class="el-chip">${l}</span>`).join('') || '<i>vuota</i>';
+    $q('.el-txt').textContent = f.txt;
+    $q('.el-pas').innerHTML = k + 1 < S.foto.length ? '<button class="btn" data-a="p">Passo ▶</button><button class="btn sec" data-a="f">Fino alla fine</button>' : '';
+  }
+  c.addEventListener('click', e => {
+    const l = e.target.closest('.el-l'); if (l && !fatto) { ord.push(l.dataset.l); scelta(); return; }
+    const a = e.target.closest('[data-a]'); if (!a) return; const m = $q('.msg');
+    if (a.dataset.a === 'n') return nuovo();
+    if (a.dataset.a === 'r' && !fatto) { ord = []; scelta(); }
+    if (a.dataset.a === 'v' && !fatto) {
+      if (ord.length < S.out.length) { m.textContent = 'Mancano alcune lettere.'; m.style.color = 'var(--mute)'; return; }
+      const ok = ord.join('') === S.out.join(''); if (primo) { st.tot++; if (ok) st.ok++; primo = false; up(); }
+      fatto = true; scelta();
+      m.innerHTML = (ok ? 'Esatto!' : `No: l'ordine giusto è <b>${S.out.join(' ')}</b>.`) + ' Seguite l\'esecuzione passo passo: prima tutto lo script, poi tutti i microtask (then), poi un task (setTimeout) alla volta.'; m.style.color = ok ? 'var(--ok)' : 'var(--ko)';
+      k = 0; passo();
+    }
+    if (a.dataset.a === 'p') { k++; passo(); }
+    if (a.dataset.a === 'f') { k = S.foto.length - 1; passo(); }
+  });
+  $q('.el-liv').onchange = nuovo; up(); nuovo();
 }
