@@ -102,6 +102,7 @@ assets/
 informatica-1/computer-e-codici/temi/   codice di argomento (numeri, aritmetica, logica, immagini, informazione)
                                         condiviso tra le pagine dell'unità e Palestra dei numeri
 tpsit-4/temi/passo-passo.js  simulatore delle pagine «passo passo» di TPSIT (semafori e problemi classici)
+tpsit-4/problemi-e-soluzioni-della-concorrenza/temi/deadlock.js  grafo di Holt da analizzare e ridurre, banchiere da giocare con la cassa e i clienti
 tpsit-3/sistemi-operativi/temi/so.js  simulatori di sistemi operativi: diagramma di Gantt, allocazione della memoria,
                                       sostituzione delle pagine
 tpsit-3/codici-digitali/temi/codici.js  Hamming con i tre cerchi, parità incrociata, CRC passo passo, display a 7 segmenti, encoder binario/Gray
