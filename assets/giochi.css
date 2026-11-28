@@ -977,3 +977,19 @@ svg.hl-s { width: 100%; max-width: 560px; height: auto; display: block; margin: 
 .fx-ob i { border: 2px dashed var(--tg-mute); color: var(--tg-mute); }
 .fx-vero i { background: var(--tg-acc); color: var(--tg-bg); opacity: .9; }
 .fx-area.ok .fx-vero i { background: var(--tg-ok); }
+/* albero del DOM (tpsit-3/javascript/temi/js.js) */
+.dt-src summary { cursor: pointer; color: var(--tg-mute); font-size: 14px; }
+.dt-html { margin: 6px 0; padding: 8px 12px; font: 13px/1.5 var(--tg-mono); background: var(--tg-bg); border: 1px solid var(--tg-line); border-radius: 8px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.dt-albero { margin: 8px 0; font: 13px var(--tg-mono); }
+.dt-rad { display: inline-block; padding: 3px 10px; border-radius: 6px; background: var(--tg-paper-2); font-weight: 700; }
+.dt-albero ul { list-style: none; margin: 0; padding-left: 18px; border-left: 2px solid var(--tg-line); margin-left: 8px; }
+.dt-albero li { position: relative; padding: 3px 0 3px 10px; }
+.dt-albero li::before { content: ""; position: absolute; left: -2px; top: 15px; width: 10px; border-top: 2px solid var(--tg-line); }
+.dt-n { font: inherit; text-align: left; color: var(--tg-ink); background: var(--tg-paper); border: 2px solid var(--tg-line); border-radius: 6px; padding: 3px 8px; cursor: pointer; overflow-wrap: anywhere; max-width: 100%; transition: border-color .2s, background .2s; }
+.dt-n:hover { border-color: var(--tg-acc); }
+.dt-n.on { border-color: var(--tg-acc); background: color-mix(in srgb, var(--tg-acc) 22%, var(--tg-paper)); }
+.dt-n.giusto { border-color: var(--tg-ok); background: var(--tg-ok-soft); }
+.dt-n.sbagliato { border-color: var(--tg-ko); background: var(--tg-ko-soft); }
+.dt-at { color: var(--tg-acc); }
+.dt-tx { color: var(--tg-mute); }
+.dt-q code { overflow-wrap: anywhere; white-space: normal; }
