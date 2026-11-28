@@ -4,6 +4,7 @@
    - urlLab(el, etichetta): si etichettano le parti di un indirizzo (protocollo, dominio, porta, percorso, parametri, frammento).
    - phishing(el, etichetta): un'email sospetta in cui trovare tutti i segnali di phishing.
    - passwordLab(el, etichetta): il tempo per indovinare una password scritta dal vivo e la sfida tra due password.
+   - reteCasa(el, etichetta): modem, router, switch, access point e dispositivi da collegare (cavo o Wi-Fi) fino a Internet.
    Gli stili sono in assets/giochi.css (sezione "simulatori"). */
 
 /* ---------- viaggio di un pacchetto ---------- */
@@ -213,4 +214,72 @@ function passwordLab(el, label = 'La password giusta') {
     m.innerHTML = (ok ? 'Esatto! ' : 'No. ') + `<code>${escH([A, B][vince])}</code> resiste ${tempoLeggibile(w.sec)}, l’altra ${tempoLeggibile(l.sec)}.` + (l.motivi.length ? ` La più debole ${escH(l.motivi[0])}.` : ''); m.style.color = ok ? 'var(--ok)' : 'var(--ko)';
   });
   $q('.pw-in').addEventListener('input', analizza); $q('[data-a=n]').onclick = nuovo; up(); nuovo(); analizza();
+}
+
+/* ---------- la rete di casa ----------
+   reteCasa(el, etichetta): si collegano i pezzi facendo clic su due nodi (cavo o Wi-Fi lo decide il tipo di dispositivo).
+   Un collegamento sbagliato viene rifiutato con il motivo; quando tutti i dispositivi raggiungono Internet si vede
+   il percorso di ciascuno. */
+const CASA_INFRA = { net: [70, 45, 'Internet', 'infra'], modem: [70, 150, 'Modem', 'infra'], router: [70, 265, 'Router', 'infra'], sw: [235, 215, 'Switch', 'infra'], ap: [235, 345, 'Access point', 'infra'] };
+const CASA_DISP = [['pc', 'PC fisso', 'cavo'], ['port', 'Portatile', 'entrambi'], ['tel', 'Smartphone', 'wifi'], ['tab', 'Tablet', 'wifi'], ['stampa', 'Stampante', 'cavo'], ['tv', 'Smart TV', 'cavo'], ['cons', 'Console', 'cavo']];
+function collegaCasa(a, b, tipo) {
+  const infra = x => ['net', 'modem', 'router', 'sw', 'ap'].includes(x), coppia = (x, y) => (a === x && b === y) || (a === y && b === x);
+  if (coppia('net', 'modem')) return { ok: true, t: 'cavo' };
+  if (coppia('modem', 'router')) return { ok: true, t: 'cavo' };
+  if (coppia('router', 'sw') || coppia('router', 'ap') || coppia('sw', 'ap')) return { ok: true, t: 'cavo' };
+  if (a === 'net' || b === 'net') return { ok: false, m: 'La linea dell’operatore che arriva da Internet entra nel modem.' };
+  if (infra(a) && infra(b)) return { ok: false, m: (coppia('modem', 'sw') || coppia('modem', 'ap')) ? 'Tra il modem e la rete di casa ci vuole il router: è lui che collega la rete locale a Internet e smista i pacchetti.' : 'Questo collegamento non serve: pensate a chi passa i pacchetti a chi.' };
+  if (!infra(a) && !infra(b)) return { ok: false, m: 'Due dispositivi non si collegano direttamente tra loro: in mezzo serve lo switch (con il cavo) o l’access point (senza fili).' };
+  const d = infra(a) ? b : a, i = infra(a) ? a : b, t = tipo[d], nome = CASA_DISP.find(x => x[0] === d)[1];
+  if (i === 'modem') return { ok: false, m: 'Il modem parla con la linea dell’operatore: i dispositivi si collegano al router, allo switch o all’access point.' };
+  if (i === 'ap') return t === 'cavo' ? { ok: false, m: `${nome} qui ha solo la porta per il cavo: collegatelo allo switch o al router.` } : { ok: true, t: 'wifi' };
+  return t === 'wifi' ? { ok: false, m: `${nome} non ha la porta per il cavo di rete: si collega senza fili all’access point.` } : { ok: true, t: 'cavo' };
+}
+function reteCasa(el, label = 'La rete di casa') {
+  const st = stat(label);
+  let disp, pos, tipo, link, sel, errori, fatto;
+  el.innerHTML = `<div class="card casa">${turn()}<p class="q">Collegate i pezzi facendo clic su due nodi, uno dopo l’altro: ogni dispositivo deve arrivare a Internet. Il tipo di collegamento (cavo o Wi-Fi) dipende dal dispositivo.</p>
+   <div class="cs-svg"></div><div class="row"><button class="btn sec" data-a="u">Togli l’ultimo collegamento</button><button class="btn sec" data-a="n">Altra casa</button></div><p class="msg"></p><div class="cs-leg"><span class="cavo">— cavo</span><span class="wifi">- - Wi-Fi</span></div><div class="stat"></div></div>`;
+  const c = el.querySelector('.casa'), $q = s => c.querySelector(s), up = () => $q('.stat').textContent = `Case collegate senza errori: ${st.ok} su ${st.tot}`;
+  function nuovo() {
+    const scelti = shuffle(CASA_DISP).slice(0, rnd(3, 5));
+    if (!scelti.some(x => x[2] === 'wifi')) scelti[0] = CASA_DISP[2];
+    if (!scelti.some(x => x[2] === 'cavo')) scelti[1] = CASA_DISP[0];
+    disp = scelti; pos = { ...CASA_INFRA }; tipo = {};
+    disp.forEach((d, i) => { pos[d[0]] = [400, 45 + i * (300 / Math.max(1, disp.length - 1)), d[1], d[2]]; tipo[d[0]] = d[2]; });
+    link = []; sel = null; errori = 0; fatto = false; $q('.msg').textContent = ''; disegna();
+  }
+  function raggiunge() { const vicini = id => link.filter(l => l.includes(id)).map(l => l[0] === id ? l[1] : l[0]);
+    const vis = new Set(['net']), coda = ['net'], da = {}; while (coda.length) { const x = coda.shift(); vicini(x).forEach(y => { if (!vis.has(y)) { vis.add(y); da[y] = x; coda.push(y); } }); }
+    return { vis, da }; }
+  function disegna(percorsi) {
+    let s = '';
+    link.forEach(([a, b, t]) => { const [x1, y1] = pos[a], [x2, y2] = pos[b]; s += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="lk ${t}${percorsi ? ' usato' : ''}"/>`; });
+    const R = raggiunge();
+    Object.entries(pos).forEach(([id, [x, y, nome, k]]) => {
+      const w = id === 'net' ? 0 : 126;
+      s += `<g class="nodo ${k === 'infra' ? 'inf' : 'dis'}${sel === id ? ' qui' : ''}${R.vis.has(id) && id !== 'net' ? ' visto' : ''}" data-n="${id}" transform="translate(${x},${y})">${id === 'net' ? '<ellipse rx="62" ry="30"/>' : `<rect x="-${w / 2}" y="-22" width="${w}" height="44" rx="10"/>`}<text y="${k === 'infra' ? 5 : 0}">${nome}</text>${k !== 'infra' ? `<text y="16" class="sub">${k === 'wifi' ? 'solo Wi-Fi' : k === 'cavo' ? 'solo cavo' : 'cavo o Wi-Fi'}</text>` : ''}</g>`;
+    });
+    $q('.cs-svg').innerHTML = `<svg viewBox="0 0 470 390" class="via-s cs-s">${s}</svg>`;
+  }
+  c.addEventListener('click', e => {
+    const g = e.target.closest('.cs-s .nodo'), m = $q('.msg');
+    if (g && !fatto) { const id = g.dataset.n;
+      if (!sel) { sel = id; disegna(); return; }
+      if (sel === id) { sel = null; disegna(); return; }
+      const a = sel; sel = null;
+      if (link.some(l => (l[0] === a && l[1] === id) || (l[0] === id && l[1] === a))) { m.textContent = 'Questo collegamento c’è già.'; m.style.color = 'var(--mute)'; disegna(); return; }
+      const r = collegaCasa(a, id, tipo);
+      if (!r.ok) { errori++; m.textContent = r.m; m.style.color = 'var(--ko)'; disegna(); return; }
+      link.push([a, id, r.t]); m.textContent = r.t === 'wifi' ? 'Collegato senza fili.' : 'Collegato con il cavo.'; m.style.color = 'var(--ink)';
+      const R = raggiunge();
+      if (disp.every(d => R.vis.has(d[0]))) { fatto = true; st.tot++; if (!errori) st.ok++; up();
+        const strada = id => { const p = [id]; while (p[p.length - 1] !== 'net') p.push(R.da[p[p.length - 1]]); return p.map(x => pos[x][2]).join(' → '); };
+        m.innerHTML = `Tutta la casa è in rete${errori ? ` (con ${errori} collegament${errori === 1 ? 'o rifiutato' : 'i rifiutati'})` : ', senza errori'}!<br>` + disp.map(d => escH(strada(d[0]))).join('<br>'); m.style.color = 'var(--ok)'; disegna(true); return; }
+      disegna(); return; }
+    const b = e.target.closest('[data-a]'); if (!b) return;
+    if (b.dataset.a === 'n') nuovo();
+    if (b.dataset.a === 'u' && !fatto && link.length) { link.pop(); sel = null; m.textContent = ''; disegna(); }
+  });
+  up(); nuovo();
 }
