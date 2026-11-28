@@ -948,3 +948,18 @@ svg.hl-s { width: 100%; max-width: 560px; height: auto; display: block; margin: 
 .bk-bar { display: flex; flex-wrap: wrap; gap: 3px; }
 .bk-bar i { border: 2px solid var(--tg-acc); border-radius: 4px; transition: background .4s; }
 .bk-bar i.p { background: var(--tg-acc); }
+/* duello delle regole CSS (tpsit-3/css/temi/css.js) */
+.du-reg { display: flex; flex-direction: column; gap: 6px; margin: 10px 0; }
+.du-r { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; padding: 6px 10px; border: 2px solid var(--tg-line); border-radius: 8px; transition: opacity .3s, border-color .3s; }
+.du-r code { font: 14px var(--tg-mono); overflow-wrap: anywhere; }
+.du-n { font-weight: 700; color: var(--tg-mute); }
+.du-esito { font-size: 13px; color: var(--tg-mute); }
+.du-r.fuori { opacity: .45; text-decoration: line-through; }
+.du-r.vince { border-color: var(--tg-ok); background: var(--tg-ok-soft); }
+.du-sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; border: 1px solid rgba(127,127,127,.5); }
+.du-col { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0; }
+.du-c.giusto { border-color: var(--tg-ok); box-shadow: 0 0 0 2px var(--tg-ok); }
+.du-c.sbagliato { border-color: var(--tg-ko); }
+.du-vista { margin: 10px 0; }
+.du-lab { margin: 0 0 6px; font-size: 13px; color: var(--tg-mute); }
+.du-host { padding: 14px; border-radius: 10px; background: #fff; border: 1px solid var(--tg-line); }
