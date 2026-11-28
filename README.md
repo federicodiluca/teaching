@@ -17,7 +17,7 @@ senza installare nulla, senza account e senza raccogliere dati degli studenti.
 | | Problem solving e algoritmi | Problem solving e algoritmi · Algoritmi con Flowgorithm |
 | | C e C++ | Dall'algoritmo al codice · Primi passi in C++ · La selezione in C++ · L'iterazione in C++ |
 | | Arduino | Arduino ed elettronica · Arduino: output e input digitali · Arduino: sensori, PWM e attuatori |
-| | Office automation | Fogli di calcolo |
+| | Office automation | Fogli di calcolo · Documenti e presentazioni |
 | Informatica, 3° anno | Java: le basi | Da C++ a Java · Tipi, variabili e input · Selezione e cicli in Java |
 | | Metodi, array e stringhe | I metodi · Gli array · Le stringhe |
 | TPSIT, 3° anno | La rappresentazione delle informazioni | Informazione e comunicazione · Digitale e binario · Sistemi di numerazione posizionali · Conversioni di numeri reali e tra basi binarie · Immagini, suoni e video |
@@ -122,6 +122,7 @@ informatica-1/architettura-e-ai/temi/vonneumann.js  macchina di Von Neumann: fet
 informatica-1/problem-solving/temi/robot.js  robot da programmare a blocchi (Avanti, Gira, Ripeti) su una griglia, a livelli
 informatica-1/reti/temi/reti.js  viaggio del pacchetto, risoluzione DNS, parti di un URL, caccia al phishing, la password giusta (tempo per indovinarla e sfida), la rete di casa da collegare
 informatica-1/office-automation/temi/fogli.js  un piccolo foglio di calcolo vero (formule all'italiana, funzioni ed errori di Excel): la formula giusta, i $ al posto giusto, che cosa mostra la cella
+informatica-1/office-automation/temi/documenti.js  formatta come il modello, sommario con gli stili dei titoli, stampa unione con la regola SE, schema diapositiva
 gpoi/organizzazione-d-impresa/temi/organizzazione.js  organigramma da costruire, catena del valore di Porter, piramide di Anthony,
                                       processo a corsie, viaggio di un ordine con i programmi a isole e con l'ERP
 gpoi/aziende-e-mercati/temi/mercato.js  domanda e offerta sul grafico: prezzo da trascinare fino all'equilibrio, curve che si spostano
