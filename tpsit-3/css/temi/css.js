@@ -2,6 +2,7 @@
    - duelloCSS(el, etichetta): un pezzo di HTML con un elemento evidenziato e alcune regole che gli danno colori diversi.
      Si sceglie il colore finale; poi la pagina viene disegnata davvero (in uno shadow DOM, quindi decide il browser)
      e si vede per ogni regola se colpisce l'elemento, la sua specificità e chi vince.
+   - flexLab(el, etichetta): scatole da portare nelle posizioni tratteggiate scegliendo le proprietà flex del contenitore.
    Gli stili sono in assets/giochi.css (sezione "simulatori"). */
 
 const DUELLO_HTML = [
@@ -80,4 +81,46 @@ function duelloCSS(el, label = 'Il duello delle regole') {
     m.innerHTML = (ok ? 'Esatto! ' : `No: diventa ${vince ? vince[1] : 'del colore di partenza'}. `) + perche; m.style.color = ok ? 'var(--ok)' : 'var(--ko)';
   });
   $q('.du-liv').onchange = nuovo; $q('[data-a=n]').onclick = nuovo; up(); nuovo();
+}
+
+/* ---------- il flexbox da regolare ----------
+   flexLab(el, etichetta): le scatole tratteggiate mostrano dove devono finire; si scelgono i valori delle proprietà
+   del contenitore e le scatole vere si spostano dal vivo. Il controllo confronta le posizioni disegnate dal browser,
+   quindi vale anche una combinazione diversa che porta allo stesso risultato. */
+const FLEX_PROP = [
+  ['flex-direction', ['row', 'column', 'row-reverse', 'column-reverse']],
+  ['justify-content', ['flex-start', 'center', 'flex-end', 'space-between', 'space-around', 'space-evenly']],
+  ['align-items', ['flex-start', 'center', 'flex-end']]
+];
+function flexLab(el, label = 'Il flexbox da regolare') {
+  const st = stat(label);
+  let n, obiettivo, scelta, primo, fatto, usate, clic;
+  el.innerHTML = `<div class="card flexlab">${turn()}<div class="row"><select class="fx-liv"><option value="1">Livello 1: justify-content</option><option value="2">Livello 2: anche align-items</option><option value="3">Livello 3: anche flex-direction</option></select><button class="btn sec" data-a="n">Altro schema</button></div>
+   <p class="q">Scegliete i valori delle proprietà del contenitore finché le scatole colorate non finiscono dentro quelle tratteggiate.</p>
+   <div class="fx-area"><div class="fx-box fx-ob"></div><div class="fx-box fx-vero"></div></div><div class="fx-prop"></div><pre class="fx-css"></pre><p class="msg"></p><div class="stat"></div></div>`;
+  const c = el.querySelector('.flexlab'), $q = s => c.querySelector(s), up = () => $q('.stat').textContent = `Schemi risolti senza tentativi a vuoto: ${st.ok} su ${st.tot}`;
+  const stile = v => usate.map(([p], i) => `${p}: ${v[i]};`).join(' ');
+  function nuovo() {
+    const liv = +$q('.fx-liv').value; usate = liv === 1 ? [FLEX_PROP[1]] : liv === 2 ? FLEX_PROP.slice(1) : FLEX_PROP;
+    n = rnd(2, 4);
+    do { obiettivo = usate.map(([, vals]) => pick(vals)); } while (obiettivo.every((v, i) => v === usate[i][1][0]));
+    scelta = usate.map(([, vals]) => vals[0]); primo = true; fatto = false; clic = 0;
+    const scatole = Array.from({ length: n }, (_, i) => `<i>${i + 1}</i>`).join('');
+    $q('.fx-ob').innerHTML = scatole; $q('.fx-vero').innerHTML = scatole; $q('.fx-ob').style.cssText = stile(obiettivo);
+    $q('.fx-prop').innerHTML = usate.map(([p, vals], i) => `<div class="fx-p"><code>${p}</code><div class="fx-v">${vals.map(v => `<button class="btn sec" data-i="${i}" data-v="${v}">${v}</button>`).join('')}</div></div>`).join('');
+    $q('.msg').textContent = ''; aggiorna();
+  }
+  function aggiorna() {
+    $q('.fx-vero').style.cssText = stile(scelta);
+    $q('.fx-css').textContent = `.contenitore {\n  display: flex;\n${usate.map(([p], i) => `  ${p}: ${scelta[i]};`).join('\n')}\n}`;
+    c.querySelectorAll('.fx-v button').forEach(b => b.classList.toggle('on', scelta[+b.dataset.i] === b.dataset.v));
+    const a = [...$q('.fx-ob').children].map(x => x.getBoundingClientRect()), b = [...$q('.fx-vero').children].map(x => x.getBoundingClientRect());
+    const ok = clic > 0 && a.every((r, i) => Math.abs(r.left - b[i].left) < 2 && Math.abs(r.top - b[i].top) < 2);
+    $q('.fx-area').classList.toggle('ok', ok);
+    if (ok && !fatto) { fatto = true; const pulito = clic <= usate.length; if (primo) { st.tot++; if (pulito) st.ok++; primo = false; up(); }
+      const m = $q('.msg'), diverso = scelta.some((v, i) => v !== obiettivo[i]);
+      m.innerHTML = `Perfetto, le scatole sono al loro posto${pulito ? ' al primo colpo' : ` (con ${clic} clic)`}!` + (diverso ? ` Avete trovato una strada diversa da quella pensata (${usate.map(([p], i) => `<code>${p}: ${obiettivo[i]}</code>`).join(', ')}) ma il risultato è lo stesso.` : ''); m.style.color = 'var(--ok)'; }
+  }
+  c.addEventListener('click', e => { const b = e.target.closest('.fx-v button'); if (!b || fatto) return; if (scelta[+b.dataset.i] !== b.dataset.v) clic++; scelta[+b.dataset.i] = b.dataset.v; aggiorna(); });
+  $q('.fx-liv').onchange = nuovo; $q('[data-a=n]').onclick = nuovo; up(); nuovo();
 }

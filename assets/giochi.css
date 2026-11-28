@@ -963,3 +963,17 @@ svg.hl-s { width: 100%; max-width: 560px; height: auto; display: block; margin: 
 .du-vista { margin: 10px 0; }
 .du-lab { margin: 0 0 6px; font-size: 13px; color: var(--tg-mute); }
 .du-host { padding: 14px; border-radius: 10px; background: #fff; border: 1px solid var(--tg-line); }
+/* flexbox da regolare (css.js) */
+.fx-p { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 6px 0; }
+.fx-p > code { min-width: 9.5em; font: 600 14px var(--tg-mono); }
+.fx-v { display: flex; flex-wrap: wrap; gap: 6px; }
+.fx-v .btn { padding: 4px 10px; font: 13px var(--tg-mono); }
+.fx-v .btn.on { background: var(--tg-acc); color: var(--tg-bg); border-color: var(--tg-acc); }
+.fx-css { margin: 8px 0; padding: 8px 12px; font: 13px/1.5 var(--tg-mono); background: var(--tg-bg); border: 1px solid var(--tg-line); border-radius: 8px; white-space: pre-wrap; }
+.fx-area { position: relative; height: 220px; margin: 8px 0; border: 2px solid var(--tg-line); border-radius: 10px; background: var(--tg-bg); transition: border-color .3s; }
+.fx-area.ok { border-color: var(--tg-ok); }
+.fx-box { position: absolute; inset: 0; display: flex; }
+.fx-box i { flex: none; width: 44px; height: 44px; border-radius: 8px; display: grid; place-items: center; font: 700 16px var(--tg-mono); font-style: normal; transition: transform .35s; }
+.fx-ob i { border: 2px dashed var(--tg-mute); color: var(--tg-mute); }
+.fx-vero i { background: var(--tg-acc); color: var(--tg-bg); opacity: .9; }
+.fx-area.ok .fx-vero i { background: var(--tg-ok); }
